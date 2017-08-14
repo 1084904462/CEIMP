@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.TechnologyCompetitionMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.TechnologyCompetition">
+    <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
+    <result column="competition_name" jdbcType="VARCHAR" property="competitionName" />
+    <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    competition_id, competition_name, competition_type_id, school_id, create_time
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from technology_competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionExample">
+    delete from technology_competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.TechnologyCompetition">
+    insert into technology_competition (competition_id, competition_name, competition_type_id, 
+      school_id, create_time)
+    values (#{competitionId,jdbcType=INTEGER}, #{competitionName,jdbcType=VARCHAR}, #{competitionTypeId,jdbcType=INTEGER}, 
+      #{schoolId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.TechnologyCompetition">
+    insert into technology_competition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="competitionId != null">
+        competition_id,
+      </if>
+      <if test="competitionName != null">
+        competition_name,
+      </if>
+      <if test="competitionTypeId != null">
+        competition_type_id,
+      </if>
+      <if test="schoolId != null">
+        school_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="competitionId != null">
+        #{competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="competitionName != null">
+        #{competitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="competitionTypeId != null">
+        #{competitionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionExample" resultType="java.lang.Long">
+    select count(*) from technology_competition
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update technology_competition
+    <set>
+      <if test="record.competitionId != null">
+        competition_id = #{record.competitionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.competitionName != null">
+        competition_name = #{record.competitionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.competitionTypeId != null">
+        competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolId != null">
+        school_id = #{record.schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update technology_competition
+    set competition_id = #{record.competitionId,jdbcType=INTEGER},
+      competition_name = #{record.competitionName,jdbcType=VARCHAR},
+      competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
+      school_id = #{record.schoolId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
