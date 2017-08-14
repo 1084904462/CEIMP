@@ -7,7 +7,7 @@ public class ReviewStatus {
 
     private String userId;
 
-    private Integer reviewStatus;
+    private Integer status;
 
     private Integer reviewTypeId;
 
@@ -18,7 +18,7 @@ public class ReviewStatus {
         return "ReviewStatus{" +
                 "reviewStatusId=" + reviewStatusId +
                 ", userId='" + userId + '\'' +
-                ", reviewStatus=" + reviewStatus +
+                ", status=" + status +
                 ", reviewTypeId=" + reviewTypeId +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
@@ -28,10 +28,17 @@ public class ReviewStatus {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewStatus(Integer reviewStatusId, String userId, Integer reviewStatus, Integer reviewTypeId) {
+    public ReviewStatus(String userId, Integer status, Integer reviewTypeId) {
+        this.userId = userId;
+        this.status = status;
+        this.reviewTypeId = reviewTypeId;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public ReviewStatus(Integer reviewStatusId, String userId, Integer status, Integer reviewTypeId) {
         this.reviewStatusId = reviewStatusId;
         this.userId = userId;
-        this.reviewStatus = reviewStatus;
+        this.status = status;
         this.reviewTypeId = reviewTypeId;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
@@ -52,12 +59,12 @@ public class ReviewStatus {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getReviewStatus() {
-        return reviewStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setReviewStatus(Integer reviewStatus) {
-        this.reviewStatus = reviewStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getReviewTypeId() {

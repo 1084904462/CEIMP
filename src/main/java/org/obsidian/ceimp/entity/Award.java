@@ -25,6 +25,12 @@ public class Award {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public Award(String userId, Integer scholarshipId) {
+        this.userId = userId;
+        this.scholarshipId = scholarshipId;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public Award(Integer awardId, String userId, Integer scholarshipId) {
         this.awardId = awardId;
         this.userId = userId;

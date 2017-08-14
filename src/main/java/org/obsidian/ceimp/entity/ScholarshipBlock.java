@@ -25,6 +25,12 @@ public class ScholarshipBlock {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public ScholarshipBlock(String scholarshipBlockName, Integer scholarshipId) {
+        this.scholarshipBlockName = scholarshipBlockName;
+        this.scholarshipId = scholarshipId;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public ScholarshipBlock(Integer scholarshipBlockId, String scholarshipBlockName, Integer scholarshipId) {
         this.scholarshipBlockId = scholarshipBlockId;
         this.scholarshipBlockName = scholarshipBlockName;

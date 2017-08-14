@@ -18,4 +18,6 @@ public interface ClassManagerService {
     ClassManager selectByClassManagerId(String classManagerId);
 
     List<ClassManager> selectAllByClassId(int classId);
+
+    List<ClassManager> selectAll();
 }

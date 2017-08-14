@@ -22,6 +22,11 @@ public class TechnologyCompetitionType {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public TechnologyCompetitionType(String type) {
+        this.type = type;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public TechnologyCompetitionType(Integer typeId, String type) {
         this.typeId = typeId;
         this.type = type;

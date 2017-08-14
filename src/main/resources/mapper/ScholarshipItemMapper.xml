@@ -9,6 +9,13 @@
     <result column="fill_in_hint" jdbcType="VARCHAR" property="fillInHint" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
+  <select id="selectAllByScholarshipId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select scholarship_item.scholarship_item_id,scholarship_item.scholarship_item_name,
+    scholarship_item.scholarship_block_id,scholarship_item.fill_in_type_id,scholarship_item.fill_in_hint,
+    scholarship_item.create_time from scholarship_item,scholarship_block
+    where scholarship_block.scholarship_id = #{scholarshipId} and
+    scholarship_block.scholarship_block_id = scholarship_item.scholarship_block_id
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

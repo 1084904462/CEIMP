@@ -5,7 +5,7 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class CompetitionLevel {
     private Integer competitionLevelId;
 
-    private String competitionLevel;
+    private String level;
 
     private Long createTime;
 
@@ -13,7 +13,7 @@ public class CompetitionLevel {
     public String toString() {
         return "CompetitionLevel{" +
                 "competitionLevelId=" + competitionLevelId +
-                ", competitionLevel='" + competitionLevel + '\'' +
+                ", level='" + level + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -22,9 +22,14 @@ public class CompetitionLevel {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionLevel(Integer competitionLevelId, String competitionLevel) {
+    public CompetitionLevel(String level) {
+        this.level = level;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public CompetitionLevel(Integer competitionLevelId, String level) {
         this.competitionLevelId = competitionLevelId;
-        this.competitionLevel = competitionLevel;
+        this.level = level;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -36,12 +41,12 @@ public class CompetitionLevel {
         this.competitionLevelId = competitionLevelId;
     }
 
-    public String getCompetitionLevel() {
-        return competitionLevel;
+    public String getLevel() {
+        return level;
     }
 
-    public void setCompetitionLevel(String competitionLevel) {
-        this.competitionLevel = competitionLevel == null ? null : competitionLevel.trim();
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public Long getCreateTime() {

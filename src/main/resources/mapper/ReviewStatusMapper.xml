@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewStatus">
     <result column="review_status_id" jdbcType="INTEGER" property="reviewStatusId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="review_status" jdbcType="INTEGER" property="reviewStatus" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    review_status_id, user_id, review_status, review_type_id, create_time
+    review_status_id, user_id, status, review_type_id, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewStatusExample" resultMap="BaseResultMap">
     select
@@ -91,9 +91,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
-    insert into review_status (review_status_id, user_id, review_status, 
+    insert into review_status (review_status_id, user_id, status, 
       review_type_id, create_time)
-    values (#{reviewStatusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{reviewStatus,jdbcType=INTEGER}, 
+    values (#{reviewStatusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{reviewTypeId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
@@ -105,8 +105,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="reviewStatus != null">
-        review_status,
+      <if test="status != null">
+        status,
       </if>
       <if test="reviewTypeId != null">
         review_type_id,
@@ -122,8 +122,8 @@
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="reviewStatus != null">
-        #{reviewStatus,jdbcType=INTEGER},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="reviewTypeId != null">
         #{reviewTypeId,jdbcType=INTEGER},
@@ -148,8 +148,8 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="record.reviewStatus != null">
-        review_status = #{record.reviewStatus,jdbcType=INTEGER},
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.reviewTypeId != null">
         review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
@@ -166,7 +166,7 @@
     update review_status
     set review_status_id = #{record.reviewStatusId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      review_status = #{record.reviewStatus,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

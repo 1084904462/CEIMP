@@ -5,7 +5,7 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class AwardLevel {
     private Integer awardLevelId;
 
-    private String awardLevel;
+    private String level;
 
     private Long createTime;
 
@@ -13,7 +13,7 @@ public class AwardLevel {
     public String toString() {
         return "AwardLevel{" +
                 "awardLevelId=" + awardLevelId +
-                ", awardLevel='" + awardLevel + '\'' +
+                ", level='" + level + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -22,9 +22,14 @@ public class AwardLevel {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public AwardLevel(Integer awardLevelId, String awardLevel) {
+    public AwardLevel(String level) {
+        this.level = level;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public AwardLevel(Integer awardLevelId, String level) {
         this.awardLevelId = awardLevelId;
-        this.awardLevel = awardLevel;
+        this.level = level;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -36,12 +41,12 @@ public class AwardLevel {
         this.awardLevelId = awardLevelId;
     }
 
-    public String getAwardLevel() {
-        return awardLevel;
+    public String getLevel() {
+        return level;
     }
 
-    public void setAwardLevel(String awardLevel) {
-        this.awardLevel = awardLevel == null ? null : awardLevel.trim();
+    public void setLevel(String level) {
+        this.level = level == null ? null : level.trim();
     }
 
     public Long getCreateTime() {

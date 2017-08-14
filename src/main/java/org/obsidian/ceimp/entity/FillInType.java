@@ -5,7 +5,7 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class FillInType {
     private Integer fillInTypeId;
 
-    private String fillInType;
+    private String type;
 
     private Long createTime;
 
@@ -13,7 +13,7 @@ public class FillInType {
     public String toString() {
         return "FillInType{" +
                 "fillInTypeId=" + fillInTypeId +
-                ", fillInType='" + fillInType + '\'' +
+                ", type='" + type + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -22,9 +22,14 @@ public class FillInType {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public FillInType(Integer fillInTypeId, String fillInType) {
+    public FillInType(String type) {
+        this.type = type;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public FillInType(Integer fillInTypeId, String type) {
         this.fillInTypeId = fillInTypeId;
-        this.fillInType = fillInType;
+        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -36,12 +41,12 @@ public class FillInType {
         this.fillInTypeId = fillInTypeId;
     }
 
-    public String getFillInType() {
-        return fillInType;
+    public String getType() {
+        return type;
     }
 
-    public void setFillInType(String fillInType) {
-        this.fillInType = fillInType == null ? null : fillInType.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public Long getCreateTime() {

@@ -3,7 +3,7 @@
 <mapper namespace="org.obsidian.ceimp.dao.ReviewTypeMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewType">
     <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
-    <result column="review_type" jdbcType="VARCHAR" property="reviewType" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    review_type_id, review_type, create_time
+    review_type_id, type, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewTypeExample" resultMap="BaseResultMap">
     select
@@ -89,9 +89,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewType">
-    insert into review_type (review_type_id, review_type, create_time
+    insert into review_type (review_type_id, type, create_time
       )
-    values (#{reviewTypeId,jdbcType=INTEGER}, #{reviewType,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+    values (#{reviewTypeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewType">
@@ -100,8 +100,8 @@
       <if test="reviewTypeId != null">
         review_type_id,
       </if>
-      <if test="reviewType != null">
-        review_type,
+      <if test="type != null">
+        type,
       </if>
       <if test="createTime != null">
         create_time,
@@ -111,8 +111,8 @@
       <if test="reviewTypeId != null">
         #{reviewTypeId,jdbcType=INTEGER},
       </if>
-      <if test="reviewType != null">
-        #{reviewType,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -131,8 +131,8 @@
       <if test="record.reviewTypeId != null">
         review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
       </if>
-      <if test="record.reviewType != null">
-        review_type = #{record.reviewType,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -145,7 +145,7 @@
   <update id="updateByExample" parameterType="map">
     update review_type
     set review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
-      review_type = #{record.reviewType,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

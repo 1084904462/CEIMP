@@ -31,6 +31,14 @@ public class ScholarshipItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public ScholarshipItem(String scholarshipItemName, Integer scholarshipBlockId, Integer fillInTypeId, String fillInHint) {
+        this.scholarshipItemName = scholarshipItemName;
+        this.scholarshipBlockId = scholarshipBlockId;
+        this.fillInTypeId = fillInTypeId;
+        this.fillInHint = fillInHint;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public ScholarshipItem(Integer scholarshipItemId, String scholarshipItemName, Integer scholarshipBlockId, Integer fillInTypeId, String fillInHint) {
         this.scholarshipItemId = scholarshipItemId;
         this.scholarshipItemName = scholarshipItemName;

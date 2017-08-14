@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-14 08:28:27
+Date: 2017-08-14 16:32:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -91,11 +91,14 @@ CREATE TABLE `award` (
   KEY `scholarship_id` (`scholarship_id`),
   CONSTRAINT `award_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `award_ibfk_2` FOREIGN KEY (`scholarship_id`) REFERENCES `scholarship` (`scholarship_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of award
 -- ----------------------------
+INSERT INTO `award` VALUES ('1', '1150299070', '1', '1502686890');
+INSERT INTO `award` VALUES ('2', '1150299071', '1', '1502694607');
+INSERT INTO `award` VALUES ('4', '1150299070', '2', '1502694607');
 
 -- ----------------------------
 -- Table structure for `award_level`
@@ -103,7 +106,7 @@ CREATE TABLE `award` (
 DROP TABLE IF EXISTS `award_level`;
 CREATE TABLE `award_level` (
   `award_level_id` int(20) NOT NULL AUTO_INCREMENT,
-  `award _level` varchar(20) NOT NULL,
+  `level` varchar(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`award_level_id`),
   UNIQUE KEY `award_level_id` (`award_level_id`) USING BTREE
@@ -127,11 +130,13 @@ CREATE TABLE `classes` (
   UNIQUE KEY `class_id` (`class_id`) USING BTREE,
   KEY `school_id` (`school_id`),
   CONSTRAINT `classes_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of classes
 -- ----------------------------
+INSERT INTO `classes` VALUES ('1', '软件工程', '151', '1', '1502686890');
+INSERT INTO `classes` VALUES ('2', '数字媒体技术', '151', '1', '1502686890');
 
 -- ----------------------------
 -- Table structure for `class_manager`
@@ -204,7 +209,7 @@ CREATE TABLE `competition_input` (
 DROP TABLE IF EXISTS `competition_level`;
 CREATE TABLE `competition_level` (
   `competition_level_id` int(20) NOT NULL AUTO_INCREMENT,
-  `competition_level` varchar(20) NOT NULL,
+  `level` varchar(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`competition_level_id`),
   UNIQUE KEY `competition_level_id` (`competition_level_id`) USING BTREE
@@ -327,15 +332,17 @@ CREATE TABLE `evaluation_point` (
 DROP TABLE IF EXISTS `fill_in_type`;
 CREATE TABLE `fill_in_type` (
   `fill_in_type_id` int(20) NOT NULL AUTO_INCREMENT,
-  `fill_in_type` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`fill_in_type_id`),
   UNIQUE KEY `fill_in_type_id` (`fill_in_type_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fill_in_type
 -- ----------------------------
+INSERT INTO `fill_in_type` VALUES ('1', '单行文本', '1502686890');
+INSERT INTO `fill_in_type` VALUES ('2', '多行文本', '1502686890');
 
 -- ----------------------------
 -- Table structure for `import_item`
@@ -347,12 +354,12 @@ CREATE TABLE `import_item` (
   `exam_fail` int(20) NOT NULL,
   `make_up` int(20) NOT NULL,
   `cet4` int(20) NOT NULL,
-  `pe` int(20) NOT NULL,
+  `pe` double NOT NULL,
   `gpa` double NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`import_id`),
   UNIQUE KEY `import_id` (`import_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of import_item
@@ -431,7 +438,7 @@ DROP TABLE IF EXISTS `review_status`;
 CREATE TABLE `review_status` (
   `review_status_id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
-  `review_status` int(20) NOT NULL,
+  `status` int(20) NOT NULL,
   `review_type_id` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_status_id`),
@@ -472,15 +479,18 @@ CREATE TABLE `review_time` (
 DROP TABLE IF EXISTS `review_type`;
 CREATE TABLE `review_type` (
   `review_type_id` int(20) NOT NULL AUTO_INCREMENT,
-  `review_type` varchar(20) NOT NULL,
+  `type` varchar(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_type_id`),
   UNIQUE KEY `review_type_id` (`review_type_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of review_type
 -- ----------------------------
+INSERT INTO `review_type` VALUES ('1', '一审', '1502696435');
+INSERT INTO `review_type` VALUES ('2', '二审', '1502696436');
+INSERT INTO `review_type` VALUES ('3', '三审', '1502696436');
 
 -- ----------------------------
 -- Table structure for `scholarship`
@@ -489,15 +499,17 @@ DROP TABLE IF EXISTS `scholarship`;
 CREATE TABLE `scholarship` (
   `scholarship_id` int(20) NOT NULL AUTO_INCREMENT,
   `scholarship_name` varchar(100) NOT NULL,
-  `award_sum` int(20) NOT NULL,
+  `award_percent` double NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`scholarship_id`),
   UNIQUE KEY `scholarship_id` (`scholarship_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship
 -- ----------------------------
+INSERT INTO `scholarship` VALUES ('1', '省政府奖学金', '0.1', '1502678569');
+INSERT INTO `scholarship` VALUES ('2', '校级一等奖学金', '0.2', '1502678569');
 
 -- ----------------------------
 -- Table structure for `scholarship_block`
@@ -512,11 +524,16 @@ CREATE TABLE `scholarship_block` (
   UNIQUE KEY `scholarship_block_id` (`scholarship_block_id`) USING BTREE,
   KEY `scholarship_id` (`scholarship_id`),
   CONSTRAINT `scholarship_block_ibfk_1` FOREIGN KEY (`scholarship_id`) REFERENCES `scholarship` (`scholarship_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship_block
 -- ----------------------------
+INSERT INTO `scholarship_block` VALUES ('1', '个人基本信息', '1', '1502680002');
+INSERT INTO `scholarship_block` VALUES ('2', '学习情况', '1', '1502680003');
+INSERT INTO `scholarship_block` VALUES ('3', '大学期间主要获奖情况', '1', '1502680003');
+INSERT INTO `scholarship_block` VALUES ('4', '推荐理由', '1', '1502680003');
+INSERT INTO `scholarship_block` VALUES ('5', '院系意见', '1', '1502680003');
 
 -- ----------------------------
 -- Table structure for `scholarship_item`
@@ -535,11 +552,13 @@ CREATE TABLE `scholarship_item` (
   KEY `fill_in_type_id` (`fill_in_type_id`),
   CONSTRAINT `scholarship_item_ibfk_1` FOREIGN KEY (`scholarship_block_id`) REFERENCES `scholarship_block` (`scholarship_block_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `scholarship_item_ibfk_2` FOREIGN KEY (`fill_in_type_id`) REFERENCES `fill_in_type` (`fill_in_type_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship_item
 -- ----------------------------
+INSERT INTO `scholarship_item` VALUES ('1', '学校', '1', '1', '学校名', '1502686890');
+INSERT INTO `scholarship_item` VALUES ('2', '院系', '1', '1', '院系名', '1502688314');
 
 -- ----------------------------
 -- Table structure for `school`
@@ -551,11 +570,12 @@ CREATE TABLE `school` (
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`school_id`),
   UNIQUE KEY `school_id` (`school_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of school
 -- ----------------------------
+INSERT INTO `school` VALUES ('1', '信息与电子工程学院', '1502686890');
 
 -- ----------------------------
 -- Table structure for `school_manager`
@@ -606,6 +626,7 @@ CREATE TABLE `technology_competition` (
   `competition_name` varchar(100) NOT NULL,
   `competition_type_id` int(20) NOT NULL,
   `school_id` int(20) NOT NULL,
+  `organizer` varchar(100) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`competition_id`),
   UNIQUE KEY `competition_id` (`competition_id`) USING BTREE,
@@ -702,3 +723,6 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
+INSERT INTO `users` VALUES ('1150299070', '陈伟', '888666', '1', '1502686890');
+INSERT INTO `users` VALUES ('1150299071', '伟哥', '888888', '1', '1502686890');
+INSERT INTO `users` VALUES ('1150299072', '伟哥哥', '666666', '2', '1502686890');

@@ -3,7 +3,7 @@
 <mapper namespace="org.obsidian.ceimp.dao.CompetitionLevelMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionLevel">
     <result column="competition_level_id" jdbcType="INTEGER" property="competitionLevelId" />
-    <result column="competition_level" jdbcType="VARCHAR" property="competitionLevel" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    competition_level_id, competition_level, create_time
+    competition_level_id, level, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionLevelExample" resultMap="BaseResultMap">
     select
@@ -89,10 +89,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionLevel">
-    insert into competition_level (competition_level_id, competition_level, 
-      create_time)
-    values (#{competitionLevelId,jdbcType=INTEGER}, #{competitionLevel,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=BIGINT})
+    insert into competition_level (competition_level_id, level, create_time
+      )
+    values (#{competitionLevelId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionLevel">
     insert into competition_level
@@ -100,8 +100,8 @@
       <if test="competitionLevelId != null">
         competition_level_id,
       </if>
-      <if test="competitionLevel != null">
-        competition_level,
+      <if test="level != null">
+        level,
       </if>
       <if test="createTime != null">
         create_time,
@@ -111,8 +111,8 @@
       <if test="competitionLevelId != null">
         #{competitionLevelId,jdbcType=INTEGER},
       </if>
-      <if test="competitionLevel != null">
-        #{competitionLevel,jdbcType=VARCHAR},
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -131,8 +131,8 @@
       <if test="record.competitionLevelId != null">
         competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
       </if>
-      <if test="record.competitionLevel != null">
-        competition_level = #{record.competitionLevel,jdbcType=VARCHAR},
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -145,7 +145,7 @@
   <update id="updateByExample" parameterType="map">
     update competition_level
     set competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
-      competition_level = #{record.competitionLevel,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

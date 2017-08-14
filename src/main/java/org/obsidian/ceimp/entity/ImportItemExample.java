@@ -424,52 +424,52 @@ public class ImportItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andPeEqualTo(Integer value) {
+        public Criteria andPeEqualTo(Double value) {
             addCriterion("pe =", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeNotEqualTo(Integer value) {
+        public Criteria andPeNotEqualTo(Double value) {
             addCriterion("pe <>", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeGreaterThan(Integer value) {
+        public Criteria andPeGreaterThan(Double value) {
             addCriterion("pe >", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPeGreaterThanOrEqualTo(Double value) {
             addCriterion("pe >=", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeLessThan(Integer value) {
+        public Criteria andPeLessThan(Double value) {
             addCriterion("pe <", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeLessThanOrEqualTo(Integer value) {
+        public Criteria andPeLessThanOrEqualTo(Double value) {
             addCriterion("pe <=", value, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeIn(List<Integer> values) {
+        public Criteria andPeIn(List<Double> values) {
             addCriterion("pe in", values, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeNotIn(List<Integer> values) {
+        public Criteria andPeNotIn(List<Double> values) {
             addCriterion("pe not in", values, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeBetween(Integer value1, Integer value2) {
+        public Criteria andPeBetween(Double value1, Double value2) {
             addCriterion("pe between", value1, value2, "pe");
             return (Criteria) this;
         }
 
-        public Criteria andPeNotBetween(Integer value1, Integer value2) {
+        public Criteria andPeNotBetween(Double value1, Double value2) {
             addCriterion("pe not between", value1, value2, "pe");
             return (Criteria) this;
         }

@@ -11,6 +11,8 @@ public class TechnologyCompetition {
 
     private Integer schoolId;
 
+    private String organizer;
+
     private Long createTime;
 
     @Override
@@ -20,6 +22,7 @@ public class TechnologyCompetition {
                 ", competitionName='" + competitionName + '\'' +
                 ", competitionTypeId=" + competitionTypeId +
                 ", schoolId=" + schoolId +
+                ", organizer='" + organizer + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -28,11 +31,20 @@ public class TechnologyCompetition {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public TechnologyCompetition(Integer competitionId, String competitionName, Integer competitionTypeId, Integer schoolId) {
+    public TechnologyCompetition(String competitionName, Integer competitionTypeId, Integer schoolId, String organizer) {
+        this.competitionName = competitionName;
+        this.competitionTypeId = competitionTypeId;
+        this.schoolId = schoolId;
+        this.organizer = organizer;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public TechnologyCompetition(Integer competitionId, String competitionName, Integer competitionTypeId, Integer schoolId, String organizer) {
         this.competitionId = competitionId;
         this.competitionName = competitionName;
         this.competitionTypeId = competitionTypeId;
         this.schoolId = schoolId;
+        this.organizer = organizer;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -66,6 +78,14 @@ public class TechnologyCompetition {
 
     public void setSchoolId(Integer schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer == null ? null : organizer.trim();
     }
 
     public Long getCreateTime() {

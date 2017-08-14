@@ -234,63 +234,63 @@ public class ScholarshipExample {
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumIsNull() {
-            addCriterion("award_sum is null");
+        public Criteria andAwardPercentIsNull() {
+            addCriterion("award_percent is null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumIsNotNull() {
-            addCriterion("award_sum is not null");
+        public Criteria andAwardPercentIsNotNull() {
+            addCriterion("award_percent is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumEqualTo(Integer value) {
-            addCriterion("award_sum =", value, "awardSum");
+        public Criteria andAwardPercentEqualTo(Double value) {
+            addCriterion("award_percent =", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumNotEqualTo(Integer value) {
-            addCriterion("award_sum <>", value, "awardSum");
+        public Criteria andAwardPercentNotEqualTo(Double value) {
+            addCriterion("award_percent <>", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumGreaterThan(Integer value) {
-            addCriterion("award_sum >", value, "awardSum");
+        public Criteria andAwardPercentGreaterThan(Double value) {
+            addCriterion("award_percent >", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("award_sum >=", value, "awardSum");
+        public Criteria andAwardPercentGreaterThanOrEqualTo(Double value) {
+            addCriterion("award_percent >=", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumLessThan(Integer value) {
-            addCriterion("award_sum <", value, "awardSum");
+        public Criteria andAwardPercentLessThan(Double value) {
+            addCriterion("award_percent <", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumLessThanOrEqualTo(Integer value) {
-            addCriterion("award_sum <=", value, "awardSum");
+        public Criteria andAwardPercentLessThanOrEqualTo(Double value) {
+            addCriterion("award_percent <=", value, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumIn(List<Integer> values) {
-            addCriterion("award_sum in", values, "awardSum");
+        public Criteria andAwardPercentIn(List<Double> values) {
+            addCriterion("award_percent in", values, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumNotIn(List<Integer> values) {
-            addCriterion("award_sum not in", values, "awardSum");
+        public Criteria andAwardPercentNotIn(List<Double> values) {
+            addCriterion("award_percent not in", values, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumBetween(Integer value1, Integer value2) {
-            addCriterion("award_sum between", value1, value2, "awardSum");
+        public Criteria andAwardPercentBetween(Double value1, Double value2) {
+            addCriterion("award_percent between", value1, value2, "awardPercent");
             return (Criteria) this;
         }
 
-        public Criteria andAwardSumNotBetween(Integer value1, Integer value2) {
-            addCriterion("award_sum not between", value1, value2, "awardSum");
+        public Criteria andAwardPercentNotBetween(Double value1, Double value2) {
+            addCriterion("award_percent not between", value1, value2, "awardPercent");
             return (Criteria) this;
         }
 

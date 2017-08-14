@@ -24,4 +24,6 @@ public interface ClassesService {
     List<Classes> selectAllByClassNum(int classNum);
 
     List<Classes> selectAllBySchoolId(int schoolId);
+
+    List<Classes> selectAll();
 }
