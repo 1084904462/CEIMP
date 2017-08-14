@@ -6,4 +6,5 @@ package org.obsidian.ceimp.service;
 public interface ImportItemService {
 
     int insertImportItem();
+    
 }
