@@ -11,6 +11,8 @@ public class PointReview {
 
     private Integer reviewStatus;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -20,11 +22,21 @@ public class PointReview {
                 ", userId='" + userId + '\'' +
                 ", pointId=" + pointId +
                 ", reviewStatus=" + reviewStatus +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public PointReview() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public PointReview(String userId, Integer pointId, Integer reviewStatus) {
+        this.userId = userId;
+        this.pointId = pointId;
+        this.reviewStatus = reviewStatus;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -33,6 +45,7 @@ public class PointReview {
         this.userId = userId;
         this.pointId = pointId;
         this.reviewStatus = reviewStatus;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -66,6 +79,14 @@ public class PointReview {
 
     public void setReviewStatus(Integer reviewStatus) {
         this.reviewStatus = reviewStatus;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

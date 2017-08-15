@@ -11,6 +11,8 @@ public class PointScore {
 
     private Integer score;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -20,11 +22,21 @@ public class PointScore {
                 ", pointId=" + pointId +
                 ", userId='" + userId + '\'' +
                 ", score=" + score +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public PointScore() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public PointScore(Integer pointId, String userId, Integer score) {
+        this.pointId = pointId;
+        this.userId = userId;
+        this.score = score;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -33,6 +45,7 @@ public class PointScore {
         this.pointId = pointId;
         this.userId = userId;
         this.score = score;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -66,6 +79,14 @@ public class PointScore {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

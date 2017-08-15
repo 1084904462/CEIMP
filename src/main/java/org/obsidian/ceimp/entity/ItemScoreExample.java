@@ -354,6 +354,66 @@ public class ItemScoreExample {
             return (Criteria) this;
         }
 
+        public Criteria andYearScopeIsNull() {
+            addCriterion("year_scope is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeIsNotNull() {
+            addCriterion("year_scope is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeEqualTo(Integer value) {
+            addCriterion("year_scope =", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotEqualTo(Integer value) {
+            addCriterion("year_scope <>", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeGreaterThan(Integer value) {
+            addCriterion("year_scope >", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("year_scope >=", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeLessThan(Integer value) {
+            addCriterion("year_scope <", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeLessThanOrEqualTo(Integer value) {
+            addCriterion("year_scope <=", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeIn(List<Integer> values) {
+            addCriterion("year_scope in", values, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotIn(List<Integer> values) {
+            addCriterion("year_scope not in", values, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeBetween(Integer value1, Integer value2) {
+            addCriterion("year_scope between", value1, value2, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotBetween(Integer value1, Integer value2) {
+            addCriterion("year_scope not between", value1, value2, "yearScope");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

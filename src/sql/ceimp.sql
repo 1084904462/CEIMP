@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-14 16:32:47
+Date: 2017-08-15 15:42:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,6 +25,7 @@ CREATE TABLE `accumulate_input` (
   `point_id` int(20) NOT NULL,
   `evidence` varchar(100) NOT NULL,
   `times` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,
@@ -84,6 +85,7 @@ CREATE TABLE `award` (
   `award_id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
   `scholarship_id` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`award_id`),
   UNIQUE KEY `award_id` (`award_id`) USING BTREE,
@@ -96,9 +98,9 @@ CREATE TABLE `award` (
 -- ----------------------------
 -- Records of award
 -- ----------------------------
-INSERT INTO `award` VALUES ('1', '1150299070', '1', '1502686890');
-INSERT INTO `award` VALUES ('2', '1150299071', '1', '1502694607');
-INSERT INTO `award` VALUES ('4', '1150299070', '2', '1502694607');
+INSERT INTO `award` VALUES ('1', '1150299070', '1', '0', '1502686890');
+INSERT INTO `award` VALUES ('2', '1150299071', '1', '0', '1502694607');
+INSERT INTO `award` VALUES ('4', '1150299070', '2', '0', '1502694607');
 
 -- ----------------------------
 -- Table structure for `award_level`
@@ -166,6 +168,7 @@ CREATE TABLE `class_score` (
   `class_id` int(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `score` double NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`class_score_id`),
   UNIQUE KEY `class_score_id` (`class_score_id`) USING BTREE,
@@ -190,6 +193,7 @@ CREATE TABLE `competition_input` (
   `evidence` varchar(100) NOT NULL,
   `award_level_id` int(20) NOT NULL,
   `competition_type` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,
@@ -228,6 +232,7 @@ CREATE TABLE `double_input` (
   `user_id` varchar(20) NOT NULL,
   `point_id` int(20) NOT NULL,
   `evidence` varchar(100) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,
@@ -336,7 +341,7 @@ CREATE TABLE `fill_in_type` (
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`fill_in_type_id`),
   UNIQUE KEY `fill_in_type_id` (`fill_in_type_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of fill_in_type
@@ -359,7 +364,7 @@ CREATE TABLE `import_item` (
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`import_id`),
   UNIQUE KEY `import_id` (`import_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of import_item
@@ -374,6 +379,7 @@ CREATE TABLE `item_score` (
   `item_id` int(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `score` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`item_score_id`),
   UNIQUE KEY `item_score_id` (`item_score_id`) USING BTREE,
@@ -396,6 +402,7 @@ CREATE TABLE `point_review` (
   `user_id` varchar(20) NOT NULL,
   `point_id` int(20) NOT NULL,
   `review_status` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_id`),
   UNIQUE KEY `review_id` (`review_id`) USING BTREE,
@@ -418,6 +425,7 @@ CREATE TABLE `point_score` (
   `point_id` int(20) NOT NULL,
   `user_id` varchar(20) NOT NULL,
   `score` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`point_score_id`),
   UNIQUE KEY `point_score_id` (`point_score_id`) USING BTREE,
@@ -440,6 +448,7 @@ CREATE TABLE `review_status` (
   `user_id` varchar(20) NOT NULL,
   `status` int(20) NOT NULL,
   `review_type_id` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_status_id`),
   UNIQUE KEY `review_status_id` (`review_status_id`) USING BTREE,
@@ -459,9 +468,10 @@ CREATE TABLE `review_status` (
 DROP TABLE IF EXISTS `review_time`;
 CREATE TABLE `review_time` (
   `review_time_id` int(20) NOT NULL AUTO_INCREMENT,
-  `review_start` int(20) NOT NULL,
-  `review_end` int(20) NOT NULL,
+  `review_start` bigint(20) NOT NULL,
+  `review_end` bigint(20) NOT NULL,
   `review_type_id` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_time_id`),
   UNIQUE KEY `review_time_id` (`review_time_id`) USING BTREE,
@@ -483,7 +493,7 @@ CREATE TABLE `review_type` (
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`review_type_id`),
   UNIQUE KEY `review_type_id` (`review_type_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of review_type
@@ -503,7 +513,7 @@ CREATE TABLE `scholarship` (
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`scholarship_id`),
   UNIQUE KEY `scholarship_id` (`scholarship_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship
@@ -524,7 +534,7 @@ CREATE TABLE `scholarship_block` (
   UNIQUE KEY `scholarship_block_id` (`scholarship_block_id`) USING BTREE,
   KEY `scholarship_id` (`scholarship_id`),
   CONSTRAINT `scholarship_block_ibfk_1` FOREIGN KEY (`scholarship_id`) REFERENCES `scholarship` (`scholarship_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship_block
@@ -552,7 +562,7 @@ CREATE TABLE `scholarship_item` (
   KEY `fill_in_type_id` (`fill_in_type_id`),
   CONSTRAINT `scholarship_item_ibfk_1` FOREIGN KEY (`scholarship_block_id`) REFERENCES `scholarship_block` (`scholarship_block_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `scholarship_item_ibfk_2` FOREIGN KEY (`fill_in_type_id`) REFERENCES `fill_in_type` (`fill_in_type_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship_item
@@ -604,6 +614,7 @@ CREATE TABLE `single_input` (
   `input_id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
   `point_id` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,
@@ -691,6 +702,7 @@ CREATE TABLE `triple_input` (
   `point_id` int(20) NOT NULL,
   `evidence` varchar(100) NOT NULL,
   `addition` varchar(100) NOT NULL,
+  `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,

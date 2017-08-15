@@ -13,6 +13,8 @@ public class TripleInput {
 
     private String addition;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -23,11 +25,22 @@ public class TripleInput {
                 ", pointId=" + pointId +
                 ", evidence='" + evidence + '\'' +
                 ", addition='" + addition + '\'' +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public TripleInput() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public TripleInput(String userId, Integer pointId, String evidence, String addition) {
+        this.userId = userId;
+        this.pointId = pointId;
+        this.evidence = evidence;
+        this.addition = addition;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -37,6 +50,7 @@ public class TripleInput {
         this.pointId = pointId;
         this.evidence = evidence;
         this.addition = addition;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -78,6 +92,14 @@ public class TripleInput {
 
     public void setAddition(String addition) {
         this.addition = addition == null ? null : addition.trim();
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

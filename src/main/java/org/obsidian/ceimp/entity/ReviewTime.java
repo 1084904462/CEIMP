@@ -5,11 +5,13 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class ReviewTime {
     private Integer reviewTimeId;
 
-    private Integer reviewStart;
+    private Long reviewStart;
 
-    private Integer reviewEnd;
+    private Long reviewEnd;
 
     private Integer reviewTypeId;
+
+    private Integer yearScope;
 
     private Long createTime;
 
@@ -20,19 +22,30 @@ public class ReviewTime {
                 ", reviewStart=" + reviewStart +
                 ", reviewEnd=" + reviewEnd +
                 ", reviewTypeId=" + reviewTypeId +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public ReviewTime() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewTime(Integer reviewTimeId, Integer reviewStart, Integer reviewEnd, Integer reviewTypeId) {
+    public ReviewTime(Long reviewStart, Long reviewEnd, Integer reviewTypeId) {
+        this.reviewStart = reviewStart;
+        this.reviewEnd = reviewEnd;
+        this.reviewTypeId = reviewTypeId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public ReviewTime(Integer reviewTimeId, Long reviewStart, Long reviewEnd, Integer reviewTypeId) {
         this.reviewTimeId = reviewTimeId;
         this.reviewStart = reviewStart;
         this.reviewEnd = reviewEnd;
         this.reviewTypeId = reviewTypeId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -44,19 +57,19 @@ public class ReviewTime {
         this.reviewTimeId = reviewTimeId;
     }
 
-    public Integer getReviewStart() {
+    public Long getReviewStart() {
         return reviewStart;
     }
 
-    public void setReviewStart(Integer reviewStart) {
+    public void setReviewStart(Long reviewStart) {
         this.reviewStart = reviewStart;
     }
 
-    public Integer getReviewEnd() {
+    public Long getReviewEnd() {
         return reviewEnd;
     }
 
-    public void setReviewEnd(Integer reviewEnd) {
+    public void setReviewEnd(Long reviewEnd) {
         this.reviewEnd = reviewEnd;
     }
 
@@ -66,6 +79,14 @@ public class ReviewTime {
 
     public void setReviewTypeId(Integer reviewTypeId) {
         this.reviewTypeId = reviewTypeId;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

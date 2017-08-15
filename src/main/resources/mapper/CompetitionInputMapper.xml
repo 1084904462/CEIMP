@@ -8,6 +8,7 @@
     <result column="evidence" jdbcType="VARCHAR" property="evidence" />
     <result column="award_level_id" jdbcType="INTEGER" property="awardLevelId" />
     <result column="competition_type" jdbcType="INTEGER" property="competitionType" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    input_id, user_id, competition_id, evidence, award_level_id, competition_type, create_time
+    input_id, user_id, competition_id, evidence, award_level_id, competition_type, year_scope, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionInputExample" resultMap="BaseResultMap">
     select
@@ -95,10 +97,10 @@
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
     insert into competition_input (input_id, user_id, competition_id, 
       evidence, award_level_id, competition_type, 
-      create_time)
+      year_scope, create_time)
     values (#{inputId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{competitionId,jdbcType=INTEGER}, 
       #{evidence,jdbcType=VARCHAR}, #{awardLevelId,jdbcType=INTEGER}, #{competitionType,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=BIGINT})
+      #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
     insert into competition_input
@@ -120,6 +122,9 @@
       </if>
       <if test="competitionType != null">
         competition_type,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
       </if>
       <if test="createTime != null">
         create_time,
@@ -143,6 +148,9 @@
       </if>
       <if test="competitionType != null">
         #{competitionType,jdbcType=INTEGER},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -176,6 +184,9 @@
       <if test="record.competitionType != null">
         competition_type = #{record.competitionType,jdbcType=INTEGER},
       </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -192,6 +203,7 @@
       evidence = #{record.evidence,jdbcType=VARCHAR},
       award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
       competition_type = #{record.competitionType,jdbcType=INTEGER},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

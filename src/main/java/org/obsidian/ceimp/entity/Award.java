@@ -9,6 +9,8 @@ public class Award {
 
     private Integer scholarshipId;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -17,17 +19,20 @@ public class Award {
                 "awardId=" + awardId +
                 ", userId='" + userId + '\'' +
                 ", scholarshipId=" + scholarshipId +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public Award() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
     public Award(String userId, Integer scholarshipId) {
         this.userId = userId;
         this.scholarshipId = scholarshipId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -35,6 +40,7 @@ public class Award {
         this.awardId = awardId;
         this.userId = userId;
         this.scholarshipId = scholarshipId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -60,6 +66,14 @@ public class Award {
 
     public void setScholarshipId(Integer scholarshipId) {
         this.scholarshipId = scholarshipId;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

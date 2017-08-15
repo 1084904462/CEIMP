@@ -3,9 +3,10 @@
 <mapper namespace="org.obsidian.ceimp.dao.ReviewTimeMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewTime">
     <result column="review_time_id" jdbcType="INTEGER" property="reviewTimeId" />
-    <result column="review_start" jdbcType="INTEGER" property="reviewStart" />
-    <result column="review_end" jdbcType="INTEGER" property="reviewEnd" />
+    <result column="review_start" jdbcType="BIGINT" property="reviewStart" />
+    <result column="review_end" jdbcType="BIGINT" property="reviewEnd" />
     <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    review_time_id, review_start, review_end, review_type_id, create_time
+    review_time_id, review_start, review_end, review_type_id, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewTimeExample" resultMap="BaseResultMap">
     select
@@ -92,9 +93,11 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewTime">
     insert into review_time (review_time_id, review_start, review_end, 
-      review_type_id, create_time)
-    values (#{reviewTimeId,jdbcType=INTEGER}, #{reviewStart,jdbcType=INTEGER}, #{reviewEnd,jdbcType=INTEGER}, 
-      #{reviewTypeId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+      review_type_id, year_scope, create_time
+      )
+    values (#{reviewTimeId,jdbcType=INTEGER}, #{reviewStart,jdbcType=BIGINT}, #{reviewEnd,jdbcType=BIGINT}, 
+      #{reviewTypeId,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewTime">
     insert into review_time
@@ -111,6 +114,9 @@
       <if test="reviewTypeId != null">
         review_type_id,
       </if>
+      <if test="yearScope != null">
+        year_scope,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -120,13 +126,16 @@
         #{reviewTimeId,jdbcType=INTEGER},
       </if>
       <if test="reviewStart != null">
-        #{reviewStart,jdbcType=INTEGER},
+        #{reviewStart,jdbcType=BIGINT},
       </if>
       <if test="reviewEnd != null">
-        #{reviewEnd,jdbcType=INTEGER},
+        #{reviewEnd,jdbcType=BIGINT},
       </if>
       <if test="reviewTypeId != null">
         #{reviewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -146,13 +155,16 @@
         review_time_id = #{record.reviewTimeId,jdbcType=INTEGER},
       </if>
       <if test="record.reviewStart != null">
-        review_start = #{record.reviewStart,jdbcType=INTEGER},
+        review_start = #{record.reviewStart,jdbcType=BIGINT},
       </if>
       <if test="record.reviewEnd != null">
-        review_end = #{record.reviewEnd,jdbcType=INTEGER},
+        review_end = #{record.reviewEnd,jdbcType=BIGINT},
       </if>
       <if test="record.reviewTypeId != null">
         review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -165,9 +177,10 @@
   <update id="updateByExample" parameterType="map">
     update review_time
     set review_time_id = #{record.reviewTimeId,jdbcType=INTEGER},
-      review_start = #{record.reviewStart,jdbcType=INTEGER},
-      review_end = #{record.reviewEnd,jdbcType=INTEGER},
+      review_start = #{record.reviewStart,jdbcType=BIGINT},
+      review_end = #{record.reviewEnd,jdbcType=BIGINT},
       review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

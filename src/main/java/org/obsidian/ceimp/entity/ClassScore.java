@@ -11,6 +11,8 @@ public class ClassScore {
 
     private Double score;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -20,11 +22,21 @@ public class ClassScore {
                 ", classId=" + classId +
                 ", userId='" + userId + '\'' +
                 ", score=" + score +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public ClassScore() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public ClassScore(Integer classId, String userId, Double score) {
+        this.classId = classId;
+        this.userId = userId;
+        this.score = score;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -33,6 +45,7 @@ public class ClassScore {
         this.classId = classId;
         this.userId = userId;
         this.score = score;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -66,6 +79,14 @@ public class ClassScore {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

@@ -11,6 +11,8 @@ public class ReviewStatus {
 
     private Integer reviewTypeId;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -20,11 +22,13 @@ public class ReviewStatus {
                 ", userId='" + userId + '\'' +
                 ", status=" + status +
                 ", reviewTypeId=" + reviewTypeId +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public ReviewStatus() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -32,6 +36,7 @@ public class ReviewStatus {
         this.userId = userId;
         this.status = status;
         this.reviewTypeId = reviewTypeId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -40,6 +45,7 @@ public class ReviewStatus {
         this.userId = userId;
         this.status = status;
         this.reviewTypeId = reviewTypeId;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -73,6 +79,14 @@ public class ReviewStatus {
 
     public void setReviewTypeId(Integer reviewTypeId) {
         this.reviewTypeId = reviewTypeId;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

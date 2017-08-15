@@ -13,6 +13,8 @@ public class AccumulateInput {
 
     private Integer times;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -23,11 +25,23 @@ public class AccumulateInput {
                 ", pointId=" + pointId +
                 ", evidence='" + evidence + '\'' +
                 ", times=" + times +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public AccumulateInput() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+
+    }
+
+    public AccumulateInput(String userId, Integer pointId, String evidence, Integer times) {
+        this.userId = userId;
+        this.pointId = pointId;
+        this.evidence = evidence;
+        this.times = times;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -37,6 +51,7 @@ public class AccumulateInput {
         this.pointId = pointId;
         this.evidence = evidence;
         this.times = times;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -78,6 +93,14 @@ public class AccumulateInput {
 
     public void setTimes(Integer times) {
         this.times = times;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {
