@@ -7,6 +7,7 @@
     <result column="point_id" jdbcType="INTEGER" property="pointId" />
     <result column="evidence" jdbcType="VARCHAR" property="evidence" />
     <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    input_id, user_id, point_id, evidence, times, create_time
+    input_id, user_id, point_id, evidence, times, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.AccumulateInputExample" resultMap="BaseResultMap">
     select
@@ -93,11 +94,11 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.AccumulateInput">
     insert into accumulate_input (input_id, user_id, point_id, 
-      evidence, times, create_time
-      )
+      evidence, times, year_scope, 
+      create_time)
     values (#{inputId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{pointId,jdbcType=INTEGER}, 
-      #{evidence,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
-      )
+      #{evidence,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.AccumulateInput">
     insert into accumulate_input
@@ -116,6 +117,9 @@
       </if>
       <if test="times != null">
         times,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
       </if>
       <if test="createTime != null">
         create_time,
@@ -136,6 +140,9 @@
       </if>
       <if test="times != null">
         #{times,jdbcType=INTEGER},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -166,6 +173,9 @@
       <if test="record.times != null">
         times = #{record.times,jdbcType=INTEGER},
       </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -181,6 +191,7 @@
       point_id = #{record.pointId,jdbcType=INTEGER},
       evidence = #{record.evidence,jdbcType=VARCHAR},
       times = #{record.times,jdbcType=INTEGER},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

@@ -174,52 +174,52 @@ public class ReviewTimeExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartEqualTo(Integer value) {
+        public Criteria andReviewStartEqualTo(Long value) {
             addCriterion("review_start =", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartNotEqualTo(Integer value) {
+        public Criteria andReviewStartNotEqualTo(Long value) {
             addCriterion("review_start <>", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartGreaterThan(Integer value) {
+        public Criteria andReviewStartGreaterThan(Long value) {
             addCriterion("review_start >", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartGreaterThanOrEqualTo(Integer value) {
+        public Criteria andReviewStartGreaterThanOrEqualTo(Long value) {
             addCriterion("review_start >=", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartLessThan(Integer value) {
+        public Criteria andReviewStartLessThan(Long value) {
             addCriterion("review_start <", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartLessThanOrEqualTo(Integer value) {
+        public Criteria andReviewStartLessThanOrEqualTo(Long value) {
             addCriterion("review_start <=", value, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartIn(List<Integer> values) {
+        public Criteria andReviewStartIn(List<Long> values) {
             addCriterion("review_start in", values, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartNotIn(List<Integer> values) {
+        public Criteria andReviewStartNotIn(List<Long> values) {
             addCriterion("review_start not in", values, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartBetween(Integer value1, Integer value2) {
+        public Criteria andReviewStartBetween(Long value1, Long value2) {
             addCriterion("review_start between", value1, value2, "reviewStart");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStartNotBetween(Integer value1, Integer value2) {
+        public Criteria andReviewStartNotBetween(Long value1, Long value2) {
             addCriterion("review_start not between", value1, value2, "reviewStart");
             return (Criteria) this;
         }
@@ -234,52 +234,52 @@ public class ReviewTimeExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndEqualTo(Integer value) {
+        public Criteria andReviewEndEqualTo(Long value) {
             addCriterion("review_end =", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndNotEqualTo(Integer value) {
+        public Criteria andReviewEndNotEqualTo(Long value) {
             addCriterion("review_end <>", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndGreaterThan(Integer value) {
+        public Criteria andReviewEndGreaterThan(Long value) {
             addCriterion("review_end >", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndGreaterThanOrEqualTo(Integer value) {
+        public Criteria andReviewEndGreaterThanOrEqualTo(Long value) {
             addCriterion("review_end >=", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndLessThan(Integer value) {
+        public Criteria andReviewEndLessThan(Long value) {
             addCriterion("review_end <", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndLessThanOrEqualTo(Integer value) {
+        public Criteria andReviewEndLessThanOrEqualTo(Long value) {
             addCriterion("review_end <=", value, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndIn(List<Integer> values) {
+        public Criteria andReviewEndIn(List<Long> values) {
             addCriterion("review_end in", values, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndNotIn(List<Integer> values) {
+        public Criteria andReviewEndNotIn(List<Long> values) {
             addCriterion("review_end not in", values, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndBetween(Integer value1, Integer value2) {
+        public Criteria andReviewEndBetween(Long value1, Long value2) {
             addCriterion("review_end between", value1, value2, "reviewEnd");
             return (Criteria) this;
         }
 
-        public Criteria andReviewEndNotBetween(Integer value1, Integer value2) {
+        public Criteria andReviewEndNotBetween(Long value1, Long value2) {
             addCriterion("review_end not between", value1, value2, "reviewEnd");
             return (Criteria) this;
         }
@@ -341,6 +341,66 @@ public class ReviewTimeExample {
 
         public Criteria andReviewTypeIdNotBetween(Integer value1, Integer value2) {
             addCriterion("review_type_id not between", value1, value2, "reviewTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeIsNull() {
+            addCriterion("year_scope is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeIsNotNull() {
+            addCriterion("year_scope is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeEqualTo(Integer value) {
+            addCriterion("year_scope =", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotEqualTo(Integer value) {
+            addCriterion("year_scope <>", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeGreaterThan(Integer value) {
+            addCriterion("year_scope >", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("year_scope >=", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeLessThan(Integer value) {
+            addCriterion("year_scope <", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeLessThanOrEqualTo(Integer value) {
+            addCriterion("year_scope <=", value, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeIn(List<Integer> values) {
+            addCriterion("year_scope in", values, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotIn(List<Integer> values) {
+            addCriterion("year_scope not in", values, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeBetween(Integer value1, Integer value2) {
+            addCriterion("year_scope between", value1, value2, "yearScope");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearScopeNotBetween(Integer value1, Integer value2) {
+            addCriterion("year_scope not between", value1, value2, "yearScope");
             return (Criteria) this;
         }
 

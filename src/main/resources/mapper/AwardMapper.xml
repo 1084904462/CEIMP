@@ -5,6 +5,7 @@
     <result column="award_id" jdbcType="INTEGER" property="awardId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="scholarship_id" jdbcType="INTEGER" property="scholarshipId" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <select id="selectAllByClassId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -74,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    award_id, user_id, scholarship_id, create_time
+    award_id, user_id, scholarship_id, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.AwardExample" resultMap="BaseResultMap">
     select
@@ -99,9 +100,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Award">
     insert into award (award_id, user_id, scholarship_id, 
-      create_time)
+      year_scope, create_time)
     values (#{awardId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{scholarshipId,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=BIGINT})
+      #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Award">
     insert into award
@@ -114,6 +115,9 @@
       </if>
       <if test="scholarshipId != null">
         scholarship_id,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
       </if>
       <if test="createTime != null">
         create_time,
@@ -128,6 +132,9 @@
       </if>
       <if test="scholarshipId != null">
         #{scholarshipId,jdbcType=INTEGER},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -152,6 +159,9 @@
       <if test="record.scholarshipId != null">
         scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
       </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -165,6 +175,7 @@
     set award_id = #{record.awardId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
       scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

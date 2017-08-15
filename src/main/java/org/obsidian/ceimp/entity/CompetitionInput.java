@@ -15,6 +15,8 @@ public class CompetitionInput {
 
     private Integer competitionType;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -26,11 +28,23 @@ public class CompetitionInput {
                 ", evidence='" + evidence + '\'' +
                 ", awardLevelId=" + awardLevelId +
                 ", competitionType=" + competitionType +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public CompetitionInput() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public CompetitionInput(String userId, Integer competitionId, String evidence, Integer awardLevelId, Integer competitionType) {
+        this.userId = userId;
+        this.competitionId = competitionId;
+        this.evidence = evidence;
+        this.awardLevelId = awardLevelId;
+        this.competitionType = competitionType;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -41,6 +55,7 @@ public class CompetitionInput {
         this.evidence = evidence;
         this.awardLevelId = awardLevelId;
         this.competitionType = competitionType;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -90,6 +105,14 @@ public class CompetitionInput {
 
     public void setCompetitionType(Integer competitionType) {
         this.competitionType = competitionType;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

@@ -4,6 +4,7 @@ import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.entity.Award;
 import org.obsidian.ceimp.entity.AwardExample;
 import org.obsidian.ceimp.service.AwardService;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,6 +94,27 @@ public class AwardServiceImpl implements AwardService {
     @Override
     public List<Award> selectAllBySchoolId(int schoolId) {
         List<Award> list = awardMapper.selectAllBySchoolId(schoolId);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    public List<Award> selectAllByThisYear(){
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        AwardExample example = new AwardExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<Award> list = awardMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    public List<Award> selectAllByYearScope(int yearScope){
+        AwardExample example = new AwardExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<Award> list = awardMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
         }

@@ -25,5 +25,9 @@ public interface AwardService {
 
     List<Award> selectAllBySchoolId(int schoolId);
 
+    List<Award> selectAllByThisYear();
+
+    List<Award> selectAllByYearScope(int yearScope);
+
     List<Award> selectAll();
 }
