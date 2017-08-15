@@ -20,4 +20,14 @@ public class TestController {
         model.addAttribute("time",now);
         return "index";
     }
+
+    @RequestMapping("/getYear")
+    public String getYear(Model model){
+        Long time = TimeUtil.getInstance().getTimeStamp();
+        System.out.println(time);
+        int year = TimeUtil.getInstance().getYear(time);
+        System.out.println(year);
+        model.addAttribute("year",year);
+        return "index";
+    }
 }

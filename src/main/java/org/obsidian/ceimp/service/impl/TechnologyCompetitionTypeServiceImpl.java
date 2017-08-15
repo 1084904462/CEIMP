@@ -2,6 +2,7 @@ package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.dao.TechnologyCompetitionTypeMapper;
 import org.obsidian.ceimp.entity.TechnologyCompetitionType;
+import org.obsidian.ceimp.entity.TechnologyCompetitionTypeExample;
 import org.obsidian.ceimp.service.TechnologyCompetitionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,36 +22,59 @@ public class TechnologyCompetitionTypeServiceImpl implements TechnologyCompetiti
     @Transactional
     @Override
     public int insertTechnologyCompetitionType(String type) {
-        return 0;
+        TechnologyCompetitionType technologyCompetitionType = new TechnologyCompetitionType(type);
+        return technologyCompetitionTypeMapper.insertSelective(technologyCompetitionType);
     }
 
     @Transactional
     @Override
     public int updateTechnologyCompetitionType(int typeId, String type) {
-        return 0;
+        TechnologyCompetitionType technologyCompetitionType = new TechnologyCompetitionType(typeId,type);
+        TechnologyCompetitionTypeExample example = new TechnologyCompetitionTypeExample();
+        example.or().andTypeIdEqualTo(typeId);
+        return technologyCompetitionTypeMapper.updateByExample(technologyCompetitionType,example);
     }
 
     @Transactional
     @Override
     public int deleteTechnologyCompetitionType(int typeId) {
-        return 0;
+        TechnologyCompetitionTypeExample example = new TechnologyCompetitionTypeExample();
+        example.or().andTypeIdEqualTo(typeId);
+        return technologyCompetitionTypeMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
     public TechnologyCompetitionType selectByTypeId(int typeId) {
-        return null;
+        TechnologyCompetitionTypeExample example = new TechnologyCompetitionTypeExample();
+        example.or().andTypeIdEqualTo(typeId);
+        List<TechnologyCompetitionType> list = technologyCompetitionTypeMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     @Transactional
     @Override
     public TechnologyCompetitionType selectByType(String type) {
-        return null;
+        TechnologyCompetitionTypeExample example = new TechnologyCompetitionTypeExample();
+        example.or().andTypeEqualTo(type);
+        List<TechnologyCompetitionType> list = technologyCompetitionTypeMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     @Transactional
     @Override
     public List<TechnologyCompetitionType> selectAll() {
-        return null;
+        TechnologyCompetitionTypeExample example = new TechnologyCompetitionTypeExample();
+        List<TechnologyCompetitionType> list = technologyCompetitionTypeMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

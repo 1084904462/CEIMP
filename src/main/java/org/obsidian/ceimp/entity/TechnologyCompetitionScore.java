@@ -31,6 +31,14 @@ public class TechnologyCompetitionScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public TechnologyCompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Integer score) {
+        this.competitionLevelId = competitionLevelId;
+        this.awardLevelId = awardLevelId;
+        this.competitionTypeId = competitionTypeId;
+        this.score = score;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public TechnologyCompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Integer score) {
         this.scoreId = scoreId;
         this.competitionLevelId = competitionLevelId;
