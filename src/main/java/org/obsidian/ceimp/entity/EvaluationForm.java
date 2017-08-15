@@ -31,6 +31,14 @@ public class EvaluationForm {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public EvaluationForm(String formName, String content, String publishingUnit, Integer schoolId) {
+        this.formName = formName;
+        this.content = content;
+        this.publishingUnit = publishingUnit;
+        this.schoolId = schoolId;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public EvaluationForm(Integer formId, String formName, String content, String publishingUnit, Integer schoolId) {
         this.formId = formId;
         this.formName = formName;

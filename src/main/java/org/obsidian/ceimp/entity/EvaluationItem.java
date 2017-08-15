@@ -28,6 +28,13 @@ public class EvaluationItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public EvaluationItem(String itemName, Integer classId, Integer maxScore) {
+        this.itemName = itemName;
+        this.classId = classId;
+        this.maxScore = maxScore;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public EvaluationItem(Integer itemId, String itemName, Integer classId, Integer maxScore) {
         this.itemId = itemId;
         this.itemName = itemName;

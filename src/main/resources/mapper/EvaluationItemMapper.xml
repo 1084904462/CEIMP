@@ -8,6 +8,11 @@
     <result column="max_score" jdbcType="INTEGER" property="maxScore" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
+  <select id="selectAllByFormId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select evaluation_item.item_id,evaluation_item.item_name,evaluation_item.class_id,
+    evaluation_item.max_score,evaluation_item.create_time from evaluation_item,evaluation_class
+    where evaluation_item.class_id = evaluation_class.class_id and evaluation_class.form_id = #{formId}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

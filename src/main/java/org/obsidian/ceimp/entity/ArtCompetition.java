@@ -22,6 +22,11 @@ public class ArtCompetition {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public ArtCompetition(String competitionName) {
+        this.competitionName = competitionName;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public ArtCompetition(Integer competitionId, String competitionName) {
         this.competitionId = competitionId;
         this.competitionName = competitionName;

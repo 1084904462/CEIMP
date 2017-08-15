@@ -28,6 +28,13 @@ public class ArtCompetitionScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public ArtCompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer score) {
+        this.competitionLevelId = competitionLevelId;
+        this.awardLevelId = awardLevelId;
+        this.score = score;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public ArtCompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer score) {
         this.scoreId = scoreId;
         this.competitionLevelId = competitionLevelId;

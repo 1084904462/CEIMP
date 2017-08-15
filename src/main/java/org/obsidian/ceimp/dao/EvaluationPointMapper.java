@@ -1,11 +1,16 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.entity.EvaluationPoint;
 import org.obsidian.ceimp.entity.EvaluationPointExample;
 
+import java.util.List;
+
 public interface EvaluationPointMapper {
+    List<EvaluationPoint> selectAllByClassId(int classId);
+
+    List<EvaluationPoint> selectAllByFormId(int formId);
+
     long countByExample(EvaluationPointExample example);
 
     int deleteByExample(EvaluationPointExample example);

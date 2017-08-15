@@ -31,6 +31,14 @@ public class EvaluationClass {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
+    public EvaluationClass(String className, Integer formId, String content, Double weight) {
+        this.className = className;
+        this.formId = formId;
+        this.content = content;
+        this.weight = weight;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
     public EvaluationClass(Integer classId, String className, Integer formId, String content, Double weight) {
         this.classId = classId;
         this.className = className;
