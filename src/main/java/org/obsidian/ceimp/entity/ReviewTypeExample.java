@@ -164,73 +164,73 @@ public class ReviewTypeExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIsNull() {
-            addCriterion("review_type is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIsNotNull() {
-            addCriterion("review_type is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeEqualTo(String value) {
-            addCriterion("review_type =", value, "reviewType");
+        public Criteria andTypeEqualTo(String value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeNotEqualTo(String value) {
-            addCriterion("review_type <>", value, "reviewType");
+        public Criteria andTypeNotEqualTo(String value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeGreaterThan(String value) {
-            addCriterion("review_type >", value, "reviewType");
+        public Criteria andTypeGreaterThan(String value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("review_type >=", value, "reviewType");
+        public Criteria andTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeLessThan(String value) {
-            addCriterion("review_type <", value, "reviewType");
+        public Criteria andTypeLessThan(String value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeLessThanOrEqualTo(String value) {
-            addCriterion("review_type <=", value, "reviewType");
+        public Criteria andTypeLessThanOrEqualTo(String value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeLike(String value) {
-            addCriterion("review_type like", value, "reviewType");
+        public Criteria andTypeLike(String value) {
+            addCriterion("type like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeNotLike(String value) {
-            addCriterion("review_type not like", value, "reviewType");
+        public Criteria andTypeNotLike(String value) {
+            addCriterion("type not like", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIn(List<String> values) {
-            addCriterion("review_type in", values, "reviewType");
+        public Criteria andTypeIn(List<String> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeNotIn(List<String> values) {
-            addCriterion("review_type not in", values, "reviewType");
+        public Criteria andTypeNotIn(List<String> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeBetween(String value1, String value2) {
-            addCriterion("review_type between", value1, value2, "reviewType");
+        public Criteria andTypeBetween(String value1, String value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeNotBetween(String value1, String value2) {
-            addCriterion("review_type not between", value1, value2, "reviewType");
+        public Criteria andTypeNotBetween(String value1, String value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 

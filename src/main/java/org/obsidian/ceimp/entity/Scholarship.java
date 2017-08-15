@@ -7,7 +7,7 @@ public class Scholarship {
 
     private String scholarshipName;
 
-    private Integer awardSum;
+    private Double awardPercent;
 
     private Long createTime;
 
@@ -16,7 +16,7 @@ public class Scholarship {
         return "Scholarship{" +
                 "scholarshipId=" + scholarshipId +
                 ", scholarshipName='" + scholarshipName + '\'' +
-                ", awardSum=" + awardSum +
+                ", awardPercent=" + awardPercent +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -25,10 +25,16 @@ public class Scholarship {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Scholarship(Integer scholarshipId, String scholarshipName, Integer awardSum) {
+    public Scholarship(String scholarshipName, Double awardPercent) {
+        this.scholarshipName = scholarshipName;
+        this.awardPercent = awardPercent;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public Scholarship(Integer scholarshipId, String scholarshipName, Double awardPercent) {
         this.scholarshipId = scholarshipId;
         this.scholarshipName = scholarshipName;
-        this.awardSum = awardSum;
+        this.awardPercent = awardPercent;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -48,12 +54,12 @@ public class Scholarship {
         this.scholarshipName = scholarshipName == null ? null : scholarshipName.trim();
     }
 
-    public Integer getAwardSum() {
-        return awardSum;
+    public Double getAwardPercent() {
+        return awardPercent;
     }
 
-    public void setAwardSum(Integer awardSum) {
-        this.awardSum = awardSum;
+    public void setAwardPercent(Double awardPercent) {
+        this.awardPercent = awardPercent;
     }
 
     public Long getCreateTime() {

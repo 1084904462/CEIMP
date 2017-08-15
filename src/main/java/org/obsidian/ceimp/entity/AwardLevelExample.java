@@ -164,73 +164,73 @@ public class AwardLevelExample {
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIsNull() {
-            addCriterion("\"award _level\" is null");
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIsNotNull() {
-            addCriterion("\"award _level\" is not null");
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelEqualTo(String value) {
-            addCriterion("\"award _level\" =", value, "awardLevel");
+        public Criteria andLevelEqualTo(String value) {
+            addCriterion("level =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelNotEqualTo(String value) {
-            addCriterion("\"award _level\" <>", value, "awardLevel");
+        public Criteria andLevelNotEqualTo(String value) {
+            addCriterion("level <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelGreaterThan(String value) {
-            addCriterion("\"award _level\" >", value, "awardLevel");
+        public Criteria andLevelGreaterThan(String value) {
+            addCriterion("level >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelGreaterThanOrEqualTo(String value) {
-            addCriterion("\"award _level\" >=", value, "awardLevel");
+        public Criteria andLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("level >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelLessThan(String value) {
-            addCriterion("\"award _level\" <", value, "awardLevel");
+        public Criteria andLevelLessThan(String value) {
+            addCriterion("level <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelLessThanOrEqualTo(String value) {
-            addCriterion("\"award _level\" <=", value, "awardLevel");
+        public Criteria andLevelLessThanOrEqualTo(String value) {
+            addCriterion("level <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelLike(String value) {
-            addCriterion("\"award _level\" like", value, "awardLevel");
+        public Criteria andLevelLike(String value) {
+            addCriterion("level like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelNotLike(String value) {
-            addCriterion("\"award _level\" not like", value, "awardLevel");
+        public Criteria andLevelNotLike(String value) {
+            addCriterion("level not like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIn(List<String> values) {
-            addCriterion("\"award _level\" in", values, "awardLevel");
+        public Criteria andLevelIn(List<String> values) {
+            addCriterion("level in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelNotIn(List<String> values) {
-            addCriterion("\"award _level\" not in", values, "awardLevel");
+        public Criteria andLevelNotIn(List<String> values) {
+            addCriterion("level not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelBetween(String value1, String value2) {
-            addCriterion("\"award _level\" between", value1, value2, "awardLevel");
+        public Criteria andLevelBetween(String value1, String value2) {
+            addCriterion("level between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelNotBetween(String value1, String value2) {
-            addCriterion("\"award _level\" not between", value1, value2, "awardLevel");
+        public Criteria andLevelNotBetween(String value1, String value2) {
+            addCriterion("level not between", value1, value2, "level");
             return (Criteria) this;
         }
 

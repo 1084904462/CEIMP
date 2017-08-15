@@ -354,6 +354,76 @@ public class TechnologyCompetitionExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrganizerIsNull() {
+            addCriterion("organizer is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerIsNotNull() {
+            addCriterion("organizer is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerEqualTo(String value) {
+            addCriterion("organizer =", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerNotEqualTo(String value) {
+            addCriterion("organizer <>", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerGreaterThan(String value) {
+            addCriterion("organizer >", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerGreaterThanOrEqualTo(String value) {
+            addCriterion("organizer >=", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerLessThan(String value) {
+            addCriterion("organizer <", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerLessThanOrEqualTo(String value) {
+            addCriterion("organizer <=", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerLike(String value) {
+            addCriterion("organizer like", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerNotLike(String value) {
+            addCriterion("organizer not like", value, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerIn(List<String> values) {
+            addCriterion("organizer in", values, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerNotIn(List<String> values) {
+            addCriterion("organizer not in", values, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerBetween(String value1, String value2) {
+            addCriterion("organizer between", value1, value2, "organizer");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganizerNotBetween(String value1, String value2) {
+            addCriterion("organizer not between", value1, value2, "organizer");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

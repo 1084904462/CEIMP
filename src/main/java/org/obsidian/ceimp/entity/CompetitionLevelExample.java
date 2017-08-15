@@ -164,73 +164,73 @@ public class CompetitionLevelExample {
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIsNull() {
-            addCriterion("competition_level is null");
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIsNotNull() {
-            addCriterion("competition_level is not null");
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelEqualTo(String value) {
-            addCriterion("competition_level =", value, "competitionLevel");
+        public Criteria andLevelEqualTo(String value) {
+            addCriterion("level =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelNotEqualTo(String value) {
-            addCriterion("competition_level <>", value, "competitionLevel");
+        public Criteria andLevelNotEqualTo(String value) {
+            addCriterion("level <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelGreaterThan(String value) {
-            addCriterion("competition_level >", value, "competitionLevel");
+        public Criteria andLevelGreaterThan(String value) {
+            addCriterion("level >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelGreaterThanOrEqualTo(String value) {
-            addCriterion("competition_level >=", value, "competitionLevel");
+        public Criteria andLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("level >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelLessThan(String value) {
-            addCriterion("competition_level <", value, "competitionLevel");
+        public Criteria andLevelLessThan(String value) {
+            addCriterion("level <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelLessThanOrEqualTo(String value) {
-            addCriterion("competition_level <=", value, "competitionLevel");
+        public Criteria andLevelLessThanOrEqualTo(String value) {
+            addCriterion("level <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelLike(String value) {
-            addCriterion("competition_level like", value, "competitionLevel");
+        public Criteria andLevelLike(String value) {
+            addCriterion("level like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelNotLike(String value) {
-            addCriterion("competition_level not like", value, "competitionLevel");
+        public Criteria andLevelNotLike(String value) {
+            addCriterion("level not like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIn(List<String> values) {
-            addCriterion("competition_level in", values, "competitionLevel");
+        public Criteria andLevelIn(List<String> values) {
+            addCriterion("level in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelNotIn(List<String> values) {
-            addCriterion("competition_level not in", values, "competitionLevel");
+        public Criteria andLevelNotIn(List<String> values) {
+            addCriterion("level not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelBetween(String value1, String value2) {
-            addCriterion("competition_level between", value1, value2, "competitionLevel");
+        public Criteria andLevelBetween(String value1, String value2) {
+            addCriterion("level between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelNotBetween(String value1, String value2) {
-            addCriterion("competition_level not between", value1, value2, "competitionLevel");
+        public Criteria andLevelNotBetween(String value1, String value2) {
+            addCriterion("level not between", value1, value2, "level");
             return (Criteria) this;
         }
 

@@ -6,6 +6,7 @@ import org.obsidian.ceimp.entity.UsersExample;
 import org.obsidian.ceimp.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,12 +19,14 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private UsersMapper usersMapper;
 
+    @Transactional
     @Override
     public int insertUsers(String userId, String username, String password, int classId) {
         Users users = new Users(userId,username,password,classId);
         return usersMapper.insert(users);
     }
 
+    @Transactional
     @Override
     public int updateUsers(String userId, String username, String password, int classId) {
         Users users = new Users(userId,username,password,classId);
@@ -32,6 +35,7 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.updateByExample(users,example);
     }
 
+    @Transactional
     @Override
     public int deleteUsers(String userId) {
         UsersExample example = new UsersExample();
@@ -39,6 +43,7 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.deleteByExample(example);
     }
 
+    @Transactional
     @Override
     public Users selectByUserId(String userId) {
         UsersExample example = new UsersExample();
@@ -50,6 +55,7 @@ public class UsersServiceImpl implements UsersService {
         return list.get(0);
     }
 
+    @Transactional
     @Override
     public List<Users> selectAllByUsername(String username) {
         username = "%" + username + "%";
@@ -62,6 +68,7 @@ public class UsersServiceImpl implements UsersService {
         return list;
     }
 
+    @Transactional
     @Override
     public List<Users> selectAllByClassId(int classId) {
         UsersExample example = new UsersExample();
@@ -73,9 +80,21 @@ public class UsersServiceImpl implements UsersService {
         return list;
     }
 
+    @Transactional
     @Override
     public List<Users> selectAllBySchoolId(int schoolId) {
         List<Users> list = usersMapper.selectAllBySchoolId(schoolId);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<Users> selectAll(){
+        UsersExample example = new UsersExample();
+        List<Users> list = usersMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
         }

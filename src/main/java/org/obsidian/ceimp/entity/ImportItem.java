@@ -13,7 +13,7 @@ public class ImportItem {
 
     private Integer cet4;
 
-    private Integer pe;
+    private Double pe;
 
     private Double gpa;
 
@@ -37,7 +37,17 @@ public class ImportItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ImportItem(Integer importId, String userId, Integer examFail, Integer makeUp, Integer cet4, Integer pe, Double gpa) {
+    public ImportItem(String userId, Integer examFail, Integer makeUp, Integer cet4, Double pe, Double gpa) {
+        this.userId = userId;
+        this.examFail = examFail;
+        this.makeUp = makeUp;
+        this.cet4 = cet4;
+        this.pe = pe;
+        this.gpa = gpa;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public ImportItem(Integer importId, String userId, Integer examFail, Integer makeUp, Integer cet4, Double pe, Double gpa) {
         this.importId = importId;
         this.userId = userId;
         this.examFail = examFail;
@@ -88,11 +98,11 @@ public class ImportItem {
         this.cet4 = cet4;
     }
 
-    public Integer getPe() {
+    public Double getPe() {
         return pe;
     }
 
-    public void setPe(Integer pe) {
+    public void setPe(Double pe) {
         this.pe = pe;
     }
 

@@ -5,7 +5,7 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class ReviewType {
     private Integer reviewTypeId;
 
-    private String reviewType;
+    private String type;
 
     private Long createTime;
 
@@ -13,7 +13,7 @@ public class ReviewType {
     public String toString() {
         return "ReviewType{" +
                 "reviewTypeId=" + reviewTypeId +
-                ", reviewType='" + reviewType + '\'' +
+                ", type='" + type + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -22,9 +22,14 @@ public class ReviewType {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewType(Integer reviewTypeId, String reviewType) {
+    public ReviewType(String type) {
+        this.type = type;
+        this.createTime = TimeUtil.getInstance().getTimeStamp();
+    }
+
+    public ReviewType(Integer reviewTypeId, String type) {
         this.reviewTypeId = reviewTypeId;
-        this.reviewType = reviewType;
+        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -36,12 +41,12 @@ public class ReviewType {
         this.reviewTypeId = reviewTypeId;
     }
 
-    public String getReviewType() {
-        return reviewType;
+    public String getType() {
+        return type;
     }
 
-    public void setReviewType(String reviewType) {
-        this.reviewType = reviewType == null ? null : reviewType.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public Long getCreateTime() {

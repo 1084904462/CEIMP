@@ -22,4 +22,6 @@ public interface UsersService {
     List<Users> selectAllByClassId(int classId);
 
     List<Users> selectAllBySchoolId(int schoolId);
+
+    List<Users> selectAll();
 }

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Scholarship">
     <result column="scholarship_id" jdbcType="INTEGER" property="scholarshipId" />
     <result column="scholarship_name" jdbcType="VARCHAR" property="scholarshipName" />
-    <result column="award_sum" jdbcType="INTEGER" property="awardSum" />
+    <result column="award_percent" jdbcType="DOUBLE" property="awardPercent" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scholarship_id, scholarship_name, award_sum, create_time
+    scholarship_id, scholarship_name, award_percent, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipExample" resultMap="BaseResultMap">
     select
@@ -90,9 +90,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Scholarship">
-    insert into scholarship (scholarship_id, scholarship_name, award_sum, 
+    insert into scholarship (scholarship_id, scholarship_name, award_percent, 
       create_time)
-    values (#{scholarshipId,jdbcType=INTEGER}, #{scholarshipName,jdbcType=VARCHAR}, #{awardSum,jdbcType=INTEGER}, 
+    values (#{scholarshipId,jdbcType=INTEGER}, #{scholarshipName,jdbcType=VARCHAR}, #{awardPercent,jdbcType=DOUBLE}, 
       #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Scholarship">
@@ -104,8 +104,8 @@
       <if test="scholarshipName != null">
         scholarship_name,
       </if>
-      <if test="awardSum != null">
-        award_sum,
+      <if test="awardPercent != null">
+        award_percent,
       </if>
       <if test="createTime != null">
         create_time,
@@ -118,8 +118,8 @@
       <if test="scholarshipName != null">
         #{scholarshipName,jdbcType=VARCHAR},
       </if>
-      <if test="awardSum != null">
-        #{awardSum,jdbcType=INTEGER},
+      <if test="awardPercent != null">
+        #{awardPercent,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -141,8 +141,8 @@
       <if test="record.scholarshipName != null">
         scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
       </if>
-      <if test="record.awardSum != null">
-        award_sum = #{record.awardSum,jdbcType=INTEGER},
+      <if test="record.awardPercent != null">
+        award_percent = #{record.awardPercent,jdbcType=DOUBLE},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -156,7 +156,7 @@
     update scholarship
     set scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
       scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
-      award_sum = #{record.awardSum,jdbcType=INTEGER},
+      award_percent = #{record.awardPercent,jdbcType=DOUBLE},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

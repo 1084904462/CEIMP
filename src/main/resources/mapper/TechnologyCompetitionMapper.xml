@@ -6,6 +6,7 @@
     <result column="competition_name" jdbcType="VARCHAR" property="competitionName" />
     <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
     <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="organizer" jdbcType="VARCHAR" property="organizer" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    competition_id, competition_name, competition_type_id, school_id, create_time
+    competition_id, competition_name, competition_type_id, school_id, organizer, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionExample" resultMap="BaseResultMap">
     select
@@ -92,9 +93,11 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.TechnologyCompetition">
     insert into technology_competition (competition_id, competition_name, competition_type_id, 
-      school_id, create_time)
+      school_id, organizer, create_time
+      )
     values (#{competitionId,jdbcType=INTEGER}, #{competitionName,jdbcType=VARCHAR}, #{competitionTypeId,jdbcType=INTEGER}, 
-      #{schoolId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+      #{schoolId,jdbcType=INTEGER}, #{organizer,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.TechnologyCompetition">
     insert into technology_competition
@@ -110,6 +113,9 @@
       </if>
       <if test="schoolId != null">
         school_id,
+      </if>
+      <if test="organizer != null">
+        organizer,
       </if>
       <if test="createTime != null">
         create_time,
@@ -127,6 +133,9 @@
       </if>
       <if test="schoolId != null">
         #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="organizer != null">
+        #{organizer,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -154,6 +163,9 @@
       <if test="record.schoolId != null">
         school_id = #{record.schoolId,jdbcType=INTEGER},
       </if>
+      <if test="record.organizer != null">
+        organizer = #{record.organizer,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -168,6 +180,7 @@
       competition_name = #{record.competitionName,jdbcType=VARCHAR},
       competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       school_id = #{record.schoolId,jdbcType=INTEGER},
+      organizer = #{record.organizer,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

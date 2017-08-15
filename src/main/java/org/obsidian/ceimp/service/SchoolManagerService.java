@@ -18,4 +18,6 @@ public interface SchoolManagerService {
     SchoolManager selectBySchoolManagerId(String schoolManagerId);
 
     List<SchoolManager> selectAllBySchoolId(int schoolId);
+
+    List<SchoolManager> selectAll();
 }

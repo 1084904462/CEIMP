@@ -234,63 +234,63 @@ public class ReviewStatusExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusIsNull() {
-            addCriterion("review_status is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusIsNotNull() {
-            addCriterion("review_status is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusEqualTo(Integer value) {
-            addCriterion("review_status =", value, "reviewStatus");
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusNotEqualTo(Integer value) {
-            addCriterion("review_status <>", value, "reviewStatus");
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusGreaterThan(Integer value) {
-            addCriterion("review_status >", value, "reviewStatus");
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("review_status >=", value, "reviewStatus");
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusLessThan(Integer value) {
-            addCriterion("review_status <", value, "reviewStatus");
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("review_status <=", value, "reviewStatus");
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusIn(List<Integer> values) {
-            addCriterion("review_status in", values, "reviewStatus");
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusNotIn(List<Integer> values) {
-            addCriterion("review_status not in", values, "reviewStatus");
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusBetween(Integer value1, Integer value2) {
-            addCriterion("review_status between", value1, value2, "reviewStatus");
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andReviewStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("review_status not between", value1, value2, "reviewStatus");
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 
