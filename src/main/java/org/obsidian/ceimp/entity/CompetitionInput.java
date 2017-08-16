@@ -11,6 +11,8 @@ public class CompetitionInput {
 
     private String evidence;
 
+    private Integer competitionLevelId;
+
     private Integer awardLevelId;
 
     private Integer competitionType;
@@ -26,6 +28,7 @@ public class CompetitionInput {
                 ", userId='" + userId + '\'' +
                 ", competitionId=" + competitionId +
                 ", evidence='" + evidence + '\'' +
+                ", competitionLevelId=" + competitionLevelId +
                 ", awardLevelId=" + awardLevelId +
                 ", competitionType=" + competitionType +
                 ", yearScope=" + yearScope +
@@ -38,21 +41,23 @@ public class CompetitionInput {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionInput(String userId, Integer competitionId, String evidence, Integer awardLevelId, Integer competitionType) {
+    public CompetitionInput(String userId, Integer competitionId, String evidence, Integer competitionLevelId, Integer awardLevelId, Integer competitionType) {
         this.userId = userId;
         this.competitionId = competitionId;
         this.evidence = evidence;
+        this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
         this.competitionType = competitionType;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionInput(Integer inputId, String userId, Integer competitionId, String evidence, Integer awardLevelId, Integer competitionType) {
+    public CompetitionInput(Integer inputId, String userId, Integer competitionId, String evidence, Integer competitionLevelId, Integer awardLevelId, Integer competitionType) {
         this.inputId = inputId;
         this.userId = userId;
         this.competitionId = competitionId;
         this.evidence = evidence;
+        this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
         this.competitionType = competitionType;
         this.yearScope = TimeUtil.getInstance().getThisYear();
@@ -89,6 +94,14 @@ public class CompetitionInput {
 
     public void setEvidence(String evidence) {
         this.evidence = evidence == null ? null : evidence.trim();
+    }
+
+    public Integer getCompetitionLevelId() {
+        return competitionLevelId;
+    }
+
+    public void setCompetitionLevelId(Integer competitionLevelId) {
+        this.competitionLevelId = competitionLevelId;
     }
 
     public Integer getAwardLevelId() {

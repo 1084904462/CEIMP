@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-15 15:42:15
+Date: 2017-08-16 11:24:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -191,6 +191,7 @@ CREATE TABLE `competition_input` (
   `user_id` varchar(20) NOT NULL,
   `competition_id` int(20) NOT NULL,
   `evidence` varchar(100) NOT NULL,
+  `competition_level_id` int(20) NOT NULL,
   `award_level_id` int(20) NOT NULL,
   `competition_type` int(20) NOT NULL,
   `year_scope` int(20) NOT NULL,
@@ -199,6 +200,8 @@ CREATE TABLE `competition_input` (
   UNIQUE KEY `input_id` (`input_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   KEY `award_level_id` (`award_level_id`),
+  KEY `competition_level_id` (`competition_level_id`),
+  CONSTRAINT `competition_input_ibfk_3` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`competition_level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_input_ibfk_2` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`award_level_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -221,6 +224,26 @@ CREATE TABLE `competition_level` (
 
 -- ----------------------------
 -- Records of competition_level
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `competition_level_connection`
+-- ----------------------------
+DROP TABLE IF EXISTS `competition_level_connection`;
+CREATE TABLE `competition_level_connection` (
+  `connection_id` int(20) NOT NULL AUTO_INCREMENT,
+  `competition_id` int(20) NOT NULL,
+  `level_id` int(20) NOT NULL,
+  `competition_type` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`connection_id`),
+  UNIQUE KEY `connection_id` (`connection_id`) USING BTREE,
+  KEY `level_id` (`level_id`),
+  CONSTRAINT `competition_level_connection_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `competition_level` (`competition_level_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of competition_level_connection
 -- ----------------------------
 
 -- ----------------------------

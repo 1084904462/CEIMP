@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.obsidian.ceimp.dao.CompetitionInputMapper">
-  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionInput">
-    <result column="input_id" jdbcType="INTEGER" property="inputId" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+<mapper namespace="org.obsidian.ceimp.dao.CompetitionLevelConnectionMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionLevelConnection">
+    <result column="connection_id" jdbcType="INTEGER" property="connectionId" />
     <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
-    <result column="evidence" jdbcType="VARCHAR" property="evidence" />
-    <result column="competition_level_id" jdbcType="INTEGER" property="competitionLevelId" />
-    <result column="award_level_id" jdbcType="INTEGER" property="awardLevelId" />
+    <result column="level_id" jdbcType="INTEGER" property="levelId" />
     <result column="competition_type" jdbcType="INTEGER" property="competitionType" />
-    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -71,17 +67,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    input_id, user_id, competition_id, evidence, competition_level_id, award_level_id, 
-    competition_type, year_scope, create_time
+    connection_id, competition_id, level_id, competition_type, create_time
   </sql>
-  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionInputExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnectionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from competition_input
+    from competition_level_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,115 +84,75 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.CompetitionInputExample">
-    delete from competition_input
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnectionExample">
+    delete from competition_level_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
-    insert into competition_input (input_id, user_id, competition_id, 
-      evidence, competition_level_id, award_level_id, 
-      competition_type, year_scope, create_time
-      )
-    values (#{inputId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{competitionId,jdbcType=INTEGER}, 
-      #{evidence,jdbcType=VARCHAR}, #{competitionLevelId,jdbcType=INTEGER}, #{awardLevelId,jdbcType=INTEGER}, 
-      #{competitionType,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
-      )
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnection">
+    insert into competition_level_connection (connection_id, competition_id, level_id, 
+      competition_type, create_time)
+    values (#{connectionId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{levelId,jdbcType=INTEGER}, 
+      #{competitionType,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
-    insert into competition_input
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnection">
+    insert into competition_level_connection
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="inputId != null">
-        input_id,
-      </if>
-      <if test="userId != null">
-        user_id,
+      <if test="connectionId != null">
+        connection_id,
       </if>
       <if test="competitionId != null">
         competition_id,
       </if>
-      <if test="evidence != null">
-        evidence,
-      </if>
-      <if test="competitionLevelId != null">
-        competition_level_id,
-      </if>
-      <if test="awardLevelId != null">
-        award_level_id,
+      <if test="levelId != null">
+        level_id,
       </if>
       <if test="competitionType != null">
         competition_type,
-      </if>
-      <if test="yearScope != null">
-        year_scope,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="inputId != null">
-        #{inputId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+      <if test="connectionId != null">
+        #{connectionId,jdbcType=INTEGER},
       </if>
       <if test="competitionId != null">
         #{competitionId,jdbcType=INTEGER},
       </if>
-      <if test="evidence != null">
-        #{evidence,jdbcType=VARCHAR},
-      </if>
-      <if test="competitionLevelId != null">
-        #{competitionLevelId,jdbcType=INTEGER},
-      </if>
-      <if test="awardLevelId != null">
-        #{awardLevelId,jdbcType=INTEGER},
+      <if test="levelId != null">
+        #{levelId,jdbcType=INTEGER},
       </if>
       <if test="competitionType != null">
         #{competitionType,jdbcType=INTEGER},
-      </if>
-      <if test="yearScope != null">
-        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.CompetitionInputExample" resultType="java.lang.Long">
-    select count(*) from competition_input
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnectionExample" resultType="java.lang.Long">
+    select count(*) from competition_level_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update competition_input
+    update competition_level_connection
     <set>
-      <if test="record.inputId != null">
-        input_id = #{record.inputId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+      <if test="record.connectionId != null">
+        connection_id = #{record.connectionId,jdbcType=INTEGER},
       </if>
       <if test="record.competitionId != null">
         competition_id = #{record.competitionId,jdbcType=INTEGER},
       </if>
-      <if test="record.evidence != null">
-        evidence = #{record.evidence,jdbcType=VARCHAR},
-      </if>
-      <if test="record.competitionLevelId != null">
-        competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
-      </if>
-      <if test="record.awardLevelId != null">
-        award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
+      <if test="record.levelId != null">
+        level_id = #{record.levelId,jdbcType=INTEGER},
       </if>
       <if test="record.competitionType != null">
         competition_type = #{record.competitionType,jdbcType=INTEGER},
-      </if>
-      <if test="record.yearScope != null">
-        year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -208,15 +163,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update competition_input
-    set input_id = #{record.inputId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+    update competition_level_connection
+    set connection_id = #{record.connectionId,jdbcType=INTEGER},
       competition_id = #{record.competitionId,jdbcType=INTEGER},
-      evidence = #{record.evidence,jdbcType=VARCHAR},
-      competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
-      award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
+      level_id = #{record.levelId,jdbcType=INTEGER},
       competition_type = #{record.competitionType,jdbcType=INTEGER},
-      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
