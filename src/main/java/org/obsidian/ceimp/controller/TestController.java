@@ -30,4 +30,9 @@ public class TestController {
         model.addAttribute("year",year);
         return "index";
     }
+
+    @RequestMapping("/admin")
+	public String admin(){
+    	return "admin";
+	}
 }
