@@ -104,63 +104,63 @@ public class CompetitionLevelExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCompetitionLevelIdIsNull() {
-            addCriterion("competition_level_id is null");
+        public Criteria andLevelIdIsNull() {
+            addCriterion("level_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdIsNotNull() {
-            addCriterion("competition_level_id is not null");
+        public Criteria andLevelIdIsNotNull() {
+            addCriterion("level_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdEqualTo(Integer value) {
-            addCriterion("competition_level_id =", value, "competitionLevelId");
+        public Criteria andLevelIdEqualTo(Integer value) {
+            addCriterion("level_id =", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdNotEqualTo(Integer value) {
-            addCriterion("competition_level_id <>", value, "competitionLevelId");
+        public Criteria andLevelIdNotEqualTo(Integer value) {
+            addCriterion("level_id <>", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdGreaterThan(Integer value) {
-            addCriterion("competition_level_id >", value, "competitionLevelId");
+        public Criteria andLevelIdGreaterThan(Integer value) {
+            addCriterion("level_id >", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("competition_level_id >=", value, "competitionLevelId");
+        public Criteria andLevelIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("level_id >=", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdLessThan(Integer value) {
-            addCriterion("competition_level_id <", value, "competitionLevelId");
+        public Criteria andLevelIdLessThan(Integer value) {
+            addCriterion("level_id <", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdLessThanOrEqualTo(Integer value) {
-            addCriterion("competition_level_id <=", value, "competitionLevelId");
+        public Criteria andLevelIdLessThanOrEqualTo(Integer value) {
+            addCriterion("level_id <=", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdIn(List<Integer> values) {
-            addCriterion("competition_level_id in", values, "competitionLevelId");
+        public Criteria andLevelIdIn(List<Integer> values) {
+            addCriterion("level_id in", values, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdNotIn(List<Integer> values) {
-            addCriterion("competition_level_id not in", values, "competitionLevelId");
+        public Criteria andLevelIdNotIn(List<Integer> values) {
+            addCriterion("level_id not in", values, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdBetween(Integer value1, Integer value2) {
-            addCriterion("competition_level_id between", value1, value2, "competitionLevelId");
+        public Criteria andLevelIdBetween(Integer value1, Integer value2) {
+            addCriterion("level_id between", value1, value2, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionLevelIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("competition_level_id not between", value1, value2, "competitionLevelId");
+        public Criteria andLevelIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("level_id not between", value1, value2, "levelId");
             return (Criteria) this;
         }
 

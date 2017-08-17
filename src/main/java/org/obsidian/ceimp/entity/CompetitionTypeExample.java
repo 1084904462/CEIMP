@@ -3,14 +3,14 @@ package org.obsidian.ceimp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TechnologyCompetitionTypeExample {
+public class CompetitionTypeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TechnologyCompetitionTypeExample() {
+    public CompetitionTypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -231,6 +231,66 @@ public class TechnologyCompetitionTypeExample {
 
         public Criteria andTypeNotBetween(String value1, String value2) {
             addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIsNull() {
+            addCriterion("percent is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIsNotNull() {
+            addCriterion("percent is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentEqualTo(Double value) {
+            addCriterion("percent =", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentNotEqualTo(Double value) {
+            addCriterion("percent <>", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentGreaterThan(Double value) {
+            addCriterion("percent >", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentGreaterThanOrEqualTo(Double value) {
+            addCriterion("percent >=", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentLessThan(Double value) {
+            addCriterion("percent <", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentLessThanOrEqualTo(Double value) {
+            addCriterion("percent <=", value, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIn(List<Double> values) {
+            addCriterion("percent in", values, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentNotIn(List<Double> values) {
+            addCriterion("percent not in", values, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentBetween(Double value1, Double value2) {
+            addCriterion("percent between", value1, value2, "percent");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentNotBetween(Double value1, Double value2) {
+            addCriterion("percent not between", value1, value2, "percent");
             return (Criteria) this;
         }
 

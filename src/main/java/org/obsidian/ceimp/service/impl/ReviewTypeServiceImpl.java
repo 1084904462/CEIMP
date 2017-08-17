@@ -28,26 +28,26 @@ public class ReviewTypeServiceImpl implements ReviewTypeService {
 
     @Transactional
     @Override
-    public int updateReviewType(int reviewTypeId, String type) {
-        ReviewType reviewType = new ReviewType(reviewTypeId,type);
+    public int updateReviewType(int typeId, String type) {
+        ReviewType reviewType = new ReviewType(typeId,type);
         ReviewTypeExample example = new ReviewTypeExample();
-        example.or().andReviewTypeIdEqualTo(reviewTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         return reviewTypeMapper.updateByExample(reviewType,example);
     }
 
     @Transactional
     @Override
-    public int deleteReviewType(int reviewTypeId) {
+    public int deleteReviewType(int typeId) {
         ReviewTypeExample example = new ReviewTypeExample();
-        example.or().andReviewTypeIdEqualTo(reviewTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         return reviewTypeMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
-    public ReviewType selectByReviewTypeId(int reviewTypeId) {
+    public ReviewType selectByTypeId(int typeId) {
         ReviewTypeExample example = new ReviewTypeExample();
-        example.or().andReviewTypeIdEqualTo(reviewTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         List<ReviewType> list = reviewTypeMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

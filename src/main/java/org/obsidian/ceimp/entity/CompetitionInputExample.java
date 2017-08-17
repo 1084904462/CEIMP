@@ -294,73 +294,63 @@ public class CompetitionInputExample {
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceIsNull() {
-            addCriterion("evidence is null");
+        public Criteria andCompetitionTypeIdIsNull() {
+            addCriterion("competition_type_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceIsNotNull() {
-            addCriterion("evidence is not null");
+        public Criteria andCompetitionTypeIdIsNotNull() {
+            addCriterion("competition_type_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceEqualTo(String value) {
-            addCriterion("evidence =", value, "evidence");
+        public Criteria andCompetitionTypeIdEqualTo(Integer value) {
+            addCriterion("competition_type_id =", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceNotEqualTo(String value) {
-            addCriterion("evidence <>", value, "evidence");
+        public Criteria andCompetitionTypeIdNotEqualTo(Integer value) {
+            addCriterion("competition_type_id <>", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceGreaterThan(String value) {
-            addCriterion("evidence >", value, "evidence");
+        public Criteria andCompetitionTypeIdGreaterThan(Integer value) {
+            addCriterion("competition_type_id >", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceGreaterThanOrEqualTo(String value) {
-            addCriterion("evidence >=", value, "evidence");
+        public Criteria andCompetitionTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("competition_type_id >=", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceLessThan(String value) {
-            addCriterion("evidence <", value, "evidence");
+        public Criteria andCompetitionTypeIdLessThan(Integer value) {
+            addCriterion("competition_type_id <", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceLessThanOrEqualTo(String value) {
-            addCriterion("evidence <=", value, "evidence");
+        public Criteria andCompetitionTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("competition_type_id <=", value, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceLike(String value) {
-            addCriterion("evidence like", value, "evidence");
+        public Criteria andCompetitionTypeIdIn(List<Integer> values) {
+            addCriterion("competition_type_id in", values, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceNotLike(String value) {
-            addCriterion("evidence not like", value, "evidence");
+        public Criteria andCompetitionTypeIdNotIn(List<Integer> values) {
+            addCriterion("competition_type_id not in", values, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceIn(List<String> values) {
-            addCriterion("evidence in", values, "evidence");
+        public Criteria andCompetitionTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("competition_type_id between", value1, value2, "competitionTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andEvidenceNotIn(List<String> values) {
-            addCriterion("evidence not in", values, "evidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvidenceBetween(String value1, String value2) {
-            addCriterion("evidence between", value1, value2, "evidence");
-            return (Criteria) this;
-        }
-
-        public Criteria andEvidenceNotBetween(String value1, String value2) {
-            addCriterion("evidence not between", value1, value2, "evidence");
+        public Criteria andCompetitionTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("competition_type_id not between", value1, value2, "competitionTypeId");
             return (Criteria) this;
         }
 
@@ -484,63 +474,73 @@ public class CompetitionInputExample {
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeIsNull() {
-            addCriterion("competition_type is null");
+        public Criteria andEvidenceIsNull() {
+            addCriterion("evidence is null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeIsNotNull() {
-            addCriterion("competition_type is not null");
+        public Criteria andEvidenceIsNotNull() {
+            addCriterion("evidence is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeEqualTo(Integer value) {
-            addCriterion("competition_type =", value, "competitionType");
+        public Criteria andEvidenceEqualTo(String value) {
+            addCriterion("evidence =", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeNotEqualTo(Integer value) {
-            addCriterion("competition_type <>", value, "competitionType");
+        public Criteria andEvidenceNotEqualTo(String value) {
+            addCriterion("evidence <>", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeGreaterThan(Integer value) {
-            addCriterion("competition_type >", value, "competitionType");
+        public Criteria andEvidenceGreaterThan(String value) {
+            addCriterion("evidence >", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("competition_type >=", value, "competitionType");
+        public Criteria andEvidenceGreaterThanOrEqualTo(String value) {
+            addCriterion("evidence >=", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeLessThan(Integer value) {
-            addCriterion("competition_type <", value, "competitionType");
+        public Criteria andEvidenceLessThan(String value) {
+            addCriterion("evidence <", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("competition_type <=", value, "competitionType");
+        public Criteria andEvidenceLessThanOrEqualTo(String value) {
+            addCriterion("evidence <=", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeIn(List<Integer> values) {
-            addCriterion("competition_type in", values, "competitionType");
+        public Criteria andEvidenceLike(String value) {
+            addCriterion("evidence like", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeNotIn(List<Integer> values) {
-            addCriterion("competition_type not in", values, "competitionType");
+        public Criteria andEvidenceNotLike(String value) {
+            addCriterion("evidence not like", value, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeBetween(Integer value1, Integer value2) {
-            addCriterion("competition_type between", value1, value2, "competitionType");
+        public Criteria andEvidenceIn(List<String> values) {
+            addCriterion("evidence in", values, "evidence");
             return (Criteria) this;
         }
 
-        public Criteria andCompetitionTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("competition_type not between", value1, value2, "competitionType");
+        public Criteria andEvidenceNotIn(List<String> values) {
+            addCriterion("evidence not in", values, "evidence");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvidenceBetween(String value1, String value2) {
+            addCriterion("evidence between", value1, value2, "evidence");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvidenceNotBetween(String value1, String value2) {
+            addCriterion("evidence not between", value1, value2, "evidence");
             return (Criteria) this;
         }
 

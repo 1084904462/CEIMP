@@ -17,6 +17,9 @@ public interface SingleInputService {
 
     SingleInput selectByInputId(int inputId);
 
+    List<SingleInput> selectAllByThisYear();
+    List<SingleInput> selectAllByYearScope(int yearScope);
+
     List<SingleInput> selectAllByUserId(String userId);
     List<SingleInput> selectAllByUserIdAndThisYear(String userId);
     List<SingleInput> selectAllByUserIdAndYearScope(String userId,int yearScope);

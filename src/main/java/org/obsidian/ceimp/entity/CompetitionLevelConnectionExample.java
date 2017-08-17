@@ -224,123 +224,63 @@ public class CompetitionLevelConnectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdIsNull() {
-            addCriterion("level_id is null");
+        public Criteria andCompetitionLevelIdIsNull() {
+            addCriterion("competition_level_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdIsNotNull() {
-            addCriterion("level_id is not null");
+        public Criteria andCompetitionLevelIdIsNotNull() {
+            addCriterion("competition_level_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdEqualTo(Integer value) {
-            addCriterion("level_id =", value, "levelId");
+        public Criteria andCompetitionLevelIdEqualTo(Integer value) {
+            addCriterion("competition_level_id =", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdNotEqualTo(Integer value) {
-            addCriterion("level_id <>", value, "levelId");
+        public Criteria andCompetitionLevelIdNotEqualTo(Integer value) {
+            addCriterion("competition_level_id <>", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdGreaterThan(Integer value) {
-            addCriterion("level_id >", value, "levelId");
+        public Criteria andCompetitionLevelIdGreaterThan(Integer value) {
+            addCriterion("competition_level_id >", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("level_id >=", value, "levelId");
+        public Criteria andCompetitionLevelIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("competition_level_id >=", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdLessThan(Integer value) {
-            addCriterion("level_id <", value, "levelId");
+        public Criteria andCompetitionLevelIdLessThan(Integer value) {
+            addCriterion("competition_level_id <", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdLessThanOrEqualTo(Integer value) {
-            addCriterion("level_id <=", value, "levelId");
+        public Criteria andCompetitionLevelIdLessThanOrEqualTo(Integer value) {
+            addCriterion("competition_level_id <=", value, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdIn(List<Integer> values) {
-            addCriterion("level_id in", values, "levelId");
+        public Criteria andCompetitionLevelIdIn(List<Integer> values) {
+            addCriterion("competition_level_id in", values, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdNotIn(List<Integer> values) {
-            addCriterion("level_id not in", values, "levelId");
+        public Criteria andCompetitionLevelIdNotIn(List<Integer> values) {
+            addCriterion("competition_level_id not in", values, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdBetween(Integer value1, Integer value2) {
-            addCriterion("level_id between", value1, value2, "levelId");
+        public Criteria andCompetitionLevelIdBetween(Integer value1, Integer value2) {
+            addCriterion("competition_level_id between", value1, value2, "competitionLevelId");
             return (Criteria) this;
         }
 
-        public Criteria andLevelIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("level_id not between", value1, value2, "levelId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeIsNull() {
-            addCriterion("competition_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeIsNotNull() {
-            addCriterion("competition_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeEqualTo(Integer value) {
-            addCriterion("competition_type =", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeNotEqualTo(Integer value) {
-            addCriterion("competition_type <>", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeGreaterThan(Integer value) {
-            addCriterion("competition_type >", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("competition_type >=", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeLessThan(Integer value) {
-            addCriterion("competition_type <", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("competition_type <=", value, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeIn(List<Integer> values) {
-            addCriterion("competition_type in", values, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeNotIn(List<Integer> values) {
-            addCriterion("competition_type not in", values, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeBetween(Integer value1, Integer value2) {
-            addCriterion("competition_type between", value1, value2, "competitionType");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompetitionTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("competition_type not between", value1, value2, "competitionType");
+        public Criteria andCompetitionLevelIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("competition_level_id not between", value1, value2, "competitionLevelId");
             return (Criteria) this;
         }
 

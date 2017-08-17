@@ -21,14 +21,14 @@ public class EvaluationPointServiceImpl implements EvaluationPointService {
 
     @Transactional
     @Override
-    public int insertEvaluationPoint(String content, String remark, int score, int itemId, int calculateType, int inputType) {
+    public int insertEvaluationPoint(String content, String remark, double score, int itemId, int calculateType, int inputType) {
         EvaluationPoint evaluationPoint = new EvaluationPoint(content,remark,score,itemId,calculateType,inputType);
         return evaluationPointMapper.insertSelective(evaluationPoint);
     }
 
     @Transactional
     @Override
-    public int updateEvaluationPoint(int pointId, String content, String remark, int score, int itemId, int calculateType, int inputType) {
+    public int updateEvaluationPoint(int pointId, String content, String remark, double score, int itemId, int calculateType, int inputType) {
         EvaluationPoint evaluationPoint = new EvaluationPoint(pointId,content,remark,score,itemId,calculateType,inputType);
         EvaluationPointExample example = new EvaluationPointExample();
         example.or().andPointIdEqualTo(pointId);

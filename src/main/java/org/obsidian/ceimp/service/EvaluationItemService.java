@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface EvaluationItemService {
 
-    int insertEvaluationItem(String itemName,int classId,int maxScore);
+    int insertEvaluationItem(String itemName,int classId,double maxScore);
 
-    int updateEvaluationItem(int itemId,String itemName,int classId,int maxScore);
+    int updateEvaluationItem(int itemId,String itemName,int classId,double maxScore);
 
     int deleteEvaluationItem(int itemId);
 

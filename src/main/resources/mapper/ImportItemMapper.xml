@@ -9,6 +9,7 @@
     <result column="cet4" jdbcType="INTEGER" property="cet4" />
     <result column="pe" jdbcType="DOUBLE" property="pe" />
     <result column="gpa" jdbcType="DOUBLE" property="gpa" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    import_id, user_id, exam_fail, make_up, cet4, pe, gpa, create_time
+    import_id, user_id, exam_fail, make_up, cet4, pe, gpa, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ImportItemExample" resultMap="BaseResultMap">
     select
@@ -96,10 +97,10 @@
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ImportItem">
     insert into import_item (import_id, user_id, exam_fail, 
       make_up, cet4, pe, gpa, 
-      create_time)
+      year_scope, create_time)
     values (#{importId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{examFail,jdbcType=INTEGER}, 
       #{makeUp,jdbcType=INTEGER}, #{cet4,jdbcType=INTEGER}, #{pe,jdbcType=DOUBLE}, #{gpa,jdbcType=DOUBLE}, 
-      #{createTime,jdbcType=BIGINT})
+      #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ImportItem">
     insert into import_item
@@ -124,6 +125,9 @@
       </if>
       <if test="gpa != null">
         gpa,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
       </if>
       <if test="createTime != null">
         create_time,
@@ -150,6 +154,9 @@
       </if>
       <if test="gpa != null">
         #{gpa,jdbcType=DOUBLE},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -186,6 +193,9 @@
       <if test="record.gpa != null">
         gpa = #{record.gpa,jdbcType=DOUBLE},
       </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -203,6 +213,7 @@
       cet4 = #{record.cet4,jdbcType=INTEGER},
       pe = #{record.pe,jdbcType=DOUBLE},
       gpa = #{record.gpa,jdbcType=DOUBLE},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

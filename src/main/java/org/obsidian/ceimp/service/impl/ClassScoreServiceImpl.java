@@ -22,15 +22,15 @@ public class ClassScoreServiceImpl implements ClassScoreService {
 
     @Transactional
     @Override
-    public int insertClassScore(int classId, String userId, double score) {
-        ClassScore classScore = new ClassScore(classId,userId,score);
+    public int insertClassScore(String userId, int classId, double score) {
+        ClassScore classScore = new ClassScore(userId,classId,score);
         return classScoreMapper.insertSelective(classScore);
     }
 
     @Transactional
     @Override
-    public int updateClassScore(int classScoreId, int classId, String userId, double score) {
-        ClassScore classScore = new ClassScore(classId,userId,score);
+    public int updateClassScore(int classScoreId, String userId, int classId, double score) {
+        ClassScore classScore = new ClassScore(classScoreId,userId,classId,score);
         ClassScoreExample example = new ClassScoreExample();
         example.or().andClassScoreIdEqualTo(classScoreId);
         return classScoreMapper.updateByExample(classScore,example);
@@ -54,6 +54,31 @@ public class ClassScoreServiceImpl implements ClassScoreService {
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<ClassScore> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ClassScoreExample example = new ClassScoreExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ClassScore> list = classScoreMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ClassScore> selectAllByYearScope(int yearScope) {
+        ClassScoreExample example = new ClassScoreExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ClassScore> list = classScoreMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 
     @Transactional

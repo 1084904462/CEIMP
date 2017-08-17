@@ -37,25 +37,7 @@
         </javaClientGenerator>
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="competition_level_connection" domainObjectName="CompetitionLevelConnection"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="classes" domainObjectName="Classes"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="school" domainObjectName="School"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="users" domainObjectName="Users"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="accumulate_input" domainObjectName="AccumulateInput"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="art_competition" domainObjectName="ArtCompetition"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="art_competition_score" domainObjectName="ArtCompetitionScore"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="award" domainObjectName="Award"
@@ -70,10 +52,28 @@
         <table tableName="class_score" domainObjectName="ClassScore"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="classes" domainObjectName="Classes"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="competition" domainObjectName="Competition"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="competition_input" domainObjectName="CompetitionInput"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="competition_level" domainObjectName="CompetitionLevel"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="competition_level_connection" domainObjectName="CompetitionLevelConnection"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="competition_score" domainObjectName="CompetitionScore"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="competition_type" domainObjectName="CompetitionType"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="competition_type_connection" domainObjectName="CompetitionTypeConnection"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="double_input" domainObjectName="DoubleInput"
@@ -124,22 +124,19 @@
         <table tableName="scholarship_item" domainObjectName="ScholarshipItem"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="school" domainObjectName="School"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="school_manager" domainObjectName="SchoolManager"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="single_input" domainObjectName="SingleInput"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="technology_competition" domainObjectName="TechnologyCompetition"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="technology_competition_score" domainObjectName="TechnologyCompetitionScore"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
-        <table tableName="technology_competition_type" domainObjectName="TechnologyCompetitionType"
-               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
-               enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="triple_input" domainObjectName="TripleInput"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="users" domainObjectName="Users"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
     </context>

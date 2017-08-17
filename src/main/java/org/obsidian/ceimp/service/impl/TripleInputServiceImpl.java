@@ -58,6 +58,31 @@ public class TripleInputServiceImpl implements TripleInputService {
 
     @Transactional
     @Override
+    public List<TripleInput> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        TripleInputExample example = new TripleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<TripleInput> list = tripleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<TripleInput> selectAllByYearScope(int yearScope) {
+        TripleInputExample example = new TripleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<TripleInput> list = tripleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<TripleInput> selectAllByUserId(String userId) {
         TripleInputExample example = new TripleInputExample();
         example.or().andUserIdEqualTo(userId);

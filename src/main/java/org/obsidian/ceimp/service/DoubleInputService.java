@@ -17,6 +17,9 @@ public interface DoubleInputService {
 
     DoubleInput selectByInputId(int inputId);
 
+    List<DoubleInput> selectAllByThisYear();
+    List<DoubleInput> selectAllByYearScope(int yearScope);
+
     List<DoubleInput> selectAllByUserId(String userId);
     List<DoubleInput> selectAllByUserIdAndThisYear(String userId);
     List<DoubleInput> selectAllByUserIdAndYearScope(String userId,int yearScope);

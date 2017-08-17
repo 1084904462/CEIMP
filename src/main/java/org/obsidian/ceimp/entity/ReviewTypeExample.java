@@ -104,63 +104,63 @@ public class ReviewTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andReviewTypeIdIsNull() {
-            addCriterion("review_type_id is null");
+        public Criteria andTypeIdIsNull() {
+            addCriterion("type_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdIsNotNull() {
-            addCriterion("review_type_id is not null");
+        public Criteria andTypeIdIsNotNull() {
+            addCriterion("type_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdEqualTo(Integer value) {
-            addCriterion("review_type_id =", value, "reviewTypeId");
+        public Criteria andTypeIdEqualTo(Integer value) {
+            addCriterion("type_id =", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdNotEqualTo(Integer value) {
-            addCriterion("review_type_id <>", value, "reviewTypeId");
+        public Criteria andTypeIdNotEqualTo(Integer value) {
+            addCriterion("type_id <>", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdGreaterThan(Integer value) {
-            addCriterion("review_type_id >", value, "reviewTypeId");
+        public Criteria andTypeIdGreaterThan(Integer value) {
+            addCriterion("type_id >", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("review_type_id >=", value, "reviewTypeId");
+        public Criteria andTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type_id >=", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdLessThan(Integer value) {
-            addCriterion("review_type_id <", value, "reviewTypeId");
+        public Criteria andTypeIdLessThan(Integer value) {
+            addCriterion("type_id <", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("review_type_id <=", value, "reviewTypeId");
+        public Criteria andTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("type_id <=", value, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdIn(List<Integer> values) {
-            addCriterion("review_type_id in", values, "reviewTypeId");
+        public Criteria andTypeIdIn(List<Integer> values) {
+            addCriterion("type_id in", values, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdNotIn(List<Integer> values) {
-            addCriterion("review_type_id not in", values, "reviewTypeId");
+        public Criteria andTypeIdNotIn(List<Integer> values) {
+            addCriterion("type_id not in", values, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdBetween(Integer value1, Integer value2) {
-            addCriterion("review_type_id between", value1, value2, "reviewTypeId");
+        public Criteria andTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("type_id between", value1, value2, "typeId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewTypeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("review_type_id not between", value1, value2, "reviewTypeId");
+        public Criteria andTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("type_id not between", value1, value2, "typeId");
             return (Criteria) this;
         }
 

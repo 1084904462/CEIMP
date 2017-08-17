@@ -2,34 +2,39 @@ package org.obsidian.ceimp.entity;
 
 import org.obsidian.ceimp.util.TimeUtil;
 
-public class TechnologyCompetitionType {
+public class CompetitionType {
     private Integer typeId;
 
     private String type;
+
+    private Double percent;
 
     private Long createTime;
 
     @Override
     public String toString() {
-        return "TechnologyCompetitionType{" +
+        return "CompetitionType{" +
                 "typeId=" + typeId +
                 ", type='" + type + '\'' +
+                ", percent=" + percent +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
-    public TechnologyCompetitionType() {
+    public CompetitionType() {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public TechnologyCompetitionType(String type) {
+    public CompetitionType(String type, Double percent) {
         this.type = type;
+        this.percent = percent;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public TechnologyCompetitionType(Integer typeId, String type) {
+    public CompetitionType(Integer typeId, String type, Double percent) {
         this.typeId = typeId;
         this.type = type;
+        this.percent = percent;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -47,6 +52,14 @@ public class TechnologyCompetitionType {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public Double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Double percent) {
+        this.percent = percent;
     }
 
     public Long getCreateTime() {

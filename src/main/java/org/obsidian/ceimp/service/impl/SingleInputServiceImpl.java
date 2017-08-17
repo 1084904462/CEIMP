@@ -58,6 +58,31 @@ public class SingleInputServiceImpl implements SingleInputService {
 
     @Transactional
     @Override
+    public List<SingleInput> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        SingleInputExample example = new SingleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<SingleInput> list = singleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<SingleInput> selectAllByYearScope(int yearScope) {
+        SingleInputExample example = new SingleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<SingleInput> list = singleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<SingleInput> selectAllByUserId(String userId) {
         SingleInputExample example = new SingleInputExample();
         example.or().andUserIdEqualTo(userId);

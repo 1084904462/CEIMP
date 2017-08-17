@@ -18,7 +18,6 @@ public interface ReviewTimeService {
     ReviewTime selectByReviewTimeId(int reviewTimeId);
 
     List<ReviewTime> selectAllByThisYear();
-
     List<ReviewTime> selectAllByYearScope(int yearScope);
 
     List<ReviewTime> selectAll();

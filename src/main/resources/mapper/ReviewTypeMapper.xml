@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.obsidian.ceimp.dao.ReviewTypeMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewType">
-    <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    review_type_id, type, create_time
+    type_id, type, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewTypeExample" resultMap="BaseResultMap">
     select
@@ -89,16 +89,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewType">
-    insert into review_type (review_type_id, type, create_time
+    insert into review_type (type_id, type, create_time
       )
-    values (#{reviewTypeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+    values (#{typeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewType">
     insert into review_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="reviewTypeId != null">
-        review_type_id,
+      <if test="typeId != null">
+        type_id,
       </if>
       <if test="type != null">
         type,
@@ -108,8 +108,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="reviewTypeId != null">
-        #{reviewTypeId,jdbcType=INTEGER},
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
@@ -128,8 +128,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update review_type
     <set>
-      <if test="record.reviewTypeId != null">
-        review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
@@ -144,7 +144,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update review_type
-    set review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+    set type_id = #{record.typeId,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

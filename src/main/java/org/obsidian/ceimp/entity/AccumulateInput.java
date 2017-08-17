@@ -33,7 +33,6 @@ public class AccumulateInput {
     public AccumulateInput() {
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
-
     }
 
     public AccumulateInput(String userId, Integer pointId, String evidence, Integer times) {

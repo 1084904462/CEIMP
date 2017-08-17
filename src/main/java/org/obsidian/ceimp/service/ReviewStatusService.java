@@ -11,11 +11,14 @@ public interface ReviewStatusService {
 
     int insertReviewStatus(String userId,int status,int reviewTypeId);
 
-    int updateReviewStatus(int reviewStatusId,String userId,int status,int reviewTypeId);
+    int updateReviewStatus(int statusId,String userId,int status,int reviewTypeId);
 
-    int deleteReviewStatus(int reviewStatusId);
+    int deleteReviewStatus(int statusId);
 
-    ReviewStatus selectByReviewStatusId(int reviewStatusId);
+    ReviewStatus selectByStatusId(int statusId);
+
+    List<ReviewStatus> selectAllByThisYear();
+    List<ReviewStatus> selectAllByYearScope(int yearScope);
 
     List<ReviewStatus> selectAllByUserId(String userId);
     List<ReviewStatus> selectAllByUserIdAndThisYear(String userId);

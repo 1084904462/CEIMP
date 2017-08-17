@@ -9,13 +9,13 @@ public class CompetitionInput {
 
     private Integer competitionId;
 
-    private String evidence;
+    private Integer competitionTypeId;
 
     private Integer competitionLevelId;
 
     private Integer awardLevelId;
 
-    private Integer competitionType;
+    private String evidence;
 
     private Integer yearScope;
 
@@ -27,10 +27,10 @@ public class CompetitionInput {
                 "inputId=" + inputId +
                 ", userId='" + userId + '\'' +
                 ", competitionId=" + competitionId +
-                ", evidence='" + evidence + '\'' +
+                ", competitionTypeId=" + competitionTypeId +
                 ", competitionLevelId=" + competitionLevelId +
                 ", awardLevelId=" + awardLevelId +
-                ", competitionType=" + competitionType +
+                ", evidence='" + evidence + '\'' +
                 ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
@@ -41,25 +41,25 @@ public class CompetitionInput {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionInput(String userId, Integer competitionId, String evidence, Integer competitionLevelId, Integer awardLevelId, Integer competitionType) {
+    public CompetitionInput(String userId, Integer competitionId, Integer competitionTypeId, Integer competitionLevelId, Integer awardLevelId, String evidence) {
         this.userId = userId;
         this.competitionId = competitionId;
-        this.evidence = evidence;
+        this.competitionTypeId = competitionTypeId;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
-        this.competitionType = competitionType;
+        this.evidence = evidence;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionInput(Integer inputId, String userId, Integer competitionId, String evidence, Integer competitionLevelId, Integer awardLevelId, Integer competitionType) {
+    public CompetitionInput(Integer inputId, String userId, Integer competitionId, Integer competitionTypeId, Integer competitionLevelId, Integer awardLevelId, String evidence) {
         this.inputId = inputId;
         this.userId = userId;
         this.competitionId = competitionId;
-        this.evidence = evidence;
+        this.competitionTypeId = competitionTypeId;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
-        this.competitionType = competitionType;
+        this.evidence = evidence;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
@@ -88,12 +88,12 @@ public class CompetitionInput {
         this.competitionId = competitionId;
     }
 
-    public String getEvidence() {
-        return evidence;
+    public Integer getCompetitionTypeId() {
+        return competitionTypeId;
     }
 
-    public void setEvidence(String evidence) {
-        this.evidence = evidence == null ? null : evidence.trim();
+    public void setCompetitionTypeId(Integer competitionTypeId) {
+        this.competitionTypeId = competitionTypeId;
     }
 
     public Integer getCompetitionLevelId() {
@@ -112,12 +112,12 @@ public class CompetitionInput {
         this.awardLevelId = awardLevelId;
     }
 
-    public Integer getCompetitionType() {
-        return competitionType;
+    public String getEvidence() {
+        return evidence;
     }
 
-    public void setCompetitionType(Integer competitionType) {
-        this.competitionType = competitionType;
+    public void setEvidence(String evidence) {
+        this.evidence = evidence == null ? null : evidence.trim();
     }
 
     public Integer getYearScope() {

@@ -17,6 +17,8 @@ public class ImportItem {
 
     private Double gpa;
 
+    private Integer yearScope;
+
     private Long createTime;
 
     @Override
@@ -29,11 +31,13 @@ public class ImportItem {
                 ", cet4=" + cet4 +
                 ", pe=" + pe +
                 ", gpa=" + gpa +
+                ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
     public ImportItem() {
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -44,6 +48,7 @@ public class ImportItem {
         this.cet4 = cet4;
         this.pe = pe;
         this.gpa = gpa;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -55,6 +60,7 @@ public class ImportItem {
         this.cet4 = cet4;
         this.pe = pe;
         this.gpa = gpa;
+        this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -112,6 +118,14 @@ public class ImportItem {
 
     public void setGpa(Double gpa) {
         this.gpa = gpa;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
     }
 
     public Long getCreateTime() {

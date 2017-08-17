@@ -58,6 +58,31 @@ public class PointReviewServiceImpl implements PointReviewService {
 
     @Transactional
     @Override
+    public List<PointReview> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        PointReviewExample example = new PointReviewExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<PointReview> list = pointReviewMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<PointReview> selectAllByYearScope(int yearScope) {
+        PointReviewExample example = new PointReviewExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<PointReview> list = pointReviewMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<PointReview> selectAllByUserId(String userId) {
         PointReviewExample example = new PointReviewExample();
         example.or().andUserIdEqualTo(userId);

@@ -28,26 +28,26 @@ public class CompetitionLevelServiceImpl implements CompetitionLevelService {
 
     @Transactional
     @Override
-    public int updateCompetitionLevel(int competitionLevelId, String level) {
-        CompetitionLevel competitionLevel = new CompetitionLevel(competitionLevelId,level);
+    public int updateCompetitionLevel(int levelId, String level) {
+        CompetitionLevel competitionLevel = new CompetitionLevel(levelId,level);
         CompetitionLevelExample example = new CompetitionLevelExample();
-        example.or().andCompetitionLevelIdEqualTo(competitionLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         return competitionLevelMapper.updateByExample(competitionLevel,example);
     }
 
     @Transactional
     @Override
-    public int deleteCompetitionLevel(int competitionLevelId) {
+    public int deleteCompetitionLevel(int levelId) {
         CompetitionLevelExample example = new CompetitionLevelExample();
-        example.or().andCompetitionLevelIdEqualTo(competitionLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         return competitionLevelMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
-    public CompetitionLevel selectByCompetitionLevelId(int competitionLevelId) {
+    public CompetitionLevel selectByLevelId(int levelId) {
         CompetitionLevelExample example = new CompetitionLevelExample();
-        example.or().andCompetitionLevelIdEqualTo(competitionLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         List<CompetitionLevel> list = competitionLevelMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

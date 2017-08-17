@@ -11,11 +11,11 @@ public interface CompetitionLevelService {
 
     int insertCompetitionLevel(String level);
 
-    int updateCompetitionLevel(int competitionLevelId,String level);
+    int updateCompetitionLevel(int levelId,String level);
 
-    int deleteCompetitionLevel(int competitionLevelId);
+    int deleteCompetitionLevel(int levelId);
 
-    CompetitionLevel selectByCompetitionLevelId(int competitionLevelId);
+    CompetitionLevel selectByLevelId(int levelId);
 
     CompetitionLevel selectByLevel(String level);
 

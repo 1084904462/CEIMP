@@ -5,24 +5,23 @@
     <result column="point_id" jdbcType="INTEGER" property="pointId" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="calculate_type" jdbcType="INTEGER" property="calculateType" />
     <result column="input_type" jdbcType="INTEGER" property="inputType" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <select id="selectAllByClassId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,
-    evaluation_point.score,evaluation_point.item_id,evaluation_point.calculate_type,
-    evaluation_point.input_type,evaluation_point.create_time from evaluation_point,evaluation_item
-    where evaluation_point.item_id = evaluation_item.item_id and evaluation_item.class_id = #{classId}
+    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,evaluation_point.score,
+    evaluation_point.item_id,evaluation_point.calculate_type,evaluation_point.input_type,evaluation_point.create_time
+    from evaluation_point,evaluation_item where evaluation_point.item_id = evaluation_item.item_id and
+    evaluation_item.class_id = #{classId}
   </select>
   <select id="selectAllByFormId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,
-    evaluation_point.score,evaluation_point.item_id,evaluation_point.calculate_type,
-    evaluation_point.input_type,evaluation_point.create_time from evaluation_point,evaluation_item,evaluation_class
-    where evaluation_point.item_id = evaluation_item.item_id and evaluation_item.class_id = evaluation_class.class_id
-    and evaluation_class.form_id = #{formId}
+    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,evaluation_point.score,
+    evaluation_point.item_id,evaluation_point.calculate_type,evaluation_point.input_type,evaluation_point.create_time
+    from evaluation_point,evaluation_item,evaluation_class where evaluation_point.item_id = evaluation_item.item_id and
+    evaluation_item.class_id = evaluation_class.class_id and evaluation_class.form_id = #{formId}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -111,7 +110,7 @@
       score, item_id, calculate_type, 
       input_type, create_time)
     values (#{pointId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{score,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{calculateType,jdbcType=INTEGER}, 
+      #{score,jdbcType=DOUBLE}, #{itemId,jdbcType=INTEGER}, #{calculateType,jdbcType=INTEGER}, 
       #{inputType,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.EvaluationPoint">
@@ -153,7 +152,7 @@
         #{remark,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
-        #{score,jdbcType=INTEGER},
+        #{score,jdbcType=DOUBLE},
       </if>
       <if test="itemId != null">
         #{itemId,jdbcType=INTEGER},
@@ -188,7 +187,7 @@
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
       <if test="record.score != null">
-        score = #{record.score,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DOUBLE},
       </if>
       <if test="record.itemId != null">
         item_id = #{record.itemId,jdbcType=INTEGER},
@@ -212,7 +211,7 @@
     set point_id = #{record.pointId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      score = #{record.score,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=DOUBLE},
       item_id = #{record.itemId,jdbcType=INTEGER},
       calculate_type = #{record.calculateType,jdbcType=INTEGER},
       input_type = #{record.inputType,jdbcType=INTEGER},

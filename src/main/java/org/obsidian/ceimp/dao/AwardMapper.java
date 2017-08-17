@@ -7,6 +7,10 @@ import org.obsidian.ceimp.entity.AwardExample;
 import java.util.List;
 
 public interface AwardMapper {
+    List<Award> selectAllByClassIdAndYearScope(@Param("classId") int classId,@Param("yearScope") int yearScope);
+
+    List<Award> selectAllBySchoolIdAndYearScope(@Param("schoolId") int schoolId,@Param("yearScope") int yearScope);
+
     List<Award> selectAllByClassId(int classId);
 
     List<Award> selectAllBySchoolId(int schoolId);

@@ -9,7 +9,7 @@ public class EvaluationPoint {
 
     private String remark;
 
-    private Integer score;
+    private Double score;
 
     private Integer itemId;
 
@@ -37,7 +37,7 @@ public class EvaluationPoint {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationPoint(String content, String remark, Integer score, Integer itemId, Integer calculateType, Integer inputType) {
+    public EvaluationPoint(String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType) {
         this.content = content;
         this.remark = remark;
         this.score = score;
@@ -47,7 +47,7 @@ public class EvaluationPoint {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationPoint(Integer pointId, String content, String remark, Integer score, Integer itemId, Integer calculateType, Integer inputType) {
+    public EvaluationPoint(Integer pointId, String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType) {
         this.pointId = pointId;
         this.content = content;
         this.remark = remark;
@@ -82,11 +82,11 @@ public class EvaluationPoint {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 

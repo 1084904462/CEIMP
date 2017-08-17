@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.obsidian.ceimp.dao.TechnologyCompetitionTypeMapper">
-  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.TechnologyCompetitionType">
+<mapper namespace="org.obsidian.ceimp.dao.CompetitionTypeMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionType">
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="percent" jdbcType="DOUBLE" property="percent" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,16 +66,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    type_id, type, create_time
+    type_id, type, percent, create_time
   </sql>
-  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionTypeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from technology_competition_type
+    from competition_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,26 +83,29 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionTypeExample">
-    delete from technology_competition_type
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeExample">
+    delete from competition_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionType">
-    insert into technology_competition_type (type_id, type, create_time
-      )
-    values (#{typeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
-      )
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionType">
+    insert into competition_type (type_id, type, percent, 
+      create_time)
+    values (#{typeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{percent,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionType">
-    insert into technology_competition_type
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionType">
+    insert into competition_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="typeId != null">
         type_id,
       </if>
       <if test="type != null">
         type,
+      </if>
+      <if test="percent != null">
+        percent,
       </if>
       <if test="createTime != null">
         create_time,
@@ -114,25 +118,31 @@
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
+      <if test="percent != null">
+        #{percent,jdbcType=DOUBLE},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionTypeExample" resultType="java.lang.Long">
-    select count(*) from technology_competition_type
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeExample" resultType="java.lang.Long">
+    select count(*) from competition_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update technology_competition_type
+    update competition_type
     <set>
       <if test="record.typeId != null">
         type_id = #{record.typeId,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.percent != null">
+        percent = #{record.percent,jdbcType=DOUBLE},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -143,9 +153,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update technology_competition_type
+    update competition_type
     set type_id = #{record.typeId,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
+      percent = #{record.percent,jdbcType=DOUBLE},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

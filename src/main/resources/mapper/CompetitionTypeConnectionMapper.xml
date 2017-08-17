@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.obsidian.ceimp.dao.TechnologyCompetitionScoreMapper">
-  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.TechnologyCompetitionScore">
-    <result column="score_id" jdbcType="INTEGER" property="scoreId" />
-    <result column="competition_level_id" jdbcType="INTEGER" property="competitionLevelId" />
-    <result column="award_level_id" jdbcType="INTEGER" property="awardLevelId" />
+<mapper namespace="org.obsidian.ceimp.dao.CompetitionTypeConnectionMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionTypeConnection">
+    <result column="connection_id" jdbcType="INTEGER" property="connectionId" />
+    <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
     <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
-    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,16 +67,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    score_id, competition_level_id, award_level_id, competition_type_id, score, create_time
+    connection_id, competition_id, competition_type_id, school_id, create_time
   </sql>
-  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionScoreExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeConnectionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from technology_competition_score
+    from competition_type_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,86 +84,75 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionScoreExample">
-    delete from technology_competition_score
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeConnectionExample">
+    delete from competition_type_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionScore">
-    insert into technology_competition_score (score_id, competition_level_id, award_level_id, 
-      competition_type_id, score, create_time
-      )
-    values (#{scoreId,jdbcType=INTEGER}, #{competitionLevelId,jdbcType=INTEGER}, #{awardLevelId,jdbcType=INTEGER}, 
-      #{competitionTypeId,jdbcType=INTEGER}, #{score,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
-      )
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionTypeConnection">
+    insert into competition_type_connection (connection_id, competition_id, competition_type_id, 
+      school_id, create_time)
+    values (#{connectionId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{competitionTypeId,jdbcType=INTEGER}, 
+      #{schoolId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionScore">
-    insert into technology_competition_score
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionTypeConnection">
+    insert into competition_type_connection
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="scoreId != null">
-        score_id,
+      <if test="connectionId != null">
+        connection_id,
       </if>
-      <if test="competitionLevelId != null">
-        competition_level_id,
-      </if>
-      <if test="awardLevelId != null">
-        award_level_id,
+      <if test="competitionId != null">
+        competition_id,
       </if>
       <if test="competitionTypeId != null">
         competition_type_id,
       </if>
-      <if test="score != null">
-        score,
+      <if test="schoolId != null">
+        school_id,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="scoreId != null">
-        #{scoreId,jdbcType=INTEGER},
+      <if test="connectionId != null">
+        #{connectionId,jdbcType=INTEGER},
       </if>
-      <if test="competitionLevelId != null">
-        #{competitionLevelId,jdbcType=INTEGER},
-      </if>
-      <if test="awardLevelId != null">
-        #{awardLevelId,jdbcType=INTEGER},
+      <if test="competitionId != null">
+        #{competitionId,jdbcType=INTEGER},
       </if>
       <if test="competitionTypeId != null">
         #{competitionTypeId,jdbcType=INTEGER},
       </if>
-      <if test="score != null">
-        #{score,jdbcType=INTEGER},
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.TechnologyCompetitionScoreExample" resultType="java.lang.Long">
-    select count(*) from technology_competition_score
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.CompetitionTypeConnectionExample" resultType="java.lang.Long">
+    select count(*) from competition_type_connection
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update technology_competition_score
+    update competition_type_connection
     <set>
-      <if test="record.scoreId != null">
-        score_id = #{record.scoreId,jdbcType=INTEGER},
+      <if test="record.connectionId != null">
+        connection_id = #{record.connectionId,jdbcType=INTEGER},
       </if>
-      <if test="record.competitionLevelId != null">
-        competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
-      </if>
-      <if test="record.awardLevelId != null">
-        award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
+      <if test="record.competitionId != null">
+        competition_id = #{record.competitionId,jdbcType=INTEGER},
       </if>
       <if test="record.competitionTypeId != null">
         competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       </if>
-      <if test="record.score != null">
-        score = #{record.score,jdbcType=INTEGER},
+      <if test="record.schoolId != null">
+        school_id = #{record.schoolId,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -175,12 +163,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update technology_competition_score
-    set score_id = #{record.scoreId,jdbcType=INTEGER},
-      competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
-      award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
+    update competition_type_connection
+    set connection_id = #{record.connectionId,jdbcType=INTEGER},
+      competition_id = #{record.competitionId,jdbcType=INTEGER},
       competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
-      score = #{record.score,jdbcType=INTEGER},
+      school_id = #{record.schoolId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

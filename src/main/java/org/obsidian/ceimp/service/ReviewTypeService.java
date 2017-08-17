@@ -11,11 +11,11 @@ public interface ReviewTypeService {
 
     int insertReviewType(String type);
 
-    int updateReviewType(int reviewTypeId,String type);
+    int updateReviewType(int typeId,String type);
 
-    int deleteReviewType(int reviewTypeId);
+    int deleteReviewType(int typeId);
 
-    ReviewType selectByReviewTypeId(int reviewTypeId);
+    ReviewType selectByTypeId(int typeId);
 
     ReviewType selectByType(String type);
 

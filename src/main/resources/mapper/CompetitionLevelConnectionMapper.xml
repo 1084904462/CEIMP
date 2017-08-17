@@ -4,8 +4,7 @@
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionLevelConnection">
     <result column="connection_id" jdbcType="INTEGER" property="connectionId" />
     <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
-    <result column="level_id" jdbcType="INTEGER" property="levelId" />
-    <result column="competition_type" jdbcType="INTEGER" property="competitionType" />
+    <result column="competition_level_id" jdbcType="INTEGER" property="competitionLevelId" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    connection_id, competition_id, level_id, competition_type, create_time
+    connection_id, competition_id, competition_level_id, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnectionExample" resultMap="BaseResultMap">
     select
@@ -91,10 +90,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnection">
-    insert into competition_level_connection (connection_id, competition_id, level_id, 
-      competition_type, create_time)
-    values (#{connectionId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{levelId,jdbcType=INTEGER}, 
-      #{competitionType,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+    insert into competition_level_connection (connection_id, competition_id, competition_level_id, 
+      create_time)
+    values (#{connectionId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{competitionLevelId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionLevelConnection">
     insert into competition_level_connection
@@ -105,11 +104,8 @@
       <if test="competitionId != null">
         competition_id,
       </if>
-      <if test="levelId != null">
-        level_id,
-      </if>
-      <if test="competitionType != null">
-        competition_type,
+      <if test="competitionLevelId != null">
+        competition_level_id,
       </if>
       <if test="createTime != null">
         create_time,
@@ -122,11 +118,8 @@
       <if test="competitionId != null">
         #{competitionId,jdbcType=INTEGER},
       </if>
-      <if test="levelId != null">
-        #{levelId,jdbcType=INTEGER},
-      </if>
-      <if test="competitionType != null">
-        #{competitionType,jdbcType=INTEGER},
+      <if test="competitionLevelId != null">
+        #{competitionLevelId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -148,11 +141,8 @@
       <if test="record.competitionId != null">
         competition_id = #{record.competitionId,jdbcType=INTEGER},
       </if>
-      <if test="record.levelId != null">
-        level_id = #{record.levelId,jdbcType=INTEGER},
-      </if>
-      <if test="record.competitionType != null">
-        competition_type = #{record.competitionType,jdbcType=INTEGER},
+      <if test="record.competitionLevelId != null">
+        competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -166,8 +156,7 @@
     update competition_level_connection
     set connection_id = #{record.connectionId,jdbcType=INTEGER},
       competition_id = #{record.competitionId,jdbcType=INTEGER},
-      level_id = #{record.levelId,jdbcType=INTEGER},
-      competition_type = #{record.competitionType,jdbcType=INTEGER},
+      competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

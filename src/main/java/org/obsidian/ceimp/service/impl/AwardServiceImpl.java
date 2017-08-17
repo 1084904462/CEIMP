@@ -70,9 +70,57 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
+    public List<Award> selectAllByUserIdAndThisYear(String userId) {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        AwardExample example = new AwardExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        List<Award> list = awardMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<Award> selectAllByUserIdAndYearScope(String userId, int yearScope) {
+        AwardExample example = new AwardExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        List<Award> list = awardMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<Award> selectAllByScholarshipId(int scholarshipId) {
         AwardExample example = new AwardExample();
         example.or().andScholarshipIdEqualTo(scholarshipId);
+        List<Award> list = awardMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Award> selectAllByScholarshipIdAndThisYear(int scholarshipId) {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        AwardExample example = new AwardExample();
+        example.or().andScholarshipIdEqualTo(scholarshipId).andYearScopeEqualTo(yearScope);
+        List<Award> list = awardMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Award> selectAllByScholarshipIdAndYearScope(int scholarshipId, int yearScope) {
+        AwardExample example = new AwardExample();
+        example.or().andScholarshipIdEqualTo(scholarshipId).andYearScopeEqualTo(yearScope);
         List<Award> list = awardMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -90,10 +138,48 @@ public class AwardServiceImpl implements AwardService {
         return list;
     }
 
+    @Override
+    public List<Award> selectAllByClassIdAndThisYear(int classId) {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<Award> list = awardMapper.selectAllByClassIdAndYearScope(classId,yearScope);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Award> selectAllByClassIdAndYearScope(int classId, int yearScope) {
+        List<Award> list = awardMapper.selectAllByClassIdAndYearScope(classId,yearScope);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
     @Transactional
     @Override
     public List<Award> selectAllBySchoolId(int schoolId) {
         List<Award> list = awardMapper.selectAllBySchoolId(schoolId);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Award> selectAllBySchoolIdAndThisYear(int schoolId) {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<Award> list = awardMapper.selectAllBySchoolIdAndYearScope(schoolId,yearScope);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<Award> selectAllBySchoolIdAndYearScope(int schoolId, int yearScope) {
+        List<Award> list = awardMapper.selectAllBySchoolIdAndYearScope(schoolId,yearScope);
         if(list.isEmpty()){
             return null;
         }

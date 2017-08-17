@@ -17,7 +17,12 @@ public interface ImportItemService {
 
     ImportItem selectByImportId(int importId);
 
+    List<ImportItem> selectAllByThisYear();
+    List<ImportItem> selectAllByYearScope(int yearScope);
+
     List<ImportItem> selectAllByUserId(String userId);
+    List<ImportItem> selectAllByUserIdAndThisYear(String userId);
+    List<ImportItem> selectAllByUserIdAndYearScope(String userId,int yearScope);
 
     List<ImportItem> selectAll();
 }

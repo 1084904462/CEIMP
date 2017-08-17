@@ -8,13 +8,23 @@
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
+  <select id="selectAllByClassIdAndYearScope" parameterType="map" resultMap="BaseResultMap">
+    select award.award_id,award.user_id,award.scholarship_id,award.year_scope,award.create_time
+    from award,users where award.user_id = users.user_id and users.class_id = #{classId} and year_scope = #{yearScope}
+  </select>
+  <select id="selectAllBySchoolIdAndYearScope" parameterType="map" resultMap="BaseResultMap">
+    select award.award_id,award.user_id,award.scholarship_id,award.year_scope,award.create_time
+    from award,users,classes where award.user_id = users.user_id and users.class_id = classes.class_id
+    and classes.school_id = #{schoolId} and year_scope = #{yearScope}
+  </select>
   <select id="selectAllByClassId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select award.award_id,award.user_id,award.scholarship_id,award.create_time from award,users
-    where award.user_id = users.user_id and users.class_id = #{classId}
+    select award.award_id,award.user_id,award.scholarship_id,award.year_scope,award.create_time
+    from award,users where award.user_id = users.user_id and users.class_id = #{classId}
   </select>
   <select id="selectAllBySchoolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select award.award_id,award.user_id,award.scholarship_id,award.create_time from award,users,classes
-    where award.user_id = users.user_id and users.class_id = classes.class_id and classes.school_id = #{schoolId}
+    select award.award_id,award.user_id,award.scholarship_id,award.year_scope,award.create_time
+    from award,users,classes where award.user_id = users.user_id and users.class_id = classes.class_id
+    and classes.school_id = #{schoolId}
   </select>
   <sql id="Example_Where_Clause">
     <where>

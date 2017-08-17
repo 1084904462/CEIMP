@@ -21,15 +21,15 @@ public class CompetitionLevelConnectionServiceImpl implements CompetitionLevelCo
 
     @Transactional
     @Override
-    public int insertCompetitionLevelConnection(int competitionId, int levelId, int competitionType) {
-        CompetitionLevelConnection competitionLevelConnection = new CompetitionLevelConnection(competitionId,levelId,competitionType);
+    public int insertCompetitionLevelConnection(int competitionId, int competitionLevelId) {
+        CompetitionLevelConnection competitionLevelConnection = new CompetitionLevelConnection(competitionId,competitionLevelId);
         return competitionLevelConnectionMapper.insertSelective(competitionLevelConnection);
     }
 
     @Transactional
     @Override
-    public int updateCompetitionLevelConnection(int connectionId, int competitionId, int levelId, int competitionType) {
-        CompetitionLevelConnection competitionLevelConnection = new CompetitionLevelConnection(connectionId,competitionId,levelId,competitionType);
+    public int updateCompetitionLevelConnection(int connectionId, int competitionId, int competitionLevelId) {
+        CompetitionLevelConnection competitionLevelConnection = new CompetitionLevelConnection(connectionId,competitionId,competitionLevelId);
         CompetitionLevelConnectionExample example = new CompetitionLevelConnectionExample();
         example.or().andConnectionIdEqualTo(connectionId);
         return competitionLevelConnectionMapper.updateByExample(competitionLevelConnection,example);
@@ -57,9 +57,9 @@ public class CompetitionLevelConnectionServiceImpl implements CompetitionLevelCo
 
     @Transactional
     @Override
-    public List<CompetitionLevelConnection> selectAllByConnectionIdAndCompetitionType(int competitionId, int competitionType) {
+    public List<CompetitionLevelConnection> selectAllByCompetitionId(int competitionId) {
         CompetitionLevelConnectionExample example = new CompetitionLevelConnectionExample();
-        example.or().andCompetitionIdEqualTo(competitionId).andCompetitionTypeEqualTo(competitionType);
+        example.or().andCompetitionIdEqualTo(competitionId);
         List<CompetitionLevelConnection> list = competitionLevelConnectionMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -69,21 +69,9 @@ public class CompetitionLevelConnectionServiceImpl implements CompetitionLevelCo
 
     @Transactional
     @Override
-    public List<CompetitionLevelConnection> selectAllByLevelIdAndCompetitionType(int levelId, int competitionType) {
+    public List<CompetitionLevelConnection> selectAllByCompetitionLevelId(int competitionLevelId) {
         CompetitionLevelConnectionExample example = new CompetitionLevelConnectionExample();
-        example.or().andLevelIdEqualTo(levelId).andCompetitionTypeEqualTo(competitionType);
-        List<CompetitionLevelConnection> list = competitionLevelConnectionMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<CompetitionLevelConnection> selectAllByCompetitionType(int competitionType) {
-        CompetitionLevelConnectionExample example = new CompetitionLevelConnectionExample();
-        example.or().andCompetitionTypeEqualTo(competitionType);
+        example.or().andCompetitionLevelIdEqualTo(competitionLevelId);
         List<CompetitionLevelConnection> list = competitionLevelConnectionMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

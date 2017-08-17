@@ -3,9 +3,9 @@
 <mapper namespace="org.obsidian.ceimp.dao.PointScoreMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.PointScore">
     <result column="point_score_id" jdbcType="INTEGER" property="pointScoreId" />
-    <result column="point_id" jdbcType="INTEGER" property="pointId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="point_id" jdbcType="INTEGER" property="pointId" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    point_score_id, point_id, user_id, score, year_scope, create_time
+    point_score_id, user_id, point_id, score, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.PointScoreExample" resultMap="BaseResultMap">
     select
@@ -92,11 +92,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.PointScore">
-    insert into point_score (point_score_id, point_id, user_id, 
+    insert into point_score (point_score_id, user_id, point_id, 
       score, year_scope, create_time
       )
-    values (#{pointScoreId,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
-      #{score,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
+    values (#{pointScoreId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{pointId,jdbcType=INTEGER}, 
+      #{score,jdbcType=DOUBLE}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.PointScore">
@@ -105,11 +105,11 @@
       <if test="pointScoreId != null">
         point_score_id,
       </if>
-      <if test="pointId != null">
-        point_id,
-      </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
       </if>
       <if test="score != null">
         score,
@@ -125,14 +125,14 @@
       <if test="pointScoreId != null">
         #{pointScoreId,jdbcType=INTEGER},
       </if>
-      <if test="pointId != null">
-        #{pointId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
       <if test="score != null">
-        #{score,jdbcType=INTEGER},
+        #{score,jdbcType=DOUBLE},
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
@@ -154,14 +154,14 @@
       <if test="record.pointScoreId != null">
         point_score_id = #{record.pointScoreId,jdbcType=INTEGER},
       </if>
-      <if test="record.pointId != null">
-        point_id = #{record.pointId,jdbcType=INTEGER},
-      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
+      <if test="record.pointId != null">
+        point_id = #{record.pointId,jdbcType=INTEGER},
+      </if>
       <if test="record.score != null">
-        score = #{record.score,jdbcType=INTEGER},
+        score = #{record.score,jdbcType=DOUBLE},
       </if>
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
@@ -177,9 +177,9 @@
   <update id="updateByExample" parameterType="map">
     update point_score
     set point_score_id = #{record.pointScoreId,jdbcType=INTEGER},
-      point_id = #{record.pointId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      score = #{record.score,jdbcType=INTEGER},
+      point_id = #{record.pointId,jdbcType=INTEGER},
+      score = #{record.score,jdbcType=DOUBLE},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

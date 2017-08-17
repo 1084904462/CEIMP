@@ -164,66 +164,6 @@ public class PointScoreExample {
             return (Criteria) this;
         }
 
-        public Criteria andPointIdIsNull() {
-            addCriterion("point_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdIsNotNull() {
-            addCriterion("point_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdEqualTo(Integer value) {
-            addCriterion("point_id =", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdNotEqualTo(Integer value) {
-            addCriterion("point_id <>", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdGreaterThan(Integer value) {
-            addCriterion("point_id >", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("point_id >=", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdLessThan(Integer value) {
-            addCriterion("point_id <", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdLessThanOrEqualTo(Integer value) {
-            addCriterion("point_id <=", value, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdIn(List<Integer> values) {
-            addCriterion("point_id in", values, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdNotIn(List<Integer> values) {
-            addCriterion("point_id not in", values, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdBetween(Integer value1, Integer value2) {
-            addCriterion("point_id between", value1, value2, "pointId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPointIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("point_id not between", value1, value2, "pointId");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -294,6 +234,66 @@ public class PointScoreExample {
             return (Criteria) this;
         }
 
+        public Criteria andPointIdIsNull() {
+            addCriterion("point_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdIsNotNull() {
+            addCriterion("point_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdEqualTo(Integer value) {
+            addCriterion("point_id =", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdNotEqualTo(Integer value) {
+            addCriterion("point_id <>", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdGreaterThan(Integer value) {
+            addCriterion("point_id >", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("point_id >=", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdLessThan(Integer value) {
+            addCriterion("point_id <", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdLessThanOrEqualTo(Integer value) {
+            addCriterion("point_id <=", value, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdIn(List<Integer> values) {
+            addCriterion("point_id in", values, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdNotIn(List<Integer> values) {
+            addCriterion("point_id not in", values, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdBetween(Integer value1, Integer value2) {
+            addCriterion("point_id between", value1, value2, "pointId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPointIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("point_id not between", value1, value2, "pointId");
+            return (Criteria) this;
+        }
+
         public Criteria andScoreIsNull() {
             addCriterion("score is null");
             return (Criteria) this;
@@ -304,52 +304,52 @@ public class PointScoreExample {
             return (Criteria) this;
         }
 
-        public Criteria andScoreEqualTo(Integer value) {
+        public Criteria andScoreEqualTo(Double value) {
             addCriterion("score =", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotEqualTo(Integer value) {
+        public Criteria andScoreNotEqualTo(Double value) {
             addCriterion("score <>", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThan(Integer value) {
+        public Criteria andScoreGreaterThan(Double value) {
             addCriterion("score >", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThanOrEqualTo(Integer value) {
+        public Criteria andScoreGreaterThanOrEqualTo(Double value) {
             addCriterion("score >=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThan(Integer value) {
+        public Criteria andScoreLessThan(Double value) {
             addCriterion("score <", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThanOrEqualTo(Integer value) {
+        public Criteria andScoreLessThanOrEqualTo(Double value) {
             addCriterion("score <=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreIn(List<Integer> values) {
+        public Criteria andScoreIn(List<Double> values) {
             addCriterion("score in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotIn(List<Integer> values) {
+        public Criteria andScoreNotIn(List<Double> values) {
             addCriterion("score not in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreBetween(Integer value1, Integer value2) {
+        public Criteria andScoreBetween(Double value1, Double value2) {
             addCriterion("score between", value1, value2, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotBetween(Integer value1, Integer value2) {
+        public Criteria andScoreNotBetween(Double value1, Double value2) {
             addCriterion("score not between", value1, value2, "score");
             return (Criteria) this;
         }

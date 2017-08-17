@@ -3,8 +3,8 @@
 <mapper namespace="org.obsidian.ceimp.dao.ClassScoreMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ClassScore">
     <result column="class_score_id" jdbcType="INTEGER" property="classScoreId" />
-    <result column="class_id" jdbcType="INTEGER" property="classId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
     <result column="score" jdbcType="DOUBLE" property="score" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    class_score_id, class_id, user_id, score, year_scope, create_time
+    class_score_id, user_id, class_id, score, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ClassScoreExample" resultMap="BaseResultMap">
     select
@@ -92,10 +92,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ClassScore">
-    insert into class_score (class_score_id, class_id, user_id, 
+    insert into class_score (class_score_id, user_id, class_id, 
       score, year_scope, create_time
       )
-    values (#{classScoreId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+    values (#{classScoreId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{classId,jdbcType=INTEGER}, 
       #{score,jdbcType=DOUBLE}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
@@ -105,11 +105,11 @@
       <if test="classScoreId != null">
         class_score_id,
       </if>
-      <if test="classId != null">
-        class_id,
-      </if>
       <if test="userId != null">
         user_id,
+      </if>
+      <if test="classId != null">
+        class_id,
       </if>
       <if test="score != null">
         score,
@@ -125,11 +125,11 @@
       <if test="classScoreId != null">
         #{classScoreId,jdbcType=INTEGER},
       </if>
-      <if test="classId != null">
-        #{classId,jdbcType=INTEGER},
-      </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
       </if>
       <if test="score != null">
         #{score,jdbcType=DOUBLE},
@@ -154,11 +154,11 @@
       <if test="record.classScoreId != null">
         class_score_id = #{record.classScoreId,jdbcType=INTEGER},
       </if>
-      <if test="record.classId != null">
-        class_id = #{record.classId,jdbcType=INTEGER},
-      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classId != null">
+        class_id = #{record.classId,jdbcType=INTEGER},
       </if>
       <if test="record.score != null">
         score = #{record.score,jdbcType=DOUBLE},
@@ -177,8 +177,8 @@
   <update id="updateByExample" parameterType="map">
     update class_score
     set class_score_id = #{record.classScoreId,jdbcType=INTEGER},
-      class_id = #{record.classId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
+      class_id = #{record.classId,jdbcType=INTEGER},
       score = #{record.score,jdbcType=DOUBLE},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}

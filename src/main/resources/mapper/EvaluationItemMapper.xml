@@ -5,13 +5,13 @@
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
     <result column="class_id" jdbcType="INTEGER" property="classId" />
-    <result column="max_score" jdbcType="INTEGER" property="maxScore" />
+    <result column="max_score" jdbcType="DOUBLE" property="maxScore" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <select id="selectAllByFormId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select evaluation_item.item_id,evaluation_item.item_name,evaluation_item.class_id,
-    evaluation_item.max_score,evaluation_item.create_time from evaluation_item,evaluation_class
-    where evaluation_item.class_id = evaluation_class.class_id and evaluation_class.form_id = #{formId}
+    select evaluation_item.item_id,evaluation_item.item_name,evaluation_item.class_id,evaluation_item.max_score,
+    evaluation_item.create_time from evaluation_item,evaluation_form where evaluation_item.class_id = evaluation_class.form_id
+    and evaluation_class.form_id = #{formId}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -99,7 +99,7 @@
     insert into evaluation_item (item_id, item_name, class_id, 
       max_score, create_time)
     values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{classId,jdbcType=INTEGER}, 
-      #{maxScore,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+      #{maxScore,jdbcType=DOUBLE}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.EvaluationItem">
     insert into evaluation_item
@@ -131,7 +131,7 @@
         #{classId,jdbcType=INTEGER},
       </if>
       <if test="maxScore != null">
-        #{maxScore,jdbcType=INTEGER},
+        #{maxScore,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -157,7 +157,7 @@
         class_id = #{record.classId,jdbcType=INTEGER},
       </if>
       <if test="record.maxScore != null">
-        max_score = #{record.maxScore,jdbcType=INTEGER},
+        max_score = #{record.maxScore,jdbcType=DOUBLE},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -172,7 +172,7 @@
     set item_id = #{record.itemId,jdbcType=INTEGER},
       item_name = #{record.itemName,jdbcType=VARCHAR},
       class_id = #{record.classId,jdbcType=INTEGER},
-      max_score = #{record.maxScore,jdbcType=INTEGER},
+      max_score = #{record.maxScore,jdbcType=DOUBLE},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

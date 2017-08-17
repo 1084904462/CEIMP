@@ -2,7 +2,7 @@ package org.obsidian.ceimp.entity;
 
 import org.obsidian.ceimp.util.TimeUtil;
 
-public class TechnologyCompetitionScore {
+public class CompetitionScore {
     private Integer scoreId;
 
     private Integer competitionLevelId;
@@ -11,13 +11,13 @@ public class TechnologyCompetitionScore {
 
     private Integer competitionTypeId;
 
-    private Integer score;
+    private Double score;
 
     private Long createTime;
 
     @Override
     public String toString() {
-        return "TechnologyCompetitionScore{" +
+        return "CompetitionScore{" +
                 "scoreId=" + scoreId +
                 ", competitionLevelId=" + competitionLevelId +
                 ", awardLevelId=" + awardLevelId +
@@ -27,11 +27,11 @@ public class TechnologyCompetitionScore {
                 '}';
     }
 
-    public TechnologyCompetitionScore() {
+    public CompetitionScore() {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public TechnologyCompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Integer score) {
+    public CompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score) {
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
         this.competitionTypeId = competitionTypeId;
@@ -39,7 +39,7 @@ public class TechnologyCompetitionScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public TechnologyCompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Integer score) {
+    public CompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score) {
         this.scoreId = scoreId;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
@@ -80,11 +80,11 @@ public class TechnologyCompetitionScore {
         this.competitionTypeId = competitionTypeId;
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 

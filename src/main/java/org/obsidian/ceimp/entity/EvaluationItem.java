@@ -9,7 +9,7 @@ public class EvaluationItem {
 
     private Integer classId;
 
-    private Integer maxScore;
+    private Double maxScore;
 
     private Long createTime;
 
@@ -28,14 +28,14 @@ public class EvaluationItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationItem(String itemName, Integer classId, Integer maxScore) {
+    public EvaluationItem(String itemName, Integer classId, Double maxScore) {
         this.itemName = itemName;
         this.classId = classId;
         this.maxScore = maxScore;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationItem(Integer itemId, String itemName, Integer classId, Integer maxScore) {
+    public EvaluationItem(Integer itemId, String itemName, Integer classId, Double maxScore) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.classId = classId;
@@ -67,11 +67,11 @@ public class EvaluationItem {
         this.classId = classId;
     }
 
-    public Integer getMaxScore() {
+    public Double getMaxScore() {
         return maxScore;
     }
 
-    public void setMaxScore(Integer maxScore) {
+    public void setMaxScore(Double maxScore) {
         this.maxScore = maxScore;
     }
 

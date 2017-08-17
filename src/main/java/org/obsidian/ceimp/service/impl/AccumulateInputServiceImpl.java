@@ -58,6 +58,31 @@ public class AccumulateInputServiceImpl implements AccumulateInputService {
 
     @Transactional
     @Override
+    public List<AccumulateInput> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        AccumulateInputExample example = new AccumulateInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<AccumulateInput> list = accumulateInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<AccumulateInput> selectAllByYearScope(int yearScope) {
+        AccumulateInputExample example = new AccumulateInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<AccumulateInput> list = accumulateInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<AccumulateInput> selectAllByUserId(String userId) {
         AccumulateInputExample example = new AccumulateInputExample();
         example.or().andUserIdEqualTo(userId);

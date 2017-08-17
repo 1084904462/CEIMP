@@ -9,17 +9,17 @@ import java.util.List;
  */
 public interface FillInTypeService {
 
-    int insertFillInType(String fillInType);
+    int insertFillInType(String type);
 
-    int updateFillInType(int fillInTypeId,String type);
+    int updateFillInType(int typeId,String type);
 
-    int deleteFillInType(int fillInTypeId);
+    int deleteFillInType(int typeId);
 
-    FillInType selectByFillInTypeId(int fillInTypeId);
+    FillInType selectByTypeId(int typeId);
 
-    FillInType selectByFillInType(String type);
+    FillInType selectByType(String type);
 
-    List<FillInType> selectAllByFillInType(String type);
+    List<FillInType> selectAllByType(String type);
 
     List<FillInType> selectAll();
 }

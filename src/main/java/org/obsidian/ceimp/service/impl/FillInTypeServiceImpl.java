@@ -28,26 +28,26 @@ public class FillInTypeServiceImpl implements FillInTypeService {
 
     @Transactional
     @Override
-    public int updateFillInType(int fillInTypeId, String type) {
-        FillInType fillInType = new FillInType(fillInTypeId,type);
+    public int updateFillInType(int typeId, String type) {
+        FillInType fillInType = new FillInType(typeId,type);
         FillInTypeExample example = new FillInTypeExample();
-        example.or().andFillInTypeIdEqualTo(fillInTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         return fillInTypeMapper.updateByExample(fillInType,example);
     }
 
     @Transactional
     @Override
-    public int deleteFillInType(int fillInTypeId) {
+    public int deleteFillInType(int typeId) {
         FillInTypeExample example = new FillInTypeExample();
-        example.or().andFillInTypeIdEqualTo(fillInTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         return fillInTypeMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
-    public FillInType selectByFillInTypeId(int fillInTypeId) {
+    public FillInType selectByTypeId(int typeId) {
         FillInTypeExample example = new FillInTypeExample();
-        example.or().andFillInTypeIdEqualTo(fillInTypeId);
+        example.or().andTypeIdEqualTo(typeId);
         List<FillInType> list = fillInTypeMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -57,7 +57,7 @@ public class FillInTypeServiceImpl implements FillInTypeService {
 
     @Transactional
     @Override
-    public FillInType selectByFillInType(String type) {
+    public FillInType selectByType(String type) {
         FillInTypeExample example = new FillInTypeExample();
         example.or().andTypeEqualTo(type);
         List<FillInType> list = fillInTypeMapper.selectByExample(example);
@@ -69,7 +69,7 @@ public class FillInTypeServiceImpl implements FillInTypeService {
 
     @Transactional
     @Override
-    public List<FillInType> selectAllByFillInType(String type) {
+    public List<FillInType> selectAllByType(String type) {
         type = "%" + type + "%";
         FillInTypeExample example = new FillInTypeExample();
         example.or().andTypeLike(type);

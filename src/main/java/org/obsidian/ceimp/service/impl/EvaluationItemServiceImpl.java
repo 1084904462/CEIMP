@@ -21,14 +21,14 @@ public class EvaluationItemServiceImpl implements EvaluationItemService {
 
     @Transactional
     @Override
-    public int insertEvaluationItem(String itemName, int classId, int maxScore) {
+    public int insertEvaluationItem(String itemName, int classId, double maxScore) {
         EvaluationItem evaluationItem = new EvaluationItem(itemName,classId,maxScore);
         return evaluationItemMapper.insertSelective(evaluationItem);
     }
 
     @Transactional
     @Override
-    public int updateEvaluationItem(int itemId, String itemName, int classId, int maxScore) {
+    public int updateEvaluationItem(int itemId, String itemName, int classId, double maxScore) {
         EvaluationItem evaluationItem = new EvaluationItem(itemId,itemName,classId,maxScore);
         EvaluationItemExample example = new EvaluationItemExample();
         example.or().andItemIdEqualTo(itemId);

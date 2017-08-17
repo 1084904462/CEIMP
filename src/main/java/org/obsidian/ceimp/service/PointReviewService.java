@@ -17,6 +17,9 @@ public interface PointReviewService {
 
     PointReview selectByReviewId(int reviewId);
 
+    List<PointReview> selectAllByThisYear();
+    List<PointReview> selectAllByYearScope(int yearScope);
+
     List<PointReview> selectAllByUserId(String userId);
     List<PointReview> selectAllByUserIdAndThisYear(String userId);
     List<PointReview> selectAllByUserIdAndYearScope(String userId,int yearScope);

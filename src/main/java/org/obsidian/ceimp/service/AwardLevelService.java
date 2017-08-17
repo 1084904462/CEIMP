@@ -11,11 +11,11 @@ public interface AwardLevelService {
 
     int insertAwardLevel(String level);
 
-    int updateAwardLevel(int awardLevelId,String level);
+    int updateAwardLevel(int levelId,String level);
 
-    int deleteAwardLevel(int awardLevelId);
+    int deleteAwardLevel(int levelId);
 
-    AwardLevel selectByAwardLevelId(int awardLevelId);
+    AwardLevel selectByLevelId(int levelId);
 
     AwardLevel selectByLevel(String level);
 

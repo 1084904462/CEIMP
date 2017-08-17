@@ -3,7 +3,7 @@ package org.obsidian.ceimp.entity;
 import org.obsidian.ceimp.util.TimeUtil;
 
 public class ReviewType {
-    private Integer reviewTypeId;
+    private Integer typeId;
 
     private String type;
 
@@ -12,7 +12,7 @@ public class ReviewType {
     @Override
     public String toString() {
         return "ReviewType{" +
-                "reviewTypeId=" + reviewTypeId +
+                "typeId=" + typeId +
                 ", type='" + type + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
@@ -27,18 +27,18 @@ public class ReviewType {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewType(Integer reviewTypeId, String type) {
-        this.reviewTypeId = reviewTypeId;
+    public ReviewType(Integer typeId, String type) {
+        this.typeId = typeId;
         this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Integer getReviewTypeId() {
-        return reviewTypeId;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setReviewTypeId(Integer reviewTypeId) {
-        this.reviewTypeId = reviewTypeId;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 
     public String getType() {

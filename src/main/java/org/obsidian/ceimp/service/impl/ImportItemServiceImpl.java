@@ -4,6 +4,7 @@ import org.obsidian.ceimp.dao.ImportItemMapper;
 import org.obsidian.ceimp.entity.ImportItem;
 import org.obsidian.ceimp.entity.ImportItemExample;
 import org.obsidian.ceimp.service.ImportItemService;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,9 +58,59 @@ public class ImportItemServiceImpl implements ImportItemService {
 
     @Transactional
     @Override
+    public List<ImportItem> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ImportItemExample example = new ImportItemExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ImportItem> list = importItemMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ImportItem> selectAllByYearScope(int yearScope) {
+        ImportItemExample example = new ImportItemExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ImportItem> list = importItemMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<ImportItem> selectAllByUserId(String userId) {
         ImportItemExample example = new ImportItemExample();
         example.or().andUserIdEqualTo(userId);
+        List<ImportItem> list = importItemMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ImportItem> selectAllByUserIdAndThisYear(String userId){
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ImportItemExample example = new ImportItemExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        List<ImportItem> list = importItemMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ImportItem> selectAllByUserIdAndYearScope(String userId,int yearScope){
+        ImportItemExample example = new ImportItemExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
         List<ImportItem> list = importItemMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

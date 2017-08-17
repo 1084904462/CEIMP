@@ -5,11 +5,11 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class ItemScore {
     private Integer itemScoreId;
 
-    private Integer itemId;
-
     private String userId;
 
-    private Integer score;
+    private Integer itemId;
+
+    private Double score;
 
     private Integer yearScope;
 
@@ -19,8 +19,8 @@ public class ItemScore {
     public String toString() {
         return "ItemScore{" +
                 "itemScoreId=" + itemScoreId +
-                ", itemId=" + itemId +
                 ", userId='" + userId + '\'' +
+                ", itemId=" + itemId +
                 ", score=" + score +
                 ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
@@ -32,18 +32,18 @@ public class ItemScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ItemScore(Integer itemId, String userId, Integer score) {
-        this.itemId = itemId;
+    public ItemScore(String userId, Integer itemId, Double score) {
         this.userId = userId;
+        this.itemId = itemId;
         this.score = score;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ItemScore(Integer itemScoreId, Integer itemId, String userId, Integer score) {
+    public ItemScore(Integer itemScoreId, String userId, Integer itemId, Double score) {
         this.itemScoreId = itemScoreId;
-        this.itemId = itemId;
         this.userId = userId;
+        this.itemId = itemId;
         this.score = score;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
@@ -57,14 +57,6 @@ public class ItemScore {
         this.itemScoreId = itemScoreId;
     }
 
-    public Integer getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -73,11 +65,19 @@ public class ItemScore {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getScore() {
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 

@@ -17,6 +17,9 @@ public interface AccumulateInputService {
 
     AccumulateInput selectByInputId(int inputId);
 
+    List<AccumulateInput> selectAllByThisYear();
+    List<AccumulateInput> selectAllByYearScope(int yearScope);
+
     List<AccumulateInput> selectAllByUserId(String userId);
     List<AccumulateInput> selectAllByUserIdAndThisYear(String userId);
     List<AccumulateInput> selectAllByUserIdAndYearScope(String userId,int yearScope);

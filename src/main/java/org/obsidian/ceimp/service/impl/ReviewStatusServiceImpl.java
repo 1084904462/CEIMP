@@ -29,31 +29,56 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public int updateReviewStatus(int reviewStatusId, String userId, int status, int reviewTypeId) {
-        ReviewStatus reviewStatus = new ReviewStatus(reviewStatusId,userId,status,reviewTypeId);
+    public int updateReviewStatus(int statusId, String userId, int status, int reviewTypeId) {
+        ReviewStatus reviewStatus = new ReviewStatus(statusId,userId,status,reviewTypeId);
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andReviewStatusIdEqualTo(reviewStatusId);
+        example.or().andStatusIdEqualTo(statusId);
         return reviewStatusMapper.updateByExample(reviewStatus,example);
     }
 
     @Transactional
     @Override
-    public int deleteReviewStatus(int reviewStatusId) {
+    public int deleteReviewStatus(int statusId) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andReviewStatusIdEqualTo(reviewStatusId);
+        example.or().andStatusIdEqualTo(statusId);
         return reviewStatusMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
-    public ReviewStatus selectByReviewStatusId(int reviewStatusId) {
+    public ReviewStatus selectByStatusId(int statusId) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andReviewStatusIdEqualTo(reviewStatusId);
+        example.or().andStatusIdEqualTo(statusId);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<ReviewStatus> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ReviewStatusExample example = new ReviewStatusExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ReviewStatus> selectAllByYearScope(int yearScope) {
+        ReviewStatusExample example = new ReviewStatusExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 
     @Transactional

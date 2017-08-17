@@ -7,9 +7,7 @@ public class CompetitionLevelConnection {
 
     private Integer competitionId;
 
-    private Integer levelId;
-
-    private Integer competitionType;
+    private Integer competitionLevelId;
 
     private Long createTime;
 
@@ -18,8 +16,7 @@ public class CompetitionLevelConnection {
         return "CompetitionLevelConnection{" +
                 "connectionId=" + connectionId +
                 ", competitionId=" + competitionId +
-                ", levelId=" + levelId +
-                ", competitionType=" + competitionType +
+                ", competitionLevelId=" + competitionLevelId +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -28,18 +25,16 @@ public class CompetitionLevelConnection {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionLevelConnection(Integer competitionId, Integer levelId, Integer competitionType) {
+    public CompetitionLevelConnection(Integer competitionId, Integer competitionLevelId) {
         this.competitionId = competitionId;
-        this.levelId = levelId;
-        this.competitionType = competitionType;
+        this.competitionLevelId = competitionLevelId;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionLevelConnection(Integer connectionId, Integer competitionId, Integer levelId, Integer competitionType) {
+    public CompetitionLevelConnection(Integer connectionId, Integer competitionId, Integer competitionLevelId) {
         this.connectionId = connectionId;
         this.competitionId = competitionId;
-        this.levelId = levelId;
-        this.competitionType = competitionType;
+        this.competitionLevelId = competitionLevelId;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -59,20 +54,12 @@ public class CompetitionLevelConnection {
         this.competitionId = competitionId;
     }
 
-    public Integer getLevelId() {
-        return levelId;
+    public Integer getCompetitionLevelId() {
+        return competitionLevelId;
     }
 
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
-    }
-
-    public Integer getCompetitionType() {
-        return competitionType;
-    }
-
-    public void setCompetitionType(Integer competitionType) {
-        this.competitionType = competitionType;
+    public void setCompetitionLevelId(Integer competitionLevelId) {
+        this.competitionLevelId = competitionLevelId;
     }
 
     public Long getCreateTime() {

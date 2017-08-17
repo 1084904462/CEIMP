@@ -9,8 +9,8 @@
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <select id="selectAllBySchoolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select users.user_id,users.username,users.password,users.class_id,users.create_time from users,classes,school
-    where school.school_id = #{schoolId} and school.school_id = classes.school_id and classes.class_id = users.class_id
+    select users.user_id,users.username,users.password,users.class_id,users.create_time from users,classes
+    where users.class_id = classes.class_id and classes.school_id = #{schoolId}
   </select>
   <sql id="Example_Where_Clause">
     <where>

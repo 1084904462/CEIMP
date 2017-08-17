@@ -304,52 +304,52 @@ public class EvaluationItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreEqualTo(Integer value) {
+        public Criteria andMaxScoreEqualTo(Double value) {
             addCriterion("max_score =", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotEqualTo(Integer value) {
+        public Criteria andMaxScoreNotEqualTo(Double value) {
             addCriterion("max_score <>", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreGreaterThan(Integer value) {
+        public Criteria andMaxScoreGreaterThan(Double value) {
             addCriterion("max_score >", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMaxScoreGreaterThanOrEqualTo(Double value) {
             addCriterion("max_score >=", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreLessThan(Integer value) {
+        public Criteria andMaxScoreLessThan(Double value) {
             addCriterion("max_score <", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreLessThanOrEqualTo(Integer value) {
+        public Criteria andMaxScoreLessThanOrEqualTo(Double value) {
             addCriterion("max_score <=", value, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreIn(List<Integer> values) {
+        public Criteria andMaxScoreIn(List<Double> values) {
             addCriterion("max_score in", values, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotIn(List<Integer> values) {
+        public Criteria andMaxScoreNotIn(List<Double> values) {
             addCriterion("max_score not in", values, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreBetween(Integer value1, Integer value2) {
+        public Criteria andMaxScoreBetween(Double value1, Double value2) {
             addCriterion("max_score between", value1, value2, "maxScore");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotBetween(Integer value1, Integer value2) {
+        public Criteria andMaxScoreNotBetween(Double value1, Double value2) {
             addCriterion("max_score not between", value1, value2, "maxScore");
             return (Criteria) this;
         }

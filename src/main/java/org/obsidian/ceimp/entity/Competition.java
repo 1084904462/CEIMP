@@ -2,34 +2,39 @@ package org.obsidian.ceimp.entity;
 
 import org.obsidian.ceimp.util.TimeUtil;
 
-public class ArtCompetition {
+public class Competition {
     private Integer competitionId;
 
     private String competitionName;
+
+    private String organizer;
 
     private Long createTime;
 
     @Override
     public String toString() {
-        return "ArtCompetition{" +
+        return "Competition{" +
                 "competitionId=" + competitionId +
                 ", competitionName='" + competitionName + '\'' +
+                ", organizer='" + organizer + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
 
-    public ArtCompetition() {
+    public Competition() {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ArtCompetition(String competitionName) {
+    public Competition(String competitionName, String organizer) {
         this.competitionName = competitionName;
+        this.organizer = organizer;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ArtCompetition(Integer competitionId, String competitionName) {
+    public Competition(Integer competitionId, String competitionName, String organizer) {
         this.competitionId = competitionId;
         this.competitionName = competitionName;
+        this.organizer = organizer;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -47,6 +52,14 @@ public class ArtCompetition {
 
     public void setCompetitionName(String competitionName) {
         this.competitionName = competitionName == null ? null : competitionName.trim();
+    }
+
+    public String getOrganizer() {
+        return organizer;
+    }
+
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer == null ? null : organizer.trim();
     }
 
     public Long getCreateTime() {

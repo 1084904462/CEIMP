@@ -9,19 +9,17 @@ import java.util.List;
  */
 public interface CompetitionLevelConnectionService {
 
-    int insertCompetitionLevelConnection(int competitionId,int levelId,int competitionType);
+    int insertCompetitionLevelConnection(int competitionId,int competitionLevelId);
 
-    int updateCompetitionLevelConnection(int connectionId,int competitionId,int levelId,int competitionType);
+    int updateCompetitionLevelConnection(int connectionId,int competitionId,int competitionLevelId);
 
     int deleteCompetitionLevelConnection(int connectionId);
 
     CompetitionLevelConnection selectByConnectionId(int connectionId);
 
-    List<CompetitionLevelConnection> selectAllByConnectionIdAndCompetitionType(int competitionId,int competitionType);
+    List<CompetitionLevelConnection> selectAllByCompetitionId(int competitionId);
 
-    List<CompetitionLevelConnection> selectAllByLevelIdAndCompetitionType(int levelId,int competitionType);
-
-    List<CompetitionLevelConnection> selectAllByCompetitionType(int competitionType);
+    List<CompetitionLevelConnection> selectAllByCompetitionLevelId(int competitionLevelId);
 
     List<CompetitionLevelConnection> selectAll();
 }

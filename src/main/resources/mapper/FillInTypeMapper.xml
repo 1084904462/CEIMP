@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.obsidian.ceimp.dao.FillInTypeMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.FillInType">
-    <result column="fill_in_type_id" jdbcType="INTEGER" property="fillInTypeId" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    fill_in_type_id, type, create_time
+    type_id, type, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.FillInTypeExample" resultMap="BaseResultMap">
     select
@@ -89,16 +89,16 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.FillInType">
-    insert into fill_in_type (fill_in_type_id, type, create_time
+    insert into fill_in_type (type_id, type, create_time
       )
-    values (#{fillInTypeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
+    values (#{typeId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.FillInType">
     insert into fill_in_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="fillInTypeId != null">
-        fill_in_type_id,
+      <if test="typeId != null">
+        type_id,
       </if>
       <if test="type != null">
         type,
@@ -108,8 +108,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="fillInTypeId != null">
-        #{fillInTypeId,jdbcType=INTEGER},
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
@@ -128,8 +128,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update fill_in_type
     <set>
-      <if test="record.fillInTypeId != null">
-        fill_in_type_id = #{record.fillInTypeId,jdbcType=INTEGER},
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=VARCHAR},
@@ -144,7 +144,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update fill_in_type
-    set fill_in_type_id = #{record.fillInTypeId,jdbcType=INTEGER},
+    set type_id = #{record.typeId,jdbcType=INTEGER},
       type = #{record.type,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

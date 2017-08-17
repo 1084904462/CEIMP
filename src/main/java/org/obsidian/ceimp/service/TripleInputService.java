@@ -17,6 +17,9 @@ public interface TripleInputService {
 
     TripleInput selectByInputId(int inputId);
 
+    List<TripleInput> selectAllByThisYear();
+    List<TripleInput> selectAllByYearScope(int yearScope);
+
     List<TripleInput> selectAllByUserId(String userId);
     List<TripleInput> selectAllByUserIdAndThisYear(String userId);
     List<TripleInput> selectAllByUserIdAndYearScope(String userId,int yearScope);

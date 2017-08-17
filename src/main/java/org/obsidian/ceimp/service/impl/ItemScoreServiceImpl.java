@@ -22,15 +22,15 @@ public class ItemScoreServiceImpl implements ItemScoreService {
 
     @Transactional
     @Override
-    public int insertItemScore(int itemId, String userId, int score) {
-        ItemScore itemScore = new ItemScore(itemId,userId,score);
+    public int insertItemScore(String userId, int itemId, double score) {
+        ItemScore itemScore = new ItemScore(userId,itemId,score);
         return itemScoreMapper.insertSelective(itemScore);
     }
 
     @Transactional
     @Override
-    public int updateItemScore(int itemScoreId, int itemId, String userId, int score) {
-        ItemScore itemScore = new ItemScore(itemScoreId,itemId,userId,score);
+    public int updateItemScore(int itemScoreId, String userId, int itemId, double score) {
+        ItemScore itemScore = new ItemScore(itemScoreId,userId,itemId,score);
         ItemScoreExample example = new ItemScoreExample();
         example.or().andItemScoreIdEqualTo(itemScoreId);
         return itemScoreMapper.updateByExample(itemScore,example);
@@ -54,6 +54,31 @@ public class ItemScoreServiceImpl implements ItemScoreService {
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<ItemScore> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ItemScoreExample example = new ItemScoreExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ItemScore> list = itemScoreMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<ItemScore> selectAllByYearScope(int yearScope) {
+        ItemScoreExample example = new ItemScoreExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<ItemScore> list = itemScoreMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 
     @Transactional

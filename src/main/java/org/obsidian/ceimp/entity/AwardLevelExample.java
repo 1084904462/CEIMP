@@ -104,63 +104,63 @@ public class AwardLevelExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andAwardLevelIdIsNull() {
-            addCriterion("award_level_id is null");
+        public Criteria andLevelIdIsNull() {
+            addCriterion("level_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdIsNotNull() {
-            addCriterion("award_level_id is not null");
+        public Criteria andLevelIdIsNotNull() {
+            addCriterion("level_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdEqualTo(Integer value) {
-            addCriterion("award_level_id =", value, "awardLevelId");
+        public Criteria andLevelIdEqualTo(Integer value) {
+            addCriterion("level_id =", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdNotEqualTo(Integer value) {
-            addCriterion("award_level_id <>", value, "awardLevelId");
+        public Criteria andLevelIdNotEqualTo(Integer value) {
+            addCriterion("level_id <>", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdGreaterThan(Integer value) {
-            addCriterion("award_level_id >", value, "awardLevelId");
+        public Criteria andLevelIdGreaterThan(Integer value) {
+            addCriterion("level_id >", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("award_level_id >=", value, "awardLevelId");
+        public Criteria andLevelIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("level_id >=", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdLessThan(Integer value) {
-            addCriterion("award_level_id <", value, "awardLevelId");
+        public Criteria andLevelIdLessThan(Integer value) {
+            addCriterion("level_id <", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdLessThanOrEqualTo(Integer value) {
-            addCriterion("award_level_id <=", value, "awardLevelId");
+        public Criteria andLevelIdLessThanOrEqualTo(Integer value) {
+            addCriterion("level_id <=", value, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdIn(List<Integer> values) {
-            addCriterion("award_level_id in", values, "awardLevelId");
+        public Criteria andLevelIdIn(List<Integer> values) {
+            addCriterion("level_id in", values, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdNotIn(List<Integer> values) {
-            addCriterion("award_level_id not in", values, "awardLevelId");
+        public Criteria andLevelIdNotIn(List<Integer> values) {
+            addCriterion("level_id not in", values, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdBetween(Integer value1, Integer value2) {
-            addCriterion("award_level_id between", value1, value2, "awardLevelId");
+        public Criteria andLevelIdBetween(Integer value1, Integer value2) {
+            addCriterion("level_id between", value1, value2, "levelId");
             return (Criteria) this;
         }
 
-        public Criteria andAwardLevelIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("award_level_id not between", value1, value2, "awardLevelId");
+        public Criteria andLevelIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("level_id not between", value1, value2, "levelId");
             return (Criteria) this;
         }
 

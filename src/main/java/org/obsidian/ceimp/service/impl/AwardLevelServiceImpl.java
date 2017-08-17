@@ -28,26 +28,26 @@ public class AwardLevelServiceImpl implements AwardLevelService {
 
     @Transactional
     @Override
-    public int updateAwardLevel(int awardLevelId, String level) {
-        AwardLevel awardLevel = new AwardLevel(awardLevelId,level);
+    public int updateAwardLevel(int levelId, String level) {
+        AwardLevel awardLevel = new AwardLevel(levelId,level);
         AwardLevelExample example = new AwardLevelExample();
-        example.or().andAwardLevelIdEqualTo(awardLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         return awardLevelMapper.updateByExample(awardLevel,example);
     }
 
     @Transactional
     @Override
-    public int deleteAwardLevel(int awardLevelId) {
+    public int deleteAwardLevel(int levelId) {
         AwardLevelExample example = new AwardLevelExample();
-        example.or().andAwardLevelIdEqualTo(awardLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         return awardLevelMapper.deleteByExample(example);
     }
 
     @Transactional
     @Override
-    public AwardLevel selectByAwardLevelId(int awardLevelId) {
+    public AwardLevel selectByLevelId(int levelId) {
         AwardLevelExample example = new AwardLevelExample();
-        example.or().andAwardLevelIdEqualTo(awardLevelId);
+        example.or().andLevelIdEqualTo(levelId);
         List<AwardLevel> list = awardLevelMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

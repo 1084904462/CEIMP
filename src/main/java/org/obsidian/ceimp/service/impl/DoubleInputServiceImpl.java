@@ -58,6 +58,31 @@ public class DoubleInputServiceImpl implements DoubleInputService {
 
     @Transactional
     @Override
+    public List<DoubleInput> selectAllByThisYear() {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        DoubleInputExample example = new DoubleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<DoubleInput> list = doubleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<DoubleInput> selectAllByYearScope(int yearScope) {
+        DoubleInputExample example = new DoubleInputExample();
+        example.or().andYearScopeEqualTo(yearScope);
+        List<DoubleInput> list = doubleInputMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
     public List<DoubleInput> selectAllByUserId(String userId) {
         DoubleInputExample example = new DoubleInputExample();
         example.or().andUserIdEqualTo(userId);

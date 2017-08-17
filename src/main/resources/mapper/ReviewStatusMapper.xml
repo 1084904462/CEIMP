@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.obsidian.ceimp.dao.ReviewStatusMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewStatus">
-    <result column="review_status_id" jdbcType="INTEGER" property="reviewStatusId" />
+    <result column="status_id" jdbcType="INTEGER" property="statusId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    review_status_id, user_id, status, review_type_id, year_scope, create_time
+    status_id, user_id, status, review_type_id, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewStatusExample" resultMap="BaseResultMap">
     select
@@ -92,18 +92,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
-    insert into review_status (review_status_id, user_id, status, 
+    insert into review_status (status_id, user_id, status, 
       review_type_id, year_scope, create_time
       )
-    values (#{reviewStatusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+    values (#{statusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{reviewTypeId,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
     insert into review_status
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="reviewStatusId != null">
-        review_status_id,
+      <if test="statusId != null">
+        status_id,
       </if>
       <if test="userId != null">
         user_id,
@@ -122,8 +122,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="reviewStatusId != null">
-        #{reviewStatusId,jdbcType=INTEGER},
+      <if test="statusId != null">
+        #{statusId,jdbcType=INTEGER},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
@@ -151,8 +151,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update review_status
     <set>
-      <if test="record.reviewStatusId != null">
-        review_status_id = #{record.reviewStatusId,jdbcType=INTEGER},
+      <if test="record.statusId != null">
+        status_id = #{record.statusId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
@@ -176,7 +176,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update review_status
-    set review_status_id = #{record.reviewStatusId,jdbcType=INTEGER},
+    set status_id = #{record.statusId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},

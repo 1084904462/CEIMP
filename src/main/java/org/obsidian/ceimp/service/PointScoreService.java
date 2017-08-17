@@ -9,13 +9,16 @@ import java.util.List;
  */
 public interface PointScoreService {
 
-    int insertPointScore(int pointId,String userId,int score);
+    int insertPointScore(String userId,int pointId,double score);
 
-    int updatePointScore(int pointScoreId,int pointId,String userId,int score);
+    int updatePointScore(int pointScoreId,String userId,int pointId,double score);
 
     int deletePointScore(int pointScoreId);
 
     PointScore selectByPointScoreId(int pointScoreId);
+
+    List<PointScore> selectAllByThisYear();
+    List<PointScore> selectAllByYearScope(int yearScope);
 
     List<PointScore> selectAllByUserId(String userId);
     List<PointScore> selectAllByUserIdAndThisYear(String userId);

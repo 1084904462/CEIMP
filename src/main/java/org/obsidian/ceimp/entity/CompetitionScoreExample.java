@@ -3,14 +3,14 @@ package org.obsidian.ceimp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtCompetitionScoreExample {
+public class CompetitionScoreExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ArtCompetitionScoreExample() {
+    public CompetitionScoreExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -284,6 +284,66 @@ public class ArtCompetitionScoreExample {
             return (Criteria) this;
         }
 
+        public Criteria andCompetitionTypeIdIsNull() {
+            addCriterion("competition_type_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdIsNotNull() {
+            addCriterion("competition_type_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdEqualTo(Integer value) {
+            addCriterion("competition_type_id =", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdNotEqualTo(Integer value) {
+            addCriterion("competition_type_id <>", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdGreaterThan(Integer value) {
+            addCriterion("competition_type_id >", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("competition_type_id >=", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdLessThan(Integer value) {
+            addCriterion("competition_type_id <", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("competition_type_id <=", value, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdIn(List<Integer> values) {
+            addCriterion("competition_type_id in", values, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdNotIn(List<Integer> values) {
+            addCriterion("competition_type_id not in", values, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("competition_type_id between", value1, value2, "competitionTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompetitionTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("competition_type_id not between", value1, value2, "competitionTypeId");
+            return (Criteria) this;
+        }
+
         public Criteria andScoreIsNull() {
             addCriterion("score is null");
             return (Criteria) this;
@@ -294,52 +354,52 @@ public class ArtCompetitionScoreExample {
             return (Criteria) this;
         }
 
-        public Criteria andScoreEqualTo(Integer value) {
+        public Criteria andScoreEqualTo(Double value) {
             addCriterion("score =", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotEqualTo(Integer value) {
+        public Criteria andScoreNotEqualTo(Double value) {
             addCriterion("score <>", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThan(Integer value) {
+        public Criteria andScoreGreaterThan(Double value) {
             addCriterion("score >", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreGreaterThanOrEqualTo(Integer value) {
+        public Criteria andScoreGreaterThanOrEqualTo(Double value) {
             addCriterion("score >=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThan(Integer value) {
+        public Criteria andScoreLessThan(Double value) {
             addCriterion("score <", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreLessThanOrEqualTo(Integer value) {
+        public Criteria andScoreLessThanOrEqualTo(Double value) {
             addCriterion("score <=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreIn(List<Integer> values) {
+        public Criteria andScoreIn(List<Double> values) {
             addCriterion("score in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotIn(List<Integer> values) {
+        public Criteria andScoreNotIn(List<Double> values) {
             addCriterion("score not in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreBetween(Integer value1, Integer value2) {
+        public Criteria andScoreBetween(Double value1, Double value2) {
             addCriterion("score between", value1, value2, "score");
             return (Criteria) this;
         }
 
-        public Criteria andScoreNotBetween(Integer value1, Integer value2) {
+        public Criteria andScoreNotBetween(Double value1, Double value2) {
             addCriterion("score not between", value1, value2, "score");
             return (Criteria) this;
         }

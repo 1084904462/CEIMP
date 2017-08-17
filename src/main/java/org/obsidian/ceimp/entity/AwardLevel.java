@@ -3,7 +3,7 @@ package org.obsidian.ceimp.entity;
 import org.obsidian.ceimp.util.TimeUtil;
 
 public class AwardLevel {
-    private Integer awardLevelId;
+    private Integer levelId;
 
     private String level;
 
@@ -12,7 +12,7 @@ public class AwardLevel {
     @Override
     public String toString() {
         return "AwardLevel{" +
-                "awardLevelId=" + awardLevelId +
+                "levelId=" + levelId +
                 ", level='" + level + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
@@ -27,18 +27,18 @@ public class AwardLevel {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public AwardLevel(Integer awardLevelId, String level) {
-        this.awardLevelId = awardLevelId;
+    public AwardLevel(Integer levelId, String level) {
+        this.levelId = levelId;
         this.level = level;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Integer getAwardLevelId() {
-        return awardLevelId;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setAwardLevelId(Integer awardLevelId) {
-        this.awardLevelId = awardLevelId;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public String getLevel() {
