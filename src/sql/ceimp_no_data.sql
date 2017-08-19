@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-17 17:52:39
+Date: 2017-08-18 14:44:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,7 +103,7 @@ CREATE TABLE `classes` (
 DROP TABLE IF EXISTS `class_manager`;
 CREATE TABLE `class_manager` (
   `class_manager_id` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `class_id` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`class_manager_id`),
@@ -233,17 +233,18 @@ CREATE TABLE `competition_score` (
   `score_id` int(20) NOT NULL AUTO_INCREMENT,
   `competition_level_id` int(20) NOT NULL,
   `award_level_id` int(20) NOT NULL,
-  `competition_type_id` int(20) NOT NULL DEFAULT '1',
+  `competition_type_id` int(20) NOT NULL,
   `score` double NOT NULL,
+  `type` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`score_id`),
   UNIQUE KEY `score_id` (`score_id`) USING BTREE,
   KEY `competition_level_id` (`competition_level_id`),
   KEY `award_level_id` (`award_level_id`),
   KEY `competition_type_id` (`competition_type_id`),
-  CONSTRAINT `competition_score_ibfk_3` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_score_ibfk_1` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_score_ibfk_2` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `competition_score_ibfk_2` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `competition_score_ibfk_3` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -647,7 +648,7 @@ CREATE TABLE `school` (
 DROP TABLE IF EXISTS `school_manager`;
 CREATE TABLE `school_manager` (
   `school_manager_id` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `school_id` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`school_manager_id`),
@@ -713,7 +714,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `class_id` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`user_id`),

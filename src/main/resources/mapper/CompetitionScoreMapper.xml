@@ -7,6 +7,7 @@
     <result column="award_level_id" jdbcType="INTEGER" property="awardLevelId" />
     <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
     <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="type" jdbcType="INTEGER" property="type" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    score_id, competition_level_id, award_level_id, competition_type_id, score, create_time
+    score_id, competition_level_id, award_level_id, competition_type_id, score, type, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionScoreExample" resultMap="BaseResultMap">
     select
@@ -93,11 +95,11 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionScore">
     insert into competition_score (score_id, competition_level_id, award_level_id, 
-      competition_type_id, score, create_time
-      )
+      competition_type_id, score, type, 
+      create_time)
     values (#{scoreId,jdbcType=INTEGER}, #{competitionLevelId,jdbcType=INTEGER}, #{awardLevelId,jdbcType=INTEGER}, 
-      #{competitionTypeId,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{createTime,jdbcType=BIGINT}
-      )
+      #{competitionTypeId,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{type,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionScore">
     insert into competition_score
@@ -116,6 +118,9 @@
       </if>
       <if test="score != null">
         score,
+      </if>
+      <if test="type != null">
+        type,
       </if>
       <if test="createTime != null">
         create_time,
@@ -136,6 +141,9 @@
       </if>
       <if test="score != null">
         #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -166,6 +174,9 @@
       <if test="record.score != null">
         score = #{record.score,jdbcType=DOUBLE},
       </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -181,6 +192,7 @@
       award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
       competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       score = #{record.score,jdbcType=DOUBLE},
+      type = #{record.type,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

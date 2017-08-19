@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="${time}" ></p>
+<form action="/userLogin" method="post">
+    <input type="text" name="userId" value=""/>
+    <input type="text" name="password" value=""/>
+    <input type="submit" value="登录"/>
+</form>
+<form action="/managerLogin" method="post">
+    <input type="text" name="managerId" value=""/>
+    <input type="text" name="password" value=""/>
+    <input type="submit" value="登录"/>
+</form>
+</body>
+</html>

@@ -13,6 +13,8 @@ public class CompetitionScore {
 
     private Double score;
 
+    private Integer type;
+
     private Long createTime;
 
     @Override
@@ -23,6 +25,7 @@ public class CompetitionScore {
                 ", awardLevelId=" + awardLevelId +
                 ", competitionTypeId=" + competitionTypeId +
                 ", score=" + score +
+                ", type=" + type +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -31,20 +34,22 @@ public class CompetitionScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score) {
+    public CompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score, Integer type) {
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
         this.competitionTypeId = competitionTypeId;
         this.score = score;
+        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score) {
+    public CompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score, Integer type) {
         this.scoreId = scoreId;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
         this.competitionTypeId = competitionTypeId;
         this.score = score;
+        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -86,6 +91,14 @@ public class CompetitionScore {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Long getCreateTime() {
