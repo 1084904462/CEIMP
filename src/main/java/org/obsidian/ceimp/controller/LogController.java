@@ -47,6 +47,7 @@ public class LogController {
             return "admin";
         }
         return "login";
+//		return "admin/admin";
     }
 
     @RequestMapping(value = "/userLogin", method = {RequestMethod.GET,RequestMethod.POST})

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-18 14:45:48
+Date: 2017-08-19 22:46:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -130,8 +130,8 @@ CREATE TABLE `class_manager` (
 -- ----------------------------
 -- Records of class_manager
 -- ----------------------------
-INSERT INTO `class_manager` VALUES ('1150299234', 'MTIzNDU2', '1', '1502972250');
-INSERT INTO `class_manager` VALUES ('1150299256', 'NjY2NjY2', '2', '1502972250');
+INSERT INTO `class_manager` VALUES ('1150299234', 'UsaeOlczEIGCMzHE5p0/Lg==', '1', '1502972250');
+INSERT INTO `class_manager` VALUES ('1150299256', '4QrcOUm6Wau+VuBX8g+IPg==', '2', '1502972250');
 
 -- ----------------------------
 -- Table structure for `class_score`
@@ -901,8 +901,8 @@ CREATE TABLE `school_manager` (
 -- ----------------------------
 -- Records of school_manager
 -- ----------------------------
-INSERT INTO `school_manager` VALUES ('1150299070', 'ODg4NjY2', '1', '1502972169');
-INSERT INTO `school_manager` VALUES ('1150299072', 'OTk5OTk5', '2', '1502972169');
+INSERT INTO `school_manager` VALUES ('1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1502972169');
+INSERT INTO `school_manager` VALUES ('1150299072', 'ISGMyneATSuhkiwz4BURBQ==', '2', '1502972169');
 
 -- ----------------------------
 -- Table structure for `single_input`
@@ -969,8 +969,8 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1150299070', '陈伟', 'ODg4NjY2', '1', '1502972050');
-INSERT INTO `users` VALUES ('1150299071', '张三', 'ODg4ODg4', '3', '1502972051');
-INSERT INTO `users` VALUES ('1150299072', '李四', 'OTk5OTk5', '4', '1502972051');
-INSERT INTO `users` VALUES ('1150299234', '林创伟', 'MTIzNDU2', '1', '1502972050');
-INSERT INTO `users` VALUES ('1150299256', '蔡靖楠', 'NjY2NjY2', '2', '1502972050');
+INSERT INTO `users` VALUES ('1150299070', '陈伟', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1502972050');
+INSERT INTO `users` VALUES ('1150299071', '张三', '83nq88gxsE3hU0adG+w0Xg==', '3', '1502972051');
+INSERT INTO `users` VALUES ('1150299072', '李四', 'ISGMyneATSuhkiwz4BURBQ==', '4', '1502972051');
+INSERT INTO `users` VALUES ('1150299234', '林创伟', 'UsaeOlczEIGCMzHE5p0/Lg==', '1', '1502972050');
+INSERT INTO `users` VALUES ('1150299256', '蔡靖楠', '4QrcOUm6Wau+VuBX8g+IPg==', '2', '1502972050');
