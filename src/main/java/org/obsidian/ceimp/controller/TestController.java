@@ -28,8 +28,8 @@ public class TestController {
         return "login";
     }
 
-    @RequestMapping("/admin")
-	public String admin(){
-    	return "admin/admin";
-	}
+//    @RequestMapping("/admin")
+//	public String admin(){
+//    	return "admin/admin";
+//	}
 }

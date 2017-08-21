@@ -3,7 +3,7 @@
  */
 layui.use(["form"], function()
 {
-    var form = layui.form();
+    var form = layui.form;
 
     //选项卡切换
     $("ul.login-tab-title li").click(function()

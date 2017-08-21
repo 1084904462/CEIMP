@@ -44,11 +44,21 @@ public class LogController {
             return "index";
         }
         else if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
-            return "admin";
+            return "redirect:/admin";
         }
         return "login";
-//		return "admin/admin";
+//		return "admin/index";
     }
+
+    @RequestMapping(value = "/admin")
+	public String admin(HttpSession session){
+		ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+		if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
+			return "admin/index";
+		}
+		return "admin/index";
+//		return "login";
+	}
 
     @RequestMapping(value = "/userLogin", method = {RequestMethod.GET,RequestMethod.POST})
     public String userLogIn(HttpSession session, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
