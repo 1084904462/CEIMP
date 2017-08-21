@@ -39,17 +39,17 @@ public class LogController {
     @RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
     public String login(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(userLogBean != null && !"".equals(userLogBean.getUserId())){
             return "index";
         }
-        else if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+        if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
             return "admin";
         }
         return "login";
     }
 
-    @RequestMapping(value = "/userLogin", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public String userLogIn(HttpSession session, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         if(userLogBean != null && !"".equals(userLogBean.getUserId())){
@@ -80,7 +80,7 @@ public class LogController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/userLogout", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
     public String userLogOut(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         logger.info("user " + userLogBean.getUserId() + " logOut");
@@ -89,7 +89,7 @@ public class LogController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/managerLogin", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
     public String managerLogIn(HttpSession session, @RequestParam(value = "managerId") String managerId,@RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
@@ -138,7 +138,7 @@ public class LogController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/managerLogout", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/managerLogout", method = RequestMethod.GET)
     public String managerLogOut(HttpSession session){
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         logger.info("manager " + managerLogBean.getManagerId() + " logOut");
