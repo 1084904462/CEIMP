@@ -13,21 +13,19 @@ import javax.servlet.http.HttpSession;
  * Created by BillChen on 2017/8/18.
  */
 public class ManagerLogInterceptor implements HandlerInterceptor {
-    private Logger logger = Logger.getLogger(ManagerLogInterceptor.class);
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession(true);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){
-            logger.info("manager " + managerLogBean.getManagerId() + " is log now");
-
+            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " is log now");
             return true;
         }
         else{
             logger.info("no manager is log now");
-
-            httpServletResponse.sendRedirect("/");
+            httpServletResponse.sendRedirect("/login");
             return false;
         }
     }

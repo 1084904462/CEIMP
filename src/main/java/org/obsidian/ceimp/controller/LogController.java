@@ -25,7 +25,7 @@ import java.security.NoSuchAlgorithmException;
  */
 @Controller
 public class LogController {
-    private Logger logger = Logger.getLogger(LogController.class);
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private UsersService usersService;
@@ -36,77 +36,131 @@ public class LogController {
     @Autowired
     private SchoolManagerService schoolManagerService;
 
-    @RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST})
+    /**
+     * 访问根路径/
+     * 返回重定向/login
+     * @return
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String defaultPage(){
+        return "redirect:/login";
+    }
+
+    /**
+     * 访问/login
+     * session已有userId，重定向至/evaluation/index
+     * session已有managerId，重定向至/admin/index
+     * 都没有，返回login.html
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        if(userLogBean != null && !"".equals(userLogBean.getUserId())){
-            return "index";
-        }
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+        if(userLogBean != null && !"".equals(userLogBean.getUserId())){
+            return "redirect:/evaluation/index";
+        }
         if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
-            return "admin";
+            return "redirect:/admin/index";
         }
         return "login";
     }
 
+    /**
+     * 表单POST
+     * 访问/userLogin
+     * 登录成功，将userLogBean存入session，并重定向至/evaluation/index
+     * 登录失败，发送失败原因，重定向至/login
+     * @param session
+     * @param userId
+     * @param password
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
     public String userLogIn(HttpSession session, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        if(userLogBean != null && !"".equals(userLogBean.getUserId())){
-            return "index";
+	    UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
+	    ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+	    if(userLogBean != null){
+	        session.removeAttribute("userLogBean");
         }
+        if(managerLogBean != null){
+	        session.removeAttribute("managerLogBean");
+        }
+
         Users users = usersService.selectByUserId(userId);
         if(users != null){
             if(users.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("user " + userId + " login success");
-
                 userLogBean = new UserLogBean(userId,"登录成功");
                 session.setAttribute("userLogBean",userLogBean);
-                return "index";
+                return "redirect:/evaluation/index";
             }
             else {
                 logger.info("user " + userId + " password is not correct");
-
                 userLogBean = new UserLogBean("","密码错误");
                 session.setAttribute("userLogBean",userLogBean);
             }
         }
         else {
             logger.info("user " + userId + " is not in database");
-
             userLogBean = new UserLogBean("","没有该用户");
             session.setAttribute("userLogBean",userLogBean);
         }
-        return "redirect:/";
+        return "redirect:/login";
     }
 
+    /**
+     * 用户登出
+     * 清空session中的userLogBean
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
     public String userLogOut(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        logger.info("user " + userLogBean.getUserId() + " logOut");
-
-        session.removeAttribute("userLogBean");
-        return "redirect:/";
+        if(userLogBean != null){
+            logger.info("user " + userLogBean.getUserId() + " logOut");
+            session.removeAttribute("userLogBean");
+        }
+        return "redirect:/login";
     }
 
+    /**
+     * 表单POST
+     * 访问/managerLogin
+     * 登录成功，将managerLogBean存入session，并重定向至/index
+     * 登录失败，发送失败原因，重定向至/login
+     * @param session
+     * @param managerId
+     * @param password
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
     @RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
     public String managerLogIn(HttpSession session, @RequestParam(value = "managerId") String managerId,@RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
+        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
-        if(managerLogBean != null && !"".equals(managerLogBean.getManagerId())){
-            return "admin";
+        if(userLogBean != null){
+            session.removeAttribute("userLogBean");
         }
+        if(managerLogBean != null){
+            session.removeAttribute("managerLogBean");
+        }
+
         ClassManager classManager = classManagerService.selectByClassManagerId(managerId);
         if(classManager != null){
             if(classManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("classManager " + managerId + " login success");
-
                 managerLogBean = new ManagerLogBean(managerId,"班级管理员","登录成功");
                 session.setAttribute("managerLogBean",managerLogBean);
-                return "admin";
+                return "redirect:/admin/index";
             }
             else{
                 logger.info("classManager " + managerId + " password is not correct");
-
                 managerLogBean = new ManagerLogBean("","","密码错误");
                 session.setAttribute("managerLogBean",managerLogBean);
             }
@@ -116,34 +170,38 @@ public class LogController {
             if(schoolManager != null){
                 if(schoolManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                     logger.info("schoolManager " + managerId + " login success");
-
                     managerLogBean = new ManagerLogBean(managerId,"学院管理员","登录成功");
                     session.setAttribute("managerLogBean",managerLogBean);
-                    return "admin";
+                    return "redirect:/admin/index";
                 }
                 else{
                     logger.info("schoolManager " + managerId + " password is not correct");
-
                     managerLogBean = new ManagerLogBean("","","密码错误");
                     session.setAttribute("managerLogBean",managerLogBean);
                 }
             }
             else{
                 logger.info("manager " + managerId + " is not in database");
-
                 managerLogBean = new ManagerLogBean("","","没有该用户");
                 session.setAttribute("managerLogBean",managerLogBean);
             }
         }
-        return "redirect:/";
+        return "redirect:/login";
     }
 
+    /**
+     * 管理员登出
+     * 清空session中的managerLogBean
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/managerLogout", method = RequestMethod.GET)
     public String managerLogOut(HttpSession session){
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
-        logger.info("manager " + managerLogBean.getManagerId() + " logOut");
-
-        session.removeAttribute("managerLogBean");
-        return "redirect:/";
+        if(managerLogBean != null){
+            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " logOut");
+            session.removeAttribute("managerLogBean");
+        }
+        return "redirect:/login";
     }
 }

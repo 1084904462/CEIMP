@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Controller
 public class ScholarshipController {
-    private Logger logger = Logger.getLogger(ScholarshipController.class);
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private ScholarshipService scholarshipService;

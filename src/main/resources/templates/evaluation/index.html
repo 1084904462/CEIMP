@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="${time}" ></p>
+<p th:text="${session.userLogBean.userId}"></p>
+<p>welcome to ceimp index!</p>
+<a href="/userLogout">登出</a>
+<a href="../admin/index.html">jump</a>
+</body>
+</html>

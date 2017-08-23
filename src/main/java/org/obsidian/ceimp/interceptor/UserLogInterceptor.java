@@ -13,21 +13,19 @@ import javax.servlet.http.HttpSession;
  * Created by BillChen on 2017/8/18.
  */
 public class UserLogInterceptor implements HandlerInterceptor {
-    private Logger logger = Logger.getLogger(UserLogInterceptor.class);
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession(true);
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         if(userLogBean != null){
-            logger.info("user " + userLogBean.getUserId() + " is log now");
-
+            logger.info("用户 " + userLogBean.getUserId() + " is log now");
             return true;
         }
         else{
             logger.info("no user is log now");
-
-            httpServletResponse.sendRedirect("/");
+            httpServletResponse.sendRedirect("/login");
             return false;
         }
     }

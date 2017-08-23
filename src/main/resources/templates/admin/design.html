@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>管理员</title>
+    <link rel="stylesheet" th:href="@{css/plugins/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{plugins/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{css/admin/adminCommon.css}"/>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">
+            综合测评信息管理平台
+        </div>
+        <div class="layui-nav layui-layout-left">
+
+        </div>
+        <div class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <i class="layui-icon">&#xe612;</i>
+                    管理员XXX
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="">修改密码</a>
+                    </dd>
+                    <dd>
+                        <a href="">退出</a>
+                    </dd>
+                </dl>
+            </li>
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <ul class="layui-nav layui-nav-tree" lay-filter="side">
+                <li class="layui-nav-item">
+                    <a href="index.html">
+                        <i class="fa fa-stop-circle"></i>
+                        概况
+                    </a>
+                </li>
+                <li class="layui-nav-item layui-this">
+                    <a href="design.html">
+                        <i class="fa fa-stop-circle"></i>
+                        设计综测表单
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascritpt:;">
+                        <i class="fa fa-stop-circle"></i>
+                        填写模板
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascritpt:;">管理填写模板</a></dd>
+                        <dd><a href="javascritpt:;">上传新模板</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascritpt:;">
+                        <i class="fa fa-stop-circle"></i>
+                        审核
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascritpt:;">
+                        <i class="fa fa-stop-circle"></i>
+                        查看流程进度
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascritpt:;">
+                        <i class="fa fa-stop-circle"></i>
+                        审核流程控制
+                    </a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascritpt:;">
+                        <i class="fa fa-stop-circle"></i>
+                        系统选项
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        design
+    </div>
+    <div class="layui-footer">
+
+    </div>
+</div>
+</body>
+<script th:src="@{js/plugins/jquery-3.1.1.min.js}"/>
+<script th:src="@{js/plugins/echarts.min.js}"/>
+<script th:src="@{js/plugins/html5shiv.min.js}"/>
+<script th:src="@{plugins/bootstrap/js/bootstrap.min.js}"/>
+<script th:src="@{plugins/layui/layui.js}"/>
+<script th:src="@{js/admin/adminCommon.js}"/>
+</html>

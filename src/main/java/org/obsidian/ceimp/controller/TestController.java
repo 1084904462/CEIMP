@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.controller;
 
+import org.apache.log4j.Logger;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class TestController {
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/getYear")
     public String getYear(Model model){
@@ -28,8 +30,8 @@ public class TestController {
         return "login";
     }
 
-    @RequestMapping("/admin")
+    @RequestMapping("/admin/design")
 	public String admin(){
-    	return "admin";
+    	return "admin/design";
 	}
 }
