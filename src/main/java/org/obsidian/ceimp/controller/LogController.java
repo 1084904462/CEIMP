@@ -93,19 +93,19 @@ public class LogController {
         Users users = usersService.selectByUserId(userId);
         if(users != null){
             if(users.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
-                logger.info("user " + userId + " login success");
+                logger.info("用户 " + userId + " 登录成功");
                 userLogBean = new UserLogBean(userId,"登录成功");
                 session.setAttribute("userLogBean",userLogBean);
                 return "redirect:/evaluation/index";
             }
             else {
-                logger.info("user " + userId + " password is not correct");
+                logger.info("用户 " + userId + " 密码错误");
                 userLogBean = new UserLogBean("","密码错误");
                 session.setAttribute("userLogBean",userLogBean);
             }
         }
         else {
-            logger.info("user " + userId + " is not in database");
+            logger.info("没有 " + userId + " 该用户");
             userLogBean = new UserLogBean("","没有该用户");
             session.setAttribute("userLogBean",userLogBean);
         }
@@ -122,7 +122,7 @@ public class LogController {
     public String userLogOut(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         if(userLogBean != null){
-            logger.info("user " + userLogBean.getUserId() + " logOut");
+            logger.info("user " + userLogBean.getUserId() + " 登出");
             session.removeAttribute("userLogBean");
         }
         return "redirect:/login";
@@ -154,13 +154,13 @@ public class LogController {
         ClassManager classManager = classManagerService.selectByClassManagerId(managerId);
         if(classManager != null){
             if(classManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
-                logger.info("classManager " + managerId + " login success");
+                logger.info("班级管理员 " + managerId + " 登录成功");
                 managerLogBean = new ManagerLogBean(managerId,"班级管理员","登录成功");
                 session.setAttribute("managerLogBean",managerLogBean);
                 return "redirect:/admin/index";
             }
             else{
-                logger.info("classManager " + managerId + " password is not correct");
+                logger.info("班级管理员 " + managerId + " 密码错误");
                 managerLogBean = new ManagerLogBean("","","密码错误");
                 session.setAttribute("managerLogBean",managerLogBean);
             }
@@ -169,19 +169,19 @@ public class LogController {
             SchoolManager schoolManager = schoolManagerService.selectBySchoolManagerId(managerId);
             if(schoolManager != null){
                 if(schoolManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
-                    logger.info("schoolManager " + managerId + " login success");
+                    logger.info("学院管理员 " + managerId + " 登录成功");
                     managerLogBean = new ManagerLogBean(managerId,"学院管理员","登录成功");
                     session.setAttribute("managerLogBean",managerLogBean);
                     return "redirect:/admin/index";
                 }
                 else{
-                    logger.info("schoolManager " + managerId + " password is not correct");
+                    logger.info("学院管理员 " + managerId + " 密码错误");
                     managerLogBean = new ManagerLogBean("","","密码错误");
                     session.setAttribute("managerLogBean",managerLogBean);
                 }
             }
             else{
-                logger.info("manager " + managerId + " is not in database");
+                logger.info("没有 " + managerId + " 该管理员");
                 managerLogBean = new ManagerLogBean("","","没有该用户");
                 session.setAttribute("managerLogBean",managerLogBean);
             }
@@ -199,7 +199,7 @@ public class LogController {
     public String managerLogOut(HttpSession session){
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){
-            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " logOut");
+            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " 登出");
             session.removeAttribute("managerLogBean");
         }
         return "redirect:/login";

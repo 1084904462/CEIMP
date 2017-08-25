@@ -20,11 +20,11 @@ public class ManagerLogInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession(true);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){
-            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " is log now");
+            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " 在线");
             return true;
         }
         else{
-            logger.info("no manager is log now");
+            logger.info("没有管理员在线");
             httpServletResponse.sendRedirect("/login");
             return false;
         }

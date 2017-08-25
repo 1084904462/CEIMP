@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by BillChen on 2017/8/13.
@@ -34,4 +35,9 @@ public class TestController {
 	public String admin(){
     	return "admin/design";
 	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test(){
+	    return "test";
+    }
 }

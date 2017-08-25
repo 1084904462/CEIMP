@@ -20,11 +20,11 @@ public class UserLogInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession(true);
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         if(userLogBean != null){
-            logger.info("用户 " + userLogBean.getUserId() + " is log now");
+            logger.info("用户 " + userLogBean.getUserId() + " 在线");
             return true;
         }
         else{
-            logger.info("no user is log now");
+            logger.info("没有用户在线");
             httpServletResponse.sendRedirect("/login");
             return false;
         }

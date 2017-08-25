@@ -1,47 +1,56 @@
 package org.obsidian.ceimp.bean;
 
-import org.obsidian.ceimp.entity.ScholarshipBlock;
-import org.obsidian.ceimp.entity.ScholarshipItem;
-
 import java.util.List;
 
 /**
- * Created by BillChen on 2017/8/20.
+ * Created by BillChen on 2017/8/25.
  */
 public class ScholarshipBlockBean {
-    private ScholarshipBlock scholarshipBlock;
+    private int scholarshipBlockId;
 
-    private List<ScholarshipItem> scholarshipItemList;
+    private String scholarshipBlockName;
+
+    private List<ScholarshipItemBean> scholarshipItemBeans;
 
     @Override
     public String toString() {
         return "ScholarshipBlockBean{" +
-                "scholarshipBlock=" + scholarshipBlock +
-                ", scholarshipItemList=" + scholarshipItemList +
+                "scholarshipBlockId=" + scholarshipBlockId +
+                ", scholarshipBlockName='" + scholarshipBlockName + '\'' +
+                ", scholarshipItemBeans=" + scholarshipItemBeans +
                 '}';
     }
 
     public ScholarshipBlockBean() {
     }
 
-    public ScholarshipBlockBean(ScholarshipBlock scholarshipBlock, List<ScholarshipItem> scholarshipItemList) {
-        this.scholarshipBlock = scholarshipBlock;
-        this.scholarshipItemList = scholarshipItemList;
+    public ScholarshipBlockBean(int scholarshipBlockId, String scholarshipBlockName, List<ScholarshipItemBean> scholarshipItemBeans) {
+        this.scholarshipBlockId = scholarshipBlockId;
+        this.scholarshipBlockName = scholarshipBlockName;
+        this.scholarshipItemBeans = scholarshipItemBeans;
     }
 
-    public ScholarshipBlock getScholarshipBlock() {
-        return scholarshipBlock;
+    public int getScholarshipBlockId() {
+        return scholarshipBlockId;
     }
 
-    public void setScholarshipBlock(ScholarshipBlock scholarshipBlock) {
-        this.scholarshipBlock = scholarshipBlock;
+    public void setScholarshipBlockId(int scholarshipBlockId) {
+        this.scholarshipBlockId = scholarshipBlockId;
     }
 
-    public List<ScholarshipItem> getScholarshipItemList() {
-        return scholarshipItemList;
+    public String getScholarshipBlockName() {
+        return scholarshipBlockName;
     }
 
-    public void setScholarshipItemList(List<ScholarshipItem> scholarshipItemList) {
-        this.scholarshipItemList = scholarshipItemList;
+    public void setScholarshipBlockName(String scholarshipBlockName) {
+        this.scholarshipBlockName = scholarshipBlockName;
+    }
+
+    public List<ScholarshipItemBean> getScholarshipItemBeans() {
+        return scholarshipItemBeans;
+    }
+
+    public void setScholarshipItemBeans(List<ScholarshipItemBean> scholarshipItemBeans) {
+        this.scholarshipItemBeans = scholarshipItemBeans;
     }
 }
