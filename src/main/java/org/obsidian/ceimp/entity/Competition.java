@@ -5,9 +5,17 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class Competition {
     private Integer competitionId;
 
+    private Integer type;
+
     private String competitionName;
 
-    private String organizer;
+    private Integer schoolId;
+
+    private Integer competitionLevelId;
+
+    private Integer competitionTypeId;
+
+    private Integer isGroup;
 
     private Long createTime;
 
@@ -15,8 +23,12 @@ public class Competition {
     public String toString() {
         return "Competition{" +
                 "competitionId=" + competitionId +
+                ", type=" + type +
                 ", competitionName='" + competitionName + '\'' +
-                ", organizer='" + organizer + '\'' +
+                ", schoolId=" + schoolId +
+                ", competitionLevelId=" + competitionLevelId +
+                ", competitionTypeId=" + competitionTypeId +
+                ", isGroup=" + isGroup +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -25,16 +37,24 @@ public class Competition {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Competition(String competitionName, String organizer) {
+    public Competition(Integer type, String competitionName, Integer schoolId, Integer competitionLevelId, Integer competitionTypeId, Integer isGroup) {
+        this.type = type;
         this.competitionName = competitionName;
-        this.organizer = organizer;
+        this.schoolId = schoolId;
+        this.competitionLevelId = competitionLevelId;
+        this.competitionTypeId = competitionTypeId;
+        this.isGroup = isGroup;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Competition(Integer competitionId, String competitionName, String organizer) {
+    public Competition(Integer competitionId, Integer type, String competitionName, Integer schoolId, Integer competitionLevelId, Integer competitionTypeId, Integer isGroup) {
         this.competitionId = competitionId;
+        this.type = type;
         this.competitionName = competitionName;
-        this.organizer = organizer;
+        this.schoolId = schoolId;
+        this.competitionLevelId = competitionLevelId;
+        this.competitionTypeId = competitionTypeId;
+        this.isGroup = isGroup;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -46,6 +66,14 @@ public class Competition {
         this.competitionId = competitionId;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String getCompetitionName() {
         return competitionName;
     }
@@ -54,12 +82,36 @@ public class Competition {
         this.competitionName = competitionName == null ? null : competitionName.trim();
     }
 
-    public String getOrganizer() {
-        return organizer;
+    public Integer getSchoolId() {
+        return schoolId;
     }
 
-    public void setOrganizer(String organizer) {
-        this.organizer = organizer == null ? null : organizer.trim();
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public Integer getCompetitionLevelId() {
+        return competitionLevelId;
+    }
+
+    public void setCompetitionLevelId(Integer competitionLevelId) {
+        this.competitionLevelId = competitionLevelId;
+    }
+
+    public Integer getCompetitionTypeId() {
+        return competitionTypeId;
+    }
+
+    public void setCompetitionTypeId(Integer competitionTypeId) {
+        this.competitionTypeId = competitionTypeId;
+    }
+
+    public Integer getIsGroup() {
+        return isGroup;
+    }
+
+    public void setIsGroup(Integer isGroup) {
+        this.isGroup = isGroup;
     }
 
     public Long getCreateTime() {

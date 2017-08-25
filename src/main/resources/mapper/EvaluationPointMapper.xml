@@ -9,19 +9,17 @@
     <result column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="calculate_type" jdbcType="INTEGER" property="calculateType" />
     <result column="input_type" jdbcType="INTEGER" property="inputType" />
+    <result column="fill_in_type_id" jdbcType="INTEGER" property="fillInTypeId" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
   <select id="selectAllByClassId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,evaluation_point.score,
-    evaluation_point.item_id,evaluation_point.calculate_type,evaluation_point.input_type,evaluation_point.create_time
-    from evaluation_point,evaluation_item where evaluation_point.item_id = evaluation_item.item_id and
-    evaluation_item.class_id = #{classId}
+    select evaluation_point.* from evaluation_point,evaluation_item where
+    evaluation_point.item_id = evaluation_item.item_id and evaluation_item.class_id = #{classId}
   </select>
   <select id="selectAllByFormId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select evaluation_point.point_id,evaluation_point.content,evaluation_point.remark,evaluation_point.score,
-    evaluation_point.item_id,evaluation_point.calculate_type,evaluation_point.input_type,evaluation_point.create_time
-    from evaluation_point,evaluation_item,evaluation_class where evaluation_point.item_id = evaluation_item.item_id and
-    evaluation_item.class_id = evaluation_class.class_id and evaluation_class.form_id = #{formId}
+    select evaluation_point.* from evaluation_point,evaluation_item,evaluation_class where
+    evaluation_point.item_id = evaluation_item.item_id and evaluation_item.class_id = evaluation_class.class_id
+    and evaluation_class.form_id = #{formId}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -82,7 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    point_id, content, remark, score, item_id, calculate_type, input_type, create_time
+    point_id, content, remark, score, item_id, calculate_type, input_type, fill_in_type_id, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.EvaluationPointExample" resultMap="BaseResultMap">
     select
@@ -108,10 +107,12 @@
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.EvaluationPoint">
     insert into evaluation_point (point_id, content, remark, 
       score, item_id, calculate_type, 
-      input_type, create_time)
+      input_type, fill_in_type_id, create_time
+      )
     values (#{pointId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{score,jdbcType=DOUBLE}, #{itemId,jdbcType=INTEGER}, #{calculateType,jdbcType=INTEGER}, 
-      #{inputType,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+      #{inputType,jdbcType=INTEGER}, #{fillInTypeId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.EvaluationPoint">
     insert into evaluation_point
@@ -136,6 +137,9 @@
       </if>
       <if test="inputType != null">
         input_type,
+      </if>
+      <if test="fillInTypeId != null">
+        fill_in_type_id,
       </if>
       <if test="createTime != null">
         create_time,
@@ -162,6 +166,9 @@
       </if>
       <if test="inputType != null">
         #{inputType,jdbcType=INTEGER},
+      </if>
+      <if test="fillInTypeId != null">
+        #{fillInTypeId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
@@ -198,6 +205,9 @@
       <if test="record.inputType != null">
         input_type = #{record.inputType,jdbcType=INTEGER},
       </if>
+      <if test="record.fillInTypeId != null">
+        fill_in_type_id = #{record.fillInTypeId,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
       </if>
@@ -215,6 +225,7 @@
       item_id = #{record.itemId,jdbcType=INTEGER},
       calculate_type = #{record.calculateType,jdbcType=INTEGER},
       input_type = #{record.inputType,jdbcType=INTEGER},
+      fill_in_type_id = #{record.fillInTypeId,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

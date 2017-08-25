@@ -11,7 +11,7 @@ public class ImportItem {
 
     private Integer makeUp;
 
-    private Integer cet4;
+    private Double cet4;
 
     private Double pe;
 
@@ -41,7 +41,7 @@ public class ImportItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ImportItem(String userId, Integer examFail, Integer makeUp, Integer cet4, Double pe, Double gpa) {
+    public ImportItem(String userId, Integer examFail, Integer makeUp, Double cet4, Double pe, Double gpa) {
         this.userId = userId;
         this.examFail = examFail;
         this.makeUp = makeUp;
@@ -52,7 +52,7 @@ public class ImportItem {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ImportItem(Integer importId, String userId, Integer examFail, Integer makeUp, Integer cet4, Double pe, Double gpa) {
+    public ImportItem(Integer importId, String userId, Integer examFail, Integer makeUp, Double cet4, Double pe, Double gpa) {
         this.importId = importId;
         this.userId = userId;
         this.examFail = examFail;
@@ -96,11 +96,11 @@ public class ImportItem {
         this.makeUp = makeUp;
     }
 
-    public Integer getCet4() {
+    public Double getCet4() {
         return cet4;
     }
 
-    public void setCet4(Integer cet4) {
+    public void setCet4(Double cet4) {
         this.cet4 = cet4;
     }
 

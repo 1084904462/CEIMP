@@ -57,18 +57,6 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Transactional
     @Override
-    public Scholarship selectByScholarshipName(String scholarshipName) {
-        ScholarshipExample example = new ScholarshipExample();
-        example.or().andScholarshipNameEqualTo(scholarshipName);
-        List<Scholarship> list = scholarshipMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
-    }
-
-    @Transactional
-    @Override
     public List<Scholarship> selectAllByScholarshipName(String scholarshipName) {
         scholarshipName = "%" + scholarshipName + "%";
         ScholarshipExample example = new ScholarshipExample();

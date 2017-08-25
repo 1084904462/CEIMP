@@ -544,6 +544,66 @@ public class EvaluationPointExample {
             return (Criteria) this;
         }
 
+        public Criteria andFillInTypeIdIsNull() {
+            addCriterion("fill_in_type_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdIsNotNull() {
+            addCriterion("fill_in_type_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdEqualTo(Integer value) {
+            addCriterion("fill_in_type_id =", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdNotEqualTo(Integer value) {
+            addCriterion("fill_in_type_id <>", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdGreaterThan(Integer value) {
+            addCriterion("fill_in_type_id >", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("fill_in_type_id >=", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdLessThan(Integer value) {
+            addCriterion("fill_in_type_id <", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("fill_in_type_id <=", value, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdIn(List<Integer> values) {
+            addCriterion("fill_in_type_id in", values, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdNotIn(List<Integer> values) {
+            addCriterion("fill_in_type_id not in", values, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("fill_in_type_id between", value1, value2, "fillInTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFillInTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("fill_in_type_id not between", value1, value2, "fillInTypeId");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

@@ -17,6 +17,8 @@ public class EvaluationPoint {
 
     private Integer inputType;
 
+    private Integer fillInTypeId;
+
     private Long createTime;
 
     @Override
@@ -29,6 +31,7 @@ public class EvaluationPoint {
                 ", itemId=" + itemId +
                 ", calculateType=" + calculateType +
                 ", inputType=" + inputType +
+                ", fillInTypeId=" + fillInTypeId +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -37,17 +40,18 @@ public class EvaluationPoint {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationPoint(String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType) {
+    public EvaluationPoint(String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType, Integer fillInTypeId) {
         this.content = content;
         this.remark = remark;
         this.score = score;
         this.itemId = itemId;
         this.calculateType = calculateType;
         this.inputType = inputType;
+        this.fillInTypeId = fillInTypeId;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public EvaluationPoint(Integer pointId, String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType) {
+    public EvaluationPoint(Integer pointId, String content, String remark, Double score, Integer itemId, Integer calculateType, Integer inputType, Integer fillInTypeId) {
         this.pointId = pointId;
         this.content = content;
         this.remark = remark;
@@ -55,6 +59,7 @@ public class EvaluationPoint {
         this.itemId = itemId;
         this.calculateType = calculateType;
         this.inputType = inputType;
+        this.fillInTypeId = fillInTypeId;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -112,6 +117,14 @@ public class EvaluationPoint {
 
     public void setInputType(Integer inputType) {
         this.inputType = inputType;
+    }
+
+    public Integer getFillInTypeId() {
+        return fillInTypeId;
+    }
+
+    public void setFillInTypeId(Integer fillInTypeId) {
+        this.fillInTypeId = fillInTypeId;
     }
 
     public Long getCreateTime() {

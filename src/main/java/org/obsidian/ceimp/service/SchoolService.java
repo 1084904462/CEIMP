@@ -16,8 +16,6 @@ public interface SchoolService {
 
     School selectById(int schoolId);
 
-    School selectBySchoolName(String schoolName);
-
     List<School> selectAllBySchoolName(String schoolName);
 
     List<School> selectAll();

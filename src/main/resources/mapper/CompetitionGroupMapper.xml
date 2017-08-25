@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.CompetitionGroupMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.CompetitionGroup">
+    <result column="rank_id" jdbcType="INTEGER" property="rankId" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
+    <result column="percent" jdbcType="DOUBLE" property="percent" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rank_id, rank, percent, school_id, create_time
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from competition_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.CompetitionGroupExample">
+    delete from competition_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionGroup">
+    insert into competition_group (rank_id, rank, percent, 
+      school_id, create_time)
+    values (#{rankId,jdbcType=INTEGER}, #{rank,jdbcType=VARCHAR}, #{percent,jdbcType=DOUBLE}, 
+      #{schoolId,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionGroup">
+    insert into competition_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rankId != null">
+        rank_id,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="percent != null">
+        percent,
+      </if>
+      <if test="schoolId != null">
+        school_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rankId != null">
+        #{rankId,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="percent != null">
+        #{percent,jdbcType=DOUBLE},
+      </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.CompetitionGroupExample" resultType="java.lang.Long">
+    select count(*) from competition_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update competition_group
+    <set>
+      <if test="record.rankId != null">
+        rank_id = #{record.rankId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.percent != null">
+        percent = #{record.percent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.schoolId != null">
+        school_id = #{record.schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update competition_group
+    set rank_id = #{record.rankId,jdbcType=INTEGER},
+      rank = #{record.rank,jdbcType=VARCHAR},
+      percent = #{record.percent,jdbcType=DOUBLE},
+      school_id = #{record.schoolId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

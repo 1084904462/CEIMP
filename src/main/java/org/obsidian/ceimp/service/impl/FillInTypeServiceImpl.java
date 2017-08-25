@@ -57,18 +57,6 @@ public class FillInTypeServiceImpl implements FillInTypeService {
 
     @Transactional
     @Override
-    public FillInType selectByType(String type) {
-        FillInTypeExample example = new FillInTypeExample();
-        example.or().andTypeEqualTo(type);
-        List<FillInType> list = fillInTypeMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
-    }
-
-    @Transactional
-    @Override
     public List<FillInType> selectAllByType(String type) {
         type = "%" + type + "%";
         FillInTypeExample example = new FillInTypeExample();

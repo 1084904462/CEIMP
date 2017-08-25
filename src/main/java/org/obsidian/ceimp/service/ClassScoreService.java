@@ -17,19 +17,15 @@ public interface ClassScoreService {
 
     ClassScore selectByClassScoreId(int classScoreId);
 
-    List<ClassScore> selectAllByThisYear();
     List<ClassScore> selectAllByYearScope(int yearScope);
 
     List<ClassScore> selectAllByUserId(String userId);
-    List<ClassScore> selectAllByUserIdAndThisYear(String userId);
     List<ClassScore> selectAllByUserIdAndYearScope(String userId,int yearScope);
 
     List<ClassScore> selectAllByClassId(int classId);
-    List<ClassScore> selectAllByClassIdAndThisYear(int classId);
     List<ClassScore> selectAllByClassIdAndYearScope(int classId,int yearScope);
 
     List<ClassScore> selectAllByUserIdAndClassId(String userId,int classId);
-    List<ClassScore> selectAllByUserIdAndClassIdAndThisYear(String userId,int classId);
     List<ClassScore> selectAllByUserIdAndClassIdAndYearScope(String userId,int classId,int yearScope);
 
     List<ClassScore> selectAll();

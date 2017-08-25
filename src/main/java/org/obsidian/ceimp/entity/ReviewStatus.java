@@ -7,9 +7,9 @@ public class ReviewStatus {
 
     private String userId;
 
-    private Integer status;
-
     private Integer reviewTypeId;
+
+    private Integer status;
 
     private Integer yearScope;
 
@@ -20,8 +20,8 @@ public class ReviewStatus {
         return "ReviewStatus{" +
                 "statusId=" + statusId +
                 ", userId='" + userId + '\'' +
-                ", status=" + status +
                 ", reviewTypeId=" + reviewTypeId +
+                ", status=" + status +
                 ", yearScope=" + yearScope +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
@@ -32,19 +32,19 @@ public class ReviewStatus {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewStatus(String userId, Integer status, Integer reviewTypeId) {
+    public ReviewStatus(String userId, Integer reviewTypeId, Integer status) {
         this.userId = userId;
-        this.status = status;
         this.reviewTypeId = reviewTypeId;
+        this.status = status;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public ReviewStatus(Integer statusId, String userId, Integer status, Integer reviewTypeId) {
+    public ReviewStatus(Integer statusId, String userId, Integer reviewTypeId, Integer status) {
         this.statusId = statusId;
         this.userId = userId;
-        this.status = status;
         this.reviewTypeId = reviewTypeId;
+        this.status = status;
         this.yearScope = TimeUtil.getInstance().getThisYear();
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
@@ -65,20 +65,20 @@ public class ReviewStatus {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Integer getReviewTypeId() {
         return reviewTypeId;
     }
 
     public void setReviewTypeId(Integer reviewTypeId) {
         this.reviewTypeId = reviewTypeId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getYearScope() {

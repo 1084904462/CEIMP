@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.CompetitionInputMapper;
 import org.obsidian.ceimp.entity.CompetitionInput;
 import org.obsidian.ceimp.entity.CompetitionInputExample;
 import org.obsidian.ceimp.service.CompetitionInputService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +19,18 @@ public class CompetitionInputServiceImpl implements CompetitionInputService {
     @Autowired
     private CompetitionInputMapper competitionInputMapper;
 
+
     @Transactional
     @Override
-    public int insertCompetitionInput(String userId, int competitionId, int competitionTypeId, int competitionLevelId, int awardLevelId, String evidence) {
-        CompetitionInput competitionInput = new CompetitionInput(userId,competitionId,competitionTypeId,competitionLevelId,awardLevelId,evidence);
+    public int insertCompetitionInput(String userId, int competitionId, int competitionLevelId, int competitionTypeId, int awardLevelId, int isRelevant, int isGroup, int rankId, String evidence, String additionCompetition) {
+        CompetitionInput competitionInput = new CompetitionInput(userId,competitionId,competitionLevelId,competitionTypeId,awardLevelId,isRelevant,isGroup,rankId,evidence,additionCompetition);
         return competitionInputMapper.insertSelective(competitionInput);
     }
 
     @Transactional
     @Override
-    public int updateCompetitionInput(int inputId, String userId, int competitionId, int competitionTypeId, int competitionLevelId, int awardLevelId, String evidence) {
-        CompetitionInput competitionInput = new CompetitionInput(inputId,userId,competitionId,competitionTypeId,competitionLevelId,awardLevelId,evidence);
+    public int updateCompetitionInput(int inputId, String userId, int competitionId, int competitionLevelId, int competitionTypeId, int awardLevelId, int isRelevant, int isGroup, int rankId, String evidence, String additionCompetition) {
+        CompetitionInput competitionInput = new CompetitionInput(inputId,userId,competitionId,competitionLevelId,competitionTypeId,awardLevelId,isRelevant,isGroup,rankId,evidence,additionCompetition);
         CompetitionInputExample example = new CompetitionInputExample();
         example.or().andInputIdEqualTo(inputId);
         return competitionInputMapper.updateByExample(competitionInput,example);
@@ -51,22 +51,9 @@ public class CompetitionInputServiceImpl implements CompetitionInputService {
         example.or().andInputIdEqualTo(inputId);
         List<CompetitionInput> list = competitionInputMapper.selectByExample(example);
         if(list.isEmpty()){
-            return null;
+            return  null;
         }
         return list.get(0);
-    }
-
-    @Transactional
-    @Override
-    public List<CompetitionInput> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        CompetitionInputExample example = new CompetitionInputExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<CompetitionInput> list = competitionInputMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
     }
 
     @Transactional
@@ -86,19 +73,6 @@ public class CompetitionInputServiceImpl implements CompetitionInputService {
     public List<CompetitionInput> selectAllByUserId(String userId) {
         CompetitionInputExample example = new CompetitionInputExample();
         example.or().andUserIdEqualTo(userId);
-        List<CompetitionInput> list = competitionInputMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<CompetitionInput> selectAllByUserIdAndThisYear(String userId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        CompetitionInputExample example = new CompetitionInputExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
         List<CompetitionInput> list = competitionInputMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

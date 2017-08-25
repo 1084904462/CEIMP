@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.ReviewStatusMapper;
 import org.obsidian.ceimp.entity.ReviewStatus;
 import org.obsidian.ceimp.entity.ReviewStatusExample;
 import org.obsidian.ceimp.service.ReviewStatusService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +21,15 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public int insertReviewStatus(String userId, int status, int reviewTypeId) {
-        ReviewStatus reviewStatus = new ReviewStatus(userId,status,reviewTypeId);
+    public int insertReviewStatus(String userId, int reviewTypeId, int status) {
+        ReviewStatus reviewStatus = new ReviewStatus(userId,reviewTypeId,status);
         return reviewStatusMapper.insertSelective(reviewStatus);
     }
 
     @Transactional
     @Override
-    public int updateReviewStatus(int statusId, String userId, int status, int reviewTypeId) {
-        ReviewStatus reviewStatus = new ReviewStatus(statusId,userId,status,reviewTypeId);
+    public int updateReviewStatus(int statusId, String userId, int reviewTypeId, int status) {
+        ReviewStatus reviewStatus = new ReviewStatus(statusId,userId,reviewTypeId,status);
         ReviewStatusExample example = new ReviewStatusExample();
         example.or().andStatusIdEqualTo(statusId);
         return reviewStatusMapper.updateByExample(reviewStatus,example);
@@ -54,19 +53,6 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
             return null;
         }
         return list.get(0);
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewStatus> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
     }
 
     @Transactional
@@ -95,59 +81,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndThisYear(String userId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ReviewStatus> selectAllByUserIdAndYearScope(String userId, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
         example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewStatus> selectAllByStatus(int status) {
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewStatus> selectAllByStatusAndThisYear(int status) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewStatus> selectAllByStatusAndYearScope(int status, int yearScope) {
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -169,19 +105,6 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByReviewTypeIdAndThisYear(int reviewTypeId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ReviewStatus> selectAllByReviewTypeIdAndYearScope(int reviewTypeId, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
         example.or().andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
@@ -194,9 +117,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatus(String userId, int status) {
+    public List<ReviewStatus> selectAllByStatus(int status) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status);
+        example.or().andStatusEqualTo(status);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -206,22 +129,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatusAndThisYear(String userId, int status) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
+    public List<ReviewStatus> selectAllByStatusAndYearScope(int status, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatusAndYearScope(String userId, int status, int yearScope) {
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
+        example.or().andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -243,19 +153,6 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndReviewTypeIdAndThisYear(String userId, int reviewTypeId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
-        List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ReviewStatus> selectAllByUserIdAndReviewTypeIdAndYearScope(String userId, int reviewTypeId, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
         example.or().andUserIdEqualTo(userId).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
@@ -268,9 +165,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByStatusAndReviewTypeId(int status, int reviewTypeId) {
+    public List<ReviewStatus> selectAllByUserIdAndStatus(String userId, int status) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId);
+        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -280,10 +177,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByStatusAndReviewTypeIdAndThisYear(int status, int reviewTypeId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
+    public List<ReviewStatus> selectAllByUserIdAndStatusAndYearScope(String userId, int status, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
+        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -293,9 +189,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByStatusAndReviewTypeIdAndYearScope(int status, int reviewTypeId, int yearScope) {
+    public List<ReviewStatus> selectAllByReviewTypeIdAndStatus(int reviewTypeId, int status) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
+        example.or().andReviewTypeIdEqualTo(reviewTypeId).andStatusEqualTo(status);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -305,9 +201,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatusAndReviewTypeId(String userId, int status, int reviewTypeId) {
+    public List<ReviewStatus> selectAllByReviewTypeIdAndStatusAndYearScope(int reviewTypeId, int status, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId);
+        example.or().andReviewTypeIdEqualTo(reviewTypeId).andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -317,10 +213,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatusAndReviewTypeIdAndThisYear(String userId, int status, int reviewTypeId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
+    public List<ReviewStatus> selectAllByUserIdAndReviewTypeIdAndStatus(String userId, int reviewTypeId, int status) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
+        example.or().andUserIdEqualTo(userId).andReviewTypeIdEqualTo(reviewTypeId).andStatusEqualTo(status);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -330,9 +225,9 @@ public class ReviewStatusServiceImpl implements ReviewStatusService {
 
     @Transactional
     @Override
-    public List<ReviewStatus> selectAllByUserIdAndStatusAndReviewTypeIdAndYearScope(String userId, int status, int reviewTypeId, int yearScope) {
+    public List<ReviewStatus> selectAllByUserIdAndReviewTypeIdAndStatusAndYearScope(String userId, int reviewTypeId, int status, int yearScope) {
         ReviewStatusExample example = new ReviewStatusExample();
-        example.or().andUserIdEqualTo(userId).andStatusEqualTo(status).andReviewTypeIdEqualTo(reviewTypeId).andYearScopeEqualTo(yearScope);
+        example.or().andUserIdEqualTo(userId).andReviewTypeIdEqualTo(reviewTypeId).andStatusEqualTo(status).andYearScopeEqualTo(yearScope);
         List<ReviewStatus> list = reviewStatusMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

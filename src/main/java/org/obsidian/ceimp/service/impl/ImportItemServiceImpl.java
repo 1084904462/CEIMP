@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.ImportItemMapper;
 import org.obsidian.ceimp.entity.ImportItem;
 import org.obsidian.ceimp.entity.ImportItemExample;
 import org.obsidian.ceimp.service.ImportItemService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +21,14 @@ public class ImportItemServiceImpl implements ImportItemService {
 
     @Transactional
     @Override
-    public int insertImportItem(String userId, int examFail, int makeUp, int cet4, double pe, double gpa) {
+    public int insertImportItem(String userId, int examFail, int makeUp, double cet4, double pe, double gpa) {
         ImportItem importItem = new ImportItem(userId,examFail,makeUp,cet4,pe,gpa);
         return importItemMapper.insertSelective(importItem);
     }
 
     @Transactional
     @Override
-    public int updateImportItem(int importId, String userId, int examFail, int makeUp, int cet4, double pe, double gpa) {
+    public int updateImportItem(int importId, String userId, int examFail, int makeUp, double cet4, double pe, double gpa) {
         ImportItem importItem = new ImportItem(importId,userId,examFail,makeUp,cet4,pe,gpa);
         ImportItemExample example = new ImportItemExample();
         example.or().andImportIdEqualTo(importId);
@@ -58,19 +57,6 @@ public class ImportItemServiceImpl implements ImportItemService {
 
     @Transactional
     @Override
-    public List<ImportItem> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ImportItemExample example = new ImportItemExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<ImportItem> list = importItemMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ImportItem> selectAllByYearScope(int yearScope) {
         ImportItemExample example = new ImportItemExample();
         example.or().andYearScopeEqualTo(yearScope);
@@ -86,19 +72,6 @@ public class ImportItemServiceImpl implements ImportItemService {
     public List<ImportItem> selectAllByUserId(String userId) {
         ImportItemExample example = new ImportItemExample();
         example.or().andUserIdEqualTo(userId);
-        List<ImportItem> list = importItemMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ImportItem> selectAllByUserIdAndThisYear(String userId){
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ImportItemExample example = new ImportItemExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
         List<ImportItem> list = importItemMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

@@ -4,10 +4,13 @@ import org.obsidian.ceimp.dao.UsersMapper;
 import org.obsidian.ceimp.entity.Users;
 import org.obsidian.ceimp.entity.UsersExample;
 import org.obsidian.ceimp.service.UsersService;
+import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -21,14 +24,16 @@ public class UsersServiceImpl implements UsersService {
 
     @Transactional
     @Override
-    public int insertUsers(String userId, String username, String password, int classId) {
+    public int insertUsers(String userId, String username, String password, int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
         Users users = new Users(userId,username,password,classId);
         return usersMapper.insert(users);
     }
 
     @Transactional
     @Override
-    public int updateUsers(String userId, String username, String password, int classId) {
+    public int updateUsers(String userId, String username, String password, int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
         Users users = new Users(userId,username,password,classId);
         UsersExample example = new UsersExample();
         example.or().andUserIdEqualTo(userId);

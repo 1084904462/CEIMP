@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.ReviewTimeMapper;
 import org.obsidian.ceimp.entity.ReviewTime;
 import org.obsidian.ceimp.entity.ReviewTimeExample;
 import org.obsidian.ceimp.service.ReviewTimeService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,19 +53,6 @@ public class ReviewTimeServiceImpl implements ReviewTimeService {
             return null;
         }
         return list.get(0);
-    }
-
-    @Transactional
-    @Override
-    public List<ReviewTime> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ReviewTimeExample example = new ReviewTimeExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<ReviewTime> list = reviewTimeMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
     }
 
     @Transactional

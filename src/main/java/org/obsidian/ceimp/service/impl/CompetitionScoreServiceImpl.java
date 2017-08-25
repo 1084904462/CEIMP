@@ -21,15 +21,15 @@ public class CompetitionScoreServiceImpl implements CompetitionScoreService {
 
     @Transactional
     @Override
-    public int insertCompetitionScore(int competitionLevelId, int awardLevelId, int competitionTypeId, double score,int type) {
-        CompetitionScore competitionScore = new CompetitionScore(competitionLevelId,awardLevelId,competitionTypeId,score,type);
+    public int insertCompetitionScore(int type, int competitionLevelId, int awardLevelId, double score) {
+        CompetitionScore competitionScore = new CompetitionScore(type,competitionLevelId,awardLevelId,score);
         return competitionScoreMapper.insertSelective(competitionScore);
     }
 
     @Transactional
     @Override
-    public int updateCompetitionScore(int scoreId, int competitionLevelId, int awardLevelId, int competitionTypeId, double score,int type) {
-        CompetitionScore competitionScore = new CompetitionScore(scoreId,competitionLevelId,awardLevelId,competitionTypeId,score,type);
+    public int updateCompetitionScore(int scoreId, int type, int competitionLevelId, int awardLevelId, double score) {
+        CompetitionScore competitionScore = new CompetitionScore(scoreId,type,competitionLevelId,awardLevelId,score);
         CompetitionScoreExample example = new CompetitionScoreExample();
         example.or().andScoreIdEqualTo(scoreId);
         return competitionScoreMapper.updateByExample(competitionScore,example);
@@ -57,9 +57,9 @@ public class CompetitionScoreServiceImpl implements CompetitionScoreService {
 
     @Transactional
     @Override
-    public CompetitionScore selectByCompetitionLevelIdAndAwardLevelIdAndCompetitionTypeIdAndType(int competitionLevelId, int awardLevelId, int competitionTypeId,int type) {
+    public CompetitionScore selectByTypeAndCompetitionLevelIdAndAwardLevelId(int type, int competitionLevelId, int awardLevelId) {
         CompetitionScoreExample example = new CompetitionScoreExample();
-        example.or().andCompetitionLevelIdEqualTo(competitionLevelId).andAwardLevelIdEqualTo(awardLevelId).andCompetitionTypeIdEqualTo(competitionTypeId).andTypeEqualTo(type);
+        example.or().andTypeEqualTo(type).andCompetitionLevelIdEqualTo(competitionLevelId).andAwardLevelIdEqualTo(awardLevelId);
         List<CompetitionScore> list = competitionScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -69,33 +69,9 @@ public class CompetitionScoreServiceImpl implements CompetitionScoreService {
 
     @Transactional
     @Override
-    public List<CompetitionScore> selectAllByCompetitionLevelIdAndType(int competitionLevelId,int type) {
+    public List<CompetitionScore> selectAllByType(int type) {
         CompetitionScoreExample example = new CompetitionScoreExample();
-        example.or().andCompetitionLevelIdEqualTo(competitionLevelId).andTypeEqualTo(type);
-        List<CompetitionScore> list = competitionScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<CompetitionScore> selectAllByAwardLevelIdAndType(int awardLevelId,int type) {
-        CompetitionScoreExample example = new CompetitionScoreExample();
-        example.or().andAwardLevelIdEqualTo(awardLevelId).andTypeEqualTo(type);
-        List<CompetitionScore> list = competitionScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<CompetitionScore> selectAllByCompetitionTypeIdAndType(int competitionTypeId,int type) {
-        CompetitionScoreExample example = new CompetitionScoreExample();
-        example.or().andCompetitionTypeIdEqualTo(competitionTypeId).andTypeEqualTo(type);
+        example.or().andTypeEqualTo(type);
         List<CompetitionScore> list = competitionScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

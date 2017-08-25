@@ -9,19 +9,17 @@ import java.util.List;
  */
 public interface ImportItemService {
 
-    int insertImportItem(String userId,int examFail,int makeUp,int cet4,double pe,double gpa);
+    int insertImportItem(String userId,int examFail,int makeUp,double cet4,double pe,double gpa);
 
-    int updateImportItem(int importId,String userId,int examFail,int makeUp,int cet4,double pe,double gpa);
+    int updateImportItem(int importId,String userId,int examFail,int makeUp,double cet4,double pe,double gpa);
 
     int deleteImportItem(int importId);
 
     ImportItem selectByImportId(int importId);
 
-    List<ImportItem> selectAllByThisYear();
     List<ImportItem> selectAllByYearScope(int yearScope);
 
     List<ImportItem> selectAllByUserId(String userId);
-    List<ImportItem> selectAllByUserIdAndThisYear(String userId);
     List<ImportItem> selectAllByUserIdAndYearScope(String userId,int yearScope);
 
     List<ImportItem> selectAll();

@@ -41,7 +41,7 @@ public class ScholarshipController {
     @Autowired
     private AwardService awardService;
 
-    @RequestMapping(value = "/scholarship",method = RequestMethod.GET)
+    @RequestMapping(value = "/evaluation/scholarship",method = RequestMethod.GET)
     public String showScholarship(HttpSession session,Model model){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         String userId = userLogBean.getUserId();

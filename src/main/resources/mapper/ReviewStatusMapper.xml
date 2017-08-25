@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ReviewStatus">
     <result column="status_id" jdbcType="INTEGER" property="statusId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="review_type_id" jdbcType="INTEGER" property="reviewTypeId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    status_id, user_id, status, review_type_id, year_scope, create_time
+    status_id, user_id, review_type_id, status, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ReviewStatusExample" resultMap="BaseResultMap">
     select
@@ -92,11 +92,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
-    insert into review_status (status_id, user_id, status, 
-      review_type_id, year_scope, create_time
+    insert into review_status (status_id, user_id, review_type_id, 
+      status, year_scope, create_time
       )
-    values (#{statusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
-      #{reviewTypeId,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
+    values (#{statusId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{reviewTypeId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ReviewStatus">
@@ -108,11 +108,11 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="status != null">
-        status,
-      </if>
       <if test="reviewTypeId != null">
         review_type_id,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="yearScope != null">
         year_scope,
@@ -128,11 +128,11 @@
       <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
       <if test="reviewTypeId != null">
         #{reviewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
@@ -157,11 +157,11 @@
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
       <if test="record.reviewTypeId != null">
         review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
@@ -178,8 +178,8 @@
     update review_status
     set status_id = #{record.statusId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
       review_type_id = #{record.reviewTypeId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

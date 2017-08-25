@@ -17,19 +17,15 @@ public interface ItemScoreService {
 
     ItemScore selectByItemScoreId(int itemScoreId);
 
-    List<ItemScore> selectAllByThisYear();
     List<ItemScore> selectAllByYearScope(int yearScope);
 
     List<ItemScore> selectAllByUserId(String userId);
-    List<ItemScore> selectAllByUserIdAndThisYear(String userId);
     List<ItemScore> selectAllByUserIdAndYearScope(String userId,int yearScope);
 
     List<ItemScore> selectAllByItemId(int itemId);
-    List<ItemScore> selectAllByItemIdAndThisYear(int itemId);
     List<ItemScore> selectAllByItemIdAndYearScope(int itemId,int yearScope);
 
     List<ItemScore> selectAllByUserIdAndItemId(String userId,int itemId);
-    List<ItemScore> selectAllByUserIdAndItemIdAndThisYear(String userId,int itemId);
     List<ItemScore> selectAllByUserIdAndItemIdAndYearScope(String userId,int itemId,int yearScope);
 
     List<ItemScore> selectAll();

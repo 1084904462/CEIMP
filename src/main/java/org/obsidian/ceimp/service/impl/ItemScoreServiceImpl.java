@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.ItemScoreMapper;
 import org.obsidian.ceimp.entity.ItemScore;
 import org.obsidian.ceimp.entity.ItemScoreExample;
 import org.obsidian.ceimp.service.ItemScoreService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,19 +57,6 @@ public class ItemScoreServiceImpl implements ItemScoreService {
 
     @Transactional
     @Override
-    public List<ItemScore> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ItemScoreExample example = new ItemScoreExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<ItemScore> list = itemScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ItemScore> selectAllByYearScope(int yearScope) {
         ItemScoreExample example = new ItemScoreExample();
         example.or().andYearScopeEqualTo(yearScope);
@@ -86,19 +72,6 @@ public class ItemScoreServiceImpl implements ItemScoreService {
     public List<ItemScore> selectAllByUserId(String userId) {
         ItemScoreExample example = new ItemScoreExample();
         example.or().andUserIdEqualTo(userId);
-        List<ItemScore> list = itemScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ItemScore> selectAllByUserIdAndThisYear(String userId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ItemScoreExample example = new ItemScoreExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
         List<ItemScore> list = itemScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -132,19 +105,6 @@ public class ItemScoreServiceImpl implements ItemScoreService {
 
     @Transactional
     @Override
-    public List<ItemScore> selectAllByItemIdAndThisYear(int itemId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ItemScoreExample example = new ItemScoreExample();
-        example.or().andItemIdEqualTo(itemId).andYearScopeEqualTo(yearScope);
-        List<ItemScore> list = itemScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ItemScore> selectAllByItemIdAndYearScope(int itemId, int yearScope) {
         ItemScoreExample example = new ItemScoreExample();
         example.or().andItemIdEqualTo(itemId).andYearScopeEqualTo(yearScope);
@@ -160,19 +120,6 @@ public class ItemScoreServiceImpl implements ItemScoreService {
     public List<ItemScore> selectAllByUserIdAndItemId(String userId, int itemId) {
         ItemScoreExample example = new ItemScoreExample();
         example.or().andUserIdEqualTo(userId).andItemIdEqualTo(itemId);
-        List<ItemScore> list = itemScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ItemScore> selectAllByUserIdAndItemIdAndThisYear(String userId, int itemId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ItemScoreExample example = new ItemScoreExample();
-        example.or().andUserIdEqualTo(userId).andItemIdEqualTo(itemId).andYearScopeEqualTo(yearScope);
         List<ItemScore> list = itemScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

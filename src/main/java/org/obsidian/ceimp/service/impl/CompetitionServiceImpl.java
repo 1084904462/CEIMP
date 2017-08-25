@@ -21,15 +21,15 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Transactional
     @Override
-    public int insertCompetition(String competitionName, String organizer) {
-        Competition competition = new Competition(competitionName,organizer);
+    public int insertCompetition(int type, String competitionName, int schoolId, int competitionLevelId, int competitionTypeId, int isGroup) {
+        Competition competition = new Competition(type,competitionName,schoolId,competitionLevelId,competitionTypeId,isGroup);
         return competitionMapper.insertSelective(competition);
     }
 
     @Transactional
     @Override
-    public int updateCompetition(int competitionId, String competitionName, String organizer) {
-        Competition competition = new Competition(competitionId,competitionName,organizer);
+    public int updateCompetition(int competitionId, int type, String competitionName, int schoolId, int competitionLevelId, int competitionTypeId, int isGroup) {
+        Competition competition = new Competition(type,competitionName,schoolId,competitionLevelId,competitionTypeId,isGroup);
         CompetitionExample example = new CompetitionExample();
         example.or().andCompetitionIdEqualTo(competitionId);
         return competitionMapper.updateByExample(competition,example);
@@ -57,10 +57,9 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Transactional
     @Override
-    public List<Competition> selectAllByCompetitionName(String competitionName) {
-        competitionName = "%" + competitionName + "%";
+    public List<Competition> selectAllByType(int type) {
         CompetitionExample example = new CompetitionExample();
-        example.or().andCompetitionNameLike(competitionName);
+        example.or().andTypeEqualTo(type);
         List<Competition> list = competitionMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -70,10 +69,22 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Transactional
     @Override
-    public List<Competition> selectAllByOrganizer(String organizer) {
-        organizer = "%" + organizer + "%";
+    public List<Competition> selectAllByTypeAndSchoolId(int type, int schoolId) {
         CompetitionExample example = new CompetitionExample();
-        example.or().andOrganizerLike(organizer);
+        example.or().andTypeEqualTo(type).andSchoolIdEqualTo(schoolId);
+        List<Competition> list = competitionMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<Competition> selectAllByTypeAndCompetitionName(int type, String competitionName) {
+        competitionName = "%" + competitionName + "%";
+        CompetitionExample example = new CompetitionExample();
+        example.or().andTypeEqualTo(type).andCompetitionNameLike(competitionName);
         List<Competition> list = competitionMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

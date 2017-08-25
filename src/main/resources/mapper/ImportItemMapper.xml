@@ -6,7 +6,7 @@
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="exam_fail" jdbcType="INTEGER" property="examFail" />
     <result column="make_up" jdbcType="INTEGER" property="makeUp" />
-    <result column="cet4" jdbcType="INTEGER" property="cet4" />
+    <result column="cet4" jdbcType="DOUBLE" property="cet4" />
     <result column="pe" jdbcType="DOUBLE" property="pe" />
     <result column="gpa" jdbcType="DOUBLE" property="gpa" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
@@ -99,7 +99,7 @@
       make_up, cet4, pe, gpa, 
       year_scope, create_time)
     values (#{importId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{examFail,jdbcType=INTEGER}, 
-      #{makeUp,jdbcType=INTEGER}, #{cet4,jdbcType=INTEGER}, #{pe,jdbcType=DOUBLE}, #{gpa,jdbcType=DOUBLE}, 
+      #{makeUp,jdbcType=INTEGER}, #{cet4,jdbcType=DOUBLE}, #{pe,jdbcType=DOUBLE}, #{gpa,jdbcType=DOUBLE}, 
       #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ImportItem">
@@ -147,7 +147,7 @@
         #{makeUp,jdbcType=INTEGER},
       </if>
       <if test="cet4 != null">
-        #{cet4,jdbcType=INTEGER},
+        #{cet4,jdbcType=DOUBLE},
       </if>
       <if test="pe != null">
         #{pe,jdbcType=DOUBLE},
@@ -185,7 +185,7 @@
         make_up = #{record.makeUp,jdbcType=INTEGER},
       </if>
       <if test="record.cet4 != null">
-        cet4 = #{record.cet4,jdbcType=INTEGER},
+        cet4 = #{record.cet4,jdbcType=DOUBLE},
       </if>
       <if test="record.pe != null">
         pe = #{record.pe,jdbcType=DOUBLE},
@@ -210,7 +210,7 @@
       user_id = #{record.userId,jdbcType=VARCHAR},
       exam_fail = #{record.examFail,jdbcType=INTEGER},
       make_up = #{record.makeUp,jdbcType=INTEGER},
-      cet4 = #{record.cet4,jdbcType=INTEGER},
+      cet4 = #{record.cet4,jdbcType=DOUBLE},
       pe = #{record.pe,jdbcType=DOUBLE},
       gpa = #{record.gpa,jdbcType=DOUBLE},
       year_scope = #{record.yearScope,jdbcType=INTEGER},

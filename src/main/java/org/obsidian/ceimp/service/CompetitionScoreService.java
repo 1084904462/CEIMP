@@ -9,21 +9,17 @@ import java.util.List;
  */
 public interface CompetitionScoreService {
 
-    int insertCompetitionScore(int competitionLevelId,int awardLevelId,int competitionTypeId,double score,int type);
+    int insertCompetitionScore(int type,int competitionLevelId,int awardLevelId,double score);
 
-    int updateCompetitionScore(int scoreId,int competitionLevelId,int awardLevelId,int competitionTypeId,double score,int type);
+    int updateCompetitionScore(int scoreId,int type,int competitionLevelId,int awardLevelId,double score);
 
     int deleteCompetitionScore(int scoreId);
 
     CompetitionScore selectByScoreId(int scoreId);
 
-    CompetitionScore selectByCompetitionLevelIdAndAwardLevelIdAndCompetitionTypeIdAndType(int competitionLevelId,int awardLevelId,int competitionTypeId,int type);
+    CompetitionScore selectByTypeAndCompetitionLevelIdAndAwardLevelId(int type,int competitionLevelId,int awardLevelId);
 
-    List<CompetitionScore> selectAllByCompetitionLevelIdAndType(int competitionLevelId,int type);
-
-    List<CompetitionScore> selectAllByAwardLevelIdAndType(int awardLevelId,int type);
-
-    List<CompetitionScore> selectAllByCompetitionTypeIdAndType(int competitionTypeId,int type);
+    List<CompetitionScore> selectAllByType(int type);
 
     List<CompetitionScore> selectAll();
 }

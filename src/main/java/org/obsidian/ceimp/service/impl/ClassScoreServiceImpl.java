@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.ClassScoreMapper;
 import org.obsidian.ceimp.entity.ClassScore;
 import org.obsidian.ceimp.entity.ClassScoreExample;
 import org.obsidian.ceimp.service.ClassScoreService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,19 +57,6 @@ public class ClassScoreServiceImpl implements ClassScoreService {
 
     @Transactional
     @Override
-    public List<ClassScore> selectAllByThisYear() {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ClassScoreExample example = new ClassScoreExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<ClassScore> list = classScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ClassScore> selectAllByYearScope(int yearScope) {
         ClassScoreExample example = new ClassScoreExample();
         example.or().andYearScopeEqualTo(yearScope);
@@ -86,19 +72,6 @@ public class ClassScoreServiceImpl implements ClassScoreService {
     public List<ClassScore> selectAllByUserId(String userId) {
         ClassScoreExample example = new ClassScoreExample();
         example.or().andUserIdEqualTo(userId);
-        List<ClassScore> list = classScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ClassScore> selectAllByUserIdAndThisYear(String userId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ClassScoreExample example = new ClassScoreExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
         List<ClassScore> list = classScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
@@ -132,19 +105,6 @@ public class ClassScoreServiceImpl implements ClassScoreService {
 
     @Transactional
     @Override
-    public List<ClassScore> selectAllByClassIdAndThisYear(int classId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ClassScoreExample example = new ClassScoreExample();
-        example.or().andClassIdEqualTo(classId).andYearScopeEqualTo(yearScope);
-        List<ClassScore> list = classScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<ClassScore> selectAllByClassIdAndYearScope(int classId, int yearScope) {
         ClassScoreExample example = new ClassScoreExample();
         example.or().andClassIdEqualTo(classId).andYearScopeEqualTo(yearScope);
@@ -160,19 +120,6 @@ public class ClassScoreServiceImpl implements ClassScoreService {
     public List<ClassScore> selectAllByUserIdAndClassId(String userId, int classId) {
         ClassScoreExample example = new ClassScoreExample();
         example.or().andUserIdEqualTo(userId).andClassIdEqualTo(classId);
-        List<ClassScore> list = classScoreMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
-    public List<ClassScore> selectAllByUserIdAndClassIdAndThisYear(String userId, int classId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        ClassScoreExample example = new ClassScoreExample();
-        example.or().andUserIdEqualTo(userId).andClassIdEqualTo(classId).andYearScopeEqualTo(yearScope);
         List<ClassScore> list = classScoreMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

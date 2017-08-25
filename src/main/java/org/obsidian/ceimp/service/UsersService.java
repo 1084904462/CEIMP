@@ -2,6 +2,8 @@ package org.obsidian.ceimp.service;
 
 import org.obsidian.ceimp.entity.Users;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -9,9 +11,9 @@ import java.util.List;
  */
 public interface UsersService {
 
-    int insertUsers(String userId,String username,String password,int classId);
+    int insertUsers(String userId,String username,String password,int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    int updateUsers(String userId,String username,String password,int classId);
+    int updateUsers(String userId,String username,String password,int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     int deleteUsers(String userId);
 

@@ -17,8 +17,6 @@ public interface FillInTypeService {
 
     FillInType selectByTypeId(int typeId);
 
-    FillInType selectByType(String type);
-
     List<FillInType> selectAllByType(String type);
 
     List<FillInType> selectAll();

@@ -9,19 +9,17 @@ import java.util.List;
  */
 public interface CompetitionInputService {
 
-    int insertCompetitionInput(String userId,int competitionId,int competitionTypeId,int competitionLevelId,int awardLevelId,String evidence);
+    int insertCompetitionInput(String userId,int competitionId,int competitionLevelId,int competitionTypeId,int awardLevelId,int isRelevant,int isGroup,int rankId,String evidence,String additionCompetition);
 
-    int updateCompetitionInput(int inputId,String userId,int competitionId,int competitionTypeId,int competitionLevelId,int awardLevelId,String evidence);
+    int updateCompetitionInput(int inputId,String userId,int competitionId,int competitionLevelId,int competitionTypeId,int awardLevelId,int isRelevant,int isGroup,int rankId,String evidence,String additionCompetition);
 
     int deleteCompetitionInput(int inputId);
 
     CompetitionInput selectByInputId(int inputId);
 
-    List<CompetitionInput> selectAllByThisYear();
     List<CompetitionInput> selectAllByYearScope(int yearScope);
 
     List<CompetitionInput> selectAllByUserId(String userId);
-    List<CompetitionInput> selectAllByUserIdAndThisYear(String userId);
     List<CompetitionInput> selectAllByUserIdAndYearScope(String userId,int yearScope);
 
     List<CompetitionInput> selectAll();

@@ -5,15 +5,13 @@ import org.obsidian.ceimp.util.TimeUtil;
 public class CompetitionScore {
     private Integer scoreId;
 
+    private Integer type;
+
     private Integer competitionLevelId;
 
     private Integer awardLevelId;
 
-    private Integer competitionTypeId;
-
     private Double score;
-
-    private Integer type;
 
     private Long createTime;
 
@@ -21,11 +19,10 @@ public class CompetitionScore {
     public String toString() {
         return "CompetitionScore{" +
                 "scoreId=" + scoreId +
+                ", type=" + type +
                 ", competitionLevelId=" + competitionLevelId +
                 ", awardLevelId=" + awardLevelId +
-                ", competitionTypeId=" + competitionTypeId +
                 ", score=" + score +
-                ", type=" + type +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -34,22 +31,20 @@ public class CompetitionScore {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionScore(Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score, Integer type) {
+    public CompetitionScore(Integer type, Integer competitionLevelId, Integer awardLevelId, Double score) {
+        this.type = type;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
-        this.competitionTypeId = competitionTypeId;
         this.score = score;
-        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public CompetitionScore(Integer scoreId, Integer competitionLevelId, Integer awardLevelId, Integer competitionTypeId, Double score, Integer type) {
+    public CompetitionScore(Integer scoreId, Integer type, Integer competitionLevelId, Integer awardLevelId, Double score) {
         this.scoreId = scoreId;
+        this.type = type;
         this.competitionLevelId = competitionLevelId;
         this.awardLevelId = awardLevelId;
-        this.competitionTypeId = competitionTypeId;
         this.score = score;
-        this.type = type;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -59,6 +54,14 @@ public class CompetitionScore {
 
     public void setScoreId(Integer scoreId) {
         this.scoreId = scoreId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getCompetitionLevelId() {
@@ -77,28 +80,12 @@ public class CompetitionScore {
         this.awardLevelId = awardLevelId;
     }
 
-    public Integer getCompetitionTypeId() {
-        return competitionTypeId;
-    }
-
-    public void setCompetitionTypeId(Integer competitionTypeId) {
-        this.competitionTypeId = competitionTypeId;
-    }
-
     public Double getScore() {
         return score;
     }
 
     public void setScore(Double score) {
         this.score = score;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public Long getCreateTime() {

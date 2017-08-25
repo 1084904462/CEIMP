@@ -17,8 +17,6 @@ public interface ReviewTypeService {
 
     ReviewType selectByTypeId(int typeId);
 
-    ReviewType selectByType(String type);
-
     List<ReviewType> selectAllByType(String type);
 
     List<ReviewType> selectAll();

@@ -58,8 +58,9 @@ public class CompetitionTypeServiceImpl implements CompetitionTypeService {
     @Transactional
     @Override
     public CompetitionType selectByType(String type) {
+        type = "%" + type + "%";
         CompetitionTypeExample example = new CompetitionTypeExample();
-        example.or().andTypeEqualTo(type);
+        example.or().andTypeLike(type);
         List<CompetitionType> list = competitionTypeMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

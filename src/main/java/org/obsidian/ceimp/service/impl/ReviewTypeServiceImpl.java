@@ -57,18 +57,6 @@ public class ReviewTypeServiceImpl implements ReviewTypeService {
 
     @Transactional
     @Override
-    public ReviewType selectByType(String type) {
-        ReviewTypeExample example = new ReviewTypeExample();
-        example.or().andTypeEqualTo(type);
-        List<ReviewType> list = reviewTypeMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
-    }
-
-    @Transactional
-    @Override
     public List<ReviewType> selectAllByType(String type) {
         type = "%" + type + "%";
         ReviewTypeExample example = new ReviewTypeExample();

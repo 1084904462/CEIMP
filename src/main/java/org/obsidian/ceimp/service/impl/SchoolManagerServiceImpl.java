@@ -4,10 +4,13 @@ import org.obsidian.ceimp.dao.SchoolManagerMapper;
 import org.obsidian.ceimp.entity.SchoolManager;
 import org.obsidian.ceimp.entity.SchoolManagerExample;
 import org.obsidian.ceimp.service.SchoolManagerService;
+import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -21,14 +24,16 @@ public class SchoolManagerServiceImpl implements SchoolManagerService {
 
     @Transactional
     @Override
-    public int insertSchoolManager(String schoolManagerId, String password, int schoolId) {
+    public int insertSchoolManager(String schoolManagerId, String password, int schoolId) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
         SchoolManager schoolManager = new SchoolManager(schoolManagerId,password,schoolId);
         return schoolManagerMapper.insert(schoolManager);
     }
 
     @Transactional
     @Override
-    public int updateSchoolManager(String schoolManagerId, String password, int schoolId) {
+    public int updateSchoolManager(String schoolManagerId, String password, int schoolId) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
         SchoolManager schoolManager = new SchoolManager(schoolManagerId,password,schoolId);
         SchoolManagerExample example = new SchoolManagerExample();
         example.or().andSchoolManagerIdEqualTo(schoolManagerId);

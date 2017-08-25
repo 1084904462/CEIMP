@@ -10,34 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-08-18 14:44:53
+Date: 2017-08-25 09:57:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `accumulate_input`
--- ----------------------------
-DROP TABLE IF EXISTS `accumulate_input`;
-CREATE TABLE `accumulate_input` (
-  `input_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `evidence` varchar(100) NOT NULL,
-  `times` int(20) NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`input_id`),
-  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `point_id` (`point_id`),
-  CONSTRAINT `accumulate_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `accumulate_input_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of accumulate_input
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for `award`
@@ -75,6 +51,32 @@ CREATE TABLE `award_level` (
 
 -- ----------------------------
 -- Records of award_level
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `basic_input`
+-- ----------------------------
+DROP TABLE IF EXISTS `basic_input`;
+CREATE TABLE `basic_input` (
+  `input_id` int(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
+  `point_id` int(20) DEFAULT NULL,
+  `evidence` varchar(500) DEFAULT NULL,
+  `times` int(20) DEFAULT NULL,
+  `subjective_score` double DEFAULT NULL,
+  `addition` varchar(500) DEFAULT NULL,
+  `year_scope` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`input_id`),
+  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
+  KEY `user_id` (`user_id`),
+  KEY `point_id` (`point_id`),
+  CONSTRAINT `basic_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `basic_input_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of basic_input
 -- ----------------------------
 
 -- ----------------------------
@@ -145,15 +147,45 @@ CREATE TABLE `class_score` (
 DROP TABLE IF EXISTS `competition`;
 CREATE TABLE `competition` (
   `competition_id` int(20) NOT NULL AUTO_INCREMENT,
+  `type` int(20) NOT NULL,
   `competition_name` varchar(100) NOT NULL,
-  `organizer` varchar(100) DEFAULT NULL,
+  `school_id` int(20) NOT NULL,
+  `competition_level_id` int(20) NOT NULL,
+  `competition_type_id` int(20) NOT NULL,
+  `is_group` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`competition_id`),
-  UNIQUE KEY `competition_id` (`competition_id`) USING BTREE
+  UNIQUE KEY `competition_id` (`competition_id`) USING BTREE,
+  KEY `school_id` (`school_id`),
+  KEY `competition_level_id` (`competition_level_id`),
+  KEY `competition_type_id` (`competition_type_id`),
+  CONSTRAINT `competition_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `competition_ibfk_2` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `competition_ibfk_3` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of competition
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `competition_group`
+-- ----------------------------
+DROP TABLE IF EXISTS `competition_group`;
+CREATE TABLE `competition_group` (
+  `rank_id` int(20) NOT NULL AUTO_INCREMENT,
+  `rank` varchar(20) NOT NULL,
+  `percent` double NOT NULL,
+  `school_id` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`rank_id`),
+  UNIQUE KEY `rank_id` (`rank_id`) USING BTREE,
+  KEY `school_id` (`school_id`),
+  CONSTRAINT `competition_group_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of competition_group
 -- ----------------------------
 
 -- ----------------------------
@@ -163,11 +195,15 @@ DROP TABLE IF EXISTS `competition_input`;
 CREATE TABLE `competition_input` (
   `input_id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
-  `competition_id` int(20) NOT NULL,
-  `competition_type_id` int(20) NOT NULL,
+  `competition_id` int(20) DEFAULT NULL,
   `competition_level_id` int(20) NOT NULL,
+  `competition_type_id` int(20) NOT NULL,
   `award_level_id` int(20) NOT NULL,
-  `evidence` varchar(100) NOT NULL,
+  `is_relevant` int(20) NOT NULL,
+  `is_group` int(20) NOT NULL,
+  `rank_id` int(20) DEFAULT NULL,
+  `evidence` varchar(500) DEFAULT NULL,
+  `addition_competition` varchar(100) DEFAULT NULL,
   `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`input_id`),
@@ -177,11 +213,13 @@ CREATE TABLE `competition_input` (
   KEY `competition_type_id` (`competition_type_id`),
   KEY `competition_level_id` (`competition_level_id`),
   KEY `award_level_id` (`award_level_id`),
+  KEY `rank_id` (`rank_id`),
   CONSTRAINT `competition_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_input_ibfk_2` FOREIGN KEY (`competition_id`) REFERENCES `competition` (`competition_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_input_ibfk_3` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `competition_input_ibfk_4` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_input_ibfk_5` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `competition_input_ibfk_5` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `competition_input_ibfk_6` FOREIGN KEY (`rank_id`) REFERENCES `competition_group` (`rank_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -205,46 +243,22 @@ CREATE TABLE `competition_level` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `competition_level_connection`
--- ----------------------------
-DROP TABLE IF EXISTS `competition_level_connection`;
-CREATE TABLE `competition_level_connection` (
-  `connection_id` int(20) NOT NULL AUTO_INCREMENT,
-  `competition_id` int(20) NOT NULL,
-  `competition_level_id` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`connection_id`),
-  UNIQUE KEY `connection_id` (`connection_id`) USING BTREE,
-  KEY `competition_id` (`competition_id`),
-  KEY `competition_level_id` (`competition_level_id`),
-  CONSTRAINT `competition_level_connection_ibfk_1` FOREIGN KEY (`competition_id`) REFERENCES `competition` (`competition_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_level_connection_ibfk_2` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of competition_level_connection
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `competition_score`
 -- ----------------------------
 DROP TABLE IF EXISTS `competition_score`;
 CREATE TABLE `competition_score` (
   `score_id` int(20) NOT NULL AUTO_INCREMENT,
+  `type` int(20) NOT NULL,
   `competition_level_id` int(20) NOT NULL,
   `award_level_id` int(20) NOT NULL,
-  `competition_type_id` int(20) NOT NULL,
   `score` double NOT NULL,
-  `type` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`score_id`),
   UNIQUE KEY `score_id` (`score_id`) USING BTREE,
   KEY `competition_level_id` (`competition_level_id`),
   KEY `award_level_id` (`award_level_id`),
-  KEY `competition_type_id` (`competition_type_id`),
   CONSTRAINT `competition_score_ibfk_1` FOREIGN KEY (`competition_level_id`) REFERENCES `competition_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_score_ibfk_2` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_score_ibfk_3` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `competition_score_ibfk_2` FOREIGN KEY (`award_level_id`) REFERENCES `award_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -266,53 +280,6 @@ CREATE TABLE `competition_type` (
 
 -- ----------------------------
 -- Records of competition_type
--- ----------------------------
-
--- ----------------------------
--- Table structure for `competition_type_connection`
--- ----------------------------
-DROP TABLE IF EXISTS `competition_type_connection`;
-CREATE TABLE `competition_type_connection` (
-  `connection_id` int(20) NOT NULL AUTO_INCREMENT,
-  `competition_id` int(20) NOT NULL,
-  `competition_type_id` int(20) NOT NULL,
-  `school_id` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`connection_id`),
-  UNIQUE KEY `connection_id` (`connection_id`) USING BTREE,
-  KEY `competition_id` (`competition_id`),
-  KEY `competition_type_id` (`competition_type_id`),
-  KEY `school_id` (`school_id`),
-  CONSTRAINT `competition_type_connection_ibfk_1` FOREIGN KEY (`competition_id`) REFERENCES `competition` (`competition_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_type_connection_ibfk_2` FOREIGN KEY (`competition_type_id`) REFERENCES `competition_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `competition_type_connection_ibfk_3` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of competition_type_connection
--- ----------------------------
-
--- ----------------------------
--- Table structure for `double_input`
--- ----------------------------
-DROP TABLE IF EXISTS `double_input`;
-CREATE TABLE `double_input` (
-  `input_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `evidence` varchar(100) NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`input_id`),
-  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `point_id` (`point_id`),
-  CONSTRAINT `double_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `double_input_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of double_input
 -- ----------------------------
 
 -- ----------------------------
@@ -385,15 +352,18 @@ CREATE TABLE `evaluation_point` (
   `point_id` int(20) NOT NULL AUTO_INCREMENT,
   `content` varchar(500) NOT NULL,
   `remark` varchar(500) DEFAULT NULL,
-  `score` double(20,0) NOT NULL,
+  `score` double NOT NULL,
   `item_id` int(20) NOT NULL,
   `calculate_type` int(20) NOT NULL,
   `input_type` int(20) NOT NULL,
+  `fill_in_type_id` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`point_id`),
   UNIQUE KEY `point_id` (`point_id`) USING BTREE,
   KEY `item_id` (`item_id`),
-  CONSTRAINT `evaluation_point_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `evaluation_item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fill_in_type_id` (`fill_in_type_id`),
+  CONSTRAINT `evaluation_point_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `evaluation_item` (`item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `evaluation_point_ibfk_2` FOREIGN KEY (`fill_in_type_id`) REFERENCES `fill_in_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -425,17 +395,144 @@ CREATE TABLE `import_item` (
   `user_id` varchar(20) NOT NULL,
   `exam_fail` int(20) DEFAULT NULL,
   `make_up` int(20) DEFAULT NULL,
-  `cet4` int(20) DEFAULT NULL,
+  `cet4` double DEFAULT NULL,
   `pe` double DEFAULT NULL,
   `gpa` double DEFAULT NULL,
   `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`import_id`),
-  UNIQUE KEY `import_id` (`import_id`) USING BTREE
+  UNIQUE KEY `import_id` (`import_id`) USING BTREE,
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `import_item_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of import_item
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `innovation`
+-- ----------------------------
+DROP TABLE IF EXISTS `innovation`;
+CREATE TABLE `innovation` (
+  `innovation_id` int(20) NOT NULL AUTO_INCREMENT,
+  `content` varchar(100) NOT NULL,
+  `type` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`innovation_id`),
+  UNIQUE KEY `innovation_id` (`innovation_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of innovation
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `innovation_input`
+-- ----------------------------
+DROP TABLE IF EXISTS `innovation_input`;
+CREATE TABLE `innovation_input` (
+  `input_id` int(20) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
+  `innovation_id` int(20) NOT NULL,
+  `content` varchar(500) NOT NULL,
+  `level_id` int(20) NOT NULL,
+  `require_id` int(20) NOT NULL,
+  `evidence` varchar(500) DEFAULT NULL,
+  `year_scope` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`input_id`),
+  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
+  KEY `user_id` (`user_id`),
+  KEY `innovation_id` (`innovation_id`),
+  KEY `level_id` (`level_id`),
+  KEY `require_id` (`require_id`),
+  CONSTRAINT `innovation_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `innovation_input_ibfk_2` FOREIGN KEY (`innovation_id`) REFERENCES `innovation` (`innovation_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `innovation_input_ibfk_3` FOREIGN KEY (`level_id`) REFERENCES `innovation_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `innovation_input_ibfk_4` FOREIGN KEY (`require_id`) REFERENCES `innovation_require` (`require_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of innovation_input
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `innovation_level`
+-- ----------------------------
+DROP TABLE IF EXISTS `innovation_level`;
+CREATE TABLE `innovation_level` (
+  `level_id` int(20) NOT NULL AUTO_INCREMENT,
+  `level` varchar(100) NOT NULL,
+  `innovation_id` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`level_id`),
+  UNIQUE KEY `level_id` (`level_id`) USING BTREE,
+  KEY `innovation_id` (`innovation_id`),
+  CONSTRAINT `innovation_level_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovation` (`innovation_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of innovation_level
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `innovation_require`
+-- ----------------------------
+DROP TABLE IF EXISTS `innovation_require`;
+CREATE TABLE `innovation_require` (
+  `require_id` int(20) NOT NULL AUTO_INCREMENT,
+  `require` varchar(100) NOT NULL,
+  `innovation_id` int(20) NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`require_id`),
+  UNIQUE KEY `require_id` (`require_id`) USING BTREE,
+  KEY `innovation_id` (`innovation_id`),
+  CONSTRAINT `innovation_require_ibfk_1` FOREIGN KEY (`innovation_id`) REFERENCES `innovation` (`innovation_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of innovation_require
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `innovation_score`
+-- ----------------------------
+DROP TABLE IF EXISTS `innovation_score`;
+CREATE TABLE `innovation_score` (
+  `score_id` int(20) NOT NULL AUTO_INCREMENT,
+  `level_id` int(20) NOT NULL,
+  `require_id` int(20) NOT NULL,
+  `score` double NOT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`score_id`),
+  UNIQUE KEY `score_id` (`score_id`) USING BTREE,
+  KEY `level_id` (`level_id`),
+  KEY `require_id` (`require_id`),
+  CONSTRAINT `innovation_score_ibfk_1` FOREIGN KEY (`level_id`) REFERENCES `innovation_level` (`level_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `innovation_score_ibfk_2` FOREIGN KEY (`require_id`) REFERENCES `innovation_require` (`require_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of innovation_score
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `input_review`
+-- ----------------------------
+DROP TABLE IF EXISTS `input_review`;
+CREATE TABLE `input_review` (
+  `review_id` int(20) NOT NULL AUTO_INCREMENT,
+  `input_id` int(20) NOT NULL,
+  `input_type` int(20) NOT NULL,
+  `review_status` int(20) DEFAULT NULL,
+  `create_time` bigint(20) NOT NULL,
+  PRIMARY KEY (`review_id`),
+  UNIQUE KEY `review_id` (`review_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of input_review
 -- ----------------------------
 
 -- ----------------------------
@@ -462,60 +559,14 @@ CREATE TABLE `item_score` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `point_review`
--- ----------------------------
-DROP TABLE IF EXISTS `point_review`;
-CREATE TABLE `point_review` (
-  `review_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `review_status` int(20) NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`review_id`),
-  UNIQUE KEY `review_id` (`review_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `point_id` (`point_id`),
-  CONSTRAINT `point_review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `point_review_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of point_review
--- ----------------------------
-
--- ----------------------------
--- Table structure for `point_score`
--- ----------------------------
-DROP TABLE IF EXISTS `point_score`;
-CREATE TABLE `point_score` (
-  `point_score_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `score` double NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`point_score_id`),
-  UNIQUE KEY `point_score_id` (`point_score_id`) USING BTREE,
-  KEY `point_id` (`point_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `point_score_ibfk_1` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `point_score_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of point_score
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `review_status`
 -- ----------------------------
 DROP TABLE IF EXISTS `review_status`;
 CREATE TABLE `review_status` (
   `status_id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) NOT NULL,
-  `status` int(20) NOT NULL,
   `review_type_id` int(20) NOT NULL,
+  `status` int(20) DEFAULT NULL,
   `year_scope` int(20) NOT NULL,
   `create_time` bigint(20) NOT NULL,
   PRIMARY KEY (`status_id`),
@@ -618,8 +669,8 @@ CREATE TABLE `scholarship_item` (
   UNIQUE KEY `scholarship_item_id` (`scholarship_item_id`) USING BTREE,
   KEY `scholarship_block_id` (`scholarship_block_id`),
   KEY `fill_in_type_id` (`fill_in_type_id`),
-  CONSTRAINT `scholarship_item_ibfk_2` FOREIGN KEY (`fill_in_type_id`) REFERENCES `fill_in_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `scholarship_item_ibfk_1` FOREIGN KEY (`scholarship_block_id`) REFERENCES `scholarship_block` (`scholarship_block_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `scholarship_item_ibfk_1` FOREIGN KEY (`scholarship_block_id`) REFERENCES `scholarship_block` (`scholarship_block_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `scholarship_item_ibfk_2` FOREIGN KEY (`fill_in_type_id`) REFERENCES `fill_in_type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -659,52 +710,6 @@ CREATE TABLE `school_manager` (
 
 -- ----------------------------
 -- Records of school_manager
--- ----------------------------
-
--- ----------------------------
--- Table structure for `single_input`
--- ----------------------------
-DROP TABLE IF EXISTS `single_input`;
-CREATE TABLE `single_input` (
-  `input_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`input_id`),
-  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `point_id` (`point_id`),
-  CONSTRAINT `single_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `single_input_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of single_input
--- ----------------------------
-
--- ----------------------------
--- Table structure for `triple_input`
--- ----------------------------
-DROP TABLE IF EXISTS `triple_input`;
-CREATE TABLE `triple_input` (
-  `input_id` int(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(20) NOT NULL,
-  `point_id` int(20) NOT NULL,
-  `evidence` varchar(100) NOT NULL,
-  `addition` varchar(100) NOT NULL,
-  `year_scope` int(20) NOT NULL,
-  `create_time` bigint(20) NOT NULL,
-  PRIMARY KEY (`input_id`),
-  UNIQUE KEY `input_id` (`input_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `point_id` (`point_id`),
-  CONSTRAINT `triple_input_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `triple_input_ibfk_2` FOREIGN KEY (`point_id`) REFERENCES `evaluation_point` (`point_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of triple_input
 -- ----------------------------
 
 -- ----------------------------

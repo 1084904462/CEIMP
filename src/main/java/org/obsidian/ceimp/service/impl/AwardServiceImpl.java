@@ -4,7 +4,6 @@ import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.entity.Award;
 import org.obsidian.ceimp.entity.AwardExample;
 import org.obsidian.ceimp.service.AwardService;
-import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,19 +69,6 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public List<Award> selectAllByUserIdAndThisYear(String userId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        AwardExample example = new AwardExample();
-        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
-        List<Award> list = awardMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public List<Award> selectAllByUserIdAndYearScope(String userId, int yearScope) {
         AwardExample example = new AwardExample();
         example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
@@ -99,24 +85,13 @@ public class AwardServiceImpl implements AwardService {
         AwardExample example = new AwardExample();
         example.or().andScholarshipIdEqualTo(scholarshipId);
         List<Award> list = awardMapper.selectByExample(example);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
         return list;
     }
 
-    @Override
-    public List<Award> selectAllByScholarshipIdAndThisYear(int scholarshipId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        AwardExample example = new AwardExample();
-        example.or().andScholarshipIdEqualTo(scholarshipId).andYearScopeEqualTo(yearScope);
-        List<Award> list = awardMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
+    @Transactional
     @Override
     public List<Award> selectAllByScholarshipIdAndYearScope(int scholarshipId, int yearScope) {
         AwardExample example = new AwardExample();
@@ -138,16 +113,7 @@ public class AwardServiceImpl implements AwardService {
         return list;
     }
 
-    @Override
-    public List<Award> selectAllByClassIdAndThisYear(int classId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        List<Award> list = awardMapper.selectAllByClassIdAndYearScope(classId,yearScope);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
+    @Transactional
     @Override
     public List<Award> selectAllByClassIdAndYearScope(int classId, int yearScope) {
         List<Award> list = awardMapper.selectAllByClassIdAndYearScope(classId,yearScope);
@@ -167,16 +133,7 @@ public class AwardServiceImpl implements AwardService {
         return list;
     }
 
-    @Override
-    public List<Award> selectAllBySchoolIdAndThisYear(int schoolId) {
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        List<Award> list = awardMapper.selectAllBySchoolIdAndYearScope(schoolId,yearScope);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
+    @Transactional
     @Override
     public List<Award> selectAllBySchoolIdAndYearScope(int schoolId, int yearScope) {
         List<Award> list = awardMapper.selectAllBySchoolIdAndYearScope(schoolId,yearScope);
@@ -186,17 +143,8 @@ public class AwardServiceImpl implements AwardService {
         return list;
     }
 
-    public List<Award> selectAllByThisYear(){
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        AwardExample example = new AwardExample();
-        example.or().andYearScopeEqualTo(yearScope);
-        List<Award> list = awardMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
+    @Transactional
+    @Override
     public List<Award> selectAllByYearScope(int yearScope){
         AwardExample example = new AwardExample();
         example.or().andYearScopeEqualTo(yearScope);

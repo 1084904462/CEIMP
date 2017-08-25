@@ -5,10 +5,14 @@
     <result column="input_id" jdbcType="INTEGER" property="inputId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="competition_id" jdbcType="INTEGER" property="competitionId" />
-    <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
     <result column="competition_level_id" jdbcType="INTEGER" property="competitionLevelId" />
+    <result column="competition_type_id" jdbcType="INTEGER" property="competitionTypeId" />
     <result column="award_level_id" jdbcType="INTEGER" property="awardLevelId" />
+    <result column="is_relevant" jdbcType="INTEGER" property="isRelevant" />
+    <result column="is_group" jdbcType="INTEGER" property="isGroup" />
+    <result column="rank_id" jdbcType="INTEGER" property="rankId" />
     <result column="evidence" jdbcType="VARCHAR" property="evidence" />
+    <result column="addition_competition" jdbcType="VARCHAR" property="additionCompetition" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
@@ -71,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    input_id, user_id, competition_id, competition_type_id, competition_level_id, award_level_id, 
-    evidence, year_scope, create_time
+    input_id, user_id, competition_id, competition_level_id, competition_type_id, award_level_id, 
+    is_relevant, is_group, rank_id, evidence, addition_competition, year_scope, create_time
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.CompetitionInputExample" resultMap="BaseResultMap">
     select
@@ -97,13 +101,15 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
     insert into competition_input (input_id, user_id, competition_id, 
-      competition_type_id, competition_level_id, 
-      award_level_id, evidence, year_scope, 
-      create_time)
+      competition_level_id, competition_type_id, 
+      award_level_id, is_relevant, is_group, 
+      rank_id, evidence, addition_competition, 
+      year_scope, create_time)
     values (#{inputId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{competitionId,jdbcType=INTEGER}, 
-      #{competitionTypeId,jdbcType=INTEGER}, #{competitionLevelId,jdbcType=INTEGER}, 
-      #{awardLevelId,jdbcType=INTEGER}, #{evidence,jdbcType=VARCHAR}, #{yearScope,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=BIGINT})
+      #{competitionLevelId,jdbcType=INTEGER}, #{competitionTypeId,jdbcType=INTEGER}, 
+      #{awardLevelId,jdbcType=INTEGER}, #{isRelevant,jdbcType=INTEGER}, #{isGroup,jdbcType=INTEGER}, 
+      #{rankId,jdbcType=INTEGER}, #{evidence,jdbcType=VARCHAR}, #{additionCompetition,jdbcType=VARCHAR}, 
+      #{yearScope,jdbcType=INTEGER}, #{createTime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.CompetitionInput">
     insert into competition_input
@@ -117,17 +123,29 @@
       <if test="competitionId != null">
         competition_id,
       </if>
-      <if test="competitionTypeId != null">
-        competition_type_id,
-      </if>
       <if test="competitionLevelId != null">
         competition_level_id,
+      </if>
+      <if test="competitionTypeId != null">
+        competition_type_id,
       </if>
       <if test="awardLevelId != null">
         award_level_id,
       </if>
+      <if test="isRelevant != null">
+        is_relevant,
+      </if>
+      <if test="isGroup != null">
+        is_group,
+      </if>
+      <if test="rankId != null">
+        rank_id,
+      </if>
       <if test="evidence != null">
         evidence,
+      </if>
+      <if test="additionCompetition != null">
+        addition_competition,
       </if>
       <if test="yearScope != null">
         year_scope,
@@ -146,17 +164,29 @@
       <if test="competitionId != null">
         #{competitionId,jdbcType=INTEGER},
       </if>
-      <if test="competitionTypeId != null">
-        #{competitionTypeId,jdbcType=INTEGER},
-      </if>
       <if test="competitionLevelId != null">
         #{competitionLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="competitionTypeId != null">
+        #{competitionTypeId,jdbcType=INTEGER},
       </if>
       <if test="awardLevelId != null">
         #{awardLevelId,jdbcType=INTEGER},
       </if>
+      <if test="isRelevant != null">
+        #{isRelevant,jdbcType=INTEGER},
+      </if>
+      <if test="isGroup != null">
+        #{isGroup,jdbcType=INTEGER},
+      </if>
+      <if test="rankId != null">
+        #{rankId,jdbcType=INTEGER},
+      </if>
       <if test="evidence != null">
         #{evidence,jdbcType=VARCHAR},
+      </if>
+      <if test="additionCompetition != null">
+        #{additionCompetition,jdbcType=VARCHAR},
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
@@ -184,17 +214,29 @@
       <if test="record.competitionId != null">
         competition_id = #{record.competitionId,jdbcType=INTEGER},
       </if>
-      <if test="record.competitionTypeId != null">
-        competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
-      </if>
       <if test="record.competitionLevelId != null">
         competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.competitionTypeId != null">
+        competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       </if>
       <if test="record.awardLevelId != null">
         award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
       </if>
+      <if test="record.isRelevant != null">
+        is_relevant = #{record.isRelevant,jdbcType=INTEGER},
+      </if>
+      <if test="record.isGroup != null">
+        is_group = #{record.isGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.rankId != null">
+        rank_id = #{record.rankId,jdbcType=INTEGER},
+      </if>
       <if test="record.evidence != null">
         evidence = #{record.evidence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.additionCompetition != null">
+        addition_competition = #{record.additionCompetition,jdbcType=VARCHAR},
       </if>
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
@@ -212,10 +254,14 @@
     set input_id = #{record.inputId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
       competition_id = #{record.competitionId,jdbcType=INTEGER},
-      competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       competition_level_id = #{record.competitionLevelId,jdbcType=INTEGER},
+      competition_type_id = #{record.competitionTypeId,jdbcType=INTEGER},
       award_level_id = #{record.awardLevelId,jdbcType=INTEGER},
+      is_relevant = #{record.isRelevant,jdbcType=INTEGER},
+      is_group = #{record.isGroup,jdbcType=INTEGER},
+      rank_id = #{record.rankId,jdbcType=INTEGER},
       evidence = #{record.evidence,jdbcType=VARCHAR},
+      addition_competition = #{record.additionCompetition,jdbcType=VARCHAR},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">

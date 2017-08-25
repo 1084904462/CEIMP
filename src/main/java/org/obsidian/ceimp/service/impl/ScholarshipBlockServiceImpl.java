@@ -57,18 +57,6 @@ public class ScholarshipBlockServiceImpl implements ScholarshipBlockService {
 
     @Transactional
     @Override
-    public ScholarshipBlock selectByScholarshipBlockName(String scholarshipBlockName) {
-        ScholarshipBlockExample example = new ScholarshipBlockExample();
-        example.or().andScholarshipBlockNameEqualTo(scholarshipBlockName);
-        List<ScholarshipBlock> list = scholarshipBlockMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
-    }
-
-    @Transactional
-    @Override
     public List<ScholarshipBlock> selectAllByScholarshipBlockName(String scholarshipBlockName) {
         scholarshipBlockName = "%" + scholarshipBlockName + "%";
         ScholarshipBlockExample example = new ScholarshipBlockExample();

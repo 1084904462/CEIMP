@@ -17,8 +17,6 @@ public interface ScholarshipService {
 
     Scholarship selectByScholarshipId(int scholarshipId);
 
-    Scholarship selectByScholarshipName(String scholarshipName);
-
     List<Scholarship> selectAllByScholarshipName(String scholarshipName);
 
     List<Scholarship> selectAll();

@@ -21,15 +21,15 @@ public class EvaluationPointServiceImpl implements EvaluationPointService {
 
     @Transactional
     @Override
-    public int insertEvaluationPoint(String content, String remark, double score, int itemId, int calculateType, int inputType) {
-        EvaluationPoint evaluationPoint = new EvaluationPoint(content,remark,score,itemId,calculateType,inputType);
+    public int insertEvaluationPoint(String content, String remark, double score, int itemId, int calculateType, int inputType,int fillInType) {
+        EvaluationPoint evaluationPoint = new EvaluationPoint(content,remark,score,itemId,calculateType,inputType,fillInType);
         return evaluationPointMapper.insertSelective(evaluationPoint);
     }
 
     @Transactional
     @Override
-    public int updateEvaluationPoint(int pointId, String content, String remark, double score, int itemId, int calculateType, int inputType) {
-        EvaluationPoint evaluationPoint = new EvaluationPoint(pointId,content,remark,score,itemId,calculateType,inputType);
+    public int updateEvaluationPoint(int pointId, String content, String remark, double score, int itemId, int calculateType, int inputType, int fillInType) {
+        EvaluationPoint evaluationPoint = new EvaluationPoint(pointId,content,remark,score,itemId,calculateType,inputType,fillInType);
         EvaluationPointExample example = new EvaluationPointExample();
         example.or().andPointIdEqualTo(pointId);
         return evaluationPointMapper.updateByExample(evaluationPoint,example);
@@ -85,6 +85,18 @@ public class EvaluationPointServiceImpl implements EvaluationPointService {
     public List<EvaluationPoint> selectAllByInputType(int inputType) {
         EvaluationPointExample example = new EvaluationPointExample();
         example.or().andInputTypeEqualTo(inputType);
+        List<EvaluationPoint> list = evaluationPointMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
+
+    @Transactional
+    @Override
+    public List<EvaluationPoint> selectAllByFillInType(int fillInType) {
+        EvaluationPointExample example = new EvaluationPointExample();
+        example.or().andFillInTypeIdEqualTo(fillInType);
         List<EvaluationPoint> list = evaluationPointMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;

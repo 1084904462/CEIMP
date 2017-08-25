@@ -57,18 +57,6 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Transactional
     @Override
-    public School selectBySchoolName(String schoolName) {
-        SchoolExample example = new SchoolExample();
-        example.or().andSchoolNameEqualTo(schoolName);
-        List<School> list = schoolMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
-    }
-
-    @Transactional
-    @Override
     public List<School> selectAllBySchoolName(String schoolName) {
         schoolName = "%" + schoolName + "%";
         SchoolExample example = new SchoolExample();

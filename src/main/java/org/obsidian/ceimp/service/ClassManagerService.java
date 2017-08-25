@@ -2,6 +2,8 @@ package org.obsidian.ceimp.service;
 
 import org.obsidian.ceimp.entity.ClassManager;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -9,9 +11,9 @@ import java.util.List;
  */
 public interface ClassManagerService {
 
-    int insertClassManager(String classManagerId,String password,int classId);
+    int insertClassManager(String classManagerId,String password,int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    int updateClassManager(String classManagerId,String password,int classId);
+    int updateClassManager(String classManagerId,String password,int classId) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     int deleteClassManager(String classManagerId);
 

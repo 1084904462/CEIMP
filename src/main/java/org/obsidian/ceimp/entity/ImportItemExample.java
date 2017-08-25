@@ -364,52 +364,52 @@ public class ImportItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andCet4EqualTo(Integer value) {
+        public Criteria andCet4EqualTo(Double value) {
             addCriterion("cet4 =", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4NotEqualTo(Integer value) {
+        public Criteria andCet4NotEqualTo(Double value) {
             addCriterion("cet4 <>", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4GreaterThan(Integer value) {
+        public Criteria andCet4GreaterThan(Double value) {
             addCriterion("cet4 >", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4GreaterThanOrEqualTo(Integer value) {
+        public Criteria andCet4GreaterThanOrEqualTo(Double value) {
             addCriterion("cet4 >=", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4LessThan(Integer value) {
+        public Criteria andCet4LessThan(Double value) {
             addCriterion("cet4 <", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4LessThanOrEqualTo(Integer value) {
+        public Criteria andCet4LessThanOrEqualTo(Double value) {
             addCriterion("cet4 <=", value, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4In(List<Integer> values) {
+        public Criteria andCet4In(List<Double> values) {
             addCriterion("cet4 in", values, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4NotIn(List<Integer> values) {
+        public Criteria andCet4NotIn(List<Double> values) {
             addCriterion("cet4 not in", values, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4Between(Integer value1, Integer value2) {
+        public Criteria andCet4Between(Double value1, Double value2) {
             addCriterion("cet4 between", value1, value2, "cet4");
             return (Criteria) this;
         }
 
-        public Criteria andCet4NotBetween(Integer value1, Integer value2) {
+        public Criteria andCet4NotBetween(Double value1, Double value2) {
             addCriterion("cet4 not between", value1, value2, "cet4");
             return (Criteria) this;
         }

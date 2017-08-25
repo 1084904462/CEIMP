@@ -17,8 +17,6 @@ public interface ScholarshipBlockService {
 
     ScholarshipBlock selectByScholarshipBlockId(int scholarshipBlockId);
 
-    ScholarshipBlock selectByScholarshipBlockName(String scholarshipBlockName);
-
     List<ScholarshipBlock> selectAllByScholarshipBlockName(String scholarshipBlockName);
 
     List<ScholarshipBlock> selectAllByScholarshipId(int scholarshipId);
