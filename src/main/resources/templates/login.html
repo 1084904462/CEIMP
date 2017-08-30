@@ -62,4 +62,24 @@
 <script th:src="@{plugins/layui/layui.js}"/>
 <script th:src="@{js/common.js}"/>
 <script th:src="@{js/login.js}"/>
+<script type="text/javascript" th:inline="javascript" th:if="${session.managerLogBean}">
+    layui.use(["layer"], function()
+    {
+        var layer = layui.layer;
+
+        layer.msg(/*[[${session.managerLogBean.status}]]*/, {icon: 2});
+//        删除session中的managerLogBean
+        /*[[${session.managerLogBean = null}]]*/
+    })
+</script>
+<script type="text/javascript" th:inline="javascript" th:if="${session.userLogBean}">
+    layui.use(["layer"], function()
+    {
+        var layer = layui.layer;
+
+        layer.msg(/*[[${session.userLogBean.status}]]*/, {icon: 2});
+//        删除session中的userLogBean
+        /*[[${session.userLogBean = null}]]*/
+    })
+</script>
 </html>

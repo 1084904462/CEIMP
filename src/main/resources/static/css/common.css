@@ -5,11 +5,3 @@
 	box-sizing: inherit;
 }
 
-.container-fluid
-{
-	background: -webkit-linear-gradient(to top right, #cde0e9, #FFFFFF, #FFFFFF, #cde0e9);
-	background: linear-gradient(to top right, #cde0e9, #ffffff, #FFFFFF, #cde0e9);
-	min-height: 389px;
-	overflow: auto;
-	background-attachment:fixed;
-}

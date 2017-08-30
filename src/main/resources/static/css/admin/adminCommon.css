@@ -14,3 +14,43 @@ a:hover, a:focus
 {
 	line-height: 36px!important;
 }
+
+.admin-side-toggle
+{
+	position: relative;
+	cursor: pointer;
+	color: #FFFFFF;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	background: #1AA094;
+	line-height: 30px;
+	top:25%;
+}
+
+@keyframes fadeInRight
+{
+	0%
+	{
+		opacity: 0;
+		-webkit-transform: translateX(40px);
+		-ms-transform: translateX(40px);
+		transform: translateX(40px);
+	}
+
+	100%
+	{
+		opacity: 1;
+		-webkit-transform: translateX(0);
+		-ms-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+.fade-in-right
+{
+	-webkit-animation-name: fadeInRight;
+	animation-name: fadeInRight;
+	-webkit-animation-duration:.5s;
+	animation-duration:.5s;
+}

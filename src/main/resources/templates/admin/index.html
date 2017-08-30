@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8"/>
     <title>管理员</title>
-    <link rel="stylesheet" th:href="@{css/plugins/font-awesome/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" th:href="@{plugins/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{plugins/layui/css/layui.css}"/>
-    <link rel="stylesheet" th:href="@{css/admin/adminCommon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/adminCommon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/index.css}"/>
 </head>
 <body>
-<a href="/admin/design">design</a>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <div class="layui-logo">
                 综合测评信息管理平台
             </div>
-            <div class="layui-nav layui-layout-left">
-
+            <div class="layui-nav layui-layout-left" style="height: 60px;">
+                <div class="admin-side-toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
             </div>
             <div class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
@@ -39,13 +41,13 @@
             <div class="layui-side-scroll">
                 <ul class="layui-nav layui-nav-tree" lay-filter="side">
                     <li class="layui-nav-item layui-this">
-                        <a href="admin/index.html">
+                        <a href="index.html">
                             <i class="fa fa-stop-circle"></i>
                             概况
                         </a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="admin/design.html">
+                        <a href="design.html">
                             <i class="fa fa-stop-circle"></i>
                             设计综测表单
                         </a>
@@ -57,11 +59,11 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascritpt:;">管理填写模板</a></dd>
-                            <dd><a href="javascritpt:;">上传新模板</a></dd>
+                            <dd><a href="upload.html">上传新模板</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascritpt:;">
+                        <a href="template.html">
                             <i class="fa fa-stop-circle"></i>
                             审核
                         </a>
@@ -88,8 +90,57 @@
             </div>
         </div>
         <div class="layui-body">
-            <div style="padding: 15px;">
-                
+            <div class="layui-fluid fade-in-right" style="padding: 15px;">
+                <div class="layui-row layui-col-space30">
+                    <div class="layui-col-md3 layui-col-lg3">
+                        <div class="overview-div">
+                            <div class="overview-content layui-bg-red">
+                                <i class="fa fa-bar-chart pull-left"></i>
+                                <span class="total">客服在线人数</span>
+                                <span class="total-num">&nbsp;21</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-lg3">
+                        <div class="overview-div">
+                            <div class="overview-content layui-bg-blue">
+                                <i class="fa fa-bar-chart pull-left"></i>
+                                <span class="total">客服在线人数</span>
+                                <span class="total-num">&nbsp;21</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-lg3">
+                        <div class="overview-div">
+                            <div class="overview-content layui-bg-orange">
+                                <i class="fa fa-bar-chart pull-left"></i>
+                                <span class="total">客服在线人数</span>
+                                <span class="total-num">&nbsp;21</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3 layui-col-lg3">
+                        <div class="overview-div">
+                            <div class="overview-content layui-bg-black">
+                                <i class="fa fa-bar-chart pull-left"></i>
+                                <span class="total">客服在线人数</span>
+                                <span class="total-num">&nbsp;21</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md3 layui-col-lg3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                123
+                            </div>
+                            <div class="panel-body">
+                                456
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="layui-footer">
@@ -97,10 +148,10 @@
         </div>
     </div>
 </body>
-<script th:src="@{js/plugins/jquery-3.1.1.min.js}"/>
-<script th:src="@{js/plugins/echarts.min.js}"/>
-<script th:src="@{js/plugins/html5shiv.min.js}"/>
-<script th:src="@{plugins/bootstrap/js/bootstrap.min.js}"/>
-<script th:src="@{plugins/layui/layui.js}"/>
-<script th:src="@{js/admin/adminCommon.js}"/>
+<script th:src="@{/js/plugins/jquery-3.1.1.min.js}"/>
+<script th:src="@{/js/plugins/echarts.min.js}"/>
+<script th:src="@{/js/plugins/html5shiv.min.js}"/>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"/>
+<script th:src="@{/plugins/layui/layui.js}"/>
+<script th:src="@{/js/admin/adminCommon.js}"/>
 </html>
