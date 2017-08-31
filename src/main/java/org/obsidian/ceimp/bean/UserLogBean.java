@@ -6,7 +6,7 @@ package org.obsidian.ceimp.bean;
 public class UserLogBean {
     private String userId;
 
-    private String status;
+    private int status;
 
     @Override
     public String toString() {
@@ -19,7 +19,7 @@ public class UserLogBean {
     public UserLogBean() {
     }
 
-    public UserLogBean(String userId, String status) {
+    public UserLogBean(String userId, int status) {
         this.userId = userId;
         this.status = status;
     }
@@ -32,11 +32,11 @@ public class UserLogBean {
         this.userId = userId;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

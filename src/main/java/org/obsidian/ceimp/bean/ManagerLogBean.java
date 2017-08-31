@@ -6,9 +6,9 @@ package org.obsidian.ceimp.bean;
 public class ManagerLogBean {
     private String managerId;
 
-    private String managerType;
+    private int managerType;
 
-    private String status;
+    private int status;
 
     @Override
     public String toString() {
@@ -22,7 +22,7 @@ public class ManagerLogBean {
     public ManagerLogBean() {
     }
 
-    public ManagerLogBean(String managerId, String managerType, String status) {
+    public ManagerLogBean(String managerId, int managerType, int status) {
         this.managerId = managerId;
         this.managerType = managerType;
         this.status = status;
@@ -36,19 +36,19 @@ public class ManagerLogBean {
         this.managerId = managerId;
     }
 
-    public String getManagerType() {
+    public int getManagerType() {
         return managerType;
     }
 
-    public void setManagerType(String managerType) {
+    public void setManagerType(int managerType) {
         this.managerType = managerType;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

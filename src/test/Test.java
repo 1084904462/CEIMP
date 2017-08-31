@@ -47,9 +47,9 @@ public class Test {
         textMap.put("t","2017");
         textMap.put("u","11");
         textMap.put("v","11");
-        textMap.put("w","这人贼6,我说的是大实话，不信你去问陈伟阿姆斯特朗回旋加速器，他会告诉你真正的事实");
+        textMap.put("w","这人贼6,我说的是大实话，不信你去问伟哥阿姆斯特朗回旋加速器，他会告诉你真正的事实");
         textMap.put("x","大司马");
-        textMap.put("y","这人贼6,我说的是大实话，不信你去问陈伟阿姆斯特朗回旋加速器，他会告诉你真正的事实");
+        textMap.put("y","这人贼6,我说的是大实话，不信你去问伟哥阿姆斯特朗回旋加速器，他会告诉你真正的事实");
         List<String[]> textList = new ArrayList<>();
         WordUtil.getInstance().generateWord(inputUrl,outputUrl,textMap,textList);
     }
