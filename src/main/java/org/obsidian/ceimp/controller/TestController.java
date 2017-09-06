@@ -31,11 +31,6 @@ public class TestController {
         return "login";
     }
 
-    @RequestMapping("/admin/design")
-	public String admin(){
-    	return "admin/design";
-	}
-
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(){
 	    return "test";

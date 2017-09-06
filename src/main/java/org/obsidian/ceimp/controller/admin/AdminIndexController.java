@@ -14,12 +14,15 @@ import javax.servlet.http.HttpSession;
 public class AdminIndexController {
     private Logger logger = Logger.getLogger(this.getClass());
 
-
-
     @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
     public String adminIndex(){
         return "admin/index";
     }
+
+	@RequestMapping(value = "/admin/design", method = RequestMethod.GET)
+	public String admin(){
+		return "admin/design";
+	}
 
     public int getAllStudentSum(HttpSession session){
         return 0;
