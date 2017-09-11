@@ -1,5 +1,7 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.ScholarshipBean;
+import org.obsidian.ceimp.bean.ScholarshipDetailBean;
 import org.obsidian.ceimp.entity.Scholarship;
 
 import java.util.List;
@@ -9,9 +11,9 @@ import java.util.List;
  */
 public interface ScholarshipService {
 
-    int insertScholarship(String scholarshipName,double awardPercent);
+    int insertScholarship(String scholarshipName,String modelName);
 
-    int updateScholarship(int scholarshipId,String scholarshipName,double awardPercent);
+    int updateScholarship(int scholarshipId,String scholarshipName,String modelName);
 
     int deleteScholarship(int scholarshipId);
 
@@ -20,4 +22,8 @@ public interface ScholarshipService {
     List<Scholarship> selectAllByScholarshipName(String scholarshipName);
 
     List<Scholarship> selectAll();
+
+    List<ScholarshipBean> selectAllIdAndName();
+
+    ScholarshipDetailBean selectScholarshipDetail(int scholarshipId);
 }

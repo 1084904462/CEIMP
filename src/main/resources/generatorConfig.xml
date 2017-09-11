@@ -16,7 +16,7 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/ceimp?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"
                         userId="root"
-                        password="123456">
+                        password="admin">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -128,6 +128,9 @@
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="scholarship_item" domainObjectName="ScholarshipItem"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="scholarship_percent" domainObjectName="ScholarshipPercent"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="school" domainObjectName="School"

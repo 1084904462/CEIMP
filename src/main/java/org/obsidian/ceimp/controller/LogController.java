@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.controller;
 
 import org.apache.log4j.Logger;
+import org.obsidian.ceimp.bean.LogStatusBean;
 import org.obsidian.ceimp.bean.ManagerLogBean;
 import org.obsidian.ceimp.bean.UserLogBean;
 import org.obsidian.ceimp.entity.ClassManager;
@@ -12,6 +13,7 @@ import org.obsidian.ceimp.service.UsersService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,7 +82,7 @@ public class LogController {
      * @throws NoSuchAlgorithmException
      */
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String userLogIn(HttpSession session, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public String userLogIn(HttpSession session, Model model, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 	    UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
 	    ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
 	    if(userLogBean != null){
@@ -94,20 +96,20 @@ public class LogController {
         if(users != null){
             if(users.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("用户 " + userId + " 登录成功");
-                userLogBean = new UserLogBean(userId,1);
+                userLogBean = new UserLogBean(userId);
                 session.setAttribute("userLogBean",userLogBean);
                 return "redirect:/evaluation/index";
             }
             else {
                 logger.info("用户 " + userId + " 密码错误");
-                userLogBean = new UserLogBean("",-1);
-                session.setAttribute("userLogBean",userLogBean);
+                LogStatusBean logStatusBean = new LogStatusBean("密码错误");
+                model.addAttribute("logStatusBean",logStatusBean);
             }
         }
         else {
             logger.info("没有 " + userId + " 该用户");
-            userLogBean = new UserLogBean("",0);
-            session.setAttribute("userLogBean",userLogBean);
+            LogStatusBean logStatusBean = new LogStatusBean("无该用户");
+            model.addAttribute("logStatusBean",logStatusBean);
         }
         return "redirect:/login";
     }
@@ -141,7 +143,7 @@ public class LogController {
      * @throws NoSuchAlgorithmException
      */
     @RequestMapping(value = "/managerLogin", method = RequestMethod.POST)
-    public String managerLogIn(HttpSession session, @RequestParam(value = "managerId") String managerId,@RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
+    public String managerLogIn(HttpSession session, Model model, @RequestParam(value = "managerId") String managerId,@RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException{
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(userLogBean != null){
@@ -155,14 +157,14 @@ public class LogController {
         if(classManager != null){
             if(classManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("班级管理员 " + managerId + " 登录成功");
-                managerLogBean = new ManagerLogBean(managerId,1,1);
+                managerLogBean = new ManagerLogBean(managerId,1);
                 session.setAttribute("managerLogBean",managerLogBean);
                 return "redirect:/admin/index";
             }
             else{
                 logger.info("班级管理员 " + managerId + " 密码错误");
-                managerLogBean = new ManagerLogBean("",0,-1);
-                session.setAttribute("managerLogBean",managerLogBean);
+                LogStatusBean logStatusBean = new LogStatusBean("密码错误");
+                model.addAttribute("logStatusBean",logStatusBean);
             }
         }
         else{
@@ -170,20 +172,20 @@ public class LogController {
             if(schoolManager != null){
                 if(schoolManager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                     logger.info("学院管理员 " + managerId + " 登录成功");
-                    managerLogBean = new ManagerLogBean(managerId,2,1);
+                    managerLogBean = new ManagerLogBean(managerId,2);
                     session.setAttribute("managerLogBean",managerLogBean);
                     return "redirect:/admin/index";
                 }
                 else{
                     logger.info("学院管理员 " + managerId + " 密码错误");
-                    managerLogBean = new ManagerLogBean("",0,-1);
-                    session.setAttribute("managerLogBean",managerLogBean);
+                    LogStatusBean logStatusBean = new LogStatusBean("密码错误");
+                    model.addAttribute("logStatusBean",logStatusBean);
                 }
             }
             else{
                 logger.info("没有 " + managerId + " 该管理员");
-                managerLogBean = new ManagerLogBean("",0,0);
-                session.setAttribute("managerLogBean",managerLogBean);
+                LogStatusBean logStatusBean = new LogStatusBean("无该用户");
+                model.addAttribute("logStatusBean",logStatusBean);
             }
         }
         return "redirect:/login";
@@ -199,7 +201,7 @@ public class LogController {
     public String managerLogOut(HttpSession session){
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){
-            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " 登出");
+            logger.info("管理员 " + managerLogBean.getManagerId() + " 登出");
             session.removeAttribute("managerLogBean");
         }
         return "redirect:/login";

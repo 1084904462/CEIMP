@@ -17,9 +17,6 @@ import java.util.Map;
 @SpringBootTest(classes = Application.class)
 public class Test {
 
-    @Autowired
-
-
     @org.junit.Test
     public void test(){
         String inputUrl = "F:\\ideaworkspace\\CEIMP\\src\\main\\resources\\模板.docx";
@@ -52,5 +49,13 @@ public class Test {
         textMap.put("y","这人贼6,我说的是大实话，不信你去问伟哥阿姆斯特朗回旋加速器，他会告诉你真正的事实");
         List<String[]> textList = new ArrayList<>();
         WordUtil.getInstance().generateWord(inputUrl,outputUrl,textMap,textList);
+    }
+
+    @Autowired
+
+
+    @org.junit.Test
+    public void test1(){
+
     }
 }

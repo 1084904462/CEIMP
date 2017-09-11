@@ -8,24 +8,20 @@ public class ManagerLogBean {
 
     private int managerType;
 
-    private int status;
-
     @Override
     public String toString() {
         return "ManagerLogBean{" +
                 "managerId='" + managerId + '\'' +
-                ", managerType='" + managerType + '\'' +
-                ", status='" + status + '\'' +
+                ", managerType=" + managerType +
                 '}';
     }
 
     public ManagerLogBean() {
     }
 
-    public ManagerLogBean(String managerId, int managerType, int status) {
+    public ManagerLogBean(String managerId, int managerType) {
         this.managerId = managerId;
         this.managerType = managerType;
-        this.status = status;
     }
 
     public String getManagerId() {
@@ -42,13 +38,5 @@ public class ManagerLogBean {
 
     public void setManagerType(int managerType) {
         this.managerType = managerType;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }

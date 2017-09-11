@@ -1,22 +1,19 @@
 package org.obsidian.ceimp.controller.evaluation;
 
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.*;
-import org.obsidian.ceimp.entity.*;
-import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.bean.ScholarshipBean;
+import org.obsidian.ceimp.bean.ScholarshipBeanList;
+import org.obsidian.ceimp.bean.ScholarshipDetailBean;
+import org.obsidian.ceimp.service.ScholarshipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by BillChen on 2017/8/20.
+ * Created by BillChen on 2017/9/11.
  */
 @Controller
 public class ScholarshipController {
@@ -25,75 +22,44 @@ public class ScholarshipController {
     @Autowired
     private ScholarshipService scholarshipService;
 
-    @Autowired
-    private ScholarshipBlockService scholarshipBlockService;
-
-    @Autowired
-    private ScholarshipItemService scholarshipItemService;
-
-    @Autowired
-    private FillInTypeService fillInTypeService;
-
-    @Autowired
-    private AwardService awardService;
-
     /**
-     * 通过session获取用户ID，
-     * 通过GET方法传递参数：年份
-     * 返回获奖数量，奖项列表
-     * @param session
+     * 访问/evaluation/scholarship
+     * 返回所有奖学金列表与第一个奖学金详情
      * @param model
-     * @param yearScope
      * @return
      */
-    @RequestMapping(value = "/evaluation/scholarship/{yearScope}",method = RequestMethod.GET)
-    public String showScholarship(HttpSession session, Model model, @PathVariable("yearScope") int yearScope){
-        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        String userId = userLogBean.getUserId();
-        List<Award> awardList = awardService.selectAllByUserIdAndYearScope(userId, yearScope);
+    @RequestMapping(value = "/evaluation/scholarship", method = RequestMethod.GET)
+    public String scholarship(Model model){
         ScholarshipBeanList scholarshipBeanList = new ScholarshipBeanList();
-        if(awardList == null){
-            logger.info(userId + " 在" + yearScope + "年度没有获奖");
-            scholarshipBeanList.setSum(0);
-        }
-        else{
-            int scholarshipSum = awardList.size();
-            logger.info(userId + " 在" + yearScope + "年度共获" + scholarshipSum + "项奖");
-            scholarshipBeanList.setSum(scholarshipSum);
-
-            List<ScholarshipBean> scholarshipBeans = new ArrayList<>();
-            for (Award award : awardList) {
-                int scholarshipId = award.getScholarshipId();
-                Scholarship scholarship = scholarshipService.selectByScholarshipId(scholarshipId);
-                logger.info(userId + " 获得" + yearScope + "年度" + scholarship.getScholarshipName());
-                List<ScholarshipBlock> scholarshipBlocks = scholarshipBlockService.selectAllByScholarshipId(scholarshipId);
-                List<ScholarshipBlockBean> scholarshipBlockBeans = new ArrayList<>();
-                for (ScholarshipBlock scholarshipBlock : scholarshipBlocks) {
-                    int scholarshipBlockId = scholarshipBlock.getScholarshipBlockId();
-                    List<ScholarshipItem> scholarshipItems = scholarshipItemService.selectAllByScholarshipBlockId(scholarshipBlockId);
-                    List<ScholarshipItemBean> scholarshipItemBeans = new ArrayList<>();
-                    for(ScholarshipItem scholarshipItem : scholarshipItems){
-                        FillInType fillInType = fillInTypeService.selectByTypeId(scholarshipItem.getFillInTypeId());
-                        FillInTypeBean fillInTypeBean = new FillInTypeBean(fillInType.getTypeId(),fillInType.getType());
-                        ScholarshipItemBean scholarshipItemBean = new ScholarshipItemBean(
-                                scholarshipItem.getScholarshipItemId(),
-                                scholarshipItem.getScholarshipItemName(),
-                                fillInTypeBean,
-                                scholarshipItem.getFillInHint());
-                        scholarshipItemBeans.add(scholarshipItemBean);
-                    }
-                    ScholarshipBlockBean scholarshipBlockBean = new ScholarshipBlockBean(
-                            scholarshipBlockId,
-                            scholarshipBlock.getScholarshipBlockName(),
-                            scholarshipItemBeans);
-                    scholarshipBlockBeans.add(scholarshipBlockBean);
-                }
-                ScholarshipBean scholarshipBean = new ScholarshipBean(scholarshipId, scholarship.getScholarshipName(), scholarship.getAwardPercent(), scholarshipBlockBeans);
-                scholarshipBeans.add(scholarshipBean);
-            }
+        List<ScholarshipBean> scholarshipBeans = scholarshipService.selectAllIdAndName();
+        int firstScholarshipId = 0;
+        if(scholarshipBeans != null){
+            logger.info("查询到所有奖学金列表：" + scholarshipBeans.toString());
+            firstScholarshipId = scholarshipBeans.get(0).getScholarshipId();
+            scholarshipBeanList.setSum(scholarshipBeans.size());
             scholarshipBeanList.setScholarshipBeans(scholarshipBeans);
         }
         model.addAttribute("scholarshipBeanList",scholarshipBeanList);
-        return "test";
+
+        if(firstScholarshipId != 0){
+            ScholarshipDetailBean scholarshipDetailBean = scholarshipService.selectScholarshipDetail(firstScholarshipId);
+            model.addAttribute("scholarshipDetail",scholarshipDetailBean);
+            logger.info("显示奖学金：" + scholarshipDetailBean.getScholarshipName());
+        }
+        return "evaluation/scholarship";
+    }
+
+    /**
+     * 访问/evaluation/scholarship/{scholarshipId}
+     * 通过scholarshipId查询对应奖学金表格详情
+     * @param scholarshipId
+     * @return
+     */
+    @RequestMapping(value = "/evaluation/scholarship/{scholarshipId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ScholarshipDetailBean scholarshipDetail(@PathVariable("scholarshipId") int scholarshipId){
+        ScholarshipDetailBean scholarshipDetailBean = scholarshipService.selectScholarshipDetail(scholarshipId);
+        logger.info("显示奖学金：" + scholarshipDetailBean.getScholarshipName());
+        return scholarshipDetailBean;
     }
 }

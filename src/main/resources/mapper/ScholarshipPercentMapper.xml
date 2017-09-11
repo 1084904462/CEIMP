@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.obsidian.ceimp.dao.ScholarshipMapper">
-  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Scholarship">
+<mapper namespace="org.obsidian.ceimp.dao.ScholarshipPercentMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.ScholarshipPercent">
+    <result column="percent_id" jdbcType="INTEGER" property="percentId" />
     <result column="scholarship_id" jdbcType="INTEGER" property="scholarshipId" />
-    <result column="scholarship_name" jdbcType="VARCHAR" property="scholarshipName" />
-    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="percent" jdbcType="DOUBLE" property="percent" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
   </resultMap>
-  <resultMap id="IdAndNameMap" type="org.obsidian.ceimp.bean.ScholarshipBean">
-    <result column="scholarship_id" jdbcType="INTEGER" property="scholarshipId" />
-    <result column="scholarship_name" jdbcType="VARCHAR" property="scholarshipName" />
-  </resultMap>
-  <select id="selectAllIdAndName" resultMap="IdAndNameMap">
-    select scholarship_id,scholarship_name from scholarship;
-  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -73,16 +67,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scholarship_id, scholarship_name, model_name, create_time
+    percent_id, scholarship_id, level, percent, create_time
   </sql>
-  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipPercentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from scholarship
+    from scholarship_percent
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,66 +84,75 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipExample">
-    delete from scholarship
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipPercentExample">
+    delete from scholarship_percent
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.obsidian.ceimp.entity.Scholarship">
-    insert into scholarship (scholarship_id, scholarship_name, model_name, 
-      create_time)
-    values (#{scholarshipId,jdbcType=INTEGER}, #{scholarshipName,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=BIGINT})
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.ScholarshipPercent">
+    insert into scholarship_percent (percent_id, scholarship_id, level, 
+      percent, create_time)
+    values (#{percentId,jdbcType=INTEGER}, #{scholarshipId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
+      #{percent,jdbcType=DOUBLE}, #{createTime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Scholarship">
-    insert into scholarship
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.ScholarshipPercent">
+    insert into scholarship_percent
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="percentId != null">
+        percent_id,
+      </if>
       <if test="scholarshipId != null">
         scholarship_id,
       </if>
-      <if test="scholarshipName != null">
-        scholarship_name,
+      <if test="level != null">
+        level,
       </if>
-      <if test="modelName != null">
-        model_name,
+      <if test="percent != null">
+        percent,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="percentId != null">
+        #{percentId,jdbcType=INTEGER},
+      </if>
       <if test="scholarshipId != null">
         #{scholarshipId,jdbcType=INTEGER},
       </if>
-      <if test="scholarshipName != null">
-        #{scholarshipName,jdbcType=VARCHAR},
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
       </if>
-      <if test="modelName != null">
-        #{modelName,jdbcType=VARCHAR},
+      <if test="percent != null">
+        #{percent,jdbcType=DOUBLE},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipExample" resultType="java.lang.Long">
-    select count(*) from scholarship
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipPercentExample" resultType="java.lang.Long">
+    select count(*) from scholarship_percent
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update scholarship
+    update scholarship_percent
     <set>
+      <if test="record.percentId != null">
+        percent_id = #{record.percentId,jdbcType=INTEGER},
+      </if>
       <if test="record.scholarshipId != null">
         scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
       </if>
-      <if test="record.scholarshipName != null">
-        scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
       </if>
-      <if test="record.modelName != null">
-        model_name = #{record.modelName,jdbcType=VARCHAR},
+      <if test="record.percent != null">
+        percent = #{record.percent,jdbcType=DOUBLE},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=BIGINT},
@@ -160,10 +163,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update scholarship
-    set scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
-      scholarship_name = #{record.scholarshipName,jdbcType=VARCHAR},
-      model_name = #{record.modelName,jdbcType=VARCHAR},
+    update scholarship_percent
+    set percent_id = #{record.percentId,jdbcType=INTEGER},
+      scholarship_id = #{record.scholarshipId,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      percent = #{record.percent,jdbcType=DOUBLE},
       create_time = #{record.createTime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
