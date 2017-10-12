@@ -20,8 +20,13 @@ public class AdminIndexController {
     }
 
 	@RequestMapping(value = "/admin/design", method = RequestMethod.GET)
-	public String admin(){
+	public String adminDesign(){
 		return "admin/design";
+	}
+
+	@RequestMapping(value = "/admin/scholarship", method = RequestMethod.GET)
+	public String adminScholarship(){
+		return "admin/scholarship";
 	}
 
     public int getAllStudentSum(HttpSession session){
