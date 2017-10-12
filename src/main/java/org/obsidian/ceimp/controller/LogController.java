@@ -45,7 +45,7 @@ public class LogController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String defaultPage(){
-        return "redirect:/login";
+        return "redirect:/test";
     }
 
     /**
