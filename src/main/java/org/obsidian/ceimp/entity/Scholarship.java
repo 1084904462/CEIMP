@@ -7,7 +7,7 @@ public class Scholarship {
 
     private String scholarshipName;
 
-    private Double awardPercent;
+    private String modelName;
 
     private Long createTime;
 
@@ -16,7 +16,7 @@ public class Scholarship {
         return "Scholarship{" +
                 "scholarshipId=" + scholarshipId +
                 ", scholarshipName='" + scholarshipName + '\'' +
-                ", awardPercent=" + awardPercent +
+                ", modelName='" + modelName + '\'' +
                 ", createTime=" + TimeUtil.getInstance().getTime(createTime) +
                 '}';
     }
@@ -25,16 +25,16 @@ public class Scholarship {
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Scholarship(String scholarshipName, Double awardPercent) {
+    public Scholarship(String scholarshipName, String modelName) {
         this.scholarshipName = scholarshipName;
-        this.awardPercent = awardPercent;
+        this.modelName = modelName;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
-    public Scholarship(Integer scholarshipId, String scholarshipName, Double awardPercent) {
+    public Scholarship(Integer scholarshipId, String scholarshipName, String modelName) {
         this.scholarshipId = scholarshipId;
         this.scholarshipName = scholarshipName;
-        this.awardPercent = awardPercent;
+        this.modelName = modelName;
         this.createTime = TimeUtil.getInstance().getTimeStamp();
     }
 
@@ -54,12 +54,12 @@ public class Scholarship {
         this.scholarshipName = scholarshipName == null ? null : scholarshipName.trim();
     }
 
-    public Double getAwardPercent() {
-        return awardPercent;
+    public String getModelName() {
+        return modelName;
     }
 
-    public void setAwardPercent(Double awardPercent) {
-        this.awardPercent = awardPercent;
+    public void setModelName(String modelName) {
+        this.modelName = modelName == null ? null : modelName.trim();
     }
 
     public Long getCreateTime() {

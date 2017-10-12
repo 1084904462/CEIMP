@@ -8,7 +8,7 @@ public class ScholarshipItemBean {
 
     private String scholarshipItemName;
 
-    private FillInTypeBean fillInTypeBean;
+    private int fillInTypeId;
 
     private String fillInHint;
 
@@ -17,7 +17,7 @@ public class ScholarshipItemBean {
         return "ScholarshipItemBean{" +
                 "scholarshipItemId=" + scholarshipItemId +
                 ", scholarshipItemName='" + scholarshipItemName + '\'' +
-                ", fillInTypeBean=" + fillInTypeBean +
+                ", fillInTypeId=" + fillInTypeId +
                 ", fillInHint='" + fillInHint + '\'' +
                 '}';
     }
@@ -25,10 +25,10 @@ public class ScholarshipItemBean {
     public ScholarshipItemBean() {
     }
 
-    public ScholarshipItemBean(int scholarshipItemId, String scholarshipItemName, FillInTypeBean fillInTypeBean, String fillInHint) {
+    public ScholarshipItemBean(int scholarshipItemId, String scholarshipItemName, int fillInTypeId, String fillInHint) {
         this.scholarshipItemId = scholarshipItemId;
         this.scholarshipItemName = scholarshipItemName;
-        this.fillInTypeBean = fillInTypeBean;
+        this.fillInTypeId = fillInTypeId;
         this.fillInHint = fillInHint;
     }
 
@@ -48,12 +48,12 @@ public class ScholarshipItemBean {
         this.scholarshipItemName = scholarshipItemName;
     }
 
-    public FillInTypeBean getFillInTypeBean() {
-        return fillInTypeBean;
+    public int getFillInTypeId() {
+        return fillInTypeId;
     }
 
-    public void setFillInTypeBean(FillInTypeBean fillInTypeBean) {
-        this.fillInTypeBean = fillInTypeBean;
+    public void setFillInTypeId(int fillInTypeId) {
+        this.fillInTypeId = fillInTypeId;
     }
 
     public String getFillInHint() {

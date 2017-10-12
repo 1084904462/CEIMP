@@ -3,14 +3,14 @@ package org.obsidian.ceimp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScholarshipExample {
+public class ScholarshipPercentExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ScholarshipExample() {
+    public ScholarshipPercentExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,6 +104,66 @@ public class ScholarshipExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andPercentIdIsNull() {
+            addCriterion("percent_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdIsNotNull() {
+            addCriterion("percent_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdEqualTo(Integer value) {
+            addCriterion("percent_id =", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdNotEqualTo(Integer value) {
+            addCriterion("percent_id <>", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdGreaterThan(Integer value) {
+            addCriterion("percent_id >", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("percent_id >=", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdLessThan(Integer value) {
+            addCriterion("percent_id <", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("percent_id <=", value, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdIn(List<Integer> values) {
+            addCriterion("percent_id in", values, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdNotIn(List<Integer> values) {
+            addCriterion("percent_id not in", values, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdBetween(Integer value1, Integer value2) {
+            addCriterion("percent_id between", value1, value2, "percentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPercentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("percent_id not between", value1, value2, "percentId");
+            return (Criteria) this;
+        }
+
         public Criteria andScholarshipIdIsNull() {
             addCriterion("scholarship_id is null");
             return (Criteria) this;
@@ -164,143 +224,133 @@ public class ScholarshipExample {
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameIsNull() {
-            addCriterion("scholarship_name is null");
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameIsNotNull() {
-            addCriterion("scholarship_name is not null");
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameEqualTo(String value) {
-            addCriterion("scholarship_name =", value, "scholarshipName");
+        public Criteria andLevelEqualTo(String value) {
+            addCriterion("level =", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameNotEqualTo(String value) {
-            addCriterion("scholarship_name <>", value, "scholarshipName");
+        public Criteria andLevelNotEqualTo(String value) {
+            addCriterion("level <>", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameGreaterThan(String value) {
-            addCriterion("scholarship_name >", value, "scholarshipName");
+        public Criteria andLevelGreaterThan(String value) {
+            addCriterion("level >", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameGreaterThanOrEqualTo(String value) {
-            addCriterion("scholarship_name >=", value, "scholarshipName");
+        public Criteria andLevelGreaterThanOrEqualTo(String value) {
+            addCriterion("level >=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameLessThan(String value) {
-            addCriterion("scholarship_name <", value, "scholarshipName");
+        public Criteria andLevelLessThan(String value) {
+            addCriterion("level <", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameLessThanOrEqualTo(String value) {
-            addCriterion("scholarship_name <=", value, "scholarshipName");
+        public Criteria andLevelLessThanOrEqualTo(String value) {
+            addCriterion("level <=", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameLike(String value) {
-            addCriterion("scholarship_name like", value, "scholarshipName");
+        public Criteria andLevelLike(String value) {
+            addCriterion("level like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameNotLike(String value) {
-            addCriterion("scholarship_name not like", value, "scholarshipName");
+        public Criteria andLevelNotLike(String value) {
+            addCriterion("level not like", value, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameIn(List<String> values) {
-            addCriterion("scholarship_name in", values, "scholarshipName");
+        public Criteria andLevelIn(List<String> values) {
+            addCriterion("level in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameNotIn(List<String> values) {
-            addCriterion("scholarship_name not in", values, "scholarshipName");
+        public Criteria andLevelNotIn(List<String> values) {
+            addCriterion("level not in", values, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameBetween(String value1, String value2) {
-            addCriterion("scholarship_name between", value1, value2, "scholarshipName");
+        public Criteria andLevelBetween(String value1, String value2) {
+            addCriterion("level between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andScholarshipNameNotBetween(String value1, String value2) {
-            addCriterion("scholarship_name not between", value1, value2, "scholarshipName");
+        public Criteria andLevelNotBetween(String value1, String value2) {
+            addCriterion("level not between", value1, value2, "level");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIsNull() {
-            addCriterion("model_name is null");
+        public Criteria andPercentIsNull() {
+            addCriterion("percent is null");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIsNotNull() {
-            addCriterion("model_name is not null");
+        public Criteria andPercentIsNotNull() {
+            addCriterion("percent is not null");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameEqualTo(String value) {
-            addCriterion("model_name =", value, "modelName");
+        public Criteria andPercentEqualTo(Double value) {
+            addCriterion("percent =", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotEqualTo(String value) {
-            addCriterion("model_name <>", value, "modelName");
+        public Criteria andPercentNotEqualTo(Double value) {
+            addCriterion("percent <>", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameGreaterThan(String value) {
-            addCriterion("model_name >", value, "modelName");
+        public Criteria andPercentGreaterThan(Double value) {
+            addCriterion("percent >", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameGreaterThanOrEqualTo(String value) {
-            addCriterion("model_name >=", value, "modelName");
+        public Criteria andPercentGreaterThanOrEqualTo(Double value) {
+            addCriterion("percent >=", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLessThan(String value) {
-            addCriterion("model_name <", value, "modelName");
+        public Criteria andPercentLessThan(Double value) {
+            addCriterion("percent <", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLessThanOrEqualTo(String value) {
-            addCriterion("model_name <=", value, "modelName");
+        public Criteria andPercentLessThanOrEqualTo(Double value) {
+            addCriterion("percent <=", value, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameLike(String value) {
-            addCriterion("model_name like", value, "modelName");
+        public Criteria andPercentIn(List<Double> values) {
+            addCriterion("percent in", values, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotLike(String value) {
-            addCriterion("model_name not like", value, "modelName");
+        public Criteria andPercentNotIn(List<Double> values) {
+            addCriterion("percent not in", values, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameIn(List<String> values) {
-            addCriterion("model_name in", values, "modelName");
+        public Criteria andPercentBetween(Double value1, Double value2) {
+            addCriterion("percent between", value1, value2, "percent");
             return (Criteria) this;
         }
 
-        public Criteria andModelNameNotIn(List<String> values) {
-            addCriterion("model_name not in", values, "modelName");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelNameBetween(String value1, String value2) {
-            addCriterion("model_name between", value1, value2, "modelName");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelNameNotBetween(String value1, String value2) {
-            addCriterion("model_name not between", value1, value2, "modelName");
+        public Criteria andPercentNotBetween(Double value1, Double value2) {
+            addCriterion("percent not between", value1, value2, "percent");
             return (Criteria) this;
         }
 

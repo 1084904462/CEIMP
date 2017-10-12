@@ -20,7 +20,6 @@ public class ManagerLogInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession(true);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){
-            logger.info(managerLogBean.getManagerType() + " " + managerLogBean.getManagerId() + " 在线");
             return true;
         }
         else{

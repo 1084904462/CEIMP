@@ -130,6 +130,9 @@
         <table tableName="scholarship_item" domainObjectName="ScholarshipItem"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="scholarship_percent" domainObjectName="ScholarshipPercent"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
         <table tableName="school" domainObjectName="School"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
