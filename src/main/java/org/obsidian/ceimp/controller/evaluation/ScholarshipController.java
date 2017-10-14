@@ -92,7 +92,7 @@ public class ScholarshipController {
         Userss userss = userssService.selectByUserId(userId);
         Nationalinspirationalscholarship nationalinspirationalscholarship = nationalinspirationalscholarshipService.selectByUserId(userId);
 
-        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = new NationalinspirationalscholarshipBean();
+        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = this.getNationalinspirationalscholarshipBean(userss,nationalinspirationalscholarship);
         model.addAttribute("nationalinspirationalscholarshipBean",nationalinspirationalscholarshipBean);
 		return "scholarship/nationalInspirationalScholarship";
 	}
@@ -317,43 +317,4 @@ public class ScholarshipController {
         }
         return tripleastudentBean;
     }
-<<<<<<< HEAD
 }
-=======
-
-	@RequestMapping(value = "/u/changedPassword", method = RequestMethod.POST)
-	public String changedPassword(HttpSession session, Model model,
-                                 @RequestParam(value = "oldPassword")String oldPassword,
-                                 @RequestParam(value = "newPassword")String newPassword,
-                                 @RequestParam(value = "confirmPassword")String confirmPassword){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
-        Userss userss = userssService.selectByUserId(userId);
-        ChangePasswordBean changePasswordBean = null;
-        if(userss.getPassword().equals(oldPassword)){
-            if(newPassword.length() >= 6){
-                if(newPassword.equals("888888")){
-                    changePasswordBean = new ChangePasswordBean("密码不能设为888888");
-                }
-                else{
-                    if(newPassword.equals(confirmPassword)){
-                        userssService.updatePassword(userId,newPassword);
-                        changePasswordBean = new ChangePasswordBean("密码修改成功");
-                    }
-                    else{
-                        changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
-                    }
-                }
-            }
-            else{
-                changePasswordBean = new ChangePasswordBean("新密码必须大于6位");
-            }
-        }
-        else{
-            changePasswordBean = new ChangePasswordBean("旧密码输入错误");
-        }
-        model.addAttribute("changePasswordBean",changePasswordBean);
-        return "scholarship/changePassword";
-	}
-}
->>>>>>> 6686abc91d7f78d5642a2f9cbabd871f763a1994
