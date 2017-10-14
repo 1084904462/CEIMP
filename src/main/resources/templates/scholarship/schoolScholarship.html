@@ -205,23 +205,23 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">奖学金等级</label>
                     <div class="layui-input-block">
-                        <select name="level" required="required" lay-verify="required">
-                            <option value=""></option>
-                            <option value="优秀学生一等奖学金">优秀学生一等奖学金</option>
-                            <option value="优秀学生二等奖学金">优秀学生二等奖学金</option>
-                            <option value="优秀学生三等奖学金">优秀学生三等奖学金</option>
-                            <option value="学业优秀一等奖学金">学业优秀一等奖学金</option>
-                            <option value="学业优秀二等奖学金">学业优秀二等奖学金</option>
-                            <option value="学业优秀三等奖学金">学业优秀三等奖学金</option>
-                            <option value="学习进步奖">学习进步奖</option>
-                            <option value="优良学风奖">优良学风奖</option>
-                            <option value="外语成绩优秀奖">外语成绩优秀奖</option>
-                            <option value="文体优秀奖">文体优秀奖</option>
-                            <option value="社团活动奖">社团活动奖</option>
-                            <option value="突出贡献奖">突出贡献奖</option>
-                            <option value="创新创业一等奖">创新创业一等奖</option>
-                            <option value="创新创业二等奖">创新创业二等奖</option>
-                            <option value="创新创业三等奖">创新创业三等奖</option>
+                        <select id="level" name="level" required="required" lay-verify="required">
+                            <!--<option value=""></option>-->
+                            <!--<option value="优秀学生一等奖学金">优秀学生一等奖学金</option>-->
+                            <!--<option value="优秀学生二等奖学金">优秀学生二等奖学金</option>-->
+                            <!--<option value="优秀学生三等奖学金">优秀学生三等奖学金</option>-->
+                            <!--<option value="学业优秀一等奖学金">学业优秀一等奖学金</option>-->
+                            <!--<option value="学业优秀二等奖学金">学业优秀二等奖学金</option>-->
+                            <!--<option value="学业优秀三等奖学金">学业优秀三等奖学金</option>-->
+                            <!--<option value="学习进步奖">学习进步奖</option>-->
+                            <!--<option value="优良学风奖">优良学风奖</option>-->
+                            <!--<option value="外语成绩优秀奖">外语成绩优秀奖</option>-->
+                            <!--<option value="文体优秀奖">文体优秀奖</option>-->
+                            <!--<option value="社团活动奖">社团活动奖</option>-->
+                            <!--<option value="突出贡献奖">突出贡献奖</option>-->
+                            <!--<option value="创新创业一等奖">创新创业一等奖</option>-->
+                            <!--<option value="创新二等奖">创新二等奖</option>-->
+                            <!--<option value="创新三等奖">创新三等奖</option>-->
                         </select>
                     </div>
                 </div>
@@ -253,10 +253,12 @@
             "土族","达斡尔族","仫佬族","羌族","布朗族","撒拉族","毛南族","仡佬族","锡伯族","阿昌族","普米族","塔吉克族","怒族", "乌孜别克族",
             "俄罗斯族","鄂温克族","德昂族","保安族","裕固族","京族","塔塔尔族","独龙族","鄂伦春族","赫哲族","门巴族","珞巴族","基诺族"];
 
+        var levelArray = ["", "优秀学生一等奖学金", "优秀学生二等奖学金", "优秀学生三等奖学金", "学业优秀一等奖学金", "学业优秀二等奖学金",
+        "学业优秀三等奖学金", "学习进步奖", "优良学风奖", "外语成绩优秀奖", "文体优秀奖", "社团活动奖", "突出贡献奖", "创新创业一等奖",
+        "创新二等奖", "创新三等奖"];
 
         /*<![CDATA[*/
         var myNation = /*[[${schoolscholarshipBean.nation}]]*/;
-
 
         var $nationSelect = $("#nation");
         for(var i = 0; i < nationArray.length; i++){
@@ -267,6 +269,20 @@
             else
             {
                 $nationSelect.append(`<option value='${nationArray[i]}'>${nationArray[i]}</option>`);
+            }
+        }
+
+        var mylevel = /*[[${schoolscholarshipBean.level}]]*/;
+
+        var $levelSelected = $("#level");
+        for(var i = 0; i < levelArray.length; i++){
+            if(mylevel == levelArray[i])
+            {
+                $levelSelected.append(`<option value='${levelArray[i]}' selected>${levelArray[i]}</option>`);
+            }
+            else
+            {
+                $levelSelected.append(`<option value='${levelArray[i]}'>${levelArray[i]}</option>`);
             }
         }
         /*]]>*/

@@ -317,4 +317,8 @@ public class ScholarshipController {
         }
         return tripleastudentBean;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f091beb87ef02f6315354b0e685a49d5453ee419
