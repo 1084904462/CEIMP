@@ -3,66 +3,85 @@
 
 <head>
 
-  <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 
-  <title>欢迎使用综测系统</title>
+    <title>欢迎使用综测系统</title>
 
-  <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
 
-  <link rel='stylesheet' href='css/jquery-ui.css'/>
-<link rel='stylesheet prefetch' href='css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='css/jquery-ui.css'/>
+    <link rel='stylesheet prefetch' href='css/bootstrap.min.css'/>
     <script src="js/modernizr.js"></script>
     <style type="text/css">
 
-.login-form{
-  margin: 0 auto;
-  height: 420px;
-  width: 320px;
-  padding-top:12%;
+        .login-form
+        {
+            margin: 0 auto;
+            height: 420px;
+            width: 320px;
+            padding-top: 12%;
 
-}
-.form-control{
-  width: 320px;
-  height: 48px;
-}
-form{
-  padding: 10%;
-  background-color: white;
-  box-shadow: 0px  0px 3px 3px #DCDCDC;
-  border-radius: 10%;
+        }
 
-}
-.title{
-  color: #CCCCCC;
-  border-bottom: 1px solid #E4E4E4;
-  padding-bottom: 5%;
-}
-.radio-inline{
-  padding-left: 40px;
-  color: #555;
-}
-.btn {
-  border-color: transparent;
-  margin: 0;
-}
+        .form-control
+        {
+            width: 320px;
+            height: 48px;
+        }
 
-.nav-tabs{
-  border: none;
-}
-#manager a{
-  color: #555;
-}
-#manager a:hover{
-  color: #00B5B5;
-}
-.nav.nav-tabs li a{
-  border: none;
-}
-.nav.nav-tabs li a:hover{
-  background-color: transparent;
-  color: #00B5B5;
-}
+        form
+        {
+            padding: 10%;
+            background-color: white;
+            box-shadow: 0px 0px 3px 3px #DCDCDC;
+            border-radius: 10%;
 
+        }
+
+        .title
+        {
+            color: #CCCCCC;
+            border-bottom: 1px solid #E4E4E4;
+            padding-bottom: 5%;
+        }
+
+        .radio-inline
+        {
+            padding-left: 40px;
+            color: #555;
+        }
+
+        .btn
+        {
+            border-color: transparent;
+            margin: 0;
+        }
+
+        .nav-tabs
+        {
+            border: none;
+        }
+
+        #manager a
+        {
+            color: #555;
+        }
+
+        #manager a:hover
+        {
+            color: #00B5B5;
+        }
+
+        .nav.nav-tabs li a
+        {
+            border: none;
+        }
+
+        .nav.nav-tabs li a:hover
+        {
+            background-color: transparent;
+            color: #00B5B5;
+        }
 
 
     </style>
@@ -70,143 +89,130 @@ form{
 </head>
 
 
-  <body background="img/loading.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
+<body background="img/loading.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
 <div class="container">
 
-<div class="login-form">
+    <div class="login-form">
 
 
+        <form method="post" role="form" id="form_login">
 
-      <form method="post" role="form" id="form_login">
-
-        <div class="form-group">
-           <p class="title">欢迎使用综合测评系统</p>
-        </div>
-
-                <div class="form-group">
-
-    <ul class="nav nav-tabs">
-  <li role="presentation" id="student"  style="border-bottom: 2px solid #7AC5CD;"><a class="student-a">学生登录</a></li>
-  <li role="presentation" id="manager" ><a class="teacher-a">管理员登录</a></li>
-</ul>
-
-
-        </div>
-
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">
-              <i class="fa fa-user"></i>
+            <div class="form-group">
+                <p class="title">欢迎使用综合测评系统</p>
             </div>
-            <input type="text" class="form-control" name="userID" id="userID" placeholder="学号/卡号" autocomplete="off" />
-          </div>
-        </div>
+
+            <div class="form-group">
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" id="student" style="border-bottom: 2px solid #7AC5CD;"><a class="student-a">学生登录</a>
+                    </li>
+                    <li role="presentation" id="manager"><a class="teacher-a">管理员登录</a></li>
+                </ul>
 
 
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon">
-              <i class="fa fa-key"></i>
             </div>
-            <input type="password" class="form-control" name="password" id="password" placeholder="统一身份验证" autocomplete="off" />
-          </div>
-        </div> 
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block btn-login" id="s-load">
-            <i class="fa fa-sign-in"></i>
-            登录
-          </button>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <input type="text" class="form-control" name="userID" id="userID" placeholder="学号/卡号"
+                           autocomplete="off"/>
+                </div>
+            </div>
 
-           <button type="submit" class="btn btn-primary btn-block btn-login" id="m-load" style="display: none;">
-            <i class="fa fa-sign-in"></i>
-            登录
-          </button>
-        </div>  
-      
-      </form>
 
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </div>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="统一身份验证"
+                           autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-login" id="s-load">
+                    <i class="fa fa-sign-in"></i>
+                    登录
+                </button>
+
+                <button type="submit" class="btn btn-primary btn-block btn-login" id="m-load" style="display: none;">
+                    <i class="fa fa-sign-in"></i>
+                    登录
+                </button>
+            </div>
+
+        </form>
 
 
     </div>
 
-  </div>
+</div>
 
 <a href="/u/index">asdasd</a>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-$(function(){
-
-    $("#student").click(function(){
-
-        $("#s-load").css("display","block");
-        $("#m-load").css("display","none");
-
-        $(this).css("border-bottom","2px solid #7AC5CD");
-        $("#manager").css("border","none")
-        $(".student-a").css("color","#337ab7")
-        $(".teacher-a").css("color","#555");
-
-  });
- 
-
-    $("#manager").click(function(){
-
-        $("#s-load").css("display","none");
-        $("#m-load").css("display","block");
- 
-
-         $(this).css("border-bottom","2px solid #7AC5CD");
-           $("#student").css("border","none")
-         $(".teacher-a").css("color","#337ab7")
-        $(".student-a").css("color","#555");
-
-  });
-
-
-  $("#s-load").click(function(){
-
-
-    $.ajax({
-    type:"POST",
-    url:"/uLogin",
-    data:{
-      userId:$("#userID").val(),
-     password:$("#password").val(),
-    },
-    success:function(response,status,xhr){
-
-    },
-        error:function(){
-
-    }
-    }); 
-
-  });
-
-
-  $("#m-load").click(function(){
-
- 
-    $.ajax({
-     type:"POST",
-      url:"/mLogin",
-    data:{
-      userId:$("#userID").val(),
-     password:$("#password").val(),
-    },
-    success:function(response,status,xhr){
-
-    },
-        error:function(){
-      alert("密码错误、无该用户");
-    }
-    }); 
-  });
-
-})
+    $(function()
+    {
+        $("#student").click(function()
+        {
+            $("#s-load").css("display", "block");
+            $("#m-load").css("display", "none");
+            $(this).css("border-bottom", "2px solid #7AC5CD");
+            $("#manager").css("border", "none")
+            $(".student-a").css("color", "#337ab7")
+            $(".teacher-a").css("color", "#555");
+        });
+        $("#manager").click(function()
+        {
+            $("#s-load").css("display", "none");
+            $("#m-load").css("display", "block");
+            $(this).css("border-bottom", "2px solid #7AC5CD");
+            $("#student").css("border", "none")
+            $(".teacher-a").css("color", "#337ab7")
+            $(".student-a").css("color", "#555");
+        });
+        $("#s-load").click(function()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/uLogin",
+                data: {
+                    userId: $("#userID").val(),
+                    password: $("#password").val(),
+                },
+                success: function(response, status, xhr)
+                {
+                },
+                error: function()
+                {
+                }
+            });
+        });
+        $("#m-load").click(function()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/mLogin",
+                data: {
+                    userId: $("#userID").val(),
+                    password: $("#password").val(),
+                },
+                success: function(response, status, xhr)
+                {
+                },
+                error: function()
+                {
+                    alert("密码错误、无该用户");
+                }
+            });
+        });
+    })
 </script>
 
 </body>

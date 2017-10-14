@@ -264,7 +264,7 @@ public class LogController {
                 model.addAttribute("logStatusBean",logStatusBean);
             }
         }
-        return "redirect:/login";
+        return "login";
     }
 
     /**
