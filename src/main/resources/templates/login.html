@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{css/plugins/font-awesome/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{plugins/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{plugins/layui/css/layui.css}"/>
@@ -10,8 +10,7 @@
     <link rel="stylesheet" th:href="@{css/login.css}"/>
 </head>
 <body background="img/loading.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
-<p th:text="${logStatusBean}"></p>
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="login-div">
             <div class="login-title">
                 <span>综合测评信息管理平台</span>
@@ -28,26 +27,32 @@
                         <div class="login-tab-item login-show">
                             <form class="layui-form" action="/userLogin" method="post">
                                 <div class="layui-form-item">
-                                    <input type="text" name="userId" required="required"  lay-verify="required|id" placeholder="用户学号" autocomplete="off" class="layui-input" />
+                                    <input type="text" name="userId" required="required" lay-verify="required|id"
+                                           placeholder="用户学号" autocomplete="off" class="layui-input"/>
                                 </div>
                                 <div class="layui-form-item">
-                                    <input type="password" name="password" required="required"  lay-verify="required" placeholder="统一身份密码" autocomplete="off" class="layui-input" />
+                                    <input type="password" name="password" required="required" lay-verify="required"
+                                           placeholder="统一身份密码" autocomplete="off" class="layui-input"/>
                                 </div>
                                 <div class="layui-form-item login-form-item">
-                                    <button class="layui-btn layui-btn-big layui-btn-normal" lay-submit="lay-submit">登录</button>
+                                    <button class="layui-btn layui-btn-big layui-btn-normal" lay-submit="lay-submit">登录
+                                    </button>
                                 </div>
                             </form>
                         </div>
                         <div class="login-tab-item">
                             <form class="layui-form" action="/managerLogin" method="post">
                                 <div class="layui-form-item">
-                                    <input type="text" name="managerId" required="required"  lay-verify="required|id" placeholder="管理员账号" autocomplete="off" class="layui-input" />
+                                    <input type="text" name="managerId" required="required" lay-verify="required|id"
+                                           placeholder="管理员账号" autocomplete="off" class="layui-input"/>
                                 </div>
                                 <div class="layui-form-item">
-                                    <input type="password" name="password" required="required"  lay-verify="required" placeholder="统一身份密码" autocomplete="off" class="layui-input" />
+                                    <input type="password" name="password" required="required" lay-verify="required"
+                                           placeholder="统一身份密码" autocomplete="off" class="layui-input"/>
                                 </div>
                                 <div class="layui-form-item login-form-item">
-                                    <button class="layui-btn layui-btn-big layui-btn-normal" lay-submit="lay-submit">登录</button>
+                                    <button class="layui-btn layui-btn-big layui-btn-normal" lay-submit="lay-submit">登录
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -67,8 +72,7 @@
     layui.use(["layer"], function()
     {
         var layer = layui.layer;
-
-        layer.msg(/*[[${session.managerLogBean.status}]]*/, {icon: 2});
+        layer.msg(/*[[${logStatusBean.status}]]*/, {icon: 2});
 //        删除session中的managerLogBean
         /*[[${session.managerLogBean = null}]]*/
     })
@@ -77,7 +81,6 @@
     layui.use(["layer"], function()
     {
         var layer = layui.layer;
-
         layer.msg(/*[[${session.userLogBean.status}]]*/, {icon: 2});
 //        删除session中的userLogBean
         /*[[${session.userLogBean = null}]]*/

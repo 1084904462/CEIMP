@@ -24,10 +24,10 @@
                         <a href="provincialGovernmentScholarship">省政府奖学金</a>
                     </dd>
                     <dd>
-                        <a href="nationalInspirationalScholarship">国家励志奖学金</a>
+                        <a href="schoolScholarship">校奖学金</a>
                     </dd>
                     <dd>
-                        <a href="nationalInspirationalScholarship">国家励志奖学金</a>
+                        <a href="tripleAStudent">三好学生</a>
                     </dd>
                 </dl>
             </li>
@@ -69,7 +69,7 @@
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content">
-                            <a href="nationalInspirationalScholarship" class="scholarship-link">
+                            <a href="provincialGovernmentScholarship" class="scholarship-link">
                                 <div class="layui-timeline-title">省政府奖学金</div>
                             </a>
                         </div>
@@ -77,7 +77,7 @@
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content">
-                            <a href="nationalInspirationalScholarship" class="scholarship-link">
+                            <a href="schoolScholarship" class="scholarship-link">
                                 <div class="layui-timeline-title">校奖学金</div>
                             </a>
                         </div>
@@ -85,7 +85,7 @@
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content">
-                            <a href="nationalInspirationalScholarship" class="scholarship-link">
+                            <a href="tripleAStudent" class="scholarship-link">
                                 <div class="layui-timeline-title">三好学生</div>
                             </a>
                         </div>
@@ -120,7 +120,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">专业</label>
                             <div class="layui-input-inline">
-                                <select name="major">
+                                <select name="major" required="required" lay-verify="required">
                                     <option value=""></option>
                                     <option value="软件工程">软件工程</option>
                                     <option value="计算机科学与技术">计算机科学与技术</option>
@@ -134,7 +134,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">班级</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="z" autocomplete="off" class="layui-input"/>
+                                <input type="text" name="z" required="required" lay-verify="required" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">联系电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="phone" autocomplete="off" class="layui-input"/>
+                                <input type="text" name="phone" required="required" lay-verify="required|phone" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -157,7 +157,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">政治面貌</label>
                             <div class="layui-input-inline">
-                                <select name="political">
+                                <select name="political" required="required" lay-verify="required">
                                     <option value=""></option>
                                     <option value="群众">群众</option>
                                     <option value="共青团员">共青团员</option>
@@ -169,7 +169,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">出生年月</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="birth" name="birth" placeholder="yyyy-MM" autocomplete="off" class="layui-input"/>
+                                <input type="text" id="birth" required="required" lay-verify="required" name="birth" placeholder="例：1996年12月" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                     </div>
@@ -177,109 +177,111 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">民族</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="nation" autocomplete="off" class="layui-input"/>
+                                <select name="nation" id="nation" required="required" lay-verify="required" lay-search=""></select>
+                                <!--<input type="text" name="nation" placeholder="汉族" autocomplete="off" class="layui-input"/>-->
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">入学时间</label>
-                            <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" name="entranceYear" placeholder="XXXX" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline">
+                                <input type="text" id="entrance" name="entrance" required="required" lay-verify="required" placeholder="例：2015年09月" autocomplete="off" class="layui-input"/>
                             </div>
-                            <div class="layui-form-mid">年</div>
-                            <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" name="entranceMonth" placeholder="XX" autocomplete="off" class="layui-input"/>
-                            </div>
-                            <div class="layui-form-mid">月</div>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">身份证</label>
                         <div class="layui-input-block">
-                            <input type="text" name="identity" autocomplete="off" class="layui-input"/>
+                            <input type="text" name="identity" required="required" lay-verify="required|identity" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">排名</label>
-                            <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" name="gpRank" placeholder="绩点排名" autocomplete="off" class="layui-input"/>
+                            <label class="layui-form-label">绩点排名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="gpRank" value="1/72" placeholder="绩点排名" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
                             </div>
-                            <div class="layui-form-mid">/</div>
-                            <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" name="ceRank" placeholder="综测排名" autocomplete="off" class="layui-input"/>
-                            </div>
-                            <div class="layui-form-mid">/</div>
-                            <div class="layui-input-inline" style="width: 100px;">
-                                <input type="text" name="peopleSum" placeholder="专业总人数" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">综测排名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="gpRank" value="1/72" placeholder="综测排名" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
                             </div>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">必修课</label>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" name="passSum" placeholder="及格门数" autocomplete="off" class="layui-input"/>
+                            <input type="text" name="passSum" required="required" lay-verify="required|number" placeholder="及格门数" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">/</div>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" name="subSum" placeholder="总门数" autocomplete="off" class="layui-input"/>
+                            <input type="text" name="subSum" required="required" lay-verify="required|number" placeholder="总门数" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-form-text" style="margin-bottom: 5px">
                         <label class="layui-form-label">获奖情况</label>
-                        <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                                <input type="text" name="date1" placeholder="日期" autocomplete="off" class="layui-input"/>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="date1" name="date1" placeholder="日期" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="award1" placeholder="奖项名称" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 290px;">
+                                <input type="text" name="award1" lay-verify="scholarshipName" placeholder="奖项名称（34字以内）" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="unit1" placeholder="颁奖单位" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 240px;">
+                                <input type="text" name="unit1" lay-verify="scholarshipUnit" placeholder="颁奖单位（30字内）" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
-                        <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                                <input type="text" name="date2" placeholder="" autocomplete="off" class="layui-input"/>
+                        <div class="layui-inline">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="date2" name="date2" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="award2" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 290px;">
+                                <input type="text" name="award2" lay-verify="scholarshipName" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="unit2" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 240px;">
+                                <input type="text" name="unit2" lay-verify="scholarshipUnit" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
-                        <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                                <input type="text" name="date3" placeholder="" autocomplete="off" class="layui-input"/>
+                        <div class="layui-inline">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="date3" name="date3" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="award3" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 290px;">
+                                <input type="text" name="award3" lay-verify="scholarshipName" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="unit3" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 240px;">
+                                <input type="text" name="unit3" lay-verify="scholarshipUnit" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
-                        <div class="layui-input-block">
-                            <div class="layui-input-inline">
-                                <input type="text" name="date4" placeholder="" autocomplete="off" class="layui-input"/>
+                        <div class="layui-inline">
+                            <div class="layui-input-inline" style="width: 100px;">
+                                <input type="text" id="date4" name="date4" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="award4" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 290px;">
+                                <input type="text" name="award4" lay-verify="scholarshipName" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                             <div class="layui-form-mid">-</div>
-                            <div class="layui-input-inline">
-                                <input type="text" name="unit4" placeholder="" autocomplete="off" class="layui-input"/>
+                            <div class="layui-input-inline" style="width: 240px;">
+                                <input type="text" name="unit4" lay-verify="scholarshipUnit" placeholder="" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">家庭月收入</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="monthIncome" required="required" lay-verify="required|number" autocomplete="off" class="layui-input"/>
+                            </div>
+                        </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">家庭户口</label>
                             <div class="layui-input-block">
@@ -291,20 +293,20 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">收入来源</label>
                         <div class="layui-input-block">
-                            <input type="text" name="incomeSource" autocomplete="off" class="layui-input"/>
+                            <input type="text" required="required" lay-verify="required" placeholder="30字以内" name="incomeSource" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">家庭月收入</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="monthIncome" autocomplete="off" class="layui-input"/>
+                            <label class="layui-form-label">家庭人口数</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="familySum" required="required" lay-verify="required|number" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">家庭人口数</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="familySum" autocomplete="off" class="layui-input"/>
+                            <label class="layui-form-label">邮政编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="postalCode" required="required" lay-verify="required|postcode" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                     </div>
@@ -312,15 +314,7 @@
                         <div class="layui-block">
                             <label class="layui-form-label">家庭住址</label>
                             <div class="layui-input-block">
-                                <input type="text" name="address" autocomplete="off" class="layui-input"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">邮政编码</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="postalCode" autocomplete="off" class="layui-input"/>
+                                <input type="text" placeholder="54字以内" required="required" lay-verify="required|address" name="address" autocomplete="off" class="layui-input"/>
                             </div>
                         </div>
                     </div>
@@ -336,11 +330,11 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">申请理由</label>
                         <div class="layui-input-block">
-                            <textarea name="reason" placeholder="200字以内" class="layui-textarea"></textarea>
+                            <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn" lay-submit="" lay-filter="demo2">提交</button>
+                        <button class="layui-btn" lay-submit="lay-submit">提交</button>
                     </div>
                 </form>
             </div>
@@ -350,18 +344,5 @@
 <script th:src="@{/js/plugins/jquery-3.1.1.min.js}"/>
 <script th:src="@{/js/plugins/html5shiv.min.js}"/>
 <script th:src="@{/plugins/layui/layui.js}"/>
-<script>
-    layui.use(['form', 'element', 'laydate'], function()
-    {
-        var element = layui.element;
-        var form = layui.form;
-        var laydate = layui.laydate;
-
-        laydate.render({
-            elem: '#birth',
-            type: 'month',
-            btns: ['clear', 'confirm']
-        })
-    })
-</script>
+<script th:src="@{/js/scholarship.js}"/>
 </html>
