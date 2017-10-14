@@ -75,6 +75,20 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
             {
                 return "字数不能超过200字";
             }
+        },
+        recommendReason: function(value, item)
+        {
+            if(value.length > 100)
+            {
+                return "字数不能超过100字";
+            }
+        },
+        opinion: function(value, item)
+        {
+            if(value.length > 100)
+            {
+                return "字数不能超过100字";
+            }
         }
     })
 })
