@@ -22,19 +22,29 @@ public class TripleastudentServiceImpl implements TripleastudentService {
     @Transactional
     @Override
     public int insertTripleastudent(String userId, String reason) {
-        return 0;
+        Tripleastudent tripleastudent = new Tripleastudent();
+        tripleastudent.setUserid(userId);
+        tripleastudent.setReason(reason);
+        return tripleastudentMapper.insertSelective(tripleastudent);
     }
 
     @Transactional
     @Override
     public int updateTripleastudent(String userId, String reason) {
-        return 0;
+        Tripleastudent tripleastudent = new Tripleastudent();
+        tripleastudent.setUserid(userId);
+        tripleastudent.setReason(reason);
+        TripleastudentExample example = new TripleastudentExample();
+        example.or().andUseridEqualTo(userId);
+        return tripleastudentMapper.updateByExampleSelective(tripleastudent,example);
     }
 
     @Transactional
     @Override
     public int deleteTripleastudent(String userId) {
-        return 0;
+        TripleastudentExample example = new TripleastudentExample();
+        example.or().andUseridEqualTo(userId);
+        return tripleastudentMapper.deleteByExample(example);
     }
 
     @Transactional

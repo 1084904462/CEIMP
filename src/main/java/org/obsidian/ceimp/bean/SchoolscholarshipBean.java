@@ -4,38 +4,27 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2017/10/14.
  */
 public class SchoolscholarshipBean {
-    private String classId;
-
-    private String username;
-
     private String userId;
-
-    private String sex;
-
-    private String nation;
-
+    private String username;
+    private String major;
+    private String classId;
     private String political;
-
+    private String sex;
+    private String nation;
     private String job;
-
     private String charact;
-
     private String study;
-
     private String ability;
-
     private String all;
-
     private String rank;
-
     private String level;
-
     private String reason;
 
     @Override
     public String toString() {
         return "SchoolscholarshipBean{" +
-                "classId='" + classId + '\'' +
+                "major='" + major + '\'' +
+                ", classId='" + classId + '\'' +
                 ", username='" + username + '\'' +
                 ", userId='" + userId + '\'' +
                 ", sex='" + sex + '\'' +
@@ -50,6 +39,14 @@ public class SchoolscholarshipBean {
                 ", level='" + level + '\'' +
                 ", reason='" + reason + '\'' +
                 '}';
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getClassId() {

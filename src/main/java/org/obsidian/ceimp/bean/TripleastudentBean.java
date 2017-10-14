@@ -4,41 +4,31 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2017/10/14.
  */
 public class TripleastudentBean {
-    private String classId;
-
-    private String username;
-
     private String userId;
-
-    private String sex;
-
-    private String nation;
-
+    private String username;
+    private String major;
+    private String classId;
     private String political;
-
+    private String sex;
+    private String nation;
     private String job;
-
     private String character;
-
     private String study;
-
     private String ability;
-
     private String all;
-
     private String rank;
-
     private String reason;
 
     @Override
     public String toString() {
         return "TripleastudentBean{" +
-                "classId='" + classId + '\'' +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
-                ", userId='" + userId + '\'' +
+                ", major='" + major + '\'' +
+                ", classId='" + classId + '\'' +
+                ", political='" + political + '\'' +
                 ", sex='" + sex + '\'' +
                 ", nation='" + nation + '\'' +
-                ", political='" + political + '\'' +
                 ", job='" + job + '\'' +
                 ", character='" + character + '\'' +
                 ", study='" + study + '\'' +
@@ -49,12 +39,12 @@ public class TripleastudentBean {
                 '}';
     }
 
-    public String getClassId() {
-        return classId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setClassId(String classId) {
-        this.classId = classId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -65,12 +55,28 @@ public class TripleastudentBean {
         this.username = username;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getMajor() {
+        return major;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getPolitical() {
+        return political;
+    }
+
+    public void setPolitical(String political) {
+        this.political = political;
     }
 
     public String getSex() {
@@ -87,14 +93,6 @@ public class TripleastudentBean {
 
     public void setNation(String nation) {
         this.nation = nation;
-    }
-
-    public String getPolitical() {
-        return political;
-    }
-
-    public void setPolitical(String political) {
-        this.political = political;
     }
 
     public String getJob() {

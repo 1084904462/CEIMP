@@ -10,6 +10,8 @@ import java.util.List;
 public interface UserssService {
     int updateUserss(String userId,String sex,String entryTime,String phone);
 
+    int updateUserss(String userId,String sex, String nation, String political, String job);
+
     List<String> selectAllUserId();
 
     Userss selectByUserId(String userId);

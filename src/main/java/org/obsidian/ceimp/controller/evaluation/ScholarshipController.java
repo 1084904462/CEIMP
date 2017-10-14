@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -92,6 +93,113 @@ public class ScholarshipController {
         Nationalinspirationalscholarship nationalinspirationalscholarship = nationalinspirationalscholarshipService.selectByUserId(userId);
 
         NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = new NationalinspirationalscholarshipBean();
+        model.addAttribute("nationalinspirationalscholarshipBean",nationalinspirationalscholarshipBean);
+		return "scholarship/nationalInspirationalScholarship";
+	}
+	@RequestMapping(value = "/u/provincialGovernmentScholarship")
+	public String provincialGovernmentScholarship(HttpSession session,Model model){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        String userId = userssBean.getUserId();
+        Userss userss = userssService.selectByUserId(userId);
+        Provincialgovernmentscholarship provincialgovernmentscholarship = provincialgovernmentscholarshipService.selectByUserId(userId);
+
+        ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = this.getProvincialgovernmentscholarshipBean(userss,provincialgovernmentscholarship);
+        model.addAttribute("provincialgovernmentscholarshipBean",provincialgovernmentscholarshipBean);
+        return "scholarship/provincialGovernmentScholarship";
+	}
+	@RequestMapping(value = "/u/schoolScholarship")
+	public String schoolScholarship(HttpSession session,Model model){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        String userId = userssBean.getUserId();
+        Userss userss = userssService.selectByUserId(userId);
+        Schoolscholarship schoolscholarship = schoolscholarshipService.selectByUserId(userId);
+
+        SchoolscholarshipBean schoolscholarshipBean = this.getSchoolscholarshipBean(userss,schoolscholarship);
+        model.addAttribute("schoolscholarshipBean",schoolscholarshipBean);
+		return "scholarship/schoolScholarship";
+	}
+	@RequestMapping(value = "/u/tripleAStudent")
+	public String tripleAStudent(HttpSession session,Model model){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        String userId = userssBean.getUserId();
+        Userss userss = userssService.selectByUserId(userId);
+        Tripleastudent tripleastudent = tripleastudentService.selectByUserId(userId);
+        TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent);
+        model.addAttribute("tripleastudentBean",tripleastudentBean);
+		return "scholarship/tripleAStudent";
+	}
+	@RequestMapping(value = "/u/changePassword", method = RequestMethod.GET)
+    private String changePassword(){
+	    return "scholarship/changePassword";
+    }
+	@RequestMapping(value = "/u/changedPassword", method = RequestMethod.POST)
+	public String changedPassword(HttpSession session, Model model,
+                                 @RequestParam(value = "oldPassword")String oldPassword,
+                                 @RequestParam(value = "newPassword")String newPassword,
+                                 @RequestParam(value = "confirmPassword")String confirmPassword){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        String userId = userssBean.getUserId();
+        Userss userss = userssService.selectByUserId(userId);
+        ChangePasswordBean changePasswordBean = null;
+        if(userss.getPassword().equals(oldPassword)){
+            if(newPassword.length() >= 6){
+                if(newPassword.equals("888888")){
+                    changePasswordBean = new ChangePasswordBean("密码不能设为888888");
+                }
+                else{
+                    if(newPassword.equals(confirmPassword)){
+                        userssService.updatePassword(userId,newPassword);
+                        changePasswordBean = new ChangePasswordBean("密码修改成功");
+                    }
+                    else{
+                        changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
+                    }
+                }
+            }
+            else{
+                changePasswordBean = new ChangePasswordBean("新密码必须大于6位");
+            }
+        }
+        else{
+            changePasswordBean = new ChangePasswordBean("旧密码输入错误");
+        }
+        model.addAttribute("changePasswordBean",changePasswordBean);
+        return "scholarship/changePassword";
+	}
+
+
+
+
+
+	@RequestMapping(value = "/u/tripleAStudent/submit", method = RequestMethod.POST)
+    public String tripleAStudentSubmit(HttpSession session,Model model,HttpServletRequest request){
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
+        String sex = request.getParameter("sex");
+	    String nation = request.getParameter("nation");
+	    String political = request.getParameter("political");
+	    String job = request.getParameter("job");
+	    String reason = request.getParameter("reason");
+        Tripleastudent tripleastudent = tripleastudentService.selectByUserId(userId);
+        if(tripleastudent == null){
+            tripleastudentService.insertTripleastudent(userId,reason);
+        }
+        else{
+            tripleastudentService.updateTripleastudent(userId,reason);
+        }
+        userssService.updateUserss(userId,sex,nation,political,job);
+
+        Userss userss = userssService.selectByUserId(userId);
+        Tripleastudent tripleastudent1 = tripleastudentService.selectByUserId(userId);
+	    TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent1);
+	    model.addAttribute("tripleastudentBean",tripleastudentBean);
+	    return "redirect:/u/tripleAStudent";
+    }
+
+
+
+
+    public NationalinspirationalscholarshipBean getNationalinspirationalscholarshipBean(Userss userss,Nationalinspirationalscholarship nationalinspirationalscholarship){
+        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = new NationalinspirationalscholarshipBean();
         nationalinspirationalscholarshipBean.setMajor(userss.getMajor());
         nationalinspirationalscholarshipBean.setClassId(userss.getClassId());
         nationalinspirationalscholarshipBean.setUsername(userss.getUsername());
@@ -130,19 +238,9 @@ public class ScholarshipController {
             nationalinspirationalscholarshipBean.setApplyReason(nationalinspirationalscholarship.getApplyreason());
             nationalinspirationalscholarshipBean.setOpinion(nationalinspirationalscholarship.getOpinion());
         }
-        model.addAttribute("nationalinspirationalscholarshipBean",nationalinspirationalscholarshipBean);
-		return "scholarship/nationalInspirationalScholarship";
-	}
-
-	@RequestMapping(value = "/u/provincialGovernmentScholarship")
-	public String provincialGovernmentScholarship(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
-        Userss userss = userssService.selectByUserId(userId);
-        Provincialgovernmentscholarship provincialgovernmentscholarship = provincialgovernmentscholarshipService.selectByUserId(userId);
-        System.out.println(userss);
-        System.out.println(provincialgovernmentscholarship);
-
+        return nationalinspirationalscholarshipBean;
+    }
+    public ProvincialgovernmentscholarshipBean getProvincialgovernmentscholarshipBean(Userss userss,Provincialgovernmentscholarship provincialgovernmentscholarship ){
         ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = new ProvincialgovernmentscholarshipBean();
         provincialgovernmentscholarshipBean.setUserId(userss.getUserId());
         provincialgovernmentscholarshipBean.setUsername(userss.getUsername());
@@ -175,21 +273,12 @@ public class ScholarshipController {
             provincialgovernmentscholarshipBean.setRecommendReason(provincialgovernmentscholarship.getRecommendreason());
             provincialgovernmentscholarshipBean.setOpinion(provincialgovernmentscholarship.getOpinion());
         }
-        model.addAttribute("provincialgovernmentscholarshipBean",provincialgovernmentscholarshipBean);
-        return "scholarship/provincialGovernmentScholarship";
-	}
-
-	@RequestMapping(value = "/u/schoolScholarship")
-	public String schoolScholarship(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
-        Userss userss = userssService.selectByUserId(userId);
-        Schoolscholarship schoolscholarship = schoolscholarshipService.selectByUserId(userId);
-        System.out.println(userss);
-        System.out.println(schoolscholarship);
-
+        return provincialgovernmentscholarshipBean;
+    }
+    public SchoolscholarshipBean getSchoolscholarshipBean(Userss userss,Schoolscholarship schoolscholarship){
         SchoolscholarshipBean schoolscholarshipBean = new SchoolscholarshipBean();
-        schoolscholarshipBean.setClassId(userss.getMajor() + userss.getClassId());
+        schoolscholarshipBean.setMajor(userss.getMajor());
+        schoolscholarshipBean.setClassId(userss.getClassId());
         schoolscholarshipBean.setUserId(userss.getUserId());
         schoolscholarshipBean.setUsername(userss.getUsername());
         schoolscholarshipBean.setSex(userss.getSex());
@@ -201,28 +290,21 @@ public class ScholarshipController {
         schoolscholarshipBean.setAbility(userss.getAbility());
         schoolscholarshipBean.setAll(userss.getAll());
         schoolscholarshipBean.setRank(userss.getCe() + "/" + userss.getMajorSum());
-        if(schoolscholarship != null){
+        if(schoolscholarship != null) {
             schoolscholarshipBean.setLevel(schoolscholarship.getLevel());
             schoolscholarshipBean.setReason(schoolscholarship.getReason());
         }
-        model.addAttribute("schoolscholarshipBean",schoolscholarshipBean);
-		return "scholarship/schoolScholarship";
-	}
-
-	@RequestMapping(value = "/u/tripleAStudent")
-	public String tripleAStudent(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
-        Userss userss = userssService.selectByUserId(userId);
-        Tripleastudent tripleastudent = tripleastudentService.selectByUserId(userId);
-
+        return schoolscholarshipBean;
+    }
+    public TripleastudentBean getTripleastudentBean(Userss userss,Tripleastudent tripleastudent){
         TripleastudentBean tripleastudentBean = new TripleastudentBean();
-        tripleastudentBean.setClassId(userss.getMajor() + userss.getClassId());
-        tripleastudentBean.setUsername(userss.getUsername());
         tripleastudentBean.setUserId(userss.getUserId());
+        tripleastudentBean.setUsername(userss.getUsername());
+        tripleastudentBean.setMajor(userss.getMajor());
+        tripleastudentBean.setClassId(userss.getClassId());
+        tripleastudentBean.setPolitical(userss.getPolitical());
         tripleastudentBean.setSex(userss.getSex());
         tripleastudentBean.setNation(userss.getNation());
-        tripleastudentBean.setPolitical(userss.getPolitical());
         tripleastudentBean.setJob(userss.getJob());
         tripleastudentBean.setCharacter(userss.getCharacter());
         tripleastudentBean.setStudy(userss.getStudy());
@@ -232,47 +314,6 @@ public class ScholarshipController {
         if(tripleastudent != null){
             tripleastudentBean.setReason(tripleastudent.getReason());
         }
-        model.addAttribute("tripleastudentBean",tripleastudentBean);
-		return "scholarship/tripleAStudent";
-	}
-
-	@RequestMapping(value = "/u/changePassword", method = RequestMethod.GET)
-    private String changePassword(){
-	    return "scholarship/changePassword";
+        return tripleastudentBean;
     }
-
-	@RequestMapping(value = "/u/changedPassword", method = RequestMethod.POST)
-	public String changedPassword(HttpSession session, Model model,
-                                 @RequestParam(value = "oldPassword")String oldPassword,
-                                 @RequestParam(value = "newPassword")String newPassword,
-                                 @RequestParam(value = "confirmPassword")String confirmPassword){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
-        Userss userss = userssService.selectByUserId(userId);
-        ChangePasswordBean changePasswordBean = null;
-        if(userss.getPassword().equals(oldPassword)){
-            if(newPassword.length() >= 6){
-                if(newPassword.equals("888888")){
-                    changePasswordBean = new ChangePasswordBean("密码不能设为888888");
-                }
-                else{
-                    if(newPassword.equals(confirmPassword)){
-                        userssService.updatePassword(userId,newPassword);
-                        changePasswordBean = new ChangePasswordBean("密码修改成功");
-                    }
-                    else{
-                        changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
-                    }
-                }
-            }
-            else{
-                changePasswordBean = new ChangePasswordBean("新密码必须大于6位");
-            }
-        }
-        else{
-            changePasswordBean = new ChangePasswordBean("旧密码输入错误");
-        }
-        model.addAttribute("changePasswordBean",changePasswordBean);
-        return "scholarship/changePassword";
-	}
 }
