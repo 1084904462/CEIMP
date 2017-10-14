@@ -12,6 +12,7 @@ public class ProvincialgovernmentscholarshipBean {
     private String nation;
     private String entrance;
     private String major;
+    private String classId;
     private String phone;
     private String identity;
     private String gpRank;
@@ -133,7 +134,17 @@ public class ProvincialgovernmentscholarshipBean {
         this.major = major;
     }
 
-    public String getPhone() {
+	public String getClassId()
+	{
+		return classId;
+	}
+
+	public void setClassId(String classId)
+	{
+		this.classId = classId;
+	}
+
+	public String getPhone() {
         return phone;
     }
 
