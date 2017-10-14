@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.NationalinspirationalscholarshipMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Nationalinspirationalscholarship">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="classId" jdbcType="VARCHAR" property="classid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birth" jdbcType="VARCHAR" property="birth" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="entrance" jdbcType="VARCHAR" property="entrance" />
+    <result column="political" jdbcType="VARCHAR" property="political" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="gpRank" jdbcType="VARCHAR" property="gprank" />
+    <result column="passSum" jdbcType="VARCHAR" property="passsum" />
+    <result column="subSum" jdbcType="VARCHAR" property="subsum" />
+    <result column="ceRank" jdbcType="VARCHAR" property="cerank" />
+    <result column="date1" jdbcType="VARCHAR" property="date1" />
+    <result column="award1" jdbcType="VARCHAR" property="award1" />
+    <result column="unit1" jdbcType="VARCHAR" property="unit1" />
+    <result column="date2" jdbcType="VARCHAR" property="date2" />
+    <result column="award2" jdbcType="VARCHAR" property="award2" />
+    <result column="unit2" jdbcType="VARCHAR" property="unit2" />
+    <result column="date3" jdbcType="VARCHAR" property="date3" />
+    <result column="award3" jdbcType="VARCHAR" property="award3" />
+    <result column="unit3" jdbcType="VARCHAR" property="unit3" />
+    <result column="date4" jdbcType="VARCHAR" property="date4" />
+    <result column="award4" jdbcType="VARCHAR" property="award4" />
+    <result column="unit4" jdbcType="VARCHAR" property="unit4" />
+    <result column="resident" jdbcType="VARCHAR" property="resident" />
+    <result column="incomeSource" jdbcType="VARCHAR" property="incomesource" />
+    <result column="monthIncome" jdbcType="VARCHAR" property="monthincome" />
+    <result column="familySum" jdbcType="VARCHAR" property="familysum" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="postalCode" jdbcType="VARCHAR" property="postalcode" />
+    <result column="situation" jdbcType="VARCHAR" property="situation" />
+    <result column="applyReason" jdbcType="VARCHAR" property="applyreason" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, major, classId, username, sex, birth, userId, nation, entrance, political, phone, 
+    identity, gpRank, passSum, subSum, ceRank, date1, award1, unit1, date2, award2, unit2, 
+    date3, award3, unit3, date4, award4, unit4, resident, incomeSource, monthIncome, 
+    familySum, address, postalCode, situation, applyReason, opinion
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.NationalinspirationalscholarshipExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from nationalinspirationalscholarship
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.NationalinspirationalscholarshipExample">
+    delete from nationalinspirationalscholarship
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.Nationalinspirationalscholarship">
+    insert into nationalinspirationalscholarship (id, major, classId, 
+      username, sex, birth, 
+      userId, nation, entrance, 
+      political, phone, identity, 
+      gpRank, passSum, subSum, 
+      ceRank, date1, award1, 
+      unit1, date2, award2, 
+      unit2, date3, award3, 
+      unit3, date4, award4, 
+      unit4, resident, incomeSource, 
+      monthIncome, familySum, address, 
+      postalCode, situation, applyReason, 
+      opinion)
+    values (#{id,jdbcType=INTEGER}, #{major,jdbcType=VARCHAR}, #{classid,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{entrance,jdbcType=VARCHAR}, 
+      #{political,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+      #{gprank,jdbcType=VARCHAR}, #{passsum,jdbcType=VARCHAR}, #{subsum,jdbcType=VARCHAR}, 
+      #{cerank,jdbcType=VARCHAR}, #{date1,jdbcType=VARCHAR}, #{award1,jdbcType=VARCHAR}, 
+      #{unit1,jdbcType=VARCHAR}, #{date2,jdbcType=VARCHAR}, #{award2,jdbcType=VARCHAR}, 
+      #{unit2,jdbcType=VARCHAR}, #{date3,jdbcType=VARCHAR}, #{award3,jdbcType=VARCHAR}, 
+      #{unit3,jdbcType=VARCHAR}, #{date4,jdbcType=VARCHAR}, #{award4,jdbcType=VARCHAR}, 
+      #{unit4,jdbcType=VARCHAR}, #{resident,jdbcType=VARCHAR}, #{incomesource,jdbcType=VARCHAR}, 
+      #{monthincome,jdbcType=VARCHAR}, #{familysum,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{postalcode,jdbcType=VARCHAR}, #{situation,jdbcType=VARCHAR}, #{applyreason,jdbcType=VARCHAR}, 
+      #{opinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Nationalinspirationalscholarship">
+    insert into nationalinspirationalscholarship
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="classid != null">
+        classId,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="entrance != null">
+        entrance,
+      </if>
+      <if test="political != null">
+        political,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="gprank != null">
+        gpRank,
+      </if>
+      <if test="passsum != null">
+        passSum,
+      </if>
+      <if test="subsum != null">
+        subSum,
+      </if>
+      <if test="cerank != null">
+        ceRank,
+      </if>
+      <if test="date1 != null">
+        date1,
+      </if>
+      <if test="award1 != null">
+        award1,
+      </if>
+      <if test="unit1 != null">
+        unit1,
+      </if>
+      <if test="date2 != null">
+        date2,
+      </if>
+      <if test="award2 != null">
+        award2,
+      </if>
+      <if test="unit2 != null">
+        unit2,
+      </if>
+      <if test="date3 != null">
+        date3,
+      </if>
+      <if test="award3 != null">
+        award3,
+      </if>
+      <if test="unit3 != null">
+        unit3,
+      </if>
+      <if test="date4 != null">
+        date4,
+      </if>
+      <if test="award4 != null">
+        award4,
+      </if>
+      <if test="unit4 != null">
+        unit4,
+      </if>
+      <if test="resident != null">
+        resident,
+      </if>
+      <if test="incomesource != null">
+        incomeSource,
+      </if>
+      <if test="monthincome != null">
+        monthIncome,
+      </if>
+      <if test="familysum != null">
+        familySum,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="postalcode != null">
+        postalCode,
+      </if>
+      <if test="situation != null">
+        situation,
+      </if>
+      <if test="applyreason != null">
+        applyReason,
+      </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="entrance != null">
+        #{entrance,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="gprank != null">
+        #{gprank,jdbcType=VARCHAR},
+      </if>
+      <if test="passsum != null">
+        #{passsum,jdbcType=VARCHAR},
+      </if>
+      <if test="subsum != null">
+        #{subsum,jdbcType=VARCHAR},
+      </if>
+      <if test="cerank != null">
+        #{cerank,jdbcType=VARCHAR},
+      </if>
+      <if test="date1 != null">
+        #{date1,jdbcType=VARCHAR},
+      </if>
+      <if test="award1 != null">
+        #{award1,jdbcType=VARCHAR},
+      </if>
+      <if test="unit1 != null">
+        #{unit1,jdbcType=VARCHAR},
+      </if>
+      <if test="date2 != null">
+        #{date2,jdbcType=VARCHAR},
+      </if>
+      <if test="award2 != null">
+        #{award2,jdbcType=VARCHAR},
+      </if>
+      <if test="unit2 != null">
+        #{unit2,jdbcType=VARCHAR},
+      </if>
+      <if test="date3 != null">
+        #{date3,jdbcType=VARCHAR},
+      </if>
+      <if test="award3 != null">
+        #{award3,jdbcType=VARCHAR},
+      </if>
+      <if test="unit3 != null">
+        #{unit3,jdbcType=VARCHAR},
+      </if>
+      <if test="date4 != null">
+        #{date4,jdbcType=VARCHAR},
+      </if>
+      <if test="award4 != null">
+        #{award4,jdbcType=VARCHAR},
+      </if>
+      <if test="unit4 != null">
+        #{unit4,jdbcType=VARCHAR},
+      </if>
+      <if test="resident != null">
+        #{resident,jdbcType=VARCHAR},
+      </if>
+      <if test="incomesource != null">
+        #{incomesource,jdbcType=VARCHAR},
+      </if>
+      <if test="monthincome != null">
+        #{monthincome,jdbcType=VARCHAR},
+      </if>
+      <if test="familysum != null">
+        #{familysum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null">
+        #{postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null">
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="applyreason != null">
+        #{applyreason,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.NationalinspirationalscholarshipExample" resultType="java.lang.Long">
+    select count(*) from nationalinspirationalscholarship
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update nationalinspirationalscholarship
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.major != null">
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classid != null">
+        classId = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birth != null">
+        birth = #{record.birth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entrance != null">
+        entrance = #{record.entrance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.political != null">
+        political = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identity != null">
+        identity = #{record.identity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gprank != null">
+        gpRank = #{record.gprank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passsum != null">
+        passSum = #{record.passsum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subsum != null">
+        subSum = #{record.subsum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cerank != null">
+        ceRank = #{record.cerank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date1 != null">
+        date1 = #{record.date1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.award1 != null">
+        award1 = #{record.award1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit1 != null">
+        unit1 = #{record.unit1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date2 != null">
+        date2 = #{record.date2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.award2 != null">
+        award2 = #{record.award2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit2 != null">
+        unit2 = #{record.unit2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date3 != null">
+        date3 = #{record.date3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.award3 != null">
+        award3 = #{record.award3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit3 != null">
+        unit3 = #{record.unit3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date4 != null">
+        date4 = #{record.date4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.award4 != null">
+        award4 = #{record.award4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit4 != null">
+        unit4 = #{record.unit4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resident != null">
+        resident = #{record.resident,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomesource != null">
+        incomeSource = #{record.incomesource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthincome != null">
+        monthIncome = #{record.monthincome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familysum != null">
+        familySum = #{record.familysum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalcode != null">
+        postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.situation != null">
+        situation = #{record.situation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyreason != null">
+        applyReason = #{record.applyreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opinion != null">
+        opinion = #{record.opinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update nationalinspirationalscholarship
+    set id = #{record.id,jdbcType=INTEGER},
+      major = #{record.major,jdbcType=VARCHAR},
+      classId = #{record.classid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birth = #{record.birth,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      entrance = #{record.entrance,jdbcType=VARCHAR},
+      political = #{record.political,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      identity = #{record.identity,jdbcType=VARCHAR},
+      gpRank = #{record.gprank,jdbcType=VARCHAR},
+      passSum = #{record.passsum,jdbcType=VARCHAR},
+      subSum = #{record.subsum,jdbcType=VARCHAR},
+      ceRank = #{record.cerank,jdbcType=VARCHAR},
+      date1 = #{record.date1,jdbcType=VARCHAR},
+      award1 = #{record.award1,jdbcType=VARCHAR},
+      unit1 = #{record.unit1,jdbcType=VARCHAR},
+      date2 = #{record.date2,jdbcType=VARCHAR},
+      award2 = #{record.award2,jdbcType=VARCHAR},
+      unit2 = #{record.unit2,jdbcType=VARCHAR},
+      date3 = #{record.date3,jdbcType=VARCHAR},
+      award3 = #{record.award3,jdbcType=VARCHAR},
+      unit3 = #{record.unit3,jdbcType=VARCHAR},
+      date4 = #{record.date4,jdbcType=VARCHAR},
+      award4 = #{record.award4,jdbcType=VARCHAR},
+      unit4 = #{record.unit4,jdbcType=VARCHAR},
+      resident = #{record.resident,jdbcType=VARCHAR},
+      incomeSource = #{record.incomesource,jdbcType=VARCHAR},
+      monthIncome = #{record.monthincome,jdbcType=VARCHAR},
+      familySum = #{record.familysum,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      postalCode = #{record.postalcode,jdbcType=VARCHAR},
+      situation = #{record.situation,jdbcType=VARCHAR},
+      applyReason = #{record.applyreason,jdbcType=VARCHAR},
+      opinion = #{record.opinion,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,15 +1,12 @@
 package org.obsidian.ceimp.controller;
 
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.LogStatusBean;
-import org.obsidian.ceimp.bean.ManagerLogBean;
-import org.obsidian.ceimp.bean.UserLogBean;
-import org.obsidian.ceimp.entity.ClassManager;
-import org.obsidian.ceimp.entity.SchoolManager;
-import org.obsidian.ceimp.entity.Users;
+import org.obsidian.ceimp.bean.*;
+import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.ClassManagerService;
 import org.obsidian.ceimp.service.SchoolManagerService;
 import org.obsidian.ceimp.service.UsersService;
+import org.obsidian.ceimp.service.UserssService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +35,9 @@ public class LogController {
     @Autowired
     private SchoolManagerService schoolManagerService;
 
+    @Autowired
+    private UserssService userssService;
+
     /**
      * 访问根路径/
      * 返回重定向/login
@@ -45,8 +45,84 @@ public class LogController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String defaultPage(){
-        return "redirect:/test";
+        return "redirect:/Login";
     }
+
+    @RequestMapping(value = "/u/index", method = RequestMethod.GET)
+    public String uIndex(){
+        return "uIndex";
+    }
+
+    @RequestMapping(value = "/m/index", method = RequestMethod.GET)
+    public String mIndex(){
+        return "mIndex";
+    }
+
+    @RequestMapping(value = "/Login", method = RequestMethod.GET)
+    public String Login(HttpSession session){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
+        if(userssBean != null && !"".equals(userssBean.getUserId())){
+            return "redirect:/u/index";
+        }
+        if(managerBean != null && !"".equals(managerBean.getManagerId())){
+            return "redirect:/m/index";
+        }
+        return "loading";
+    }
+
+    @RequestMapping(value = "/uLogin", method = RequestMethod.POST)
+    public String uLogin(HttpSession session, Model model, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
+        if(userssBean != null){
+            session.removeAttribute("userssBean");
+            session.removeAttribute("logStatusBean");
+        }
+        if(managerBean != null){
+            session.removeAttribute("managerBean");
+            session.removeAttribute("logStatusBean");
+        }
+
+        Userss userss = userssService.selectByUserId(userId);
+        if(userss != null){
+            if(userss.getPassword().equals(password)){
+                logger.info("用户 " + userId + " 登录成功");
+                userssBean = new UserssBean();
+                userssBean.setUserId(userId);
+                session.setAttribute("userssBean",userssBean);
+                LogStatusBean logStatusBean = new LogStatusBean("登录成功");
+                session.setAttribute("logStatusBean",logStatusBean);
+                return "redirect:/u/index";
+            }
+            else {
+                logger.info("用户 " + userId + " 密码错误");
+                LogStatusBean logStatusBean = new LogStatusBean("密码错误");
+                session.setAttribute("logStatusBean",logStatusBean);
+            }
+        }
+        else {
+            logger.info("没有 " + userId + " 该用户");
+            LogStatusBean logStatusBean = new LogStatusBean("无该用户");
+            session.setAttribute("logStatusBean",logStatusBean);
+        }
+        return "redirect:/Login";
+    }
+
+    @RequestMapping(value = "/uLogout", method = RequestMethod.GET)
+    public String uLogOut(HttpSession session){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        if(userssBean != null){
+            logger.info("用户 " + userssBean.getUserId() + " 登出");
+            session.removeAttribute("userssBean");
+            session.removeAttribute("logStatusBean");
+        }
+        return "redirect:/Login";
+    }
+
+
+
+
 
     /**
      * 访问/login

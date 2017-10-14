@@ -45,52 +45,13 @@ public class TestController {
 	    return "test";
     }
 
-    @RequestMapping(value = "/test/nationalScholarship", method = RequestMethod.POST)
-    public void nationalScholarship(HttpServletRequest request,HttpServletResponse response) throws IOException {
-        String identity = request.getParameter("identity");
-        char a = 'a';
-        String userId = request.getParameter("userId");
-        String username = request.getParameter("username");
-        String inputUrl = "F:\\ideaworkspace\\CEIMP\\src\\main\\resources\\国家奖学金模板.docx";
-        String outputUrl = "D:\\award\\nationalScholarship\\" + userId + username + "国家奖学金.docx";
-        Map<String,String> textMap = new HashMap<>();
-        textMap.put("school",request.getParameter("school"));
-        textMap.put("userId",userId);
-        textMap.put("phone",request.getParameter("phone"));
-        textMap.put("username",username);
-        textMap.put("sex",request.getParameter("sex"));
-        textMap.put("political",request.getParameter("political"));
-        textMap.put("birth",request.getParameter("birthYear") + "年" + request.getParameter("birthMonth") + "月");
-        textMap.put("nation",request.getParameter("nation"));
-        textMap.put("entrance",request.getParameter("entranceYear") + "年" + request.getParameter("entranceMonth") + "月");
-        textMap.put("major",request.getParameter("major"));
-        textMap.put("gpRank",request.getParameter("gpRank") + "/" + request.getParameter("peopleSum"));
-        textMap.put("ceRank",request.getParameter("ceRank") + "/" + request.getParameter("peopleSum"));
-        textMap.put("passSum",request.getParameter("passSum"));
-        textMap.put("subSum",request.getParameter("subSum"));
-        textMap.put("date1",request.getParameter("date1"));
-        textMap.put("award1",request.getParameter("award1"));
-        textMap.put("unit1",request.getParameter("unit1"));
-        textMap.put("date2",request.getParameter("date2"));
-        textMap.put("award2",request.getParameter("award2"));
-        textMap.put("unit2",request.getParameter("unit2"));
-        textMap.put("date3",request.getParameter("date3"));
-        textMap.put("award3",request.getParameter("award3"));
-        textMap.put("unit3",request.getParameter("unit3"));
-        textMap.put("date4",request.getParameter("date4"));
-        textMap.put("award4",request.getParameter("award4"));
-        textMap.put("unit4",request.getParameter("unit4"));
-        textMap.put("reason",request.getParameter("reason"));
-        for(int i=0;i<18;i++){
-            textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
-        }
-        WordUtil.getInstance().generateWord(inputUrl,outputUrl,textMap);
-        DownloadUtil.getInstance().download(outputUrl,response,userId + username + "国家奖学金.docx");
+    @RequestMapping(value = "/manager/zip", method = RequestMethod.GET)
+    public String zip(){
+        return "zip";
     }
 
     @RequestMapping(value = "/test/nationalInspirationalScholarship", method = RequestMethod.POST)
     public void nationalInspirationalScholarship(HttpServletRequest request,HttpServletResponse response) throws IOException{
-        System.out.println(request.getParameter("z"));
         String identity = request.getParameter("identity");
         char a = 'a';
         String resident = request.getParameter("resident");
@@ -113,7 +74,7 @@ public class TestController {
         String outputUrl = "D:\\award\\nationalInspirationalScholarship\\" + userId + username + "国家励志奖学金.docx";
         Map<String,String> textMap = new HashMap<>();
         textMap.put("major",request.getParameter("major"));
-        textMap.put("z",request.getParameter("z"));
+        textMap.put("classId",request.getParameter("classId"));
         textMap.put("username",username);
         textMap.put("userId",userId);
         textMap.put("phone",request.getParameter("phone"));
@@ -143,7 +104,8 @@ public class TestController {
         textMap.put("familySum",request.getParameter("familySum"));
         textMap.put("address",request.getParameter("address"));
         textMap.put("postalCode",request.getParameter("postalCode"));
-        textMap.put("reason",request.getParameter("reason"));
+        textMap.put("applyReason",request.getParameter("applyReason"));
+        textMap.put("opinion",request.getParameter("opinion"));
         for(int i=0;i<18;i++){
             textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
         }
@@ -186,9 +148,9 @@ public class TestController {
         textMap.put("date4",request.getParameter("date4"));
         textMap.put("award4",request.getParameter("award4"));
         textMap.put("unit4",request.getParameter("unit4"));
-        textMap.put("reason1",request.getParameter("reason1"));
-        textMap.put("reason2",request.getParameter("reason2"));
-        textMap.put("reason3",request.getParameter("reason3"));
+        textMap.put("applyReason",request.getParameter("applyReason"));
+        textMap.put("recommendReason",request.getParameter("recommendReason"));
+        textMap.put("opinion",request.getParameter("opinion"));
         for(int i=0;i<18;i++){
             textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
         }
@@ -207,13 +169,12 @@ public class TestController {
         textMap.put("username",username);
         textMap.put("userId",userId);
         textMap.put("sex",request.getParameter("sex"));
-        textMap.put("a",request.getParameter("a"));
+        textMap.put("nation",request.getParameter("nation"));
         textMap.put("political",request.getParameter("political"));
         textMap.put("job",request.getParameter("job"));
-        textMap.put("character",request.getParameter("character"));
+        textMap.put("charact",request.getParameter("charact"));
         textMap.put("study",request.getParameter("study"));
         textMap.put("ability",request.getParameter("ability"));
-        textMap.put("personality",request.getParameter("personality"));
         textMap.put("all",request.getParameter("all"));
         textMap.put("rank",request.getParameter("rank") + "/" + request.getParameter("peopleSum"));
         textMap.put("level",request.getParameter("level"));
@@ -234,7 +195,7 @@ public class TestController {
         textMap.put("username",username);
         textMap.put("userId",userId);
         textMap.put("sex",request.getParameter("sex"));
-        textMap.put("a",request.getParameter("a"));
+        textMap.put("nation",request.getParameter("nation"));
         textMap.put("political",request.getParameter("political"));
         textMap.put("job",request.getParameter("job"));
         textMap.put("character",request.getParameter("character"));
@@ -248,10 +209,7 @@ public class TestController {
         DownloadUtil.getInstance().download(outputUrl,response,userId + username + "三好学生.docx");
     }
 
-    @RequestMapping(value = "/manager/zip", method = RequestMethod.GET)
-    public String zip(){
-        return "zip";
-    }
+
 
     @RequestMapping(value = "/manager/zip/tripleAStudent", method = RequestMethod.GET)
     public void zipTripleAStudent(HttpServletRequest request,HttpServletResponse response) throws IOException {

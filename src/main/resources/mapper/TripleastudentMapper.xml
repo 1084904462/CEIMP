@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.TripleastudentMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Tripleastudent">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="classId" jdbcType="VARCHAR" property="classid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="political" jdbcType="VARCHAR" property="political" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="character" jdbcType="VARCHAR" property="character" />
+    <result column="study" jdbcType="VARCHAR" property="study" />
+    <result column="ability" jdbcType="VARCHAR" property="ability" />
+    <result column="all" jdbcType="VARCHAR" property="all" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, classId, username, userId, sex, nation, political, job, character, study, ability, 
+    all, rank, reason
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TripleastudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tripleastudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.TripleastudentExample">
+    delete from tripleastudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.Tripleastudent">
+    insert into tripleastudent (id, classId, username, 
+      userId, sex, nation, 
+      political, job, character, 
+      study, ability, all, 
+      rank, reason)
+    values (#{id,jdbcType=INTEGER}, #{classid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{political,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{character,jdbcType=VARCHAR}, 
+      #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, #{all,jdbcType=VARCHAR}, 
+      #{rank,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Tripleastudent">
+    insert into tripleastudent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classid != null">
+        classId,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="political != null">
+        political,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="character != null">
+        character,
+      </if>
+      <if test="study != null">
+        study,
+      </if>
+      <if test="ability != null">
+        ability,
+      </if>
+      <if test="all != null">
+        all,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null">
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="character != null">
+        #{character,jdbcType=VARCHAR},
+      </if>
+      <if test="study != null">
+        #{study,jdbcType=VARCHAR},
+      </if>
+      <if test="ability != null">
+        #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="all != null">
+        #{all,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.TripleastudentExample" resultType="java.lang.Long">
+    select count(*) from tripleastudent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tripleastudent
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null">
+        classId = #{record.classid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        userId = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.political != null">
+        political = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.character != null">
+        character = #{record.character,jdbcType=VARCHAR},
+      </if>
+      <if test="record.study != null">
+        study = #{record.study,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ability != null">
+        ability = #{record.ability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.all != null">
+        all = #{record.all,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null">
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tripleastudent
+    set id = #{record.id,jdbcType=INTEGER},
+      classId = #{record.classid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      userId = #{record.userid,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      political = #{record.political,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      character = #{record.character,jdbcType=VARCHAR},
+      study = #{record.study,jdbcType=VARCHAR},
+      ability = #{record.ability,jdbcType=VARCHAR},
+      all = #{record.all,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=VARCHAR},
+      reason = #{record.reason,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
