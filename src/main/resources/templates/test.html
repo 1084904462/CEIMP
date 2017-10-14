@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>获奖填写</title>
-    <link rel="stylesheet" th:href="@{../css/plugins/font-awesome/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" th:href="@{../plugins/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{../plugins/layui/css/layui.css}"/>
-    <link rel="stylesheet" th:href="@{../css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}"/>
 </head>
 <body>
     <div class="layui-tab">
@@ -738,53 +738,15 @@
     </div>
 
 </body>
-<script th:src="@{../js/plugins/jquery-3.1.1.min.js}"/>
-<script th:src="@{../js/plugins/echarts.min.js}"/>
-<script th:src="@{../js/plugins/html5shiv.min.js}"/>
-<script th:src="@{../plugins/bootstrap/js/bootstrap.min.js}"/>
-<script th:src="@{../plugins/layui/layui.js}"/>
-<script th:src="@{../js/common.js}"/>
+<script th:src="@{/js/plugins/jquery-3.1.1.min.js}"/>
+<script th:src="@{/js/plugins/echarts.min.js}"/>
+<script th:src="@{/js/plugins/html5shiv.min.js}"/>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"/>
+<script th:src="@{/plugins/layui/layui.js}"/>
+<script th:src="@{/js/common.js}"/>
 <script>
     layui.use(['element','form'], function(){
-        var $ = layui.jquery
-            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-        //触发事件
-        var active = {
-            tabAdd: function(){
-                //新增一个Tab项
-                element.tabAdd('demo', {
-                    title: '新选项'+ (Math.random()*1000|0) //用于演示
-                    ,content: '内容'+ (Math.random()*1000|0)
-                    ,id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                })
-            }
-            ,tabDelete: function(othis){
-                //删除指定Tab项
-                element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-                othis.addClass('layui-btn-disabled');
-            }
-            ,tabChange: function(){
-                //切换到指定Tab项
-                element.tabChange('demo', '22'); //切换到：用户管理
-            }
-        };
-
-        $('.site-demo-active').on('click', function(){
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
-        });
-
-        //Hash地址的定位
-        var layid = location.hash.replace(/^#test=/, '');
-        element.tabChange('test', layid);
-
-        element.on('tab(test)', function(elem){
-            location.hash = 'test='+ $(this).attr('lay-id');
-        });
-
+        var element = layui.element;
     });
 </script>
 </html>

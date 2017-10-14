@@ -1,6 +1,7 @@
 /**
  * Created by asus on 2017/8/20.
  */
+
 layui.use(["form"], function()
 {
     var form = layui.form;
