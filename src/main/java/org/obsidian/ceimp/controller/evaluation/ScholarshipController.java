@@ -62,4 +62,29 @@ public class ScholarshipController {
         logger.info("显示奖学金：" + scholarshipDetailBean.getScholarshipName());
         return scholarshipDetailBean;
     }
+
+	@RequestMapping(value = "/nationalInspirationalScholarship")
+	public String nationalInspirationalScholarship(Model model){
+		return "scholarship/nationalInspirationalScholarship";
+	}
+
+	@RequestMapping(value = "/provincialGovernmentScholarship")
+	public String provincialGovernmentScholarship(Model model){
+		return "scholarship/provincialGovernmentScholarship";
+	}
+
+	@RequestMapping(value = "/schoolScholarship")
+	public String schoolScholarship(Model model){
+		return "scholarship/schoolScholarship";
+	}
+
+	@RequestMapping(value = "/tripleAStudent")
+	public String tripleAStudent(Model model){
+		return "scholarship/tripleAStudent";
+	}
+
+	@RequestMapping(value = "/changePassword")
+	public String changePassword(Model model){
+		return "scholarship/changePassword";
+	}
 }

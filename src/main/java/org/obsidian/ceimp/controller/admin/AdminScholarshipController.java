@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.controller.admin;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.service.ScholarshipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ public class AdminScholarshipController {
 
     @RequestMapping(value = "/admin/scholarship")
     public String adminScholarship(Model model){
-
         return "admin/scholarship";
     }
 }

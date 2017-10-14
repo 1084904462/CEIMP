@@ -10,7 +10,8 @@
     <link rel="stylesheet" th:href="@{css/login.css}"/>
 </head>
 <body>
-    <div class="container-fluid">
+<p th:text="${logStatusBean}"></p>
+<div class="container-fluid">
         <div class="login-div">
             <div class="login-title">
                 <span>综合测评信息管理平台</span>
@@ -62,7 +63,7 @@
 <script th:src="@{plugins/layui/layui.js}"/>
 <script th:src="@{js/common.js}"/>
 <script th:src="@{js/login.js}"/>
-<script type="text/javascript" th:inline="javascript" th:if="${session.managerLogBean}">
+<script type="text/javascript" th:inline="javascript" th:if="${logStatusBean}">
     layui.use(["layer"], function()
     {
         var layer = layui.layer;
