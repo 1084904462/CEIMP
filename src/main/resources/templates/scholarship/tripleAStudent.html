@@ -101,18 +101,18 @@
             </ul>
         </div>
         <div class="layui-col-lg9 layui-col-md9">
-            <form class="layui-form layui-form-pane" action="/u/tripleAStudent" method="post">
+            <form class="layui-form layui-form-pane" action="/u/tripleAStudent" method="post" th:object="${tripleastudentBean}">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">学号</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userId" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.userId}"/>
+                            <input type="text" name="userId" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{userId}"/>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.username}"/>
+                            <input type="text" name="username" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{username}"/>
                         </div>
                     </div>
                 </div>
@@ -120,13 +120,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">专业</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="major" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.major}"/>
+                            <input type="text" name="major" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{major}"/>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">班级</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="z" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.classId}"/>
+                            <input type="text" name="z" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{classId}"/>
                         </div>
                     </div>
                 </div>
@@ -136,18 +136,18 @@
                         <div class="layui-input-inline">
                             <select name="political" required="required" lay-verify="required">
                                 <option value=""></option>
-                                <option value="群众">群众</option>
-                                <option value="共青团员">共青团员</option>
-                                <option value="预备党员">预备党员</option>
-                                <option value="中共党员">中共党员</option>
+                                <option value="群众" th:selected="*{political == '群众'}">群众</option>
+                                <option value="共青团员" th:selected="*{political == '共青团员'}">共青团员</option>
+                                <option value="预备党员" th:selected="*{political == '预备党员'}">预备党员</option>
+                                <option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">性别</label>
-                        <div class="layui-input-inline">
-                            <input type="radio" name="sex" value="男" title="男" checked=""/>
-                            <input type="radio" name="sex" value="女" title="女"/>
+                        <div class="layui-inline">
+                            <input type="radio" name="sex" value="男" title="男" checked="" th:checked="*{sex == '男'}"/>
+                            <input type="radio" name="sex" value="女" title="女" th:checked="*{sex == '女'}"/>
                         </div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">担任职务</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="job" required="required" lay-verify="required" autocomplete="off" class="layui-input"/>
+                            <input type="text" name="job" required="required" lay-verify="required" autocomplete="off" class="layui-input" th:value="*{job}"/>
                         </div>
                     </div>
                 </div>
@@ -171,25 +171,25 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">品德素质(15分)</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="charact" value="14" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
+                                <input type="text" name="charact" value="14" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{character}"/>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">学业素质(70分)</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="study" value="65" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
+                                <input type="text" name="study" value="65" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{study}"/>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">发展能力素质(15分)</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="ability" value="12" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
+                                <input type="text" name="ability" value="12" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{ability}"/>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="layui-form-label">总分</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="all" value="91" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
+                                <input type="text" name="all" value="91" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{all}"/>
                             </div>
                         </div>
                     </div>
@@ -198,14 +198,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">专业名次</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="rank" value="1/72" placeholder="专业名次" autocomplete="off" class="layui-input layui-disabled" disabled="disabled"/>
+                            <input type="text" name="rank" value="1/72" placeholder="专业名次" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{rank}"/>
                         </div>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">申请理由</label>
                     <div class="layui-input-block">
-                        <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea"></textarea>
+                        <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:field="*{reason}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -220,4 +220,34 @@
 <script th:src="@{/js/plugins/html5shiv.min.js}"/>
 <script th:src="@{/plugins/layui/layui.js}"/>
 <script th:src="@{/js/scholarship.js}"/>
+<script type="text/javascript" th:inline="javascript">
+    layui.use(['form'], function()
+    {
+        var form = layui.form;
+
+        var nationArray = ["", "汉族","蒙古族","回族","藏族","维吾尔族","苗族","彝族","壮族","布依族","朝鲜族","满族","侗族","瑶族","白族","土家族",
+            "哈尼族","哈萨克族","傣族","黎族","傈僳族","佤族","畲族","高山族","拉祜族","水族","东乡族","纳西族","景颇族","柯尔克孜族",
+            "土族","达斡尔族","仫佬族","羌族","布朗族","撒拉族","毛南族","仡佬族","锡伯族","阿昌族","普米族","塔吉克族","怒族", "乌孜别克族",
+            "俄罗斯族","鄂温克族","德昂族","保安族","裕固族","京族","塔塔尔族","独龙族","鄂伦春族","赫哲族","门巴族","珞巴族","基诺族"];
+
+
+        /*<![CDATA[*/
+        var myNation = /*[[${tripleastudentBean.nation}]]*/;
+
+
+        var $nationSelect = $("#nation");
+        for(var i = 0; i < nationArray.length; i++){
+            if(myNation == nationArray[i])
+            {
+                $nationSelect.append(`<option value='${nationArray[i]}' selected>${nationArray[i]}</option>`);
+            }
+            else
+            {
+                $nationSelect.append(`<option value='${nationArray[i]}'>${nationArray[i]}</option>`);
+            }
+        }
+        /*]]>*/
+        form.render('select');
+    })
+</script>
 </html>

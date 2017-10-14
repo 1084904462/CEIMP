@@ -152,6 +152,7 @@ public class ScholarshipController {
         provincialgovernmentscholarshipBean.setNation(userss.getNation());
         provincialgovernmentscholarshipBean.setEntrance(userss.getEntrance());
         provincialgovernmentscholarshipBean.setMajor(userss.getMajor());
+        provincialgovernmentscholarshipBean.setClassId(userss.getClassId());
         provincialgovernmentscholarshipBean.setPhone(userss.getPhone());
         provincialgovernmentscholarshipBean.setIdentity(userss.getIdentity());
         provincialgovernmentscholarshipBean.setGpRank(userss.getGp() + "/" + userss.getMajorSum());
