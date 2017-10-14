@@ -27,11 +27,14 @@
     <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
   <select id="selectAllUserId" resultType="java.lang.String">
-    select userId from userss
+    select user_id from userss
   </select>
   <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select userss.* from userss where user_id = #{userId}
   </select>
+  <update id="updatePassword" parameterType="map">
+    update userss set password = #{password} where user_id = #{userId}
+  </update>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

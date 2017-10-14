@@ -37,21 +37,21 @@
         </javaClientGenerator>
 
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <!--<table tableName="nationalinspirationalscholarship" domainObjectName="Nationalinspirationalscholarship"-->
-               <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true" selectByExampleQueryId="true"/>-->
-        <!--<table tableName="provincialgovernmentscholarship" domainObjectName="Provincialgovernmentscholarship"-->
-               <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true" selectByExampleQueryId="true"/>-->
-        <!--<table tableName="schoolscholarship" domainObjectName="Schoolscholarship"-->
-               <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true" selectByExampleQueryId="true"/>-->
-        <!--<table tableName="tripleastudent" domainObjectName="Tripleastudent"-->
-               <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true" selectByExampleQueryId="true"/>-->
-        <table tableName="userss" domainObjectName="Userss"
+        <table tableName="nationalinspirationalscholarship" domainObjectName="Nationalinspirationalscholarship"
                enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
                enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="provincialgovernmentscholarship" domainObjectName="Provincialgovernmentscholarship"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="schoolscholarship" domainObjectName="Schoolscholarship"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+        <table tableName="tripleastudent" domainObjectName="Tripleastudent"
+               enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"
+               enableSelectByExample="true" selectByExampleQueryId="true"/>
+
+
+
 
         <!--<table tableName="award" domainObjectName="Award"-->
                <!--enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true"-->

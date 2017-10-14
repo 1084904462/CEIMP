@@ -3,7 +3,7 @@ package org.obsidian.ceimp.entity;
 public class Manager {
     private Integer id;
 
-    private String managerid;
+    private String managerId;
 
     private String password;
 
@@ -11,7 +11,7 @@ public class Manager {
     public String toString() {
         return "Manager{" +
                 "id=" + id +
-                ", managerid='" + managerid + '\'' +
+                ", managerId='" + managerId + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -24,12 +24,12 @@ public class Manager {
         this.id = id;
     }
 
-    public String getManagerid() {
-        return managerid;
+    public String getManagerId() {
+        return managerId;
     }
 
-    public void setManagerid(String managerid) {
-        this.managerid = managerid == null ? null : managerid.trim();
+    public void setManagerId(String managerId) {
+        this.managerId = managerId == null ? null : managerId.trim();
     }
 
     public String getPassword() {

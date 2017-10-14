@@ -47,7 +47,10 @@ public class Test {
 
     @org.junit.Test
     public void test1(){
+        String password = "888888";
         List<String> list = userssService.selectAllUserId();
-        System.out.println(list.toString());
+        for(int i=0;i<list.size();i++){
+            userssService.updatePassword(list.get(i),password);
+        }
     }
 }

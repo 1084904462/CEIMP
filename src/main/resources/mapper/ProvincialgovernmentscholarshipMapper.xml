@@ -4,19 +4,6 @@
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Provincialgovernmentscholarship">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="userId" jdbcType="VARCHAR" property="userid" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
-    <result column="birth" jdbcType="VARCHAR" property="birth" />
-    <result column="political" jdbcType="VARCHAR" property="political" />
-    <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="entrance" jdbcType="VARCHAR" property="entrance" />
-    <result column="major" jdbcType="VARCHAR" property="major" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="identity" jdbcType="VARCHAR" property="identity" />
-    <result column="gpRank" jdbcType="VARCHAR" property="gprank" />
-    <result column="passSum" jdbcType="VARCHAR" property="passsum" />
-    <result column="subSum" jdbcType="VARCHAR" property="subsum" />
-    <result column="ceRank" jdbcType="VARCHAR" property="cerank" />
     <result column="date1" jdbcType="VARCHAR" property="date1" />
     <result column="award1" jdbcType="VARCHAR" property="award1" />
     <result column="unit1" jdbcType="VARCHAR" property="unit1" />
@@ -92,9 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userId, username, sex, birth, political, nation, entrance, major, phone, identity, 
-    gpRank, passSum, subSum, ceRank, date1, award1, unit1, date2, award2, unit2, date3, 
-    award3, unit3, date4, award4, unit4, applyReason, recommendReason, opinion
+    id, userId, date1, award1, unit1, date2, award2, unit2, date3, award3, unit3, date4, 
+    award4, unit4, applyReason, recommendReason, opinion
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ProvincialgovernmentscholarshipExample" resultMap="BaseResultMap">
     select
@@ -118,28 +104,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Provincialgovernmentscholarship">
-    insert into provincialgovernmentscholarship (id, userId, username, 
-      sex, birth, political, 
-      nation, entrance, major, 
-      phone, identity, gpRank, 
-      passSum, subSum, ceRank, 
-      date1, award1, unit1, 
-      date2, award2, unit2, 
-      date3, award3, unit3, 
-      date4, award4, unit4, 
-      applyReason, recommendReason, opinion
-      )
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, 
-      #{nation,jdbcType=VARCHAR}, #{entrance,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{gprank,jdbcType=VARCHAR}, 
-      #{passsum,jdbcType=VARCHAR}, #{subsum,jdbcType=VARCHAR}, #{cerank,jdbcType=VARCHAR}, 
-      #{date1,jdbcType=VARCHAR}, #{award1,jdbcType=VARCHAR}, #{unit1,jdbcType=VARCHAR}, 
-      #{date2,jdbcType=VARCHAR}, #{award2,jdbcType=VARCHAR}, #{unit2,jdbcType=VARCHAR}, 
-      #{date3,jdbcType=VARCHAR}, #{award3,jdbcType=VARCHAR}, #{unit3,jdbcType=VARCHAR}, 
-      #{date4,jdbcType=VARCHAR}, #{award4,jdbcType=VARCHAR}, #{unit4,jdbcType=VARCHAR}, 
-      #{applyreason,jdbcType=VARCHAR}, #{recommendreason,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR}
-      )
+    insert into provincialgovernmentscholarship (id, userId, date1, 
+      award1, unit1, date2, 
+      award2, unit2, date3, 
+      award3, unit3, date4, 
+      award4, unit4, applyReason, 
+      recommendReason, opinion)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{date1,jdbcType=VARCHAR}, 
+      #{award1,jdbcType=VARCHAR}, #{unit1,jdbcType=VARCHAR}, #{date2,jdbcType=VARCHAR}, 
+      #{award2,jdbcType=VARCHAR}, #{unit2,jdbcType=VARCHAR}, #{date3,jdbcType=VARCHAR}, 
+      #{award3,jdbcType=VARCHAR}, #{unit3,jdbcType=VARCHAR}, #{date4,jdbcType=VARCHAR}, 
+      #{award4,jdbcType=VARCHAR}, #{unit4,jdbcType=VARCHAR}, #{applyreason,jdbcType=VARCHAR}, 
+      #{recommendreason,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Provincialgovernmentscholarship">
     insert into provincialgovernmentscholarship
@@ -149,45 +125,6 @@
       </if>
       <if test="userid != null">
         userId,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
-      <if test="sex != null">
-        sex,
-      </if>
-      <if test="birth != null">
-        birth,
-      </if>
-      <if test="political != null">
-        political,
-      </if>
-      <if test="nation != null">
-        nation,
-      </if>
-      <if test="entrance != null">
-        entrance,
-      </if>
-      <if test="major != null">
-        major,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="identity != null">
-        identity,
-      </if>
-      <if test="gprank != null">
-        gpRank,
-      </if>
-      <if test="passsum != null">
-        passSum,
-      </if>
-      <if test="subsum != null">
-        subSum,
-      </if>
-      <if test="cerank != null">
-        ceRank,
       </if>
       <if test="date1 != null">
         date1,
@@ -241,45 +178,6 @@
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="birth != null">
-        #{birth,jdbcType=VARCHAR},
-      </if>
-      <if test="political != null">
-        #{political,jdbcType=VARCHAR},
-      </if>
-      <if test="nation != null">
-        #{nation,jdbcType=VARCHAR},
-      </if>
-      <if test="entrance != null">
-        #{entrance,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null">
-        #{major,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="identity != null">
-        #{identity,jdbcType=VARCHAR},
-      </if>
-      <if test="gprank != null">
-        #{gprank,jdbcType=VARCHAR},
-      </if>
-      <if test="passsum != null">
-        #{passsum,jdbcType=VARCHAR},
-      </if>
-      <if test="subsum != null">
-        #{subsum,jdbcType=VARCHAR},
-      </if>
-      <if test="cerank != null">
-        #{cerank,jdbcType=VARCHAR},
       </if>
       <if test="date1 != null">
         #{date1,jdbcType=VARCHAR},
@@ -343,45 +241,6 @@
       <if test="record.userid != null">
         userId = #{record.userid,jdbcType=VARCHAR},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
-      <if test="record.birth != null">
-        birth = #{record.birth,jdbcType=VARCHAR},
-      </if>
-      <if test="record.political != null">
-        political = #{record.political,jdbcType=VARCHAR},
-      </if>
-      <if test="record.nation != null">
-        nation = #{record.nation,jdbcType=VARCHAR},
-      </if>
-      <if test="record.entrance != null">
-        entrance = #{record.entrance,jdbcType=VARCHAR},
-      </if>
-      <if test="record.major != null">
-        major = #{record.major,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.identity != null">
-        identity = #{record.identity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gprank != null">
-        gpRank = #{record.gprank,jdbcType=VARCHAR},
-      </if>
-      <if test="record.passsum != null">
-        passSum = #{record.passsum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.subsum != null">
-        subSum = #{record.subsum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cerank != null">
-        ceRank = #{record.cerank,jdbcType=VARCHAR},
-      </if>
       <if test="record.date1 != null">
         date1 = #{record.date1,jdbcType=VARCHAR},
       </if>
@@ -436,19 +295,6 @@
     update provincialgovernmentscholarship
     set id = #{record.id,jdbcType=INTEGER},
       userId = #{record.userid,jdbcType=VARCHAR},
-      username = #{record.username,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
-      birth = #{record.birth,jdbcType=VARCHAR},
-      political = #{record.political,jdbcType=VARCHAR},
-      nation = #{record.nation,jdbcType=VARCHAR},
-      entrance = #{record.entrance,jdbcType=VARCHAR},
-      major = #{record.major,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      identity = #{record.identity,jdbcType=VARCHAR},
-      gpRank = #{record.gprank,jdbcType=VARCHAR},
-      passSum = #{record.passsum,jdbcType=VARCHAR},
-      subSum = #{record.subsum,jdbcType=VARCHAR},
-      ceRank = #{record.cerank,jdbcType=VARCHAR},
       date1 = #{record.date1,jdbcType=VARCHAR},
       award1 = #{record.award1,jdbcType=VARCHAR},
       unit1 = #{record.unit1,jdbcType=VARCHAR},

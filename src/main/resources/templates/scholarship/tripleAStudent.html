@@ -101,18 +101,18 @@
             </ul>
         </div>
         <div class="layui-col-lg9 layui-col-md9">
-            <form class="layui-form layui-form-pane" action="/test/schoolScholarship" method="post">
+            <form class="layui-form layui-form-pane" action="/u/tripleAStudent" method="post">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">学号</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="userId" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" value="1150299303"/>
+                            <input type="text" name="userId" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.userId}"/>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">姓名</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="username" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" value="sq"/>
+                            <input type="text" name="username" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.username}"/>
                         </div>
                     </div>
                 </div>
@@ -120,13 +120,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">专业</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="major" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" value="软件工程"/>
+                            <input type="text" name="major" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.major}"/>
                         </div>
                     </div>
                     <div class="layui-inline">
                         <label class="layui-form-label">班级</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="z" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" value="152"/>
+                            <input type="text" name="z" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="${tripleastudentBean.classId}"/>
                         </div>
                     </div>
                 </div>

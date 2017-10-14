@@ -3,10 +3,7 @@ package org.obsidian.ceimp.controller;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.*;
-import org.obsidian.ceimp.service.ClassManagerService;
-import org.obsidian.ceimp.service.SchoolManagerService;
-import org.obsidian.ceimp.service.UsersService;
-import org.obsidian.ceimp.service.UserssService;
+import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +35,9 @@ public class LogController {
     @Autowired
     private UserssService userssService;
 
+    @Autowired
+    private ManagerService managerService;
+
     /**
      * 访问根路径/
      * 返回重定向/login
@@ -48,22 +48,12 @@ public class LogController {
         return "redirect:/Login";
     }
 
-    @RequestMapping(value = "/u/index", method = RequestMethod.GET)
-    public String uIndex(){
-        return "uIndex";
-    }
-
-    @RequestMapping(value = "/m/index", method = RequestMethod.GET)
-    public String mIndex(){
-        return "mIndex";
-    }
-
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public String Login(HttpSession session){
         UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
         ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
         if(userssBean != null && !"".equals(userssBean.getUserId())){
-            return "redirect:/u/index";
+            return "redirect:/u/nationalInspirationalScholarship";
         }
         if(managerBean != null && !"".equals(managerBean.getManagerId())){
             return "redirect:/m/index";
@@ -77,11 +67,9 @@ public class LogController {
         ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
         if(userssBean != null){
             session.removeAttribute("userssBean");
-            session.removeAttribute("logStatusBean");
         }
         if(managerBean != null){
             session.removeAttribute("managerBean");
-            session.removeAttribute("logStatusBean");
         }
 
         Userss userss = userssService.selectByUserId(userId);
@@ -91,22 +79,25 @@ public class LogController {
                 userssBean = new UserssBean();
                 userssBean.setUserId(userId);
                 session.setAttribute("userssBean",userssBean);
-                LogStatusBean logStatusBean = new LogStatusBean("登录成功");
-                session.setAttribute("logStatusBean",logStatusBean);
-                return "redirect:/u/index";
+                if(userss.getPassword().equals("888888")){
+                    return "redirect:/u/changePassword";
+                }
+                else{
+                    return "redirect:/u/nationalInspirationalScholarship";
+                }
             }
             else {
                 logger.info("用户 " + userId + " 密码错误");
-                LogStatusBean logStatusBean = new LogStatusBean("密码错误");
-                session.setAttribute("logStatusBean",logStatusBean);
+                LogStatusBean logStatusBean = new LogStatusBean("密码错误","用户");
+                model.addAttribute("logStatusBean",logStatusBean);
             }
         }
         else {
             logger.info("没有 " + userId + " 该用户");
-            LogStatusBean logStatusBean = new LogStatusBean("无该用户");
-            session.setAttribute("logStatusBean",logStatusBean);
+            LogStatusBean logStatusBean = new LogStatusBean("无该用户","用户");
+            model.addAttribute("logStatusBean",logStatusBean);
         }
-        return "redirect:/Login";
+        return "loading";
     }
 
     @RequestMapping(value = "/uLogout", method = RequestMethod.GET)
@@ -115,10 +106,62 @@ public class LogController {
         if(userssBean != null){
             logger.info("用户 " + userssBean.getUserId() + " 登出");
             session.removeAttribute("userssBean");
-            session.removeAttribute("logStatusBean");
         }
         return "redirect:/Login";
     }
+
+    @RequestMapping(value = "/m/index", method = RequestMethod.GET)
+    public String mIndex(){
+        return "mIndex";
+    }
+
+    @RequestMapping(value = "/mLogin", method = RequestMethod.POST)
+    public String mLogin(HttpSession session, Model model, @RequestParam(value = "managerId") String managerId, @RequestParam(value = "password") String password){
+        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
+        ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
+        if(userssBean != null){
+            session.removeAttribute("userssBean");
+        }
+        if(managerBean != null){
+            session.removeAttribute("managerBean");
+        }
+
+        Manager manager = managerService.selectByManagerId(managerId);
+        if(manager != null){
+            if(manager.getPassword().equals(password)){
+                logger.info("管理员 " + managerId + " 登录成功");
+                managerBean = new ManagerBean();
+                manager.setManagerId(managerId);
+                session.setAttribute("managerBean",managerBean);
+                    return "redirect:/m/index";
+            }
+            else {
+                logger.info("管理员 " + managerId + " 密码错误");
+                LogStatusBean logStatusBean = new LogStatusBean("密码错误","管理员");
+                model.addAttribute("logStatusBean",logStatusBean);
+            }
+        }
+        else {
+            logger.info("没有 " + managerId + " 该管理员");
+            LogStatusBean logStatusBean = new LogStatusBean("无该管理员","管理员");
+            model.addAttribute("logStatusBean",logStatusBean);
+        }
+        return "loading";
+    }
+
+    @RequestMapping(value = "/mLogout", method = RequestMethod.GET)
+    public String mLogout(HttpSession session){
+        ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
+        if(managerBean != null){
+            logger.info("管理员 " + managerBean.getManagerId() + " 登出");
+            session.removeAttribute("managerBean");
+        }
+        return "redirect:/Login";
+    }
+
+
+
+
 
 
 

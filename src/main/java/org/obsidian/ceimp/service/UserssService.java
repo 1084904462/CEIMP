@@ -13,4 +13,6 @@ public interface UserssService {
     List<String> selectAllUserId();
 
     Userss selectByUserId(String userId);
+
+    int updatePassword(String userId,String password);
 }

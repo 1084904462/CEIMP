@@ -3,35 +3,7 @@ package org.obsidian.ceimp.entity;
 public class Nationalinspirationalscholarship {
     private Integer id;
 
-    private String major;
-
-    private String classid;
-
-    private String username;
-
-    private String sex;
-
-    private String birth;
-
     private String userid;
-
-    private String nation;
-
-    private String entrance;
-
-    private String political;
-
-    private String phone;
-
-    private String identity;
-
-    private String gprank;
-
-    private String passsum;
-
-    private String subsum;
-
-    private String cerank;
 
     private String date1;
 
@@ -79,21 +51,7 @@ public class Nationalinspirationalscholarship {
     public String toString() {
         return "Nationalinspirationalscholarship{" +
                 "id=" + id +
-                ", major='" + major + '\'' +
-                ", classid='" + classid + '\'' +
-                ", username='" + username + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birth='" + birth + '\'' +
                 ", userid='" + userid + '\'' +
-                ", nation='" + nation + '\'' +
-                ", entrance='" + entrance + '\'' +
-                ", political='" + political + '\'' +
-                ", phone='" + phone + '\'' +
-                ", identity='" + identity + '\'' +
-                ", gprank='" + gprank + '\'' +
-                ", passsum='" + passsum + '\'' +
-                ", subsum='" + subsum + '\'' +
-                ", cerank='" + cerank + '\'' +
                 ", date1='" + date1 + '\'' +
                 ", award1='" + award1 + '\'' +
                 ", unit1='" + unit1 + '\'' +
@@ -126,124 +84,12 @@ public class Nationalinspirationalscholarship {
         this.id = id;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major == null ? null : major.trim();
-    }
-
-    public String getClassid() {
-        return classid;
-    }
-
-    public void setClassid(String classid) {
-        this.classid = classid == null ? null : classid.trim();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public String getBirth() {
-        return birth;
-    }
-
-    public void setBirth(String birth) {
-        this.birth = birth == null ? null : birth.trim();
-    }
-
     public String getUserid() {
         return userid;
     }
 
     public void setUserid(String userid) {
         this.userid = userid == null ? null : userid.trim();
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation == null ? null : nation.trim();
-    }
-
-    public String getEntrance() {
-        return entrance;
-    }
-
-    public void setEntrance(String entrance) {
-        this.entrance = entrance == null ? null : entrance.trim();
-    }
-
-    public String getPolitical() {
-        return political;
-    }
-
-    public void setPolitical(String political) {
-        this.political = political == null ? null : political.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
-
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity == null ? null : identity.trim();
-    }
-
-    public String getGprank() {
-        return gprank;
-    }
-
-    public void setGprank(String gprank) {
-        this.gprank = gprank == null ? null : gprank.trim();
-    }
-
-    public String getPasssum() {
-        return passsum;
-    }
-
-    public void setPasssum(String passsum) {
-        this.passsum = passsum == null ? null : passsum.trim();
-    }
-
-    public String getSubsum() {
-        return subsum;
-    }
-
-    public void setSubsum(String subsum) {
-        this.subsum = subsum == null ? null : subsum.trim();
-    }
-
-    public String getCerank() {
-        return cerank;
-    }
-
-    public void setCerank(String cerank) {
-        this.cerank = cerank == null ? null : cerank.trim();
     }
 
     public String getDate1() {

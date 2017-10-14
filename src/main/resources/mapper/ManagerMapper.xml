@@ -3,7 +3,7 @@
 <mapper namespace="org.obsidian.ceimp.dao.ManagerMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Manager">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="managerId" jdbcType="VARCHAR" property="managerid" />
+    <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, managerId, password
+    id, manager_id, password
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ManagerExample" resultMap="BaseResultMap">
     select
@@ -89,9 +89,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Manager">
-    insert into manager (id, managerId, password
+    insert into manager (id, manager_id, password
       )
-    values (#{id,jdbcType=INTEGER}, #{managerid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{managerId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Manager">
@@ -100,8 +100,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="managerid != null">
-        managerId,
+      <if test="managerId != null">
+        manager_id,
       </if>
       <if test="password != null">
         password,
@@ -111,8 +111,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="managerid != null">
-        #{managerid,jdbcType=VARCHAR},
+      <if test="managerId != null">
+        #{managerId,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -131,8 +131,8 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.managerid != null">
-        managerId = #{record.managerid,jdbcType=VARCHAR},
+      <if test="record.managerId != null">
+        manager_id = #{record.managerId,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
   <update id="updateByExample" parameterType="map">
     update manager
     set id = #{record.id,jdbcType=INTEGER},
-      managerId = #{record.managerid,jdbcType=VARCHAR},
+      manager_id = #{record.managerId,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

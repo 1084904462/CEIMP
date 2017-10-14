@@ -7,6 +7,8 @@ import org.obsidian.ceimp.entity.UserssExample;
 import java.util.List;
 
 public interface UserssMapper {
+    int updatePassword(@Param("userId") String userId,@Param("password") String password);
+
     Userss selectByUserId(String userId);
 
     List<String> selectAllUserId();

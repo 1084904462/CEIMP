@@ -164,73 +164,73 @@ public class ManagerExample {
             return (Criteria) this;
         }
 
-        public Criteria andManageridIsNull() {
-            addCriterion("managerId is null");
+        public Criteria andManagerIdIsNull() {
+            addCriterion("manager_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andManageridIsNotNull() {
-            addCriterion("managerId is not null");
+        public Criteria andManagerIdIsNotNull() {
+            addCriterion("manager_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andManageridEqualTo(String value) {
-            addCriterion("managerId =", value, "managerid");
+        public Criteria andManagerIdEqualTo(String value) {
+            addCriterion("manager_id =", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridNotEqualTo(String value) {
-            addCriterion("managerId <>", value, "managerid");
+        public Criteria andManagerIdNotEqualTo(String value) {
+            addCriterion("manager_id <>", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridGreaterThan(String value) {
-            addCriterion("managerId >", value, "managerid");
+        public Criteria andManagerIdGreaterThan(String value) {
+            addCriterion("manager_id >", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridGreaterThanOrEqualTo(String value) {
-            addCriterion("managerId >=", value, "managerid");
+        public Criteria andManagerIdGreaterThanOrEqualTo(String value) {
+            addCriterion("manager_id >=", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridLessThan(String value) {
-            addCriterion("managerId <", value, "managerid");
+        public Criteria andManagerIdLessThan(String value) {
+            addCriterion("manager_id <", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridLessThanOrEqualTo(String value) {
-            addCriterion("managerId <=", value, "managerid");
+        public Criteria andManagerIdLessThanOrEqualTo(String value) {
+            addCriterion("manager_id <=", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridLike(String value) {
-            addCriterion("managerId like", value, "managerid");
+        public Criteria andManagerIdLike(String value) {
+            addCriterion("manager_id like", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridNotLike(String value) {
-            addCriterion("managerId not like", value, "managerid");
+        public Criteria andManagerIdNotLike(String value) {
+            addCriterion("manager_id not like", value, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridIn(List<String> values) {
-            addCriterion("managerId in", values, "managerid");
+        public Criteria andManagerIdIn(List<String> values) {
+            addCriterion("manager_id in", values, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridNotIn(List<String> values) {
-            addCriterion("managerId not in", values, "managerid");
+        public Criteria andManagerIdNotIn(List<String> values) {
+            addCriterion("manager_id not in", values, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridBetween(String value1, String value2) {
-            addCriterion("managerId between", value1, value2, "managerid");
+        public Criteria andManagerIdBetween(String value1, String value2) {
+            addCriterion("manager_id between", value1, value2, "managerId");
             return (Criteria) this;
         }
 
-        public Criteria andManageridNotBetween(String value1, String value2) {
-            addCriterion("managerId not between", value1, value2, "managerid");
+        public Criteria andManagerIdNotBetween(String value1, String value2) {
+            addCriterion("manager_id not between", value1, value2, "managerId");
             return (Criteria) this;
         }
 

@@ -42,8 +42,15 @@ public class UserssServiceImpl implements UserssService {
         return list;
     }
 
+    @Transactional
     @Override
     public Userss selectByUserId(String userId) {
         return userssMapper.selectByUserId(userId);
+    }
+
+    @Transactional
+    @Override
+    public int updatePassword(String userId,String password) {
+        return userssMapper.updatePassword(userId,password);
     }
 }
