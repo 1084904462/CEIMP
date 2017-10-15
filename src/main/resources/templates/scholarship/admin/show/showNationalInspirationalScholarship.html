@@ -119,10 +119,10 @@
 
                             </div>
                         </fieldset>
-                        <table class="layui-table" lay-data="{id: 'table16', height: 'full-340', even: 'true'}" height="full-325" lay-filter="table15">
+                        <table class="layui-table" lay-data="{id: 'table16', height: 'full-340', even: 'true'}" height="full-325" lay-filter="table16">
                             <thead>
                             <tr>
-                                <th lay-data="{checkbox:true, fixed: true}"></th>
+                                <th lay-data="{field: 'id', checkbox:true, fixed: true}"></th>
                                 <th lay-data="{field: 'major', width: 180, sort: 'true'}">专业</th>
                                 <th lay-data="{field: 'majorClass', width: 200, sort: 'true'}">班级</th>
                                 <th lay-data="{field: 'userId', width: 170, sort: 'true'}">学号</th>
@@ -134,7 +134,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
-                                <td></td>
+                                <td th:text="${person.id}"></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>

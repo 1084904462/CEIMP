@@ -21,24 +21,21 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else
         {
-            // layer.open({
-            //     title: '在线调试',
-            //     content: JSON.stringify(data),
-            // });
+            var $form = $("<form>").attr({
+                style: "display:none",
+                method: "get",
+                action: "/m/admin/"
+            });
+            $('body').append($form);
 
-            $.ajax({
-                url: '/m/admin/zip',
-                type: 'get',
-                data: "zipBean=" + JSON.stringify(data),
-                success: function(data)
-                {
-                    console.log(data);
-                },
-                error: function(data)
-                {
-                    alert("失败");
-                }
-            })
+            var $input = $("<input>").attr({
+                type: "hidden",
+                name: "zipBean",
+                value: JSON.stringify(data),
+            });
+            $form.append($input);
+
+            $form.submit().remove();
         }
 
         console.log(checkStatus.data);//获取选中行的数据
@@ -49,6 +46,35 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     batchDownload15.click(batchDownload);
     var batchDownload16 = $("#batchDownload16");
     batchDownload16.click(batchDownload);
+    
+    function download(obj)
+    {
+        var data = obj.data;
+        var event = obj.event;
 
-    table.on
+        if(event == 'download')
+        {
+            layer.open({
+                title: '下载',
+                content: '[' + JSON.stringify(data) + ']',
+            })
+        }
+        else if(event == "del")
+        {
+            layer.open({
+                title: '删除',
+                content: "userId=" + data.userId + "&award=" + data.award,
+            })
+        }
+    }
+
+    table.on('tool(table15)', function(obj)
+    {
+        download(obj);
+    });
+
+    table.on('tool(table16)', function(obj)
+    {
+        download(obj);
+    })
 });
