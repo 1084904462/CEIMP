@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.NationalinspirationalscholarshipShowBean;
 import org.obsidian.ceimp.dao.NationalinspirationalscholarshipMapper;
 import org.obsidian.ceimp.entity.Nationalinspirationalscholarship;
 import org.obsidian.ceimp.entity.NationalinspirationalscholarshipExample;
@@ -97,5 +98,15 @@ public class NationalinspirationalscholarshipServiceImpl implements Nationalinsp
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<NationalinspirationalscholarshipShowBean> selectAllNationalinspirationalscholarship() {
+        List<NationalinspirationalscholarshipShowBean> list = nationalinspirationalscholarshipMapper.selectAllNationalinspirationalscholarship();
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

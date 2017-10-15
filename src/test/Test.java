@@ -1,5 +1,7 @@
 import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
+import org.obsidian.ceimp.bean.TripleastudentShowBean;
+import org.obsidian.ceimp.service.TripleastudentService;
 import org.obsidian.ceimp.service.UserssService;
 import org.obsidian.ceimp.util.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,6 +47,9 @@ public class Test {
     @Autowired
     private UserssService userssService;
 
+    @Autowired
+    private TripleastudentService tripleastudentService;
+
     @org.junit.Test
     public void test1(){
 //        String password = "888888";
@@ -53,5 +59,7 @@ public class Test {
 //        }
 //        String path = System.getProperty("user.dir");
 //        System.out.println(path);
+        List<TripleastudentShowBean> list = tripleastudentService.selectAllTripleastudent();
+        System.out.println(list.toString());
     }
 }

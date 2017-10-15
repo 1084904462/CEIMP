@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.TripleastudentShowBean;
 import org.obsidian.ceimp.entity.Tripleastudent;
 import org.obsidian.ceimp.entity.TripleastudentExample;
 
+import java.util.List;
+
 public interface TripleastudentMapper {
+    List<TripleastudentShowBean> selectAllTripleastudent();
+
     long countByExample(TripleastudentExample example);
 
     int deleteByExample(TripleastudentExample example);

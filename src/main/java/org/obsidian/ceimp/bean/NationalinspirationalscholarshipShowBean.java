@@ -3,7 +3,7 @@ package org.obsidian.ceimp.bean;
 /**
  * Created by BillChen on 2017/10/15.
  */
-public class TripleastudentShowBean {
+public class NationalinspirationalscholarshipShowBean {
     private int id;
     private String major;
     private String class_id;
@@ -13,7 +13,7 @@ public class TripleastudentShowBean {
 
     @Override
     public String toString() {
-        return "TripleastudentShowBean{" +
+        return "NationalinspirationalscholarshipShowBean{" +
                 "id=" + id +
                 ", major='" + major + '\'' +
                 ", class_id='" + class_id + '\'' +

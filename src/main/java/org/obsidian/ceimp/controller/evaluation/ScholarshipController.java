@@ -292,29 +292,33 @@ public class ScholarshipController {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
-        System.out.println(oldPassword + " " + newPassword + " " + confirmPassword);
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         ChangePasswordBean changePasswordBean = null;
         if(userss.getPassword().equals(oldPassword)){
             if(newPassword.length() >= 6){
-                if(newPassword.equals("888888")){
-                    changePasswordBean = new ChangePasswordBean("密码不能设为888888");
-                }
-                else{
-                    if(newPassword.equals(confirmPassword)){
-                        userssService.updatePassword(userId,newPassword);
-                        changePasswordBean = new ChangePasswordBean("密码修改成功");
-                        UserssBean userssBean = new UserssBean();
-                        userssBean.setUserId(userId);
-                        userssBean.setIsChangedPassword(1);
-                        session.removeAttribute("userssBean");
-                        session.setAttribute("userssBean",userssBean);
-                        return "redirect:/u/nationalInspirationalScholarship";
+                if(newPassword.length() <= 16){
+                    if(newPassword.equals("888888")){
+                        changePasswordBean = new ChangePasswordBean("密码不能设为888888");
                     }
                     else{
-                        changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
+                        if(newPassword.equals(confirmPassword)){
+                            userssService.updatePassword(userId,newPassword);
+                            changePasswordBean = new ChangePasswordBean("密码修改成功");
+                            UserssBean userssBean = new UserssBean();
+                            userssBean.setUserId(userId);
+                            userssBean.setIsChangedPassword(1);
+                            session.removeAttribute("userssBean");
+                            session.setAttribute("userssBean",userssBean);
+                            return "redirect:/u/nationalInspirationalScholarship";
+                        }
+                        else{
+                            changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
+                        }
                     }
+                }
+                else{
+                    changePasswordBean = new ChangePasswordBean("新密码必须小于16位");
                 }
             }
             else{

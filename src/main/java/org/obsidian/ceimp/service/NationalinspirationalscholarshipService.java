@@ -1,6 +1,9 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.NationalinspirationalscholarshipShowBean;
 import org.obsidian.ceimp.entity.Nationalinspirationalscholarship;
+
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/10/14.
@@ -27,4 +30,6 @@ public interface NationalinspirationalscholarshipService {
     int deleteNationalinspirationalscholarship(String userId);
 
     Nationalinspirationalscholarship selectByUserId(String userId);
+
+    List<NationalinspirationalscholarshipShowBean> selectAllNationalinspirationalscholarship();
 }

@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.TripleastudentShowBean;
 import org.obsidian.ceimp.dao.TripleastudentMapper;
 import org.obsidian.ceimp.entity.Tripleastudent;
 import org.obsidian.ceimp.entity.TripleastudentExample;
@@ -59,5 +60,15 @@ public class TripleastudentServiceImpl implements TripleastudentService {
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<TripleastudentShowBean> selectAllTripleastudent() {
+        List<TripleastudentShowBean> list = tripleastudentMapper.selectAllTripleastudent();
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

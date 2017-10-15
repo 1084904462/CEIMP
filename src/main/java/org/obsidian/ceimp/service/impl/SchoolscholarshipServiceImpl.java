@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.SchoolscholarshipShowBean;
 import org.obsidian.ceimp.dao.SchoolscholarshipMapper;
 import org.obsidian.ceimp.entity.Schoolscholarship;
 import org.obsidian.ceimp.entity.SchoolscholarshipExample;
@@ -18,6 +19,16 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
 
     @Autowired
     private SchoolscholarshipMapper schoolscholarshipMapper;
+
+    @Transactional
+    @Override
+    public List<SchoolscholarshipShowBean> selectAllSchoolscholarship() {
+        List<SchoolscholarshipShowBean> list = schoolscholarshipMapper.selectAllSchoolscholarship();
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
+    }
 
     @Transactional
     @Override
