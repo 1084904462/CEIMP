@@ -93,8 +93,7 @@ public class ScholarshipController {
 
 	@RequestMapping(value = "/u/nationalInspirationalScholarship")
 	public String nationalInspirationalScholarship(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Nationalinspirationalscholarship nationalinspirationalscholarship = nationalinspirationalscholarshipService.selectByUserId(userId);
 
@@ -104,8 +103,7 @@ public class ScholarshipController {
 	}
 	@RequestMapping(value = "/u/provincialGovernmentScholarship")
 	public String provincialGovernmentScholarship(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Provincialgovernmentscholarship provincialgovernmentscholarship = provincialgovernmentscholarshipService.selectByUserId(userId);
 
@@ -115,8 +113,7 @@ public class ScholarshipController {
 	}
 	@RequestMapping(value = "/u/schoolScholarship")
 	public String schoolScholarship(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Schoolscholarship schoolscholarship = schoolscholarshipService.selectByUserId(userId);
 
@@ -126,8 +123,7 @@ public class ScholarshipController {
 	}
 	@RequestMapping(value = "/u/tripleAStudent")
 	public String tripleAStudent(HttpSession session,Model model){
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Tripleastudent tripleastudent = tripleastudentService.selectByUserId(userId);
         TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent);
@@ -296,8 +292,7 @@ public class ScholarshipController {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("oldPassword");
         String confirmPassword = request.getParameter("oldPassword");
-        UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
-        String userId = userssBean.getUserId();
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         ChangePasswordBean changePasswordBean = null;
         if(userss.getPassword().equals(oldPassword)){
@@ -309,6 +304,11 @@ public class ScholarshipController {
                     if(newPassword.equals(confirmPassword)){
                         userssService.updatePassword(userId,newPassword);
                         changePasswordBean = new ChangePasswordBean("密码修改成功");
+                        UserssBean userssBean = new UserssBean();
+                        userssBean.setUserId(userId);
+                        userssBean.setIsChangedPassword(1);
+                        session.removeAttribute("userssBean");
+                        session.setAttribute("userssBean",userssBean);
                     }
                     else{
                         changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");

@@ -78,11 +78,14 @@ public class LogController {
                 logger.info("用户 " + userId + " 登录成功");
                 userssBean = new UserssBean();
                 userssBean.setUserId(userId);
-                session.setAttribute("userssBean",userssBean);
                 if(userss.getPassword().equals("888888")){
+                    userssBean.setIsChangedPassword(0);
+                    session.setAttribute("userssBean",userssBean);
                     return "redirect:/u/changePassword";
                 }
                 else{
+                    userssBean.setIsChangedPassword(1);
+                    session.setAttribute("userssBean",userssBean);
                     return "redirect:/u/nationalInspirationalScholarship";
                 }
             }

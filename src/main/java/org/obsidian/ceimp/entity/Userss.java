@@ -7,6 +7,8 @@ public class Userss {
 
     private String password;
 
+    private Integer isChangedPassword;
+
     private String username;
 
     private String major;
@@ -53,6 +55,7 @@ public class Userss {
                 "id=" + id +
                 ", userId='" + userId + '\'' +
                 ", password='" + password + '\'' +
+                ", isChangedPassword=" + isChangedPassword +
                 ", username='" + username + '\'' +
                 ", major='" + major + '\'' +
                 ", classId='" + classId + '\'' +
@@ -98,6 +101,14 @@ public class Userss {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public Integer getIsChangedPassword() {
+        return isChangedPassword;
+    }
+
+    public void setIsChangedPassword(Integer isChangedPassword) {
+        this.isChangedPassword = isChangedPassword;
     }
 
     public String getUsername() {

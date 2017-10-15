@@ -304,6 +304,66 @@ public class UserssExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsChangedPasswordIsNull() {
+            addCriterion("is_changed_password is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordIsNotNull() {
+            addCriterion("is_changed_password is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordEqualTo(Integer value) {
+            addCriterion("is_changed_password =", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordNotEqualTo(Integer value) {
+            addCriterion("is_changed_password <>", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordGreaterThan(Integer value) {
+            addCriterion("is_changed_password >", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_changed_password >=", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordLessThan(Integer value) {
+            addCriterion("is_changed_password <", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordLessThanOrEqualTo(Integer value) {
+            addCriterion("is_changed_password <=", value, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordIn(List<Integer> values) {
+            addCriterion("is_changed_password in", values, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordNotIn(List<Integer> values) {
+            addCriterion("is_changed_password not in", values, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordBetween(Integer value1, Integer value2) {
+            addCriterion("is_changed_password between", value1, value2, "isChangedPassword");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsChangedPasswordNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_changed_password not between", value1, value2, "isChangedPassword");
+            return (Criteria) this;
+        }
+
         public Criteria andUsernameIsNull() {
             addCriterion("username is null");
             return (Criteria) this;
