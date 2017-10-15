@@ -21,6 +21,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else
         {
+<<<<<<< HEAD
             // layer.open({
             //     title: '在线调试',
             //     content: JSON.stringify(data),
@@ -39,6 +40,23 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                     alert("失败");
                 }
             })
+=======
+            var $form = $("<form>").attr({
+                style: "display:none",
+                method: "get",
+                action: "/m/admin/"
+            });
+            $('body').append($form);
+
+            var $input = $("<input>").attr({
+                type: "hidden",
+                name: "zipBean",
+                value: JSON.stringify(data),
+            });
+            $form.append($input);
+
+            $form.submit().remove();
+>>>>>>> 4b4e5718fad801d6aa48ccaaadd7c0d118e89287
         }
 
         console.log(checkStatus.data);//获取选中行的数据
@@ -49,5 +67,38 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     batchDownload15.click(batchDownload);
     var batchDownload16 = $("#batchDownload16");
     batchDownload16.click(batchDownload);
+    
+    function download(obj)
+    {
+        var data = obj.data;
+        var event = obj.event;
 
+<<<<<<< HEAD
+=======
+        if(event == 'download')
+        {
+            layer.open({
+                title: '下载',
+                content: '[' + JSON.stringify(data) + ']',
+            })
+        }
+        else if(event == "del")
+        {
+            layer.open({
+                title: '删除',
+                content: "userId=" + data.userId + "&award=" + data.award,
+            })
+        }
+    }
+
+    table.on('tool(table15)', function(obj)
+    {
+        download(obj);
+    });
+
+    table.on('tool(table16)', function(obj)
+    {
+        download(obj);
+    })
+>>>>>>> 4b4e5718fad801d6aa48ccaaadd7c0d118e89287
 });
