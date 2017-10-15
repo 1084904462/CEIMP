@@ -101,7 +101,7 @@
                 </ul>
             </div>
             <div class="layui-col-lg9 layui-col-md9">
-                <form class="layui-form layui-form-pane" action="/test/nationalInspirationalScholarship" method="post" th:object="${nationalinspirationalscholarshipBean}">
+                <form class="layui-form layui-form-pane" action="/u/nationalInspirationalScholarship/submit" method="post" th:object="${nationalinspirationalscholarshipBean}">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">学号</label>
@@ -322,7 +322,13 @@
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">申请理由</label>
                         <div class="layui-input-block">
-                            <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:value="*{applyReason}"></textarea>
+                            <textarea name="applyReason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:field="*{applyReason}"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">院（系）意见</label>
+                        <div class="layui-input-block">
+                            <textarea name="opinion" required="required" lay-verify="required|applyReason" placeholder="100字以内" class="layui-textarea" th:field="*{opinion}"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">

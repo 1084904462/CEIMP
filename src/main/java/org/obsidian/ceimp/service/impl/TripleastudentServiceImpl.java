@@ -21,19 +21,21 @@ public class TripleastudentServiceImpl implements TripleastudentService {
 
     @Transactional
     @Override
-    public int insertTripleastudent(String userId, String reason) {
+    public int insertTripleastudent(String userId, String reason,String opinion) {
         Tripleastudent tripleastudent = new Tripleastudent();
         tripleastudent.setUserid(userId);
         tripleastudent.setReason(reason);
+        tripleastudent.setOpinion(opinion);
         return tripleastudentMapper.insertSelective(tripleastudent);
     }
 
     @Transactional
     @Override
-    public int updateTripleastudent(String userId, String reason) {
+    public int updateTripleastudent(String userId, String reason,String opinion) {
         Tripleastudent tripleastudent = new Tripleastudent();
         tripleastudent.setUserid(userId);
         tripleastudent.setReason(reason);
+        tripleastudent.setOpinion(opinion);
         TripleastudentExample example = new TripleastudentExample();
         example.or().andUseridEqualTo(userId);
         return tripleastudentMapper.updateByExampleSelective(tripleastudent,example);

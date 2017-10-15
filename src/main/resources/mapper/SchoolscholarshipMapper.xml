@@ -6,6 +6,7 @@
     <result column="userId" jdbcType="VARCHAR" property="userid" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userId, level, reason
+    id, userId, level, reason, opinion
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.SchoolscholarshipExample" resultMap="BaseResultMap">
     select
@@ -91,9 +92,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Schoolscholarship">
     insert into schoolscholarship (id, userId, level, 
-      reason)
+      reason, opinion)
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
-      #{reason,jdbcType=VARCHAR})
+      #{reason,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Schoolscholarship">
     insert into schoolscholarship
@@ -110,6 +111,9 @@
       <if test="reason != null">
         reason,
       </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -123,6 +127,9 @@
       </if>
       <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,6 +154,9 @@
       <if test="record.reason != null">
         reason = #{record.reason,jdbcType=VARCHAR},
       </if>
+      <if test="record.opinion != null">
+        opinion = #{record.opinion,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -157,7 +167,8 @@
     set id = #{record.id,jdbcType=INTEGER},
       userId = #{record.userid,jdbcType=VARCHAR},
       level = #{record.level,jdbcType=VARCHAR},
-      reason = #{record.reason,jdbcType=VARCHAR}
+      reason = #{record.reason,jdbcType=VARCHAR},
+      opinion = #{record.opinion,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

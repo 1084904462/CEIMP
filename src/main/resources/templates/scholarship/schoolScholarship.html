@@ -101,7 +101,7 @@
             </ul>
         </div>
         <div class="layui-col-lg9 layui-col-md9">
-            <form class="layui-form layui-form-pane" action="/test/schoolScholarship" method="post" th:object="${schoolscholarshipBean}">
+            <form class="layui-form layui-form-pane" action="/u/schoolScholarship/submit" method="post" th:object="${schoolscholarshipBean}">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">学号</label>
@@ -206,22 +206,6 @@
                     <label class="layui-form-label">奖学金等级</label>
                     <div class="layui-input-block">
                         <select id="level" name="level" required="required" lay-verify="required">
-                            <!--<option value=""></option>-->
-                            <!--<option value="优秀学生一等奖学金">优秀学生一等奖学金</option>-->
-                            <!--<option value="优秀学生二等奖学金">优秀学生二等奖学金</option>-->
-                            <!--<option value="优秀学生三等奖学金">优秀学生三等奖学金</option>-->
-                            <!--<option value="学业优秀一等奖学金">学业优秀一等奖学金</option>-->
-                            <!--<option value="学业优秀二等奖学金">学业优秀二等奖学金</option>-->
-                            <!--<option value="学业优秀三等奖学金">学业优秀三等奖学金</option>-->
-                            <!--<option value="学习进步奖">学习进步奖</option>-->
-                            <!--<option value="优良学风奖">优良学风奖</option>-->
-                            <!--<option value="外语成绩优秀奖">外语成绩优秀奖</option>-->
-                            <!--<option value="文体优秀奖">文体优秀奖</option>-->
-                            <!--<option value="社团活动奖">社团活动奖</option>-->
-                            <!--<option value="突出贡献奖">突出贡献奖</option>-->
-                            <!--<option value="创新创业一等奖">创新创业一等奖</option>-->
-                            <!--<option value="创新二等奖">创新二等奖</option>-->
-                            <!--<option value="创新三等奖">创新三等奖</option>-->
                         </select>
                     </div>
                 </div>
@@ -229,6 +213,12 @@
                     <label class="layui-form-label">申请理由</label>
                     <div class="layui-input-block">
                         <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:field="*{reason}"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">二级学工组意见</label>
+                    <div class="layui-input-block">
+                        <textarea name="opinion" required="required" lay-verify="required|applyReason" placeholder="100字以内" class="layui-textarea" th:field="*{opinion}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">

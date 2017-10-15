@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,10 +46,12 @@ public class Test {
 
     @org.junit.Test
     public void test1(){
-        String password = "888888";
-        List<String> list = userssService.selectAllUserId();
-        for(int i=0;i<list.size();i++){
-            userssService.updatePassword(list.get(i),password);
-        }
+//        String password = "888888";
+//        List<String> list = userssService.selectAllUserId();
+//        for(int i=0;i<list.size();i++){
+//            userssService.updatePassword(list.get(i),password);
+//        }
+        String path = System.getProperty("user.dir");
+        System.out.println(path);
     }
 }

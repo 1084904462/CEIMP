@@ -7,12 +7,15 @@ public class Tripleastudent {
 
     private String reason;
 
+    private String opinion;
+
     @Override
     public String toString() {
         return "Tripleastudent{" +
                 "id=" + id +
                 ", userid='" + userid + '\'' +
                 ", reason='" + reason + '\'' +
+                ", opinion='" + opinion + '\'' +
                 '}';
     }
 
@@ -38,5 +41,13 @@ public class Tripleastudent {
 
     public void setReason(String reason) {
         this.reason = reason == null ? null : reason.trim();
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion == null ? null : opinion.trim();
     }
 }
