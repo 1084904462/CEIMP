@@ -2,16 +2,14 @@ import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
 import org.obsidian.ceimp.service.TripleastudentService;
 import org.obsidian.ceimp.service.UserssService;
+import org.obsidian.ceimp.util.DeleteUtil;
 import org.obsidian.ceimp.util.WordUtil;
-import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,13 +61,15 @@ public class Test {
 //        String path = System.getProperty("user.dir");
 //        System.out.println(path);
 
-        String inputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\tripleAStudent";
-        String outputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\zip";
-        String awardName = "三好学生";
-        List<String> fileNameList = new ArrayList<>();
-        fileNameList.add("1150299070陈伟一好学生");
-        fileNameList.add("1150299070陈伟二好学生");
-        fileNameList.add("1150299070陈伟三好学生");
-        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
+//        String inputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\tripleAStudent";
+//        String outputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\zip";
+//        String awardName = "三好学生";
+//        List<String> fileNameList = new ArrayList<>();
+//        fileNameList.add("1150299070陈伟一好学生");
+//        fileNameList.add("1150299070陈伟二好学生");
+//        fileNameList.add("1150299070陈伟三好学生");
+//        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
+        String inputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\zip\\三好学生.sql";
+        DeleteUtil.getInstance().delete(inputUrl);
     }
 }

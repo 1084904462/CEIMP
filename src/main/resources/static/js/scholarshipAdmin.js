@@ -29,7 +29,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             $.ajax({
                 url: '/m/admin/zip',
                 type: 'get',
-                data: "zipBean=" + JSON.stringify(data),
+                data: "zipBean=" + encodeURI(JSON.stringify(data)),
                 success: function(data)
                 {
                     console.log(data);
@@ -50,5 +50,4 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     var batchDownload16 = $("#batchDownload16");
     batchDownload16.click(batchDownload);
 
-    table.on
 });

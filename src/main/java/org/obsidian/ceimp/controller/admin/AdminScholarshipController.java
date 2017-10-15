@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.util.DownloadUtil;
 import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,6 +104,7 @@ public class AdminScholarshipController {
         String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award;
         String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\zip";
         ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,list);
-//        DownloadUtil.getInstance().download(outputUrl + "\\" + award + ".zip",response,fileName);
+        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
+//        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
     }
 }
