@@ -2,7 +2,6 @@ import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
 import org.obsidian.ceimp.service.TripleastudentService;
 import org.obsidian.ceimp.service.UserssService;
-import org.obsidian.ceimp.util.DeleteUtil;
 import org.obsidian.ceimp.util.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -69,7 +68,8 @@ public class Test {
 //        fileNameList.add("1150299070陈伟二好学生");
 //        fileNameList.add("1150299070陈伟三好学生");
 //        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
-        String inputUrl = System.getProperty("user.dir") + "\\src\\main\\resources\\award\\zip\\三好学生.sql";
-        DeleteUtil.getInstance().delete(inputUrl);
+        for(int i=94;i<=180;i++){
+            userssService.updateUserss(i,"2016年09月");
+        }
     }
 }

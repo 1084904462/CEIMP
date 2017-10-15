@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -107,5 +108,43 @@ public class AdminScholarshipController {
         ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,list);
         DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
         DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
+    }
+    @RequestMapping(value = "/m/admin/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public int delete(HttpServletRequest request){
+        int isDelete = 0;
+        String userId = request.getParameter("userId");
+        String username = request.getParameter("username");
+        String award = request.getParameter("award");
+        String awardUrl = "";
+        if(award.equals("国家励志奖学金")){
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
+            nationalinspirationalscholarshipService.deleteNationalinspirationalscholarship(userId);
+            DeleteUtil.getInstance().delete(awardUrl);
+            isDelete = 1;
+        }
+        else if(award.equals("省政府奖学金")){
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
+            provincialgovernmentscholarshipService.deleteProvincialgovernmentscholarship(userId);
+            DeleteUtil.getInstance().delete(awardUrl);
+            isDelete = 1;
+        }
+        else if(award.equals("三好学生")){
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "tripleAStudent\\" + userId + username + award + ".docx";
+            tripleastudentService.deleteTripleastudent(userId);
+            DeleteUtil.getInstance().delete(awardUrl);
+            isDelete = 1;
+        }
+        else{
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "schoolScholarship\\" + userId + username + award + ".docx";
+            schoolscholarshipService.deleteSchoolscholarshipByUserIdAndLevel(userId,award);
+            DeleteUtil.getInstance().delete(awardUrl);
+            isDelete = 1;
+        }
+        return isDelete;
     }
 }

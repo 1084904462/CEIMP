@@ -86,4 +86,15 @@ public class UserssServiceImpl implements UserssService {
     public int updatePassword(String userId,String password) {
         return userssMapper.updatePassword(userId,password);
     }
+
+    @Transactional
+    @Override
+    public int updateUserss(int id, String entrance) {
+        Userss userss = new Userss();
+        userss.setId(id);
+        userss.setEntrance(entrance);
+        UserssExample example = new UserssExample();
+        example.or().andIdEqualTo(id);
+        return userssMapper.updateByExampleSelective(userss,example);
+    }
 }

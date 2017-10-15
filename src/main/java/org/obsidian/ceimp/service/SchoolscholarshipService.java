@@ -20,4 +20,6 @@ public interface SchoolscholarshipService {
     Schoolscholarship selectByUserId(String userId);
 
     Schoolscholarship selectByUserIdAndLevel(String userId,String level);
+
+    int deleteSchoolscholarshipByUserIdAndLevel(String userId,String level);
 }

@@ -57,7 +57,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             var $form = $("<form>").attr({
                 style: "display:none",
                 method: "get",
-                action: "/m/admin/"
+                action: "/m/admin/zip"
             });
             $('body').append($form);
 

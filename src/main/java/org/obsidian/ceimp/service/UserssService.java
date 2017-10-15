@@ -20,4 +20,6 @@ public interface UserssService {
     Userss selectByUserId(String userId);
 
     int updatePassword(String userId,String password);
+
+    int updateUserss(int id,String entrance);
 }

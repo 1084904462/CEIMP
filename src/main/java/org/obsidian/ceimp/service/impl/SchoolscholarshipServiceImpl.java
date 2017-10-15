@@ -74,6 +74,7 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
         return list.get(0);
     }
 
+    @Transactional
     @Override
     public Schoolscholarship selectByUserIdAndLevel(String userId, String level) {
         SchoolscholarshipExample example = new SchoolscholarshipExample();
@@ -83,5 +84,13 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public int deleteSchoolscholarshipByUserIdAndLevel(String userId, String level) {
+        SchoolscholarshipExample example = new SchoolscholarshipExample();
+        example.or().andUseridEqualTo(userId).andLevelEqualTo(level);
+        return schoolscholarshipMapper.deleteByExample(example);
     }
 }
