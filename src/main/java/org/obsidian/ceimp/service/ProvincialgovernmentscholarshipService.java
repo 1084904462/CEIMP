@@ -1,6 +1,9 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.ProvincialgovernmentscholarshipShowBean;
 import org.obsidian.ceimp.entity.Provincialgovernmentscholarship;
+
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/10/14.
@@ -23,4 +26,6 @@ public interface ProvincialgovernmentscholarshipService {
     int deleteProvincialgovernmentscholarship(String userId);
 
     Provincialgovernmentscholarship selectByUserId(String userId);
+
+    List<ProvincialgovernmentscholarshipShowBean> selectAllProvincialgovernmentscholarship();
 }

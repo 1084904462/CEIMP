@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.SchoolscholarshipShowBean;
 import org.obsidian.ceimp.entity.Schoolscholarship;
 import org.obsidian.ceimp.entity.SchoolscholarshipExample;
 
+import java.util.List;
+
 public interface SchoolscholarshipMapper {
+    List<SchoolscholarshipShowBean> selectAllSchoolscholarship();
+
     long countByExample(SchoolscholarshipExample example);
 
     int deleteByExample(SchoolscholarshipExample example);

@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.ProvincialgovernmentscholarshipShowBean;
 import org.obsidian.ceimp.dao.ProvincialgovernmentscholarshipMapper;
 import org.obsidian.ceimp.entity.Provincialgovernmentscholarship;
 import org.obsidian.ceimp.entity.ProvincialgovernmentscholarshipExample;
@@ -85,5 +86,15 @@ public class ProvincialgovernmentscholarshipServiceImpl implements Provincialgov
             return null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<ProvincialgovernmentscholarshipShowBean> selectAllProvincialgovernmentscholarship() {
+        List<ProvincialgovernmentscholarshipShowBean> list = provincialgovernmentscholarshipMapper.selectAllProvincialgovernmentscholarship();
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

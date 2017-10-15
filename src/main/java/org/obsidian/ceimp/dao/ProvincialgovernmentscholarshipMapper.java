@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.ProvincialgovernmentscholarshipShowBean;
 import org.obsidian.ceimp.entity.Provincialgovernmentscholarship;
 import org.obsidian.ceimp.entity.ProvincialgovernmentscholarshipExample;
 
+import java.util.List;
+
 public interface ProvincialgovernmentscholarshipMapper {
+    List<ProvincialgovernmentscholarshipShowBean> selectAllProvincialgovernmentscholarship();
+
     long countByExample(ProvincialgovernmentscholarshipExample example);
 
     int deleteByExample(ProvincialgovernmentscholarshipExample example);

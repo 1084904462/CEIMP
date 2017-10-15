@@ -3,23 +3,25 @@ package org.obsidian.ceimp.bean;
 /**
  * Created by BillChen on 2017/10/15.
  */
-public class TripleastudentShowBean {
+public class SchoolscholarshipShowBean {
     private int id;
     private String major;
     private String class_id;
     private String user_id;
     private String username;
     private String sex;
+    private String level;
 
     @Override
     public String toString() {
-        return "TripleastudentShowBean{" +
+        return "SchoolscholarshipShowBean{" +
                 "id=" + id +
                 ", major='" + major + '\'' +
                 ", class_id='" + class_id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
+                ", level='" + level + '\'' +
                 '}';
     }
 
@@ -69,5 +71,13 @@ public class TripleastudentShowBean {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }

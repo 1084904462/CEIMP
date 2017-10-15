@@ -7,6 +7,10 @@
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
+  <select id="selectAllTripleastudent" resultType="org.obsidian.ceimp.bean.TripleastudentShowBean">
+    select tripleastudent.id,userss.major,userss.class_id,userss.user_id,userss.username,userss.sex
+     from userss,tripleastudent where userss.user_id = tripleastudent.userId;
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

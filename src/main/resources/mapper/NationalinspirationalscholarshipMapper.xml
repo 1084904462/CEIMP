@@ -26,6 +26,10 @@
     <result column="applyReason" jdbcType="VARCHAR" property="applyreason" />
     <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
+  <select id="selectAllNationalinspirationalscholarship" resultType="org.obsidian.ceimp.bean.NationalinspirationalscholarshipShowBean">
+    select nationalinspirationalscholarship.id,userss.major,userss.class_id,userss.user_id,userss.username,userss.sex
+     from userss,nationalinspirationalscholarship where userss.user_id = nationalinspirationalscholarship.userId;
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
