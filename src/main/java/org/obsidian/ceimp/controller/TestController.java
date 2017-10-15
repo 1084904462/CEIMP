@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.obsidian.ceimp.util.DownloadUtil;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.WordUtil;
-import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -219,7 +218,7 @@ public class TestController {
         String url = "D:\\award\\tripleAStudent";
         String zipFilePath = "D:\\award\\zip";
         String fileName = "三好学生";
-        ZipUtil.getInstance().zip(url,zipFilePath,fileName);
-        DownloadUtil.getInstance().download(zipFilePath + "\\" + fileName + ".zip",response,fileName + ".zip");
+//        ZipUtil.getInstance().zip(url,zipFilePath,fileName);
+//        DownloadUtil.getInstance().download(zipFilePath + "\\" + fileName + ".zip",response,fileName + ".zip");
     }
 }
