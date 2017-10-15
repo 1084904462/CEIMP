@@ -19,17 +19,18 @@ public class SchoolscholarshipBean {
     private String rank;
     private String level;
     private String reason;
+    private String opinion;
 
     @Override
     public String toString() {
         return "SchoolscholarshipBean{" +
-                "major='" + major + '\'' +
-                ", classId='" + classId + '\'' +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
-                ", userId='" + userId + '\'' +
+                ", major='" + major + '\'' +
+                ", classId='" + classId + '\'' +
+                ", political='" + political + '\'' +
                 ", sex='" + sex + '\'' +
                 ", nation='" + nation + '\'' +
-                ", political='" + political + '\'' +
                 ", job='" + job + '\'' +
                 ", charact='" + charact + '\'' +
                 ", study='" + study + '\'' +
@@ -38,7 +39,16 @@ public class SchoolscholarshipBean {
                 ", rank='" + rank + '\'' +
                 ", level='" + level + '\'' +
                 ", reason='" + reason + '\'' +
+                ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 
     public String getMajor() {

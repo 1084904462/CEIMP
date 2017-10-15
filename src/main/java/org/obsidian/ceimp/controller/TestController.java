@@ -183,12 +183,15 @@ public class TestController {
         DownloadUtil.getInstance().download(outputUrl,response,userId + username + "校奖学金.docx");
     }
 
-    @RequestMapping(value = "/test/tripleAStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "/test/tripleAStudent", method = RequestMethod.POST)
     public void tripleAStudent(HttpServletRequest request,HttpServletResponse response) throws IOException{
         String userId = request.getParameter("userId");
         String username = request.getParameter("username");
-        String inputUrl = "F:\\ideaworkspace\\CEIMP\\src\\main\\resources\\三好学生模板.docx";
-        String outputUrl = "D:\\award\\tripleAStudent\\" + userId + username + "三好学生.docx";
+        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\三好学生模板.docx";
+        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\tripleAStudent\\" + userId + username + "三好学生.docx";
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println(inputUrl);
+        System.out.println(outputUrl);
         Map<String,String> textMap = new HashMap<>();
         textMap.put("school",request.getParameter("school"));
         textMap.put("classId",request.getParameter("classId"));

@@ -5,6 +5,7 @@
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="userId" jdbcType="VARCHAR" property="userid" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userId, reason
+    id, userId, reason, opinion
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.TripleastudentExample" resultMap="BaseResultMap">
     select
@@ -89,10 +90,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Tripleastudent">
-    insert into tripleastudent (id, userId, reason
-      )
-    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}
-      )
+    insert into tripleastudent (id, userId, reason, 
+      opinion)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{opinion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Tripleastudent">
     insert into tripleastudent
@@ -106,6 +107,9 @@
       <if test="reason != null">
         reason,
       </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -116,6 +120,9 @@
       </if>
       <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -137,6 +144,9 @@
       <if test="record.reason != null">
         reason = #{record.reason,jdbcType=VARCHAR},
       </if>
+      <if test="record.opinion != null">
+        opinion = #{record.opinion,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -146,7 +156,8 @@
     update tripleastudent
     set id = #{record.id,jdbcType=INTEGER},
       userId = #{record.userid,jdbcType=VARCHAR},
-      reason = #{record.reason,jdbcType=VARCHAR}
+      reason = #{record.reason,jdbcType=VARCHAR},
+      opinion = #{record.opinion,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

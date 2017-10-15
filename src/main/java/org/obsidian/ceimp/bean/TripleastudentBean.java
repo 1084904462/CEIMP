@@ -18,6 +18,7 @@ public class TripleastudentBean {
     private String all;
     private String rank;
     private String reason;
+    private String opinion;
 
     @Override
     public String toString() {
@@ -36,7 +37,16 @@ public class TripleastudentBean {
                 ", all='" + all + '\'' +
                 ", rank='" + rank + '\'' +
                 ", reason='" + reason + '\'' +
+                ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 
     public String getUserId() {

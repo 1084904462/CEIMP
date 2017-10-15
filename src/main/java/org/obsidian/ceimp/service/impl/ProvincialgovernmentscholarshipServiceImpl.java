@@ -22,19 +22,57 @@ public class ProvincialgovernmentscholarshipServiceImpl implements Provincialgov
     @Transactional
     @Override
     public int insertProvincialgovernmentscholarship(String userId, String date1, String award1, String unit1, String date2, String award2, String unit2, String date3, String award3, String unit3, String date4, String award4, String unit4, String applyReason, String recommendReason, String opinion) {
-        return 0;
+        Provincialgovernmentscholarship provincialgovernmentscholarship = new Provincialgovernmentscholarship();
+        provincialgovernmentscholarship.setUserid(userId);
+        provincialgovernmentscholarship.setDate1(date1);
+        provincialgovernmentscholarship.setAward1(award1);
+        provincialgovernmentscholarship.setUnit1(unit1);
+        provincialgovernmentscholarship.setDate2(date2);
+        provincialgovernmentscholarship.setAward2(award2);
+        provincialgovernmentscholarship.setUnit2(unit2);
+        provincialgovernmentscholarship.setDate3(date3);
+        provincialgovernmentscholarship.setAward3(award3);
+        provincialgovernmentscholarship.setUnit3(unit3);
+        provincialgovernmentscholarship.setDate4(date4);
+        provincialgovernmentscholarship.setAward4(award4);
+        provincialgovernmentscholarship.setUnit4(unit4);
+        provincialgovernmentscholarship.setApplyreason(applyReason);
+        provincialgovernmentscholarship.setRecommendreason(recommendReason);
+        provincialgovernmentscholarship.setOpinion(opinion);
+        return provincialgovernmentscholarshipMapper.insertSelective(provincialgovernmentscholarship);
     }
 
     @Transactional
     @Override
     public int updateProvincialgovernmentscholarship(String userId, String date1, String award1, String unit1, String date2, String award2, String unit2, String date3, String award3, String unit3, String date4, String award4, String unit4, String applyReason, String recommendReason, String opinion) {
-        return 0;
+        Provincialgovernmentscholarship provincialgovernmentscholarship = new Provincialgovernmentscholarship();
+        provincialgovernmentscholarship.setUserid(userId);
+        provincialgovernmentscholarship.setDate1(date1);
+        provincialgovernmentscholarship.setAward1(award1);
+        provincialgovernmentscholarship.setUnit1(unit1);
+        provincialgovernmentscholarship.setDate2(date2);
+        provincialgovernmentscholarship.setAward2(award2);
+        provincialgovernmentscholarship.setUnit2(unit2);
+        provincialgovernmentscholarship.setDate3(date3);
+        provincialgovernmentscholarship.setAward3(award3);
+        provincialgovernmentscholarship.setUnit3(unit3);
+        provincialgovernmentscholarship.setDate4(date4);
+        provincialgovernmentscholarship.setAward4(award4);
+        provincialgovernmentscholarship.setUnit4(unit4);
+        provincialgovernmentscholarship.setApplyreason(applyReason);
+        provincialgovernmentscholarship.setRecommendreason(recommendReason);
+        provincialgovernmentscholarship.setOpinion(opinion);
+        ProvincialgovernmentscholarshipExample example = new ProvincialgovernmentscholarshipExample();
+        example.or().andUseridEqualTo(userId);
+        return provincialgovernmentscholarshipMapper.updateByExampleSelective(provincialgovernmentscholarship,example);
     }
 
     @Transactional
     @Override
     public int deleteProvincialgovernmentscholarship(String userId) {
-        return 0;
+        ProvincialgovernmentscholarshipExample example = new ProvincialgovernmentscholarshipExample();
+        example.or().andUseridEqualTo(userId);
+        return provincialgovernmentscholarshipMapper.deleteByExample(example);
     }
 
     @Transactional

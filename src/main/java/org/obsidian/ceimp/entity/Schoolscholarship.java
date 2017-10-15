@@ -9,6 +9,8 @@ public class Schoolscholarship {
 
     private String reason;
 
+    private String opinion;
+
     @Override
     public String toString() {
         return "Schoolscholarship{" +
@@ -16,6 +18,7 @@ public class Schoolscholarship {
                 ", userid='" + userid + '\'' +
                 ", level='" + level + '\'' +
                 ", reason='" + reason + '\'' +
+                ", opinion='" + opinion + '\'' +
                 '}';
     }
 
@@ -49,5 +52,13 @@ public class Schoolscholarship {
 
     public void setReason(String reason) {
         this.reason = reason == null ? null : reason.trim();
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion == null ? null : opinion.trim();
     }
 }

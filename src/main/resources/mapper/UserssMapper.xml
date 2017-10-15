@@ -5,6 +5,7 @@
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="is_changed_password" jdbcType="INTEGER" property="isChangedPassword" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="major" jdbcType="VARCHAR" property="major" />
     <result column="class_id" jdbcType="VARCHAR" property="classId" />
@@ -33,7 +34,7 @@
     select userss.* from userss where user_id = #{userId}
   </select>
   <update id="updatePassword" parameterType="map">
-    update userss set password = #{password} where user_id = #{userId}
+    update userss set password = #{password},is_changed_password = 1 where user_id = #{userId}
   </update>
   <sql id="Example_Where_Clause">
     <where>
@@ -94,9 +95,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, password, username, major, class_id, major_sum, character, study, ability, 
-    all, gp, ce, sex, birth, nation, entrance, political, phone, identity, pass_sum, 
-    sub_sum, job
+    id, user_id, password, is_changed_password, username, major, class_id, major_sum, 
+    character, study, ability, all, gp, ce, sex, birth, nation, entrance, political, 
+    phone, identity, pass_sum, sub_sum, job
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserssExample" resultMap="BaseResultMap">
     select
@@ -121,21 +122,21 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Userss">
     insert into userss (id, user_id, password, 
-      username, major, class_id, 
-      major_sum, character, study, 
-      ability, all, gp, ce, 
-      sex, birth, nation, 
-      entrance, political, phone, 
-      identity, pass_sum, sub_sum, 
-      job)
+      is_changed_password, username, major, 
+      class_id, major_sum, character, 
+      study, ability, all, 
+      gp, ce, sex, birth, 
+      nation, entrance, political, 
+      phone, identity, pass_sum, 
+      sub_sum, job)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, 
-      #{majorSum,jdbcType=VARCHAR}, #{character,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, 
-      #{ability,jdbcType=VARCHAR}, #{all,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{entrance,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{identity,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, #{subSum,jdbcType=VARCHAR}, 
-      #{job,jdbcType=VARCHAR})
+      #{isChangedPassword,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{classId,jdbcType=VARCHAR}, #{majorSum,jdbcType=VARCHAR}, #{character,jdbcType=VARCHAR}, 
+      #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, #{all,jdbcType=VARCHAR}, 
+      #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{entrance,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, 
+      #{subSum,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Userss">
     insert into userss
@@ -148,6 +149,9 @@
       </if>
       <if test="password != null">
         password,
+      </if>
+      <if test="isChangedPassword != null">
+        is_changed_password,
       </if>
       <if test="username != null">
         username,
@@ -219,6 +223,9 @@
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isChangedPassword != null">
+        #{isChangedPassword,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -300,6 +307,9 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.isChangedPassword != null">
+        is_changed_password = #{record.isChangedPassword,jdbcType=INTEGER},
+      </if>
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
@@ -370,6 +380,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      is_changed_password = #{record.isChangedPassword,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       major = #{record.major,jdbcType=VARCHAR},
       class_id = #{record.classId,jdbcType=VARCHAR},

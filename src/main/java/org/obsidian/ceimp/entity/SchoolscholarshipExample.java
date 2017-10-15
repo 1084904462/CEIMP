@@ -373,6 +373,76 @@ public class SchoolscholarshipExample {
             addCriterion("reason not between", value1, value2, "reason");
             return (Criteria) this;
         }
+
+        public Criteria andOpinionIsNull() {
+            addCriterion("opinion is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionIsNotNull() {
+            addCriterion("opinion is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionEqualTo(String value) {
+            addCriterion("opinion =", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionNotEqualTo(String value) {
+            addCriterion("opinion <>", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionGreaterThan(String value) {
+            addCriterion("opinion >", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionGreaterThanOrEqualTo(String value) {
+            addCriterion("opinion >=", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionLessThan(String value) {
+            addCriterion("opinion <", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionLessThanOrEqualTo(String value) {
+            addCriterion("opinion <=", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionLike(String value) {
+            addCriterion("opinion like", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionNotLike(String value) {
+            addCriterion("opinion not like", value, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionIn(List<String> values) {
+            addCriterion("opinion in", values, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionNotIn(List<String> values) {
+            addCriterion("opinion not in", values, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionBetween(String value1, String value2) {
+            addCriterion("opinion between", value1, value2, "opinion");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpinionNotBetween(String value1, String value2) {
+            addCriterion("opinion not between", value1, value2, "opinion");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

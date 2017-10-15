@@ -21,20 +21,34 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
 
     @Transactional
     @Override
-    public int insertSchoolscholarship(String userId, String level, String reason) {
-        return 0;
+    public int insertSchoolscholarship(String userId, String level, String reason,String opinion) {
+        Schoolscholarship schoolscholarship = new Schoolscholarship();
+        schoolscholarship.setUserid(userId);
+        schoolscholarship.setLevel(level);
+        schoolscholarship.setReason(reason);
+        schoolscholarship.setOpinion(opinion);
+        return schoolscholarshipMapper.insertSelective(schoolscholarship);
     }
 
     @Transactional
     @Override
-    public int updateSchoolscholarship(String userId, String level, String reason) {
-        return 0;
+    public int updateSchoolscholarship(String userId, String level, String reason,String opinion) {
+        Schoolscholarship schoolscholarship = new Schoolscholarship();
+        schoolscholarship.setUserid(userId);
+        schoolscholarship.setLevel(level);
+        schoolscholarship.setReason(reason);
+        schoolscholarship.setOpinion(opinion);
+        SchoolscholarshipExample example = new SchoolscholarshipExample();
+        example.or().andUseridEqualTo(userId).andLevelEqualTo(level);
+        return schoolscholarshipMapper.updateByExampleSelective(schoolscholarship,example);
     }
 
     @Transactional
     @Override
     public int deleteSchoolscholarship(String userId) {
-        return 0;
+        SchoolscholarshipExample example = new SchoolscholarshipExample();
+        example.or().andUseridEqualTo(userId);
+        return schoolscholarshipMapper.deleteByExample(example);
     }
 
     @Transactional
@@ -42,6 +56,17 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
     public Schoolscholarship selectByUserId(String userId) {
         SchoolscholarshipExample example = new SchoolscholarshipExample();
         example.or().andUseridEqualTo(userId);
+        List<Schoolscholarship> list = schoolscholarshipMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
+
+    @Override
+    public Schoolscholarship selectByUserIdAndLevel(String userId, String level) {
+        SchoolscholarshipExample example = new SchoolscholarshipExample();
+        example.or().andUseridEqualTo(userId).andLevelEqualTo(level);
         List<Schoolscholarship> list = schoolscholarshipMapper.selectByExample(example);
         if(list.isEmpty()){
             return null;
