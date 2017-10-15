@@ -44,8 +44,8 @@
                         查看名单
                     </a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="/m/admin/showNationalInspirationalScholarship">国家励志奖学金</a></dd>
-                        <dd><a href="/m/admin/showProvincialgovernmentscholarship">省政府奖学金</a></dd>
+                        <dd><a href="/m/admin/showNationalInspirationalScholarship">国家励志奖学金</a></dd>
+                        <dd class="layui-this"><a href="/m/admin/showProvincialgovernmentscholarship">省政府奖学金</a></dd>
                         <dd><a href="/m/admin/showSchoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/showTripleastudent">三好学生</a></dd>
                     </dl>
@@ -75,7 +75,7 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <fieldset class="layui-elem-field">
-                            <legend>国家励志奖学金</legend>
+                            <legend>省政府奖学金</legend>
                             <div class="layui-field-box">
                                 <div class="layui-inline">
                                     <button class="layui-btn" id="batchDownload15">批量下载</button>
@@ -97,21 +97,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major != '信息大类'}">
+                            <tr th:each="person : ${provincialgovernmentscholarshipShowBean}" th:if="${person.major != '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td>国家励志奖学金</td>
+                                <td>省政府奖学金</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="layui-tab-item">
                         <fieldset class="layui-elem-field">
-                            <legend>国家励志奖学金</legend>
+                            <legend>省政府奖学金</legend>
                             <div class="layui-field-box">
                                 <div class="layui-inline">
                                     <button class="layui-btn" id="batchDownload16">批量下载</button>
@@ -133,14 +133,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
+                            <tr th:each="person : ${provincialgovernmentscholarshipShowBean}" th:if="${person.major == '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td>国家励志奖学金</td>
+                                <td>省政府奖学金</td>
                             </tr>
                             </tbody>
                         </table>
