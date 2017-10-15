@@ -78,7 +78,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             layer.confirm("确认删除？", function(index)
             {
                 $.ajax({
-                    url: "",
+                    url: "/m/admin/delete",
                     type: "get",
                     data: "userId=" + data.userId + "&username=" + data.username + "&award=" + data.award,
                     success: function(data)
