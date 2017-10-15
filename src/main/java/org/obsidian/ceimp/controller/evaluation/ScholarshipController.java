@@ -292,11 +292,7 @@ public class ScholarshipController {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
-<<<<<<< HEAD
-=======
 
-        System.out.println(oldPassword + " " + newPassword + " " + confirmPassword);
->>>>>>> e1b6c2e90add6a8983c495a3ebce26003e9b1207
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         ChangePasswordBean changePasswordBean = null;
