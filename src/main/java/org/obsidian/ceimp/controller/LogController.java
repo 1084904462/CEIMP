@@ -56,7 +56,7 @@ public class LogController {
             return "redirect:/u/nationalInspirationalScholarship";
         }
         if(managerBean != null && !"".equals(managerBean.getManagerId())){
-            return "redirect:/m/index";
+            return "redirect:/m/admin/showNationalInspirationalScholarship";
         }
         return "loading";
     }
@@ -113,11 +113,6 @@ public class LogController {
         return "redirect:/Login";
     }
 
-    @RequestMapping(value = "/m/index", method = RequestMethod.GET)
-    public String mIndex(){
-        return "mIndex";
-    }
-
     @RequestMapping(value = "/mLogin", method = RequestMethod.POST)
     public String mLogin(HttpSession session, Model model, @RequestParam(value = "managerId") String managerId, @RequestParam(value = "password") String password){
         UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
@@ -136,7 +131,7 @@ public class LogController {
                 managerBean = new ManagerBean();
                 manager.setManagerId(managerId);
                 session.setAttribute("managerBean",managerBean);
-                    return "redirect:/m/index";
+                    return "redirect:/m/admin/showNationalInspirationalScholarship";
             }
             else {
                 logger.info("管理员 " + managerId + " 密码错误");

@@ -292,6 +292,8 @@ public class ScholarshipController {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
+
+        System.out.println(oldPassword + " " + newPassword + " " + confirmPassword);
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         ChangePasswordBean changePasswordBean = null;
@@ -309,6 +311,7 @@ public class ScholarshipController {
                         userssBean.setIsChangedPassword(1);
                         session.removeAttribute("userssBean");
                         session.setAttribute("userssBean",userssBean);
+                        return "redirect:/u/nationalInspirationalScholarship";
                     }
                     else{
                         changePasswordBean = new ChangePasswordBean("两次新密码输入不相同");
