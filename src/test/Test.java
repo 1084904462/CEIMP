@@ -51,7 +51,7 @@ public class Test {
 //        for(int i=0;i<list.size();i++){
 //            userssService.updatePassword(list.get(i),password);
 //        }
-        String path = System.getProperty("user.dir");
-        System.out.println(path);
+//        String path = System.getProperty("user.dir");
+//        System.out.println(path);
     }
 }
