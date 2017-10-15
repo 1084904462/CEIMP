@@ -54,10 +54,21 @@ layui.use(['element', 'table', 'form', 'layer'], function()
 
         if(event == 'download')
         {
-            layer.open({
-                title: '下载',
-                content: '[' + JSON.stringify(data) + ']',
-            })
+            var $form = $("<form>").attr({
+                style: "display:none",
+                method: "get",
+                action: "/m/admin/"
+            });
+            $('body').append($form);
+
+            var $input = $("<input>").attr({
+                type: "hidden",
+                name: "zipBean",
+                value: "[" + JSON.stringify(data) + "]",
+            });
+            $form.append($input);
+
+            $form.submit().remove();
         }
         else if(event == "del")
         {
