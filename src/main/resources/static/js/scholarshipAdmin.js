@@ -21,30 +21,10 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else
         {
-<<<<<<< HEAD
-            // layer.open({
-            //     title: '在线调试',
-            //     content: JSON.stringify(data),
-            // });
-
-            $.ajax({
-                url: '/m/admin/zip',
-                type: 'get',
-                data: "zipBean=" + encodeURI(JSON.stringify(data)),
-                success: function(data)
-                {
-                    console.log(data);
-                },
-                error: function(data)
-                {
-                    alert("失败");
-                }
-            })
-=======
             var $form = $("<form>").attr({
                 style: "display:none",
                 method: "get",
-                action: "/m/admin/"
+                action: "/m/admin/zip"
             });
             $('body').append($form);
 
@@ -56,7 +36,6 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             $form.append($input);
 
             $form.submit().remove();
->>>>>>> 4b4e5718fad801d6aa48ccaaadd7c0d118e89287
         }
 
         console.log(checkStatus.data);//获取选中行的数据
@@ -73,8 +52,6 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         var data = obj.data;
         var event = obj.event;
 
-<<<<<<< HEAD
-=======
         if(event == 'download')
         {
             layer.open({
@@ -100,5 +77,4 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     {
         download(obj);
     })
->>>>>>> 4b4e5718fad801d6aa48ccaaadd7c0d118e89287
 });
