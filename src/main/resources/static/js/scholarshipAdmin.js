@@ -8,6 +8,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     var form = layui.form;
     var layer = layui.layer;
 
+    // 批量下载
     function batchDownload()
     {
         var checkStatus = table.checkStatus('table' + $(this).attr("id").slice(-2));
@@ -46,7 +47,9 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     batchDownload15.click(batchDownload);
     var batchDownload16 = $("#batchDownload16");
     batchDownload16.click(batchDownload);
-    
+
+
+    // 单个下载
     function download(obj)
     {
         var data = obj.data;
@@ -72,10 +75,32 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else if(event == "del")
         {
-            layer.open({
-                title: '删除',
-                content: "userId=" + data.userId + "&award=" + data.award,
-            })
+            layer.confirm("确认删除？", function(index)
+            {
+                $.ajax({
+                    url: "",
+                    type: "get",
+                    data: "userId=" + data.userId + "&username=" + data.username + "&award=" + data.award,
+                    success: function(data)
+                    {
+                        if(data == 1)
+                        {
+                            layer.msg("删除成功", {icon: 1});
+                            obj.del();
+                        }
+                        else
+                        {
+                            layer.msg("删除失败", {icon: 2});
+                        }
+                    },
+                    error: function(data)
+                    {
+                        layer.msg("发生错误，删除失败", {icon: 2});
+                    }
+                });
+
+                layer.close(index);
+            });
         }
     }
 
