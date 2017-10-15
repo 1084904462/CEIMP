@@ -1,11 +1,12 @@
 package org.obsidian.ceimp.controller.admin;
 
+import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.NationalinspirationalscholarshipShowBean;
-import org.obsidian.ceimp.bean.ProvincialgovernmentscholarshipShowBean;
-import org.obsidian.ceimp.bean.SchoolscholarshipShowBean;
-import org.obsidian.ceimp.bean.TripleastudentShowBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.util.DeleteUtil;
+import org.obsidian.ceimp.util.DownloadUtil;
+import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,16 +75,37 @@ public class AdminScholarshipController {
     }
 
 
-    @RequestMapping(value = "/m/admin/download1", method = RequestMethod.GET)
-    public void download1(HttpServletRequest request, HttpServletResponse response){
-        String userId = request.getParameter("userId");
-        String username = request.getParameter("username");
-
-    }
-    @RequestMapping(value = "/m/admin/download2", method = RequestMethod.GET)
-    public void download2(HttpServletRequest request, HttpServletResponse response){
-        String userId = request.getParameter("userId");
-        String username = request.getParameter("username");
-        String level = request.getParameter("level");
+    @RequestMapping(value = "/m/admin/zip", method = RequestMethod.GET)
+    public void zip(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String jsonStr = request.getParameter("zipBean");
+        List<ZipBean> zipBeans = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipBean.class));
+        List<String> list = new ArrayList<>();
+        for(int i=0;i<zipBeans.size();i++){
+            list.add(zipBeans.get(i).getUserId() + zipBeans.get(i).getUsername() + zipBeans.get(i).getAward());
+        }
+        ZipBean zipBean = zipBeans.get(0);
+        String award = "";
+        String awardName = "";
+        if(zipBean.getAward().equals("国家励志奖学金")){
+            award = "nationalInspirationalScholarship";
+            awardName = "国家励志奖学金";
+        }
+        else if(zipBean.getAward().equals("省政府奖学金")){
+            award = "provincialGovernmentScholarship";
+            awardName = "省政府奖学金";
+        }
+        else if(zipBean.getAward().equals("三好学生")){
+            award = "tripleAStudent";
+            awardName = "三好学生";
+        }
+        else{
+            award = "schoolScholarship";
+            awardName = "校奖学金";
+        }
+        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award;
+        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\zip";
+        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,list);
+        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
+        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
     }
 }
