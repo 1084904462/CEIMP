@@ -29,6 +29,36 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
         format: 'yyyy年MM月'
     });
 
+    laydate.render({
+        elem: '#date2',
+        type: 'month',
+        btns: ['clear', 'confirm'],
+        format: 'yyyy年MM月'
+    });
+
+    laydate.render({
+        elem: '#date3',
+        type: 'month',
+        btns: ['clear', 'confirm'],
+        format: 'yyyy年MM月'
+    });
+
+    laydate.render({
+        elem: '#date4',
+        type: 'month',
+        btns: ['clear', 'confirm'],
+        format: 'yyyy年MM月'
+    });
+
+    $(".add-line").click(function()
+    {
+        var $thisParent = $(this).parents(".layui-inline");
+        console.log($thisParent.get(0));
+        var $nextParent = $thisParent.next();
+        console.log($nextParent.get(0));
+        $nextParent.removeClass("layui-hide");
+    });
+
     // var nationArray = ["", "汉族","蒙古族","回族","藏族","维吾尔族","苗族","彝族","壮族","布依族","朝鲜族","满族","侗族","瑶族","白族","土家族",
     //     "哈尼族","哈萨克族","傣族","黎族","傈僳族","佤族","畲族","高山族","拉祜族","水族","东乡族","纳西族","景颇族","柯尔克孜族",
     //     "土族","达斡尔族","仫佬族","羌族","布朗族","撒拉族","毛南族","仡佬族","锡伯族","阿昌族","普米族","塔吉克族","怒族", "乌孜别克族",

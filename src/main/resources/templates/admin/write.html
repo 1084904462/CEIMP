@@ -1,160 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8"/>
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-	<style type="text/css">
-	.banner{
-		width: 100%;
-		height: 70px;
-	}
-	.left{
-		width: 20%;
-		float: left;
-	}
-	.right{
-		width: 60%;
-		float: right;
-	}
-	.row{
-		margin-top: 50px;
-	}
-	.choice{
-		margin-left: 50px;
-		margin-top: 70px;
-	}
-	a{
-		width: 200px;
-		height: 40px;
-		margin:-1px;
-	}
-	textarea{
-		width: 600px;
-		height: 200px;
-	}
-	.container{
-		margin-bottom: 100px;
-	}
-	#baocun{
-		float: right;
-		width: 90px;
-		margin-right: 130px;
-	}
-	.btn{
-		border-color: #337ab7;
-	}
-	.btn:hover{
-		background-color: #337ab7;
-		color: white;
-		border: white;
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
+    <style type="text/css">
+        .banner
+        {
+            width: 100%;
+            height: 70px;
+        }
 
-	}
-	</style>
+        .left
+        {
+            width: 20%;
+            float: left;
+        }
+
+        .right
+        {
+            width: 60%;
+            float: right;
+        }
+
+        .row
+        {
+            margin-top: 50px;
+        }
+
+        .choice
+        {
+            margin-left: 50px;
+            margin-top: 70px;
+        }
+
+        a
+        {
+            width: 200px;
+            height: 40px;
+            margin: -1px;
+        }
+
+        textarea
+        {
+            width: 600px;
+            height: 200px;
+        }
+
+        .container
+        {
+            margin-bottom: 100px;
+        }
+
+        #baocun
+        {
+            float: right;
+            width: 90px;
+            margin-right: 130px;
+        }
+
+        .btn
+        {
+            border-color: #337ab7;
+        }
+
+        .btn:hover
+        {
+            background-color: #337ab7;
+            color: white;
+            border: white;
+
+        }
+    </style>
 </head>
 <body>
-	<div class="banner"></div>
-	<div class="container">
-	<div class="left">
-		<div class="choice" id="choice">
-		<a class="btn btn-primary">国家励志奖学金</a>
-		<a class="btn btn-default">省政府奖学金</a>
-		<a class="btn btn-default">校奖学金</a>
-		<a class="btn btn-default">三好学生</a>
-		</div>
-	</div>
-	<div class="right" id="right" >
-		<div class="right-text">
-			<div class="row">
-				<p>院(系)意见</p>
-					<div>
+<div class="banner"></div>
+<div class="container">
+    <div class="left">
+        <div class="choice" id="choice">
+            <a class="btn btn-primary">国家励志奖学金</a>
+            <a class="btn btn-default">省政府奖学金</a>
+            <a class="btn btn-default">校奖学金</a>
+            <a class="btn btn-default">三好学生</a>
+        </div>
+    </div>
+    <div class="right" id="right">
+        <div class="right-text">
+            <div class="row">
+                <p>院(系)意见</p>
+                <div>
 						<textarea>
 
 						</textarea>
-					</div>
-			</div>
-		</div>
-		<div class="right-text" style="display: none;">
-			<div class="row">
-				<p>推荐理由</p>
-					<div>
+                </div>
+            </div>
+        </div>
+        <div class="right-text" style="display: none;">
+            <div class="row">
+                <p>推荐理由</p>
+                <div>
 						<textarea>
 
 						</textarea>
-					</div>
-			</div>
-						<div class="row">
-				<p>院(系)意见</p>
-					<div>
+                </div>
+            </div>
+            <div class="row">
+                <p>院(系)意见</p>
+                <div>
 						<textarea>
 
 						</textarea>
-					</div>
-			</div>
-		</div>
-		<div class="right-text" style="display: none;">
-			<div class="row">
-				<p>二级学院学工组意见</p>
-					<div>
+                </div>
+            </div>
+        </div>
+        <div class="right-text" style="display: none;">
+            <div class="row">
+                <p>二级学院学工组意见</p>
+                <div>
 						<textarea>
 
 						</textarea>
-					</div>
-			</div>
-		</div>
-		<div class="right-text" style="display: none;">
-			<div class="row">
-				<p>二级学院学工组意见</p>
-					<div>
+                </div>
+            </div>
+        </div>
+        <div class="right-text" style="display: none;">
+            <div class="row">
+                <p>二级学院学工组意见</p>
+                <div>
 						<textarea>
 
 						</textarea>
-					</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
 
 
+        <div class="row">
+            <a class="btn btn-primary" id="baocun">保存</a>
+        </div>
+    </div>
+</div>
 
 
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        window.onload = function()
+        {
+            var div1 = document.getElementById("choice");
+            var a = div1.getElementsByTagName("a");
+            var dd = document.getElementById("right");
+            var show = dd.getElementsByClassName("right-text");
+            for(var i = 0; i < a.length; i++)
+            {
+                a[i].index = i;
+                a[i].onclick = function()
+                {
+                    for(var i = 0; i < a.length; i++)
+                    {
+                        show[i].style.display = "none";
+                        a[i].className = 'btn btn-default';
+                    }
+                    show[this.index].style.display = "block";
+                    a[this.index].className = 'btn btn-primary';
+                }
+            }
+        }
+        /*]]>*/
 
-		<div class="row">
-		<a class="btn btn-primary" id="baocun">保存</a>
-		</div>
-	</div>
-
-
-	
-
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>	
-	<script type="text/javascript">
- window.onload=function(){
- 	var div1=document.getElementById("choice");
- 	var a=div1.getElementsByTagName("a");
- 	var dd=document.getElementById("right");
- 	var show=dd.getElementsByClassName("right-text");
-
-
-for(var i=0;i<a.length;i++){
-	a[i].index=i;
- 		a[i].onclick=function(){
- 			for(var i=0;i<a.length;i++){
- 				 			show[i].style.display="none";
- 				 			a[i].className='btn btn-default';
-
- 			}
-
-
- 		show[this.index].style.display="block";
- 		a[this.index].className='btn btn-primary';
- 	}
-}
-
- }
-
-
-
-	</script>
+    </script>
 
 </body>
 </html>

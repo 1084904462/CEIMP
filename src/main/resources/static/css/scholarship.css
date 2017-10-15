@@ -56,6 +56,12 @@ body{
 	left: 8%;
 }
 
+.add-line{
+	font-size: 20px;
+	color: #009688;
+	cursor: pointer;
+}
+
 /**
 	时间线
  */

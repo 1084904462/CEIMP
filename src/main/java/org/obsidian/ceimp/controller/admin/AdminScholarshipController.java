@@ -22,4 +22,9 @@ public class AdminScholarshipController {
     public String adminScholarship(Model model){
         return "admin/scholarship";
     }
+
+    @RequestMapping(value = "/showNationalInspirationalScholarship")
+	public String showNationalInspirationalScholarship(){
+    	return "scholarship/admin/show/showNationalInspirationalScholarship";
+	}
 }

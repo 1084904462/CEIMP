@@ -10,37 +10,15 @@
 <body>
 <!--上方-->
 <div class="scholarship-header">
-    <!--<div class="scholarship-logo">-->
-    <!--奖学金填写-->
-    <!--</div>-->
-    <ul class="layui-nav">
-        <li class="layui-nav-item">
-            <a href="">奖学金填写</a>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="nationalInspirationalScholarship">国家励志奖学金</a>
-                </dd>
-                <dd>
-                    <a href="provincialGovernmentScholarship">省政府奖学金</a>
-                </dd>
-                <dd>
-                    <a href="schoolScholarship">校奖学金</a>
-                </dd>
-                <dd>
-                    <a href="tripleAStudent">三好学生</a>
-                </dd>
-            </dl>
-        </li>
-    </ul>
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
-            <a href="javascript:;">1150299303</a>
+            <a href="javascript:;" th:text="${session.userssBean.userId}"></a>
             <dl class="layui-nav-child">
                 <dd>
-                    <a href="javascript:void(0)">修改密码</a>
+                    <a href="changePassword">修改密码</a>
                 </dd>
                 <dd>
-                    <a href="javascript:void(0)">退出</a>
+                    <a href="/uLogout">退出</a>
                 </dd>
             </dl>
         </li>
@@ -87,14 +65,6 @@
                     <div class="layui-timeline-content">
                         <a href="tripleAStudent" class="scholarship-link">
                             <div class="layui-timeline-title">三好学生</div>
-                        </a>
-                    </div>
-                </li>
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                    <div class="layui-timeline-content">
-                        <a href="changePassword" class="scholarship-link">
-                            <div class="layui-timeline-title">修改密码</div>
                         </a>
                     </div>
                 </li>
@@ -162,7 +132,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">担任职务</label>
                         <div class="layui-input-inline">
-                            <input type="text" name="job" required="required" lay-verify="required" autocomplete="off" class="layui-input" th:value="*{job}"/>
+                            <input type="text" name="job" placeholder="无职务则填无" required="required" lay-verify="required" autocomplete="off" class="layui-input" th:value="*{job}"/>
                         </div>
                     </div>
                 </div>
