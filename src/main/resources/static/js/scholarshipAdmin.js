@@ -281,16 +281,16 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                 {
                     if(data != 0)
                     {
-                        layer.msg("重置成功");
+                        layer.msg("重置成功", {icon: 1});
                     }
                     else
                     {
-                        layer.msg("重置失败");
+                        layer.msg("重置失败", {icon: 2, anim: 6});
                     }
                 },
                 error: function(data)
                 {
-                    layer.msg("重置失败");
+                    layer.msg("发生错误，重置失败");
                 }
             })
         }
@@ -303,4 +303,35 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     resetPassword15.click(resetPassword);
     var resetPassword16 = $("#resetPassword16");
     resetPassword16.click(resetPassword);
+
+    function writeOpinion()
+    {
+        var opinionForm = $(this).parents('form').get(0);
+
+        var opinionData;
+        opinionData = "opinion=" + opinionForm.opinion.value;
+
+        if(opinionForm.recommendReason != undefined)
+        {
+            opinionData += "&recommendReason=" + opinionForm.recommendReason.value;
+        }
+
+        $.ajax({
+            url: opinionForm.action,
+            type: "post",
+            data: opinionData,
+            success: function(data)
+            {
+                console.log(data);
+            },
+            error: function(data)
+            {
+                layer.msg("发生错误，提交失败");
+            }
+        });
+
+        return false;
+    }
+
+    $("#opinionSubmit").click(writeOpinion);
 });
