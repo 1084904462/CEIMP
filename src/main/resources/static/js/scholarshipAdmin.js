@@ -69,7 +69,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                                 // layer.msg("必填项不能为空", {icon: 2, anim: 6, tipsMore: true});
                                 $msg.text("必填项不能为空");
                             }
-                            else if(newPasswordInput.value == "" || (newPasswordInput.value < 6 || newPasswordInput.value > 16))
+                            else if(newPasswordInput.value == "" || (newPasswordInput.value.length < 6 || newPasswordInput.value.length > 16))
                             {
                                 $(newPasswordInput).addClass("layui-form-danger").focus();
 
@@ -85,7 +85,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                                 // layer.msg(msg, {icon: 2, anim: 6});
                                 $msg.text(msg);
                             }
-                            else if(confirmPasswordInput.value == "" || (confirmPasswordInput.value < 6 || confirmPasswordInput.value > 16))
+                            else if(confirmPasswordInput.value == "" || (confirmPasswordInput.value.length < 6 || confirmPasswordInput.value.length > 16))
                             {
                                 $(confirmPasswordInput).addClass("layui-form-danger").focus();
 
@@ -104,21 +104,22 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                             else
                             {
                                 $.ajax({
-                                    url: "",
+                                    url: "/m/admin/changeManagerPassword",
                                     type: "post",
                                     data: "oldPassword=" + oldPasswordInput.value + "newPassword=" +
                                         newPasswordInput.value + "confirmPassword=" + confirmPasswordInput.value,
                                     success:function(data)
                                     {
-                                        var changePasswordBean = data.changePasswordBean;
+                                        console.log(data);
+                                        var status = data.status;
 
-                                        if(changePasswordBean.status == "修改成功")
+                                        if(status == "修改成功")
                                         {
                                             layer.msg("修改成功", {icon: 1});
                                         }
                                         else
                                         {
-                                            $("#msg").val(changePasswordBean.status);
+                                            $("#msg").text(status);
                                         }
                                     }
                                 })
@@ -238,5 +239,66 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     table.on('tool(table16)', function(obj)
     {
         download(obj);
-    })
+    });
+
+    // 批量重置
+    function resetPassword()
+    {
+        var checkStatus = table.checkStatus('table' + $(this).attr("id").slice(-2));
+
+        var data = checkStatus.data;
+
+        if(data.length == 0)
+        {
+            layer.msg("请先勾选所要下载的行", {icon: 2, anim: 6});
+            return ;
+        }
+        else
+        {
+            // var $form = $("<form>").attr({
+            //     style: "display:none",
+            //     method: "post",
+            //     action: "/m/admin/resetPassword/submit"
+            // });
+            // $('body').append($form);
+            //
+            // var $input = $("<input>").attr({
+            //     type: "hidden",
+            //     name: "resetPasswordBean",
+            //     value: JSON.stringify(data),
+            // });
+            // $form.append($input);
+            //
+            // $form.submit().remove();
+
+            $.ajax({
+                url: "/m/admin/resetPassword/submit",
+                type: "post",
+                data: JSON.stringify(data),
+                success: function(data)
+                {
+                    if(data != 0)
+                    {
+                        layer.msg("重置成功");
+                    }
+                    else
+                    {
+                        layer.msg("重置失败");
+                    }
+                },
+                error: function(data)
+                {
+                    layer.msg("重置失败");
+                }
+            })
+        }
+
+        console.log(checkStatus.data);//获取选中行的数据
+        console.log(checkStatus.data.length); //获取选中行数量，可作为是否有选中行的条件
+    }
+
+    var resetPassword15 = $("#resetPassword15");
+    resetPassword15.click(resetPassword);
+    var resetPassword16 = $("#resetPassword16");
+    resetPassword16.click(resetPassword);
 });

@@ -3,6 +3,7 @@ package org.obsidian.ceimp.controller.admin;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.ChangePasswordBean;
+import org.obsidian.ceimp.bean.ManagerBean;
 import org.obsidian.ceimp.bean.ResetPasswordBean;
 import org.obsidian.ceimp.bean.ResetUserssBean;
 import org.obsidian.ceimp.entity.Manager;
@@ -36,16 +37,18 @@ public class AdminPasswordController {
     @Autowired
     private UserssService userssService;
 
-    @RequestMapping(value = "m/admin/changeManagerPassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/m/admin/changeManagerPassword", method = RequestMethod.POST)
     @ResponseBody
     public ChangePasswordBean changeManagerPassword(HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        String managerId = ((Manager)session.getAttribute("managerBean")).getManagerId();
+        String managerId = ((ManagerBean)session.getAttribute("managerBean")).getManagerId();
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
         Manager manager = managerService.selectByManagerId(managerId);
         ChangePasswordBean changePasswordBean = null;
-        if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(oldPassword))){
+		System.out.println(manager.getPassword());
+		System.out.println(MD5Util.getInstance().EncoderByMd5(oldPassword));
+		if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(oldPassword))){
             if(newPassword.length() >= 6){
                 if(newPassword.length() <= 16){
                     if(newPassword.equals(confirmPassword)){
@@ -79,6 +82,7 @@ public class AdminPasswordController {
     }
 
     @RequestMapping(value = "/m/admin/resetPassword/submit", method = RequestMethod.POST)
+	@ResponseBody
     public int resetPasswordSubmit(HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String jsonStr = request.getParameter("resetPasswordBean");
         List<ResetPasswordBean> resetPasswordBeans = new ArrayList<>(JSONArray.parseArray(jsonStr, ResetPasswordBean.class));

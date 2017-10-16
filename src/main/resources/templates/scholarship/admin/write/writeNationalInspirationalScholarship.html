@@ -19,26 +19,25 @@
             </div>
         </div>
         <div class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon">&#xe612;</i>
-                    管理员XXX
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="">修改密码</a>
-                    </dd>
-                    <dd>
-                        <a href="/mLogout">退出</a>
-                    </dd>
-                </dl>
-            </li>
+            <ul class="layui-nav" lay-filter="user">
+                <li class="layui-nav-item">
+                    <a href="javascript:;" th:text="${session.managerBean.managerId}"></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:void(0);">修改密码</a>
+                        </dd>
+                        <dd>
+                            <a href="/mLogout">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree" lay-filter="side">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a href="javascript:;">
                         <i class="fa fa-stop-circle"></i>
                         查看名单
@@ -50,7 +49,7 @@
                         <dd><a href="/m/admin/showTripleastudent">三好学生</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">
                         <i class="fa fa-stop-circle"></i>
                         填写意见
@@ -62,6 +61,12 @@
                         <dd><a href="/m/admin/opinion/tripleastudent">三好学生</a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="/m/admin/resetPassword">
+                        <i class="fa fa-stop-circle"></i>
+                        重置学生密码
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -71,7 +76,12 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">院（系）意见</label>
                     <div class="layui-input-block">
-                        <textarea name="opinion" lay-verify="applyReason" placeholder="100字以内" class="layui-textarea" th:field=""></textarea>
+                        <textarea name="opinion" lay-verify="applyReason" placeholder="100字以内" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <button class="layui-btn" lay-submit="lay-submit">提交</button>
                     </div>
                 </div>
             </form>

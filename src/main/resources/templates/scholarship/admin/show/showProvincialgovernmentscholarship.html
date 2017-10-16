@@ -19,20 +19,19 @@
             </div>
         </div>
         <div class="layui-nav layui-layout-right">
-            <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <i class="layui-icon">&#xe612;</i>
-                    管理员XXX
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="">修改密码</a>
-                    </dd>
-                    <dd>
-                        <a href="/mLogout">退出</a>
-                    </dd>
-                </dl>
-            </li>
+            <ul class="layui-nav" lay-filter="user">
+                <li class="layui-nav-item">
+                    <a href="javascript:;" th:text="${session.managerBean.managerId}"></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:void(0);">修改密码</a>
+                        </dd>
+                        <dd>
+                            <a href="/mLogout">退出</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="layui-side layui-bg-black">
@@ -61,6 +60,12 @@
                         <dd><a href="/m/admin/opinion/schoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/opinion/tripleastudent">三好学生</a></dd>
                     </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/m/admin/resetPassword">
+                        <i class="fa fa-stop-circle"></i>
+                        重置学生密码
+                    </a>
                 </li>
             </ul>
         </div>
