@@ -18,4 +18,6 @@ public interface TripleastudentService {
     Tripleastudent selectByUserId(String userId);
 
     List<TripleastudentShowBean> selectAllTripleastudent();
+
+    int updateAllOpinion(String opinion);
 }

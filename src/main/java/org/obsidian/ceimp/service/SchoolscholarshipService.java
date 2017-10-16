@@ -22,4 +22,6 @@ public interface SchoolscholarshipService {
     Schoolscholarship selectByUserIdAndLevel(String userId,String level);
 
     int deleteSchoolscholarshipByUserIdAndLevel(String userId,String level);
+
+    int updateAllOpinion(String opinion);
 }

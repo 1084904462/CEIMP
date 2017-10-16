@@ -28,4 +28,6 @@ public interface ProvincialgovernmentscholarshipService {
     Provincialgovernmentscholarship selectByUserId(String userId);
 
     List<ProvincialgovernmentscholarshipShowBean> selectAllProvincialgovernmentscholarship();
+
+    int updateAllRecommendReasonAndOpinion(String recommendReason,String opinion);
 }

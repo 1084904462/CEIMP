@@ -129,7 +129,7 @@ public class LogController {
             if(manager.getPassword().equals(password)){
                 logger.info("管理员 " + managerId + " 登录成功");
                 managerBean = new ManagerBean();
-                manager.setManagerId(managerId);
+                managerBean.setManagerId(managerId);
                 session.setAttribute("managerBean",managerBean);
                     return "redirect:/m/admin/showNationalInspirationalScholarship";
             }

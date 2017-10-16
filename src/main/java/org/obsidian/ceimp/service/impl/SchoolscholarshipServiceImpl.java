@@ -93,4 +93,13 @@ public class SchoolscholarshipServiceImpl implements SchoolscholarshipService {
         example.or().andUseridEqualTo(userId).andLevelEqualTo(level);
         return schoolscholarshipMapper.deleteByExample(example);
     }
+
+    @Transactional
+    @Override
+    public int updateAllOpinion(String opinion) {
+        Schoolscholarship schoolscholarship = new Schoolscholarship();
+        schoolscholarship.setOpinion(opinion);
+        SchoolscholarshipExample example = new SchoolscholarshipExample();
+        return schoolscholarshipMapper.updateByExampleSelective(schoolscholarship,example);
+    }
 }

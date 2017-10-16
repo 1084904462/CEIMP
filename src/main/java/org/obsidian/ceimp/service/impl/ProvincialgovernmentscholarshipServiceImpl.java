@@ -97,4 +97,14 @@ public class ProvincialgovernmentscholarshipServiceImpl implements Provincialgov
         }
         return list;
     }
+
+    @Transactional
+    @Override
+    public int updateAllRecommendReasonAndOpinion(String recommendReason, String opinion) {
+        Provincialgovernmentscholarship provincialgovernmentscholarship = new Provincialgovernmentscholarship();
+        provincialgovernmentscholarship.setRecommendreason(recommendReason);
+        provincialgovernmentscholarship.setOpinion(opinion);
+        ProvincialgovernmentscholarshipExample example = new ProvincialgovernmentscholarshipExample();
+        return provincialgovernmentscholarshipMapper.updateByExampleSelective(provincialgovernmentscholarship,example);
+    }
 }

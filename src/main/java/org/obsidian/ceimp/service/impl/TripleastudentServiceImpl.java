@@ -71,4 +71,13 @@ public class TripleastudentServiceImpl implements TripleastudentService {
         }
         return list;
     }
+
+    @Transactional
+    @Override
+    public int updateAllOpinion(String opinion) {
+        Tripleastudent tripleastudent = new Tripleastudent();
+        tripleastudent.setOpinion(opinion);
+        TripleastudentExample example = new TripleastudentExample();
+        return tripleastudentMapper.updateByExampleSelective(tripleastudent,example);
+    }
 }

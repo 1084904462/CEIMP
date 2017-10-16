@@ -109,4 +109,13 @@ public class NationalinspirationalscholarshipServiceImpl implements Nationalinsp
         }
         return list;
     }
+
+    @Transactional
+    @Override
+    public int updateAllOpinion(String opinion) {
+        Nationalinspirationalscholarship nationalinspirationalscholarship = new Nationalinspirationalscholarship();
+        nationalinspirationalscholarship.setOpinion(opinion);
+        NationalinspirationalscholarshipExample example = new NationalinspirationalscholarshipExample();
+        return nationalinspirationalscholarshipMapper.updateByExampleSelective(nationalinspirationalscholarship,example);
+    }
 }

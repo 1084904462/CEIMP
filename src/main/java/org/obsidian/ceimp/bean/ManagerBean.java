@@ -6,6 +6,13 @@ package org.obsidian.ceimp.bean;
 public class ManagerBean {
     private String managerId;
 
+    @Override
+    public String toString() {
+        return "ManagerBean{" +
+                "managerId='" + managerId + '\'' +
+                '}';
+    }
+
     public String getManagerId() {
         return managerId;
     }

@@ -32,4 +32,6 @@ public interface NationalinspirationalscholarshipService {
     Nationalinspirationalscholarship selectByUserId(String userId);
 
     List<NationalinspirationalscholarshipShowBean> selectAllNationalinspirationalscholarship();
+
+    int updateAllOpinion(String opinion);
 }

@@ -1,5 +1,6 @@
 import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
+import org.obsidian.ceimp.service.SchoolscholarshipService;
 import org.obsidian.ceimp.service.TripleastudentService;
 import org.obsidian.ceimp.service.UserssService;
 import org.obsidian.ceimp.util.WordUtil;
@@ -49,6 +50,9 @@ public class Test {
     @Autowired
     private TripleastudentService tripleastudentService;
 
+    @Autowired
+    private SchoolscholarshipService schoolscholarshipService;
+
     @org.junit.Test
     public void test1() throws IOException {
 //        String password = "888888";
@@ -68,8 +72,7 @@ public class Test {
 //        fileNameList.add("1150299070陈伟二好学生");
 //        fileNameList.add("1150299070陈伟三好学生");
 //        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
-        for(int i=94;i<=180;i++){
-            userssService.updateUserss(i,"2016年09月");
-        }
+        int result = schoolscholarshipService.updateAllOpinion("这人真心穷！！");
+        System.out.println(result);
     }
 }
