@@ -1,5 +1,6 @@
 import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
+import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.SchoolscholarshipService;
 import org.obsidian.ceimp.service.TripleastudentService;
 import org.obsidian.ceimp.service.UserssService;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,8 +55,11 @@ public class Test {
     @Autowired
     private SchoolscholarshipService schoolscholarshipService;
 
+    @Autowired
+    private ManagerService managerService;
+
     @org.junit.Test
-    public void test1() throws IOException {
+    public void test1() throws IOException, NoSuchAlgorithmException {
 //        String password = "888888";
 //        List<String> list = userssService.selectAllUserId();
 //        for(int i=0;i<list.size();i++){
@@ -72,7 +77,5 @@ public class Test {
 //        fileNameList.add("1150299070陈伟二好学生");
 //        fileNameList.add("1150299070陈伟三好学生");
 //        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
-        int result = schoolscholarshipService.updateAllOpinion("这人真心穷！！");
-        System.out.println(result);
     }
 }

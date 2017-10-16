@@ -27,6 +27,9 @@
     <result column="sub_sum" jdbcType="VARCHAR" property="subSum" />
     <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
+  <select id="selectAllResetUserssBean" resultType="org.obsidian.ceimp.bean.ResetUserssBean">
+    select major,class_id,user_id,username from userss
+  </select>
   <select id="selectAllUserId" resultType="java.lang.String">
     select user_id from userss
   </select>

@@ -1,13 +1,17 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.ResetUserssBean;
 import org.obsidian.ceimp.dao.UserssMapper;
 import org.obsidian.ceimp.entity.Userss;
 import org.obsidian.ceimp.entity.UserssExample;
 import org.obsidian.ceimp.service.UserssService;
+import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -83,7 +87,8 @@ public class UserssServiceImpl implements UserssService {
 
     @Transactional
     @Override
-    public int updatePassword(String userId,String password) {
+    public int updatePassword(String userId,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
         return userssMapper.updatePassword(userId,password);
     }
 
@@ -96,5 +101,44 @@ public class UserssServiceImpl implements UserssService {
         UserssExample example = new UserssExample();
         example.or().andIdEqualTo(id);
         return userssMapper.updateByExampleSelective(userss,example);
+    }
+
+    @Transactional
+    @Override
+    public int updateUserssPassword(List<String> list) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        int updateSum = 0;
+        Userss userss = new Userss();
+        String password = MD5Util.getInstance().EncoderByMd5("888888");
+        userss.setPassword(password);
+        UserssExample example = null;
+        if(list != null){
+            for(int i=0;i<list.size();i++){
+                example = new UserssExample();
+                example.or().andUserIdEqualTo(list.get(i));
+                userssMapper.updateByExampleSelective(userss,example);
+                updateSum++;
+            }
+        }
+        return updateSum;
+    }
+
+    @Transactional
+    @Override
+    public int resetAllUsersPassword() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        String password = MD5Util.getInstance().EncoderByMd5("888888");
+        Userss userss = new Userss();
+        userss.setPassword(password);
+        UserssExample example = new UserssExample();
+        return userssMapper.updateByExampleSelective(userss,example);
+    }
+
+    @Transactional
+    @Override
+    public List<ResetUserssBean> selectAllResetUserssBean() {
+        List<ResetUserssBean> list = userssMapper.selectAllResetUserssBean();
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

@@ -62,7 +62,7 @@ public class LogController {
     }
 
     @RequestMapping(value = "/uLogin", method = RequestMethod.POST)
-    public String uLogin(HttpSession session, Model model, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password){
+    public String uLogin(HttpSession session, Model model, @RequestParam(value = "userId") String userId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
         ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
         if(userssBean != null){
@@ -74,11 +74,11 @@ public class LogController {
 
         Userss userss = userssService.selectByUserId(userId);
         if(userss != null){
-            if(userss.getPassword().equals(password)){
+            if(userss.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("用户 " + userId + " 登录成功");
                 userssBean = new UserssBean();
                 userssBean.setUserId(userId);
-                if(userss.getPassword().equals("888888")){
+                if(userss.getPassword().equals(MD5Util.getInstance().EncoderByMd5("888888"))){
                     userssBean.setIsChangedPassword(0);
                     session.setAttribute("userssBean",userssBean);
                     return "redirect:/u/changePassword";
@@ -114,7 +114,7 @@ public class LogController {
     }
 
     @RequestMapping(value = "/mLogin", method = RequestMethod.POST)
-    public String mLogin(HttpSession session, Model model, @RequestParam(value = "managerId") String managerId, @RequestParam(value = "password") String password){
+    public String mLogin(HttpSession session, Model model, @RequestParam(value = "managerId") String managerId, @RequestParam(value = "password") String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
         ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
         if(userssBean != null){
@@ -126,7 +126,7 @@ public class LogController {
 
         Manager manager = managerService.selectByManagerId(managerId);
         if(manager != null){
-            if(manager.getPassword().equals(password)){
+            if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
                 logger.info("管理员 " + managerId + " 登录成功");
                 managerBean = new ManagerBean();
                 managerBean.setManagerId(managerId);

@@ -1,7 +1,10 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.ResetUserssBean;
 import org.obsidian.ceimp.entity.Userss;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -19,7 +22,13 @@ public interface UserssService {
 
     Userss selectByUserId(String userId);
 
-    int updatePassword(String userId,String password);
+    int updatePassword(String userId,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     int updateUserss(int id,String entrance);
+
+    int updateUserssPassword(List<String> list) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    int resetAllUsersPassword() throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    List<ResetUserssBean> selectAllResetUserssBean();
 }

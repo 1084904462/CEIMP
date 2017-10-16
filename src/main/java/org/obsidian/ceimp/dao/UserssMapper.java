@@ -1,12 +1,15 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.ResetUserssBean;
 import org.obsidian.ceimp.entity.Userss;
 import org.obsidian.ceimp.entity.UserssExample;
 
 import java.util.List;
 
 public interface UserssMapper {
+    List<ResetUserssBean> selectAllResetUserssBean();
+
     int updatePassword(@Param("userId") String userId,@Param("password") String password);
 
     Userss selectByUserId(String userId);

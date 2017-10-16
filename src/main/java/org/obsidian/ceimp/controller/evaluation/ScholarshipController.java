@@ -5,6 +5,7 @@ import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.DownloadUtil;
+import org.obsidian.ceimp.util.MD5Util;
 import org.obsidian.ceimp.util.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -288,14 +291,14 @@ public class ScholarshipController {
 //	    return "redirect:/u/tripleAStudent";
     }
     @RequestMapping(value = "/u/changedPassword", method = RequestMethod.POST)
-    public String changedPassword(HttpSession session, Model model,HttpServletRequest request){
+    public String changedPassword(HttpSession session, Model model,HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
         String confirmPassword = request.getParameter("confirmPassword");
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         ChangePasswordBean changePasswordBean = null;
-        if(userss.getPassword().equals(oldPassword)){
+        if(userss.getPassword().equals(MD5Util.getInstance().EncoderByMd5(oldPassword))){
             if(newPassword.length() >= 6){
                 if(newPassword.length() <= 16){
                     if(newPassword.equals("888888")){
