@@ -106,8 +106,8 @@ layui.use(['element', 'table', 'form', 'layer'], function()
                                 $.ajax({
                                     url: "/m/admin/changeManagerPassword",
                                     type: "post",
-                                    data: "oldPassword=" + oldPasswordInput.value + "newPassword=" +
-                                        newPasswordInput.value + "confirmPassword=" + confirmPasswordInput.value,
+                                    data: "oldPassword=" + oldPasswordInput.value + "&newPassword=" +
+                                        newPasswordInput.value + "&confirmPassword=" + confirmPasswordInput.value,
                                     success:function(data)
                                     {
                                         console.log(data);
@@ -274,7 +274,9 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             $.ajax({
                 url: "/m/admin/resetPassword/submit",
                 type: "post",
-                data: JSON.stringify(data),
+                data: {
+                    "resetPasswordBean":JSON.stringify(data)
+                },
                 success: function(data)
                 {
                     if(data != 0)

@@ -46,8 +46,6 @@ public class AdminPasswordController {
         String confirmPassword = request.getParameter("confirmPassword");
         Manager manager = managerService.selectByManagerId(managerId);
         ChangePasswordBean changePasswordBean = null;
-		System.out.println(manager.getPassword());
-		System.out.println(MD5Util.getInstance().EncoderByMd5(oldPassword));
 		if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(oldPassword))){
             if(newPassword.length() >= 6){
                 if(newPassword.length() <= 16){
@@ -77,7 +75,6 @@ public class AdminPasswordController {
     public String resetPassword(Model model){
         List<ResetUserssBean> list = userssService.selectAllResetUserssBean();
         model.addAttribute("resetUserssBean",list);
-        System.out.println(list);
         return "scholarship/admin/resetPassword";
     }
 
@@ -85,6 +82,7 @@ public class AdminPasswordController {
 	@ResponseBody
     public int resetPasswordSubmit(HttpServletRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String jsonStr = request.getParameter("resetPasswordBean");
+        System.out.println(jsonStr);
         List<ResetPasswordBean> resetPasswordBeans = new ArrayList<>(JSONArray.parseArray(jsonStr, ResetPasswordBean.class));
         List<String> list = new ArrayList<>();
         for(int i=0;i<resetPasswordBeans.size();i++){
