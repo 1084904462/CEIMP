@@ -27,10 +27,18 @@ public class ZipUtil {
         FileOutputStream fos = null;
         ZipOutputStream zos = null;
         try{
-            File zipFile = new File(outputUrl + "\\" + awardName + ".zip");
+            //Windows
+//            File zipFile = new File(outputUrl + "\\" + awardName + ".zip");
+//            File[] sourceFiles = new File[fileNameList.size()];
+//            for(int i=0;i<fileNameList.size();i++){
+//                sourceFiles[i] = new File(inputUrl + "\\" + fileNameList.get(i) + ".docx");
+//            }
+
+            //Linux
+            File zipFile = new File(outputUrl + "/" + awardName + ".zip");
             File[] sourceFiles = new File[fileNameList.size()];
             for(int i=0;i<fileNameList.size();i++){
-                sourceFiles[i] = new File(inputUrl + "\\" + fileNameList.get(i) + ".docx");
+                sourceFiles[i] = new File(inputUrl + "/" + fileNameList.get(i) + ".docx");
             }
             fos = new FileOutputStream(zipFile);
             zos = new ZipOutputStream(new BufferedOutputStream(fos));

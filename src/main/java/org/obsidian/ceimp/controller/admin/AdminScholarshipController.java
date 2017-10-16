@@ -103,16 +103,25 @@ public class AdminScholarshipController {
             award = "schoolScholarship";
             awardName = "校奖学金";
         }
-        //服务器路径
-        String inputUrl = System.getProperty("user.dir") + "\\classes\\award\\" + award;
-        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\zip";
+        //服务器路径Windows
+//        String inputUrl = System.getProperty("user.dir") + "\\classes\\award\\" + award;
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\zip";
+        //服务器路径Linux
+        String inputUrl = System.getProperty("user.dir") + "/classes/award/" + award;
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/zip";
 
         //本地路径
 //        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award;
 //        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\zip";
         ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,list);
-        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
-        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
+
+        //Windows
+//        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
+//        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
+
+        //Linux
+        DownloadUtil.getInstance().download(outputUrl + "/" + awardName + ".zip",response,awardName + ".zip");
+        DeleteUtil.getInstance().delete(outputUrl + "/" + awardName + ".zip");
     }
     @RequestMapping(value = "/m/admin/delete", method = RequestMethod.GET)
     @ResponseBody
@@ -123,9 +132,13 @@ public class AdminScholarshipController {
         String award = request.getParameter("award");
         String awardUrl = "";
         if(award.equals("国家励志奖学金")){
-            //服务器路径
-            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Windows
+//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+//                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Linux
+            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+                    "nationalInspirationalScholarship/" + userId + username + award + ".docx";
+
             //本地路径
 //            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
 //                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
@@ -134,9 +147,13 @@ public class AdminScholarshipController {
             isDelete = 1;
         }
         else if(award.equals("省政府奖学金")){
-            //服务器路径
-            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Windows
+//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+//                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Linux
+            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+                    "provincialGovernmentScholarship/" + userId + username + award + ".docx";
+
             //本地路径
 //            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
 //                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
@@ -145,9 +162,13 @@ public class AdminScholarshipController {
             isDelete = 1;
         }
         else if(award.equals("三好学生")){
-            //服务器路径
-            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-                    "tripleAStudent\\" + userId + username + award + ".docx";
+            //服务器路径Windows
+//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+//                    "tripleAStudent\\" + userId + username + award + ".docx";
+            //服务器路径Linux
+            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+                    "tripleAStudent/" + userId + username + award + ".docx";
+
             //本地路径
 //            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
 //                    "tripleAStudent\\" + userId + username + award + ".docx";
@@ -156,9 +177,13 @@ public class AdminScholarshipController {
             isDelete = 1;
         }
         else{
-            //服务器路径
-            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-                    "schoolScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Windows
+//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+//                    "schoolScholarship\\" + userId + username + award + ".docx";
+            //服务器路径Linux
+            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+                    "schoolScholarship/" + userId + username + award + ".docx";
+
             //本地路径
 //            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
 //                    "schoolScholarship\\" + userId + username + award + ".docx";

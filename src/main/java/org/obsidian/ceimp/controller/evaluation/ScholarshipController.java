@@ -489,33 +489,48 @@ public class ScholarshipController {
         String situation = nationalinspirationalscholarshipBean.getSituation();
         String inputUrl = null;
         if(resident.equals("城镇") && situation.equals("家庭经济特别困难")){
-            //服务器路径
-            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板1.docx";
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板1.docx";
+            //服务器路径Linux
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家励志奖学金模板1.docx";
+
             //本地路径
 //            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板1.docx";
         }
         else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
-            //服务器路径
-            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板2.docx";
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板2.docx";
+            //服务器路径Linux
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家励志奖学金模板2.docx";
+
             //本地路径
 //            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家励志奖学金模板2.docx";
         }
         else if(resident.equals("农村") && situation.equals("家庭经济特别困难")){
-            //服务器路径
-            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板3.docx";
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板3.docx";
+            //服务器路径Linux
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家励志奖学金模板3.docx";
+
             //本地路径
 //            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家励志奖学金模板3.docx";
         }
         else if(resident.equals("农村") && situation.equals("家庭经济一般困难")){
-            //服务器路径
-            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板4.docx";
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板4.docx";
+            //服务器路径Linux
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家励志奖学金模板4.docx";
+
             //本地路径
 //            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家励志奖学金模板4.docx";
         }
         String userId = nationalinspirationalscholarshipBean.getUserId();
         String username = nationalinspirationalscholarshipBean.getUsername();
-        //服务器路径
-        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\nationalInspirationalScholarship\\" + userId + username + "国家励志奖学金.docx";
+        //服务器路径Windows
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\nationalInspirationalScholarship\\" + userId + username + "国家励志奖学金.docx";
+        //服务器路径Linux
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/nationalInspirationalScholarship/" + userId + username + "国家励志奖学金.docx";
+
         //本地路径
 //        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\nationalInspirationalScholarship\\" + userId + username + "国家励志奖学金.docx";
         Map<String,String> textMap = new HashMap<>();
@@ -563,9 +578,13 @@ public class ScholarshipController {
         char a = 'a';
         String userId = provincialgovernmentscholarshipBean.getUserId();
         String username = provincialgovernmentscholarshipBean.getUsername();
-        //服务器路径
-        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\省政府奖学金模板.docx";
-        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\provincialGovernmentScholarship\\" + userId + username + "省政府奖学金.docx";
+        //服务器路径Windows
+//        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\省政府奖学金模板.docx";
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\provincialGovernmentScholarship\\" + userId + username + "省政府奖学金.docx";
+        //服务器路径Linux
+        String inputUrl = System.getProperty("user.dir") + "/classes/model/省政府奖学金模板.docx";
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/provincialGovernmentScholarship/" + userId + username + "省政府奖学金.docx";
+
         //本地路径
 //        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\省政府奖学金模板.docx";
 //        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\provincialGovernmentScholarship\\" + userId + username + "省政府奖学金.docx";
@@ -608,9 +627,13 @@ public class ScholarshipController {
         String userId = schoolscholarshipBean.getUserId();
         String username = schoolscholarshipBean.getUsername();
         String level = schoolscholarshipBean.getLevel();
-        //服务器路径
-        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\校奖学金模板.docx";
-        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\schoolScholarship\\" + userId + username + level + ".docx";
+        //服务器路径Windows
+//        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\校奖学金模板.docx";
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\schoolScholarship\\" + userId + username + level + ".docx";
+        //服务器路径Linux
+        String inputUrl = System.getProperty("user.dir") + "/classes/model/校奖学金模板.docx";
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/schoolScholarship/" + userId + username + level + ".docx";
+
         //本地路径
 //        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\校奖学金模板.docx";
 //        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\schoolScholarship\\" + userId + username + level + ".docx";
@@ -636,9 +659,13 @@ public class ScholarshipController {
     public void tripleAStudentWord(TripleastudentBean tripleastudentBean,HttpServletResponse response) throws IOException {
         String userId = tripleastudentBean.getUserId();
         String username = tripleastudentBean.getUsername();
-        //服务器路径
-        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\三好学生模板.docx";
-        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\tripleAStudent\\" + userId + username + "三好学生.docx";
+        //服务器路径Windows
+//        String inputUrl = System.getProperty("user.dir") + "\\classes\\model\\三好学生模板.docx";
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\tripleAStudent\\" + userId + username + "三好学生.docx";
+        //服务器路径Linux
+        String inputUrl = System.getProperty("user.dir") + "/classes/model/三好学生模板.docx";
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/tripleAStudent/" + userId + username + "三好学生.docx";
+
         //本地路径
 //        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\三好学生模板.docx";
 //        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\tripleAStudent\\" + userId + username + "三好学生.docx";
