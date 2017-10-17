@@ -73,7 +73,7 @@
     </div>
     <div class="layui-body fade-in-right">
         <div class="layui-fluid" style="padding: 15px;">
-            <div class="layui-tab">
+            <div class="layui-tab" lay-filter="content">
                 <ul class="layui-tab-title">
                     <li class="layui-this">15级</li>
                     <li>16级</li>
@@ -89,7 +89,8 @@
 
                             </div>
                         </fieldset>
-                        <table class="layui-table" lay-data="{id: 'table15', height: 'full-340', even: 'true', limit:1000}" height="full-325" lay-filter="table15">
+                        <!---->
+                        <table class="layui-table" lay-data="{id: 'table15', height: 'full-340', even: 'true', limit:1000}" lay-filter="table15">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -125,10 +126,35 @@
 
                             </div>
                         </fieldset>
-                        <table class="layui-table" lay-data="{id: 'table16', height: 'full-340', even: 'true', limit:1000}" height="full-325" lay-filter="table16">
+                        <!--<table class="layui-table" lay-data="{id: 'table16',height: 'full-340', even: 'true', limit:1000}" height="full-325" lay-filter="table16">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th lay-data="{field: 'id', checkbox:true, fixed: true}"></th>-->
+                                <!--<th lay-data="{field: 'major', width: 150, sort: 'true'}">专业</th>-->
+                                <!--<th lay-data="{field: 'majorClass', width: 180, sort: 'true'}">班级</th>-->
+                                <!--<th lay-data="{field: 'userId', width: 130, sort: 'true'}">学号</th>-->
+                                <!--<th lay-data="{field: 'username', width: 100}">名字</th>-->
+                                <!--<th lay-data="{field: 'sex', width: 60}">性别</th>-->
+                                <!--<th lay-data="{field: 'award', width: 200, sort: 'true'}">奖项</th>-->
+                                <!--<th lay-data="{width: 130, fixed: 'right', toolbar: '#toolbar'}"></th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">-->
+                                <!--<td th:text="${person.id}"></td>-->
+                                <!--<td th:text="${person.major}"></td>-->
+                                <!--<td th:text="${person.major + person.class_id}"></td>-->
+                                <!--<td th:text="${person.user_id}"></td>-->
+                                <!--<td th:text="${person.username}"></td>-->
+                                <!--<td th:text="${person.sex}"></td>-->
+                                <!--<td>国家励志奖学金</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <table lay-filter="table16">
                             <thead>
                             <tr>
-                                <th lay-data="{field: 'id', checkbox:true, fixed: true}"></th>
+                                <th lay-data="{checkbox:true, fixed: true}"></th>
                                 <th lay-data="{field: 'major', width: 150, sort: 'true'}">专业</th>
                                 <th lay-data="{field: 'majorClass', width: 180, sort: 'true'}">班级</th>
                                 <th lay-data="{field: 'userId', width: 130, sort: 'true'}">学号</th>

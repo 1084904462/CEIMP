@@ -149,10 +149,12 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else
         {
+            // target: '_blank' 用于提交时新建页面 原页面不跳转
             var $form = $("<form>").attr({
                 style: "display:none",
                 method: "get",
-                action: "/m/admin/zip"
+                action: "/m/admin/zip",
+                target: '_blank'
             });
             $('body').append($form);
 
@@ -164,6 +166,10 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             $form.append($input);
 
             $form.submit().remove();
+
+            // layer.open({
+            //     content: JSON.stringify(data)
+            // })
         }
 
         console.log(checkStatus.data);//获取选中行的数据
@@ -187,7 +193,8 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             var $form = $("<form>").attr({
                 style: "display:none",
                 method: "get",
-                action: "/m/admin/zip"
+                action: "/m/admin/zip",
+                target: '_blank'
             });
             $('body').append($form);
 
@@ -338,4 +345,24 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     }
 
     $("#opinionSubmit").click(writeOpinion);
+
+
+    var flag = 1;
+    var tableOpinion = {
+        height: 'full-340',
+        id: 'table16',
+        even: 'true',
+        limit:1000
+    };
+
+    // table.init('table15', tableOpinion);
+
+    element.on('tab(content)', function(data)
+    {
+        if($(this).text() == "16级" && flag == 1)
+        {
+            table.init('table16', tableOpinion);
+            flag = 0;
+        }
+    });
 });
