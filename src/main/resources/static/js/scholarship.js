@@ -87,7 +87,7 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
         },
         postcode: function(value, item)
         {
-            if(!/^[1-9][0-9]{5}$/.test(value))
+            if(!/^[0-9]{6}$/.test(value))
             {
                 return "请输入正确的邮政编码";
             }
