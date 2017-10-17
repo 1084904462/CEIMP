@@ -53,7 +53,12 @@ public class LogController {
         UserssBean userssBean = (UserssBean) session.getAttribute("userssBean");
         ManagerBean managerBean = (ManagerBean) session.getAttribute("managerBean");
         if(userssBean != null && !"".equals(userssBean.getUserId())){
-            return "redirect:/u/nationalInspirationalScholarship";
+            if(userssBean.getIsChangedPassword() == 0){
+                return "redirect:/u/changePassword";
+            }
+            else if(userssBean.getIsChangedPassword() == 1){
+                return "redirect:/u/nationalInspirationalScholarship";
+            }
         }
         if(managerBean != null && !"".equals(managerBean.getManagerId())){
             return "redirect:/m/admin/showNationalInspirationalScholarship";

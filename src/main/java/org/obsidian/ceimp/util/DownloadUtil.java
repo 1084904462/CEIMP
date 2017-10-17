@@ -24,8 +24,8 @@ public class DownloadUtil {
     }
 
     public void download(String url,HttpServletResponse response,String fileName) throws IOException{
-        System.out.println(url);
-        System.out.println(fileName);
+        System.out.println("downloadUrl:" + url);
+        System.out.println("downloadFileName:" + fileName);
         // 读到流中
         InputStream inStream = new FileInputStream(url);// 文件的存放路径
         // 设置输出的格式

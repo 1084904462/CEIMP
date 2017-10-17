@@ -47,6 +47,8 @@ public class ScholarshipController {
     @Autowired
     private TripleastudentService tripleastudentService;
 
+    @Autowired
+    private ScholarshipOpinionSerivce scholarshipOpinionSerivce;
 
     /**
      * 访问/evaluation/scholarship
@@ -99,8 +101,15 @@ public class ScholarshipController {
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Nationalinspirationalscholarship nationalinspirationalscholarship = nationalinspirationalscholarshipService.selectByUserId(userId);
-
-        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = this.getNationalinspirationalscholarshipBean(userss,nationalinspirationalscholarship);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
+        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = this.getNationalinspirationalscholarshipBean(userss,nationalinspirationalscholarship,scholarshipOpinion);
         model.addAttribute("nationalinspirationalscholarshipBean",nationalinspirationalscholarshipBean);
 		return "scholarship/nationalInspirationalScholarship";
 	}
@@ -109,8 +118,15 @@ public class ScholarshipController {
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Provincialgovernmentscholarship provincialgovernmentscholarship = provincialgovernmentscholarshipService.selectByUserId(userId);
-
-        ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = this.getProvincialgovernmentscholarshipBean(userss,provincialgovernmentscholarship);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
+        ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = this.getProvincialgovernmentscholarshipBean(userss,provincialgovernmentscholarship,scholarshipOpinion);
         model.addAttribute("provincialgovernmentscholarshipBean",provincialgovernmentscholarshipBean);
         return "scholarship/provincialGovernmentScholarship";
 	}
@@ -119,8 +135,15 @@ public class ScholarshipController {
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
         Schoolscholarship schoolscholarship = schoolscholarshipService.selectByUserId(userId);
-
-        SchoolscholarshipBean schoolscholarshipBean = this.getSchoolscholarshipBean(userss,schoolscholarship);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
+        SchoolscholarshipBean schoolscholarshipBean = this.getSchoolscholarshipBean(userss,schoolscholarship,scholarshipOpinion);
         model.addAttribute("schoolscholarshipBean",schoolscholarshipBean);
 		return "scholarship/schoolScholarship";
 	}
@@ -128,8 +151,16 @@ public class ScholarshipController {
 	public String tripleAStudent(HttpSession session,Model model){
         String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
         Userss userss = userssService.selectByUserId(userId);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
         Tripleastudent tripleastudent = tripleastudentService.selectByUserId(userId);
-        TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent);
+        TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent,scholarshipOpinion);
         model.addAttribute("tripleastudentBean",tripleastudentBean);
 		return "scholarship/tripleAStudent";
 	}
@@ -187,8 +218,16 @@ public class ScholarshipController {
         userssService.updateUserss(userId,phone,sex,political,birth,nation,entrance,identity,passSum,subSum);
 
         Userss userss = userssService.selectByUserId(userId);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
         Nationalinspirationalscholarship nationalinspirationalscholarship1 = nationalinspirationalscholarshipService.selectByUserId(userId);
-        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = this.getNationalinspirationalscholarshipBean(userss,nationalinspirationalscholarship1);
+        NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = this.getNationalinspirationalscholarshipBean(userss,nationalinspirationalscholarship1,scholarshipOpinion);
         model.addAttribute("nationalinspirationalscholarshipBean",nationalinspirationalscholarshipBean);
         this.nationalInspirationalScholarshipWord(nationalinspirationalscholarshipBean,response);
 //        return "redirect:/u/nationalInspirationalScholarship";
@@ -234,8 +273,16 @@ public class ScholarshipController {
         userssService.updateUserss(userId,phone,sex,political,birth,nation,entrance,identity,passSum,subSum);
 
         Userss userss = userssService.selectByUserId(userId);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
         Provincialgovernmentscholarship provincialgovernmentscholarship1 = provincialgovernmentscholarshipService.selectByUserId(userId);
-        ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = this.getProvincialgovernmentscholarshipBean(userss,provincialgovernmentscholarship1);
+        ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = this.getProvincialgovernmentscholarshipBean(userss,provincialgovernmentscholarship1,scholarshipOpinion);
         model.addAttribute("provincialgovernmentscholarshipBean",provincialgovernmentscholarshipBean);
         this.provincialGovernmentScholarshipWord(provincialgovernmentscholarshipBean,response);
 //        return "redirect:/u/provincialGovernmentScholarship";
@@ -260,7 +307,15 @@ public class ScholarshipController {
         userssService.updateUserss(userId,sex,nation,political,job);
 
         Userss userss = userssService.selectByUserId(userId);
-        SchoolscholarshipBean schoolscholarshipBean = this.getSchoolscholarshipBean(userss,level,reason,opinion);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
+        SchoolscholarshipBean schoolscholarshipBean = this.getSchoolscholarshipBean(userss,level,reason,scholarshipOpinion);
         model.addAttribute("schoolscholarshipBean",schoolscholarshipBean);
         this.schoolScholarshipWord(schoolscholarshipBean,response);
 //        return "redirect:/u/schoolScholarship";
@@ -284,8 +339,16 @@ public class ScholarshipController {
         userssService.updateUserss(userId,sex,nation,political,job);
 
         Userss userss = userssService.selectByUserId(userId);
+        String managerId = "";
+        if(userss.getMajor().equals("信息大类")){
+            managerId = "112021";
+        }
+        else{
+            managerId = "114046";
+        }
+        ScholarshipOpinion scholarshipOpinion = scholarshipOpinionSerivce.selectByManagerId(managerId);
         Tripleastudent tripleastudent1 = tripleastudentService.selectByUserId(userId);
-	    TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent1);
+	    TripleastudentBean tripleastudentBean = this.getTripleastudentBean(userss,tripleastudent1,scholarshipOpinion);
 	    model.addAttribute("tripleastudentBean",tripleastudentBean);
 	    this.tripleAStudentWord(tripleastudentBean,response);
 //	    return "redirect:/u/tripleAStudent";
@@ -337,7 +400,7 @@ public class ScholarshipController {
 
 
 
-    public NationalinspirationalscholarshipBean getNationalinspirationalscholarshipBean(Userss userss,Nationalinspirationalscholarship nationalinspirationalscholarship){
+    public NationalinspirationalscholarshipBean getNationalinspirationalscholarshipBean(Userss userss,Nationalinspirationalscholarship nationalinspirationalscholarship,ScholarshipOpinion scholarshipOpinion){
         NationalinspirationalscholarshipBean nationalinspirationalscholarshipBean = new NationalinspirationalscholarshipBean();
         nationalinspirationalscholarshipBean.setMajor(userss.getMajor());
         nationalinspirationalscholarshipBean.setClassId(userss.getClassId());
@@ -377,9 +440,10 @@ public class ScholarshipController {
             nationalinspirationalscholarshipBean.setApplyReason(nationalinspirationalscholarship.getApplyreason());
             nationalinspirationalscholarshipBean.setOpinion(nationalinspirationalscholarship.getOpinion());
         }
+        nationalinspirationalscholarshipBean.setOpinion(scholarshipOpinion.getNationalOpinion());
         return nationalinspirationalscholarshipBean;
     }
-    public ProvincialgovernmentscholarshipBean getProvincialgovernmentscholarshipBean(Userss userss,Provincialgovernmentscholarship provincialgovernmentscholarship ){
+    public ProvincialgovernmentscholarshipBean getProvincialgovernmentscholarshipBean(Userss userss,Provincialgovernmentscholarship provincialgovernmentscholarship,ScholarshipOpinion scholarshipOpinion ){
         ProvincialgovernmentscholarshipBean provincialgovernmentscholarshipBean = new ProvincialgovernmentscholarshipBean();
         provincialgovernmentscholarshipBean.setUserId(userss.getUserId());
         provincialgovernmentscholarshipBean.setUsername(userss.getUsername());
@@ -410,12 +474,12 @@ public class ScholarshipController {
             provincialgovernmentscholarshipBean.setAward4(provincialgovernmentscholarship.getAward4());
             provincialgovernmentscholarshipBean.setUnit4(provincialgovernmentscholarship.getUnit4());
             provincialgovernmentscholarshipBean.setApplyReason(provincialgovernmentscholarship.getApplyreason());
-            provincialgovernmentscholarshipBean.setRecommendReason(provincialgovernmentscholarship.getRecommendreason());
-            provincialgovernmentscholarshipBean.setOpinion(provincialgovernmentscholarship.getOpinion());
         }
+        provincialgovernmentscholarshipBean.setRecommendReason(scholarshipOpinion.getProvincialRecommend());
+        provincialgovernmentscholarshipBean.setOpinion(scholarshipOpinion.getProvincialOpinion());
         return provincialgovernmentscholarshipBean;
     }
-    public SchoolscholarshipBean getSchoolscholarshipBean(Userss userss,String level,String reason,String opinion){
+    public SchoolscholarshipBean getSchoolscholarshipBean(Userss userss,String level,String reason,ScholarshipOpinion scholarshipOpinion){
         SchoolscholarshipBean schoolscholarshipBean = new SchoolscholarshipBean();
         schoolscholarshipBean.setMajor(userss.getMajor());
         schoolscholarshipBean.setClassId(userss.getClassId());
@@ -432,10 +496,10 @@ public class ScholarshipController {
         schoolscholarshipBean.setRank(userss.getCe() + "/" + userss.getMajorSum());
         schoolscholarshipBean.setLevel(level);
         schoolscholarshipBean.setReason(reason);
-        schoolscholarshipBean.setOpinion(opinion);
+        schoolscholarshipBean.setOpinion(scholarshipOpinion.getSchoolOpinion());
         return schoolscholarshipBean;
     }
-    public SchoolscholarshipBean getSchoolscholarshipBean(Userss userss,Schoolscholarship schoolscholarship){
+    public SchoolscholarshipBean getSchoolscholarshipBean(Userss userss,Schoolscholarship schoolscholarship,ScholarshipOpinion scholarshipOpinion){
         SchoolscholarshipBean schoolscholarshipBean = new SchoolscholarshipBean();
         schoolscholarshipBean.setMajor(userss.getMajor());
         schoolscholarshipBean.setClassId(userss.getClassId());
@@ -453,11 +517,11 @@ public class ScholarshipController {
         if(schoolscholarship != null){
             schoolscholarshipBean.setLevel(schoolscholarship.getLevel());
             schoolscholarshipBean.setReason(schoolscholarship.getReason());
-            schoolscholarshipBean.setOpinion(schoolscholarship.getOpinion());
         }
+        schoolscholarshipBean.setOpinion(scholarshipOpinion.getSchoolOpinion());
         return schoolscholarshipBean;
     }
-    public TripleastudentBean getTripleastudentBean(Userss userss,Tripleastudent tripleastudent){
+    public TripleastudentBean getTripleastudentBean(Userss userss,Tripleastudent tripleastudent,ScholarshipOpinion scholarshipOpinion){
         TripleastudentBean tripleastudentBean = new TripleastudentBean();
         tripleastudentBean.setUserId(userss.getUserId());
         tripleastudentBean.setUsername(userss.getUsername());
@@ -474,8 +538,8 @@ public class ScholarshipController {
         tripleastudentBean.setRank(userss.getCe() + "/" + userss.getMajorSum());
         if(tripleastudent != null){
             tripleastudentBean.setReason(tripleastudent.getReason());
-            tripleastudentBean.setOpinion(tripleastudent.getOpinion());
         }
+        tripleastudentBean.setOpinion(scholarshipOpinion.getTripleaOpinion());
         return tripleastudentBean;
     }
 

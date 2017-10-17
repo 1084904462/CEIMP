@@ -179,13 +179,13 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">申请理由</label>
                     <div class="layui-input-block">
-                        <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:field="*{reason}"></textarea>
+                        <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:text="*{reason}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">二级学工组意见</label>
                     <div class="layui-input-block">
-                        <textarea name="opinion" required="required" lay-verify="required|applyReason" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:field="*{opinion}"></textarea>
+                        <textarea name="opinion" lay-verify="applyReason" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:text="*{opinion}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">

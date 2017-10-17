@@ -315,18 +315,22 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         {
             opinionData += "&recommendReason=" + opinionForm.recommendReason.value;
         }
-
         $.ajax({
             url: opinionForm.action,
             type: "post",
             data: opinionData,
             success: function(data)
             {
-                console.log(data);
+                if(data == 1){
+                    layer.msg("意见修改成功", {icon: 1});
+                }
+                else{
+                    layer.msg("意见修改失败", {icon: 2, anim: 6});
+                }
             },
             error: function(data)
             {
-                layer.msg("发生错误，提交失败");
+                layer.msg("意见修改失败", {icon: 2, anim: 6});
             }
         });
 

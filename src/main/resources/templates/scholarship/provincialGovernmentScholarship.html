@@ -244,19 +244,19 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">申请理由</label>
                     <div class="layui-input-block">
-                        <textarea name="reason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:field="*{applyReason}"></textarea>
+                        <textarea name="applyReason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:text="*{applyReason}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">推荐理由</label>
                     <div class="layui-input-block">
-                        <textarea name="recommendReason" lay-verify="recommendReason" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:field="*{recommendReason}"></textarea>
+                        <textarea name="recommendReason" lay-verify="recommendReason" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:text="*{recommendReason}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">院（系）意见</label>
                     <div class="layui-input-block">
-                        <textarea name="opinion" lay-verify="opinion" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:field="*{opinion}"></textarea>
+                        <textarea name="opinion" lay-verify="opinion" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:text="*{opinion}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">

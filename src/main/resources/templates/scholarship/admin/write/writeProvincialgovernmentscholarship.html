@@ -73,17 +73,17 @@
     </div>
     <div class="layui-body fade-in-right">
         <div style="padding: 15px;">
-            <form action="/m/admin/opinion/provincialgovernmentscholarship/submit" class="layui-form layui-form-pane" method="post">
+            <form action="/m/admin/opinion/provincialgovernmentscholarship/submit" class="layui-form layui-form-pane" method="post" th:object="${scholarshipOpinionBean}">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">推荐理由</label>
                     <div class="layui-input-block">
-                        <textarea name="recommendReason" lay-verify="recommendReason" placeholder="100字以内" class="layui-textarea"></textarea>
+                        <textarea name="recommendReason" lay-verify="recommendReason" placeholder="100字以内" class="layui-textarea" th:text="*{provincialRecommend}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">院（系）意见</label>
                     <div class="layui-input-block">
-                        <textarea name="opinion" lay-verify="opinion" placeholder="100字以内" class="layui-textarea"></textarea>
+                        <textarea name="opinion" lay-verify="opinion" placeholder="100字以内" class="layui-textarea" th:text="*{provincialOpinion}"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
