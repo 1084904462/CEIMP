@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>查看 - 校奖学金</title>
+    <title>填写 - 国家助学金</title>
     <link rel="stylesheet" th:href="@{/css/plugins/font-awesome/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}"/>
     <link rel="stylesheet" th:href="@{/css/admin/adminCommon.css}"/>
@@ -38,7 +38,7 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree" lay-filter="side">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a href="javascript:;">
                         <i class="fa fa-stop-circle"></i>
                         查看名单
@@ -47,18 +47,18 @@
                         <dd><a href="/m/admin/showNationalInspirationalScholarship">国家励志奖学金</a></dd>
                         <dd><a href="/m/admin/showNationalGrant">国家助学金</a></dd>
                         <dd><a href="/m/admin/showProvincialgovernmentscholarship">省政府奖学金</a></dd>
-                        <dd class="layui-this"><a href="/m/admin/showSchoolscholarship">校奖学金</a></dd>
+                        <dd><a href="/m/admin/showSchoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/showTripleastudent">三好学生</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">
                         <i class="fa fa-stop-circle"></i>
                         填写意见
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="/m/admin/opinion/nationalinspirationalscholarship">国家励志奖学金</a></dd>
-                        <dd><a href="/m/admin/opinion/nationalGrant">国家助学金</a></dd>
+                        <dd class="layui-this"><a href="/m/admin/opinion/nationalGrant">国家助学金</a></dd>
                         <dd><a href="/m/admin/opinion/provincialgovernmentscholarship">省政府奖学金</a></dd>
                         <dd><a href="/m/admin/opinion/schoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/opinion/tripleastudent">三好学生</a></dd>
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="layui-body fade-in-right">
-        <div class="layui-fluid" style="padding: 15px;">
+        <div style="padding: 15px;">
             <div class="layui-tab" lay-filter="content">
                 <ul class="layui-tab-title">
                     <li class="layui-this">15级</li>
@@ -83,17 +83,26 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <fieldset class="layui-elem-field">
-                            <legend>校奖学金</legend>
+                            <legend>国家助学金</legend>
                             <div class="layui-field-box">
-                                <div class="layui-inline">
-                                    <button class="layui-btn" id="batchDownload15">批量下载</button>
-                                </div>
-                                <div class="layui-inline checked-number">
-                                    已选 <span id="checkedNumber15">0</span> 人
+                                <div class="layui-form">
+                                    <div class="layui-inline">
+                                        <select name="opinion">
+                                            <option value=""></option>
+                                            <option value="国家助学金一档">国家助学金一档</option>
+                                            <option value="国家助学金二档">国家助学金二档</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button class="layui-btn" id="changeNationalGrantOpinion15">修改</button>
+                                    </div>
+                                    <div class="layui-inline checked-number">
+                                        已选 <span id="checkedNumber15">0</span> 人
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
-                        <table class="layui-table" lay-data="{limit:1000, id: 'table15', height: 'full-340', even: 'true'}" lay-filter="table15">
+                        <table class="layui-table" lay-data="{id: 'table15', height: 'full-340', even: 'true', limit:1000}" lay-filter="table15">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -103,31 +112,39 @@
                                 <th lay-data="{field: 'username', width: 100}">名字</th>
                                 <th lay-data="{field: 'sex', width: 60}">性别</th>
                                 <th lay-data="{field: 'award', width: 200, sort: 'true'}">奖项</th>
-                                <th lay-data="{width: 130, fixed: 'right', toolbar: '#toolbar'}"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${schoolscholarshipShowBean}" th:if="${person.major != '信息大类'}">
+                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major != '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td th:text="${person.level}"></td>
+                                <td>国家助学金</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="layui-tab-item">
                         <fieldset class="layui-elem-field">
-                            <legend>校奖学金</legend>
+                            <legend>国家助学金</legend>
                             <div class="layui-field-box">
-                                <div class="layui-inline">
-                                    <button class="layui-btn" id="batchDownload16">批量下载</button>
-                                </div>
-                                <div class="layui-inline checked-number">
-                                    已选 <span id="checkedNumber16">0</span> 人
+                                <div class="layui-form">
+                                    <div class="layui-inline">
+                                        <select name="opinion">
+                                            <option value=""></option>
+                                            <option value="国家助学金一档">国家助学金一档</option>
+                                            <option value="国家助学金二档">国家助学金二档</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <button class="layui-btn" id="changeNationalGrantOpinion16">修改</button>
+                                    </div>
+                                    <div class="layui-inline checked-number">
+                                        已选 <span id="checkedNumber16">0</span> 人
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
@@ -141,18 +158,17 @@
                                 <th lay-data="{field: 'username', width: 100}">名字</th>
                                 <th lay-data="{field: 'sex', width: 60}">性别</th>
                                 <th lay-data="{field: 'award', width: 200, sort: 'true'}">奖项</th>
-                                <th lay-data="{width: 130, fixed: 'right', toolbar: '#toolbar'}"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${schoolscholarshipShowBean}" th:if="${person.major == '信息大类'}">
+                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td th:text="${person.level}"></td>
+                                <td>国家助学金</td>
                             </tr>
                             </tbody>
                         </table>
@@ -165,10 +181,6 @@
 
     </div>
 </div>
-<template id="toolbar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="download">下载</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
-</template>
 </body>
 <script th:src="@{/js/plugins/jquery-3.1.1.min.js}"/>
 <script th:src="@{/js/plugins/html5shiv.min.js}"/>

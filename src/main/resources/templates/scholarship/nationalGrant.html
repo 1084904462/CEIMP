@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>省政府奖学金</title>
+    <title>国家助学金</title>
     <link rel="stylesheet" th:href="@{/css/plugins/font-awesome/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/plugins/layui/css/layui.css}"/>
     <link rel="stylesheet" th:href="@{/css/scholarship.css}"/>
@@ -33,7 +33,7 @@
     <div class="layui-row layui-col-space5">
         <div class="layui-col-lg-offset3 layui-col-lg9 layui-col-md-offset3 layui-col-md9">
             <div class="scholarship-title">
-                省政府奖学金
+                国家助学金
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
             </ul>
         </div>
         <div class="layui-col-lg9 layui-col-md9">
-            <form class="layui-form layui-form-pane" action="/u/provincialGovernmentScholarship/submit" method="post" th:object="${provincialgovernmentscholarshipBean}">
+            <form class="layui-form layui-form-pane" action="/u/nationalGrant/submit" method="post" th:object="${nationalinspirationalscholarshipBean}">
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">学号</label>
@@ -168,84 +168,145 @@
                         <input type="text" name="identity" required="required" lay-verify="required|identity" autocomplete="off" class="layui-input" th:value="*{identity}"/>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">绩点排名</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="gpRank" value="1/72" placeholder="绩点排名" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{gpRank}"/>
-                        </div>
-                    </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">综测排名</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="ceRank" value="1/72" placeholder="综测排名" autocomplete="off" class="layui-input layui-disabled" disabled="disabled" th:value="*{ceRank}"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">必修课</label>
-                    <div class="layui-input-inline" style="width: 100px;">
-                        <input type="text" name="passSum" required="required" lay-verify="required|number" placeholder="及格门数" autocomplete="off" class="layui-input" th:value="*{passSum}"/>
-                    </div>
-                    <div class="layui-form-mid">/</div>
-                    <div class="layui-input-inline" style="width: 100px;">
-                        <input type="text" name="subSum" required="required" lay-verify="required|number" placeholder="总门数" autocomplete="off" class="layui-input" th:value="*{subSum}"/>
-                    </div>
-                </div>
                 <div class="layui-form-item layui-form-text" style="margin-bottom: 5px">
-                    <label class="layui-form-label">获奖情况</label>
+                    <label class="layui-form-label">家庭成员情况</label>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <input type="text" name="fName1" placeholder="姓名" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 50px;">
+                            <input type="text" name="age1" lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" id="date1" name="date1" placeholder="日期" autocomplete="off" class="layui-input" th:value="*{date1}"/>
+                            <input type="text" name="relation1" lay-verify="" placeholder="与本人关系" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 290px;">
-                            <input type="text" name="award1" lay-verify="scholarshipName" placeholder="奖项名称（34字以内）" autocomplete="off" class="layui-input" th:value="*{award1}"/>
-                        </div>
-                        <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 240px;">
-                            <input type="text" name="unit1" lay-verify="scholarshipUnit" placeholder="颁奖单位（30字内）" autocomplete="off" class="layui-input" th:value="*{unit1}"/>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="workPlace1" lay-verify="" placeholder="工作或学习单位" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <input type="text" name="fName2" placeholder="姓名" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 50px;">
+                            <input type="text" name="age2" lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" id="date2" name="date2"  placeholder="日期" autocomplete="off" class="layui-input" th:value="*{date2}"/>
+                            <input type="text" name="relation2" lay-verify="" placeholder="与本人关系" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 290px;">
-                            <input type="text" name="award2" lay-verify="scholarshipName" placeholder="奖项名称（34字以内）" autocomplete="off" class="layui-input" th:value="*{award2}"/>
-                        </div>
-                        <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 240px;">
-                            <input type="text" name="unit2" lay-verify="scholarshipUnit" placeholder="颁奖单位（30字内）" autocomplete="off" class="layui-input" th:value="*{unit2}"/>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="workPlace2" lay-verify="" placeholder="工作或学习单位" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <input type="text" name="fName3" placeholder="姓名" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 50px;">
+                            <input type="text" name="age3" lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" id="date3" name="date3" placeholder="日期" autocomplete="off" class="layui-input" th:value="*{date3}"/>
+                            <input type="text" name="relation3" lay-verify="" placeholder="与本人关系" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 290px;">
-                            <input type="text" name="award3" lay-verify="scholarshipName" placeholder="奖项名称（34字以内）" autocomplete="off" class="layui-input" th:value="*{award3}"/>
-                        </div>
-                        <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 240px;">
-                            <input type="text" name="unit3" lay-verify="scholarshipUnit" placeholder="颁奖单位（30字内）" autocomplete="off" class="layui-input" th:value="*{unit3}"/>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="workPlace3" lay-verify="" placeholder="工作或学习单位" autocomplete="off" class="layui-input"/>
                         </div>
                     </div>
                     <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <input type="text" name="fName4" placeholder="姓名" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 50px;">
+                            <input type="text" name="age4" lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
                         <div class="layui-input-inline" style="width: 100px;">
-                            <input type="text" id="date4" name="date4" placeholder="日期" autocomplete="off" class="layui-input" th:value="*{date4}"/>
+                            <input type="text" name="relation4" lay-verify="" placeholder="与本人关系" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 290px;">
-                            <input type="text" name="award4" lay-verify="scholarshipName" placeholder="奖项名称（34字以内）" autocomplete="off" class="layui-input" th:value="*{award4}"/>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="workPlace4" lay-verify="" placeholder="工作或学习单位" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 80px;">
+                            <input type="text" name="fName5" placeholder="姓名" autocomplete="off" class="layui-input"/>
                         </div>
                         <div class="layui-form-mid">-</div>
-                        <div class="layui-input-inline" style="width: 240px;">
-                            <input type="text" name="unit4" lay-verify="scholarshipUnit" placeholder="颁奖单位（30字内）" autocomplete="off" class="layui-input" th:value="*{unit4}"/>
+                        <div class="layui-input-inline" style="width: 50px;">
+                            <input type="text" name="age5" lay-verify="number" placeholder="年龄" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="relation5" lay-verify="" placeholder="与本人关系" autocomplete="off" class="layui-input"/>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="workPlace5" lay-verify="" placeholder="工作或学习单位" autocomplete="off" class="layui-input"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">家庭月收入</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="monthIncome" required="required" lay-verify="required|number" autocomplete="off" class="layui-input" th:value="*{monthIncome}"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">家庭户口</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="resident" value="城镇" title="城镇" checked="" th:checked="*{resident == '城镇'}"/>
+                            <input type="radio" name="resident" value="农村" title="农村" th:checked="*{resident == '农村'}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">收入来源</label>
+                    <div class="layui-input-block">
+                        <input type="text" required="required" lay-verify="required" placeholder="30字以内" name="incomeSource" autocomplete="off" class="layui-input" th:value="*{incomeSource}"/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">家庭人口数</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="familySum" required="required" lay-verify="required|number" autocomplete="off" class="layui-input" th:value="*{familySum}"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">邮政编码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="postalCode" required="required" lay-verify="required|postcode" autocomplete="off" class="layui-input" th:value="*{postalCode}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-block">
+                        <label class="layui-form-label">家庭住址</label>
+                        <div class="layui-input-block">
+                            <input type="text" placeholder="54字以内" required="required" lay-verify="required|address" name="address" autocomplete="off" class="layui-input" th:value="*{address}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">认定情况</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="situation" value="家庭经济特别困难" title="家庭经济特别困难" checked="" th:checked="*{situation == '家庭经济特别困难'}"/>
+                            <input type="radio" name="situation" value="家庭经济一般困难" title="家庭经济一般困难" th:checked="*{situation == '家庭经济一般困难'}"/>
                         </div>
                     </div>
                 </div>
@@ -255,20 +316,8 @@
                         <textarea name="applyReason" required="required" lay-verify="required|applyReason" placeholder="200字以内" class="layui-textarea" th:text="*{applyReason}"></textarea>
                     </div>
                 </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">推荐理由</label>
-                    <div class="layui-input-block">
-                        <textarea name="recommendReason" lay-verify="recommendReason" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:text="*{recommendReason}"></textarea>
-                    </div>
-                </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">院（系）意见</label>
-                    <div class="layui-input-block">
-                        <textarea name="opinion" lay-verify="opinion" placeholder="100字以内" class="layui-textarea layui-disabled" disabled="disabled" th:text="*{opinion}"></textarea>
-                    </div>
-                </div>
                 <div class="layui-form-item">
-                    <button class="layui-btn layui-btn-normal" lay-submit="">提交</button>
+                    <button class="layui-btn layui-btn-normal" lay-submit="lay-submit">提交</button>
                 </div>
             </form>
         </div>
@@ -278,7 +327,7 @@
 <script th:src="@{/js/plugins/jquery-3.1.1.min.js}"/>
 <script th:src="@{/js/plugins/html5shiv.min.js}"/>
 <script th:src="@{/plugins/layui/layui.js}"/>
-<script th:src="@{/js/scholarship.js}"/>
+<script th:src="@{/js/scholarship.js}" th:inline="javascript"/>
 <script type="text/javascript" th:inline="javascript">
     layui.use(['form'], function()
     {
@@ -291,7 +340,7 @@
 
 
         /*<![CDATA[*/
-        var myNation = /*[[${provincialgovernmentscholarshipBean.nation}]]*/;
+        var myNation = /*[[${nationalinspirationalscholarshipBean.nation}]]*/;
 
 
         var $nationSelect = $("#nation");

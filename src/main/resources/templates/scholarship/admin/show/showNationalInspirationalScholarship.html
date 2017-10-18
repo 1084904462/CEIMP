@@ -45,6 +45,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd class="layui-this"><a href="/m/admin/showNationalInspirationalScholarship">国家励志奖学金</a></dd>
+                        <dd><a href="/m/admin/showNationalGrant">国家助学金</a></dd>
                         <dd><a href="/m/admin/showProvincialgovernmentscholarship">省政府奖学金</a></dd>
                         <dd><a href="/m/admin/showSchoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/showTripleastudent">三好学生</a></dd>
@@ -57,6 +58,7 @@
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="/m/admin/opinion/nationalinspirationalscholarship">国家励志奖学金</a></dd>
+                        <dd><a href="/m/admin/opinion/nationalGrant">国家助学金</a></dd>
                         <dd><a href="/m/admin/opinion/provincialgovernmentscholarship">省政府奖学金</a></dd>
                         <dd><a href="/m/admin/opinion/schoolscholarship">校奖学金</a></dd>
                         <dd><a href="/m/admin/opinion/tripleastudent">三好学生</a></dd>
@@ -86,7 +88,9 @@
                                 <div class="layui-inline">
                                     <button class="layui-btn" id="batchDownload15">批量下载</button>
                                 </div>
-
+                                <div class="layui-inline checked-number">
+                                    已选 <span id="checkedNumber15">0</span> 人
+                                </div>
                             </div>
                         </fieldset>
                         <!---->
@@ -123,7 +127,9 @@
                                 <div class="layui-inline">
                                     <button class="layui-btn" id="batchDownload16">批量下载</button>
                                 </div>
-
+                                <div class="layui-inline checked-number">
+                                    已选 <span id="checkedNumber16">0</span> 人
+                                </div>
                             </div>
                         </fieldset>
                         <!--<table class="layui-table" lay-data="{id: 'table16',height: 'full-340', even: 'true', limit:1000}" height="full-325" lay-filter="table16">-->
@@ -166,7 +172,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
-                                <td th:text="${person.id}"></td>
+                                <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>

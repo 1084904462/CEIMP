@@ -182,7 +182,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     batchDownload16.click(batchDownload);
 
 
-    // 单个下载
+    // 单个下载或删除
     function download(obj)
     {
         var data = obj.data;
@@ -246,6 +246,22 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     table.on('tool(table16)', function(obj)
     {
         download(obj);
+    });
+
+    //显示已选人数
+    function changeCheckedNumber(grade)
+    {
+        var checkStatus = table.checkStatus('table' + grade);
+
+        $("#checkedNumber" + grade).text(checkStatus.data.length);
+    }
+
+    table.on('checkbox(table15)', function(obj){
+        changeCheckedNumber(15);
+    });
+
+    table.on('checkbox(table16)', function(obj){
+        changeCheckedNumber(16);
     });
 
     // 批量重置
@@ -346,7 +362,30 @@ layui.use(['element', 'table', 'form', 'layer'], function()
 
     $("#opinionSubmit").click(writeOpinion);
 
+    //批量修改国家助学金意见
+    function changeNationalGrantOpinion()
+    {
+        var checkStatus = table.checkStatus('table' + $(this).attr("id").slice(-2));
 
+        var data = checkStatus.data;
+
+        if(data.length == 0)
+        {
+            layer.msg("请先勾选所要下载的行", {icon: 2, anim: 6});
+            return ;
+        }
+        else
+        {
+            // layer.open({
+            //     content: JSON.stringify(data)
+            // })
+        }
+    }
+
+    $("#changeNationalGrantOpinion15").click(changeNationalGrantOpinion);
+    $("#changeNationalGrantOpinion16").click(changeNationalGrantOpinion);
+
+    //解决“16级”表格显示的问题
     var flag = 1;
     var tableOpinion = {
         height: 'full-340',
@@ -354,8 +393,6 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         even: 'true',
         limit:1000
     };
-
-    // table.init('table15', tableOpinion);
 
     element.on('tab(content)', function(data)
     {
