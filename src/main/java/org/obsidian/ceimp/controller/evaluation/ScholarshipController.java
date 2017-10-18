@@ -559,7 +559,7 @@ public class ScholarshipController {
             inputUrl = System.getProperty("user.dir") + "/classes/model/国家励志奖学金模板1.docx";
 
             //本地路径
-//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家励志奖学金模板1.docx";
+//            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家励志奖学金模板1.docx";
         }
         else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
             //服务器路径Windows

@@ -26,28 +26,28 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
         elem: '#date1',
         type: 'month',
         btns: ['clear', 'confirm'],
-        format: 'yyyy年MM月'
+        format: 'yyyy年M月'
     });
 
     laydate.render({
         elem: '#date2',
         type: 'month',
         btns: ['clear', 'confirm'],
-        format: 'yyyy年MM月'
+        format: 'yyyy年M月'
     });
 
     laydate.render({
         elem: '#date3',
         type: 'month',
         btns: ['clear', 'confirm'],
-        format: 'yyyy年MM月'
+        format: 'yyyy年M月'
     });
 
     laydate.render({
         elem: '#date4',
         type: 'month',
         btns: ['clear', 'confirm'],
-        format: 'yyyy年MM月'
+        format: 'yyyy年M月'
     });
 
     $(".add-line").click(function()
