@@ -122,7 +122,7 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
         },
         age: function(value, item)
         {
-            if(!/^[0-9]/.test(value))
+            if(!/^[0-9]*$/.test(value))
             {
                 return "年龄必须为数字";
             }

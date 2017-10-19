@@ -388,7 +388,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             var $form = $("<form>").attr({
                 style: "display:none",
                 method: "post",
-                action: "/m/admin/nationalGrant/submit"
+                action: "/m/admin/opinion/nationalGrant/submit"
             });
             $('body').append($form);
 

@@ -1,10 +1,8 @@
 package org.obsidian.ceimp.controller.admin;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.ManagerBean;
-import org.obsidian.ceimp.bean.NationalGrantOpinionAjaxBean;
 import org.obsidian.ceimp.bean.NationalGrantOpinionBean;
 import org.obsidian.ceimp.entity.ScholarshipOpinion;
 import org.obsidian.ceimp.service.*;
@@ -112,22 +110,13 @@ public class AdminOpinionController {
         return scholarshipOpinionSerivce.updateTripleaOpinion(managerId,opinion);
     }
     @RequestMapping(value = "/m/admin/opinion/nationalGrant/submit", method = RequestMethod.POST)
-    @ResponseBody
     public String writeNationalGrantSubmit(HttpServletRequest request){
-        int updateSum = 0;
         String jsonStr = request.getParameter("nationalGrantOpinionBean");
         String opinion = request.getParameter("opinion");
         List<NationalGrantOpinionBean> list = new ArrayList<>(JSONArray.parseArray(jsonStr, NationalGrantOpinionBean.class));
         for(int i=0;i<list.size();i++){
             nationalGrantService.updateNationalGrant(list.get(i).getUser_id(),opinion);
-            updateSum++;
         }
-        List<NationalGrantOpinionBean> nationalGrantOpinionBeanList = nationalGrantService.selectAllNationalGrantOpinion();
-        NationalGrantOpinionAjaxBean nationalGrantOpinionAjaxBean = new NationalGrantOpinionAjaxBean();
-        nationalGrantOpinionAjaxBean.setCode(0);
-        nationalGrantOpinionAjaxBean.setMsg("");
-        nationalGrantOpinionAjaxBean.setCount(updateSum);
-        nationalGrantOpinionAjaxBean.setData(nationalGrantOpinionBeanList);
-        return JSON.toJSONString(nationalGrantOpinionAjaxBean);
+        return "redirect:/m/admin/opinion/nationalGrant";
     }
 }

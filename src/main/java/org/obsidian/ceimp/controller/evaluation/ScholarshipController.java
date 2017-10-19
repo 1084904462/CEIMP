@@ -873,47 +873,47 @@ public class ScholarshipController {
             //服务器路径Windows
 //            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板1.docx";
             //服务器路径Linux
-//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板1.docx";
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板1.docx";
 
             //本地路径
-            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板1.docx";
+//            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板1.docx";
         }
         else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
             //服务器路径Windows
 //            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板2.docx";
             //服务器路径Linux
-//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板2.docx";
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板2.docx";
 
             //本地路径
-            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板2.docx";
+//            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板2.docx";
         }
         else if(resident.equals("农村") && situation.equals("家庭经济特别困难")){
             //服务器路径Windows
 //            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板3.docx";
             //服务器路径Linux
-//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板3.docx";
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板3.docx";
 
             //本地路径
-            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板3.docx";
+//            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板3.docx";
         }
         else if(resident.equals("农村") && situation.equals("家庭经济一般困难")){
             //服务器路径Windows
 //            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板4.docx";
             //服务器路径Linux
-//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板4.docx";
+            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板4.docx";
 
             //本地路径
-            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板4.docx";
+//            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板4.docx";
         }
         String userId = nationalGrantBean.getUserId();
         String username = nationalGrantBean.getUsername();
         //服务器路径Windows
 //        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\nationalGrant\\" + userId + username + "国家助学金.docx";
         //服务器路径Linux
-//        String outputUrl = System.getProperty("user.dir") + "/classes/award/nationalGrant/" + userId + username + "国家助学金.docx";
+        String outputUrl = System.getProperty("user.dir") + "/classes/award/nationalGrant/" + userId + username + "国家助学金.docx";
 
         //本地路径
-        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\nationalGrant\\" + userId + username + "国家助学金.docx";
+//        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\nationalGrant\\" + userId + username + "国家助学金.docx";
 
         Map<String,String> textMap = new HashMap<>();
         textMap.put("major",nationalGrantBean.getMajor());
