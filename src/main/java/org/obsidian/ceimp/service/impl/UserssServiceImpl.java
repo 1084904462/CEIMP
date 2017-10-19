@@ -71,6 +71,22 @@ public class UserssServiceImpl implements UserssService {
 
     @Transactional
     @Override
+    public int updateUserss(String userId, String phone, String sex, String political, String birth, String nation, String entrance, String identity) {
+        Userss userss = new Userss();
+        userss.setPhone(phone);
+        userss.setSex(sex);
+        userss.setPolitical(political);
+        userss.setBirth(birth);
+        userss.setNation(nation);
+        userss.setEntrance(entrance);
+        userss.setIdentity(identity);
+        UserssExample example = new UserssExample();
+        example.or().andUserIdEqualTo(userId);
+        return userssMapper.updateByExampleSelective(userss,example);
+    }
+
+    @Transactional
+    @Override
     public List<String> selectAllUserId() {
         List<String> list = userssMapper.selectAllUserId();
         if(list.isEmpty()){

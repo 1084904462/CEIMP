@@ -376,6 +376,18 @@ layui.use(['element', 'table', 'form', 'layer'], function()
         }
         else
         {
+            $.ajax({
+                url: '/m/admin/opinion/nationalGrant/submit',
+                type: 'post',
+                data: {
+                    nationalGrantOpinionBean: JSON.stringify(data),
+                    opinion: "同意一档"
+                },
+                success: function (result) {
+                    console.log(result);
+                }
+            })
+
             // layer.open({
             //     content: JSON.stringify(data)
             // })

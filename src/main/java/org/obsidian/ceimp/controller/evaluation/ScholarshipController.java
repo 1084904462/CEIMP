@@ -50,6 +50,9 @@ public class ScholarshipController {
     @Autowired
     private ScholarshipOpinionSerivce scholarshipOpinionSerivce;
 
+    @Autowired
+    private NationalGrantService nationalGrantService;
+
     /**
      * 访问/evaluation/scholarship
      * 返回所有奖学金列表与第一个奖学金详情
@@ -168,7 +171,15 @@ public class ScholarshipController {
     private String changePassword(){
 	    return "scholarship/changePassword";
     }
-
+    @RequestMapping(value = "/u/nationalGrant", method = RequestMethod.GET)
+    private String nationalGrant(HttpSession session,Model model){
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
+        Userss userss = userssService.selectByUserId(userId);
+        NationalGrant nationalGrant = nationalGrantService.selectByUserId(userId);
+        NationalGrantBean nationalGrantBean = this.getNationalGrantBean(userss,nationalGrant);
+        model.addAttribute("nationalGrantBean",nationalGrantBean);
+        return "scholarship/nationalGrant";
+    }
 
 
 	@RequestMapping(value = "/u/nationalInspirationalScholarship/submit", method = RequestMethod.POST)
@@ -397,7 +408,63 @@ public class ScholarshipController {
         model.addAttribute("changePasswordBean",changePasswordBean);
         return "scholarship/changePassword";
     }
+    @RequestMapping(value = "/u/nationalGrant/submit", method = RequestMethod.POST)
+    public void nationalGrantSubmit(HttpSession session,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
+        String userId = ((UserssBean) session.getAttribute("userssBean")).getUserId();
+        String phone = request.getParameter("phone");
+        String sex = request.getParameter("sex");
+        String political = request.getParameter("political");
+        String birth = request.getParameter("birth");
+        String nation = request.getParameter("nation");
+        String entrance = request.getParameter("entrance");
+        String identity = request.getParameter("identity");
+        String monthIncome = request.getParameter("monthIncome");
+        String resident = request.getParameter("resident");
+        String incomeSource = request.getParameter("incomeSource");
+        String familySum = request.getParameter("familySum");
+        String postalCode = request.getParameter("postalCode");
+        String address = request.getParameter("address");
+        String situation = request.getParameter("situation");
+        String fName1 = request.getParameter("fName1");
+        String age1 = request.getParameter("age1");
+        String relation1 = request.getParameter("relation1");
+        String workPlace1 = request.getParameter("workPlace1");
+        String fName2 = request.getParameter("fName2");
+        String age2 = request.getParameter("age2");
+        String relation2 = request.getParameter("relation2");
+        String workPlace2 = request.getParameter("workPlace2");
+        String fName3 = request.getParameter("fName3");
+        String age3 = request.getParameter("age3");
+        String relation3 = request.getParameter("relation3");
+        String workPlace3 = request.getParameter("workPlace3");
+        String fName4 = request.getParameter("fName4");
+        String age4 = request.getParameter("age4");
+        String relation4 = request.getParameter("relation4");
+        String workPlace4 = request.getParameter("workPlace4");
+        String fName5 = request.getParameter("fName5");
+        String age5 = request.getParameter("age5");
+        String relation5 = request.getParameter("relation5");
+        String workPlace5 = request.getParameter("workPlace5");
+        String applyReason = request.getParameter("applyReason");
+        NationalGrant nationalGrant = nationalGrantService.selectByUserId(userId);
+        if(nationalGrant == null){
+            nationalGrantService.insertNationalGrant(userId,resident,incomeSource,monthIncome,familySum,address,postalCode,
+                    fName1,age1,relation1,workPlace1,fName2,age2,relation2,workPlace2,fName3,age3,relation3,workPlace3,
+                    fName4,age4,relation4,workPlace4,fName5,age5,relation5,workPlace5,situation,applyReason);
+        }
+        else{
+            nationalGrantService.updateNationalGrant(userId,resident,incomeSource,monthIncome,familySum,address,postalCode,
+                    fName1,age1,relation1,workPlace1,fName2,age2,relation2,workPlace2,fName3,age3,relation3,workPlace3,
+                    fName4,age4,relation4,workPlace4,fName5,age5,relation5,workPlace5,situation,applyReason);
+        }
+        userssService.updateUserss(userId,phone,sex,political,birth,nation,entrance,identity);
 
+        Userss userss = userssService.selectByUserId(userId);
+        NationalGrant nationalGrant1 = nationalGrantService.selectByUserId(userId);
+        NationalGrantBean nationalGrantBean = this.getNationalGrantBean(userss,nationalGrant1);
+        model.addAttribute("nationalGrantBean",nationalGrantBean);
+        this.nationalGrantWord(nationalGrantBean,response);
+    }
 
 
     public NationalinspirationalscholarshipBean getNationalinspirationalscholarshipBean(Userss userss,Nationalinspirationalscholarship nationalinspirationalscholarship,ScholarshipOpinion scholarshipOpinion){
@@ -542,7 +609,52 @@ public class ScholarshipController {
         tripleastudentBean.setOpinion(scholarshipOpinion.getTripleaOpinion());
         return tripleastudentBean;
     }
-
+    public NationalGrantBean getNationalGrantBean(Userss userss,NationalGrant nationalGrant){
+        NationalGrantBean nationalGrantBean = new NationalGrantBean();
+        nationalGrantBean.setMajor(userss.getMajor());
+        nationalGrantBean.setClassId(userss.getClassId());
+        nationalGrantBean.setUsername(userss.getUsername());
+        nationalGrantBean.setSex(userss.getSex());
+        nationalGrantBean.setBirth(userss.getBirth());
+        nationalGrantBean.setUserId(userss.getUserId());
+        nationalGrantBean.setNation(userss.getNation());
+        nationalGrantBean.setEntrance(userss.getEntrance());
+        nationalGrantBean.setPolitical(userss.getPolitical());
+        nationalGrantBean.setPhone(userss.getPhone());
+        nationalGrantBean.setIdentity(userss.getIdentity());
+        if(nationalGrant != null){
+            nationalGrantBean.setResident(nationalGrant.getResident());
+            nationalGrantBean.setIncomeSource(nationalGrant.getIncomeSource());
+            nationalGrantBean.setMonthIncome(nationalGrant.getMonthIncome());
+            nationalGrantBean.setFamilySum(nationalGrant.getFamilySum());
+            nationalGrantBean.setAddress(nationalGrant.getAddress());
+            nationalGrantBean.setPostalCode(nationalGrant.getPostalCode());
+            nationalGrantBean.setSituation(nationalGrant.getSituation());
+            nationalGrantBean.setfName1(nationalGrant.getfName1());
+            nationalGrantBean.setAge1(nationalGrant.getAge1());
+            nationalGrantBean.setRelation1(nationalGrant.getRelation1());
+            nationalGrantBean.setWorkPlace1(nationalGrant.getWorkPlace1());
+            nationalGrantBean.setfName2(nationalGrant.getfName2());
+            nationalGrantBean.setAge2(nationalGrant.getAge2());
+            nationalGrantBean.setRelation2(nationalGrant.getRelation2());
+            nationalGrantBean.setWorkPlace2(nationalGrant.getWorkPlace2());
+            nationalGrantBean.setfName3(nationalGrant.getfName3());
+            nationalGrantBean.setAge3(nationalGrant.getAge3());
+            nationalGrantBean.setRelation3(nationalGrant.getRelation3());
+            nationalGrantBean.setWorkPlace3(nationalGrant.getWorkPlace3());
+            nationalGrantBean.setfName4(nationalGrant.getfName4());
+            nationalGrantBean.setAge4(nationalGrant.getAge4());
+            nationalGrantBean.setRelation4(nationalGrant.getRelation4());
+            nationalGrantBean.setWorkPlace4(nationalGrant.getWorkPlace4());
+            nationalGrantBean.setfName5(nationalGrant.getfName5());
+            nationalGrantBean.setAge5(nationalGrant.getAge5());
+            nationalGrantBean.setRelation5(nationalGrant.getRelation5());
+            nationalGrantBean.setWorkPlace5(nationalGrant.getWorkPlace5());
+            nationalGrantBean.setApplyReason(nationalGrant.getApplyReason());
+            nationalGrantBean.setOpinion(nationalGrant.getOpinion());
+        }
+        return nationalGrantBean;
+    }
 
 
 
@@ -750,5 +862,101 @@ public class ScholarshipController {
         textMap.put("opinion",tripleastudentBean.getOpinion());
         WordUtil.getInstance().generateWord(inputUrl,outputUrl,textMap);
         DownloadUtil.getInstance().download(outputUrl,response,userId + username + "三好学生.docx");
+    }
+    public void nationalGrantWord(NationalGrantBean nationalGrantBean,HttpServletResponse response) throws IOException{
+        String identity = nationalGrantBean.getIdentity();
+        char a = 'a';
+        String resident = nationalGrantBean.getResident();
+        String situation = nationalGrantBean.getSituation();
+        String inputUrl = null;
+        if(resident.equals("城镇") && situation.equals("家庭经济特别困难")){
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板1.docx";
+            //服务器路径Linux
+//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板1.docx";
+
+            //本地路径
+            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板1.docx";
+        }
+        else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板2.docx";
+            //服务器路径Linux
+//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板2.docx";
+
+            //本地路径
+            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板2.docx";
+        }
+        else if(resident.equals("农村") && situation.equals("家庭经济特别困难")){
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板3.docx";
+            //服务器路径Linux
+//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板3.docx";
+
+            //本地路径
+            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板3.docx";
+        }
+        else if(resident.equals("农村") && situation.equals("家庭经济一般困难")){
+            //服务器路径Windows
+//            inputUrl = System.getProperty("user.dir") + "\\classes\\model\\国家助学金模板4.docx";
+            //服务器路径Linux
+//            inputUrl = System.getProperty("user.dir") + "/classes/model/国家助学金模板4.docx";
+
+            //本地路径
+            inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\国家助学金模板4.docx";
+        }
+        String userId = nationalGrantBean.getUserId();
+        String username = nationalGrantBean.getUsername();
+        //服务器路径Windows
+//        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\nationalGrant\\" + userId + username + "国家助学金.docx";
+        //服务器路径Linux
+//        String outputUrl = System.getProperty("user.dir") + "/classes/award/nationalGrant/" + userId + username + "国家助学金.docx";
+
+        //本地路径
+        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\nationalGrant\\" + userId + username + "国家助学金.docx";
+
+        Map<String,String> textMap = new HashMap<>();
+        textMap.put("major",nationalGrantBean.getMajor());
+        textMap.put("classId",nationalGrantBean.getClassId());
+        textMap.put("username",username);
+        textMap.put("sex",nationalGrantBean.getSex());
+        textMap.put("birth",nationalGrantBean.getBirth());
+        textMap.put("userId",userId);
+        textMap.put("nation",nationalGrantBean.getNation());
+        textMap.put("entrance",nationalGrantBean.getEntrance());
+        textMap.put("political",nationalGrantBean.getPolitical());
+        textMap.put("phone",nationalGrantBean.getPhone());
+        textMap.put("incomeSource",nationalGrantBean.getIncomeSource());
+        textMap.put("monthIncome",nationalGrantBean.getMonthIncome());
+        textMap.put("familySum",nationalGrantBean.getFamilySum());
+        textMap.put("address",nationalGrantBean.getAddress());
+        textMap.put("postalCode",nationalGrantBean.getPostalCode());
+        textMap.put("fName1",nationalGrantBean.getfName1());
+        textMap.put("age1",nationalGrantBean.getAge1());
+        textMap.put("relation1",nationalGrantBean.getRelation1());
+        textMap.put("workPlace1",nationalGrantBean.getWorkPlace1());
+        textMap.put("fName2",nationalGrantBean.getfName2());
+        textMap.put("age2",nationalGrantBean.getAge2());
+        textMap.put("relation2",nationalGrantBean.getRelation2());
+        textMap.put("workPlace2",nationalGrantBean.getWorkPlace2());
+        textMap.put("fName3",nationalGrantBean.getfName3());
+        textMap.put("age3",nationalGrantBean.getAge3());
+        textMap.put("relation3",nationalGrantBean.getRelation3());
+        textMap.put("workPlace3",nationalGrantBean.getWorkPlace3());
+        textMap.put("fName4",nationalGrantBean.getfName4());
+        textMap.put("age4",nationalGrantBean.getAge4());
+        textMap.put("relation4",nationalGrantBean.getRelation4());
+        textMap.put("workPlace4",nationalGrantBean.getWorkPlace4());
+        textMap.put("fName5",nationalGrantBean.getfName5());
+        textMap.put("age5",nationalGrantBean.getAge5());
+        textMap.put("relation5",nationalGrantBean.getRelation5());
+        textMap.put("workPlace5",nationalGrantBean.getWorkPlace5());
+        textMap.put("applyReason",nationalGrantBean.getApplyReason());
+        textMap.put("opinion",nationalGrantBean.getOpinion());
+        for(int i=0;i<18;i++){
+            textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
+        }
+        WordUtil.getInstance().generateWord(inputUrl,outputUrl,textMap);
+        DownloadUtil.getInstance().download(outputUrl,response,userId + username + "国家助学金.docx");
     }
 }

@@ -89,8 +89,8 @@
                                     <div class="layui-inline">
                                         <select name="opinion">
                                             <option value=""></option>
-                                            <option value="国家助学金一档">国家助学金一档</option>
-                                            <option value="国家助学金二档">国家助学金二档</option>
+                                            <option value="同意一档">同意一档</option>
+                                            <option value="同意二档">同意二档</option>
                                         </select>
                                     </div>
                                     <div class="layui-inline">
@@ -108,21 +108,21 @@
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
                                 <th lay-data="{field: 'major', width: 150, sort: 'true'}">专业</th>
                                 <th lay-data="{field: 'majorClass', width: 180, sort: 'true'}">班级</th>
-                                <th lay-data="{field: 'userId', width: 130, sort: 'true'}">学号</th>
+                                <th lay-data="{field: 'user_id', width: 130, sort: 'true'}">学号</th>
                                 <th lay-data="{field: 'username', width: 100}">名字</th>
                                 <th lay-data="{field: 'sex', width: 60}">性别</th>
-                                <th lay-data="{field: 'award', width: 200, sort: 'true'}">奖项</th>
+                                <th lay-data="{field: 'award', width: 200, sort: 'true'}">院（系）意见</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major != '信息大类'}">
+                            <tr th:each="person : ${nationalGrantOpinionBean}" th:if="${person.major != '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td>国家助学金</td>
+                                <td th:text="${person.opinion}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -135,8 +135,8 @@
                                     <div class="layui-inline">
                                         <select name="opinion">
                                             <option value=""></option>
-                                            <option value="国家助学金一档">国家助学金一档</option>
-                                            <option value="国家助学金二档">国家助学金二档</option>
+                                            <option value="同意一档">同意一档</option>
+                                            <option value="同意二档">同意二档</option>
                                         </select>
                                     </div>
                                     <div class="layui-inline">
@@ -154,21 +154,21 @@
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
                                 <th lay-data="{field: 'major', width: 150, sort: 'true'}">专业</th>
                                 <th lay-data="{field: 'majorClass', width: 180, sort: 'true'}">班级</th>
-                                <th lay-data="{field: 'userId', width: 130, sort: 'true'}">学号</th>
+                                <th lay-data="{field: 'user_id', width: 130, sort: 'true'}">学号</th>
                                 <th lay-data="{field: 'username', width: 100}">名字</th>
                                 <th lay-data="{field: 'sex', width: 60}">性别</th>
-                                <th lay-data="{field: 'award', width: 200, sort: 'true'}">奖项</th>
+                                <th lay-data="{field: 'award', width: 200, sort: 'true'}">院（系）意见</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
+                            <tr th:each="person : ${nationalGrantOpinionBean}" th:if="${person.major == '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
                                 <td th:text="${person.user_id}"></td>
                                 <td th:text="${person.username}"></td>
                                 <td th:text="${person.sex}"></td>
-                                <td>国家助学金</td>
+                                <td th:text="${person.opinion}"></td>
                             </tr>
                             </tbody>
                         </table>

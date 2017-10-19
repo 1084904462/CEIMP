@@ -18,6 +18,9 @@ public interface UserssService {
     int updateUserss(String userId,String phone,String sex,String political,String birth,String nation,
                      String entrance,String identity,String passSum,String subSum);
 
+    int updateUserss(String userId,String phone,String sex,String political,String birth,String nation,
+                     String entrance,String identity);
+
     List<String> selectAllUserId();
 
     Userss selectByUserId(String userId);

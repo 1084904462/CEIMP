@@ -52,6 +52,9 @@ public class AdminScholarshipController {
     @Autowired
     private ScholarshipOpinionSerivce scholarshipOpinionSerivce;
 
+    @Autowired
+    private NationalGrantService nationalGrantService;
+
 //    @RequestMapping(value = "/admin/scholarship")
 //    public String adminScholarship(Model model){
 //        return "admin/scholarship";
@@ -81,6 +84,12 @@ public class AdminScholarshipController {
         model.addAttribute("tripleastudentShowBean",list);
         return "scholarship/admin/show/showTripleastudent";
     }
+    @RequestMapping(value = "/m/admin/showNationalGrant", method = RequestMethod.GET)
+    public String showNationalGrant(Model model){
+        List<NationalGrantShowBean> list = nationalGrantService.selectAllNationalGrant();
+        model.addAttribute("nationalGrantShowBean",list);
+        return "scholarship/admin/show/showNationalGrant";
+    }
 
 
     @RequestMapping(value = "/m/admin/zip", method = RequestMethod.GET)
@@ -103,6 +112,10 @@ public class AdminScholarshipController {
             award = "nationalInspirationalScholarship";
             awardName = "国家励志奖学金";
         }
+        else if(zipBean.getAward().equals("国家助学金")){
+            award = "nationalGrant";
+            awardName = "国家助学金";
+        }
         else if(zipBean.getAward().equals("省政府奖学金")){
             award = "provincialGovernmentScholarship";
             awardName = "省政府奖学金";
@@ -120,55 +133,92 @@ public class AdminScholarshipController {
         String wordOutputUrl = "";
         for(int i=0;i<list.size();i++){
             //本地路径
-//            wordOutputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award + "\\" + list.get(i) + ".docx";
+            wordOutputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award + "\\" + list.get(i) + ".docx";
             //服务器路径Windows
 //            wordOutputUrl = System.getProperty("user.dir") + "\\classes\\award\\" + award + "\\" + list.get(i) + ".docx";
             //服务器路径Linux
-            wordOutputUrl = System.getProperty("user.dir") + "/classes/award/" + award + "/" + list.get(i) + ".docx";
+//            wordOutputUrl = System.getProperty("user.dir") + "/classes/award/" + award + "/" + list.get(i) + ".docx";
             if(awardName.equals("国家励志奖学金")){
                 Nationalinspirationalscholarship nationalinspirationalscholarship = nationalinspirationalscholarshipService.selectByUserId(userIdList.get(i));
                 String resident = nationalinspirationalscholarship.getResident();
                 String situation = nationalinspirationalscholarship.getSituation();
                 if(resident.equals("城镇") && situation.equals("家庭经济特别困难")){
                     //本地路径
-//                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resource\\model\\" + awardName + "模板1.docx";
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板1.docx";
                     //服务器路径Windows
 //                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板1.docx";
                     //服务器路径Linux
-                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板1.docx";
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板1.docx";
                 }
                 else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
                     //本地路径
-//                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resource\\model\\" + awardName + "模板2.docx";
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板2.docx";
                     //服务器路径Windows
 //                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板2.docx";
                     //服务器路径Linux
-                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板2.docx";
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板2.docx";
                 }
                 else if(resident.equals("农村") && situation.equals("家庭经济特别困难")){
                     //本地路径
-//                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resource\\model\\" + awardName + "模板3.docx";
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板3.docx";
                     //服务器路径Windows
 //                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板3.docx";
                     //服务器路径Linux
-                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板3.docx";
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板3.docx";
                 }
                 else if(resident.equals("农村") && situation.equals("家庭经济一般困难")){
                     //本地路径
-//                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resource\\model\\" + awardName + "模板4.docx";
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板4.docx";
                     //服务器路径Windows
 //                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板4.docx";
                     //服务器路径Linux
-                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板4.docx";
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板4.docx";
+                }
+            }
+            else if(awardName.equals("国家助学金")){
+                NationalGrant nationalGrant = nationalGrantService.selectByUserId(userIdList.get(i));
+                String resident = nationalGrant.getResident();
+                String situation = nationalGrant.getSituation();
+                if(resident.equals("城镇") && situation.equals("家庭经济特别困难")){
+                    //本地路径
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板1.docx";
+                    //服务器路径Windows
+//                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板1.docx";
+                    //服务器路径Linux
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板1.docx";
+                }
+                else if(resident.equals("城镇") && situation.equals("家庭经济一般困难")){
+                    //本地路径
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板2.docx";
+                    //服务器路径Windows
+//                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板2.docx";
+                    //服务器路径Linux
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板2.docx";
+                }
+                else if(resident.equals("农村") && situation.equals("家庭经济特别困难")){
+                    //本地路径
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板3.docx";
+                    //服务器路径Windows
+//                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板3.docx";
+                    //服务器路径Linux
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板3.docx";
+                }
+                else if(resident.equals("农村") && situation.equals("家庭经济一般困难")){
+                    //本地路径
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板4.docx";
+                    //服务器路径Windows
+//                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板4.docx";
+                    //服务器路径Linux
+//                    wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板4.docx";
                 }
             }
             else{
                 //本地路径
-//                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resource\\model\\" + awardName + "模板.docx";
+                    wordModelUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\model\\" + awardName + "模板.docx";
                 //服务器路径Windows
 //                    wordModelUrl = System.getProperty("user.dir") + "\\classes\\model\\" + awardName + "模板.docx";
                 //服务器路径Linux
-                wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板.docx";
+//                wordModelUrl = System.getProperty("user.dir") + "/classes/model/" + awardName + "模板.docx";
             }
             Map<String,String> textMap = this.getTextMap(awardName,userIdList.get(i),awardList.get(i));
             System.out.println("wordModelUrl:" + wordModelUrl);
@@ -180,21 +230,21 @@ public class AdminScholarshipController {
 //        String inputUrl = System.getProperty("user.dir") + "\\classes\\award\\" + award;
 //        String outputUrl = System.getProperty("user.dir") + "\\classes\\award\\zip";
         //服务器路径Linux
-        String inputUrl = System.getProperty("user.dir") + "/classes/award/" + award;
-        String outputUrl = System.getProperty("user.dir") + "/classes/award/zip";
+//        String inputUrl = System.getProperty("user.dir") + "/classes/award/" + award;
+//        String outputUrl = System.getProperty("user.dir") + "/classes/award/zip";
         //本地路径
-//        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award;
-//        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\zip";
+        String inputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" + award;
+        String outputUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\zip";
 
         ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,list);
 
         //Windows
-//        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
-//        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
+        DownloadUtil.getInstance().download(outputUrl + "\\" + awardName + ".zip",response,awardName + ".zip");
+        DeleteUtil.getInstance().delete(outputUrl + "\\" + awardName + ".zip");
 
         //Linux
-        DownloadUtil.getInstance().download(outputUrl + "/" + awardName + ".zip",response,awardName + ".zip");
-        DeleteUtil.getInstance().delete(outputUrl + "/" + awardName + ".zip");
+//        DownloadUtil.getInstance().download(outputUrl + "/" + awardName + ".zip",response,awardName + ".zip");
+//        DeleteUtil.getInstance().delete(outputUrl + "/" + awardName + ".zip");
     }
     @RequestMapping(value = "/m/admin/delete", method = RequestMethod.GET)
     @ResponseBody
@@ -209,57 +259,72 @@ public class AdminScholarshipController {
 //            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
 //                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
             //服务器路径Linux
-            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
-                    "nationalInspirationalScholarship/" + userId + username + award + ".docx";
+//            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+//                    "nationalInspirationalScholarship/" + userId + username + award + ".docx";
 
             //本地路径
-//            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
-//                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "nationalInspirationalScholarship\\" + userId + username + award + ".docx";
             nationalinspirationalscholarshipService.deleteNationalinspirationalscholarship(userId);
+            DeleteUtil.getInstance().delete(awardUrl);
+            isDelete = 1;
+        }
+        else if(award.equals("国家助学金")){
+            //服务器路径Windows
+//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+//                    "nationalGrant\\" + userId + username + award + ".docx";
+            //服务器路径Linux
+//            awardUrl = System.getProperty("user.dir") + "/classes/award/" +
+//                    "nationalGrant/" + userId + username + award + ".docx";
+
+            //本地路径
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "nationalGrant\\" + userId + username + award + ".docx";
+            nationalGrantService.deleteNationalGrant(userId);
             DeleteUtil.getInstance().delete(awardUrl);
             isDelete = 1;
         }
         else if(award.equals("省政府奖学金")){
             //服务器路径Windows
-//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-//                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
             //服务器路径Linux
             awardUrl = System.getProperty("user.dir") + "/classes/award/" +
                     "provincialGovernmentScholarship/" + userId + username + award + ".docx";
 
             //本地路径
-//            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
-//                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "provincialGovernmentScholarship\\" + userId + username + award + ".docx";
             provincialgovernmentscholarshipService.deleteProvincialgovernmentscholarship(userId);
             DeleteUtil.getInstance().delete(awardUrl);
             isDelete = 1;
         }
         else if(award.equals("三好学生")){
             //服务器路径Windows
-//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-//                    "tripleAStudent\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+                    "tripleAStudent\\" + userId + username + award + ".docx";
             //服务器路径Linux
             awardUrl = System.getProperty("user.dir") + "/classes/award/" +
                     "tripleAStudent/" + userId + username + award + ".docx";
 
             //本地路径
-//            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
-//                    "tripleAStudent\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "tripleAStudent\\" + userId + username + award + ".docx";
             tripleastudentService.deleteTripleastudent(userId);
             DeleteUtil.getInstance().delete(awardUrl);
             isDelete = 1;
         }
         else{
             //服务器路径Windows
-//            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
-//                    "schoolScholarship\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\classes\\award\\" +
+                    "schoolScholarship\\" + userId + username + award + ".docx";
             //服务器路径Linux
             awardUrl = System.getProperty("user.dir") + "/classes/award/" +
                     "schoolScholarship/" + userId + username + award + ".docx";
 
             //本地路径
-//            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
-//                    "schoolScholarship\\" + userId + username + award + ".docx";
+            awardUrl = System.getProperty("user.dir") + "\\CEIMP\\src\\main\\resources\\award\\" +
+                    "schoolScholarship\\" + userId + username + award + ".docx";
             schoolscholarshipService.deleteSchoolscholarshipByUserIdAndLevel(userId,award);
             DeleteUtil.getInstance().delete(awardUrl);
             isDelete = 1;
@@ -316,6 +381,51 @@ public class AdminScholarshipController {
             textMap.put("postalCode",nationalinspirationalscholarship.getPostalcode());
             textMap.put("applyReason",nationalinspirationalscholarship.getApplyreason());
             textMap.put("opinion",scholarshipOpinion.getNationalOpinion());
+            for(int i=0;i<18;i++){
+                textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
+            }
+        }
+        else if(awardName.equals("国家助学金")){
+            String identity = userss.getIdentity();
+            char a = 'a';
+            NationalGrant nationalGrant = nationalGrantService.selectByUserId(userId);
+            textMap.put("major",userss.getMajor());
+            textMap.put("classId",userss.getClassId());
+            textMap.put("username",userss.getUsername());
+            textMap.put("sex",userss.getSex());
+            textMap.put("birth",userss.getBirth());
+            textMap.put("userId",userId);
+            textMap.put("nation",userss.getNation());
+            textMap.put("entrance",userss.getEntrance());
+            textMap.put("political",userss.getPolitical());
+            textMap.put("phone",userss.getPhone());
+            textMap.put("incomeSource",nationalGrant.getIncomeSource());
+            textMap.put("monthIncome",nationalGrant.getMonthIncome());
+            textMap.put("familySum",nationalGrant.getFamilySum());
+            textMap.put("address",nationalGrant.getAddress());
+            textMap.put("postalCode",nationalGrant.getPostalCode());
+            textMap.put("fName1",nationalGrant.getfName1());
+            textMap.put("age1",nationalGrant.getAge1());
+            textMap.put("relation1",nationalGrant.getRelation1());
+            textMap.put("workPlace1",nationalGrant.getWorkPlace1());
+            textMap.put("fName2",nationalGrant.getfName2());
+            textMap.put("age2",nationalGrant.getAge2());
+            textMap.put("relation2",nationalGrant.getRelation2());
+            textMap.put("workPlace2",nationalGrant.getWorkPlace2());
+            textMap.put("fName3",nationalGrant.getfName3());
+            textMap.put("age3",nationalGrant.getAge3());
+            textMap.put("relation3",nationalGrant.getRelation3());
+            textMap.put("workPlace3",nationalGrant.getWorkPlace3());
+            textMap.put("fName4",nationalGrant.getfName4());
+            textMap.put("age4",nationalGrant.getAge4());
+            textMap.put("relation4",nationalGrant.getRelation4());
+            textMap.put("workPlace4",nationalGrant.getWorkPlace4());
+            textMap.put("fName5",nationalGrant.getfName5());
+            textMap.put("age5",nationalGrant.getAge5());
+            textMap.put("relation5",nationalGrant.getRelation5());
+            textMap.put("workPlace5",nationalGrant.getWorkPlace5());
+            textMap.put("applyReason",nationalGrant.getApplyReason());
+            textMap.put("opinion",nationalGrant.getOpinion());
             for(int i=0;i<18;i++){
                 textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
             }

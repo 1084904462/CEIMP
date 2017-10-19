@@ -107,7 +107,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major != '信息大类'}">
+                            <tr th:each="person : ${nationalGrantShowBean}" th:if="${person.major != '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
@@ -145,7 +145,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="person : ${nationalinspirationalscholarshipShowBean}" th:if="${person.major == '信息大类'}">
+                            <tr th:each="person : ${nationalGrantShowBean}" th:if="${person.major == '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
                                 <td th:text="${person.major + person.class_id}"></td>
