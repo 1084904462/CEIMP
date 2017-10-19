@@ -119,6 +119,13 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
             {
                 return "字数不能超过100字";
             }
+        },
+        age: function(value, item)
+        {
+            if(!/^[0-9]/.test(value))
+            {
+                return "年龄必须为数字";
+            }
         }
     })
 })
