@@ -365,28 +365,48 @@ layui.use(['element', 'table', 'form', 'layer'], function()
     //批量修改国家助学金意见
     function changeNationalGrantOpinion()
     {
-        var checkStatus = table.checkStatus('table' + $(this).attr("id").slice(-2));
+        var grade = $(this).attr("id").slice(-2);
+        var checkStatus = table.checkStatus('table' + grade);
 
         var data = checkStatus.data;
+        var $opinion = $("#opinion" + grade);
+        console.log($opinion);
 
         if(data.length == 0)
         {
-            layer.msg("请先勾选所要下载的行", {icon: 2, anim: 6});
+            layer.msg("请勾选所要修改的行", {icon: 2, anim: 6});
+            return ;
+        }
+        else if($opinion.val() == "")
+        {
+            layer.msg("请选择意见", {icon: 2, anim: 6});
+            $opinion.focus();
             return ;
         }
         else
         {
-            $.ajax({
-                url: '/m/admin/opinion/nationalGrant/submit',
-                type: 'post',
-                data: {
-                    nationalGrantOpinionBean: JSON.stringify(data),
-                    opinion: "同意一档"
-                },
-                success: function (result) {
-                    console.log(result);
-                }
-            })
+            var $form = $("<form>").attr({
+                style: "display:none",
+                method: "post",
+                action: "/m/admin/nationalGrant/submit"
+            });
+            $('body').append($form);
+
+            var $input1 = $("<input>").attr({
+                type: "hidden",
+                name: "nationalGrantOpinionBean",
+                value: JSON.stringify(data),
+            });
+            $form.append($input1);
+
+            var $input2 = $("<input>").attr({
+                type: "hidden",
+                name: "opinion",
+                value: $opinion.val(),
+            });
+            $form.append($input2);
+
+            $form.submit().remove();
 
             // layer.open({
             //     content: JSON.stringify(data)

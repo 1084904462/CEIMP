@@ -87,7 +87,7 @@
                             <div class="layui-field-box">
                                 <div class="layui-form">
                                     <div class="layui-inline">
-                                        <select name="opinion">
+                                        <select name="opinion15" id="opinion15">
                                             <option value=""></option>
                                             <option value="同意一档">同意一档</option>
                                             <option value="同意二档">同意二档</option>
@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <table class="layui-table" lay-data="{id: 'table15', height: 'full-340', even: 'true', limit:1000}" lay-filter="table15">
+                        <table class="layui-table" id="table15" lay-data="{id: 'table15', height: 'full-340', even: 'true', limit:1000}" lay-filter="table15">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -114,7 +114,7 @@
                                 <th lay-data="{field: 'award', width: 200, sort: 'true'}">院（系）意见</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody15">
                             <tr th:each="person : ${nationalGrantOpinionBean}" th:if="${person.major != '信息大类'}">
                                 <td></td>
                                 <td th:text="${person.major}"></td>
@@ -133,7 +133,7 @@
                             <div class="layui-field-box">
                                 <div class="layui-form">
                                     <div class="layui-inline">
-                                        <select name="opinion">
+                                        <select name="opinion16" id="opinion16">
                                             <option value=""></option>
                                             <option value="同意一档">同意一档</option>
                                             <option value="同意二档">同意二档</option>
