@@ -122,9 +122,16 @@ layui.use(['form', 'element', 'laydate', 'table'], function()
         },
         age: function(value, item)
         {
-            if(!/^[0-9]/.test(value))
+            if(!/^[0-9]*$/.test(value))
             {
                 return "年龄必须为数字";
+            }
+        },
+        nationalGrantApplyReason: function(value, item)
+        {
+            if(value.length > 130)
+            {
+                return "字数不能超过130字";
             }
         }
     })

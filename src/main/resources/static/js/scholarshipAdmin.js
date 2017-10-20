@@ -152,7 +152,7 @@ layui.use(['element', 'table', 'form', 'layer'], function()
             // target: '_blank' 用于提交时新建页面 原页面不跳转
             var $form = $("<form>").attr({
                 style: "display:none",
-                method: "get",
+                method: "post",
                 action: "/m/admin/zip",
                 target: '_blank'
             });
