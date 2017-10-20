@@ -92,7 +92,7 @@ public class AdminScholarshipController {
     }
 
 
-    @RequestMapping(value = "/m/admin/zip", method = RequestMethod.GET)
+    @RequestMapping(value = "/m/admin/zip", method = RequestMethod.POST)
     public void zip(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String jsonStr = request.getParameter("zipBean");
         List<ZipBean> zipBeans = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipBean.class));
