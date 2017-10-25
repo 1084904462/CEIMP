@@ -46,6 +46,8 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
+
+
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -128,7 +130,7 @@
     <build>
         <finalName>ceimp</finalName>
         <plugins>
-        	<!--
+            <!--
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -142,9 +144,9 @@
             </plugin>
         -->
             <plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
