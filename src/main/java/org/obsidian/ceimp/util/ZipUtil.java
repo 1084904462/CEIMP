@@ -21,7 +21,19 @@ public class ZipUtil {
         return instance;
     }
 
+    /**
+     * 将奖学金打包
+     * @param inputUrl 输入路径
+     * @param outputUrl 输出路径
+     * @param awardName 包名
+     * @param fileNameList 打包的奖学金名列表
+     * @throws IOException
+     */
     public void zip(String inputUrl,String outputUrl,String awardName,List<String> fileNameList) throws IOException{
+        logger.debug("打包文件:" + inputUrl);
+        logger.debug("生成解压包:" + outputUrl);
+        logger.debug("包名:" + awardName);
+        logger.debug("打包文件名:" + fileNameList);
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         FileOutputStream fos = null;
@@ -40,6 +52,7 @@ public class ZipUtil {
             for(int i=0;i<fileNameList.size();i++){
                 sourceFiles[i] = new File(inputUrl + "/" + fileNameList.get(i) + ".docx");
             }
+
             fos = new FileOutputStream(zipFile);
             zos = new ZipOutputStream(new BufferedOutputStream(fos));
             byte[] bufs = new byte[1024*10];
@@ -71,54 +84,4 @@ public class ZipUtil {
             }
         }
     }
-
-//    public void zip(String url,String zipFilePath, String fileName) throws IOException {
-//        File sourceFile = new File(url);
-//        FileInputStream fis = null;
-//        BufferedInputStream bis = null;
-//        FileOutputStream fos = null;
-//        ZipOutputStream zos = null;
-//        try {
-//            File zipFile = new File(zipFilePath + "/" + fileName +".zip");
-//            if(zipFile.exists()){
-//                System.out.println(zipFilePath + "目录下存在名字为:" + fileName +".zip" +"打包文件.");
-//            }else{
-//                File[] sourceFiles = sourceFile.listFiles();
-//                if(null == sourceFiles || sourceFiles.length<1){
-//                    System.out.println("待压缩的文件目录：" + url + "里面不存在文件，无需压缩.");
-//                }else{
-//                    fos = new FileOutputStream(zipFile);
-//                    zos = new ZipOutputStream(new BufferedOutputStream(fos));
-//                    byte[] bufs = new byte[1024*10];
-//                    for(int i=0;i<sourceFiles.length;i++){
-//                        //创建ZIP实体，并添加进压缩包
-//                        ZipEntry zipEntry = new ZipEntry(sourceFiles[i].getName());
-//                        zos.putNextEntry(zipEntry);
-//                        //读取待压缩的文件并写进压缩包里
-//                        fis = new FileInputStream(sourceFiles[i]);
-//                        bis = new BufferedInputStream(fis, 1024*10);
-//                        int read = 0;
-//                        while((read=bis.read(bufs, 0, 1024*10)) != -1){
-//                            zos.write(bufs,0,read);
-//                        }
-//                    }
-//                }
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new RuntimeException(e);
-//        } finally{
-//            //关闭流
-//            try {
-//                if(null != bis) bis.close();
-//                if(null != zos) zos.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
 }

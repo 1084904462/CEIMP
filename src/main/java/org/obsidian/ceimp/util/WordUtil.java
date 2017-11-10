@@ -30,9 +30,11 @@ public class WordUtil {
      *  用一个docx文档作为模板，然后替换其中的内容，再写入目标文档中
      * @param inputUrl 输入URL
      * @param outputUrl 输出URL
-     * @param textMap 参数
+     * @param textMap 需要替换的内容
      */
     public void generateWord(String inputUrl, String outputUrl, Map<String,String> textMap){
+        logger.debug("模板:" + inputUrl);
+        logger.debug("word:" + outputUrl);
         try {
             InputStream is = new FileInputStream(inputUrl);
             XWPFDocument document = new XWPFDocument(is);
@@ -83,9 +85,9 @@ public class WordUtil {
                     while((matcher = this.matcher(runText)).find()){
                         runText = matcher.replaceFirst(String.valueOf(textMap.get(matcher.group(1))));
                     }
-                    logger.info("pre: " + run.getText(0));
+                    logger.info("替换前: " + run.getText(0));
                     run.setText(runText,0);
-                    logger.info("aft: " + run.getText(0));
+                    logger.info("替换后: " + run.getText(0));
                 }
             }
         }
