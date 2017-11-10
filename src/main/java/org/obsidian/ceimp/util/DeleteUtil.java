@@ -19,8 +19,12 @@ public class DeleteUtil {
         return instance;
     }
 
+    /**
+     * 删除文件，包括单张奖学金word以及奖学金解压包
+     * @param inputUrl 文件路径
+     */
     public void delete(String inputUrl){
-        System.out.println(inputUrl);
+        logger.debug("删除文件: " + inputUrl);
         File file = new File(inputUrl);
         if(file.exists() && file.isFile()){
             file.delete();
