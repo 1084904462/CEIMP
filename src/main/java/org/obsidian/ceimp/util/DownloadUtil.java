@@ -23,9 +23,15 @@ public class DownloadUtil {
         return instance;
     }
 
+    /**
+     * 下载文件，包括单张奖学金word以及奖学金解压包
+     * @param url 文件路径
+     * @param response
+     * @param fileName 文件名
+     * @throws IOException
+     */
     public void download(String url,HttpServletResponse response,String fileName) throws IOException{
-        System.out.println("downloadUrl:" + url);
-        System.out.println("downloadFileName:" + fileName);
+        logger.debug("下载文件:" + url + "/" + fileName);
         // 读到流中
         InputStream inStream = new FileInputStream(url);// 文件的存放路径
         // 设置输出的格式
