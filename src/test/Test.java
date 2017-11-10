@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,5 +78,10 @@ public class Test {
 //        fileNameList.add("1150299070陈伟二好学生");
 //        fileNameList.add("1150299070陈伟三好学生");
 //        ZipUtil.getInstance().zip(inputUrl,outputUrl,awardName,fileNameList);
+    }
+
+    @org.junit.Test
+    public void t6() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        managerService.insertManager("123","123");
     }
 }

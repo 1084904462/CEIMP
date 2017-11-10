@@ -19,4 +19,6 @@ public interface ManagerMapper {
     int updateByExampleSelective(@Param("record") Manager record, @Param("example") ManagerExample example);
 
     int updateByExample(@Param("record") Manager record, @Param("example") ManagerExample example);
+
+    List<Manager> selectAllManager();
 }

@@ -44,4 +44,25 @@ public class ManagerServiceImpl implements ManagerService {
         example.or().andManagerIdEqualTo(managerId);
         return managerMapper.updateByExampleSelective(manager,example);
     }
+
+    @Transactional
+    @Override
+    public int insertManager(String managerId, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        password = MD5Util.getInstance().EncoderByMd5(password);
+        Manager manager = new Manager();
+        manager.setManagerId(managerId);
+        manager.setPassword(password);
+        ManagerExample example = new ManagerExample();
+        example.or().andManagerIdEqualTo(managerId).andPasswordEqualTo(password);
+        return managerMapper.insertSelective(manager);
+    }
+
+    @Transactional
+    @Override
+    public List<Manager> selectAllManager() {
+        List<Manager> list = managerMapper.selectAllManager();
+        return list;
+    }
+
+
 }

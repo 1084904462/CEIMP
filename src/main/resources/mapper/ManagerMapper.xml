@@ -67,6 +67,9 @@
   <sql id="Base_Column_List">
     id, manager_id, password
   </sql>
+  <select id="selectAllManager" resultMap="BaseResultMap">
+    SELECT manager.* FROM manager
+  </select>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
