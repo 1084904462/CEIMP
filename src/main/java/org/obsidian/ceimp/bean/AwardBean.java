@@ -5,5 +5,5 @@ package org.obsidian.ceimp.bean;
  */
 public class AwardBean {
     private Long awardId;
-    private
+    private String awardName;
 }

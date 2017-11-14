@@ -3,11 +3,11 @@
 
 <head>
 
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
 
   <title>欢迎使用综测系统</title>
 
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="css/font-awesome.min.css"/>
   <link rel='stylesheet prefetch' href='css/bootstrap.min.css'/>
   <link rel='stylesheet' href='css/toastr.min.css'/> 
   <link rel="stylesheet" href="css/login.css"/>
@@ -16,7 +16,7 @@
   <script src="js/toastr.min.js"></script>
   <script src="js/login.js"></script>
 </head>
-<body background="img/loading.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
+<body background="img/login_background.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
   <div class="container">
     <div class="login-form">
       <form method="post" role="form" id="form_login">
@@ -26,10 +26,10 @@
         <div class="form-group">
           <ul class="nav nav-tabs">
             <li role="presentation" id="student"  style="border-bottom: 2px solid #7AC5CD;">
-              <a class="student-a">学生登陆</a>
+              <a class="student-a">学生登录</a>
             </li>
             <li role="presentation" id="manager" >
-              <a class="teacher-a">管理员登陆</a>
+              <a class="teacher-a">管理员登录</a>
             </li>
           </ul>
         </div>
@@ -52,11 +52,11 @@
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-block btn-login" id="s-load" onclick="javascript:this.form.action='userLogin';">
             <i class="fa fa-sign-in"></i>
-            登陆
+            登录
           </button>
            <button type="submit" class="btn btn-primary btn-block btn-login" id="m-load" style="display: none;"  onclick="javascript:this.form.action='managerLogin';">
             <i class="fa fa-sign-in"></i>
-            登陆
+            登录
           </button>
         </div>        
       </form>

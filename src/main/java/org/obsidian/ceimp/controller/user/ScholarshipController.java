@@ -11,8 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/14.
@@ -29,10 +33,16 @@ public class ScholarshipController {
     private AwardService awardService;
 
     @GetMapping("/index")
-    public String pageIndex(HttpSession session){
+    public String pageIndex(HttpSession session, HttpServletRequest request){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<Award> list = awardService.selectAllByUserIdAndYearScope(userId,yearScope);
+        ServletContext application = request.getServletContext();
+        session.getId();
+        Map<String,HttpSession> map = new HashMap<>();
+        map.remove(1);
+
+        session.getAttribute("userLogBean");
         return "user/scholarship/index";
     }
 
