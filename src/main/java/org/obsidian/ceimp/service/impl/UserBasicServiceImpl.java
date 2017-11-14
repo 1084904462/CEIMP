@@ -1,5 +1,8 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.dao.UserBasicMapper;
+import org.obsidian.ceimp.entity.UserBasic;
+import org.obsidian.ceimp.entity.UserBasicExample;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;

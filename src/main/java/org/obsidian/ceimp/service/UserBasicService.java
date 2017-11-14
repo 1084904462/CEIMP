@@ -1,5 +1,7 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.entity.UserBasic;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
