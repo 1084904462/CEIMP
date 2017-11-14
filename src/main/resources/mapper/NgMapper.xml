@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.NgMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Ng">
+    <id column="ng_id" jdbcType="BIGINT" property="ngId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
+    <result column="resident" jdbcType="VARCHAR" property="resident" />
+    <result column="income_source" jdbcType="VARCHAR" property="incomeSource" />
+    <result column="month_income" jdbcType="VARCHAR" property="monthIncome" />
+    <result column="family_sum" jdbcType="VARCHAR" property="familySum" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="postal_code" jdbcType="VARCHAR" property="postalCode" />
+    <result column="situation" jdbcType="VARCHAR" property="situation" />
+    <result column="f_name1" jdbcType="VARCHAR" property="fName1" />
+    <result column="age1" jdbcType="VARCHAR" property="age1" />
+    <result column="relation1" jdbcType="VARCHAR" property="relation1" />
+    <result column="work_place1" jdbcType="VARCHAR" property="workPlace1" />
+    <result column="f_name2" jdbcType="VARCHAR" property="fName2" />
+    <result column="age2" jdbcType="VARCHAR" property="age2" />
+    <result column="relation2" jdbcType="VARCHAR" property="relation2" />
+    <result column="work_place2" jdbcType="VARCHAR" property="workPlace2" />
+    <result column="f_name3" jdbcType="VARCHAR" property="fName3" />
+    <result column="age3" jdbcType="VARCHAR" property="age3" />
+    <result column="relation3" jdbcType="VARCHAR" property="relation3" />
+    <result column="work_place3" jdbcType="VARCHAR" property="workPlace3" />
+    <result column="f_name4" jdbcType="VARCHAR" property="fName4" />
+    <result column="age4" jdbcType="VARCHAR" property="age4" />
+    <result column="relation4" jdbcType="VARCHAR" property="relation4" />
+    <result column="work_place4" jdbcType="VARCHAR" property="workPlace4" />
+    <result column="f_name5" jdbcType="VARCHAR" property="fName5" />
+    <result column="age5" jdbcType="VARCHAR" property="age5" />
+    <result column="relation5" jdbcType="VARCHAR" property="relation5" />
+    <result column="work_place5" jdbcType="VARCHAR" property="workPlace5" />
+    <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
+    <result column="opinion" jdbcType="VARCHAR" property="opinion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ng_id, user_id, year_scope, resident, income_source, month_income, family_sum, address, 
+    postal_code, situation, f_name1, age1, relation1, work_place1, f_name2, age2, relation2, 
+    work_place2, f_name3, age3, relation3, work_place3, f_name4, age4, relation4, work_place4, 
+    f_name5, age5, relation5, work_place5, apply_reason, opinion
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.NgExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ng
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ng
+    where ng_id = #{ngId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ng
+    where ng_id = #{ngId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.NgExample">
+    delete from ng
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.Ng">
+    insert into ng (ng_id, user_id, year_scope, 
+      resident, income_source, month_income, 
+      family_sum, address, postal_code, 
+      situation, f_name1, age1, 
+      relation1, work_place1, f_name2, 
+      age2, relation2, work_place2, 
+      f_name3, age3, relation3, 
+      work_place3, f_name4, age4, 
+      relation4, work_place4, f_name5, 
+      age5, relation5, work_place5, 
+      apply_reason, opinion)
+    values (#{ngId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
+      #{resident,jdbcType=VARCHAR}, #{incomeSource,jdbcType=VARCHAR}, #{monthIncome,jdbcType=VARCHAR}, 
+      #{familySum,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{postalCode,jdbcType=VARCHAR}, 
+      #{situation,jdbcType=VARCHAR}, #{fName1,jdbcType=VARCHAR}, #{age1,jdbcType=VARCHAR}, 
+      #{relation1,jdbcType=VARCHAR}, #{workPlace1,jdbcType=VARCHAR}, #{fName2,jdbcType=VARCHAR}, 
+      #{age2,jdbcType=VARCHAR}, #{relation2,jdbcType=VARCHAR}, #{workPlace2,jdbcType=VARCHAR}, 
+      #{fName3,jdbcType=VARCHAR}, #{age3,jdbcType=VARCHAR}, #{relation3,jdbcType=VARCHAR}, 
+      #{workPlace3,jdbcType=VARCHAR}, #{fName4,jdbcType=VARCHAR}, #{age4,jdbcType=VARCHAR}, 
+      #{relation4,jdbcType=VARCHAR}, #{workPlace4,jdbcType=VARCHAR}, #{fName5,jdbcType=VARCHAR}, 
+      #{age5,jdbcType=VARCHAR}, #{relation5,jdbcType=VARCHAR}, #{workPlace5,jdbcType=VARCHAR}, 
+      #{applyReason,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Ng">
+    insert into ng
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ngId != null">
+        ng_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
+      </if>
+      <if test="resident != null">
+        resident,
+      </if>
+      <if test="incomeSource != null">
+        income_source,
+      </if>
+      <if test="monthIncome != null">
+        month_income,
+      </if>
+      <if test="familySum != null">
+        family_sum,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="postalCode != null">
+        postal_code,
+      </if>
+      <if test="situation != null">
+        situation,
+      </if>
+      <if test="fName1 != null">
+        f_name1,
+      </if>
+      <if test="age1 != null">
+        age1,
+      </if>
+      <if test="relation1 != null">
+        relation1,
+      </if>
+      <if test="workPlace1 != null">
+        work_place1,
+      </if>
+      <if test="fName2 != null">
+        f_name2,
+      </if>
+      <if test="age2 != null">
+        age2,
+      </if>
+      <if test="relation2 != null">
+        relation2,
+      </if>
+      <if test="workPlace2 != null">
+        work_place2,
+      </if>
+      <if test="fName3 != null">
+        f_name3,
+      </if>
+      <if test="age3 != null">
+        age3,
+      </if>
+      <if test="relation3 != null">
+        relation3,
+      </if>
+      <if test="workPlace3 != null">
+        work_place3,
+      </if>
+      <if test="fName4 != null">
+        f_name4,
+      </if>
+      <if test="age4 != null">
+        age4,
+      </if>
+      <if test="relation4 != null">
+        relation4,
+      </if>
+      <if test="workPlace4 != null">
+        work_place4,
+      </if>
+      <if test="fName5 != null">
+        f_name5,
+      </if>
+      <if test="age5 != null">
+        age5,
+      </if>
+      <if test="relation5 != null">
+        relation5,
+      </if>
+      <if test="workPlace5 != null">
+        work_place5,
+      </if>
+      <if test="applyReason != null">
+        apply_reason,
+      </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ngId != null">
+        #{ngId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="resident != null">
+        #{resident,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSource != null">
+        #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="monthIncome != null">
+        #{monthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="familySum != null">
+        #{familySum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null">
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="fName1 != null">
+        #{fName1,jdbcType=VARCHAR},
+      </if>
+      <if test="age1 != null">
+        #{age1,jdbcType=VARCHAR},
+      </if>
+      <if test="relation1 != null">
+        #{relation1,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace1 != null">
+        #{workPlace1,jdbcType=VARCHAR},
+      </if>
+      <if test="fName2 != null">
+        #{fName2,jdbcType=VARCHAR},
+      </if>
+      <if test="age2 != null">
+        #{age2,jdbcType=VARCHAR},
+      </if>
+      <if test="relation2 != null">
+        #{relation2,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace2 != null">
+        #{workPlace2,jdbcType=VARCHAR},
+      </if>
+      <if test="fName3 != null">
+        #{fName3,jdbcType=VARCHAR},
+      </if>
+      <if test="age3 != null">
+        #{age3,jdbcType=VARCHAR},
+      </if>
+      <if test="relation3 != null">
+        #{relation3,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace3 != null">
+        #{workPlace3,jdbcType=VARCHAR},
+      </if>
+      <if test="fName4 != null">
+        #{fName4,jdbcType=VARCHAR},
+      </if>
+      <if test="age4 != null">
+        #{age4,jdbcType=VARCHAR},
+      </if>
+      <if test="relation4 != null">
+        #{relation4,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace4 != null">
+        #{workPlace4,jdbcType=VARCHAR},
+      </if>
+      <if test="fName5 != null">
+        #{fName5,jdbcType=VARCHAR},
+      </if>
+      <if test="age5 != null">
+        #{age5,jdbcType=VARCHAR},
+      </if>
+      <if test="relation5 != null">
+        #{relation5,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace5 != null">
+        #{workPlace5,jdbcType=VARCHAR},
+      </if>
+      <if test="applyReason != null">
+        #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.NgExample" resultType="java.lang.Long">
+    select count(*) from ng
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ng
+    <set>
+      <if test="record.ngId != null">
+        ng_id = #{record.ngId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="record.resident != null">
+        resident = #{record.resident,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeSource != null">
+        income_source = #{record.incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.monthIncome != null">
+        month_income = #{record.monthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familySum != null">
+        family_sum = #{record.familySum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postalCode != null">
+        postal_code = #{record.postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.situation != null">
+        situation = #{record.situation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fName1 != null">
+        f_name1 = #{record.fName1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age1 != null">
+        age1 = #{record.age1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation1 != null">
+        relation1 = #{record.relation1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPlace1 != null">
+        work_place1 = #{record.workPlace1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fName2 != null">
+        f_name2 = #{record.fName2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age2 != null">
+        age2 = #{record.age2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation2 != null">
+        relation2 = #{record.relation2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPlace2 != null">
+        work_place2 = #{record.workPlace2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fName3 != null">
+        f_name3 = #{record.fName3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age3 != null">
+        age3 = #{record.age3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation3 != null">
+        relation3 = #{record.relation3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPlace3 != null">
+        work_place3 = #{record.workPlace3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fName4 != null">
+        f_name4 = #{record.fName4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age4 != null">
+        age4 = #{record.age4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation4 != null">
+        relation4 = #{record.relation4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPlace4 != null">
+        work_place4 = #{record.workPlace4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fName5 != null">
+        f_name5 = #{record.fName5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age5 != null">
+        age5 = #{record.age5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relation5 != null">
+        relation5 = #{record.relation5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPlace5 != null">
+        work_place5 = #{record.workPlace5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyReason != null">
+        apply_reason = #{record.applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opinion != null">
+        opinion = #{record.opinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ng
+    set ng_id = #{record.ngId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
+      resident = #{record.resident,jdbcType=VARCHAR},
+      income_source = #{record.incomeSource,jdbcType=VARCHAR},
+      month_income = #{record.monthIncome,jdbcType=VARCHAR},
+      family_sum = #{record.familySum,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      postal_code = #{record.postalCode,jdbcType=VARCHAR},
+      situation = #{record.situation,jdbcType=VARCHAR},
+      f_name1 = #{record.fName1,jdbcType=VARCHAR},
+      age1 = #{record.age1,jdbcType=VARCHAR},
+      relation1 = #{record.relation1,jdbcType=VARCHAR},
+      work_place1 = #{record.workPlace1,jdbcType=VARCHAR},
+      f_name2 = #{record.fName2,jdbcType=VARCHAR},
+      age2 = #{record.age2,jdbcType=VARCHAR},
+      relation2 = #{record.relation2,jdbcType=VARCHAR},
+      work_place2 = #{record.workPlace2,jdbcType=VARCHAR},
+      f_name3 = #{record.fName3,jdbcType=VARCHAR},
+      age3 = #{record.age3,jdbcType=VARCHAR},
+      relation3 = #{record.relation3,jdbcType=VARCHAR},
+      work_place3 = #{record.workPlace3,jdbcType=VARCHAR},
+      f_name4 = #{record.fName4,jdbcType=VARCHAR},
+      age4 = #{record.age4,jdbcType=VARCHAR},
+      relation4 = #{record.relation4,jdbcType=VARCHAR},
+      work_place4 = #{record.workPlace4,jdbcType=VARCHAR},
+      f_name5 = #{record.fName5,jdbcType=VARCHAR},
+      age5 = #{record.age5,jdbcType=VARCHAR},
+      relation5 = #{record.relation5,jdbcType=VARCHAR},
+      work_place5 = #{record.workPlace5,jdbcType=VARCHAR},
+      apply_reason = #{record.applyReason,jdbcType=VARCHAR},
+      opinion = #{record.opinion,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.obsidian.ceimp.entity.Ng">
+    update ng
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        year_scope = #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="resident != null">
+        resident = #{resident,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSource != null">
+        income_source = #{incomeSource,jdbcType=VARCHAR},
+      </if>
+      <if test="monthIncome != null">
+        month_income = #{monthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="familySum != null">
+        family_sum = #{familySum,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postalCode != null">
+        postal_code = #{postalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null">
+        situation = #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="fName1 != null">
+        f_name1 = #{fName1,jdbcType=VARCHAR},
+      </if>
+      <if test="age1 != null">
+        age1 = #{age1,jdbcType=VARCHAR},
+      </if>
+      <if test="relation1 != null">
+        relation1 = #{relation1,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace1 != null">
+        work_place1 = #{workPlace1,jdbcType=VARCHAR},
+      </if>
+      <if test="fName2 != null">
+        f_name2 = #{fName2,jdbcType=VARCHAR},
+      </if>
+      <if test="age2 != null">
+        age2 = #{age2,jdbcType=VARCHAR},
+      </if>
+      <if test="relation2 != null">
+        relation2 = #{relation2,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace2 != null">
+        work_place2 = #{workPlace2,jdbcType=VARCHAR},
+      </if>
+      <if test="fName3 != null">
+        f_name3 = #{fName3,jdbcType=VARCHAR},
+      </if>
+      <if test="age3 != null">
+        age3 = #{age3,jdbcType=VARCHAR},
+      </if>
+      <if test="relation3 != null">
+        relation3 = #{relation3,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace3 != null">
+        work_place3 = #{workPlace3,jdbcType=VARCHAR},
+      </if>
+      <if test="fName4 != null">
+        f_name4 = #{fName4,jdbcType=VARCHAR},
+      </if>
+      <if test="age4 != null">
+        age4 = #{age4,jdbcType=VARCHAR},
+      </if>
+      <if test="relation4 != null">
+        relation4 = #{relation4,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace4 != null">
+        work_place4 = #{workPlace4,jdbcType=VARCHAR},
+      </if>
+      <if test="fName5 != null">
+        f_name5 = #{fName5,jdbcType=VARCHAR},
+      </if>
+      <if test="age5 != null">
+        age5 = #{age5,jdbcType=VARCHAR},
+      </if>
+      <if test="relation5 != null">
+        relation5 = #{relation5,jdbcType=VARCHAR},
+      </if>
+      <if test="workPlace5 != null">
+        work_place5 = #{workPlace5,jdbcType=VARCHAR},
+      </if>
+      <if test="applyReason != null">
+        apply_reason = #{applyReason,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        opinion = #{opinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ng_id = #{ngId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.obsidian.ceimp.entity.Ng">
+    update ng
+    set user_id = #{userId,jdbcType=BIGINT},
+      year_scope = #{yearScope,jdbcType=INTEGER},
+      resident = #{resident,jdbcType=VARCHAR},
+      income_source = #{incomeSource,jdbcType=VARCHAR},
+      month_income = #{monthIncome,jdbcType=VARCHAR},
+      family_sum = #{familySum,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      situation = #{situation,jdbcType=VARCHAR},
+      f_name1 = #{fName1,jdbcType=VARCHAR},
+      age1 = #{age1,jdbcType=VARCHAR},
+      relation1 = #{relation1,jdbcType=VARCHAR},
+      work_place1 = #{workPlace1,jdbcType=VARCHAR},
+      f_name2 = #{fName2,jdbcType=VARCHAR},
+      age2 = #{age2,jdbcType=VARCHAR},
+      relation2 = #{relation2,jdbcType=VARCHAR},
+      work_place2 = #{workPlace2,jdbcType=VARCHAR},
+      f_name3 = #{fName3,jdbcType=VARCHAR},
+      age3 = #{age3,jdbcType=VARCHAR},
+      relation3 = #{relation3,jdbcType=VARCHAR},
+      work_place3 = #{workPlace3,jdbcType=VARCHAR},
+      f_name4 = #{fName4,jdbcType=VARCHAR},
+      age4 = #{age4,jdbcType=VARCHAR},
+      relation4 = #{relation4,jdbcType=VARCHAR},
+      work_place4 = #{workPlace4,jdbcType=VARCHAR},
+      f_name5 = #{fName5,jdbcType=VARCHAR},
+      age5 = #{age5,jdbcType=VARCHAR},
+      relation5 = #{relation5,jdbcType=VARCHAR},
+      work_place5 = #{workPlace5,jdbcType=VARCHAR},
+      apply_reason = #{applyReason,jdbcType=VARCHAR},
+      opinion = #{opinion,jdbcType=VARCHAR}
+    where ng_id = #{ngId,jdbcType=BIGINT}
+  </update>
+</mapper>

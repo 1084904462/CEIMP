@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.UserInfo">
+    <id column="info_id" jdbcType="BIGINT" property="infoId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
+    <result column="character" jdbcType="VARCHAR" property="character" />
+    <result column="study" jdbcType="VARCHAR" property="study" />
+    <result column="ability" jdbcType="VARCHAR" property="ability" />
+    <result column="all" jdbcType="VARCHAR" property="all" />
+    <result column="gp" jdbcType="VARCHAR" property="gp" />
+    <result column="ce" jdbcType="VARCHAR" property="ce" />
+    <result column="pass_sum" jdbcType="VARCHAR" property="passSum" />
+    <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    info_id, user_id, year_scope, character, study, ability, all, gp, ce, pass_sum, class_sum
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_info
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample">
+    delete from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.UserInfo">
+    insert into user_info (info_id, user_id, year_scope, 
+      character, study, ability, 
+      all, gp, ce, pass_sum, 
+      class_sum)
+    values (#{infoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
+      #{character,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, 
+      #{all,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, 
+      #{classSum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        info_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
+      </if>
+      <if test="character != null">
+        character,
+      </if>
+      <if test="study != null">
+        study,
+      </if>
+      <if test="ability != null">
+        ability,
+      </if>
+      <if test="all != null">
+        all,
+      </if>
+      <if test="gp != null">
+        gp,
+      </if>
+      <if test="ce != null">
+        ce,
+      </if>
+      <if test="passSum != null">
+        pass_sum,
+      </if>
+      <if test="classSum != null">
+        class_sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="infoId != null">
+        #{infoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="character != null">
+        #{character,jdbcType=VARCHAR},
+      </if>
+      <if test="study != null">
+        #{study,jdbcType=VARCHAR},
+      </if>
+      <if test="ability != null">
+        #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="all != null">
+        #{all,jdbcType=VARCHAR},
+      </if>
+      <if test="gp != null">
+        #{gp,jdbcType=VARCHAR},
+      </if>
+      <if test="ce != null">
+        #{ce,jdbcType=VARCHAR},
+      </if>
+      <if test="passSum != null">
+        #{passSum,jdbcType=VARCHAR},
+      </if>
+      <if test="classSum != null">
+        #{classSum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample" resultType="java.lang.Long">
+    select count(*) from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_info
+    <set>
+      <if test="record.infoId != null">
+        info_id = #{record.infoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="record.character != null">
+        character = #{record.character,jdbcType=VARCHAR},
+      </if>
+      <if test="record.study != null">
+        study = #{record.study,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ability != null">
+        ability = #{record.ability,jdbcType=VARCHAR},
+      </if>
+      <if test="record.all != null">
+        all = #{record.all,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gp != null">
+        gp = #{record.gp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ce != null">
+        ce = #{record.ce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passSum != null">
+        pass_sum = #{record.passSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classSum != null">
+        class_sum = #{record.classSum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_info
+    set info_id = #{record.infoId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
+      character = #{record.character,jdbcType=VARCHAR},
+      study = #{record.study,jdbcType=VARCHAR},
+      ability = #{record.ability,jdbcType=VARCHAR},
+      all = #{record.all,jdbcType=VARCHAR},
+      gp = #{record.gp,jdbcType=VARCHAR},
+      ce = #{record.ce,jdbcType=VARCHAR},
+      pass_sum = #{record.passSum,jdbcType=VARCHAR},
+      class_sum = #{record.classSum,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.obsidian.ceimp.entity.UserInfo">
+    update user_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        year_scope = #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="character != null">
+        character = #{character,jdbcType=VARCHAR},
+      </if>
+      <if test="study != null">
+        study = #{study,jdbcType=VARCHAR},
+      </if>
+      <if test="ability != null">
+        ability = #{ability,jdbcType=VARCHAR},
+      </if>
+      <if test="all != null">
+        all = #{all,jdbcType=VARCHAR},
+      </if>
+      <if test="gp != null">
+        gp = #{gp,jdbcType=VARCHAR},
+      </if>
+      <if test="ce != null">
+        ce = #{ce,jdbcType=VARCHAR},
+      </if>
+      <if test="passSum != null">
+        pass_sum = #{passSum,jdbcType=VARCHAR},
+      </if>
+      <if test="classSum != null">
+        class_sum = #{classSum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.obsidian.ceimp.entity.UserInfo">
+    update user_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      year_scope = #{yearScope,jdbcType=INTEGER},
+      character = #{character,jdbcType=VARCHAR},
+      study = #{study,jdbcType=VARCHAR},
+      ability = #{ability,jdbcType=VARCHAR},
+      all = #{all,jdbcType=VARCHAR},
+      gp = #{gp,jdbcType=VARCHAR},
+      ce = #{ce,jdbcType=VARCHAR},
+      pass_sum = #{passSum,jdbcType=VARCHAR},
+      class_sum = #{classSum,jdbcType=VARCHAR}
+    where info_id = #{infoId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -20,7 +20,6 @@
         <project.build.sorceEncoding>UTF-8</project.build.sorceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <!-- <start-class>org.obsidian.ceimp.Application</start-class> -->
     </properties>
 
     <dependencies>
@@ -133,6 +132,13 @@
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.43</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

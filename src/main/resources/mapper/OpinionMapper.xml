@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.obsidian.ceimp.dao.OpinionMapper">
+  <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Opinion">
+    <id column="opinion_id" jdbcType="BIGINT" property="opinionId" />
+    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
+    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
+    <result column="ng_opinion" jdbcType="VARCHAR" property="ngOpinion" />
+    <result column="pgs_recommend" jdbcType="VARCHAR" property="pgsRecommend" />
+    <result column="pgs_opinion" jdbcType="VARCHAR" property="pgsOpinion" />
+    <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
+    <result column="tas_opinion" jdbcType="VARCHAR" property="tasOpinion" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    opinion_id, manager_id, year_scope, ng_opinion, pgs_recommend, pgs_opinion, ss_opinion, 
+    tas_opinion
+  </sql>
+  <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.OpinionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from opinion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from opinion
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from opinion
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.obsidian.ceimp.entity.OpinionExample">
+    delete from opinion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.obsidian.ceimp.entity.Opinion">
+    insert into opinion (opinion_id, manager_id, year_scope, 
+      ng_opinion, pgs_recommend, pgs_opinion, 
+      ss_opinion, tas_opinion)
+    values (#{opinionId,jdbcType=BIGINT}, #{managerId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
+      #{ngOpinion,jdbcType=VARCHAR}, #{pgsRecommend,jdbcType=VARCHAR}, #{pgsOpinion,jdbcType=VARCHAR}, 
+      #{ssOpinion,jdbcType=VARCHAR}, #{tasOpinion,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Opinion">
+    insert into opinion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="opinionId != null">
+        opinion_id,
+      </if>
+      <if test="managerId != null">
+        manager_id,
+      </if>
+      <if test="yearScope != null">
+        year_scope,
+      </if>
+      <if test="ngOpinion != null">
+        ng_opinion,
+      </if>
+      <if test="pgsRecommend != null">
+        pgs_recommend,
+      </if>
+      <if test="pgsOpinion != null">
+        pgs_opinion,
+      </if>
+      <if test="ssOpinion != null">
+        ss_opinion,
+      </if>
+      <if test="tasOpinion != null">
+        tas_opinion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="opinionId != null">
+        #{opinionId,jdbcType=BIGINT},
+      </if>
+      <if test="managerId != null">
+        #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="ngOpinion != null">
+        #{ngOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="pgsRecommend != null">
+        #{pgsRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="pgsOpinion != null">
+        #{pgsOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="ssOpinion != null">
+        #{ssOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="tasOpinion != null">
+        #{tasOpinion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.obsidian.ceimp.entity.OpinionExample" resultType="java.lang.Long">
+    select count(*) from opinion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update opinion
+    <set>
+      <if test="record.opinionId != null">
+        opinion_id = #{record.opinionId,jdbcType=BIGINT},
+      </if>
+      <if test="record.managerId != null">
+        manager_id = #{record.managerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.yearScope != null">
+        year_scope = #{record.yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="record.ngOpinion != null">
+        ng_opinion = #{record.ngOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pgsRecommend != null">
+        pgs_recommend = #{record.pgsRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pgsOpinion != null">
+        pgs_opinion = #{record.pgsOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssOpinion != null">
+        ss_opinion = #{record.ssOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasOpinion != null">
+        tas_opinion = #{record.tasOpinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update opinion
+    set opinion_id = #{record.opinionId,jdbcType=BIGINT},
+      manager_id = #{record.managerId,jdbcType=BIGINT},
+      year_scope = #{record.yearScope,jdbcType=INTEGER},
+      ng_opinion = #{record.ngOpinion,jdbcType=VARCHAR},
+      pgs_recommend = #{record.pgsRecommend,jdbcType=VARCHAR},
+      pgs_opinion = #{record.pgsOpinion,jdbcType=VARCHAR},
+      ss_opinion = #{record.ssOpinion,jdbcType=VARCHAR},
+      tas_opinion = #{record.tasOpinion,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.obsidian.ceimp.entity.Opinion">
+    update opinion
+    <set>
+      <if test="managerId != null">
+        manager_id = #{managerId,jdbcType=BIGINT},
+      </if>
+      <if test="yearScope != null">
+        year_scope = #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="ngOpinion != null">
+        ng_opinion = #{ngOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="pgsRecommend != null">
+        pgs_recommend = #{pgsRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="pgsOpinion != null">
+        pgs_opinion = #{pgsOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="ssOpinion != null">
+        ss_opinion = #{ssOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="tasOpinion != null">
+        tas_opinion = #{tasOpinion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.obsidian.ceimp.entity.Opinion">
+    update opinion
+    set manager_id = #{managerId,jdbcType=BIGINT},
+      year_scope = #{yearScope,jdbcType=INTEGER},
+      ng_opinion = #{ngOpinion,jdbcType=VARCHAR},
+      pgs_recommend = #{pgsRecommend,jdbcType=VARCHAR},
+      pgs_opinion = #{pgsOpinion,jdbcType=VARCHAR},
+      ss_opinion = #{ssOpinion,jdbcType=VARCHAR},
+      tas_opinion = #{tasOpinion,jdbcType=VARCHAR}
+    where opinion_id = #{opinionId,jdbcType=BIGINT}
+  </update>
+</mapper>
