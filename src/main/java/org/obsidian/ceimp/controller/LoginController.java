@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class LoginController {
-
+    private Logger logger = Logger.getLogger(this.getClass());
 
     /**
      * 项目根路径
