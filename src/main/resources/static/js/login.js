@@ -55,16 +55,16 @@ $(function(){
     }
     else{
     $.ajax({
-    type:"POST",
-    url:"userLogin",
-    data:{
-    userID:$("#userID").val(),
-    password:$("#password").val(),
-    },
-    success:function(result){
-      var res = String($.trim(result)); 
-       toastr.error(res);
-    },
+        type:"POST",
+        url:"userLogin",
+        data:{
+        userID:$("#userID").val(),
+        password:$("#password").val(),
+        },
+        success:function(result){
+          var res = String($.trim(result));
+           toastr.error(res);
+        }
     }); 
     }
   });
@@ -85,12 +85,12 @@ $(function(){
             data:{
             userID:$("#userID").val(),
             password:$("#password").val(),
-    },
-    success:function(result){
-      var res = String($.trim(result)); 
-       toastr.error(res);
-    },
-    }); 
+            },
+            success:function(result){
+              var res = String($.trim(result));
+               toastr.error(res);
+            }
+        });
     }  
   });
 })

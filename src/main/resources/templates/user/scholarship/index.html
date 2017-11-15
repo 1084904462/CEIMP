@@ -5,8 +5,9 @@
     <title>奖学金填写</title>
 </head>
 <body>
-<p th:text="${userLogBean}"></p>
+<p th:text="${session.userLogBean.userId}"></p>
     <a href="/scholarship/ng">国家助学金</a>
     <a href="/scholarship/nis">国家励志奖学金</a>
+<a href="/userLogout">退出</a>
 </body>
 </html>
