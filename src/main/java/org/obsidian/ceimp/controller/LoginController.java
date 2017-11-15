@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.LogStatusBean;
 import org.obsidian.ceimp.bean.ManagerLogBean;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +65,6 @@ public class LoginController {
 
     /**
      * 普通用户登录
-     * @param model
      * @param session
      * @param request
      * @param account 用户登录账号
@@ -73,8 +74,8 @@ public class LoginController {
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/userLogin")
+    @ResponseBody
     public String userLogin(
-                        Model model,
                         HttpSession session,
                         HttpServletRequest request,
                         @RequestParam("account")String account,
@@ -100,20 +101,19 @@ public class LoginController {
             session.setAttribute("userLogBean",userLogBean);
             logStatusBean.setStatus("登录成功");
             logger.info(logStatusBean);
-            model.addAttribute("logStatusBean",logStatusBean);
-            return "user/scholarship/index";
+            return JSON.toJSONString(logStatusBean);
 
         }else {
             if(userBasic == null){
                 logStatusBean.setStatus("无该用户");
                 logger.debug(logStatusBean);
-                model.addAttribute("logStatusBean",logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }else {
                 logStatusBean.setStatus("密码错误");
                 logger.debug(logStatusBean);
-                model.addAttribute("logStatusBean",logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }
-            return "login";
+
         }
 
     }
@@ -136,7 +136,6 @@ public class LoginController {
 
     /**
      * 管理员登录
-     * @param model
      * @param session
      * @param request
      * @param account 管理员登录账号
@@ -146,8 +145,8 @@ public class LoginController {
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/managerLogin")
+    @ResponseBody
     public String managerLogin(
-                         Model model,
                          HttpSession session,
                          HttpServletRequest request,
                          @RequestParam("account")String account,
@@ -173,19 +172,17 @@ public class LoginController {
             session.setAttribute("managerLogBean",managerLogBean);
             logStatusBean.setStatus("登录成功");
             logger.info(logStatusBean);
-            model.addAttribute("logStatusBean",logStatusBean);
-            return "manager/index";
+            return JSON.toJSONString(logStatusBean);
         }else {
             if(manager == null){
                 logStatusBean.setStatus("无该用户");
                 logger.debug(logStatusBean);
-                model.addAttribute("logStatusBean",logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }else {
                 logStatusBean.setStatus("密码错误");
                 logger.debug(logStatusBean);
-                model.addAttribute("logStatusBean",logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }
-            return "login";
         }
     }
 
