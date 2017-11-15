@@ -7,6 +7,8 @@ public class Scholarship {
 
     private String modelName;
 
+    private String subName;
+
     public Long getScholarshipId() {
         return scholarshipId;
     }
@@ -29,5 +31,13 @@ public class Scholarship {
 
     public void setModelName(String modelName) {
         this.modelName = modelName == null ? null : modelName.trim();
+    }
+
+    public String getSubName() {
+        return subName;
+    }
+
+    public void setSubName(String subName) {
+        this.subName = subName == null ? null : subName.trim();
     }
 }

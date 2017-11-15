@@ -303,6 +303,76 @@ public class ScholarshipExample {
             addCriterion("model_name not between", value1, value2, "modelName");
             return (Criteria) this;
         }
+
+        public Criteria andSubNameIsNull() {
+            addCriterion("sub_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameIsNotNull() {
+            addCriterion("sub_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameEqualTo(String value) {
+            addCriterion("sub_name =", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameNotEqualTo(String value) {
+            addCriterion("sub_name <>", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameGreaterThan(String value) {
+            addCriterion("sub_name >", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameGreaterThanOrEqualTo(String value) {
+            addCriterion("sub_name >=", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameLessThan(String value) {
+            addCriterion("sub_name <", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameLessThanOrEqualTo(String value) {
+            addCriterion("sub_name <=", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameLike(String value) {
+            addCriterion("sub_name like", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameNotLike(String value) {
+            addCriterion("sub_name not like", value, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameIn(List<String> values) {
+            addCriterion("sub_name in", values, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameNotIn(List<String> values) {
+            addCriterion("sub_name not in", values, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameBetween(String value1, String value2) {
+            addCriterion("sub_name between", value1, value2, "subName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubNameNotBetween(String value1, String value2) {
+            addCriterion("sub_name not between", value1, value2, "subName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

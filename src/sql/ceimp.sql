@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-14 13:36:24
+Date: 2017-11-14 18:07:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,11 +48,13 @@ CREATE TABLE `class_num` (
   UNIQUE KEY `class_num_id` (`class_num_id`) USING BTREE,
   KEY `major_id` (`major_id`),
   CONSTRAINT `class_num_ibfk_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class_num
 -- ----------------------------
+INSERT INTO `class_num` VALUES ('1', '151', '1');
+INSERT INTO `class_num` VALUES ('2', '152', '1');
 
 -- ----------------------------
 -- Table structure for `major`
@@ -67,11 +69,14 @@ CREATE TABLE `major` (
   UNIQUE KEY `major_id` (`major_id`) USING BTREE,
   KEY `school_id` (`school_id`),
   CONSTRAINT `major_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of major
 -- ----------------------------
+INSERT INTO `major` VALUES ('1', '软件工程', '1', '72');
+INSERT INTO `major` VALUES ('2', '计算机科学与技术', '1', '90');
+INSERT INTO `major` VALUES ('3', '应用物理学', '2', '60');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -239,6 +244,7 @@ CREATE TABLE `scholarship` (
   `scholarship_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '奖学金id',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '奖学金名称',
   `model_name` varchar(50) NOT NULL DEFAULT '' COMMENT '模板名称',
+  `sub_name` varchar(20) NOT NULL COMMENT '奖学金缩写',
   PRIMARY KEY (`scholarship_id`),
   UNIQUE KEY `scholarship_id` (`scholarship_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -256,11 +262,13 @@ CREATE TABLE `school` (
   `name` varchar(50) NOT NULL COMMENT '学院名称',
   PRIMARY KEY (`school_id`),
   UNIQUE KEY `school_id` (`school_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of school
 -- ----------------------------
+INSERT INTO `school` VALUES ('1', '信息与电子工程学院');
+INSERT INTO `school` VALUES ('2', '理学院');
 
 -- ----------------------------
 -- Table structure for `ss`
@@ -324,11 +332,12 @@ CREATE TABLE `user_basic` (
   UNIQUE KEY `account` (`account`) USING BTREE,
   KEY `class_num_id` (`class_num_id`),
   CONSTRAINT `user_basic_ibfk_1` FOREIGN KEY (`class_num_id`) REFERENCES `class_num` (`class_num_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_basic
 -- ----------------------------
+INSERT INTO `user_basic` VALUES ('1', '1150299070', '888666', '陈伟', '1', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `user_info`
