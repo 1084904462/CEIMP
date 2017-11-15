@@ -5,6 +5,7 @@
     <id column="scholarship_id" jdbcType="BIGINT" property="scholarshipId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="sub_name" jdbcType="VARCHAR" property="subName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scholarship_id, name, model_name
+    scholarship_id, name, model_name, sub_name
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ScholarshipExample" resultMap="BaseResultMap">
     select
@@ -99,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Scholarship">
-    insert into scholarship (scholarship_id, name, model_name
-      )
-    values (#{scholarshipId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}
-      )
+    insert into scholarship (scholarship_id, name, model_name, 
+      sub_name)
+    values (#{scholarshipId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{modelName,jdbcType=VARCHAR}, 
+      #{subName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Scholarship">
     insert into scholarship
@@ -116,6 +117,9 @@
       <if test="modelName != null">
         model_name,
       </if>
+      <if test="subName != null">
+        sub_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="scholarshipId != null">
@@ -126,6 +130,9 @@
       </if>
       <if test="modelName != null">
         #{modelName,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null">
+        #{subName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,6 +154,9 @@
       <if test="record.modelName != null">
         model_name = #{record.modelName,jdbcType=VARCHAR},
       </if>
+      <if test="record.subName != null">
+        sub_name = #{record.subName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -156,7 +166,8 @@
     update scholarship
     set scholarship_id = #{record.scholarshipId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      model_name = #{record.modelName,jdbcType=VARCHAR}
+      model_name = #{record.modelName,jdbcType=VARCHAR},
+      sub_name = #{record.subName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -170,13 +181,17 @@
       <if test="modelName != null">
         model_name = #{modelName,jdbcType=VARCHAR},
       </if>
+      <if test="subName != null">
+        sub_name = #{subName,jdbcType=VARCHAR},
+      </if>
     </set>
     where scholarship_id = #{scholarshipId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.obsidian.ceimp.entity.Scholarship">
     update scholarship
     set name = #{name,jdbcType=VARCHAR},
-      model_name = #{modelName,jdbcType=VARCHAR}
+      model_name = #{modelName,jdbcType=VARCHAR},
+      sub_name = #{subName,jdbcType=VARCHAR}
     where scholarship_id = #{scholarshipId,jdbcType=BIGINT}
   </update>
 </mapper>
