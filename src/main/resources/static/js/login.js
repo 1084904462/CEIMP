@@ -51,22 +51,39 @@ $(function(){
     }
     if ($("#password").val()=="") {
        toastr.error("请输入密码");
-      return false;
+        return false;
     }
-    else{
-    $.ajax({
-        type:"POST",
-        url:"userLogin",
-        data:{
-        userID:$("#userID").val(),
-        password:$("#password").val(),
-        },
-        success:function(result){
-          var res = String($.trim(result));
-           toastr.error(res);
-        }
-    }); 
+     else{
+        $.ajax({
+            method:"post",
+            url:"/userLogin",
+            data:{
+                "account":$("#userID").val(),
+                "password":$("#password").val()
+            },
+
+            success:function (result) {
+                var  jsonText = JSON.parse(result);
+
+                if (jsonText.status == "密码错误") {
+                    toastr.error("密码错误");
+                    return false;
+                }
+                if (jsonText.status == "无该用户") {
+                    toastr.error("无该用户");
+                    return false;
+                }
+                else{
+                   // window.location.href="test.html";
+                   $("#form_login").submit();
+                }
+            }, error:function (result) {
+                toastr.error("登录失败");
+                        return false;
+                    }
+        });
     }
+    return false;
   });
 
   $("#m-load").click(function(){
@@ -80,17 +97,34 @@ $(function(){
     }
     else{
         $.ajax({
-            type:"POST",
-            url:"managerLogin",
+            metho:"post",
+            url:"/manngerLogin",
             data:{
-            userID:$("#userID").val(),
-            password:$("#password").val(),
+                "account":$("#userID").val(),
+                "password":$("#password").val()
             },
-            success:function(result){
-              var res = String($.trim(result));
-               toastr.error(res);
+            success:function (result) {
+                var  jsonText = JSON.parse(result);
+
+                if (jsonText.status == "密码错误") {
+                    toastr.error("密码错误");
+                    return false;
+                }
+                if (jsonText.status == "无该用户") {
+                    toastr.error("无该用户");
+                    return false;
+                }
+                else{
+
+                    return true;
+                }
+            }, error:function (result) {
+                toastr.error("登录失败");
+                return false;
             }
         });
-    }  
+
+    }
+    return false;
   });
 })
