@@ -1,6 +1,10 @@
 package org.obsidian.ceimp.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
+import org.obsidian.ceimp.bean.LogStatusBean;
+import org.obsidian.ceimp.bean.ManagerLogBean;
+import org.obsidian.ceimp.bean.UserLogBean;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
@@ -8,10 +12,10 @@ import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +64,6 @@ public class LoginController {
 
     /**
      * 普通用户登录
-     * @param model
      * @param session
      * @param request
      * @param account 用户登录账号
@@ -70,38 +73,48 @@ public class LoginController {
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/userLogin")
+    @ResponseBody
     public String userLogin(
-                        Model model,
                         HttpSession session,
                         HttpServletRequest request,
-                        @RequestParam("account")Long account,
+                        @RequestParam("account")String account,
                         @RequestParam("password")String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.debug("account:"+account+""+"password:"+password);
+        logger.info("account:"+account+""+"password:"+password);
         ServletContext application = request.getServletContext();
         application.setAttribute("sessionMap",sessionMap);
         application.setAttribute("userMap",userMap);
-        application.setAttribute("managerMap",managerMap);
-        UserBasic userBasic = userBasicService.selectByUserId(account);
+        UserBasic userBasic = userBasicService.selectByAccount(account);
+        LogStatusBean logStatusBean = new LogStatusBean();
         if(userBasic.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
-            String sessionId = userMap.get(account);
-            if(sessionId != null){
+            String sessionId = userMap.get(userBasic.getUserId());
+            if(sessionId != null && !"".equals(sessionId)){
                 sessionMap.get(sessionId).invalidate();
                 sessionMap.remove(sessionId);
-                userMap.remove(account);
+                userMap.remove(userBasic.getUserId());
             }else {
-                userMap.put(account,session.getId());
+                userMap.put(userBasic.getUserId(),session.getId());
             }
             sessionMap.put(session.getId(),session);
-            session.setAttribute("userAccount",account);
-            return "user/index";
+            UserLogBean userLogBean = new UserLogBean();
+            userLogBean.setUserId(userBasic.getUserId());
+            session.setAttribute("userLogBean",userLogBean);
+            logStatusBean.setStatus("登录成功");
+            logger.info(logStatusBean);
+            return JSON.toJSONString(logStatusBean);
+
         }else {
             if(userBasic == null){
-                model.addAttribute("result","该账户不存在");
+                logStatusBean.setStatus("无该用户");
+                logger.debug(logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }else {
-                model.addAttribute("result","密码错误");
+                logStatusBean.setStatus("密码错误");
+                logger.debug(logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }
-            return "login";
+
         }
+
     }
 
     /**
@@ -109,15 +122,19 @@ public class LoginController {
      * @param session
      * @return 返回登录页面
      */
-    @GetMapping("/Logout")
+    @GetMapping("/userLogout")
     public String userLogout(HttpSession session){
-        session.invalidate();
+        UserLogBean userLogBean =(UserLogBean) session.getAttribute("userLogBean");
+        String sessionnId = userMap.get(userLogBean.getUserId());
+        HttpSession session1 = sessionMap.get(sessionnId);
+        session1.invalidate();
+        sessionMap.remove(sessionnId);
+        userMap.remove(userLogBean.getUserId());
         return "redirect:/login";
     }
 
     /**
      * 管理员登录
-     * @param model
      * @param session
      * @param request
      * @param account 管理员登录账号
@@ -127,38 +144,55 @@ public class LoginController {
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/managerLogin")
+    @ResponseBody
     public String managerLogin(
-                         Model model,
                          HttpSession session,
                          HttpServletRequest request,
-                         @RequestParam("account")Long account,
+                         @RequestParam("account")String account,
                          @RequestParam("password")String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.debug("account:"+account+""+"password:"+password);
+        logger.info("account:"+account+""+"password:"+password);
         ServletContext application = request.getServletContext();
         application.setAttribute("sessionMap",sessionMap);
-        application.setAttribute("userMap",userMap);
         application.setAttribute("managerMap",managerMap);
-        Manager manager = managerService.selectByManagerId(account);
+        LogStatusBean logStatusBean = new LogStatusBean();
+        Manager manager = managerService.selectByAccount(account);
         if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(password))){
-            String sessionId = managerMap.get(account);
+            String sessionId = managerMap.get(manager.getManagerId());
             if(sessionId != null){
                 sessionMap.get(sessionId).invalidate();
                 sessionMap.remove(sessionId);
-                managerMap.remove(account);
+                managerMap.remove(manager.getManagerId());
             }else {
-                managerMap.put(account,session.getId());
+                managerMap.put(manager.getManagerId(),session.getId());
             }
             sessionMap.put(session.getId(),session);
-            session.setAttribute("managerAccount",account);
-            return "manager/index";
+            ManagerLogBean managerLogBean = new ManagerLogBean();
+            managerLogBean.setManagerId(manager.getManagerId());
+            session.setAttribute("managerLogBean",managerLogBean);
+            logStatusBean.setStatus("登录成功");
+            logger.info(logStatusBean);
+            return JSON.toJSONString(logStatusBean);
         }else {
             if(manager == null){
-                model.addAttribute("result","该账户不存在");
+                logStatusBean.setStatus("无该用户");
+                logger.debug(logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }else {
-                model.addAttribute("result","密码错误");
+                logStatusBean.setStatus("密码错误");
+                logger.debug(logStatusBean);
+                return JSON.toJSONString(logStatusBean);
             }
-            return "login";
         }
     }
 
+    @GetMapping("/managerLogout")
+    public String managerLogout(HttpSession session){
+        ManagerLogBean managerLogBean =(ManagerLogBean) session.getAttribute("managerLogBean");
+        String sessionnId = managerMap.get(managerLogBean.getManagerId());
+        HttpSession session1 = sessionMap.get(sessionnId);
+        session1.invalidate();
+        sessionMap.remove(sessionnId);
+        managerMap.remove(managerLogBean.getManagerId());
+        return "redirect:/login";
+    }
 }

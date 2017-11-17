@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
   <meta charset="UTF-8"/>
-
   <title>欢迎使用综测系统</title>
 
   <link rel="stylesheet" href="css/font-awesome.min.css"/>
@@ -19,7 +16,7 @@
 <body background="img/login_background.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
   <div class="container">
     <div class="login-form">
-      <form method="post" role="form" id="form_login">
+      <form  id="form_login">
         <div class="form-group">
            <p class="title">欢迎使用综合测评系统</p>
         </div>
@@ -36,26 +33,26 @@
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">
-              <i class="fa fa-user"></i>
+              <!--<i class="fa fa-user"></i>-->
             </div>
-            <input type="text" class="form-control" name="userID" id="userID" placeholder="学号/卡号" autocomplete="off" />
+            <input type="text" class="form-control" name="account" id="userID" placeholder="学号/卡号" autocomplete="off" />
           </div>
         </div>
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-addon">
-              <i class="fa fa-key"></i>
+              <!--<i class="fa fa-key"></i>-->
             </div>
             <input type="password" class="form-control" name="password" id="password" placeholder="统一身份验证" autocomplete="off" />
           </div>
         </div> 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block btn-login" id="s-load" onclick="javascript:this.form.action='userLogin';">
-            <i class="fa fa-sign-in"></i>
+          <button class="btn btn-primary btn-block btn-login" id="s-load" >
+            <!--<i class="fa fa-sign-in"></i>-->
             登录
           </button>
-           <button type="submit" class="btn btn-primary btn-block btn-login" id="m-load" style="display: none;"  onclick="javascript:this.form.action='managerLogin';">
-            <i class="fa fa-sign-in"></i>
+           <button class="btn btn-primary btn-block btn-login" id="m-load" style="display: none;">
+            <!--<i class="fa fa-sign-in"></i>-->
             登录
           </button>
         </div>        

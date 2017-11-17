@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/11/13.
@@ -49,12 +50,22 @@ public class UserBasicServiceImpl implements UserBasicService {
     public UserBasic selectByUserId(Long userId) {
         UserBasicExample example = new UserBasicExample();
         example.or().andUserIdEqualTo(userId);
-        return userBasicMapper.selectByExample(example).get(0);
+        List<UserBasic> list = userBasicMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return  null;
+        }
+        return list.get(0);
     }
 
     @Transactional
     @Override
     public UserBasic selectByAccount(String account) {
-        return null;
+        UserBasicExample example = new UserBasicExample();
+        example.or().andAccountEqualTo(account);
+        List<UserBasic> list = userBasicMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return  null;
+        }
+        return list.get(0);
     }
 }

@@ -1,0 +1,225 @@
+a:hover{
+	text-decoration: none;
+}
+nav{
+	height: 60px;
+	background: #393D49;
+	z-index: 1000000;
+}
+.navbar-toggle{
+	border: white  1px solid;
+}
+.navbar-toggle span{
+	background-color: white;
+}
+.scholarship-logo{
+	position: absolute;
+	height: 100%;
+	text-align: center;
+	line-height: 60px;
+	color: #1E9FFF;
+	font-size: 16px;
+}
+#menu li a{
+	background-color:  #393D49;
+}
+
+.navbar-text{
+	margin-top: 0px;
+	color: white;
+}
+.dropdown{
+	border-bottom: 3px solid  #393D49;
+	background: #393D49;
+}
+.dropdown-menu1{
+	background-color: white;
+	padding: 10px;
+	z-index: 222;
+	display: none;
+}
+.dropdown-menu1 li {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	display: block;
+	text-align: center;
+}
+.dropdown-menu1 li:hover{
+	background-color: #eee;
+}
+
+.nav>li>a:hover{
+	background-color: #393D49;
+	color: gray;
+}
+.nav>li>a:focus{
+	background-color:  #393D49;
+	color: gray;
+}
+.container{
+	margin-top: 60px;
+}
+ul li{
+	list-style: none;
+}
+.all-date{
+	margin-top: 2%;
+	margin-bottom: 5%;
+	margin-left: -3%;
+}
+.date{
+	float: left;
+	font-size: 23px;
+	font-family: "KaiTi";
+
+}
+.myform{
+	padding: 20px;
+}
+.scholarship-title{
+	margin-top: 5%;
+	text-align: center;
+	font-size: 30px;
+	font-family: "KaiTi";
+	margin-left: -5%;
+
+}
+.form-group{
+	margin-left: 20px;
+}
+.input-group{
+	height: 38px;
+}
+.form-control{
+	height: 38px;
+	color: black;
+}
+.input-group-addon{
+	width: 100px;
+	background-color: #FBFBFB;
+	color: black;
+}
+.radio-inline{
+	display: block;
+	float: left;
+	width: 50px;
+	margin-left: 50px;
+	padding: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+input[type=radio] {
+    width: 20px;
+    height: 20px;
+    margin-top: -1px;
+    
+
+}
+.form-control{
+    border-radius: 4px; 
+}
+
+.btn .btn-primary{
+	float: right;
+	margin-right: 50px;
+	margin-bottom: 100px;
+
+}
+.gang{
+	width: 38px;
+	height: 38px;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	float: left;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #eee;
+    opacity: 1;
+}
+.datetimepicker{
+	width: 220px;
+	height: 220px;
+	margin-left: 100px;
+	overflow: hidden;
+
+}
+.message{
+	text-align: right;
+	margin-right: 25px;
+}
+.length-message{
+	text-align: right;
+	color: red;
+}
+.length-message2{
+	text-align: right;
+	color: red;
+}
+.length-message3{
+	color: red;
+	width: 140px;
+	float: left;
+	margin-right: 20px;
+}
+#submit{
+	margin-bottom: 100px;
+}
+.input-group-addon:last-child {
+     border-left: 1px solid #ccc;
+}
+#zhuyao{
+	text-align: left;
+	border:1px solid #ccc;
+	border-radius: 4px;
+	border-bottom: none;
+}
+#date1{
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 5px;
+
+}
+#name1{
+	width: 250px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#place1{
+	width: 200px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#date2{
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 5px;
+
+}
+#name2{
+	width: 250px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#place2{
+	width: 200px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#date3{
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 5px;
+
+}
+#name3{
+	width: 250px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#place3{
+	width: 200px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
