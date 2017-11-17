@@ -1,6 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.entity.Award;
+import org.obsidian.ceimp.bean.AwardBean;
 
 import java.util.List;
 
@@ -8,5 +8,5 @@ import java.util.List;
  * Created by BillChen on 2017/11/14.
  */
 public interface AwardService {
-    List<Award> selectAllByUserIdAndYearScope(Long userId,Integer yearScope);
+    List<AwardBean> selectAllByUserIdAndYearScope(Long userId, Integer yearScope);
 }

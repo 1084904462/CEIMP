@@ -1,15 +1,12 @@
 package org.obsidian.ceimp.controller;
 
 import org.apache.log4j.Logger;
-<<<<<<< HEAD
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> 109a7e8ce339c3b4b86e113f41ecb56f18aa4abe
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -31,7 +27,6 @@ import java.util.Map;
 @Controller
 public class LoginController {
     private Logger logger = Logger.getLogger(this.getClass());
-<<<<<<< HEAD
 
     @Autowired
     private UserBasicService userBasicService;
@@ -44,8 +39,6 @@ public class LoginController {
     private final Map<Long,String> userMap = new HashMap<>();
 
     private final Map<Long,String> managerMap = new HashMap<>();
-=======
->>>>>>> 109a7e8ce339c3b4b86e113f41ecb56f18aa4abe
 
     /**
      * 项目根路径

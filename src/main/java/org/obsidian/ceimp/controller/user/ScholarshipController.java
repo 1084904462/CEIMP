@@ -3,8 +3,6 @@ package org.obsidian.ceimp.controller.user;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.bean.UserLogBean;
-import org.obsidian.ceimp.entity.Award;
-import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.service.AwardService;
 import org.obsidian.ceimp.service.ScholarshipService;
 import org.obsidian.ceimp.service.UserBasicService;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,13 +37,7 @@ public class ScholarshipController {
     public String pageIndex(HttpSession session, Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        List<Award> list = awardService.selectAllByUserIdAndYearScope(userId,yearScope);
-        List<AwardBean> awardBeanList = new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            Scholarship scholarship = scholarshipService.selectByScholarshipId(list.get(i).getScholarshipId());
-            AwardBean awardBean = new AwardBean(scholarship.getName(),scholarship.getSubName());
-            awardBeanList.add(awardBean);
-        }
+        List<AwardBean> awardBeanList = awardService.selectAllByUserIdAndYearScope(userId,yearScope);
         model.addAttribute("awardBeanList",awardBeanList);
         return "user/scholarship/index";
     }

@@ -5,6 +5,7 @@
 用户登录
 	<-
 		/userLogin,ajax,post
+		LogBean:
 		{
 			account:String,
 			password:String
@@ -23,6 +24,7 @@
 管理员登录
 	<-
 		/managerLogin,ajax,post
+		LogBean:
 		{
 			account:String,
 			password:String
@@ -56,7 +58,8 @@
 			{
 				awardName:String,
 				subName:String	//用于奖学金超链接
-				isFilled:Integer,0-没有获得该奖学金,1-未填,2-已填
+				isFilled:Integer,-1-没有获得该奖学金,0-未填,1-已填
+				userId:Long
 			}
 		}
 

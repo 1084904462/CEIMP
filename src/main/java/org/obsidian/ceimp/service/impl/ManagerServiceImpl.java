@@ -5,10 +5,12 @@ import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.ManagerExample;
 import org.obsidian.ceimp.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Administrator on 2017/11/14.
  */
+@Service
 public class ManagerServiceImpl implements ManagerService {
 
     @Autowired

@@ -6,20 +6,16 @@ package org.obsidian.ceimp.bean;
 public class AwardBean {
     private String awardName;
     private String subName;
-
-    public AwardBean() {
-    }
-
-    public AwardBean(String awardName, String subName) {
-        this.awardName = awardName;
-        this.subName = subName;
-    }
+    private Integer isFilled;
+    private Integer userId;
 
     @Override
     public String toString() {
         return "AwardBean{" +
                 "awardName='" + awardName + '\'' +
                 ", subName='" + subName + '\'' +
+                ", isFilled=" + isFilled +
+                ", userId=" + userId +
                 '}';
     }
 
@@ -37,5 +33,21 @@ public class AwardBean {
 
     public void setSubName(String subName) {
         this.subName = subName;
+    }
+
+    public Integer getIsFilled() {
+        return isFilled;
+    }
+
+    public void setIsFilled(Integer isFilled) {
+        this.isFilled = isFilled;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

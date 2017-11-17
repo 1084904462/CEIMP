@@ -7,6 +7,11 @@
     <result column="scholarship_id" jdbcType="BIGINT" property="scholarshipId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
   </resultMap>
+  <select id="selectAllByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.AwardBean">
+    select scholarship.name awardName,scholarship.sub_name subName,IFNULL(award.is_filled,-1) isFilled,
+    IFNULL(award.user_id,0) userId from scholarship left join award on scholarship.scholarship_id =
+    award.scholarship_id and award.user_id = #{userId} and award.year_scope = #{yearScope};
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

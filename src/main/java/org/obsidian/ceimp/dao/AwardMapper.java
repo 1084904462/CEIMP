@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.entity.Award;
 import org.obsidian.ceimp.entity.AwardExample;
 
+import java.util.List;
+
 public interface AwardMapper {
+    List<AwardBean> selectAllByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") Integer yearScope);
+
     long countByExample(AwardExample example);
 
     int deleteByExample(AwardExample example);
