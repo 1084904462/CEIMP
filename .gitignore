@@ -1,6 +1,6 @@
 target/
 src/test/Test.java
 src/main/resources/application.properties
-#src/main/resources/generatorConfig.xml
-.idea/
+src/main/resources/generatorConfig.xml
 CEIMP.iml
+.idea/
