@@ -98,11 +98,7 @@ $(function(){
                     window.setTimeout("self.location='/login'",1500);
                 }
                 else{
-<<<<<<< HEAD
-                    toastr.success("登录成功");
-=======
                     toastr.error(result.status);
->>>>>>> 8b55908e277667a5894945023a209722993a26ea
                 }
             },
             error:function (result) {
