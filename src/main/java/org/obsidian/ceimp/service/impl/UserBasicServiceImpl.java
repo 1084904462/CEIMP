@@ -31,7 +31,8 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int updateUserBasic(UserBasic userBasic) {
+    public int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
         UserBasicExample example = new UserBasicExample();
         example.or().andUserIdEqualTo(userBasic.getUserId());
         return userBasicMapper.updateByExampleSelective(userBasic,example);

@@ -30,10 +30,10 @@ public class ZipUtil {
      * @throws IOException
      */
     public void zip(String inputUrl,String outputUrl,String awardName,List<String> fileNameList) throws IOException{
-        logger.debug("打包文件:" + inputUrl);
-        logger.debug("生成解压包:" + outputUrl);
-        logger.debug("包名:" + awardName);
-        logger.debug("打包文件名:" + fileNameList);
+        logger.info("打包文件:" + inputUrl);
+        logger.info("生成解压包:" + outputUrl);
+        logger.info("包名:" + awardName);
+        logger.info("打包文件名:" + fileNameList);
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         FileOutputStream fos = null;

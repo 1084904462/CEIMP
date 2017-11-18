@@ -9,6 +9,19 @@ public class Manager {
 
     private Integer managerType;
 
+    private Long schoolId;
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "managerId=" + managerId +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", managerType=" + managerType +
+                ", schoolId=" + schoolId +
+                '}';
+    }
+
     public Long getManagerId() {
         return managerId;
     }
@@ -39,5 +52,13 @@ public class Manager {
 
     public void setManagerType(Integer managerType) {
         this.managerType = managerType;
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 }

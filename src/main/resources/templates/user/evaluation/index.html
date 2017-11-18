@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>首页</title>
+	<link rel='stylesheet prefetch' th:href='@{/static/css/bootstrap.min.css}'/>
+	<link rel='stylesheet' th:href='@{/static/css/jquery-ui.css}'/>
+	<link rel='stylesheet' th:href='@{/static/css/user/scholarship/scholarship.css}'/>
+	<link rel="stylesheet" th:href='@{/static/css/user/evaluation/index.css}'/>
+    <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
+  	<script th:src="@{/static/js/bootstrap.min.js}"></script>
+	<script th:src="@{/static/js/user/scholarship/ss.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top">
+	<div class="navbar-header navbar-left ">
+   		 	<div class="scholarship-logo">信息与电子工程学院 综合测评管理系统</div>
+   		 	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+	<div class="collapse navbar-collapse navbar-right" id="navbar-collapse">
+		<ul class="nav navbar-nav" id="menu">
+			<li class="active"><a href="#">审核与填写规则</a></li>
+			<li><a href="#">综测信息填写</a></li>
+			<li><a href="#">查看审核状态</a></li>
+			<li><a href="#">查看公示结果</a></li>
+			<li><a href="/scholarship/index">在线文档生成</a></li>
+		</ul>
+		<ul class="nav navbar-nav">
+			 <li class="navbar-text">
+			  <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">
+			    <span class="caret"></span>
+			   </a>
+			        <ul class="dropdown-menu1">
+				  		<li><a href="#">修改密码</a></li>
+				   		<li><a href="/userLogout">退出登录</a></li>
+				 	</ul>
+			 </li>
+		</ul>
+    </div>
+</nav>
+	 <div class="container">
+		 <div class="row">
+			<div class="col-xs-6 col-md-4">   
+			     <div class="caption">
+			       <h2>欢迎使用综合测评管理系统</h2>
+			       <h3>综测信息填写</h3>
+			        <p>  <a>2017/11/11</a>，综测信息填写开始。填写前请先阅读
+					<a href="#">《综合测评审核与填写规则》</a>。</p>
+			  	</div>
+			</div>
+			<div class="col-xs-6 col-md-4"></div>
+			<div class="col-xs-6 col-md-4"> <img th:src="@{/static/img/one.jpg}" class="img-circle" id="img1"/></div>
+		 </div>
+	 	 <div class="row">
+	 	 	<div class="line"></div>
+				<div class="col-xs-6 col-md-5"></div>
+				<div class="col-xs-6 col-md-2">
+					<div class="title">
+						<h4>综测审核流程</h4>
+					</div>
+				</div>
+			<div class="col-xs-6 col-md-5"></div>
+		 </div>
+
+
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img th:src="@{/static/img/one.jpg}"  class="img-circle"/>
+      <div class="caption">
+        <h3>一审</h3>
+        <p> <a>2017/11/15</a>，综测信息填写截止，进入一审阶段，请各位班长作好各班的综测审核工作。如有发现填写错误，请通知同学进行修改，或由班长代替修改。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img th:src="@{/static/img/two.jpg}" class="img-circle"/>
+      <div class="caption">
+        <h3>二审</h3>
+        <p><a>2017/11/18</a>，一审截止，由辅导员进行二审。</p>
+
+      </div>
+    </div>
+  </div>
+
+
+    <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img th:src="@{/static/img/three.jpg}" class="img-circle"/>
+      <div class="caption">
+        <h3>二审错误修改</h3>
+        <p>       <a>2017/11/22</a>，二审结束，辅导员将二审中出现的错误反馈给各班班长，通知同学进行修改，或由班长代替修改。</p>
+
+      </div>
+    </div>
+
+</div>
+</div>
+	 	 <div class="row">
+	 	 	<div class="line"></div>
+		    <div class="col-xs-6 col-md-5"></div>
+			<div class="col-xs-6 col-md-2">
+				<div class="title">
+					<h4>审核结束后续</h4>
+				</div>
+			</div>
+			<div class="col-xs-6 col-md-5"></div>
+		</div>
+	 <div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-4">
+	    	<div class="thumbnail">
+		      	<img th:src="@{/static/img/look.jpg}" class="img-circle"/>
+		      	<div class="caption">
+			        <h3>查看公示结果</h3>
+			        <p>       <a>2017/11/28</a>,审核结束公示综测结果。请各位同学及时查看成绩，如有疑问，请联系各班班长。</p>
+		     	</div>
+	   		</div>
+		</div>
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+		    <div class="thumbnail">
+		      <img th:src="@{/static/img/money.jpg}" class="img-circle"/>
+		      <div class="caption">
+		        <h3>奖学金申报</h3>
+		        <p>       <a>2017/11/30</a>，开始各项奖学金申报，请参照奖学金填写模板进行奖学金表格填写。</p>
+		      </div>
+		    </div>
+		</div>
+		<div class="col-md-1"></div>
+	 </div>
+</div>
+<div class="floor">
+版权所有 © 浙江科技学院  xcb@zust.edu.cn  浙ICP备11051284号
+地址：浙江·杭州市留和路318号 邮编：310023
+
+
+</div>
+</body>
+</html>

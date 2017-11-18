@@ -32,6 +32,7 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new UserLogInterceptor())
                 .addPathPatterns("/scholarship/**")
                 .addPathPatterns("/evaluation/**");
+
         super.addInterceptors(registry);
     }
 }

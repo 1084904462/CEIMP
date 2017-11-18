@@ -31,7 +31,7 @@ public class DownloadUtil {
      * @throws IOException
      */
     public void download(String url,HttpServletResponse response,String fileName) throws IOException{
-        logger.debug("下载文件:" + url + "/" + fileName);
+        logger.info("下载文件:" + url + "/" + fileName);
         // 读到流中
         InputStream inStream = new FileInputStream(url);// 文件的存放路径
         // 设置输出的格式

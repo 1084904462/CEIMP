@@ -1,125 +1,33 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><!--"../vendor/bootstrap/css/bootstrap.min.css"-->
-
-    <!-- MetisMenu CSS -->
-    <link href="../../static/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-    <!-- DataTables CSS -->
-    <link href="../../static/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="../../static/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../../static/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="../../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>查看奖学金</title>
+    <link th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-responsive/dataTables.responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/static/dist/css/sb-admin-2.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
     <![endif]-->
-    <style type="text/css">
-    th:nth-child(1) {
-    vertical-align: middle;
-    text-align: center;
-    width: 9%;
-	}
-	tr th:nth-child(8) {
-  	vertical-align: middle;
-    text-align: center;
-    width: 15%;
-	}
-	
-	.btn-danger2 {
-    color: #fff;
-    background-color: #f750a3;
-    border-color: #f750a3;
-	}
-	
-	.btn-danger2:hover {
-    color: #fff;
-    background-color: #f4409a;
-    border-color: #f4409a;
-	}
-
-	.btn-danger2:focus {
-    color: #fff;
-    background-color: #f3288d;
-    border-color: #f3288d;
-	}
-	.btn-danger2:active {
-    color: #fff;
-    background-color: #f60b80;
-    border-color: #f60b80;
-	}
-
-	
-
-         /* .btn-danger {
-            color: white;
-            background-color: #008aa6;
-            padding: 0px 1em;
-            height: 22px;
-            margin-left: 10px;
-            border: 0px solid black;
-            border-radius: 5px;
-        }
-
-
-        .btn-danger:hover {
-            background-color: #ff0000;
-        }
-
-
-        /*active 要在后面 否则会被hover覆盖*/
-
-
-        .btn-danger:focus {
-            background-color: #00ff00;
-        }
-
-
-        .btn-danger:active {
-            background-color: #000000;
-        }*/
-
-
-
-
-	th input{
-	    vertical-align: middle;
-	    display: inline-block;
-	}
-	td {
-   	padding-top:25px;
-    text-align: center;
-
-	}
-
-	
-    </style>
+    <link th:href="@{/static/css/manager/showScholarship.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/static/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/metisMenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-responsive/dataTables.responsive.js}"></script>
+    <script th:src="@{/static/dist/js/sb-admin-2.js}"></script>
+    <script th:src="@{/static/js/manager/showScholarship.js}"></script>
 </head>
-
 <body>
-
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -131,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="navbar-brand" >奖学金测评管理员界面1231</div>
+                <div class="navbar-brand" >综合测评管理系统管理员端</div>
             </div>
             <!-- /.navbar-header -->
 
@@ -163,7 +71,7 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Search..."/>
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -196,7 +104,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                
                                <li onclick=""><a><span class="text ">奖学金意见填写</span></a>
@@ -231,8 +139,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading"style="padding: 0px;margin: 0px;">
-                            
+                        <div class="panel-heading" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
                                 <li role="presentation" class="active"><a href="#">2015级</a></li>
                                 <li role="presentation"><a href="#" >2016级</a></li> <!--style="color: grey"-->
@@ -241,29 +148,14 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example"data-order='[[1, "asc"]]'>
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" data-order='[[1, "asc"]]'>
                                 <thead>
                                     <tr>
-                                <th >
+                                <th>
                                     <!--<div class="checkbox">-->
                                     <!--<label>-->
-
                                            <!-- <input style="" type="checkbox" id="checkAll" value="option1" name="checkbox" aria-label="..." style="margin: 0 auto;"> -->
-
-
-                                       
-											 <input type="checkbox" id="checkAll" name="">全选所有页
-											 
-											   
-											    
-											
-
-
-
-                                          
-                                          
-
+											 <input type="checkbox" id="checkAll" name=""/>全选所有页
                                         <!--Option one is this and that&mdash;be sure to include why it's great-->
                                     <!--</label>-->
                                   <!--</div>-->
@@ -279,13 +171,12 @@
                                 <th>性别<!-- <i class="glyphicon glyphicon-triangle-bottom interval-small aria-hidden="true" id="archerFive" onclick="showArcherFive()" ></i> --></th>
                                 <th>奖项<!-- <i class="glyphicon glyphicon-triangle-bottom interval-small" aria-hidden="true" id="archerSix" onclick="showArcherSix()" ></i> --></th>
                                 <th class="setWidth">操作</th>
-                            </tr>
+                                    </tr>
                                 </thead>
-                                  <tbody>
+                                <tbody>
                                 <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -293,15 +184,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
-
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
                             </tr>
                               <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -309,14 +199,58 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
+
+                            </tr>  <tr>
+                                <th scope="row">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
+                                </th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
+
+                            </tr>  <tr>
+                                <th scope="row">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
+                                </th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
+
+                            </tr>  <tr>
+                                <th scope="row">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
+                                </th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                                <td>@mdo</td>
+                               <th><button type="button" class="btn btn-info btn-sm radius">下载</button>
 
                                 	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -324,14 +258,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -339,14 +273,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -354,14 +288,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -369,14 +303,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -384,14 +318,14 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>  <tr>
                                 <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -399,59 +333,15 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
-
-                            </tr>  <tr>
-                                <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
-                                </th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
-
-                            </tr>  <tr>
-                                <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
-                                </th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
-
-                            </tr>  <tr>
-                                <th scope="row">
-
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
-                                </th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox" id="blankCheckbox2" value="option1" name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox" id="blankCheckbox2" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Jacob</td>
                                 <td>Thornton</td>
@@ -459,14 +349,15 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                                <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                                <th>
+                                    <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                    <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                                </th>
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Larry</td>
                                 <td>the Bird</td>
@@ -474,15 +365,16 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                                <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                                <th>
+                                    <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                    <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                                </th>
 
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                  </th>
                                 <td>Larry</td>
                                 <td>the Bird</td>
@@ -490,14 +382,15 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Larry</td>
                                 <td>the Bird</td>
@@ -505,15 +398,16 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                 </th>
                                 <td>Larry</td>
                                 <td>the Bird</td>
@@ -521,15 +415,16 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                                <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                                <th>
+                                    <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                    <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                                </th>
 
 
                             </tr>
                             <tr>
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                  </th>
                                 <td>Larry</td>
                                 <td>the Bird</td>
@@ -537,9 +432,10 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                                <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                                <th>
+                                    <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                    <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                                </th>
 
 
                             </tr>
@@ -547,7 +443,7 @@
                             <!--添加border-bottom-->
                             <tr class="border-bottom">
                                 <th scope="row">
-                                        <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;">
+                                    <input type="checkbox"  value="option1"  name="subBox" aria-label="..." style="margin-top:7px;"/>
                                  </th>
                                 <td >Larry</td>
                                 <td>the Bird</td>
@@ -555,9 +451,10 @@
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                               <th  ><button type="button" class="btn btn-info btn-sm radius">下载</button>
-
-                                	<button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button></th>
+                               <th>
+                                   <button type="button" class="btn btn-info btn-sm radius">下载</button>
+                                   <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;">删除</button>
+                               </th>
 
 
                             </tr>
@@ -587,178 +484,5 @@
 
 
     </div>
-    <!-- /#wrapper -->
-
-
-
-
-
-    </script>
-    <!-- jQuery -->
-    <script src="../../static/vendor/jquery/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../static/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="../../static/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- DataTables JavaScript -->
-    <script src="../../static/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="../../static/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="../../static/vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../../static/dist/js/sb-admin-2.js"></script>
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
-    $(document).ready(function() {
-        var oTable=$('#dataTables-example').DataTable({
-          /*  responsive: true*/
-             "columnDefs": [{ "targets": [0, 7], "orderable": false }]
-        });
-
-
-        var allPages = oTable.cells( ).nodes( );
-
-    $('#checkAll').click(function () {
-        if ($(this).hasClass('allChecked')) {
-            $(allPages).find('input[name="subBox"]').prop('checked', false);
-             $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
-        } else {
-            $(allPages).find('input[name="subBox"]').prop('checked', true);
-             $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
-        }
-        $(this).toggleClass('allChecked');
-    });
-       
-     
-           
-
-
-
-/*  $("#checkAll2").click(function() {
-  			 if ($(this).hasClass('checked')) {
-            $('input[name="subBox"]').prop("checked",false);
-            $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-           else {
-            $('input[name="subBox"]').prop("checked",true);
-            $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-            $(this).toggleClass('checked');
-        });*/
-        var $subBox = $(allPages).find('input[name="subBox"]');
-        $subBox.click(function(){
-          /*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*/
-            $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
-          
-        });
-
-
-
-        
-
-
-  
-
-    function changeCheckedNumber(grade)
-    {
-        $("#checkedNumber" + grade).text($("input[name='subBox']:checked").length);
-    }
-
-    table.on('checkbox(table15)', function(obj){
-        changeCheckedNumber(15);
-    });
-
-    table.on('checkbox(table16)', function(obj){
-        changeCheckedNumber(16);
-    });
-
-        /* $('#txtTitle').keyup(function() {
-        var txttile = $('#txtTitle').val();  
-       document.getElementById("txtContent").innerHTML="1";
-
-        if (txttile == "") {
-            document.getElementById("txtContent").innerHTML="1";
-            return false;
-        }
-        else if (txttile.length > 3) {
-             document.getElementById("txtContent").innerHTML="2";
-            return false;
-
-        }
-    });*/
-
-
-   
-       
-
-    });
-   
-    </script>
-     <script type="text/javascript">
-        /* $('#dataTables-example').dataTable( {
-
-          "columnDefs": [ {
-              "targets": [ 0, 2 ],
-              "orderable": false
-            } ]
-        } );
-          console.log("2");*/
-   /*  $('.btn-danger2').click(function(){
- 	 $(this).css('background-color', 'red', function(){
-     $(this).css('background-color', '#f750a3');
-  });
-});     */
- /*$(function() {
-       
-            $("#checkAll").click(function() {
-            $('input[name="subBox"]').prop("checked",this.checked);
-           $("#checkedNumber15").text($("input[name='subBox']:checked").length);
-        });
-        var $subBox = $("input[name='subBox']");
-        $subBox.click(function(){
-            $("#checkAll").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);
-            $("#checkedNumber15").text($("input[name='subBox']:checked").length);
-          
-        });
-
-
-
-         $('#txtTitle').keyup(function() {
-        var txttile = $('#txtTitle').val();  
-       document.getElementById("txtContent").innerHTML="1";
-
-        if (txttile == "") {
-            document.getElementById("txtContent").innerHTML="1";
-            return false;
-        }
-        else if (txttile.length > 3) {
-             document.getElementById("txtContent").innerHTML="2";
-            return false;
-
-        }
-    });
-
-
-    });*/
-
-    function changeCheckedNumber(grade)
-    {
-        $("#checkedNumber" + grade).text($("input[name='subBox']:checked").length);
-    }
-
-    table.on('checkbox(table15)', function(obj){
-        changeCheckedNumber(15);
-    });
-
-    table.on('checkbox(table16)', function(obj){
-        changeCheckedNumber(16);
-    });
-
-
-    </script> 
-
 </body>
-
 </html>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-14 18:07:41
+Date: 2017-11-18 14:37:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,6 +23,7 @@ CREATE TABLE `award` (
   `award_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `scholarship_id` bigint(20) NOT NULL,
+  `is_filled` int(20) NOT NULL COMMENT '是否已填写，0-未填，1-已填',
   `year_scope` int(20) NOT NULL,
   PRIMARY KEY (`award_id`),
   UNIQUE KEY `award_id` (`award_id`) USING BTREE,
@@ -30,11 +31,16 @@ CREATE TABLE `award` (
   KEY `scholarship_id` (`scholarship_id`),
   CONSTRAINT `award_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `award_ibfk_2` FOREIGN KEY (`scholarship_id`) REFERENCES `scholarship` (`scholarship_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of award
 -- ----------------------------
+INSERT INTO `award` VALUES ('1', '1', '1', '0', '2017');
+INSERT INTO `award` VALUES ('2', '1', '2', '0', '2017');
+INSERT INTO `award` VALUES ('3', '1', '3', '0', '2017');
+INSERT INTO `award` VALUES ('4', '2', '1', '0', '2017');
+INSERT INTO `award` VALUES ('5', '2', '4', '0', '2017');
 
 -- ----------------------------
 -- Table structure for `class_num`
@@ -87,14 +93,18 @@ CREATE TABLE `manager` (
   `account` varchar(20) NOT NULL COMMENT '登录账号',
   `password` varchar(50) NOT NULL COMMENT '登录密码',
   `manager_type` int(20) NOT NULL COMMENT '管理员类型 1-高级管理员，2-子管理员',
+  `school_id` bigint(20) NOT NULL,
   PRIMARY KEY (`manager_id`),
   UNIQUE KEY `manager_id` (`manager_id`) USING BTREE,
-  UNIQUE KEY `account` (`account`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `account` (`account`) USING BTREE,
+  KEY `school_id` (`school_id`),
+  CONSTRAINT `manager_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of manager
 -- ----------------------------
+INSERT INTO `manager` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1');
 
 -- ----------------------------
 -- Table structure for `ng`
@@ -247,11 +257,16 @@ CREATE TABLE `scholarship` (
   `sub_name` varchar(20) NOT NULL COMMENT '奖学金缩写',
   PRIMARY KEY (`scholarship_id`),
   UNIQUE KEY `scholarship_id` (`scholarship_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship
 -- ----------------------------
+INSERT INTO `scholarship` VALUES ('1', '国家助学金', '国家助学金模板', 'ng');
+INSERT INTO `scholarship` VALUES ('2', '国家励志奖学金', '国家励志奖学金模板', 'nis');
+INSERT INTO `scholarship` VALUES ('3', '省政府奖学金', '省政府奖学金模板', 'pgs');
+INSERT INTO `scholarship` VALUES ('4', '校奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('5', '三好学生', '三好学生模板', 'tas');
 
 -- ----------------------------
 -- Table structure for `school`
@@ -332,12 +347,13 @@ CREATE TABLE `user_basic` (
   UNIQUE KEY `account` (`account`) USING BTREE,
   KEY `class_num_id` (`class_num_id`),
   CONSTRAINT `user_basic_ibfk_1` FOREIGN KEY (`class_num_id`) REFERENCES `class_num` (`class_num_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_basic
 -- ----------------------------
-INSERT INTO `user_basic` VALUES ('1', '1150299070', '888666', '陈伟', '1', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '陈伟', '1', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('2', '1150299071', 'ZTLcLq+BaR2y9kFF0eCBzw==', '黄豆豆', '1', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `user_info`

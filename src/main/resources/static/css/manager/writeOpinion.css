@@ -1,0 +1,152 @@
+th:nth-child(1) {
+    vertical-align: middle;
+    text-align: center;
+    width: 9%;
+}
+tr th:nth-child(8) {
+    vertical-align: middle;
+    text-align: center;
+    width: 15%;
+}
+
+.btn-danger2 {
+    color: #fff;
+    background-color: #f750a3;
+    border-color: #f750a3;
+}
+
+.btn-danger2:hover {
+    color: #fff;
+    background-color: #f4409a;
+    border-color: #f4409a;
+}
+
+.btn-danger2:focus {
+    color: #fff;
+    background-color: #f3288d;
+    border-color: #f3288d;
+}
+.btn-danger2:active {
+    color: #fff;
+    background-color: #f60b80;
+    border-color: #f60b80;
+}
+
+
+
+/* .btn-danger {
+   color: white;
+   background-color: #008aa6;
+   padding: 0px 1em;
+   height: 22px;
+   margin-left: 10px;
+   border: 0px solid black;
+   border-radius: 5px;
+}
+
+
+.btn-danger:hover {
+   background-color: #ff0000;
+}
+
+
+/*active 要在后面 否则会被hover覆盖*/
+
+
+.btn-danger:focus {
+    background-color: #00ff00;
+}
+
+
+.btn-danger:active {
+    background-color: #000000;
+}
+
+
+th:nth-child(1) {
+    vertical-align: middle;
+    text-align: center;
+    width: 8%;
+}
+tr th:nth-child(8) {
+    vertical-align: middle;
+    text-align: center;
+    width: 15%;
+}
+
+.btn-danger2 {
+    color: #fff;
+    background-color: #f750a3;
+    border-color: #f750a3;
+}
+
+.btn-danger2:hover {
+    color: #fff;
+    background-color: #f4409a;
+    border-color: #f4409a;
+}
+
+.btn-danger2:focus {
+    color: #fff;
+    background-color: #f3288d;
+    border-color: #f3288d;
+}
+.btn-danger2:active {
+    color: #fff;
+    background-color: #f60b80;
+    border-color: #f60b80;
+}
+
+
+
+/* .btn-danger {
+   color: white;
+   background-color: #008aa6;
+   padding: 0px 1em;
+   height: 22px;
+   margin-left: 10px;
+   border: 0px solid black;
+   border-radius: 5px;
+}
+
+
+.btn-danger:hover {
+   background-color: #ff0000;
+}
+
+
+/*active 要在后面 否则会被hover覆盖*/
+
+
+.btn-danger:focus {
+    background-color: #00ff00;
+}
+
+
+.btn-danger:active {
+    background-color: #000000;
+}
+
+
+
+
+th input{
+    vertical-align: middle;
+    display: inline-block;
+}
+td {
+    padding-top:25px;
+    text-align: center;
+
+}
+
+
+th input{
+    vertical-align: middle;
+    display: inline-block;
+}
+td {
+    padding-top:25px;
+    text-align: center;
+
+}
