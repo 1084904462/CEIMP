@@ -115,8 +115,7 @@ $(function(){
                     return false;
                 }
                 else{
-
-                    return true;
+                    toastr.success("登录成功");
                 }
             }, error:function (result) {
                 toastr.error("登录失败");
