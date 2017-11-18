@@ -3,12 +3,12 @@ package org.obsidian.ceimp.bean;
 /**
  * Created by BillChen on 2017/11/14.
  */
-public class LogStatusBean {
+public class StatusBean {
     private String status;
 
     @Override
     public String toString() {
-        return "LogStatusBean{" +
+        return "StatusBean{" +
                 "status='" + status + '\'' +
                 '}';
     }

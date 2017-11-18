@@ -284,73 +284,73 @@ public class OpinionExample {
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionIsNull() {
-            addCriterion("ng_opinion is null");
+        public Criteria andNisOpinionIsNull() {
+            addCriterion("nis_opinion is null");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionIsNotNull() {
-            addCriterion("ng_opinion is not null");
+        public Criteria andNisOpinionIsNotNull() {
+            addCriterion("nis_opinion is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionEqualTo(String value) {
-            addCriterion("ng_opinion =", value, "ngOpinion");
+        public Criteria andNisOpinionEqualTo(String value) {
+            addCriterion("nis_opinion =", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionNotEqualTo(String value) {
-            addCriterion("ng_opinion <>", value, "ngOpinion");
+        public Criteria andNisOpinionNotEqualTo(String value) {
+            addCriterion("nis_opinion <>", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionGreaterThan(String value) {
-            addCriterion("ng_opinion >", value, "ngOpinion");
+        public Criteria andNisOpinionGreaterThan(String value) {
+            addCriterion("nis_opinion >", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionGreaterThanOrEqualTo(String value) {
-            addCriterion("ng_opinion >=", value, "ngOpinion");
+        public Criteria andNisOpinionGreaterThanOrEqualTo(String value) {
+            addCriterion("nis_opinion >=", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionLessThan(String value) {
-            addCriterion("ng_opinion <", value, "ngOpinion");
+        public Criteria andNisOpinionLessThan(String value) {
+            addCriterion("nis_opinion <", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionLessThanOrEqualTo(String value) {
-            addCriterion("ng_opinion <=", value, "ngOpinion");
+        public Criteria andNisOpinionLessThanOrEqualTo(String value) {
+            addCriterion("nis_opinion <=", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionLike(String value) {
-            addCriterion("ng_opinion like", value, "ngOpinion");
+        public Criteria andNisOpinionLike(String value) {
+            addCriterion("nis_opinion like", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionNotLike(String value) {
-            addCriterion("ng_opinion not like", value, "ngOpinion");
+        public Criteria andNisOpinionNotLike(String value) {
+            addCriterion("nis_opinion not like", value, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionIn(List<String> values) {
-            addCriterion("ng_opinion in", values, "ngOpinion");
+        public Criteria andNisOpinionIn(List<String> values) {
+            addCriterion("nis_opinion in", values, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionNotIn(List<String> values) {
-            addCriterion("ng_opinion not in", values, "ngOpinion");
+        public Criteria andNisOpinionNotIn(List<String> values) {
+            addCriterion("nis_opinion not in", values, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionBetween(String value1, String value2) {
-            addCriterion("ng_opinion between", value1, value2, "ngOpinion");
+        public Criteria andNisOpinionBetween(String value1, String value2) {
+            addCriterion("nis_opinion between", value1, value2, "nisOpinion");
             return (Criteria) this;
         }
 
-        public Criteria andNgOpinionNotBetween(String value1, String value2) {
-            addCriterion("ng_opinion not between", value1, value2, "ngOpinion");
+        public Criteria andNisOpinionNotBetween(String value1, String value2) {
+            addCriterion("nis_opinion not between", value1, value2, "nisOpinion");
             return (Criteria) this;
         }
 

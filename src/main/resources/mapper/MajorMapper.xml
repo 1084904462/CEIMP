@@ -5,8 +5,12 @@
     <id column="major_id" jdbcType="BIGINT" property="majorId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="school_id" jdbcType="BIGINT" property="schoolId" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="sum" jdbcType="INTEGER" property="sum" />
   </resultMap>
+  <select id="selectAllGradeBySchoolId" parameterType="java.lang.Long" resultType="java.lang.String">
+    select DISTINCT grade from major where school_id = #{schoolId}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -66,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    major_id, name, school_id, sum
+    major_id, name, school_id, grade, sum
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.MajorExample" resultMap="BaseResultMap">
     select
@@ -101,9 +105,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Major">
     insert into major (major_id, name, school_id, 
-      sum)
+      grade, sum)
     values (#{majorId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{schoolId,jdbcType=BIGINT}, 
-      #{sum,jdbcType=INTEGER})
+      #{grade,jdbcType=VARCHAR}, #{sum,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Major">
     insert into major
@@ -116,6 +120,9 @@
       </if>
       <if test="schoolId != null">
         school_id,
+      </if>
+      <if test="grade != null">
+        grade,
       </if>
       <if test="sum != null">
         sum,
@@ -130,6 +137,9 @@
       </if>
       <if test="schoolId != null">
         #{schoolId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
       </if>
       <if test="sum != null">
         #{sum,jdbcType=INTEGER},
@@ -154,6 +164,9 @@
       <if test="record.schoolId != null">
         school_id = #{record.schoolId,jdbcType=BIGINT},
       </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
       <if test="record.sum != null">
         sum = #{record.sum,jdbcType=INTEGER},
       </if>
@@ -167,6 +180,7 @@
     set major_id = #{record.majorId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
       school_id = #{record.schoolId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=VARCHAR},
       sum = #{record.sum,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -181,6 +195,9 @@
       <if test="schoolId != null">
         school_id = #{schoolId,jdbcType=BIGINT},
       </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
       <if test="sum != null">
         sum = #{sum,jdbcType=INTEGER},
       </if>
@@ -191,6 +208,7 @@
     update major
     set name = #{name,jdbcType=VARCHAR},
       school_id = #{schoolId,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=VARCHAR},
       sum = #{sum,jdbcType=INTEGER}
     where major_id = #{majorId,jdbcType=BIGINT}
   </update>
