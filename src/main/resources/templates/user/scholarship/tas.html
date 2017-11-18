@@ -38,12 +38,12 @@
 			</ul>
 			    <ul class="nav navbar-nav">
 			        <li class="navbar-text">
-			            <a href="javascript:;" th:text="${session.userssBean.userId}" class="dropdown">1150299190 
+			            <a href="javascript:;" th:text="${session.UserLogBean.account}" class="dropdown">1150299190
 			            	<span class="caret"></span>
 			            </a>
 			                <ul class="dropdown-menu1">
 				  		  		<li><a href="#">修改密码</a></li>
-				   		  		<li><a href="#">退出登录</a></li>
+				   		  		<li><a href="/userLogout">退出登录</a></li>
 				 			</ul>
 			        </li>
 			    </ul>
@@ -55,75 +55,75 @@
 
 		<div class="col-md-9">
 			<div class="scholarship-title">三好学生</div>
-			<div class="col-md-12 all-date" >
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<div class="date">2016</div>
-					<div class="date">学年——</div>
-					<div class="date">2017</div>
-					<div class="date">学年</div>
+			<form class="myform" th:object="${TasBean}" action="/scholarship/tas" method="post">
+				<div class="col-md-12 all-date" >
+					<div class="col-md-4"></div>
+					<div class="col-md-6">
+						<div class="date" th:value="*{ts}">2016</div>
+						<div class="date">学年——</div>
+						<div class="date">2017</div>
+						<div class="date"th:value="*{te}">学年</div>
+					</div>
+					<div class="col-md-3"></div>
 				</div>
-				<div class="col-md-4"></div>
-			</div>
-			<form class="myform">
 				 <div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon" >学号</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{account}" name="account">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">姓名</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{username}" name="username">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">专业</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{major}" name="major">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">班级</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{classNum}" name="className">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">联系电话</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{phone}" name="phone">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">性别</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{sex}" name="sex">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">政治面貌</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{political}" name="politica">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">出生年月</div>
-					     <input type="text" class="form-control" disabled>
+					     <input type="text" class="form-control" disabled th:value="*{birth}" name="birth">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">民族</div>
-					     <input type="text" class="form-control" disabled>
+					     <input type="text" class="form-control" disabled th:value="*{nation}" name="nation">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">担任职务</div>
-					     <input type="text" class="form-control" data-toggle="popover" data-content="" data-placement="bottom" data-am-popover="{theme:'danger'}" data-html="true" placeholder="无职务则写无" id="job" >
+					     <input type="text" class="form-control" data-toggle="popover" data-content="" data-placement="bottom" data-am-popover="{theme:'danger'}" data-html="true" placeholder="无职务则写无" id="job" th:value="*{job}" name="job">
 					</div>
 					<div class="length-message2"></div>
 				</div>
@@ -131,39 +131,39 @@
 				<div class="form-group col-md-5">
 					<div class="input-group ">
 					    <div class="input-group-addon">品德素质(15分)</div>
-					     <input type="text" class="form-control" disabled>				
+					     <input type="text" class="form-control" disabled th:value="*{character}" name="character">
 					</div>
 				</div>
 
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">学业素质(70分)</div>	
-					    <input type="text" class="form-control" disabled>				    	
+					    <input type="text" class="form-control" disabled th:value="*{study}" name="study">
 					</div>					 
 				</div>
 				<div class="form-group col-md-5" >
 					<div class="input-group">
 					    <div class="input-group-addon">发展能力素质(15分)</div>
-					     <input type="text" class="form-control" disabled>				
+					     <input type="text" class="form-control" disabled th:value="*{ability}" name="ability">
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">总分</div>
-					     <input type="text" class="form-control" disabled>				
+					     <input type="text" class="form-control" disabled th:value="*{all}" name="all">
 					</div>
 				</div>
 				<div class="form-group col-md-8">
 					<div class="input-group">
 					    <div class="input-group-addon">专业名次</div>
-					    <input type="text" class="form-control" disabled>
+					    <input type="text" class="form-control" disabled th:value="*{ceRank}" name="ceRank">
 					</div>
 				</div>
 				<div class="form-group col-md-12">
 					<div class="input-group" style="width: 609px;">
 					    <div class="input-group-addon" id="zhuyao">主要事迹与表现</div>
 					</div>
-					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="200字以内" id="text1" data-toggle="popover" data-content="" data-placement="right" data-html="true" ></textarea>
+					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="200字以内" id="text1" data-toggle="popover" data-content="" data-placement="right" data-html="true" th:value="*{reason}" name="reason"></textarea>
 					<div class="message" id="message1"></div>
 					<div class="message" id="message2"></div>
 				</div>
@@ -171,7 +171,7 @@
 					<div class="input-group" style="width: 609px;">
 					    <div class="input-group-addon" id="zhuyao">二级学工组意见</div>
 					</div>
-					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="100字以内"disabled></textarea>
+					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="100字以内"disabled th:value="*{opinion}" name="opinion"></textarea>
 				</div>
 				<div class="form-group col-md-10">
 					<input type="submit" class="btn btn-primary" id="submit">

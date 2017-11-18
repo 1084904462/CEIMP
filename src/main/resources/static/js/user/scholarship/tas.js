@@ -1,8 +1,6 @@
 $(function () {  
    $("[data-toggle='popover']").popover('hide');
 
-   var i=0;
-   var x=0;
      $("#job").keyup(function(){
         $("#job").popover('hide');
          var r=/^[\u4e00-\u9fa5]*$/;//汉字
