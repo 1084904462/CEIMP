@@ -7,7 +7,7 @@ public class Opinion {
 
     private Integer yearScope;
 
-    private String ngOpinion;
+    private String nisOpinion;
 
     private String pgsRecommend;
 
@@ -41,12 +41,12 @@ public class Opinion {
         this.yearScope = yearScope;
     }
 
-    public String getNgOpinion() {
-        return ngOpinion;
+    public String getNisOpinion() {
+        return nisOpinion;
     }
 
-    public void setNgOpinion(String ngOpinion) {
-        this.ngOpinion = ngOpinion == null ? null : ngOpinion.trim();
+    public void setNisOpinion(String nisOpinion) {
+        this.nisOpinion = nisOpinion == null ? null : nisOpinion.trim();
     }
 
     public String getPgsRecommend() {

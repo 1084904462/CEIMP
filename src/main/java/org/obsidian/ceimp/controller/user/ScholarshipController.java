@@ -4,8 +4,6 @@ import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.bean.UserLogBean;
 import org.obsidian.ceimp.service.AwardService;
-import org.obsidian.ceimp.service.ScholarshipService;
-import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,13 +23,7 @@ public class ScholarshipController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
-    private UserBasicService userBasicService;
-
-    @Autowired
     private AwardService awardService;
-
-    @Autowired
-    private ScholarshipService scholarshipService;
 
     @GetMapping("")
     public String pageScholarship(){
@@ -40,16 +32,14 @@ public class ScholarshipController {
 
     @GetMapping("/index")
     public String pageScholarshipIndex(HttpSession session, Model model){
-        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        int yearScope = TimeUtil.getInstance().getThisYear();
+        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
+        logger.info("用户" + userLogBean.getAccount() + userLogBean.getUsername() + "进入奖学金首页");
+        Long userId = userLogBean.getUserId();
+        Integer yearScope = TimeUtil.getInstance().getThisYear();
         List<AwardBean> awardBeanList = awardService.selectAllByUserIdAndYearScope(userId,yearScope);
+        logger.info(awardBeanList);
         model.addAttribute("awardBeanList",awardBeanList);
         return "user/scholarship/index";
     }
 
-    @GetMapping("/ng")
-    public String pageNg(HttpSession session){
-        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        return "user/scholarship/ng";
-    }
 }

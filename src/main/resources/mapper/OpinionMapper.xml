@@ -5,7 +5,7 @@
     <id column="opinion_id" jdbcType="BIGINT" property="opinionId" />
     <result column="manager_id" jdbcType="BIGINT" property="managerId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
-    <result column="ng_opinion" jdbcType="VARCHAR" property="ngOpinion" />
+    <result column="nis_opinion" jdbcType="VARCHAR" property="nisOpinion" />
     <result column="pgs_recommend" jdbcType="VARCHAR" property="pgsRecommend" />
     <result column="pgs_opinion" jdbcType="VARCHAR" property="pgsOpinion" />
     <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    opinion_id, manager_id, year_scope, ng_opinion, pgs_recommend, pgs_opinion, ss_opinion, 
+    opinion_id, manager_id, year_scope, nis_opinion, pgs_recommend, pgs_opinion, ss_opinion, 
     tas_opinion
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.OpinionExample" resultMap="BaseResultMap">
@@ -106,10 +106,10 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Opinion">
     insert into opinion (opinion_id, manager_id, year_scope, 
-      ng_opinion, pgs_recommend, pgs_opinion, 
+      nis_opinion, pgs_recommend, pgs_opinion, 
       ss_opinion, tas_opinion)
     values (#{opinionId,jdbcType=BIGINT}, #{managerId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
-      #{ngOpinion,jdbcType=VARCHAR}, #{pgsRecommend,jdbcType=VARCHAR}, #{pgsOpinion,jdbcType=VARCHAR}, 
+      #{nisOpinion,jdbcType=VARCHAR}, #{pgsRecommend,jdbcType=VARCHAR}, #{pgsOpinion,jdbcType=VARCHAR}, 
       #{ssOpinion,jdbcType=VARCHAR}, #{tasOpinion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Opinion">
@@ -124,8 +124,8 @@
       <if test="yearScope != null">
         year_scope,
       </if>
-      <if test="ngOpinion != null">
-        ng_opinion,
+      <if test="nisOpinion != null">
+        nis_opinion,
       </if>
       <if test="pgsRecommend != null">
         pgs_recommend,
@@ -150,8 +150,8 @@
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="ngOpinion != null">
-        #{ngOpinion,jdbcType=VARCHAR},
+      <if test="nisOpinion != null">
+        #{nisOpinion,jdbcType=VARCHAR},
       </if>
       <if test="pgsRecommend != null">
         #{pgsRecommend,jdbcType=VARCHAR},
@@ -185,8 +185,8 @@
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
-      <if test="record.ngOpinion != null">
-        ng_opinion = #{record.ngOpinion,jdbcType=VARCHAR},
+      <if test="record.nisOpinion != null">
+        nis_opinion = #{record.nisOpinion,jdbcType=VARCHAR},
       </if>
       <if test="record.pgsRecommend != null">
         pgs_recommend = #{record.pgsRecommend,jdbcType=VARCHAR},
@@ -210,7 +210,7 @@
     set opinion_id = #{record.opinionId,jdbcType=BIGINT},
       manager_id = #{record.managerId,jdbcType=BIGINT},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
-      ng_opinion = #{record.ngOpinion,jdbcType=VARCHAR},
+      nis_opinion = #{record.nisOpinion,jdbcType=VARCHAR},
       pgs_recommend = #{record.pgsRecommend,jdbcType=VARCHAR},
       pgs_opinion = #{record.pgsOpinion,jdbcType=VARCHAR},
       ss_opinion = #{record.ssOpinion,jdbcType=VARCHAR},
@@ -228,8 +228,8 @@
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="ngOpinion != null">
-        ng_opinion = #{ngOpinion,jdbcType=VARCHAR},
+      <if test="nisOpinion != null">
+        nis_opinion = #{nisOpinion,jdbcType=VARCHAR},
       </if>
       <if test="pgsRecommend != null">
         pgs_recommend = #{pgsRecommend,jdbcType=VARCHAR},
@@ -250,7 +250,7 @@
     update opinion
     set manager_id = #{managerId,jdbcType=BIGINT},
       year_scope = #{yearScope,jdbcType=INTEGER},
-      ng_opinion = #{ngOpinion,jdbcType=VARCHAR},
+      nis_opinion = #{nisOpinion,jdbcType=VARCHAR},
       pgs_recommend = #{pgsRecommend,jdbcType=VARCHAR},
       pgs_opinion = #{pgsOpinion,jdbcType=VARCHAR},
       ss_opinion = #{ssOpinion,jdbcType=VARCHAR},
