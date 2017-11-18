@@ -24,7 +24,7 @@ public class DeleteUtil {
      * @param inputUrl 文件路径
      */
     public void delete(String inputUrl){
-        logger.debug("删除文件: " + inputUrl);
+        logger.info("删除文件: " + inputUrl);
         File file = new File(inputUrl);
         if(file.exists() && file.isFile()){
             file.delete();

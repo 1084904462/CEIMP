@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 public interface UserBasicService {
     int insertUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    int updateUserBasic(UserBasic userBasic);
+    int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     int deleteUserBasic(Long userId);
 

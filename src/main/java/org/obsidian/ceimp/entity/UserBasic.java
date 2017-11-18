@@ -27,6 +27,25 @@ public class UserBasic {
 
     private String job;
 
+    @Override
+    public String toString() {
+        return "UserBasic{" +
+                "userId=" + userId +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                ", classNumId=" + classNumId +
+                ", sex='" + sex + '\'' +
+                ", birth='" + birth + '\'' +
+                ", nation='" + nation + '\'' +
+                ", entrance='" + entrance + '\'' +
+                ", political='" + political + '\'' +
+                ", phone='" + phone + '\'' +
+                ", identity='" + identity + '\'' +
+                ", job='" + job + '\'' +
+                '}';
+    }
+
     public Long getUserId() {
         return userId;
     }

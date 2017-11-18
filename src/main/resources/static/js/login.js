@@ -47,11 +47,9 @@ $(function(){
   $("#s-load").click(function(){
     if ($("#userID").val()=="") {
       toastr.error("请输入账号");
-      return false;
     }
     if ($("#password").val()=="") {
        toastr.error("请输入密码");
-        return false;
     }
      else{
         $.ajax({
@@ -61,70 +59,52 @@ $(function(){
                 "account":$("#userID").val(),
                 "password":$("#password").val()
             },
-
+            dataType: "json",
             success:function (result) {
-                var  jsonText = JSON.parse(result);
-
-                if (jsonText.status == "密码错误") {
-                    toastr.error("密码错误");
-                    return false;
-                }
-                if (jsonText.status == "无该用户") {
-                    toastr.error("无该用户");
-                    return false;
+                if(result.status == "登录成功"){
+                    toastr.success(result.status);
+                    window.setTimeout("self.location='/login'",1500);
                 }
                 else{
-                   // window.location.href="test.html";
-                   $("#form_login").submit();
+                    toastr.error(result.status);
                 }
-            }, error:function (result) {
+            },
+            error:function (result) {
                 toastr.error("登录失败");
-                        return false;
-                    }
+            }
         });
     }
-    return false;
   });
 
   $("#m-load").click(function(){
-        if ($("#userID").val()=="") {
-    toastr.error("请输入账号");
-      return false;
-    }
-    if ($("#password").val()=="") {
-       toastr.error("请输入密码");
-      return false;
-    }
-    else{
+      if ($("#userID").val()=="") {
+          toastr.error("请输入账号");
+      }
+      if ($("#password").val()=="") {
+          toastr.error("请输入密码");
+      }
+      else{
         $.ajax({
-            metho:"post",
-            url:"/manngerLogin",
+            method:"post",
+            url:"/managerLogin",
             data:{
                 "account":$("#userID").val(),
                 "password":$("#password").val()
             },
+            dataType: "json",
             success:function (result) {
-                var  jsonText = JSON.parse(result);
-
-                if (jsonText.status == "密码错误") {
-                    toastr.error("密码错误");
-                    return false;
-                }
-                if (jsonText.status == "无该用户") {
-                    toastr.error("无该用户");
-                    return false;
+                if(result.status == "登录成功"){
+                    toastr.success(result.status);
+                    window.setTimeout("self.location='/login'",1500);
                 }
                 else{
-
-                    return true;
+                    toastr.error(result.status);
                 }
-            }, error:function (result) {
+            },
+            error:function (result) {
                 toastr.error("登录失败");
-                return false;
             }
         });
-
     }
-    return false;
   });
 })

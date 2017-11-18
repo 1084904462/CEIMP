@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"/>
-	<title>Document</title>
-	<link rel='stylesheet prefetch' href='css/bootstrap.min.css'/>
-	<link rel='stylesheet' href='css/jquery-ui.css'/>
-	<link rel='stylesheet' href='css/scholarship.css'/>
-	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  
-
-    <script src="js/jquery-3.2.1.min.js"></script>
-  	<script src="js/bootstrap.min.js"></script>
-	<script src="js/moment-with-locales.js"></script>  
-	<script src="js/bootstrap-datetimepicker.min.js"></script> 
-	<script src="js/bootstrap-datetimepicker.zh-CN.js"></script> 
-	<script src="js/moment-with-locales.js"></script> 
-	<script src="js/schoolScholarship.js"></script> 
-	<script src="js/国家助学.js"></script> 
-
+	<title>国家励志奖学金</title>
+	<link rel='stylesheet prefetch' th:href='@{/css/bootstrap.min.css}'/>
+	<link rel='stylesheet' th:href='@{/css/jquery-ui.css}'/>
+	<link rel='stylesheet' th:href='@{/css/user/scholarship/scholarship.css}'/>
+	<link th:href="@{/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" />
+	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/moment-with-locales.js}"></script>
+	<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+	<script th:src="@{/js/moment-with-locales.js}"></script>
+	<script th:src="@{/js/user/scholarship/ss.js}"></script>
+	<script th:src="@{/js/user/scholarship/nis.js}"></script>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top">
@@ -112,7 +110,6 @@
 					<div class="input-group">
 					    <div class="input-group-addon">出生年月</div>
 					     <input type="text" class="form-control" disabled>
-					    <!-- <input type="text" class="form-control" placeholder="例：1996年12月"> -->
 					</div>
 				</div>
 				<div class="form-group col-md-5">
@@ -133,6 +130,18 @@
 					     <input type="text" class="form-control" disabled>
 					</div>
 				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+					    <div class="input-group-addon">绩点排名</div>
+					     <input type="text" class="form-control" disabled>
+					</div>
+				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+					    <div class="input-group-addon">综测排名</div>
+					     <input type="text" class="form-control" disabled>
+					</div>
+				</div>
 				<div class="form-group col-md-3">
 					<div class="input-group">
 					    <div class="input-group-addon">必修课</div>
@@ -148,121 +157,72 @@
 				</div>
 				<div class="form-group col-md-10">
 					<div class="input-group" style="width: 609px;">
-					    <div class="input-group-addon" style="text-align: left;border:1px solid #ccc;border-radius: 4px;">家庭成员情况</div>
+					    <div class="input-group-addon" style="text-align: left;border:1px solid #ccc;border-radius: 4px;">获奖情况</div>
 					</div>
 				</div>
-				<div class="form-group col-md-12" style="margin-left: -20px;" >
-				<div class="form-group col-md-1">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="姓名" id="n1"style="width: 100px;border-radius: 4px;">
-					</div>
-					<div class="length-message3" id="n1-message"></div>
-				</div>
+				<div class="form-group col-md-12" style="margin-left: -20px;">
 				<div class="form-group col-md-2">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="年龄" id="a1"style="width: 100px;border-radius: 4px;margin-left: 35px;">
+						<input type="text" class="form-control" placeholder="日期" id="date1" >
 					</div>
-					<div class="length-message3" id="a1-message" style="text-align: right;"></div>
 				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="与本人关系" id="r1"style="width: 100px;border-radius: 4px;margin-left: 10px;">
+				<div class="form-group col-md-4">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="奖项名称(34字以内)" id="name1">
 					</div>
-					<div class="length-message3" id="r1-message"></div>
+					<div class="length-message" id="name11"></div>
 				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-3">
 					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="工作或学习单位" id="p1"style="width: 260px;border-radius: 4px;margin-left: -20px;"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
+						<input type="text" class="form-control" placeholder="颁奖单位(30字以内)" id="place1"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
 					</div>
-					<div class="length-message3" id="p1-message"></div>
+					<div class="length-message" id="place11"></div>
 				</div>
 				</div>
 				<div class="form-group col-md-12" style="margin-left: -20px;">
-				<div class="form-group col-md-1">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="姓名" id="n2" style="width: 100px;border-radius: 4px;">
-					</div>
-					<div class="length-message3" id="n2-message"></div>
-				</div>
 				<div class="form-group col-md-2">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="年龄" id="a2"style="width: 100px;border-radius: 4px;margin-left: 35px;">
+						<input type="text" class="form-control" placeholder="日期" id="date2" >
 					</div>
-					<div class="length-message3" id="a2-message"style="text-align: right;"></div>
 				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-4">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="奖项名称(34字以内)" id="name2">
+					</div>	
+					<div class="length-message" id="name22"></div>			
+				</div>
+				<div class="form-group col-md-3">
 					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="与本人关系" id="r2"style="width: 100px;border-radius: 4px;;margin-left: 10px;">
+						<input type="text" class="form-control" placeholder="颁奖单位(30字以内)" id="place2"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
 					</div>
-					<div class="length-message3" id="r2-message"></div>
-				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="工作或学习单位" id="p2"style="width: 260px;border-radius: 4px;margin-left: -20px;"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
-					</div>
-					<div class="length-message3" id="p2-message"></div>
+					<div class="length-message" id="place22"></div>
 				</div>
 				</div>
-				
 				<div class="form-group col-md-12" style="margin-left: -20px;">
-				<div class="form-group col-md-1">
-					<div class="input-group">
-						<input type="text" class="form-control name" placeholder="姓名" id="n3" style="width: 100px;border-radius: 4px;">
-					</div>
-					<div class="length-message3" id="n3-message"></div>
-				</div>
 				<div class="form-group col-md-2">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="年龄" id="a3"style="width: 100px;border-radius: 4px;margin-left: 35px;">
+						<input type="text" class="form-control" placeholder="日期" id="date3">
 					</div>
-					<div class="length-message3" id="a3-message"style="text-align: right;"></div>
 				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="与本人关系" id="r3"style="width: 100px;border-radius: 4px;;margin-left: 10px;">
-					</div>
-					<div class="length-message3" id="r3-message"></div>
-				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="工作或学习单位" id="p3"style="width: 260px;border-radius: 4px;margin-left: -20px;"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
-					</div>
-					<div class="length-message3" id="p3-message"></div>
-				</div>
-				</div>
-				
-				<div class="form-group col-md-12" style="margin-left: -20px;">
-				<div class="form-group col-md-1">
+				<div class="form-group col-md-4">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="姓名" id="n4" style="width: 100px;border-radius: 4px;">
+						<input type="text" class="form-control" placeholder="奖项名称(34字以内)" id="name3">
 					</div>
-					<div class="length-message3" id="n4-message"></div>
+					<div class="length-message" id="name33"></div>
+									
 				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="年龄" id="a4"style="width: 100px;border-radius: 4px;margin-left: 35px;">
-					</div>
-					<div class="length-message3" id="a4-message"style="text-align: right;"></div>
-				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-3">
 					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="与本人关系" id="r4"style="width: 100px;border-radius: 4px;;margin-left: 10px;">
+						<input type="text" class="form-control" placeholder="颁奖单位(30字以内)" id="place3"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
 					</div>
-					<div class="length-message3" id="r4-message"></div>
+					<div class="length-message" id="place33"></div>
 				</div>
-				<div class="form-group col-md-2">
-					<div class="input-group" style="width: 100%;">
-						<input type="text" class="form-control" placeholder="工作或学习单位" id="p4"style="width: 260px;border-radius: 4px;margin-left: -20px;"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
-					</div>
-					<div class="length-message3" id="p4-message"></div>
-				</div>
-				</div>
-				
-			
+				</div>	
+
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">家庭月收入</div>
-					    <input type="text" class="form-control" id="month-input">
+					    <input type="text" class="form-control" id="month-input"data-toggle="popover" data-content="" data-placement="bottom" data-html="true">
 					</div>
 					<div style="text-align: right;color: red;" id="month-input-message"></div>
 				</div>
@@ -273,8 +233,8 @@
 					    <input type="radio" name="type" value="城镇" id="city"> 城镇
 					    </label>
 					    <label class="radio-inline">
-					    <input type="radio" name="type"  value="农村" id="farm"data-toggle="popover" data-content="" data-placement="bottom" data-html="true"> 农村
-					    </label> 
+					    <input type="radio" name="type"  value="农村" id="farm" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"> 农村
+					    </label > 
 					</div>
 					<div class="length-message2" id="type"></div>
 				</div>
@@ -322,7 +282,13 @@
 					</div>
 					<div class="length-message2" id="type2"></div>
 				</div>
-				<div class="form-group col-md-12">
+
+									    
+					    
+
+
+
+				<div class="form-group col-md-10">
 					<div class="input-group" style="width: 609px;">
 					    <div class="input-group-addon" style="text-align: left;border:1px solid #ccc;border-radius: 4px;border-bottom: none;">申请理由</div>
 					</div>

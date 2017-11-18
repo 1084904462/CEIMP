@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>奖学金意见填写</title>
+    <link th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-responsive/dataTables.responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/static/dist/css/sb-admin-2.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link th:href="@{/static/css/manager/writeOpinion.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/static/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/metisMenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-responsive/dataTables.responsive.js}"></script>
+    <script th:src="@{/static/dist/js/sb-admin-2.js}"></script>
+    <script th:src="@{/static/js/manager/writeOpinion.js}"></script>
+</head>
+<body class="main-body">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" >综合测评管理系统管理员端</div>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+              
+              
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <font style="margin-left: 15px;margin-right: 30px;">fzj</font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                       
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search..."/>
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li  onclick="loadPage('#')"><!--showScholarship.htmlhtml'onclick="loadPage()" -->
+                            <a href="#" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
+                           <!--   -->
+                        </li>
+                       
+                        <li>
+                            <a href="#">
+                            	<i class="fa fa-table fa-fw"></i>  
+                            查看名单
+                            	<span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li onclick=""><a><span class="text ">国家励志奖学金</span></a>
+                                </li>
+                                 <li onclick=""><a><span class="text">国家助学金</span></a>
+                                </li>
+                                 <li onclick=""><a><span class="text">省政府奖学金</span></a>
+                                </li>
+                                 <li onclick=""><a><span class="text">校奖学金</span></a>
+                                </li>
+                                <li onclick=""><a><span class="text">三好学生</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                               
+                               <li onclick=""><a><span class="text ">奖学金意见填写</span></a>
+                                </li>
+                                 <li onclick=""><a><span class="text">国家助学金审批意见</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
+                            
+                            <!-- /.nav-second-level -->
+                        </li>
+                       
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+          <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">奖学金意见填写</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           国家励志奖学金
+                        </div>
+                        <!-- /.panel-heading -->
+                       
+                 
+                    
+                           <!--  <h5 style="margin-left: 10px;">院（系）意见:</h5> -->
+                       
+                        <div class="panel-body">
+
+                           <!--  <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea>
+                             <button type="button" class="btn btn-default radius" style="margin: 0 auto;">重置</button>	 -->
+                              <div class="panel panel-info" style="width:80%;margin: 0 auto;">
+		                        <div class="panel-heading" style="background-color:white;">
+		                            <h3 class="panel-title" >院（系）意见</h3>
+		                        </div>
+		                        <div class="panel-body">
+
+		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
+		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+
+		                        </div>
+		                    </div>
+
+		                   
+                        </div>
+                    
+
+                   
+
+               
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            校奖学金
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
+		                        <div class="panel-heading" style="background-color:white;">
+		                            <h3 class="panel-title" >二级学工组意见</h3>
+		                        </div>
+		                        <div class="panel-body">
+
+		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
+		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+
+		                        </div>
+		                    </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                 <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           省政府奖学金
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
+		                        <div class="panel-heading" style="background-color:white;">
+		                            <h3 class="panel-title" >推荐理由</h3>
+		                        </div>
+		                        <div class="panel-body">
+
+		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
+		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+
+		                        </div>
+		                    </div>
+		                    
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                 <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           省政府奖学金
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
+		                        <div class="panel-heading" style="background-color:white;">
+		                            <h3 class="panel-title" >院（系）意见</h3>
+		                        </div>
+		                        <div class="panel-body">
+
+		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
+		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+
+		                        </div>
+		                    </div>
+		                    
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           三好学生
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
+		                        <div class="panel-heading" style="background-color:white;">
+		                            <h3 class="panel-title" >二级学工组意见</h3>
+		                        </div>
+		                        <div class="panel-body">
+
+		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
+		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+
+		                        </div>
+		                    </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+
+               
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+<!--转圈圈model-->
+<div class="modal fade" id="circleModal" tabindex="-1" role="dialog" aria-labelledby="circleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-circle">
+        <div class="modal-content" style="height: 80px;">
+        	<div style="line-height: 80px;margin-left: 35%;" >
+
+            <img th:src="@{/static/img/loadingImg.gif}" width="40px;" height="40px;"/>
+            <label class="modal-body-title">&nbsp;&nbsp;&nbsp;数据加载中......</label>
+
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+
+    </div>
+</body>
+</html>

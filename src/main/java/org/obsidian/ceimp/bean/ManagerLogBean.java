@@ -6,11 +6,17 @@ package org.obsidian.ceimp.bean;
 public class ManagerLogBean {
     private Long managerId;
 
-    @Override
-    public String toString() {
-        return "ManagerLogBean{" +
-                "managerId=" + managerId +
-                '}';
+    private String account;
+
+    private Long schoolId;
+
+    public ManagerLogBean() {
+    }
+
+    public ManagerLogBean(Long managerId, String account, Long schoolId) {
+        this.managerId = managerId;
+        this.account = account;
+        this.schoolId = schoolId;
     }
 
     public Long getManagerId() {
@@ -19,5 +25,21 @@ public class ManagerLogBean {
 
     public void setManagerId(Long managerId) {
         this.managerId = managerId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 }

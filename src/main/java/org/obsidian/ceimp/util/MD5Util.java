@@ -31,7 +31,6 @@ public class MD5Util {
      * @throws UnsupportedEncodingException
      */
     public String EncoderByMd5(String password) throws NoSuchAlgorithmException,UnsupportedEncodingException{
-        logger.debug("加密密码");
         return base64Encoder.encode(MessageDigest.getInstance("MD5").digest(password.getBytes("utf-8")));
     }
 }

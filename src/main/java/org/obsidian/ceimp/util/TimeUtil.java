@@ -34,17 +34,17 @@ public class TimeUtil {
         return simpleDateFormat.format(new Date(time*1000));
     }
 
-    public int getThisYear(){
+    public Integer getThisYear(){
         String yearStr = simpleDateFormat.format(new Date(this.getTimeStamp()*1000)).substring(0,4);
         return Integer.parseInt(yearStr);
     }
 
-    public int getYear(Long time){
+    public Integer getYear(Long time){
         String yearStr = simpleDateFormat.format(new Date(time*1000)).substring(0,4);
         return Integer.parseInt(yearStr);
     }
 
-    public long getOneDayTimeStamp(String day){
+    public Long getOneDayTimeStamp(String day){
         Date date = null;
         try {
             date = sdf.parse(day);

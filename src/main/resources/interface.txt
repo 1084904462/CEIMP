@@ -18,7 +18,9 @@
 		//登录成功后添加session
 		session:UserLogBean
 		{
-			userId:Long
+			userId:Long,
+			account:String,
+			username:String
 		}
 
 管理员登录
@@ -37,7 +39,9 @@
 		//登录成功后添加session
 		session:ManagerLogBean
 		{
-			managerId:Long
+			managerId:Long,
+			account:String,
+			schoolId:Long
 		}
 
 用户退出登录

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
   <title>欢迎使用综测系统</title>
 
-  <link rel="stylesheet" href="css/font-awesome.min.css"/>
-  <link rel='stylesheet prefetch' href='css/bootstrap.min.css'/>
-  <link rel='stylesheet' href='css/toastr.min.css'/> 
-  <link rel="stylesheet" href="css/login.css"/>
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/toastr.min.js"></script>
-  <script src="js/login.js"></script>
+  <link rel="stylesheet" th:href="@{css/font-awesome.min.css}"/>
+  <link rel='stylesheet prefetch' th:href='@{css/bootstrap.min.css}'/>
+  <link rel='stylesheet' th:href='@{css/toastr.min.css}'/>
+  <link rel="stylesheet" th:href="@{css/login.css}"/>
+  <script th:src="@{js/jquery-3.2.1.min.js}"></script>
+  <script th:src="@{js/bootstrap.min.js}"></script>
+  <script th:src="@{js/toastr.min.js}"></script>
+  <script th:src="@{js/login.js}"></script>
 </head>
-<body background="img/login_background.jpg" style="background-size: 100% 100%; background-attachment: fixed;">
+<body th:background="@{img/login_background.jpg}" style="background-size: 100% 100%; background-attachment: fixed;">
   <div class="container">
     <div class="login-form">
-      <form  id="form_login">
+      <form  id="form_login" onsubmit="return false;">
         <div class="form-group">
            <p class="title">欢迎使用综合测评系统</p>
         </div>

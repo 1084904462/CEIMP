@@ -33,8 +33,13 @@ public class ScholarshipController {
     @Autowired
     private ScholarshipService scholarshipService;
 
+    @GetMapping("")
+    public String pageScholarship(){
+        return "redirect:/scholarship/index";
+    }
+
     @GetMapping("/index")
-    public String pageIndex(HttpSession session, Model model){
+    public String pageScholarshipIndex(HttpSession session, Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<AwardBean> awardBeanList = awardService.selectAllByUserIdAndYearScope(userId,yearScope);

@@ -33,8 +33,8 @@ public class WordUtil {
      * @param textMap 需要替换的内容
      */
     public void generateWord(String inputUrl, String outputUrl, Map<String,String> textMap){
-        logger.debug("模板:" + inputUrl);
-        logger.debug("word:" + outputUrl);
+        logger.info("模板:" + inputUrl);
+        logger.info("word:" + outputUrl);
         try {
             InputStream is = new FileInputStream(inputUrl);
             XWPFDocument document = new XWPFDocument(is);
