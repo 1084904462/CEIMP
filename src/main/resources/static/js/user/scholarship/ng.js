@@ -275,14 +275,41 @@ $(function () {
             $("#submit").attr("disabled",false);
         }
     });
+    $("#a5").keyup(function(){
+        $("#p5").popover('hide');
+        var r = /^(0|([1-9]\d?)|(1[01]\d)|(120))(\.\d*)?$/;
+        var number= $("#a1").val();
+        if (number=="") {
+            $("#a5-message").html("");
+        }
+        else if(r.test(number)){
+            $("#a5-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#a5-message").html("输入0-120整数");
+        }
+
+    });
+    $("#p5").keyup(function(){
+        $("#p5").popover('hide');
+        var number= $("#p5").val().length;
+        if(number>11){
+            $("#p5-message").html("最多输入10个字符");
+        }
+        else{
+            $("#p5-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+    });
    $("#submit").mouseover(function(){
           if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||
             ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||($("#email-message").html()!="" )
             ||($("#family-number-message").html()!="" )||($("#n1-message").html()!="")||($("#n2-message").html()!="")
-            ||($("#n3-message").html()!="")||($("#n4-message").html()!="")||($("#a1-message").html()!="")
-            ||($("#a2-message").html()!="")||($("#a3-message").html()!="")||($("#a4-message").html()!="")
+            ||($("#n3-message").html()!="")||($("#n4-message").html()!="")||($("#n5-message").html()!="")||($("#a1-message").html()!="")
+            ||($("#a2-message").html()!="")||($("#a3-message").html()!="")||($("#a4-message").html()!="")||($("#a5-message").html()!="")
             ||($("#p1-message").html()!="")||($("#p2-message").html()!="")||($("#p3-message").html()!="")
-            ||($("#p4-message").html()!="")
+            ||($("#p4-message").html()!="")||($("#p5-message").html()!="")
             ){    
             $("#submit").attr("disabled",true);
          }
@@ -302,93 +329,108 @@ $(function () {
                  if( (($("#n4").val()=="")&&($("#p4").val()=="")&&($("#a4").val()=="")&&($("#r4").val()==""))||
             (($("#n4").val()!="")&&($("#p4").val()!="")&&($("#a4").val()!="")&&($("#r4").val()!=""))
             ){
-          if($("#month-input").val()==""){
-             $("#month-input").popover({
-                content:"请输入家庭月收入",
-            });
-               $("#month-input").popover('show');
-              var position=$("#month-input").offset().top-200;
-              $("html,body").animate({
-                 "scrollTop":position},"slow");  
-                  return false;  
-         }    
-         var type=$('input:radio[name="type"]:checked').val();
-            if(type==null){
-                   $("#farm").popover({
-                content:"请选择",
-            });
-               $("#farm").popover('show');
-                  var position=$("#type").offset().top-200;
-                  $("html,body").animate({
-                 "scrollTop":position},"slow");  
-                 return false;  
-            } 
+                    if( (($("#n5").val()=="")&&($("#p5").val()=="")&&($("#a5").val()=="")&&($("#r5").val()==""))||
+                        (($("#n5").val()!="")&&($("#p5").val()!="")&&($("#a5").val()!="")&&($("#r5").val()!=""))
+                    ){
+                        if($("#month-input").val()==""){
+                            $("#month-input").popover({
+                                content:"请输入家庭月收入",
+                            });
+                            $("#month-input").popover('show');
+                            var position=$("#month-input").offset().top-200;
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
+                        var type=$('input:radio[name="resident"]:checked').val();
+                        if(type==null){
+                            $("#farm").popover({
+                                content:"请选择",
+                            });
+                            $("#farm").popover('show');
+                            var position=$("#type").offset().top-200;
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
 
-         if($("#input-form").val()==""){
-            var position=$("#input-form").offset().top-200;
-            $("#input-form").popover({
-                content:"请输入收入来源",
-            });
-               $("#input-form").popover('show');
-              $("html,body").animate({
-                 "scrollTop":position},"slow");
-                  return false;    
-         } 
+                        if($("#input-form").val()==""){
+                            var position=$("#input-form").offset().top-200;
+                            $("#input-form").popover({
+                                content:"请输入收入来源",
+                            });
+                            $("#input-form").popover('show');
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
 
-        if ($("#family-number").val()=="") {
-            var position=$("#family-number").offset().top-200;
-             $("#family-number").popover({
-                content:"请输入家庭人口数",
-            });
-               $("#family-number").popover('show');
-            $("html,body").animate({
-                 "scrollTop":position},"slow");
-            return false;
-         }
+                        if ($("#family-number").val()=="") {
+                            var position=$("#family-number").offset().top-200;
+                            $("#family-number").popover({
+                                content:"请输入家庭人口数",
+                            });
+                            $("#family-number").popover('show');
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
 
-         if ($("#email").val()=="") {
-             var position=$("#email").offset().top-200;
-             $("#email").popover({
-                content:"请输入邮政编码",
-            });
-               $("#email").popover('show');
-            $("html,body").animate({
-                 "scrollTop":position},"slow");
-            return false;
-         }
-         if ($("#home-address").val()=="") {
-             var position=$("#home-address").offset().top-200;
-           $("#home-address").popover({
-                content:"请输入家庭住址",
-            });
-               $("#home-address").popover('show');
-            $("html,body").animate({
-                 "scrollTop":position},"slow");  
-                 return false; 
-            return false;
-         }
-         var type=$('input:radio[name="type2"]:checked').val();
-            if(type==null){
-                  $("#common").popover({
-                content:"请选择",
-            });
-               $("#common").popover('show');
-                   var position=$("#type2").offset().top-200;
-                  $("html,body").animate({
-                 "scrollTop":position},"slow");  
-                 return false;  
-            } 
-             if ($("#text1").val()=="") {
-                 var position=$("#text1").offset().top-200;
-            $("#text1").popover({
-                content:"请输入申请理由",
-            });
-               $("#text1").popover('show');
-             $("html,body").animate({
-                 "scrollTop":position},"slow"); 
-            return false;
-         }    
-                 }
+                        if ($("#email").val()=="") {
+                            var position=$("#email").offset().top-200;
+                            $("#email").popover({
+                                content:"请输入邮政编码",
+                            });
+                            $("#email").popover('show');
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
+                        if ($("#home-address").val()=="") {
+                            var position=$("#home-address").offset().top-200;
+                            $("#home-address").popover({
+                                content:"请输入家庭住址",
+                            });
+                            $("#home-address").popover('show');
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                            return false;
+                        }
+                        var type=$('input:radio[name="situation"]:checked').val();
+                        if(type==null){
+                            $("#common").popover({
+                                content:"请选择",
+                            });
+                            $("#common").popover('show');
+                            var position=$("#type2").offset().top-200;
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
+                        if ($("#text1").val()=="") {
+                            var position=$("#text1").offset().top-200;
+                            $("#text1").popover({
+                                content:"请输入申请理由",
+                            });
+                            $("#text1").popover('show');
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
+
+              }else{
+                        $("#p5").popover({
+                            content:"请将信息填写完整",
+                        });
+                        $("#p5").popover('show');
+                        var position=$("#p5-message").offset().top-200;
+                        $("html,body").animate({
+                            "scrollTop":position},"slow");
+                        return false;
+                }
+
+     }
              else{
                   $("#p4").popover({
                 content:"请将信息填写完整",

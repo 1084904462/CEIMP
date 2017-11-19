@@ -83,11 +83,11 @@
 			birth:String,
 			account:String,
 			nation:String,
-			entrance:String,
+			entrance:String,//入学年月
 			political:String,
 			phone:String,
 			identity:String,
-			resident:String,
+			resident:String,//户口
 			incomeSource:String,
 			monthIncome:String,
 			familySum:String,
@@ -245,7 +245,7 @@
 			study:String,
 			ability:String,
 			all:String,
-			ceRank:String,
+			ceRank:String,//问题
 			level:String,
 			reason:String,
 			opinion:String

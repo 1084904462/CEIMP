@@ -2,8 +2,8 @@ a:hover{
 	text-decoration: none;
 }
 nav{
-	height: 60px;
-	background: #393D49;
+	height: 50px;
+	background: #f8f8f8;
 	z-index: 1000000;
 }
 .navbar-toggle{
@@ -16,12 +16,12 @@ nav{
 	position: absolute;
 	height: 100%;
 	text-align: center;
-	line-height: 60px;
+	line-height: 50px;
 	color: #1E9FFF;
 	font-size: 16px;
 }
 #menu li a{
-	background-color:  #393D49;
+	background-color:  #f8f8f8;
 }
 
 .navbar-text{
@@ -29,16 +29,23 @@ nav{
 	color: white;
 }
 .dropdown{
-	border-bottom: 3px solid  #393D49;
-	background: #393D49;
+	background: #f8f8f8;
 }
 .dropdown-menu1{
+	margin-top: 2%;
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: 4px;
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);
 	background-color: white;
 	padding: 10px;
 	z-index: 222;
 	display: none;
 }
+.dropdown-menu1 li:nth-child(1) {
+	border-bottom:1px solid #ccc ;
+}
 .dropdown-menu1 li {
+	margin-top: 2%;
 	width: 100%;
 	height: 30px;
 	line-height: 30px;
@@ -50,7 +57,7 @@ nav{
 }
 
 .nav>li>a:hover{
-	background-color: #393D49;
+	background-color: #f8f8f8;
 	color: gray;
 }
 .nav>li>a:focus{

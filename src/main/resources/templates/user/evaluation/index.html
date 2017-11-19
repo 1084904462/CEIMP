@@ -10,6 +10,7 @@
     <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
   	<script th:src="@{/static/js/bootstrap.min.js}"></script>
 	<script th:src="@{/static/js/user/scholarship/ss.js}"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-fixed-top">
@@ -29,17 +30,40 @@
 			<li><a href="#">查看公示结果</a></li>
 			<li><a href="/scholarship/index">在线文档生成</a></li>
 		</ul>
+
+
 		<ul class="nav navbar-nav">
 			 <li class="navbar-text">
 			  <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">
 			    <span class="caret"></span>
 			   </a>
 			        <ul class="dropdown-menu1">
-				  		<li><a href="#">修改密码</a></li>
-				   		<li><a href="/userLogout">退出登录</a></li>
-				 	</ul>
-			 </li>
+				  		<li><a href="#">个人信息</a></li>
+		<li><a href="/userLogout">退出登录</a></li>
 		</ul>
+		</li>
+		</ul>
+		<!--<ul class="nav navbar-top-links navbar-right">-->
+
+
+
+			<!--<li class="dropdown">-->
+				<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+					<!--<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>-->
+					<!--<font style="margin-left: 15px;margin-right: 30px;" th:text="${session.userLogBean.account}">fzj</font>-->
+				<!--</a>-->
+				<!--<ul class="dropdown-menu dropdown-user">-->
+
+					<!--<li><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>-->
+					<!--</li>-->
+					<!--<li class="divider"></li>-->
+					<!--<li><a th:href="@{/userLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>-->
+					<!--</li>-->
+				<!--</ul>-->
+				<!--&lt;!&ndash; /.dropdown-user &ndash;&gt;-->
+			<!--</li>-->
+			<!--&lt;!&ndash; /.dropdown &ndash;&gt;-->
+		<!--</ul>-->
     </div>
 </nav>
 	 <div class="container">

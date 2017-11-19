@@ -26,6 +26,7 @@
     <script th:src="@{/static/vendor/datatables-responsive/dataTables.responsive.js}"></script>
     <script th:src="@{/static/dist/js/sb-admin-2.js}"></script>
     <script th:src="@{/static/js/manager/showScholarship.js}"></script>
+    <script th:src="@{/static/js/manager/index.js}"></script>
 </head>
 <body class="main-body">
     <div id="wrapper">
@@ -43,14 +44,14 @@
             </div>
             <!-- /.navbar-header -->
 
-            <ul class="nav navbar-top-links navbar-right">
+          <!--  <ul class="nav navbar-top-links navbar-right">
                 
               
               
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        <font style="margin-left: 15px;margin-right: 30px;">fzj</font>
+                        <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                        
@@ -60,26 +61,54 @@
                         <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                         </li>
                     </ul>
+                    &lt;!&ndash; /.dropdown-user &ndash;&gt;
+                </li>
+                &lt;!&ndash; /.dropdown &ndash;&gt;
+            </ul>-->
+
+
+
+
+
+            <ul class="nav navbar-top-links navbar-right">
+
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" style="display: none;" id="hidden"  onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()">
+
+                        <li ><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
+
+
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
+                       <!-- <li class="sidebar-search">
+                           &lt;!&ndash; <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search..."/>
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
+                            </div>&ndash;&gt;
+                            &lt;!&ndash; /input-group &ndash;&gt;
+                        </li>-->
                         <li  onclick="loadPage('index.html')"><!--showScholarship.htmlhtml'onclick="loadPage()" -->
                             <a href="#" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
                            <!--   -->
@@ -149,7 +178,7 @@
                       </div>
                       <a href="#">
                           <div class="panel-footer">
-                              <span class="pull-left" style="color: #8a6d3b">查看详情</span>
+                              <span class="pull-left" style="">查看详情</span>
                               <span class="pull-right" style="color: #8a6d3b"><i class="fa fa-arrow-circle-right"></i></span>
                               <div class="clearfix"></div>
                           </div>
@@ -236,7 +265,7 @@
                             </div>
                         </div>
                         <a href="#">
-                            <div class="panel-footer">
+                            <div class="panel-footer" style="color: #3c763d">
                                 <span class="pull-left">查看详情</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
@@ -252,13 +281,13 @@
                                    
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge" style="color:white;">26</div>
-                                    <div style="color:white;">三好学生</div>
+                                    <div class="huge">26</div>
+                                    <div >三好学生</div>
                                 </div>
                             </div>
                         </div>
                         <a href="#">
-                            <div class="panel-footer">
+                            <div class="panel-footer" style="color:#31708f;">
                                 <span class="pull-left" style="color: #31708f">查看详情</span>
                                 <span class="pull-right" style="color: #31708f"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
@@ -311,148 +340,113 @@
                     </div>
                 </div>
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           国家励志奖学金
-                        </div>
-                        <!-- /.panel-heading -->
-                       
-                 
-                    
-                           <!--  <h5 style="margin-left: 10px;">院（系）意见:</h5> -->
-                       
-                        <div class="panel-body">
 
-                           <!--  <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea>
-                             <button type="button" class="btn btn-default radius" style="margin: 0 auto;">重置</button>	 -->
-                              <div class="panel panel-info" style="width:80%;margin: 0 auto;">
-		                        <div class="panel-heading" style="background-color:white;">
-		                            <h3 class="panel-title" >院（系）意见</h3>
-		                        </div>
-		                        <div class="panel-body">
+              <div class="row">
+                  <div class="col-lg-6">
+                      <div class="panel panel-default">
+                          <div class="panel-heading">
+                              校奖学金<small>---二级学工组意见</small> 
+                          </div>
 
-		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
-		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
 
-		                        </div>
-		                    </div>
 
-		                   
-                        </div>
-                    
+                          <!-- /.panel-heading -->
+                          <div class="panel-body" style="padding:0px;margin:0px;">
 
-                   
 
-               
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
+                                     <textarea class="form-control22 disabled" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;" disabled="disabled" ></textarea>
 
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            校奖学金
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
-		                        <div class="panel-heading" style="background-color:white;">
-		                            <h3 class="panel-title" >二级学工组意见</h3>
-		                        </div>
-		                        <div class="panel-body">
 
-		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
-		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
 
-		                        </div>
-		                    </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                 <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           省政府奖学金
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
-		                        <div class="panel-heading" style="background-color:white;">
-		                            <h3 class="panel-title" >推荐理由</h3>
-		                        </div>
-		                        <div class="panel-body">
+                          </div>
+                          <!-- /.panel-body -->
+                      </div>
+                      <!-- /.panel -->
+                  </div><div class="col-lg-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          国家励志奖学金<small>---院（系）意见
+                      </small> 
+                      </div>
 
-		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
-		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
 
-		                        </div>
-		                    </div>
-		                    
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                 <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           省政府奖学金
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
-		                        <div class="panel-heading" style="background-color:white;">
-		                            <h3 class="panel-title" >院（系）意见</h3>
-		                        </div>
-		                        <div class="panel-body">
 
-		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
-		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+                      <!-- /.panel-heading -->
+                      <div class="panel-body" style="padding:0px;margin:0px;">
 
-		                        </div>
-		                    </div>
-		                    
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                           三好学生
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="panel panel-info" style="width:80%;margin: 0 auto;">
-		                        <div class="panel-heading" style="background-color:white;">
-		                            <h3 class="panel-title" >二级学工组意见</h3>
-		                        </div>
-		                        <div class="panel-body">
 
-		                            <textarea class="form-control22" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 80%; margin-left:10%;  "></textarea> 
-		                            <button type="button" class="btn btn-default radius" style="margin-left: 45%;">提交</button>
+                                 <textarea class="form-control22 disabled" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;" disabled="disabled"></textarea>
 
-		                        </div>
-		                    </div>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
 
-               
-            </div>
+
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div><div class="col-lg-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          校奖学金<small>---二级学工组意见</small> 
+                      </div>
+
+
+
+                      <!-- /.panel-heading -->
+                      <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                 <textarea class="form-control22 disabled" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;" disabled="disabled"></textarea>
+
+
+
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div><div class="col-lg-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          省政府奖学金<small>---推荐理由</small> 
+                      </div>
+
+
+
+                      <!-- /.panel-heading -->
+                      <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                 <textarea class="form-control22 disabled" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;" disabled="disabled"></textarea>
+
+
+
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div><div class="col-lg-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          三好学生<small>---二级学工组意见</small> 
+                      </div>
+
+
+
+                      <!-- /.panel-heading -->
+                      <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                 <textarea class="form-control22 disabled" rows="12 " placeholder="Textarea" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;" disabled="disabled"></textarea>
+
+
+
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div>
+
+
+              </div>
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
@@ -474,4 +468,8 @@
 
     </div>
 </body>
+
+<script>
+
+</script>
 </html>
