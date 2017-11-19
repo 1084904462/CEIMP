@@ -7,6 +7,8 @@ public class Major {
 
     private Long schoolId;
 
+    private String grade;
+
     private Integer sum;
 
     public Long getMajorId() {
@@ -31,6 +33,14 @@ public class Major {
 
     public void setSchoolId(Long schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade == null ? null : grade.trim();
     }
 
     public Integer getSum() {

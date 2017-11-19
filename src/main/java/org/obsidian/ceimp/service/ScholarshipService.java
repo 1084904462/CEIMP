@@ -7,4 +7,6 @@ import org.obsidian.ceimp.entity.Scholarship;
  */
 public interface ScholarshipService {
     Scholarship selectByScholarshipId(Long scholarshipId);
+
+    Scholarship selectBySubName(String subName);
 }

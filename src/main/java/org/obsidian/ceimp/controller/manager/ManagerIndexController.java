@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/manager")
-public class ManagerController {
+public class ManagerIndexController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @GetMapping("")
@@ -21,11 +21,6 @@ public class ManagerController {
     @GetMapping("/index")
     public String managerIndex(){
         return "manager/index";
-    }
-
-    @GetMapping("/showScholarship")
-    public String showScholarship(){
-        return "manager/showScholarship";
     }
 
     @GetMapping("/writeOpinion")

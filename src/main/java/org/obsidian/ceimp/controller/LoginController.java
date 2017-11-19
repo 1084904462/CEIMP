@@ -3,7 +3,7 @@ package org.obsidian.ceimp.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.LogBean;
-import org.obsidian.ceimp.bean.LogStatusBean;
+import org.obsidian.ceimp.bean.StatusBean;
 import org.obsidian.ceimp.bean.ManagerLogBean;
 import org.obsidian.ceimp.bean.UserLogBean;
 import org.obsidian.ceimp.entity.Manager;
@@ -44,10 +44,12 @@ public class LoginController {
     /*存放所有登录管理员的session*/
     private static final Map<Long,HttpSession> managerSessionMap = new HashMap<>();
 
+    /*只用于UserLogInterceptor拦截用户请求*/
     public static Map<Long, HttpSession> getUserSessionMap() {
         return userSessionMap;
     }
 
+    /*只用于ManagerLogInterceptor拦截管理员请求*/
     public static Map<Long, HttpSession> getManagerSessionMap() {
         return managerSessionMap;
     }
@@ -63,6 +65,9 @@ public class LoginController {
 
     /**
      * 访问/login
+     * 如果当前用户已登录，则重定向至用户端首页
+     * 如果当前管理员已登录，则重定向至管理员端首页
+     * 否则返回登录界面
      * @return 返回登录界面
      */
     @GetMapping("/login")
@@ -89,10 +94,10 @@ public class LoginController {
     @PostMapping("/userLogin")
     @ResponseBody
     public String userLogin(HttpSession session, LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException, IllegalAccessException, ParseException, InvocationTargetException {
-        session.setAttribute("userLogBean",null);
+        session.setAttribute("userLogBean",null);   //防止同一个浏览器窗口同时登录用户和管理员身份
         session.setAttribute("managerLogBean",null);
         logger.info("userAccount:" + logBean.getAccount());
-        LogStatusBean logStatusBean = new LogStatusBean();
+        StatusBean statusBean = new StatusBean();
         UserBasic userBasic = userBasicService.selectByAccount(logBean.getAccount());
         logger.info(userBasic.toString());
         if(userBasic != null){
@@ -107,23 +112,23 @@ public class LoginController {
                 UserLogBean userLogBean = new UserLogBean(userBasic.getUserId(),userBasic.getAccount(),userBasic.getUsername());
                 session.setAttribute("userLogBean",userLogBean);
                 userSessionMap.put(userId,session); //把当前登录用户的userId和session放入userSessionMap
-                logStatusBean.setStatus("登录成功");
+                statusBean.setStatus("登录成功");
             }
             else{
-                logStatusBean.setStatus("密码错误");
+                statusBean.setStatus("密码错误");
             }
         }
         else{
-            logStatusBean.setStatus("无该用户");
+            statusBean.setStatus("无该用户");
         }
-        logger.info(logStatusBean);
-        return JSON.toJSONString(logStatusBean);
+        logger.info(statusBean);
+        return JSON.toJSONString(statusBean);
     }
 
     /**
      * 退出登录
      * @param session
-     * @return 返回登录页面
+     * @return 重定向至登录页面
      */
     @GetMapping("/userLogout")
     public String userLogout(HttpSession session){
@@ -151,7 +156,7 @@ public class LoginController {
         session.setAttribute("userLogBean",null);
         session.setAttribute("managerLogBean",null);
         logger.info("managerAccount:" + logBean.getAccount());
-        LogStatusBean logStatusBean = new LogStatusBean();
+        StatusBean statusBean = new StatusBean();
         Manager manager = managerService.selectByAccount(logBean.getAccount());
         logger.info(manager.toString());
         if(manager != null){
@@ -166,19 +171,24 @@ public class LoginController {
                 ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId());
                 session.setAttribute("managerLogBean",managerLogBean);
                 managerSessionMap.put(managerId,session); //把当前登录管理员的managerId和session放入managerSessionMap
-                logStatusBean.setStatus("登录成功");
+                statusBean.setStatus("登录成功");
             }
             else {
-                logStatusBean.setStatus("密码错误");
+                statusBean.setStatus("密码错误");
             }
         }
         else{
-            logStatusBean.setStatus("无该管理员");
+            statusBean.setStatus("无该管理员");
         }
-        logger.info(logStatusBean);
-        return JSON.toJSONString(logStatusBean);
+        logger.info(statusBean);
+        return JSON.toJSONString(statusBean);
     }
 
+    /**
+     * 管理员退出登录
+     * @param session
+     * @return 重定向至登录界面
+     */
     @GetMapping("/managerLogout")
     public String managerLogout(HttpSession session){
         ManagerLogBean managerLogBean =(ManagerLogBean) session.getAttribute("managerLogBean");

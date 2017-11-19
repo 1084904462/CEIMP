@@ -29,4 +29,16 @@ public class ScholarshipServiceImpl implements ScholarshipService {
         }
         return list.get(0);
     }
+
+    @Transactional
+    @Override
+    public Scholarship selectBySubName(String subName) {
+        ScholarshipExample example = new ScholarshipExample();
+        example.or().andSubNameEqualTo(subName);
+        List<Scholarship> list = scholarshipMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
 }

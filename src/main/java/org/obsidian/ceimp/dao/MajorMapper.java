@@ -1,11 +1,14 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.entity.Major;
 import org.obsidian.ceimp.entity.MajorExample;
 
+import java.util.List;
+
 public interface MajorMapper {
+    List<String> selectAllGradeBySchoolId(Long schoolId);
+
     long countByExample(MajorExample example);
 
     int deleteByExample(MajorExample example);
