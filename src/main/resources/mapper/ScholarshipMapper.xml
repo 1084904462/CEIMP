@@ -7,6 +7,15 @@
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
     <result column="sub_name" jdbcType="VARCHAR" property="subName" />
   </resultMap>
+  <delete id="deleteAllBySubNameAndUserAccountBeanListAndYearScope" parameterType="map" statementType="STATEMENT">
+    delete from ${subName} where ${subName}.year_scope = ${yearScope} and ${subName}.user_id in
+    (
+      select user_basic.user_id from user_basic where user_basic.account in
+      <foreach collection="userAccountBeanList" index="index" item="userAccountBean" open="(" separator="," close=")">
+        ${userAccountBean.account}
+      </foreach>
+    )
+  </delete>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

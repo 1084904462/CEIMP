@@ -2,12 +2,17 @@ package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.AwardBean;
+import org.obsidian.ceimp.bean.ScholarshipFormBean;
 import org.obsidian.ceimp.entity.Award;
 import org.obsidian.ceimp.entity.AwardExample;
 
 import java.util.List;
 
 public interface AwardMapper {
+    List<ScholarshipFormBean> selectAllBySubNameAndYearScope(@Param("subName") String subName,
+                                                             @Param("yearScope") Integer yearScope,
+                                                             @Param("grade") String grade);
+
     List<AwardBean> selectAllByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") Integer yearScope);
 
     long countByExample(AwardExample example);

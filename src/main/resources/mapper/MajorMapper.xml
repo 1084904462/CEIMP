@@ -9,7 +9,7 @@
     <result column="sum" jdbcType="INTEGER" property="sum" />
   </resultMap>
   <select id="selectAllGradeBySchoolId" parameterType="java.lang.Long" resultType="java.lang.String">
-    select DISTINCT grade from major where school_id = #{schoolId}
+    select DISTINCT grade from major where school_id = #{schoolId} order by grade desc
   </select>
   <sql id="Example_Where_Clause">
     <where>

@@ -10,7 +10,6 @@ import java.util.Date;
  * Created by BillChen on 2017/8/13.
  */
 public class TimeUtil {
-
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

@@ -333,22 +333,27 @@
 
 奖学金表格打包
 	<-
-		/manager/scholarship/{subName}/zip,form,post 	//通过js获取勾选列的数据，再模拟表单提交，详情百度
-		/manager/scholarship/{subName}/{yearScope}/zip,form,post
+		/manager/scholarship/zip/{subName},form,post 	//通过js获取勾选列的数据，再模拟表单提交，详情百度
+		/manager/scholarship/zip/{subName}/{yearScope},form,post
 		ZipInfoBeanList
 		{
 			ZipInfoBean
 			{
 				account:String,
 				username:String
+				scholarshipName:String
 			}
 		}
 
 删除奖学金
 	<-
-		/manager/scholarship/{subName}/delete,ajax,post
+		/manager/scholarship/delete/{subName},ajax,post
+		UserAccountBeanList
 		{
-			account:String
+			UserAccountBean
+			{
+				account:String
+			}
 		}
 	->
 		StatusBean
@@ -431,6 +436,7 @@
 重置用户密码
 	<-
 		/manager/resetPassword,ajax,get
+		UserAccountBean
 		{
 			account:String
 		}
@@ -440,3 +446,18 @@
 			status:String
 		}
 
+根据用户学号或姓名返回用户信息
+	<-
+		/manager/search,ajax,get
+		SearchBean
+		{
+			searchKey:String	//该搜索关键词可以是学号或姓名或学号和姓名
+		}
+	->
+		UserSearchBean
+		{
+			major:String,
+			classNum:String,
+			account:String,
+			username:String
+		}

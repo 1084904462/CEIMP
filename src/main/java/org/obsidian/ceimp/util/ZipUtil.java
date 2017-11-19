@@ -1,7 +1,6 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
-
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -11,8 +10,6 @@ import java.util.zip.ZipOutputStream;
  * Created by BillChen on 2017/10/12.
  */
 public class ZipUtil {
-    private Logger logger = Logger.getLogger(this.getClass());
-
     private static final ZipUtil instance = new ZipUtil();
 
     private ZipUtil(){}
@@ -21,36 +18,23 @@ public class ZipUtil {
         return instance;
     }
 
-    /**
-     * 将奖学金打包
-     * @param inputUrl 输入路径
-     * @param outputUrl 输出路径
-     * @param awardName 包名
-     * @param fileNameList 打包的奖学金名列表
-     * @throws IOException
-     */
-    public void zip(String inputUrl,String outputUrl,String awardName,List<String> fileNameList) throws IOException{
-        logger.info("打包文件:" + inputUrl);
-        logger.info("生成解压包:" + outputUrl);
-        logger.info("包名:" + awardName);
-        logger.info("打包文件名:" + fileNameList);
+    public void zip(List<String> zipInputUrlList, String zipOutputUrl, HttpServletResponse response,String scholarshipName) throws IOException{
+        this.zipAllWord(zipInputUrlList,zipOutputUrl);
+        String fileName = UrlUtil.getInstance().getZipFileName(scholarshipName);
+        DownloadUtil.getInstance().download(zipOutputUrl,response,fileName);
+        DeleteUtil.getInstance().delete(zipOutputUrl);
+    }
+
+    private void zipAllWord(List<String> zipInputUrlList,String zipOutputUrl) throws IOException{
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         FileOutputStream fos = null;
         ZipOutputStream zos = null;
         try{
-            //Windows
-//            File zipFile = new File(outputUrl + "\\" + awardName + ".zip");
-//            File[] sourceFiles = new File[fileNameList.size()];
-//            for(int i=0;i<fileNameList.size();i++){
-//                sourceFiles[i] = new File(inputUrl + "\\" + fileNameList.get(i) + ".docx");
-//            }
-
-            //Linux
-            File zipFile = new File(outputUrl + "/" + awardName + ".zip");
-            File[] sourceFiles = new File[fileNameList.size()];
-            for(int i=0;i<fileNameList.size();i++){
-                sourceFiles[i] = new File(inputUrl + "/" + fileNameList.get(i) + ".docx");
+            File zipFile = new File(zipOutputUrl);
+            File[] sourceFiles = new File[zipInputUrlList.size()];
+            for(int i=0;i<zipInputUrlList.size();i++){
+                sourceFiles[i] = new File(zipInputUrlList.get(i));
             }
 
             fos = new FileOutputStream(zipFile);

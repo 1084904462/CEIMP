@@ -1,13 +1,14 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
+import org.obsidian.ceimp.bean.ZipInfoBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/11/16.
  */
 public class UrlUtil {
-    private Logger logger = Logger.getLogger(this.getClass());
-
     private String MODEL_INPUT_URL = this.getClass().getClassLoader().getResource("")
             .getPath().substring(1) + "model/";
     private String WORD_OUTPUT_URL = this.getClass().getClassLoader().getResource("")
@@ -17,8 +18,9 @@ public class UrlUtil {
     private String ZIP_OUTPUT_URL = this.getClass().getClassLoader().getResource("")
             .getPath().substring(1) + "zip/";
 
-    private static String OS_NAME = System.getProperty("os.name");
-    private static String DIVISE;
+    private static String DIVIDE = "/";
+    private static String WORD_SUFFIX = ".docx";
+    private static String ZIP_SUFFIX = ".zip";
 
     private static final UrlUtil instance = new UrlUtil();
 
@@ -28,35 +30,29 @@ public class UrlUtil {
         return instance;
     }
 
-    static{
-        if(OS_NAME.matches("Windows.*")){
-            DIVISE = "\\\\";
+    public String getModelInputUrl(String modelName){
+        return MODEL_INPUT_URL + modelName + WORD_SUFFIX;
+    }
+
+    public String getWordOutputUrl(String subName,ZipInfoBean zipInfoBean){
+        return WORD_OUTPUT_URL + subName + DIVIDE + zipInfoBean.getAccount()
+                + zipInfoBean.getUsername() + zipInfoBean.getScholarshipName() + WORD_SUFFIX;
+    }
+
+    public List<String> getZipInputUrlList(String subName,List<ZipInfoBean> zipInfoBeanList){
+        List<String> zipInputUrlList = new ArrayList<>();
+        for(int i=0;i<zipInfoBeanList.size();i++){
+            zipInputUrlList.add(ZIP_INPUT_URL + subName + DIVIDE + zipInfoBeanList.get(i).getAccount()
+                    + zipInfoBeanList.get(i).getUsername() + zipInfoBeanList.get(i).getScholarshipName() + WORD_SUFFIX);
         }
-        else{
-            DIVISE = "/";
-        }
+        return zipInputUrlList;
     }
 
-    public String getModelUrl(){
-        System.out.println(this.MODEL_INPUT_URL);
-        System.out.println(this.WORD_OUTPUT_URL);
-        System.out.println(this.ZIP_INPUT_URL);
-        System.out.println(this.ZIP_OUTPUT_URL);
-        return "";
+    public String getZipOutputUrl(String scholarshipName){
+        return ZIP_OUTPUT_URL + scholarshipName + ZIP_SUFFIX;
     }
 
-    public String getWordUrl(){
-
-        return "";
-    }
-
-    public String getZipInputUrl(){
-
-        return "";
-    }
-
-    public String getZipOutputUrl(){
-
-        return "";
+    public String getZipFileName(String scholarshipName){
+        return scholarshipName + ZIP_SUFFIX;
     }
 }

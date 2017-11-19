@@ -1,11 +1,17 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.UserAccountBean;
 import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.entity.ScholarshipExample;
 
+import java.util.List;
+
 public interface ScholarshipMapper {
+    int deleteAllBySubNameAndUserAccountBeanListAndYearScope(@Param("subName")String subName,
+                                                             @Param("userAccountBeanList")List<UserAccountBean> userAccountBeanList,
+                                                             @Param("yearScope")Integer yearScope);
+
     long countByExample(ScholarshipExample example);
 
     int deleteByExample(ScholarshipExample example);

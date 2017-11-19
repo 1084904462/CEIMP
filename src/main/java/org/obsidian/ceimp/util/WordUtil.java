@@ -16,8 +16,6 @@ import java.util.regex.Pattern;
  * Created by BillChen on 2017/8/23.
  */
 public class WordUtil {
-    private Logger logger = Logger.getLogger(this.getClass());
-
     private static final WordUtil instance = new WordUtil();
 
     private WordUtil(){}
@@ -33,8 +31,6 @@ public class WordUtil {
      * @param textMap 需要替换的内容
      */
     public void generateWord(String inputUrl, String outputUrl, Map<String,String> textMap){
-        logger.info("模板:" + inputUrl);
-        logger.info("word:" + outputUrl);
         try {
             InputStream is = new FileInputStream(inputUrl);
             XWPFDocument document = new XWPFDocument(is);
@@ -85,9 +81,7 @@ public class WordUtil {
                     while((matcher = this.matcher(runText)).find()){
                         runText = matcher.replaceFirst(String.valueOf(textMap.get(matcher.group(1))));
                     }
-                    logger.info("替换前: " + run.getText(0));
                     run.setText(runText,0);
-                    logger.info("替换后: " + run.getText(0));
                 }
             }
         }

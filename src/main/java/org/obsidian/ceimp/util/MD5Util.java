@@ -11,8 +11,6 @@ import java.security.NoSuchAlgorithmException;
  * Created by BillChen on 2017/8/18.
  */
 public class MD5Util {
-    private Logger logger = Logger.getLogger(this.getClass());
-
     private static final BASE64Encoder base64Encoder = new BASE64Encoder();
 
     private static final MD5Util instance = new MD5Util();

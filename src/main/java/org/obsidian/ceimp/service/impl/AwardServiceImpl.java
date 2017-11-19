@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.AwardBean;
+import org.obsidian.ceimp.bean.ScholarshipFormBean;
 import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
@@ -61,5 +62,11 @@ public class AwardServiceImpl implements AwardService {
             }
         }
         return awardBeans;
+    }
+
+    @Transactional
+    @Override
+    public List<ScholarshipFormBean> selectAllBySubNameAndYearScope(String subName, Integer yearScope,String grade) {
+        return awardMapper.selectAllBySubNameAndYearScope(subName,yearScope,grade);
     }
 }

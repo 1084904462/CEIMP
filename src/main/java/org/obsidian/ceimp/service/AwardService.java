@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.service;
 
 import org.obsidian.ceimp.bean.AwardBean;
+import org.obsidian.ceimp.bean.ScholarshipFormBean;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface AwardService {
     List<AwardBean> selectAllByUserIdAndYearScope(Long userId, Integer yearScope);
+
+    List<ScholarshipFormBean> selectAllBySubNameAndYearScope(String subName,Integer yearScope,String grade);
 }

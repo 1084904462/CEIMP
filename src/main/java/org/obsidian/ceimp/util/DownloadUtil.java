@@ -12,9 +12,6 @@ import java.net.URLEncoder;
  * Created by BillChen on 2017/10/11.
  */
 public class DownloadUtil {
-
-    private Logger logger = Logger.getLogger(this.getClass());
-
     private static final DownloadUtil instance = new DownloadUtil();
 
     private DownloadUtil(){}
@@ -31,7 +28,6 @@ public class DownloadUtil {
      * @throws IOException
      */
     public void download(String url,HttpServletResponse response,String fileName) throws IOException{
-        logger.info("下载文件:" + url + "/" + fileName);
         // 读到流中
         InputStream inStream = new FileInputStream(url);// 文件的存放路径
         // 设置输出的格式
