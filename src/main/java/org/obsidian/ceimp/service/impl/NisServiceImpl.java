@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.NisBean;
 import org.obsidian.ceimp.dao.NisMapper;
 import org.obsidian.ceimp.entity.Nis;
 import org.obsidian.ceimp.entity.NisExample;
@@ -45,5 +46,13 @@ public class NisServiceImpl implements NisService {
             return null;
         }
         return list;
+    }
+
+    @Transactional
+    @Override
+    public NisBean getNisBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
+        NisBean nisBean = nisMapper.getNisBeanByUserIdAndYearScope(userId,yearScope);
+        nisBean.setTe(nisBean.getTs() + 1);
+        return nisBean;
     }
 }

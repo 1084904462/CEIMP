@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.NgBean;
 import org.obsidian.ceimp.dao.NgMapper;
 import org.obsidian.ceimp.entity.Ng;
 import org.obsidian.ceimp.entity.NgExample;
@@ -45,5 +46,12 @@ public class NgServiceImpl implements NgService {
             return null;
         }
         return list;
+    }
+
+    @Override
+    public NgBean getNgBeanByUserIdAndYearScope(Long userId,Integer yearScope) {
+        NgBean ngBean = ngMapper.selectNgBeanByUserIdAndYearScope(userId,yearScope);
+        ngBean.setTe(ngBean.getTs() + 1);
+        return ngBean;
     }
 }
