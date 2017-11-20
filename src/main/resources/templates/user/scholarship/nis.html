@@ -130,13 +130,13 @@
 					     <input type="text" class="form-control" disabled th:value="*{identity}" name="identity">
 					</div>
 				</div>
-				<div class="form-group col-md-5">
+				<div class="form-group col-md-3">
 					<div class="input-group">
 					    <div class="input-group-addon">绩点排名</div>
 					     <input type="text" class="form-control" disabled th:value="*{gpRank}" name="gpRank">
 					</div>
 				</div>
-				<div class="form-group col-md-5">
+				<div class="form-group col-md-3">
 					<div class="input-group">
 					    <div class="input-group-addon">综测排名</div>
 					     <input type="text" class="form-control" disabled th:value="*{ceRank}" name="ceRank">
@@ -144,8 +144,14 @@
 				</div>
 				<div class="form-group col-md-3">
 					<div class="input-group">
+						<div class="input-group-addon">专业人数</div>
+						<input type="text" class="form-control" disabled>//注意修改
+					</div>
+				</div>
+				<div class="form-group col-md-3">
+					<div class="input-group">
 					    <div class="input-group-addon">必修课</div>
-					    <input type="text" class="form-control" disabled style="width: 100px;" th:value="*{subSum}" name="subSum">
+					    <input type="text" class="form-control" disabled style="width: 100px;" th:value="*{classSum}" name="subSum">
 					</div>
 
 				</div>

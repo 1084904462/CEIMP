@@ -232,3 +232,19 @@ input[type=radio] {
 	border-radius: 4px;
 	margin-left: -20px;
 }
+#date4{
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 5px;
+
+}
+#name4{
+	width: 250px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
+#place4{
+	width: 200px;
+	border-radius: 4px;
+	margin-left: -20px;
+}
