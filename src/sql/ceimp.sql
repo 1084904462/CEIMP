@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-20 14:12:44
+Date: 2017-11-20 20:46:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -106,7 +106,8 @@ CREATE TABLE `manager` (
   `account` varchar(20) NOT NULL COMMENT '登录账号',
   `password` varchar(50) NOT NULL COMMENT '登录密码',
   `manager_type` int(20) NOT NULL COMMENT '管理员类型 1-高级管理员，2-子管理员',
-  `school_id` bigint(20) NOT NULL,
+  `school_id` bigint(20) NOT NULL COMMENT '所属学院id',
+  `grade` varchar(20) NOT NULL COMMENT '所管理的年级',
   PRIMARY KEY (`manager_id`),
   UNIQUE KEY `manager_id` (`manager_id`) USING BTREE,
   UNIQUE KEY `account` (`account`) USING BTREE,
@@ -117,7 +118,7 @@ CREATE TABLE `manager` (
 -- ----------------------------
 -- Records of manager
 -- ----------------------------
-INSERT INTO `manager` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1');
+INSERT INTO `manager` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1', '2015');
 
 -- ----------------------------
 -- Table structure for `ng`

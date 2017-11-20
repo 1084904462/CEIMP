@@ -52,7 +52,7 @@ public class NisServiceImpl implements NisService {
     @Override
     public NisBean getNisBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         NisBean nisBean = nisMapper.getNisBeanByUserIdAndYearScope(userId,yearScope);
-        nisBean.setTe(nisBean.getTs() + 1);
+        nisBean.setTs(nisBean.getTe() - 1);
         return nisBean;
     }
 }
