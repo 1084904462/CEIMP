@@ -103,6 +103,9 @@
     from pgs
     where pgs_id = #{pgsId,jdbcType=BIGINT}
   </select>
+  <select id="selectPgsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.PgsBean">
+    select pgs.yearScope te,major.name major,class_num.num classNum,
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from pgs
     where pgs_id = #{pgsId,jdbcType=BIGINT}

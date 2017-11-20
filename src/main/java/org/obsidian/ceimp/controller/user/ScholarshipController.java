@@ -1,12 +1,10 @@
 package org.obsidian.ceimp.controller.user;
 
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.AwardBean;
-import org.obsidian.ceimp.bean.NgBean;
-import org.obsidian.ceimp.bean.NisBean;
-import org.obsidian.ceimp.bean.UserLogBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.Ng;
 import org.obsidian.ceimp.entity.Nis;
+import org.obsidian.ceimp.entity.Pgs;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +104,19 @@ public class ScholarshipController {
         logger.info(nisBean);
         model.addAttribute("nisBean",nisBean);
         return "user/scholarship/nis";
+    }
+
+    @GetMapping("/pgs")
+    public String pageNgs(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Pgs pgs = pgsService.selectByUserIdAndYearScope(userId,yearScope);
+        if(pgs == null){
+            return "redirect:/scholarship/index";
+        }
+        PgsBean pgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(pgsBean);
+        model.addAttribute("pgsBean",pgsBean);
+        return "user/scholarship/pgs";
     }
 }
