@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.UserSearchBean;
 import org.obsidian.ceimp.dao.UserBasicMapper;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
@@ -68,5 +69,10 @@ public class UserBasicServiceImpl implements UserBasicService {
             return  null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public List<UserSearchBean> selectByAccountOrUsername(String account, String username) {
+        return userBasicMapper.selectByAccountOrUsername(account,username);
     }
 }
