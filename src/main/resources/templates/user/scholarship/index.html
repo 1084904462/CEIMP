@@ -33,7 +33,7 @@
         <ul class="nav navbar-nav">
             <li class="navbar-text">
                 <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">1150299190
-                    <span class="caret"></span>
+                    <span class="caret">123</span>
                 </a>
                 <ul class="dropdown-menu1">
                     <li><a href="#">修改密码</a></li>
@@ -44,11 +44,39 @@
     </div>
 </nav>
 <div class="container">
-    <div class="col-md-12">
+    <!--<div class="col-md-12">-->
+        <!--<ul class="canwrite-itme">-->
+            <!--<li th:each="award:${awardBeanList}">-->
+                <!--<a  th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" th:if="${award.isFilled== 0}"  class="btn blue"></a>-->
+                <!--<a  th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" th:if="${award.isFilled== 1}" class="btn green"></a>-->
+                <!--<a  th:text="${award.awardName}" th:if="${award.isFilled== -1}" class="btn gray"></a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <div class="col-md-3">
+        <div class="status" >可填写</div>
         <ul class="canwrite-itme">
-            <!--th:each="item : ${items}" th:text="${item.message}"-->
-            <!--<li><a th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" >校奖学金</a></li>-->
-            <li th:each="award:${AwardBeanList}" th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" ></li>
+            <li th:each="award:${awardBeanList}">
+                 <a  th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" th:if="${award.isFilled== 0}"  class="btn" style="color:#337ab7"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <div class="status">已填写</div>
+        <ul class="canwrite-itme" >
+            <li th:each="award:${awardBeanList}">
+                <a  th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" th:if="${award.isFilled== 1}" class="btn" style="color: #42c342"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <div class="status">不可填写</div>
+        <ul class="canwrite-itme">
+            <li th:each="award:${awardBeanList}">
+                 <a  th:text="${award.awardName}" th:if="${award.isFilled== -1}" class="btn" style="color: #999"  disabled="disabled"></a>
+            </li>
         </ul>
     </div>
 </div>

@@ -38,7 +38,7 @@
 			</ul>
 			    <ul class="nav navbar-nav">
 			        <li class="navbar-text">
-			            <a href="javascript:;" th:text="${session.UserLogBean.account}" class="dropdown">1150299190
+			            <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">1150299190
 			            	<span class="caret"></span>
 			            </a>
 			                <ul class="dropdown-menu1">
@@ -55,7 +55,7 @@
 
 		<div class="col-md-9">
 			<div class="scholarship-title">三好学生</div>
-			<form class="myform" th:object="${TasBean}" action="/scholarship/tas" method="post">
+			<form class="myform" th:object="${tasBean}" action="/scholarship/tas" method="post">
 				<div class="col-md-12 all-date" >
 					<div class="col-md-4"></div>
 					<div class="col-md-6">
