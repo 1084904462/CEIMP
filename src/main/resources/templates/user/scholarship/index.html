@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Document</title>
-    <link rel='stylesheet prefetch'th:href='@{/static/css/bootstrap.min.css}'/>
+    <link rel='stylesheet prefetch' th:href='@{/static/css/bootstrap.min.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/jquery-ui.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/user/scholarship/scholarship.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/user/scholarship/index.css}'/>
     <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
     <script th:src="@{/static/js/bootstrap.min.js}"></script>
     <script th:src="@{/static/js/user/scholarship/ss.js}"></script>
-    <script th:src="@{/static/js/user/scholarship/index.js}"></script>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top">
@@ -46,23 +45,12 @@
 </nav>
 <div class="container">
     <div class="col-md-12">
-        <ul class="canwrite-itme"  th:each="award: ${AwardBean}">
-            <li><a th:href="@{/scholarship/award.subName}"  th:text="${award.awardName}">校奖学金</a></li>
-            <!--<li><a th:href="@{/scholarship/award.subName}" class="btn blue" th:text="${awardn.awardName}">三好学生</a></li>-->
-            <!--<li><a th:href="@{/scholarship/award.subName}" class="btn blue" th:text="${award.awardName}">省政府奖学金</a></li>-->
-            <!--<li><a th:href="@{/scholarship/award.subName}" class="btn green" th:text="${award.awardName}">国家励志奖学金</a></li>-->
-            <!--<li><a th:href="@{/scholarship/award.subName}" class="btn gray" th:text="${award.awardName}">国家助学金</a></li>-->
+        <ul class="canwrite-itme">
+            <!--th:each="item : ${items}" th:text="${item.message}"-->
+            <!--<li><a th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" >校奖学金</a></li>-->
+            <li th:each="award:${AwardBeanList}" th:href="@{'/scholarship/'+${award.subName}}"  th:text="${award.awardName}" ></li>
         </ul>
     </div>
-    <!--<div class="col-md-12">-->
-        <!--<ul class="canwrite-itme">-->
-            <!--<li><a href="" class="btn btn-primary">校奖学金</a></li>-->
-            <!--<li><a href="" class="btn btn-primary">三好学生</a></li>-->
-            <!--<li><a href="" class="btn btn-success">省政府奖学金</a></li>-->
-            <!--<li><a href="" class="btn btn-default">国家励志奖学金</a></li>-->
-            <!--<li><a href="" class="btn btn-default">国家助学金</a></li>-->
-        <!--</ul>-->
-    <!--</div>-->
 </div>
 
 </body>
