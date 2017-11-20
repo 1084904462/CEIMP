@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-18 14:37:52
+Date: 2017-11-20 14:12:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,13 +54,21 @@ CREATE TABLE `class_num` (
   UNIQUE KEY `class_num_id` (`class_num_id`) USING BTREE,
   KEY `major_id` (`major_id`),
   CONSTRAINT `class_num_ibfk_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class_num
 -- ----------------------------
 INSERT INTO `class_num` VALUES ('1', '151', '1');
 INSERT INTO `class_num` VALUES ('2', '152', '1');
+INSERT INTO `class_num` VALUES ('3', '151', '2');
+INSERT INTO `class_num` VALUES ('4', '152', '2');
+INSERT INTO `class_num` VALUES ('5', '151', '3');
+INSERT INTO `class_num` VALUES ('6', '152', '3');
+INSERT INTO `class_num` VALUES ('7', '153', '3');
+INSERT INTO `class_num` VALUES ('8', '151', '4');
+INSERT INTO `class_num` VALUES ('9', '152', '4');
+INSERT INTO `class_num` VALUES ('10', '153', '4');
 
 -- ----------------------------
 -- Table structure for `major`
@@ -70,19 +78,24 @@ CREATE TABLE `major` (
   `major_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '专业id',
   `name` varchar(50) NOT NULL COMMENT '专业名称',
   `school_id` bigint(20) NOT NULL COMMENT '学院id',
+  `grade` varchar(20) NOT NULL COMMENT '年级',
   `sum` int(20) NOT NULL COMMENT '专业人数',
   PRIMARY KEY (`major_id`),
   UNIQUE KEY `major_id` (`major_id`) USING BTREE,
   KEY `school_id` (`school_id`),
   CONSTRAINT `major_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of major
 -- ----------------------------
-INSERT INTO `major` VALUES ('1', '软件工程', '1', '72');
-INSERT INTO `major` VALUES ('2', '计算机科学与技术', '1', '90');
-INSERT INTO `major` VALUES ('3', '应用物理学', '2', '60');
+INSERT INTO `major` VALUES ('1', '软件工程', '1', '2015', '74');
+INSERT INTO `major` VALUES ('2', '软件工程', '1', '2016', '80');
+INSERT INTO `major` VALUES ('3', '计算机科学与技术', '1', '2015', '60');
+INSERT INTO `major` VALUES ('4', '计算机科学与技术', '1', '2016', '80');
+INSERT INTO `major` VALUES ('5', '数字媒体技术', '1', '2015', '60');
+INSERT INTO `major` VALUES ('6', '物联网工程', '1', '2016', '80');
+INSERT INTO `major` VALUES ('7', '电子信息工程', '1', '2016', '50');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -147,11 +160,24 @@ CREATE TABLE `ng` (
   UNIQUE KEY `ng_id` (`ng_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `ng_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ng
 -- ----------------------------
+INSERT INTO `ng` VALUES ('1', '1', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('2', '1', '2016', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('3', '2', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('4', '3', '2016', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('5', '4', '2016', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('6', '5', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('7', '6', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('8', '7', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('9', '8', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('10', '8', '2016', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('11', '9', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('12', '10', '2016', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `ng` VALUES ('13', '10', '2017', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `nis`
@@ -199,7 +225,7 @@ CREATE TABLE `opinion` (
   `opinion_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `manager_id` bigint(20) NOT NULL,
   `year_scope` int(20) NOT NULL COMMENT '适用年份',
-  `ng_opinion` varchar(500) DEFAULT '',
+  `nis_opinion` varchar(500) DEFAULT '',
   `pgs_recommend` varchar(500) DEFAULT '',
   `pgs_opinion` varchar(500) DEFAULT '',
   `ss_opinion` varchar(500) DEFAULT '',
@@ -208,11 +234,13 @@ CREATE TABLE `opinion` (
   UNIQUE KEY `opinion_id` (`opinion_id`) USING BTREE,
   KEY `manager_id` (`manager_id`),
   CONSTRAINT `opinion_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of opinion
 -- ----------------------------
+INSERT INTO `opinion` VALUES ('1', '1', '2017', '小', '菜', '鸡', '唧', '唧');
+INSERT INTO `opinion` VALUES ('2', '1', '2016', '这', '个', '是', '测', '试');
 
 -- ----------------------------
 -- Table structure for `pgs`
@@ -257,7 +285,7 @@ CREATE TABLE `scholarship` (
   `sub_name` varchar(20) NOT NULL COMMENT '奖学金缩写',
   PRIMARY KEY (`scholarship_id`),
   UNIQUE KEY `scholarship_id` (`scholarship_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of scholarship
@@ -265,8 +293,18 @@ CREATE TABLE `scholarship` (
 INSERT INTO `scholarship` VALUES ('1', '国家助学金', '国家助学金模板', 'ng');
 INSERT INTO `scholarship` VALUES ('2', '国家励志奖学金', '国家励志奖学金模板', 'nis');
 INSERT INTO `scholarship` VALUES ('3', '省政府奖学金', '省政府奖学金模板', 'pgs');
-INSERT INTO `scholarship` VALUES ('4', '校奖学金', '校奖学金模板', 'ss');
-INSERT INTO `scholarship` VALUES ('5', '三好学生', '三好学生模板', 'tas');
+INSERT INTO `scholarship` VALUES ('4', '优秀学生一等奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('5', '优秀学生二等奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('6', '优秀学生三等奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('7', '学业优秀一等奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('8', '学业优秀二等奖学金', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('9', '学习进步奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('10', '优良学风奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('11', '外语成绩优秀奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('12', '文体优秀奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('13', '社团活动奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('14', '突出贡献奖', '校奖学金模板', 'ss');
+INSERT INTO `scholarship` VALUES ('15', '三好学生', '三好学生模板', 'tas');
 
 -- ----------------------------
 -- Table structure for `school`
@@ -299,11 +337,20 @@ CREATE TABLE `ss` (
   UNIQUE KEY `ss_id` (`ss_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `ss_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ss
 -- ----------------------------
+INSERT INTO `ss` VALUES ('1', '1', '2017', '', '');
+INSERT INTO `ss` VALUES ('2', '3', '2017', '', '');
+INSERT INTO `ss` VALUES ('3', '4', '2016', '', '');
+INSERT INTO `ss` VALUES ('4', '6', '2017', '', '');
+INSERT INTO `ss` VALUES ('5', '6', '2016', '', '');
+INSERT INTO `ss` VALUES ('6', '7', '2016', '', '');
+INSERT INTO `ss` VALUES ('7', '9', '2017', '', '');
+INSERT INTO `ss` VALUES ('8', '10', '2016', '', '');
+INSERT INTO `ss` VALUES ('9', '10', '2017', '', '');
 
 -- ----------------------------
 -- Table structure for `tas`
@@ -347,13 +394,27 @@ CREATE TABLE `user_basic` (
   UNIQUE KEY `account` (`account`) USING BTREE,
   KEY `class_num_id` (`class_num_id`),
   CONSTRAINT `user_basic_ibfk_1` FOREIGN KEY (`class_num_id`) REFERENCES `class_num` (`class_num_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_basic
 -- ----------------------------
-INSERT INTO `user_basic` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '陈伟', '1', '', '', '', '', '', '', '', '');
-INSERT INTO `user_basic` VALUES ('2', '1150299071', 'ZTLcLq+BaR2y9kFF0eCBzw==', '黄豆豆', '1', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '陈小弟', '1', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('2', '1150299250', 'ZTLcLq+BaR2y9kFF0eCBzw==', '黄大老', '2', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('3', '1150299260', 'ZTLcLq+BaR2y9kFF0eCBzw==', '方大老', '2', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('4', '1150299190', 'ZTLcLq+BaR2y9kFF0eCBzw==', '顾大老', '1', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('5', '1150299001', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试1', '3', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('6', '1150299002', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试2', '3', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('7', '1150299003', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试3', '4', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('8', '1150299004', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试4', '5', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('9', '1150299005', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试5', '5', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('10', '1150299006', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试6', '6', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('11', '1150299007', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试7', '7', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('12', '1150299008', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试8', '7', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('13', '1150299009', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试9', '8', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('14', '1150299010', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试10', '9', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('15', '1150299011', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试11', '10', '', '', '', '', '', '', '', '');
+INSERT INTO `user_basic` VALUES ('16', '1150299012', 'ZTLcLq+BaR2y9kFF0eCBzw==', '测试12', '10', '', '', '', '', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `user_info`

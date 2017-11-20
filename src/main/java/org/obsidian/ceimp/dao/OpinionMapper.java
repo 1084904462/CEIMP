@@ -1,11 +1,18 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.entity.OpinionExample;
 
+import java.util.List;
+
 public interface OpinionMapper {
+    int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(@Param("managerId") Long managerId,
+        @Param("yearScope") Integer yearScope,@Param("scholarshipOpinionBean")ScholarshipOpinionBean scholarshipOpinionBean);
+
+    ScholarshipOpinionBean selectByManagerIdAndYearScope(@Param("managerId") Long managerId,@Param("yearScope") Integer yearScope);
+
     long countByExample(OpinionExample example);
 
     int deleteByExample(OpinionExample example);

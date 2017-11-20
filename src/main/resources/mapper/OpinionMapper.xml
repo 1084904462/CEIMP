@@ -11,6 +11,17 @@
     <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
     <result column="tas_opinion" jdbcType="VARCHAR" property="tasOpinion" />
   </resultMap>
+  <update id="updateByManagerIdAndYearScopeAndScholarshipOpinionBean" parameterType="map">
+    update opinion set opinion.nis_opinion = #{scholarshipOpinionBean.nisOpinion},
+    opinion.pgs_recommend = #{scholarshipOpinionBean.pgsRecommend},opinion.pgs_opinion = #{scholarshipOpinionBean.pgsOpinion},
+    opinion.ss_opinion = #{scholarshipOpinionBean.ssOpinion},opinion.tas_opinion = #{scholarshipOpinionBean.tasOpinion}
+    where opinion.manager_id = #{managerId} and opinion.year_scope = #{yearScope}
+  </update>
+  <select id="selectByManagerIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipOpinionBean">
+    select opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,opinion.pgs_opinion pgsOpinion,
+    opinion.ss_opinion ssOpinion,opinion.tas_opinion tasOpinion from opinion where opinion.manager_id = #{managerId}
+    and opinion.year_scope = #{yearScope}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
