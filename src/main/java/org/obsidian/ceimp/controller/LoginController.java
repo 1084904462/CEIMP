@@ -99,8 +99,8 @@ public class LoginController {
         logger.info("userAccount:" + logBean.getAccount());
         StatusBean statusBean = new StatusBean();
         UserBasic userBasic = userBasicService.selectByAccount(logBean.getAccount());
-        logger.info(userBasic.toString());
         if(userBasic != null){
+            logger.info(userBasic.toString());
             if(userBasic.getPassword().equals(MD5Util.getInstance().EncoderByMd5(logBean.getPassword()))){
                 Long userId = userBasic.getUserId();
                 HttpSession preSession = userSessionMap.get(userId);
@@ -158,8 +158,8 @@ public class LoginController {
         logger.info("managerAccount:" + logBean.getAccount());
         StatusBean statusBean = new StatusBean();
         Manager manager = managerService.selectByAccount(logBean.getAccount());
-        logger.info(manager.toString());
         if(manager != null){
+            logger.info(manager.toString());
             if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(logBean.getPassword()))) {
                 Long managerId = manager.getManagerId();
                 HttpSession preSession = managerSessionMap.get(managerId);
