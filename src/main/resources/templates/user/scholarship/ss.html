@@ -38,7 +38,7 @@
 			</ul>
 			    <ul class="nav navbar-nav">
 			        <li class="navbar-text">
-			            <a href="javascript:;" th:text="${session.UserLogBean.account}" class="dropdown">1150299190
+			            <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">1150299190
 			            	<span class="caret"></span>
 			            </a>
 			                <ul class="dropdown-menu1">
@@ -54,14 +54,14 @@
 		</div>
 		<div class="col-md-9">
 			<div class="scholarship-title">校奖学金</div>
-			<form class="myform" th:object="${SsBean}" action="/scholarship/ss" method="post">
+			<form class="myform" th:object="${ssBean}" action="/scholarship/ss" method="post">
 				<div class="col-md-12 all-date" >
 					<div class="col-md-4"></div>
 					<div class="col-md-6">
 						<div class="date" th:text="*{ts}">2016</div>
 						<div class="date">学年——</div>
-						<div class="date">2017</div>
-						<div class="date"th:text="*{te}">学年</div>
+						<div class="date" th:text="*{te}">2017</div>
+						<div class="date">学年</div>
 					</div>
 					<div class="col-md-3"></div>
 				</div>

@@ -55,7 +55,7 @@ public class ManagerScholarshipController {
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,showScholarshipBean.getGrade().get(0));
         logger.info(scholarshipFormBeanList);
-        model.addAttribute("scholarshipFormBean",scholarshipFormBeanList);
+        model.addAttribute("scholarshipFormBeanList",scholarshipFormBeanList);
         return "manager/showScholarship";
     }
 

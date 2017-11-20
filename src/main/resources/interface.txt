@@ -145,9 +145,10 @@
 			phone:String,
 			identity:String,
 			gpRank:String,
-			passSum:String,
-			subSum:String,
 			ceRank:String,
+			majorSum:Integer,
+			passSum:String,
+			classSum:String,
 			date1:String,
 			award1,String,
 			unit1:String,
@@ -198,9 +199,10 @@
 			phone:String,
 			identity:String,
 			gpRank:String,
-			passSum:String,
-			subSum:String,
 			ceRank:String,
+			majorSum:Integer,
+			passSum:String,
+			classSum:String,
 			date1:String,
 			award1,String,
 			unit1:String,
@@ -246,6 +248,7 @@
 			ability:String,
 			all:String,
 			ceRank:String,//问题
+			majorSum:Integer,
 			level:String,
 			reason:String,
 			opinion:String
@@ -279,6 +282,7 @@
 			ability:String,
 			all:String,
 			ceRank:String,
+			majorSum:Integer,
 			reason:String,
 			opinion:String
 		}
@@ -435,10 +439,11 @@
 
 重置用户密码
 	<-
-		/manager/resetPassword,ajax,get
-		UserAccountBean
+		/manager/resetPassword,ajax,post
+		LogBeanBean
 		{
-			account:String
+			account:String,
+			password:String
 		}
 	->
 		StatusBean
@@ -454,10 +459,22 @@
 			searchKey:String	//该搜索关键词可以是学号或姓名或学号和姓名
 		}
 	->
-		UserSearchBean
+		UserSearchBeanList
 		{
-			major:String,
-			classNum:String,
-			account:String,
-			username:String
+			UserSearchBean
+			{
+				major:String,
+				classNum:String,
+				account:String,
+				username:String
+			}
+		}
+
+管理员修改自己的密码
+	<-
+		/manager/changePassword,post,form
+		PasswordBean
+		{
+			password:String,
+			confirmPassword:String
 		}

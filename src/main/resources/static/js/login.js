@@ -47,9 +47,11 @@ $(function(){
   $("#s-load").click(function(){
     if ($("#userID").val()=="") {
       toastr.error("请输入账号");
+
     }
     if ($("#password").val()=="") {
        toastr.error("请输入密码");
+
     }
      else{
         $.ajax({
@@ -79,9 +81,11 @@ $(function(){
   $("#m-load").click(function(){
       if ($("#userID").val()=="") {
           toastr.error("请输入账号");
+
       }
       if ($("#password").val()=="") {
           toastr.error("请输入密码");
+
       }
       else{
         $.ajax({
@@ -106,5 +110,15 @@ $(function(){
             }
         });
     }
+  });
+  $(document).keyup(function(){
+      if(event.keyCode=='13'){
+          if($("#s-load").is(":hidden")){
+              $("#m-load").click();
+          } else{
+              $("#s-load").click();
+          }
+
+      }
   });
 })

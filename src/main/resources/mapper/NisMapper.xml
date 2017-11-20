@@ -26,6 +26,9 @@
     <result column="situation" jdbcType="VARCHAR" property="situation" />
     <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
   </resultMap>
+  <select id="getNisBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.NisBean">
+
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
