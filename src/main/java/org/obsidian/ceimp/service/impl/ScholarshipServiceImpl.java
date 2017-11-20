@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.ScholarshipFormBean;
+import org.obsidian.ceimp.bean.ShowScholarshipBean;
 import org.obsidian.ceimp.bean.UserAccountBean;
 import org.obsidian.ceimp.dao.ScholarshipMapper;
 import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.entity.ScholarshipExample;
+import org.obsidian.ceimp.service.AwardService;
+import org.obsidian.ceimp.service.MajorService;
 import org.obsidian.ceimp.service.ScholarshipService;
-import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,10 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     private ScholarshipMapper scholarshipMapper;
 
     @Autowired
-    private UserBasicService userBasicService;
+    private MajorService majorService;
+
+    @Autowired
+    private AwardService awardService;
 
     @Transactional
     @Override
@@ -53,5 +60,16 @@ public class ScholarshipServiceImpl implements ScholarshipService {
         return scholarshipMapper.deleteAllBySubNameAndUserAccountBeanListAndYearScope(subName,userAccountBeanList,yearScope);
     }
 
+    public ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId){
+        ShowScholarshipBean showScholarshipBean = new ShowScholarshipBean();
+        showScholarshipBean.setScholarshipName(this.selectScholarshipNameBySubName(subName));
+        showScholarshipBean.setSubName(subName);
+        showScholarshipBean.setGrade(majorService.selectAllGradeBySchoolId(schoolId));
+        showScholarshipBean.setYearScope(TimeUtil.getInstance().getThisYear());
+        return showScholarshipBean;
+    }
 
+    public List<ScholarshipFormBean> getScholarshipFormBeanList(String subName, Integer yearScope, String grade){
+        return awardService.selectAllBySubNameAndYearScope(subName,yearScope,grade);
+    }
 }
