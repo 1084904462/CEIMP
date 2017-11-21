@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -90,6 +91,16 @@ public class ScholarshipController {
         return "user/scholarship/ng";
     }
 
+    @PostMapping("/ng")
+    public String ng(NgBean ngBean,HttpSession session){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        NgBean preNgBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
+        if(preNgBean != null){
+
+        }
+    }
+
     @GetMapping("/nis")
     public String pageNis(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
@@ -145,4 +156,5 @@ public class ScholarshipController {
         model.addAttribute("tasBean",tasBean);
         return "user/scholarship/tas";
     }
+
 }

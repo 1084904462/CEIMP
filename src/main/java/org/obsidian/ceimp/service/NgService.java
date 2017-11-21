@@ -14,4 +14,6 @@ public interface NgService {
     List<Ng> selectAllByUserId(Long userId);
 
     NgBean getNgBeanByUserIdAndYearScope(Long userId,Integer yearScope);
+
+    int addNgBeanByUserIdAndYearScope(NgBean ngBean,Long userId);
 }

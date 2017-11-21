@@ -1,11 +1,16 @@
 package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.NgBean;
+import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.dao.NgMapper;
+import org.obsidian.ceimp.dao.UserBasicMapper;
+import org.obsidian.ceimp.entity.Award;
 import org.obsidian.ceimp.entity.Ng;
 import org.obsidian.ceimp.entity.NgExample;
+import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.NgService;
 import org.obsidian.ceimp.util.TimeUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +25,12 @@ public class NgServiceImpl implements NgService {
 
     @Autowired
     private NgMapper ngMapper;
+
+    @Autowired
+    private UserBasicMapper userBasicMapper;
+
+    @Autowired
+    private AwardMapper awardMapper;
 
     @Transactional
     @Override
@@ -48,15 +59,20 @@ public class NgServiceImpl implements NgService {
         return list;
     }
 
+    @Transactional
     @Override
     public NgBean getNgBeanByUserIdAndYearScope(Long userId,Integer yearScope) {
         NgBean ngBean = ngMapper.selectNgBeanByUserIdAndYearScope(userId,yearScope);
-<<<<<<< HEAD
-        ngBean.setTs(ngBean.getTe() - 1);
-
-=======
         ngBean.setTe(ngBean.getTs() + 1);
->>>>>>> 08bdf8e3c40689b39ca952af4ff9c8a7dd5c443a
         return ngBean;
+    }
+
+    @Transactional
+    @Override
+    public int addNgBeanByUserIdAndYearScope(NgBean ngBean,Long userId) {
+        UserBasic userBasic = userBasicMapper.selectByPrimaryKey(userId);
+        BeanUtils.copyProperties(ngBean,userBasic);
+        Award award = awardMapper.selectByUserIdAndSubNameAndYearScope(userId,"ng",ngBean.getTs());
+        award.
     }
 }

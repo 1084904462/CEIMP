@@ -31,9 +31,6 @@ public interface SsMapper {
     int updateByPrimaryKeySelective(Ss record);
 
     int updateByPrimaryKey(Ss record);
-<<<<<<< HEAD
 
     SsBean selectSsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
-=======
->>>>>>> 08bdf8e3c40689b39ca952af4ff9c8a7dd5c443a
 }
