@@ -1,12 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.PgsBean;
 import org.obsidian.ceimp.entity.Pgs;
 import org.obsidian.ceimp.entity.PgsExample;
 
+import java.util.List;
+
 public interface PgsMapper {
+    PgsBean selectPgsBeanByUserIdAndYearScope(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
+
     long countByExample(PgsExample example);
 
     int deleteByExample(PgsExample example);
@@ -28,6 +31,4 @@ public interface PgsMapper {
     int updateByPrimaryKeySelective(Pgs record);
 
     int updateByPrimaryKey(Pgs record);
-
-    PgsBean selectPgsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
 }

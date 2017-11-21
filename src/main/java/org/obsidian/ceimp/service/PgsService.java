@@ -13,5 +13,5 @@ public interface PgsService {
 
     List<Pgs> selectAllByUserId(Long userId);
 
-    PgsBean getPgsBeanByUserIdAndYearScope(Long userId, int yearScope);
+    PgsBean getPgsBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }

@@ -1,12 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.TasBean;
 import org.obsidian.ceimp.entity.Tas;
 import org.obsidian.ceimp.entity.TasExample;
 
+import java.util.List;
+
 public interface TasMapper {
+    TasBean selectTasBeanByUserIdAndYearScope(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
+
     long countByExample(TasExample example);
 
     int deleteByExample(TasExample example);
@@ -28,6 +31,4 @@ public interface TasMapper {
     int updateByPrimaryKeySelective(Tas record);
 
     int updateByPrimaryKey(Tas record);
-
-    TasBean selectTasBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
 }

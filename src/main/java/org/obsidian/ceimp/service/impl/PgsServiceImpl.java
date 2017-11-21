@@ -50,7 +50,7 @@ public class PgsServiceImpl implements PgsService {
 
     @Transactional
     @Override
-    public PgsBean getPgsBeanByUserIdAndYearScope(Long userId, int yearScope) {
+    public PgsBean getPgsBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         PgsBean pgsBean = pgsMapper.selectPgsBeanByUserIdAndYearScope(userId,yearScope);
         pgsBean.setTs(pgsBean.getTe()-1);
         return pgsBean;

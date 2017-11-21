@@ -49,7 +49,7 @@ public class TasServiceImpl implements TasService {
     }
 
     @Override
-    public TasBean getTasBeanByUserIdAndYearScope(Long userId, int yearScope) {
+    public TasBean getTasBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         TasBean tasBean = tasMapper.selectTasBeanByUserIdAndYearScope(userId,yearScope);
         tasBean.setTs(tasBean.getTe()-1);
         return tasBean;

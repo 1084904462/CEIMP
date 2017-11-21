@@ -25,19 +25,19 @@ public class SsBean {
 
     private String job;
 
-    private String character;
+    private String charact;
 
     private String study;
 
     private String ability;
 
-    private String all;
+    private String total;
 
     private String ceRank;
 
     private Integer majorSum;
 
-    private String level;
+    private String rank;
 
     private String reason;
 
@@ -56,13 +56,13 @@ public class SsBean {
                 ", nation='" + nation + '\'' +
                 ", political='" + political + '\'' +
                 ", job='" + job + '\'' +
-                ", character='" + character + '\'' +
+                ", charact='" + charact + '\'' +
                 ", study='" + study + '\'' +
                 ", ability='" + ability + '\'' +
-                ", all='" + all + '\'' +
+                ", total='" + total + '\'' +
                 ", ceRank='" + ceRank + '\'' +
                 ", majorSum=" + majorSum +
-                ", level='" + level + '\'' +
+                ", rank='" + rank + '\'' +
                 ", reason='" + reason + '\'' +
                 ", opinion='" + opinion + '\'' +
                 '}';
@@ -148,12 +148,12 @@ public class SsBean {
         this.job = job;
     }
 
-    public String getCharacter() {
-        return character;
+    public String getCharact() {
+        return charact;
     }
 
-    public void setCharacter(String character) {
-        this.character = character;
+    public void setCharact(String charact) {
+        this.charact = charact;
     }
 
     public String getStudy() {
@@ -172,12 +172,12 @@ public class SsBean {
         this.ability = ability;
     }
 
-    public String getAll() {
-        return all;
+    public String getTotal() {
+        return total;
     }
 
-    public void setAll(String all) {
-        this.all = all;
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     public String getCeRank() {
@@ -196,12 +196,12 @@ public class SsBean {
         this.majorSum = majorSum;
     }
 
-    public String getLevel() {
-        return level;
+    public String getRank() {
+        return rank;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setRank(String rank) {
+        this.rank = rank;
     }
 
     public String getReason() {

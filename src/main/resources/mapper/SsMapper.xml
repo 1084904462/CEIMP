@@ -5,9 +5,21 @@
     <id column="ss_id" jdbcType="BIGINT" property="ssId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
-    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
   </resultMap>
+  <select id="selectSsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.SsBean">
+    select ss.year_scope te,major.name major,class_num.num classNum,user_basic.username username,
+    user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_basic.political political,
+    user_basic.job job,user_info.charact charact,user_info.study study,user_info.ability ability,
+    user_info.total total,user_info.ce ceRank,major.sum majorSum,ss.rank rank,ss.reason reason,
+    opinion.ss_opinion opinion from manager,ss,major,class_num,user_basic,user_info,opinion where
+    ss.user_id = user_basic.user_id and ss.year_scope = #{yearScope} and major.major_id = class_num.major_id
+    and class_num.class_num_id = user_basic.class_num_id and user_basic.user_id = #{userId}
+    and user_info.user_id = user_basic.user_id and user_info.year_scope = #{yearScope}
+    and opinion.manager_id = manager.manager_id and manager.school_id = major.school_id
+    and manager.grade = major.grade and opinion.year_scope = #{yearScope}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -67,7 +79,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ss_id, user_id, year_scope, level, reason
+    ss_id, user_id, year_scope, rank, reason
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.SsExample" resultMap="BaseResultMap">
     select
@@ -90,6 +102,7 @@
     from ss
     where ss_id = #{ssId,jdbcType=BIGINT}
   </select>
+<<<<<<< HEAD
   <select id="selectSsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.SsBean">
     select ss.year_scope te,major.name major,class_num.num classNum,user_basic.username username,
     user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_basic.political political,
@@ -107,6 +120,8 @@
     and manager.school_id = major.school_id
     and manager.grade = major.grade
   </select>
+=======
+>>>>>>> 08bdf8e3c40689b39ca952af4ff9c8a7dd5c443a
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ss
     where ss_id = #{ssId,jdbcType=BIGINT}
@@ -119,9 +134,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Ss">
     insert into ss (ss_id, user_id, year_scope, 
-      level, reason)
+      rank, reason)
     values (#{ssId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
-      #{level,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR})
+      #{rank,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Ss">
     insert into ss
@@ -135,8 +150,8 @@
       <if test="yearScope != null">
         year_scope,
       </if>
-      <if test="level != null">
-        level,
+      <if test="rank != null">
+        rank,
       </if>
       <if test="reason != null">
         reason,
@@ -152,8 +167,8 @@
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="level != null">
-        #{level,jdbcType=VARCHAR},
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
       </if>
       <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
@@ -178,8 +193,8 @@
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
-      <if test="record.level != null">
-        level = #{record.level,jdbcType=VARCHAR},
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=VARCHAR},
       </if>
       <if test="record.reason != null">
         reason = #{record.reason,jdbcType=VARCHAR},
@@ -194,7 +209,7 @@
     set ss_id = #{record.ssId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
-      level = #{record.level,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=VARCHAR},
       reason = #{record.reason,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -209,8 +224,8 @@
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="level != null">
-        level = #{level,jdbcType=VARCHAR},
+      <if test="rank != null">
+        rank = #{rank,jdbcType=VARCHAR},
       </if>
       <if test="reason != null">
         reason = #{reason,jdbcType=VARCHAR},
@@ -222,7 +237,7 @@
     update ss
     set user_id = #{userId,jdbcType=BIGINT},
       year_scope = #{yearScope,jdbcType=INTEGER},
-      level = #{level,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=VARCHAR},
       reason = #{reason,jdbcType=VARCHAR}
     where ss_id = #{ssId,jdbcType=BIGINT}
   </update>

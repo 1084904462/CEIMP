@@ -1,12 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.entity.Ss;
 import org.obsidian.ceimp.entity.SsExample;
 
+import java.util.List;
+
 public interface SsMapper {
+    SsBean selectSsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") Integer yearScope);
+
     long countByExample(SsExample example);
 
     int deleteByExample(SsExample example);
@@ -28,6 +31,9 @@ public interface SsMapper {
     int updateByPrimaryKeySelective(Ss record);
 
     int updateByPrimaryKey(Ss record);
+<<<<<<< HEAD
 
     SsBean selectSsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
+=======
+>>>>>>> 08bdf8e3c40689b39ca952af4ff9c8a7dd5c443a
 }

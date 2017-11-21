@@ -25,13 +25,13 @@ public class TasBean {
 
     private String job;
 
-    private String character;
+    private String charact;
 
     private String study;
 
     private String ability;
 
-    private String all;
+    private String total;
 
     private String ceRank;
 
@@ -54,10 +54,10 @@ public class TasBean {
                 ", nation='" + nation + '\'' +
                 ", political='" + political + '\'' +
                 ", job='" + job + '\'' +
-                ", character='" + character + '\'' +
+                ", charact='" + charact + '\'' +
                 ", study='" + study + '\'' +
                 ", ability='" + ability + '\'' +
-                ", all='" + all + '\'' +
+                ", total='" + total + '\'' +
                 ", ceRank='" + ceRank + '\'' +
                 ", majorSum='" + majorSum + '\'' +
                 ", reason='" + reason + '\'' +
@@ -145,12 +145,12 @@ public class TasBean {
         this.job = job;
     }
 
-    public String getCharacter() {
-        return character;
+    public String getCharact() {
+        return charact;
     }
 
-    public void setCharacter(String character) {
-        this.character = character;
+    public void setCharact(String charact) {
+        this.charact = charact;
     }
 
     public String getStudy() {
@@ -169,12 +169,12 @@ public class TasBean {
         this.ability = ability;
     }
 
-    public String getAll() {
-        return all;
+    public String getTotal() {
+        return total;
     }
 
-    public void setAll(String all) {
-        this.all = all;
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     public String getCeRank() {
