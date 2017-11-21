@@ -21,5 +21,5 @@ public interface UserBasicService {
 
     UserBasic selectByAccount(String account);
 
-    List<UserSearchBean> selectByAccountOrUsername(String account, String username);
+    List<UserSearchBean> selectByAccountAndUsername(String account, String username);
 }

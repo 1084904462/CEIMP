@@ -69,19 +69,19 @@ public class ManagerSettingController {
     @ResponseBody
     public List<UserSearchBean> search(SearchBean searchBean){
         logger.info("searchKey:"+searchBean.getSearchKey());
-        String [] accountSplit = searchBean.getSearchKey().split("\\d");
-        String account = null;
+        String [] accountSplit = searchBean.getSearchKey().split("\\D");
+        String account = "";
         for(String accounts:accountSplit){
             account = account + accounts;
         }
         logger.info(account);
-        String [] usernameSplit = searchBean.getSearchKey().split("\\D");
-        String username = null;
+        String [] usernameSplit = searchBean.getSearchKey().split("\\d");
+        String username = "";
         for(String usernames:usernameSplit){
             username = username + usernames;
         }
         logger.info(username);
-        return userBasicService.selectByAccountOrUsername(account,username);
+        return userBasicService.selectByAccountAndUsername(account,username);
     }
 
     /**

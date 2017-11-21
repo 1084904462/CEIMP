@@ -36,7 +36,7 @@
     <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
   <select id="selectNgBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.NgBean">
-    select ng.year_scope ts,major.name major,class_num.num classNum,user_basic.username username,
+    select major.name major,class_num.num classNum,user_basic.username username,
     user_basic.sex sex,user_basic.birth birth,user_basic.account account,user_basic.nation nation,
     user_basic.entrance entrance,user_basic.political political,user_basic.phone phone,
     user_basic.identity identity,ng.resident resident,ng.income_source incomeSource,

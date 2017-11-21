@@ -31,4 +31,6 @@ public interface SsMapper {
     int updateByPrimaryKeySelective(Ss record);
 
     int updateByPrimaryKey(Ss record);
+
+    SsBean selectSsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
 }

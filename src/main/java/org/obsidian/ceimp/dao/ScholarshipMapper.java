@@ -33,4 +33,6 @@ public interface ScholarshipMapper {
     int updateByPrimaryKeySelective(Scholarship record);
 
     int updateByPrimaryKey(Scholarship record);
+
+    Scholarship selectBySubName(@Param("subName")String subName);
 }

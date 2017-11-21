@@ -5,12 +5,17 @@
     <id column="award_id" jdbcType="BIGINT" property="awardId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="scholarship_id" jdbcType="BIGINT" property="scholarshipId" />
+    <result column="is_filled" jdbcType="INTEGER" property="isFilled" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
   </resultMap>
+  <select id="selectAwardIdBySubNameAndYearScope" parameterType="map" resultType="java.lang.Long">
+    select award.award_id from award,scholarship where award.scholarship_id = scholarship.scholarship_id and
+    scholarship.sub_name = #{subName} and award.year_scope = #{yearScope}
+  </select>
   <select id="selectAllByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.AwardBean">
     select scholarship.name awardName,scholarship.sub_name subName,IFNULL(award.is_filled,-1) isFilled,
     IFNULL(award.user_id,0) userId from scholarship left join award on scholarship.scholarship_id =
-    award.scholarship_id and award.user_id = #{userId} and award.year_scope = #{yearScope};
+    award.scholarship_id and award.user_id = #{userId} and award.year_scope = #{yearScope}
   </select>
   <select id="selectAllBySubNameAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipFormBean" statementType="STATEMENT">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username,
@@ -18,6 +23,13 @@
     and class_num.class_num_id = user_basic.class_num_id and user_basic.user_id
     in (select ${subName}.user_id from ${subName} where year_scope = ${yearScope}) and scholarship.sub_name = "${subName}"
     and major.grade = "${grade}"
+  </select>
+  <select id="selectByUserIdAndSubNameAndYearScope" parameterType="map" resultType="BaseResultMap">
+    select award.* from award,scholarship
+    where award.user_id = #{userId}
+    and award.year_scope = #{yearScope}
+    and scholarship.sub_name = #{subName}
+    and scholarship.scholarship_id = award.scholarship_id
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +90,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    award_id, user_id, scholarship_id, year_scope
+    award_id, user_id, scholarship_id, is_filled, year_scope
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.AwardExample" resultMap="BaseResultMap">
     select
@@ -113,9 +125,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Award">
     insert into award (award_id, user_id, scholarship_id, 
-      year_scope)
+      is_filled, year_scope)
     values (#{awardId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{scholarshipId,jdbcType=BIGINT}, 
-      #{yearScope,jdbcType=INTEGER})
+      #{isFilled,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Award">
     insert into award
@@ -128,6 +140,9 @@
       </if>
       <if test="scholarshipId != null">
         scholarship_id,
+      </if>
+      <if test="isFilled != null">
+        is_filled,
       </if>
       <if test="yearScope != null">
         year_scope,
@@ -142,6 +157,9 @@
       </if>
       <if test="scholarshipId != null">
         #{scholarshipId,jdbcType=BIGINT},
+      </if>
+      <if test="isFilled != null">
+        #{isFilled,jdbcType=INTEGER},
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
@@ -166,6 +184,9 @@
       <if test="record.scholarshipId != null">
         scholarship_id = #{record.scholarshipId,jdbcType=BIGINT},
       </if>
+      <if test="record.isFilled != null">
+        is_filled = #{record.isFilled,jdbcType=INTEGER},
+      </if>
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
@@ -179,6 +200,7 @@
     set award_id = #{record.awardId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       scholarship_id = #{record.scholarshipId,jdbcType=BIGINT},
+      is_filled = #{record.isFilled,jdbcType=INTEGER},
       year_scope = #{record.yearScope,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -193,6 +215,9 @@
       <if test="scholarshipId != null">
         scholarship_id = #{scholarshipId,jdbcType=BIGINT},
       </if>
+      <if test="isFilled != null">
+        is_filled = #{isFilled,jdbcType=INTEGER},
+      </if>
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
       </if>
@@ -203,6 +228,7 @@
     update award
     set user_id = #{userId,jdbcType=BIGINT},
       scholarship_id = #{scholarshipId,jdbcType=BIGINT},
+      is_filled = #{isFilled,jdbcType=INTEGER},
       year_scope = #{yearScope,jdbcType=INTEGER}
     where award_id = #{awardId,jdbcType=BIGINT}
   </update>
