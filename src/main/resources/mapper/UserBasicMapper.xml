@@ -99,11 +99,11 @@
     from user_basic
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <select id="selectByAccountOrUsername" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
+  <select id="selectByAccountAndUsername" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
     from user_basic,class_num,major
     where user_basic.account like CONCAT('%',#{account},'%')
-    or user_basic.username like CONCAT('%',#{username},'%')
+    and user_basic.username like CONCAT('%',#{username},'%')
     and user_basic.class_num_id = class_num.class_num_id
     and class_num.major_id = major.major_id
   </select>

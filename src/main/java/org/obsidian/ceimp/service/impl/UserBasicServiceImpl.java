@@ -72,7 +72,7 @@ public class UserBasicServiceImpl implements UserBasicService {
     }
 
     @Override
-    public List<UserSearchBean> selectByAccountOrUsername(String account, String username) {
-        return userBasicMapper.selectByAccountOrUsername(account,username);
+    public List<UserSearchBean> selectByAccountAndUsername(String account, String username) {
+        return userBasicMapper.selectByAccountAndUsername(account,username);
     }
 }
