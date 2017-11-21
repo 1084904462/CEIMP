@@ -9,11 +9,13 @@ import org.obsidian.ceimp.entity.AwardExample;
 import java.util.List;
 
 public interface AwardMapper {
+    Long selectAwardIdBySubNameAndYearScope(@Param("subName") String subName,@Param("yearScope") Integer yearScope);
+
     List<ScholarshipFormBean> selectAllBySubNameAndYearScope(@Param("subName") String subName,
                                                              @Param("yearScope") Integer yearScope,
                                                              @Param("grade") String grade);
 
-    List<AwardBean> selectAllByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") Integer yearScope);
+    List<AwardBean> selectAllByUserIdAndYearScope(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
 
     long countByExample(AwardExample example);
 

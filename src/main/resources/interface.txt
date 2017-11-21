@@ -1,57 +1,4 @@
 ---------------------用户端---------------------
-登录界面
-	<-
-		/login,get
-
-用户登录
-	<-
-		/userLogin,ajax,post
-		LogBean:
-		{
-			account:String,
-			password:String
-		}
-	->
-		StatusBean
-		{
-			status:String,密码错误、无该用户、登录成功
-		}
-		//登录成功后添加session
-		session:UserLogBean
-		{
-			userId:Long,
-			account:String,
-			username:String
-		}
-
-管理员登录
-	<-
-		/managerLogin,ajax,post
-		LogBean:
-		{
-			account:String,
-			password:String
-		}
-	->
-		StatusBean
-		{
-			status:String,密码错误、无该管理员、登录成功
-		}
-		//登录成功后添加session
-		session:ManagerLogBean
-		{
-			managerId:Long,
-			account:String,
-			schoolId:Long
-		}
-
-用户退出登录
-	<-
-		/userLoginout,get
-
-管理员退出登录
-	<-
-		/managerLogout,get
 
 奖学金首页
 	<-
@@ -478,3 +425,4 @@
 			password:String,
 			confirmPassword:String
 		}
+

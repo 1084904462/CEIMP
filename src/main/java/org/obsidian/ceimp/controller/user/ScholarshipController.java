@@ -2,7 +2,6 @@ package org.obsidian.ceimp.controller.user;
 
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
-import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +79,8 @@ public class ScholarshipController {
     public String pageNg(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Ng ng =  ngService.selectByUserIdAndYearScope(userId,yearScope);
-        if(ng == null){
+        Long isAward = awardService.selectAwardIdBySubNameAndYearScope("ng",yearScope);
+        if(isAward == null){
             return "redirect:/scholarship/index";
         }
         NgBean ngBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
@@ -94,8 +93,8 @@ public class ScholarshipController {
     public String pageNis(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Nis nis =  nisService.selectByUserIdAndYearScope(userId,yearScope);
-        if(nis == null){
+        Long isAward = awardService.selectAwardIdBySubNameAndYearScope("nis",yearScope);
+        if(isAward == null){
             return "redirect:/scholarship/index";
         }
         NisBean nisBean = nisService.getNisBeanByUserIdAndYearScope(userId,yearScope);
@@ -108,8 +107,8 @@ public class ScholarshipController {
     public String pageNgs(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Pgs pgs = pgsService.selectByUserIdAndYearScope(userId,yearScope);
-        if(pgs == null){
+        Long isAward = awardService.selectAwardIdBySubNameAndYearScope("pgs",yearScope);
+        if(isAward == null){
             return "redirect:/scholarship/index";
         }
         PgsBean pgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
@@ -122,8 +121,8 @@ public class ScholarshipController {
     public String pageSs(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Ss ss = ssService.selectByUserIdAndYearScope(userId,yearScope);
-        if(ss == null){
+        Long isAward = awardService.selectAwardIdBySubNameAndYearScope("ss",yearScope);
+        if(isAward == null){
             return "redirect:/scholarship/index";
         }
         SsBean ssBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
@@ -136,8 +135,8 @@ public class ScholarshipController {
     public String pageTas(HttpSession session,Model model){
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Tas tas = tasService.selectByUserIdAndYearScope(userId,yearScope);
-        if(tas == null){
+        Long isAward = awardService.selectAwardIdBySubNameAndYearScope("tas",yearScope);
+        if(isAward == null){
             return "redirect:/scholarship/index";
         }
         TasBean tasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
