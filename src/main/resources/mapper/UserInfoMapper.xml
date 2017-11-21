@@ -5,10 +5,10 @@
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
-    <result column="character" jdbcType="VARCHAR" property="character" />
+    <result column="charact" jdbcType="VARCHAR" property="charact" />
     <result column="study" jdbcType="VARCHAR" property="study" />
     <result column="ability" jdbcType="VARCHAR" property="ability" />
-    <result column="all" jdbcType="VARCHAR" property="all" />
+    <result column="total" jdbcType="VARCHAR" property="total" />
     <result column="gp" jdbcType="VARCHAR" property="gp" />
     <result column="ce" jdbcType="VARCHAR" property="ce" />
     <result column="pass_sum" jdbcType="VARCHAR" property="passSum" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    info_id, user_id, year_scope, character, study, ability, all, gp, ce, pass_sum, class_sum
+    info_id, user_id, year_scope, charact, study, ability, total, gp, ce, pass_sum, class_sum
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample" resultMap="BaseResultMap">
     select
@@ -108,12 +108,12 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.UserInfo">
     insert into user_info (info_id, user_id, year_scope, 
-      character, study, ability, 
-      all, gp, ce, pass_sum, 
+      charact, study, ability, 
+      total, gp, ce, pass_sum, 
       class_sum)
     values (#{infoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
-      #{character,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, 
-      #{all,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, 
+      #{charact,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, 
+      #{total,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, 
       #{classSum,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.UserInfo">
@@ -128,8 +128,8 @@
       <if test="yearScope != null">
         year_scope,
       </if>
-      <if test="character != null">
-        character,
+      <if test="charact != null">
+        charact,
       </if>
       <if test="study != null">
         study,
@@ -137,8 +137,8 @@
       <if test="ability != null">
         ability,
       </if>
-      <if test="all != null">
-        all,
+      <if test="total != null">
+        total,
       </if>
       <if test="gp != null">
         gp,
@@ -163,8 +163,8 @@
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="character != null">
-        #{character,jdbcType=VARCHAR},
+      <if test="charact != null">
+        #{charact,jdbcType=VARCHAR},
       </if>
       <if test="study != null">
         #{study,jdbcType=VARCHAR},
@@ -172,8 +172,8 @@
       <if test="ability != null">
         #{ability,jdbcType=VARCHAR},
       </if>
-      <if test="all != null">
-        #{all,jdbcType=VARCHAR},
+      <if test="total != null">
+        #{total,jdbcType=VARCHAR},
       </if>
       <if test="gp != null">
         #{gp,jdbcType=VARCHAR},
@@ -207,8 +207,8 @@
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
-      <if test="record.character != null">
-        character = #{record.character,jdbcType=VARCHAR},
+      <if test="record.charact != null">
+        charact = #{record.charact,jdbcType=VARCHAR},
       </if>
       <if test="record.study != null">
         study = #{record.study,jdbcType=VARCHAR},
@@ -216,8 +216,8 @@
       <if test="record.ability != null">
         ability = #{record.ability,jdbcType=VARCHAR},
       </if>
-      <if test="record.all != null">
-        all = #{record.all,jdbcType=VARCHAR},
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=VARCHAR},
       </if>
       <if test="record.gp != null">
         gp = #{record.gp,jdbcType=VARCHAR},
@@ -241,10 +241,10 @@
     set info_id = #{record.infoId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
-      character = #{record.character,jdbcType=VARCHAR},
+      charact = #{record.charact,jdbcType=VARCHAR},
       study = #{record.study,jdbcType=VARCHAR},
       ability = #{record.ability,jdbcType=VARCHAR},
-      all = #{record.all,jdbcType=VARCHAR},
+      total = #{record.total,jdbcType=VARCHAR},
       gp = #{record.gp,jdbcType=VARCHAR},
       ce = #{record.ce,jdbcType=VARCHAR},
       pass_sum = #{record.passSum,jdbcType=VARCHAR},
@@ -262,8 +262,8 @@
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
       </if>
-      <if test="character != null">
-        character = #{character,jdbcType=VARCHAR},
+      <if test="charact != null">
+        charact = #{charact,jdbcType=VARCHAR},
       </if>
       <if test="study != null">
         study = #{study,jdbcType=VARCHAR},
@@ -271,8 +271,8 @@
       <if test="ability != null">
         ability = #{ability,jdbcType=VARCHAR},
       </if>
-      <if test="all != null">
-        all = #{all,jdbcType=VARCHAR},
+      <if test="total != null">
+        total = #{total,jdbcType=VARCHAR},
       </if>
       <if test="gp != null">
         gp = #{gp,jdbcType=VARCHAR},
@@ -293,10 +293,10 @@
     update user_info
     set user_id = #{userId,jdbcType=BIGINT},
       year_scope = #{yearScope,jdbcType=INTEGER},
-      character = #{character,jdbcType=VARCHAR},
+      charact = #{charact,jdbcType=VARCHAR},
       study = #{study,jdbcType=VARCHAR},
       ability = #{ability,jdbcType=VARCHAR},
-      all = #{all,jdbcType=VARCHAR},
+      total = #{total,jdbcType=VARCHAR},
       gp = #{gp,jdbcType=VARCHAR},
       ce = #{ce,jdbcType=VARCHAR},
       pass_sum = #{passSum,jdbcType=VARCHAR},

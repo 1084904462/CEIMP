@@ -284,73 +284,73 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andCharacterIsNull() {
-            addCriterion("character is null");
+        public Criteria andCharactIsNull() {
+            addCriterion("charact is null");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterIsNotNull() {
-            addCriterion("character is not null");
+        public Criteria andCharactIsNotNull() {
+            addCriterion("charact is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterEqualTo(String value) {
-            addCriterion("character =", value, "character");
+        public Criteria andCharactEqualTo(String value) {
+            addCriterion("charact =", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterNotEqualTo(String value) {
-            addCriterion("character <>", value, "character");
+        public Criteria andCharactNotEqualTo(String value) {
+            addCriterion("charact <>", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterGreaterThan(String value) {
-            addCriterion("character >", value, "character");
+        public Criteria andCharactGreaterThan(String value) {
+            addCriterion("charact >", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterGreaterThanOrEqualTo(String value) {
-            addCriterion("character >=", value, "character");
+        public Criteria andCharactGreaterThanOrEqualTo(String value) {
+            addCriterion("charact >=", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterLessThan(String value) {
-            addCriterion("character <", value, "character");
+        public Criteria andCharactLessThan(String value) {
+            addCriterion("charact <", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterLessThanOrEqualTo(String value) {
-            addCriterion("character <=", value, "character");
+        public Criteria andCharactLessThanOrEqualTo(String value) {
+            addCriterion("charact <=", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterLike(String value) {
-            addCriterion("character like", value, "character");
+        public Criteria andCharactLike(String value) {
+            addCriterion("charact like", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterNotLike(String value) {
-            addCriterion("character not like", value, "character");
+        public Criteria andCharactNotLike(String value) {
+            addCriterion("charact not like", value, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterIn(List<String> values) {
-            addCriterion("character in", values, "character");
+        public Criteria andCharactIn(List<String> values) {
+            addCriterion("charact in", values, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterNotIn(List<String> values) {
-            addCriterion("character not in", values, "character");
+        public Criteria andCharactNotIn(List<String> values) {
+            addCriterion("charact not in", values, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterBetween(String value1, String value2) {
-            addCriterion("character between", value1, value2, "character");
+        public Criteria andCharactBetween(String value1, String value2) {
+            addCriterion("charact between", value1, value2, "charact");
             return (Criteria) this;
         }
 
-        public Criteria andCharacterNotBetween(String value1, String value2) {
-            addCriterion("character not between", value1, value2, "character");
+        public Criteria andCharactNotBetween(String value1, String value2) {
+            addCriterion("charact not between", value1, value2, "charact");
             return (Criteria) this;
         }
 
@@ -494,73 +494,73 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAllIsNull() {
-            addCriterion("all is null");
+        public Criteria andTotalIsNull() {
+            addCriterion("total is null");
             return (Criteria) this;
         }
 
-        public Criteria andAllIsNotNull() {
-            addCriterion("all is not null");
+        public Criteria andTotalIsNotNull() {
+            addCriterion("total is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAllEqualTo(String value) {
-            addCriterion("all =", value, "all");
+        public Criteria andTotalEqualTo(String value) {
+            addCriterion("total =", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllNotEqualTo(String value) {
-            addCriterion("all <>", value, "all");
+        public Criteria andTotalNotEqualTo(String value) {
+            addCriterion("total <>", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllGreaterThan(String value) {
-            addCriterion("all >", value, "all");
+        public Criteria andTotalGreaterThan(String value) {
+            addCriterion("total >", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllGreaterThanOrEqualTo(String value) {
-            addCriterion("all >=", value, "all");
+        public Criteria andTotalGreaterThanOrEqualTo(String value) {
+            addCriterion("total >=", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllLessThan(String value) {
-            addCriterion("all <", value, "all");
+        public Criteria andTotalLessThan(String value) {
+            addCriterion("total <", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllLessThanOrEqualTo(String value) {
-            addCriterion("all <=", value, "all");
+        public Criteria andTotalLessThanOrEqualTo(String value) {
+            addCriterion("total <=", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllLike(String value) {
-            addCriterion("all like", value, "all");
+        public Criteria andTotalLike(String value) {
+            addCriterion("total like", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllNotLike(String value) {
-            addCriterion("all not like", value, "all");
+        public Criteria andTotalNotLike(String value) {
+            addCriterion("total not like", value, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllIn(List<String> values) {
-            addCriterion("all in", values, "all");
+        public Criteria andTotalIn(List<String> values) {
+            addCriterion("total in", values, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllNotIn(List<String> values) {
-            addCriterion("all not in", values, "all");
+        public Criteria andTotalNotIn(List<String> values) {
+            addCriterion("total not in", values, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllBetween(String value1, String value2) {
-            addCriterion("all between", value1, value2, "all");
+        public Criteria andTotalBetween(String value1, String value2) {
+            addCriterion("total between", value1, value2, "total");
             return (Criteria) this;
         }
 
-        public Criteria andAllNotBetween(String value1, String value2) {
-            addCriterion("all not between", value1, value2, "all");
+        public Criteria andTotalNotBetween(String value1, String value2) {
+            addCriterion("total not between", value1, value2, "total");
             return (Criteria) this;
         }
 

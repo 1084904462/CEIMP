@@ -7,7 +7,7 @@ public class Ss {
 
     private Integer yearScope;
 
-    private String level;
+    private String rank;
 
     private String reason;
 
@@ -35,12 +35,12 @@ public class Ss {
         this.yearScope = yearScope;
     }
 
-    public String getLevel() {
-        return level;
+    public String getRank() {
+        return rank;
     }
 
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
+    public void setRank(String rank) {
+        this.rank = rank == null ? null : rank.trim();
     }
 
     public String getReason() {

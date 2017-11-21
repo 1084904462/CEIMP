@@ -13,5 +13,5 @@ public interface SsService {
 
     List<Ss> selectAllByUserId(Long userId);
 
-    SsBean getSsBeanByUserIdAndYearScope(Long userId, int yearScope);
+    SsBean getSsBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }

@@ -13,5 +13,5 @@ public interface TasService {
 
     List<Tas> selectAllByUserId(Long userId);
 
-    TasBean getTasBeanByUserIdAndYearScope(Long userId, int yearScope);
+    TasBean getTasBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }

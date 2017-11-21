@@ -7,13 +7,13 @@ public class UserInfo {
 
     private Integer yearScope;
 
-    private String character;
+    private String charact;
 
     private String study;
 
     private String ability;
 
-    private String all;
+    private String total;
 
     private String gp;
 
@@ -47,12 +47,12 @@ public class UserInfo {
         this.yearScope = yearScope;
     }
 
-    public String getCharacter() {
-        return character;
+    public String getCharact() {
+        return charact;
     }
 
-    public void setCharacter(String character) {
-        this.character = character == null ? null : character.trim();
+    public void setCharact(String charact) {
+        this.charact = charact == null ? null : charact.trim();
     }
 
     public String getStudy() {
@@ -71,12 +71,12 @@ public class UserInfo {
         this.ability = ability == null ? null : ability.trim();
     }
 
-    public String getAll() {
-        return all;
+    public String getTotal() {
+        return total;
     }
 
-    public void setAll(String all) {
-        this.all = all == null ? null : all.trim();
+    public void setTotal(String total) {
+        this.total = total == null ? null : total.trim();
     }
 
     public String getGp() {
