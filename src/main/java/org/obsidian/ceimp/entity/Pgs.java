@@ -33,8 +33,6 @@ public class Pgs {
 
     private String applyReason;
 
-    private String recommendReason;
-
     public Long getPgsId() {
         return pgsId;
     }
@@ -161,13 +159,5 @@ public class Pgs {
 
     public void setApplyReason(String applyReason) {
         this.applyReason = applyReason == null ? null : applyReason.trim();
-    }
-
-    public String getRecommendReason() {
-        return recommendReason;
-    }
-
-    public void setRecommendReason(String recommendReason) {
-        this.recommendReason = recommendReason == null ? null : recommendReason.trim();
     }
 }

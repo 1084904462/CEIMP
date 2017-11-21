@@ -18,7 +18,6 @@
     <result column="award4" jdbcType="VARCHAR" property="award4" />
     <result column="unit4" jdbcType="VARCHAR" property="unit4" />
     <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
-    <result column="recommend_reason" jdbcType="VARCHAR" property="recommendReason" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -80,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List">
     pgs_id, user_id, year_scope, date1, award1, unit1, date2, award2, unit2, date3, award3, 
-    unit3, date4, award4, unit4, apply_reason, recommend_reason
+    unit3, date4, award4, unit4, apply_reason
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.PgsExample" resultMap="BaseResultMap">
     select
@@ -119,13 +118,13 @@
       date2, award2, unit2, 
       date3, award3, unit3, 
       date4, award4, unit4, 
-      apply_reason, recommend_reason)
+      apply_reason)
     values (#{pgsId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
       #{date1,jdbcType=VARCHAR}, #{award1,jdbcType=VARCHAR}, #{unit1,jdbcType=VARCHAR}, 
       #{date2,jdbcType=VARCHAR}, #{award2,jdbcType=VARCHAR}, #{unit2,jdbcType=VARCHAR}, 
       #{date3,jdbcType=VARCHAR}, #{award3,jdbcType=VARCHAR}, #{unit3,jdbcType=VARCHAR}, 
       #{date4,jdbcType=VARCHAR}, #{award4,jdbcType=VARCHAR}, #{unit4,jdbcType=VARCHAR}, 
-      #{applyReason,jdbcType=VARCHAR}, #{recommendReason,jdbcType=VARCHAR})
+      #{applyReason,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Pgs">
     insert into pgs
@@ -178,9 +177,6 @@
       <if test="applyReason != null">
         apply_reason,
       </if>
-      <if test="recommendReason != null">
-        recommend_reason,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pgsId != null">
@@ -230,9 +226,6 @@
       </if>
       <if test="applyReason != null">
         #{applyReason,jdbcType=VARCHAR},
-      </if>
-      <if test="recommendReason != null">
-        #{recommendReason,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -293,9 +286,6 @@
       <if test="record.applyReason != null">
         apply_reason = #{record.applyReason,jdbcType=VARCHAR},
       </if>
-      <if test="record.recommendReason != null">
-        recommend_reason = #{record.recommendReason,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -318,8 +308,7 @@
       date4 = #{record.date4,jdbcType=VARCHAR},
       award4 = #{record.award4,jdbcType=VARCHAR},
       unit4 = #{record.unit4,jdbcType=VARCHAR},
-      apply_reason = #{record.applyReason,jdbcType=VARCHAR},
-      recommend_reason = #{record.recommendReason,jdbcType=VARCHAR}
+      apply_reason = #{record.applyReason,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -372,9 +361,6 @@
       <if test="applyReason != null">
         apply_reason = #{applyReason,jdbcType=VARCHAR},
       </if>
-      <if test="recommendReason != null">
-        recommend_reason = #{recommendReason,jdbcType=VARCHAR},
-      </if>
     </set>
     where pgs_id = #{pgsId,jdbcType=BIGINT}
   </update>
@@ -394,8 +380,7 @@
       date4 = #{date4,jdbcType=VARCHAR},
       award4 = #{award4,jdbcType=VARCHAR},
       unit4 = #{unit4,jdbcType=VARCHAR},
-      apply_reason = #{applyReason,jdbcType=VARCHAR},
-      recommend_reason = #{recommendReason,jdbcType=VARCHAR}
+      apply_reason = #{applyReason,jdbcType=VARCHAR}
     where pgs_id = #{pgsId,jdbcType=BIGINT}
   </update>
 </mapper>
