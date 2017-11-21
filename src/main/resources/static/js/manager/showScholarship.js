@@ -1,8 +1,10 @@
 $(document).ready(function() {
     var oTable=$('#dataTables-example').DataTable({
-        /*  responsive: true*/
-        "columnDefs": [{ "targets": [0, 7], "orderable": false }]
+         /* responsive: true*/
+        bSort: false,
+        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
     });
+    console.log("1");
 
 
     var allPages = oTable.cells( ).nodes( );
@@ -23,7 +25,7 @@ $(document).ready(function() {
 
 
 
-    /*  $("#checkAll2").click(function() {
+   $("#checkAll2").click(function() {
      if ($(this).hasClass('checked')) {
      $('input[name="subBox"]').prop("checked",false);
      $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
@@ -31,10 +33,10 @@ $(document).ready(function() {
      $('input[name="subBox"]').prop("checked",true);
      $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
      $(this).toggleClass('checked');
-     });*/
+     });
     var $subBox = $(allPages).find('input[name="subBox"]');
     $subBox.click(function(){
-        /*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*/
+        /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
         $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
 
     });
@@ -127,6 +129,12 @@ $(document).ready(function() {
 
      });*/
 
+
+
+
+
+
+/*
     function changeCheckedNumber(grade)
     {
         $("#checkedNumber" + grade).text($("input[name='subBox']:checked").length);
@@ -138,4 +146,49 @@ table.on('checkbox(table15)', function(obj){
 
 table.on('checkbox(table16)', function(obj){
     changeCheckedNumber(16);
-});
+});*/
+
+
+
+
+
+
+
+/*function deleteScholarship()
+{
+
+    $.ajax({
+        url: "/manager/scholarship/delete/{subName}",
+        type: "post",
+        data: "account=" + data.account ,
+        success: function(data)
+        {
+            if(data == 1)
+            {
+                alert("删除成功");
+                obj.del();
+            }
+            else
+            {
+                alert("删除失败");
+            }
+        },
+        error: function(data)
+        {
+            alert("发生错误，删除失败");
+        }
+    });
+}*/
+/*$(document).ready(function () {
+
+    $("#deleteScholarshipButton").submit(function (event) {
+
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+
+        fire_ajax_submit();
+
+    });
+
+});*/
+

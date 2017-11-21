@@ -24,6 +24,13 @@
     in (select ${subName}.user_id from ${subName} where year_scope = ${yearScope}) and scholarship.sub_name = "${subName}"
     and major.grade = "${grade}"
   </select>
+  <select id="selectByUserIdAndSubNameAndYearScope" parameterType="map" resultType="BaseResultMap">
+    select award.* from award,scholarship
+    where award.user_id = #{userId}
+    and award.year_scope = #{yearScope}
+    and scholarship.sub_name = #{subName}
+    and scholarship.scholarship_id = award.scholarship_id
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

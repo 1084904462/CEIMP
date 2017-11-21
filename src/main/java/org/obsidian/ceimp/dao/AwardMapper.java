@@ -38,4 +38,6 @@ public interface AwardMapper {
     int updateByPrimaryKeySelective(Award record);
 
     int updateByPrimaryKey(Award record);
+
+    Award selectByUserIdAndSubNameAndYearScope(@Param("userId") Long userId,@Param("subName") String subName,@Param("yearScope")int yearScope);
 }

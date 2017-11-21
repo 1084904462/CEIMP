@@ -191,12 +191,12 @@ input[type=radio] {
 
 }
 #name1{
-	width: 250px;
+	width: 256px;
 	border-radius: 4px;
 	margin-left: -20px;
 }
 #place1{
-	width: 200px;
+	width: 250px;
 	border-radius: 4px;
 	margin-left: -20px;
 }
@@ -212,7 +212,7 @@ input[type=radio] {
 	margin-left: -20px;
 }
 #place2{
-	width: 200px;
+	width: 256px;
 	border-radius: 4px;
 	margin-left: -20px;
 }
@@ -228,7 +228,7 @@ input[type=radio] {
 	margin-left: -20px;
 }
 #place3{
-	width: 200px;
+	width: 256px;
 	border-radius: 4px;
 	margin-left: -20px;
 }
@@ -244,7 +244,7 @@ input[type=radio] {
 	margin-left: -20px;
 }
 #place4{
-	width: 200px;
+	width: 256px;
 	border-radius: 4px;
 	margin-left: -20px;
 }

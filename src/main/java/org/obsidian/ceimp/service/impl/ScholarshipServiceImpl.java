@@ -72,4 +72,5 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     public List<ScholarshipFormBean> getScholarshipFormBeanList(String subName, Integer yearScope, String grade){
         return awardService.selectAllBySubNameAndYearScope(subName,yearScope,grade);
     }
+
 }

@@ -3,15 +3,20 @@ package org.obsidian.ceimp.controller.user;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.util.TextMapUtil;
 import org.obsidian.ceimp.util.TimeUtil;
+import org.obsidian.ceimp.util.UrlUtil;
+import org.obsidian.ceimp.util.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/14.
@@ -38,6 +43,9 @@ public class ScholarshipController {
 
     @Autowired
     private TasService tasService;
+
+    @Autowired
+    private ScholarshipService scholarshipService;
 
     /**
      * 接收/scholarship请求，重定向至/scholarship/index
@@ -87,6 +95,24 @@ public class ScholarshipController {
         logger.info(ngBean);
         model.addAttribute("ngBean",ngBean);
         return "user/scholarship/ng";
+    }
+
+    @PostMapping("/ng")
+    public String ng(NgBean ngBean,HttpSession session){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        NgBean preNgBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
+        if(preNgBean != null){
+            ngService.updateNgBeanByUserIdAndYearScope(ngBean,userId,yearScope);
+        }else {
+            ngService.insertNgBeanByUserIdAndYearScope(ngBean,userId,yearScope);
+        }
+        String modelName = scholarshipService.selectScholarshipNameBySubName("ng");
+        ZipInfoBean zipInfoBean = new ZipInfoBean(ngBean.getAccount(),ngBean.getUsername(),modelName);
+        String inputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
+        String outputUrl = UrlUtil.getInstance().getWordOutputUrl("ng",zipInfoBean);
+        Map<String,String> ngMap = TextMapUtil.getInstance().getNgMap();
+        WordUtil.getInstance().generateWord(inputUrl,outputUrl,);
     }
 
     @GetMapping("/nis")
@@ -144,4 +170,5 @@ public class ScholarshipController {
         model.addAttribute("tasBean",tasBean);
         return "user/scholarship/tas";
     }
+
 }
