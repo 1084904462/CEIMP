@@ -2,9 +2,7 @@ package org.obsidian.ceimp.controller.user;
 
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
-import org.obsidian.ceimp.entity.Ng;
-import org.obsidian.ceimp.entity.Nis;
-import org.obsidian.ceimp.entity.Pgs;
+import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,5 +116,33 @@ public class ScholarshipController {
         logger.info(pgsBean);
         model.addAttribute("pgsBean",pgsBean);
         return "user/scholarship/pgs";
+    }
+
+    @GetMapping("/ss")
+    public String pageSs(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Ss ss = ssService.selectByUserIdAndYearScope(userId,yearScope);
+        if(ss == null){
+            return "redirect:/scholarship/index";
+        }
+        SsBean ssBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(ssBean);
+        model.addAttribute("ssBean",ssBean);
+        return "user/scholarship/ss";
+    }
+
+    @GetMapping("/tas")
+    public String pageTas(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Tas tas = tasService.selectByUserIdAndYearScope(userId,yearScope);
+        if(tas == null){
+            return "redirect:/scholarship/index";
+        }
+        TasBean tasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(tasBean);
+        model.addAttribute("tasBean",tasBean);
+        return "user/scholarship/tas";
     }
 }

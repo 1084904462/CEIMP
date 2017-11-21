@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.entity.Ss;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface SsService {
     Ss selectByUserIdAndYearScope(Long userId, Integer yearScope);
 
     List<Ss> selectAllByUserId(Long userId);
+
+    SsBean getSsBeanByUserIdAndYearScope(Long userId, int yearScope);
 }

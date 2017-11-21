@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.dao.SsMapper;
 import org.obsidian.ceimp.entity.Ss;
 import org.obsidian.ceimp.entity.SsExample;
@@ -45,5 +46,12 @@ public class SsServiceImpl implements SsService {
             return null;
         }
         return list;
+    }
+
+    @Override
+    public SsBean getSsBeanByUserIdAndYearScope(Long userId, int yearScope) {
+        SsBean ssBean = ssMapper.selectSsBeanByUserIdAndYearScope(userId,yearScope);
+        ssBean.setTs(ssBean.getTe()-1);
+        return ssBean;
     }
 }
