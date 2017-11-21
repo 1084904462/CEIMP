@@ -284,6 +284,66 @@ public class AwardExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsFilledIsNull() {
+            addCriterion("is_filled is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledIsNotNull() {
+            addCriterion("is_filled is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledEqualTo(Integer value) {
+            addCriterion("is_filled =", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledNotEqualTo(Integer value) {
+            addCriterion("is_filled <>", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledGreaterThan(Integer value) {
+            addCriterion("is_filled >", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_filled >=", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledLessThan(Integer value) {
+            addCriterion("is_filled <", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledLessThanOrEqualTo(Integer value) {
+            addCriterion("is_filled <=", value, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledIn(List<Integer> values) {
+            addCriterion("is_filled in", values, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledNotIn(List<Integer> values) {
+            addCriterion("is_filled not in", values, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledBetween(Integer value1, Integer value2) {
+            addCriterion("is_filled between", value1, value2, "isFilled");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsFilledNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_filled not between", value1, value2, "isFilled");
+            return (Criteria) this;
+        }
+
         public Criteria andYearScopeIsNull() {
             addCriterion("year_scope is null");
             return (Criteria) this;

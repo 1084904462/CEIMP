@@ -12,4 +12,6 @@ public interface AwardService {
     List<AwardBean> selectAllByUserIdAndYearScope(Long userId, Integer yearScope);
 
     List<ScholarshipFormBean> selectAllBySubNameAndYearScope(String subName,Integer yearScope,String grade);
+
+    Long selectAwardIdBySubNameAndYearScope(String subName,Integer yearScope);
 }

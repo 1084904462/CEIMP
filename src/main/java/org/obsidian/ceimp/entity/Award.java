@@ -7,6 +7,8 @@ public class Award {
 
     private Long scholarshipId;
 
+    private Integer isFilled;
+
     private Integer yearScope;
 
     public Long getAwardId() {
@@ -31,6 +33,14 @@ public class Award {
 
     public void setScholarshipId(Long scholarshipId) {
         this.scholarshipId = scholarshipId;
+    }
+
+    public Integer getIsFilled() {
+        return isFilled;
+    }
+
+    public void setIsFilled(Integer isFilled) {
+        this.isFilled = isFilled;
     }
 
     public Integer getYearScope() {
