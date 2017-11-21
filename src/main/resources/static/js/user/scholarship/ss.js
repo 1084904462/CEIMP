@@ -4,7 +4,7 @@ $(function () {
             $(".dropdown-menu1").fadeIn("fast");
         }
         ,function(){
-            $(".dropdown").css({"border-bottom":" 3px solid transparent"});
+            $(".dropdown").css({"border-bottom":" 3px solid white"});
             $(".dropdown-menu1").fadeOut("fast");
         })
     $("#text1").keyup(function(){

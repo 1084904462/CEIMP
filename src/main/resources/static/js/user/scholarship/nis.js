@@ -38,7 +38,18 @@ $(function () {
         autoclose: true,//选中自动关闭
 
     });
-
+    $("#phone").keyup(function(){
+        $("#phone").popover('hide');
+        var r=/^[0-9]*$/;
+        var number= $("#phone").val();
+        if(r.test(number)){
+            $("#phone-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#phone-message").html("请输入数字");
+        }
+    });
     $("#input-form").keyup(function(){
          $("#input-form").popover('hide');
          var length = 30;
@@ -128,7 +139,7 @@ $(function () {
             });
 
         $("#submit").mouseover(function(){
-          if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||
+          if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||($("#phone-message").html()!="")||
             ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||($("#email-message").html()!="" )
             ||($("#family-number-message").html()!="" )){    
             $("#submit").attr("disabled",true);
@@ -148,6 +159,16 @@ $(function () {
                         if( (($("#name4").val()=="")&&($("#place4").val()=="")&&($("#date4").val()==""))||
                             (($("#name4").val()!="")&&($("#place4").val()!="")&&($("#date4").val()!=""))
                         ){
+                            if($("#phone").val()==""){
+                                $("#phone").popover({
+                                    content:"请输入联系电话",
+                                });
+                                $("#phone").popover('show');
+                                var position=$("#phone").offset().top-200;
+                                $("html,body").animate({
+                                    "scrollTop":position},"slow");
+                                return false;
+                            }
                             if($("#month-input").val()==""){
                                 var position=$("#month-input").offset().top-200;
                                 $("#month-input").popover({

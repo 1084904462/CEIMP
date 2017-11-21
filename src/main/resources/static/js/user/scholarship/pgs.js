@@ -39,7 +39,18 @@ $(function () {
         autoclose: true,//选中自动关闭
 
     });
-
+    $("#phone").keyup(function(){
+        $("#phone").popover('hide');
+        var r=/^[0-9]*$/;
+        var number= $("#phone").val();
+        if(r.test(number)){
+            $("#phone-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#phone-message").html("请输入数字");
+        }
+    });
     $("#name1").keyup(function(){
          $("#place1").popover('hide');
          var content_len = $("#name1").val().length;
@@ -129,7 +140,7 @@ $(function () {
              $("#submit").attr("disabled",true);
          }
        
-         if (($("#message2").html()!="")) {
+         if (($("#message2").html()!="")||($("#phone-message").html()!="")) {
              $("#submit").attr("disabled",true);
          }
           if(($("#name33").html()!="" )||($("#place33").html()!="" )){
@@ -159,6 +170,16 @@ $(function () {
                 if((($("#name4").val()=="")&&($("#place4").val()=="")&&($("#date4").val()==""))||
                     (($("#name4").val()!="")&&($("#place4").val()!="")&&($("#date4").val()!=""))
                 ){
+                    if($("#phone").val()==""){
+                        $("#phone").popover({
+                            content:"请输入联系电话",
+                        });
+                        $("#phone").popover('show');
+                        var position=$("#phone").offset().top-200;
+                        $("html,body").animate({
+                            "scrollTop":position},"slow");
+                        return false;
+                    }
                     if ($("#text1").val()=="") {
                         var position=$("#text1").offset().top-200;
                         $("#text1").popover({

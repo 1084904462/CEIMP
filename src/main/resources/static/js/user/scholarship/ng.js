@@ -1,4 +1,17 @@
-$(function () {  
+$(function () {
+
+    $("#phone").keyup(function(){
+        $("#phone").popover('hide');
+        var r=/^[0-9]*$/;
+        var number= $("#phone").val();
+        if(r.test(number)){
+            $("#phone-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#phone-message").html("请输入数字");
+        }
+    });
        $("#input-form").keyup(function(){
          $("#input-form").popover('hide');
          var length = 30;
@@ -87,13 +100,13 @@ $(function () {
                  $("#submit").attr("disabled",false);         
             });
 
-        $("#submit").mouseover(function(){
-          if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||
-            ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||
-            ($("#email-message").html()!="" )||($("#family-number-message").html()!="" )){    
-            $("#submit").attr("disabled",true);
-         }
-     });
+     //    $("#submit").mouseover(function(){
+     //      if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||
+     //        ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||($("#phone-message").html()!="")||
+     //        ($("#email-message").html()!="" )||($("#family-number-message").html()!="" )){
+     //        $("#submit").attr("disabled",true);
+     //     }
+     // });
 
     $("#n1").keyup(function(){
         $("#p1").popover('hide');
@@ -126,6 +139,22 @@ $(function () {
         }
         else{
             $("#a1-message").html("输入0-120整数");
+        }
+
+    });
+    $("#r1").keyup(function(){
+        $("#p1").popover('hide');
+        var r=/^[\u4e00-\u9fa5]*$/;//汉字
+        var number= $("#r1").val();
+        if (number=="") {
+            $("#r1-message").html("");
+        }
+        else if(r.test(number)){
+            $("#r1-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#r1-message").html("只能输入汉字");
         }
 
     });
@@ -174,6 +203,22 @@ $(function () {
             $("#a2-message").html("输入0-120整数");
         }
     });
+    $("#r2").keyup(function(){
+        $("#p2").popover('hide');
+        var r=/^[\u4e00-\u9fa5]*$/;//汉字
+        var number= $("#r2").val();
+        if (number=="") {
+            $("#r2-message").html("");
+        }
+        else if(r.test(number)){
+            $("#r2-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#r2-message").html("只能输入汉字");
+        }
+
+    });
               $("#p2").keyup(function(){  
                $("#p2").popover('hide');    
         var number= $("#p2").val().length;
@@ -218,6 +263,22 @@ $(function () {
         else{
             $("#a3-message").html("输入0-120整数");
         }
+    });
+    $("#r3").keyup(function(){
+        $("#p3").popover('hide');
+        var r=/^[\u4e00-\u9fa5]*$/;//汉字
+        var number= $("#r3").val();
+        if (number=="") {
+            $("#r3-message").html("");
+        }
+        else if(r.test(number)){
+            $("#r3-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#r3-message").html("只能输入汉字");
+        }
+
     });
               $("#p3").keyup(function(){ 
                $("#p3").popover('hide');     
@@ -264,6 +325,22 @@ $(function () {
             $("#a4-message").html("输入0-120整数");
         }
     });
+    $("#r4").keyup(function(){
+        $("#p4").popover('hide');
+        var r=/^[\u4e00-\u9fa5]*$/;//汉字
+        var number= $("#r4").val();
+        if (number=="") {
+            $("#r4-message").html("");
+        }
+        else if(r.test(number)){
+            $("#r4-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#r4-message").html("只能输入汉字");
+        }
+
+    });
               $("#p4").keyup(function(){  
               $("#p4").popover('hide');    
         var number= $("#p4").val().length;
@@ -291,6 +368,22 @@ $(function () {
         }
 
     });
+    $("#r5").keyup(function(){
+        $("#p5").popover('hide');
+        var r=/^[\u4e00-\u9fa5]*$/;//汉字
+        var number= $("#r5").val();
+        if (number=="") {
+            $("#r5-message").html("");
+        }
+        else if(r.test(number)){
+            $("#r5-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#r5-message").html("只能输入汉字");
+        }
+
+    });
     $("#p5").keyup(function(){
         $("#p5").popover('hide');
         var number= $("#p5").val().length;
@@ -303,13 +396,14 @@ $(function () {
         }
     });
    $("#submit").mouseover(function(){
-          if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||
+          if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||($("#phone-message").html()!="")||
             ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||($("#email-message").html()!="" )
             ||($("#family-number-message").html()!="" )||($("#n1-message").html()!="")||($("#n2-message").html()!="")
             ||($("#n3-message").html()!="")||($("#n4-message").html()!="")||($("#n5-message").html()!="")||($("#a1-message").html()!="")
             ||($("#a2-message").html()!="")||($("#a3-message").html()!="")||($("#a4-message").html()!="")||($("#a5-message").html()!="")
-            ||($("#p1-message").html()!="")||($("#p2-message").html()!="")||($("#p3-message").html()!="")
-            ||($("#p4-message").html()!="")||($("#p5-message").html()!="")
+            ||($("#p1-message").html()!="")||($("#p2-message").html()!="")||($("#p3-message").html()!="") ||($("#p4-message").html()!="")
+            ||($("#p5-message").html()!="")||($("#r1-message").html()!="")||($("#r2-message").html()!="") ||($("#r3-message").html()!="")
+            ||($("#r4-message").html()!="")||($("#r5-message").html()!="")
             ){    
             $("#submit").attr("disabled",true);
          }
@@ -332,6 +426,17 @@ $(function () {
                     if( (($("#n5").val()=="")&&($("#p5").val()=="")&&($("#a5").val()=="")&&($("#r5").val()==""))||
                         (($("#n5").val()!="")&&($("#p5").val()!="")&&($("#a5").val()!="")&&($("#r5").val()!=""))
                     ){
+
+                        if($("#phone").val()==""){
+                            $("#phone").popover({
+                                content:"请输入联系电话",
+                            });
+                            $("#phone").popover('show');
+                            var position=$("#phone").offset().top-200;
+                            $("html,body").animate({
+                                "scrollTop":position},"slow");
+                            return false;
+                        }
                         if($("#month-input").val()==""){
                             $("#month-input").popover({
                                 content:"请输入家庭月收入",
