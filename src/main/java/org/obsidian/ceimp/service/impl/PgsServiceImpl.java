@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.PgsBean;
 import org.obsidian.ceimp.dao.PgsMapper;
 import org.obsidian.ceimp.entity.Pgs;
 import org.obsidian.ceimp.entity.PgsExample;
@@ -45,5 +46,13 @@ public class PgsServiceImpl implements PgsService {
             return null;
         }
         return list;
+    }
+
+    @Transactional
+    @Override
+    public PgsBean getPgsBeanByUserIdAndYearScope(Long userId, int yearScope) {
+        PgsBean pgsBean = pgsMapper.selectPgsBeanByUserIdAndYearScope(userId,yearScope);
+        pgsBean.setTs(pgsBean.getTe()-1);
+        return pgsBean;
     }
 }

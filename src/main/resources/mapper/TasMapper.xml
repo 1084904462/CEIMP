@@ -89,6 +89,23 @@
     from tas
     where tas_id = #{tasId,jdbcType=BIGINT}
   </select>
+  <select id="selectTasBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.TasBean">
+    select tas.yearScope te,major.name major,class_num.num classNum,user_basic.username username,
+    user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_basic.political political,
+    user_basic.job job,user_info.character character,user_info.study study,user_info.ability ability,user_info.all all,
+    user_info.ce ceRank,major.sum majorSum,tas.reason reason,opinion.tas_opinion opinion
+    from manager,tas,major,class_num,user_basic,user_info,opinion
+    where tas.user_id = user_basic.user_id
+    and tas.year_scope = #{yearScope}
+    and major.major_id = class_num.major_id
+    and class_num.class_num_id = user_basic.class_num_id
+    and user_basic.user_id = #{userId}
+    and user_info.user_id = user_basic.user_id
+    and user_info.year_scope = #{yearScope}
+    and opinion.manager_id = manager.manager_id
+    and manager.school_id = major.school_id
+    and manager.grade = major.grade
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tas
     where tas_id = #{tasId,jdbcType=BIGINT}

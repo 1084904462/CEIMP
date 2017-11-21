@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.TasBean;
 import org.obsidian.ceimp.dao.TasMapper;
 import org.obsidian.ceimp.entity.Tas;
 import org.obsidian.ceimp.entity.TasExample;
@@ -45,5 +46,12 @@ public class TasServiceImpl implements TasService {
             return null;
         }
         return list;
+    }
+
+    @Override
+    public TasBean getTasBeanByUserIdAndYearScope(Long userId, int yearScope) {
+        TasBean tasBean = tasMapper.selectTasBeanByUserIdAndYearScope(userId,yearScope);
+        tasBean.setTs(tasBean.getTe()-1);
+        return tasBean;
     }
 }

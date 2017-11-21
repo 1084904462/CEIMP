@@ -1,12 +1,8 @@
 package org.obsidian.ceimp.controller.user;
 
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.AwardBean;
-import org.obsidian.ceimp.bean.NgBean;
-import org.obsidian.ceimp.bean.NisBean;
-import org.obsidian.ceimp.bean.UserLogBean;
-import org.obsidian.ceimp.entity.Ng;
-import org.obsidian.ceimp.entity.Nis;
+import org.obsidian.ceimp.bean.*;
+import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +102,47 @@ public class ScholarshipController {
         logger.info(nisBean);
         model.addAttribute("nisBean",nisBean);
         return "user/scholarship/nis";
+    }
+
+    @GetMapping("/pgs")
+    public String pageNgs(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Pgs pgs = pgsService.selectByUserIdAndYearScope(userId,yearScope);
+        if(pgs == null){
+            return "redirect:/scholarship/index";
+        }
+        PgsBean pgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(pgsBean);
+        model.addAttribute("pgsBean",pgsBean);
+        return "user/scholarship/pgs";
+    }
+
+    @GetMapping("/ss")
+    public String pageSs(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Ss ss = ssService.selectByUserIdAndYearScope(userId,yearScope);
+        if(ss == null){
+            return "redirect:/scholarship/index";
+        }
+        SsBean ssBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(ssBean);
+        model.addAttribute("ssBean",ssBean);
+        return "user/scholarship/ss";
+    }
+
+    @GetMapping("/tas")
+    public String pageTas(HttpSession session,Model model){
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Tas tas = tasService.selectByUserIdAndYearScope(userId,yearScope);
+        if(tas == null){
+            return "redirect:/scholarship/index";
+        }
+        TasBean tasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(tasBean);
+        model.addAttribute("tasBean",tasBean);
+        return "user/scholarship/tas";
     }
 }

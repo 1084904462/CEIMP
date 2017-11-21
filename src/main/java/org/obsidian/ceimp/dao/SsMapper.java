@@ -2,6 +2,7 @@ package org.obsidian.ceimp.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.entity.Ss;
 import org.obsidian.ceimp.entity.SsExample;
 
@@ -27,4 +28,6 @@ public interface SsMapper {
     int updateByPrimaryKeySelective(Ss record);
 
     int updateByPrimaryKey(Ss record);
+
+    SsBean selectSsBeanByUserIdAndYearScope(Long userId, int yearScope);
 }

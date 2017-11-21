@@ -102,6 +102,26 @@
     from pgs
     where pgs_id = #{pgsId,jdbcType=BIGINT}
   </select>
+  <select id="selectPgsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.PgsBean">
+    select pgs.yearScope te,major.name major,class_num.num classNum,user_basic.username username,
+    user_basic.sex sex,user_basic.birth birth,user_basic.account account,user_basic.nation nation,
+    user_basic.entrance entrance,user_basic.political political,user_basic.phone phone,user_basic.identity identity,
+    user_info.gp gpRank,user_info.ce ceRank,major.sum majorSum,user_info.pass_sum passSum,user_info.class_sum classSum,
+    pgs.date1 date1,pgs.award1 award1,pgs.unit1 unit1,pgs.date2 date2,pgs.award2 award2,pgs.unit2 unit2,pgs.date3 date3,
+    pgs.award3 award3,pgs.unit3 unit3,pgs.date4 date4,pgs.award4 award4,pgs.unit4 unit4,pgs.apply_reason applyReason,
+    pgs.recommend_reason recommendReason,opinion.pgs_opinion opinion
+    from manager,pgs,major,class_num,user_basic,user_info,opinion
+    where pgs.user_id = user_basic.user_id
+    and pgs.year_scope = #{yearScope}
+    and major.major_id = class_num.major_id
+    and class_num.class_num_id = user_basic.class_num_id
+    and user_basic.user_id = #{userId}
+    and user_info.user_id = user_basic.user_id
+    and user_info.year_scope = #{yearScope}
+    and opinion.manager_id = manager.manager_id
+    and manager.school_id = major.school_id
+    and manager.grade = major.grade
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from pgs
     where pgs_id = #{pgsId,jdbcType=BIGINT}
