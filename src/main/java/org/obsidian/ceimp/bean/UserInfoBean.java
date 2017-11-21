@@ -4,38 +4,90 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2017/11/19.
  */
 public class UserInfoBean {
-    private String account;
-    private String username;
-
-    public UserInfoBean() {
-    }
-
-    public UserInfoBean(String account, String username) {
-        this.account = account;
-        this.username = username;
-    }
+    private String charact;
+    private String study;
+    private String ability;
+    private String total;
+    private String gpRank;
+    private String ceRank;
+    private String passSum;
+    private String classSum;
 
     @Override
     public String toString() {
         return "UserInfoBean{" +
-                "account='" + account + '\'' +
-                ", username='" + username + '\'' +
+                "charact='" + charact + '\'' +
+                ", study='" + study + '\'' +
+                ", ability='" + ability + '\'' +
+                ", total='" + total + '\'' +
+                ", gpRank='" + gpRank + '\'' +
+                ", ceRank='" + ceRank + '\'' +
+                ", passSum='" + passSum + '\'' +
+                ", classSum='" + classSum + '\'' +
                 '}';
     }
 
-    public String getAccount() {
-        return account;
+    public String getCharact() {
+        return charact;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setCharact(String charact) {
+        this.charact = charact;
     }
 
-    public String getUsername() {
-        return username;
+    public String getStudy() {
+        return study;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStudy(String study) {
+        this.study = study;
+    }
+
+    public String getAbility() {
+        return ability;
+    }
+
+    public void setAbility(String ability) {
+        this.ability = ability;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public String getGpRank() {
+        return gpRank;
+    }
+
+    public void setGpRank(String gpRank) {
+        this.gpRank = gpRank;
+    }
+
+    public String getCeRank() {
+        return ceRank;
+    }
+
+    public void setCeRank(String ceRank) {
+        this.ceRank = ceRank;
+    }
+
+    public String getPassSum() {
+        return passSum;
+    }
+
+    public void setPassSum(String passSum) {
+        this.passSum = passSum;
+    }
+
+    public String getClassSum() {
+        return classSum;
+    }
+
+    public void setClassSum(String classSum) {
+        this.classSum = classSum;
     }
 }

@@ -5,6 +5,7 @@ package org.obsidian.ceimp.bean;
  */
 public class UserBasicBean {
     private String major;
+    private Integer majorSum;
     private String classNum;
     private String username;
     private String sex;
@@ -21,6 +22,7 @@ public class UserBasicBean {
     public String toString() {
         return "UserBasicBean{" +
                 "major='" + major + '\'' +
+                ", majorSum='" + majorSum + '\'' +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
@@ -41,6 +43,14 @@ public class UserBasicBean {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public Integer getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(Integer majorSum) {
+        this.majorSum = majorSum;
     }
 
     public String getClassNum() {

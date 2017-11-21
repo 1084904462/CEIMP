@@ -37,7 +37,7 @@ public class PgsBean {
 
     private Integer majorSum;
 
-    private Integer passSum;
+    private String passSum;
 
     private String classSum;
 
@@ -199,11 +199,11 @@ public class PgsBean {
         this.majorSum = majorSum;
     }
 
-    public Integer getPassSum() {
+    public String getPassSum() {
         return passSum;
     }
 
-    public void setPassSum(Integer passSum) {
+    public void setPassSum(String passSum) {
         this.passSum = passSum;
     }
 

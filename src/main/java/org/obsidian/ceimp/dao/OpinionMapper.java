@@ -8,6 +8,8 @@ import org.obsidian.ceimp.entity.OpinionExample;
 import java.util.List;
 
 public interface OpinionMapper {
+    Opinion selectByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+
     int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(@Param("managerId") Long managerId,
         @Param("yearScope") Integer yearScope,@Param("scholarshipOpinionBean")ScholarshipOpinionBean scholarshipOpinionBean);
 

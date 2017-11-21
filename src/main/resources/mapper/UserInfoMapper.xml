@@ -14,6 +14,11 @@
     <result column="pass_sum" jdbcType="VARCHAR" property="passSum" />
     <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
   </resultMap>
+  <select id="selectUserInfoBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.UserInfoBean">
+    select user_info.charact charact,user_info.study study,user_info.ability ability,user_info.total total,
+    user_info.gp gpRank,user_info.ce ceRank,user_info.pass_sum passSum,user_info.class_sum classSum
+    from user_info where user_info.user_id = #{userId} and user_info.year_scope = #{yearScope}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

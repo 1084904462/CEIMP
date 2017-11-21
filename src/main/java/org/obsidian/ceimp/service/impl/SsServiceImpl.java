@@ -51,7 +51,9 @@ public class SsServiceImpl implements SsService {
     @Override
     public SsBean getSsBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         SsBean ssBean = ssMapper.selectSsBeanByUserIdAndYearScope(userId,yearScope);
-        ssBean.setTs(ssBean.getTe()-1);
+        ssBean.setTs(TimeUtil.getInstance().getThisYear()-1);
+        ssBean.setTe(TimeUtil.getInstance().getThisYear());
+
         return ssBean;
     }
 }
