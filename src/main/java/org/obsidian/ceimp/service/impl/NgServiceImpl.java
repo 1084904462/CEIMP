@@ -51,11 +51,8 @@ public class NgServiceImpl implements NgService {
     @Override
     public NgBean getNgBeanByUserIdAndYearScope(Long userId,Integer yearScope) {
         NgBean ngBean = ngMapper.selectNgBeanByUserIdAndYearScope(userId,yearScope);
-<<<<<<< HEAD
-        ngBean.setTe(ngBean.getTs() - 1);
-=======
         ngBean.setTs(ngBean.getTe() - 1);
->>>>>>> 3c9244739baf5c2903377a58080f76d1052dacdf
+
         return ngBean;
     }
 }

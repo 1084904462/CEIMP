@@ -104,7 +104,7 @@
     where pgs_id = #{pgsId,jdbcType=BIGINT}
   </select>
   <select id="selectPgsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.PgsBean">
-    select pgs.yearScope te,major.name major,class_num.num classNum,user_basic.username username,
+    select pgs.year_scope te,major.name major,class_num.num classNum,user_basic.username username,
     user_basic.sex sex,user_basic.birth birth,user_basic.account account,user_basic.nation nation,
     user_basic.entrance entrance,user_basic.political political,user_basic.phone phone,user_basic.identity identity,
     user_info.gp gpRank,user_info.ce ceRank,major.sum majorSum,user_info.pass_sum passSum,user_info.class_sum classSum,

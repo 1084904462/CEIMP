@@ -90,7 +90,7 @@
     where tas_id = #{tasId,jdbcType=BIGINT}
   </select>
   <select id="selectTasBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.TasBean">
-    select tas.yearScope te,major.name major,class_num.num classNum,user_basic.username username,
+    select tas.year_scope te,major.name major,class_num.num classNum,user_basic.username username,
     user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_basic.political political,
     user_basic.job job,user_info.character character,user_info.study study,user_info.ability ability,user_info.all all,
     user_info.ce ceRank,major.sum majorSum,tas.reason reason,opinion.tas_opinion opinion

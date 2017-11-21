@@ -29,5 +29,5 @@ public interface SsMapper {
 
     int updateByPrimaryKey(Ss record);
 
-    SsBean selectSsBeanByUserIdAndYearScope(Long userId, int yearScope);
+    SsBean selectSsBeanByUserIdAndYearScope(@Param("userId") Long userId,@Param("yearScope") int yearScope);
 }

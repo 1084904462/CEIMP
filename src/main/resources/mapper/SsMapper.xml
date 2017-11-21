@@ -91,7 +91,7 @@
     where ss_id = #{ssId,jdbcType=BIGINT}
   </select>
   <select id="selectSsBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.SsBean">
-    select ss.yearScope te,major.name major,class_num.num classNum,user_basic.username username,
+    select ss.year_scope te,major.name major,class_num.num classNum,user_basic.username username,
     user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_basic.political political,
     user_basic.job job,user_info.character character,user_info.study study,user_info.ability ability,user_info.all all,
     user_info.ce ceRank,major.sum majorSum,ss.level level,ss.reason reason,opinion.ss_opinion opinion
