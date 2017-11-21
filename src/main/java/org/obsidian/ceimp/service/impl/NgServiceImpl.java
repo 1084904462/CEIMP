@@ -63,21 +63,30 @@ public class NgServiceImpl implements NgService {
     @Override
     public NgBean getNgBeanByUserIdAndYearScope(Long userId,Integer yearScope) {
         NgBean ngBean = ngMapper.selectNgBeanByUserIdAndYearScope(userId,yearScope);
-<<<<<<< HEAD
-        ngBean.setTe(ngBean.getTs() + 1);
-=======
         ngBean.setTs(TimeUtil.getInstance().getThisYear());
         ngBean.setTe(TimeUtil.getInstance().getThisYear() + 1);
->>>>>>> f91e594ac75294ea30119856d0053e1c7231ff2b
         return ngBean;
     }
 
     @Transactional
     @Override
-    public int addNgBeanByUserIdAndYearScope(NgBean ngBean,Long userId) {
+    public Ng updateNgBeanByUserIdAndYearScope(NgBean ngBean,Long userId,int yearScope) {
         UserBasic userBasic = userBasicMapper.selectByPrimaryKey(userId);
         BeanUtils.copyProperties(ngBean,userBasic);
-        Award award = awardMapper.selectByUserIdAndSubNameAndYearScope(userId,"ng",ngBean.getTs());
-        award.
+        Ng ng = new Ng();
+        BeanUtils.copyProperties(ngBean,ng);
+        ng.setUserId(userId);
+        ng.setYearScope(yearScope);
+        return ng;
+    }
+
+    @Transactional
+    @Override
+    public int insertNgBeanByUserIdAndYearScope(NgBean ngBean, Long userId,int yearScope) {
+        Award award = awardMapper.selectByUserIdAndSubNameAndYearScope(userId,"ng",yearScope);
+        award.setIsFilled(1);
+        awardMapper.updateByPrimaryKey(award);
+        Ng ng = updateNgBeanByUserIdAndYearScope(ngBean,userId,yearScope);
+        return ngMapper.insertSelective(ng);
     }
 }
