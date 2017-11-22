@@ -3,6 +3,7 @@ package org.obsidian.ceimp.service.impl;
 import org.obsidian.ceimp.bean.NisBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserInfoBean;
+import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.dao.NisMapper;
 import org.obsidian.ceimp.entity.Nis;
 import org.obsidian.ceimp.entity.NisExample;
@@ -11,12 +12,15 @@ import org.obsidian.ceimp.service.NisService;
 import org.obsidian.ceimp.service.OpinionService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.service.UserInfoService;
-import org.obsidian.ceimp.util.TimeUtil;
+import org.obsidian.ceimp.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/18.
@@ -112,4 +116,93 @@ public class NisServiceImpl implements NisService {
         }
         return nisBean;
     }
+
+    @Transactional
+    @Override
+    public int insertNis(Long userId, Integer yearScope, NisBean nisBean) {
+        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
+        Nis nis = new Nis();
+        nis.setUserId(userId);
+        nis.setYearScope(yearScope);
+        nis.setDate1(nisBean.getDate1());
+        nis.setAward1(nisBean.getAward1());
+        nis.setUnit1(nisBean.getUnit1());
+        nis.setDate2(nisBean.getDate2());
+        nis.setAward2(nisBean.getAward2());
+        nis.setUnit2(nisBean.getUnit2());
+        nis.setDate3(nisBean.getDate3());
+        nis.setAward3(nisBean.getAward3());
+        nis.setUnit3(nisBean.getUnit3());
+        nis.setDate4(nisBean.getDate4());
+        nis.setAward4(nisBean.getAward4());
+        nis.setUnit4(nisBean.getUnit4());
+        nis.setResident(nisBean.getResident());
+        nis.setIncomeSource(nisBean.getIncomeSource());
+        nis.setMonthIncome(nisBean.getMonthIncome());
+        nis.setFamilySum(nisBean.getFamilySum());
+        nis.setAddress(nisBean.getAddress());
+        nis.setPostalCode(nisBean.getPostalCode());
+        nis.setSituation(nisBean.getSituation());
+        nis.setApplyReason(nisBean.getApplyReason());
+        return nisMapper.insertSelective(nis);
+    }
+
+    @Transactional
+    @Override
+    public int updateNis(Long userId, Integer yearScope, NisBean nisBean) {
+        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
+        Nis nis = new Nis();
+        nis.setUserId(userId);
+        nis.setYearScope(yearScope);
+        nis.setDate1(nisBean.getDate1());
+        nis.setAward1(nisBean.getAward1());
+        nis.setUnit1(nisBean.getUnit1());
+        nis.setDate2(nisBean.getDate2());
+        nis.setAward2(nisBean.getAward2());
+        nis.setUnit2(nisBean.getUnit2());
+        nis.setDate3(nisBean.getDate3());
+        nis.setAward3(nisBean.getAward3());
+        nis.setUnit3(nisBean.getUnit3());
+        nis.setDate4(nisBean.getDate4());
+        nis.setAward4(nisBean.getAward4());
+        nis.setUnit4(nisBean.getUnit4());
+        nis.setResident(nisBean.getResident());
+        nis.setIncomeSource(nisBean.getIncomeSource());
+        nis.setMonthIncome(nisBean.getMonthIncome());
+        nis.setFamilySum(nisBean.getFamilySum());
+        nis.setAddress(nisBean.getAddress());
+        nis.setPostalCode(nisBean.getPostalCode());
+        nis.setSituation(nisBean.getSituation());
+        nis.setApplyReason(nisBean.getApplyReason());
+        NisExample example = new NisExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        return nisMapper.updateByExampleSelective(nis,example);
+    }
+
+    @Override
+    public void getNisWord(NisBean nisBean, HttpServletResponse response) throws IOException {
+        String modelName = null;
+        if(nisBean.getResident().equals("城镇") && nisBean.getSituation().equals("家庭经济特别困难")){
+            modelName = "国家励志奖学金模板1";
+        }
+        else if(nisBean.getResident().equals("城镇") && nisBean.getSituation().equals("家庭经济一般困难")){
+            modelName = "国家励志奖学金模板2";
+        }
+        else if(nisBean.getResident().equals("农村") && nisBean.getSituation().equals("家庭经济特别困难")){
+            modelName = "国家励志奖学金模板3";
+        }
+        else if(nisBean.getResident().equals("农村") && nisBean.getSituation().equals("家庭经济一般困难")){
+            modelName = "国家励志奖学金模板4";
+        }
+        ZipInfoBean zipInfoBean = new ZipInfoBean(nisBean.getAccount(),nisBean.getUsername(),"国家励志奖学金");
+        String modelInputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
+        String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl("nis",zipInfoBean);
+        Map<String,String> textMap = TextMapUtil.getInstance().getNisMap(nisBean);
+        WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
+        String fileName = UrlUtil.getInstance().getWordFileName(zipInfoBean);
+        DownloadUtil.getInstance().download(wordOutputUrl,response,fileName);
+        DeleteUtil.getInstance().delete(wordOutputUrl);
+    }
+
+
 }

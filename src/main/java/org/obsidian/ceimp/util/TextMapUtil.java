@@ -68,43 +68,134 @@ public class TextMapUtil {
     }
 
     public Map<String,String> getNisMap(NisBean nisBean){
+        String identity = nisBean.getIdentity();
+        char a = 'a';
         Map<String,String> textMap = new HashMap<>();
-
+        textMap.put("ts",nisBean.getTs().toString());
+        textMap.put("te",nisBean.getTe().toString());
+        textMap.put("school",nisBean.getSchool());
+        textMap.put("major",nisBean.getMajor());
+        textMap.put("classId",nisBean.getClassNum());
+        textMap.put("username",nisBean.getUsername());
+        textMap.put("sex",nisBean.getSex());
+        textMap.put("birth",nisBean.getBirth());
+        textMap.put("userId",nisBean.getAccount());
+        textMap.put("nation",nisBean.getNation());
+        textMap.put("entrance",nisBean.getEntrance());
+        textMap.put("political",nisBean.getPolitical());
+        textMap.put("phone",nisBean.getPhone());
+        for(int i=0;i<18;i++){
+            textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
+        }
+        textMap.put("gpRank",nisBean.getGpRank() + "/" + nisBean.getMajorSum());
+        textMap.put("classSum",nisBean.getClassSum());
+        textMap.put("passSum",nisBean.getPassSum());
+        textMap.put("ceRank",nisBean.getCeRank() + "/" + nisBean.getMajorSum());
+        textMap.put("date1",nisBean.getDate1());
+        textMap.put("award1",nisBean.getAward1());
+        textMap.put("unit1",nisBean.getUnit1());
+        textMap.put("date2",nisBean.getDate2());
+        textMap.put("award2",nisBean.getAward2());
+        textMap.put("unit2",nisBean.getUnit2());
+        textMap.put("date3",nisBean.getDate3());
+        textMap.put("award3",nisBean.getAward3());
+        textMap.put("unit3",nisBean.getUnit3());
+        textMap.put("date4",nisBean.getDate4());
+        textMap.put("award4",nisBean.getAward4());
+        textMap.put("unit4",nisBean.getUnit4());
+        textMap.put("incomeSource",nisBean.getIncomeSource());
+        textMap.put("monthIncome",nisBean.getMonthIncome());
+        textMap.put("familySum",nisBean.getFamilySum());
+        textMap.put("address",nisBean.getAddress());
+        textMap.put("postalCode",nisBean.getPostalCode());
+        textMap.put("applyReason",nisBean.getApplyReason());
+        textMap.put("opinion",nisBean.getOpinion());
         return textMap;
     }
 
     public Map<String,String> getPgsMap(PgsBean pgsBean){
+        String identity = pgsBean.getIdentity();
+        char a = 'a';
         Map<String,String> textMap = new HashMap<>();
-
+        textMap.put("ts",pgsBean.getTs().toString());
+        textMap.put("te",pgsBean.getTe().toString());
+        textMap.put("school",pgsBean.getSchool());
+        textMap.put("userId",pgsBean.getAccount());
+        textMap.put("username",pgsBean.getUsername());
+        textMap.put("sex",pgsBean.getSex());
+        textMap.put("birth",pgsBean.getBirth());
+        textMap.put("political",pgsBean.getPolitical());
+        textMap.put("nation",pgsBean.getNation());
+        textMap.put("entrance",pgsBean.getEntrance());
+        textMap.put("major",pgsBean.getMajor());
+        textMap.put("phone",pgsBean.getPhone());
+        for(int i=0;i<18;i++){
+            textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
+        }
+        textMap.put("gpRank",pgsBean.getGpRank() + "/" + pgsBean.getMajorSum());
+        textMap.put("classSum",pgsBean.getClassSum());
+        textMap.put("passSum",pgsBean.getPassSum());
+        textMap.put("ceRank",pgsBean.getCeRank() + "/" + pgsBean.getMajorSum());
+        textMap.put("date1",pgsBean.getDate1());
+        textMap.put("award1",pgsBean.getAward1());
+        textMap.put("unit1",pgsBean.getUnit1());
+        textMap.put("date2",pgsBean.getDate2());
+        textMap.put("award2",pgsBean.getAward2());
+        textMap.put("unit2",pgsBean.getUnit2());
+        textMap.put("date3",pgsBean.getDate3());
+        textMap.put("award3",pgsBean.getAward3());
+        textMap.put("unit3",pgsBean.getUnit3());
+        textMap.put("date4",pgsBean.getDate4());
+        textMap.put("award4",pgsBean.getAward4());
+        textMap.put("unit4",pgsBean.getUnit4());
+        textMap.put("applyReason",pgsBean.getApplyReason());
+        textMap.put("recommendReason",pgsBean.getRecommendReason());
+        textMap.put("opinion",pgsBean.getOpinion());
         return textMap;
     }
 
     public Map<String,String> getSsMap(SsBean ssBean){
         Map<String,String> textMap = new HashMap<>();
-        textMap.put("ts","2016");
-        textMap.put("te","2017");
-        textMap.put("school","信息与电子工程学院");
-        textMap.put("classId","软件工程151");
-        textMap.put("username","陈伟");
-        textMap.put("userId","1150299070");
-        textMap.put("sex","男");
-        textMap.put("nation","汉族");
-        textMap.put("political","共青团员");
-        textMap.put("job","无");
-        textMap.put("charact","13.2");
-        textMap.put("study","72.3");
-        textMap.put("ability","3.5");
-        textMap.put("all","79");
-        textMap.put("rank","10/74");
-        textMap.put("level","优秀学生一等奖学金");
-        textMap.put("reason","理由BALABALA");
-        textMap.put("opinion","意见BALABALA");
+        textMap.put("ts",ssBean.getTs().toString());
+        textMap.put("te",ssBean.getTe().toString());
+        textMap.put("school",ssBean.getSchool());
+        textMap.put("classId",ssBean.getMajor() + ssBean.getClassNum());
+        textMap.put("username",ssBean.getUsername());
+        textMap.put("userId",ssBean.getAccount());
+        textMap.put("sex",ssBean.getSex());
+        textMap.put("nation",ssBean.getNation());
+        textMap.put("political",ssBean.getPolitical());
+        textMap.put("job",ssBean.getJob());
+        textMap.put("charact",ssBean.getCharact());
+        textMap.put("study",ssBean.getStudy());
+        textMap.put("ability",ssBean.getAbility());
+        textMap.put("total",ssBean.getTotal());
+        textMap.put("ceRank",ssBean.getCeRank() + "/" + ssBean.getMajorSum());
+        textMap.put("rank",ssBean.getRank());
+        textMap.put("reason",ssBean.getReason());
+        textMap.put("opinion",ssBean.getOpinion());
         return textMap;
     }
 
     public Map<String,String> getTasMap(TasBean tasBean){
         Map<String,String> textMap = new HashMap<>();
-
+        textMap.put("ts",tasBean.getTs().toString());
+        textMap.put("te",tasBean.getTe().toString());
+        textMap.put("school",tasBean.getSchool());
+        textMap.put("classId",tasBean.getMajor() + tasBean.getClassNum());
+        textMap.put("username",tasBean.getUsername());
+        textMap.put("userId",tasBean.getAccount());
+        textMap.put("sex",tasBean.getSex());
+        textMap.put("nation",tasBean.getNation());
+        textMap.put("political",tasBean.getPolitical());
+        textMap.put("job",tasBean.getJob());
+        textMap.put("charact",tasBean.getCharact());
+        textMap.put("study",tasBean.getStudy());
+        textMap.put("ability",tasBean.getAbility());
+        textMap.put("total",tasBean.getTotal());
+        textMap.put("ceRank",tasBean.getCeRank() + "/" + tasBean.getMajorSum());
+        textMap.put("reason",tasBean.getReason());
+        textMap.put("opinion",tasBean.getOpinion());
         return textMap;
     }
 }

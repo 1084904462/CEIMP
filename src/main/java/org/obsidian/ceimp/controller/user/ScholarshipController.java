@@ -2,7 +2,7 @@ package org.obsidian.ceimp.controller.user;
 
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
-import org.obsidian.ceimp.entity.Ng;
+import org.obsidian.ceimp.entity.*;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,5 +168,77 @@ public class ScholarshipController {
         NgBean wordNgBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
         logger.info(wordNgBean);
         ngService.getNgWord(wordNgBean,response);
+    }
+
+    @PostMapping("/nis")
+    public void nisSubmit(NisBean nisBean,HttpSession session,HttpServletResponse response) throws IOException {
+        logger.info(nisBean);
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Nis nis = nisService.selectByUserIdAndYearScope(userId,yearScope);
+        if(nis == null){
+            nisService.insertNis(userId,yearScope,nisBean);
+            awardService.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,"nis");
+        }
+        else{
+            nisService.updateNis(userId,yearScope,nisBean);
+        }
+        NisBean wordNisBean = nisService.getNisBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(wordNisBean);
+        nisService.getNisWord(wordNisBean,response);
+    }
+
+    @PostMapping("/pgs")
+    public void pgsSubmit(PgsBean pgsBean,HttpSession session,HttpServletResponse response) throws IOException {
+        logger.info(pgsBean);
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Pgs pgs = pgsService.selectByUserIdAndYearScope(userId,yearScope);
+        if(pgs == null){
+            pgsService.insertPgs(userId,yearScope,pgsBean);
+            awardService.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,"pgs");
+        }
+        else{
+            pgsService.updatePgs(userId,yearScope,pgsBean);
+        }
+        PgsBean wordPgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(wordPgsBean);
+        pgsService.getPgsWord(wordPgsBean,response);
+    }
+
+    @PostMapping("/ss")
+    public void ssSubmit(SsBean ssBean,HttpSession session,HttpServletResponse response) throws IOException {
+        logger.info(ssBean);
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Ss ss = ssService.selectByUserIdAndYearScope(userId,yearScope);
+        if(ss == null){
+            ssService.insertSs(userId,yearScope,ssBean);
+            awardService.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,"ss");
+        }
+        else{
+            ssService.updateSs(userId,yearScope,ssBean);
+        }
+        SsBean wordSsBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(wordSsBean);
+        ssService.getSsWord(wordSsBean,response);
+    }
+
+    @PostMapping("/tas")
+    public void tasSubmit(TasBean tasBean,HttpSession session,HttpServletResponse response) throws IOException {
+        logger.info(tasBean);
+        Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Tas tas = tasService.selectByUserIdAndYearScope(userId,yearScope);
+        if(tas == null){
+            tasService.insertTas(userId,yearScope,tasBean);
+            awardService.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,"tas");
+        }
+        else{
+            tasService.updateTas(userId,yearScope,tasBean);
+        }
+        TasBean wordTasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
+        logger.info(wordTasBean);
+        tasService.getTasWord(wordTasBean,response);
     }
 }

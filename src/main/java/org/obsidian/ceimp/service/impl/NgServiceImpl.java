@@ -200,8 +200,6 @@ public class NgServiceImpl implements NgService {
         ZipInfoBean zipInfoBean = new ZipInfoBean(ngBean.getAccount(),ngBean.getUsername(),"国家助学金");
         String modelInputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
         String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl("ng",zipInfoBean);
-        System.out.println(modelInputUrl);
-        System.out.println(wordOutputUrl);
         Map<String,String> textMap = TextMapUtil.getInstance().getNgMap(ngBean);
         WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
         String fileName = UrlUtil.getInstance().getWordFileName(zipInfoBean);

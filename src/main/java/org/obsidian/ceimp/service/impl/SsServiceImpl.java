@@ -3,6 +3,7 @@ package org.obsidian.ceimp.service.impl;
 import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserInfoBean;
+import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.dao.SsMapper;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.entity.Ss;
@@ -11,12 +12,15 @@ import org.obsidian.ceimp.service.OpinionService;
 import org.obsidian.ceimp.service.SsService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.service.UserInfoService;
-import org.obsidian.ceimp.util.TimeUtil;
+import org.obsidian.ceimp.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/18.
@@ -92,5 +96,42 @@ public class SsServiceImpl implements SsService {
             ssBean.setOpinion(opinion.getSsOpinion());
         }
         return ssBean;
+    }
+
+    @Transactional
+    @Override
+    public int insertSs(Long userId, Integer yearScope, SsBean ssBean) {
+        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
+        Ss ss = new Ss();
+        ss.setUserId(userId);
+        ss.setYearScope(yearScope);
+        ss.setReason(ssBean.getReason());
+        return ssMapper.insertSelective(ss);
+    }
+
+    @Transactional
+    @Override
+    public int updateSs(Long userId, Integer yearScope, SsBean ssBean) {
+        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
+        Ss ss = new Ss();
+        ss.setUserId(userId);
+        ss.setYearScope(yearScope);
+        ss.setReason(ssBean.getReason());
+        SsExample example = new SsExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        return ssMapper.updateByExampleSelective(ss,example);
+    }
+
+    @Override
+    public void getSsWord(SsBean ssBean, HttpServletResponse response) throws IOException {
+        String modelName = "校奖学金模板";
+        ZipInfoBean zipInfoBean = new ZipInfoBean(ssBean.getAccount(),ssBean.getUsername(),ssBean.getRank());
+        String modelInputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
+        String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl("ss",zipInfoBean);
+        Map<String,String> textMap = TextMapUtil.getInstance().getSsMap(ssBean);
+        WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
+        String fileName = UrlUtil.getInstance().getWordFileName(zipInfoBean);
+        DownloadUtil.getInstance().download(wordOutputUrl,response,fileName);
+        DeleteUtil.getInstance().delete(wordOutputUrl);
     }
 }

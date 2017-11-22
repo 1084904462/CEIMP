@@ -1,8 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.NgBean;
-import org.obsidian.ceimp.bean.UserBasicBean;
-import org.obsidian.ceimp.bean.UserSearchBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.UserBasic;
 
 import java.io.UnsupportedEncodingException;
@@ -28,4 +26,12 @@ public interface UserBasicService {
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
 
     int updateByUserIdAndNgBean(Long userId,NgBean ngBean);
+
+    int updateByUserIdAndNisBean(Long userId, NisBean nisBean);
+
+    int updateByUserIdAndPgsBean(Long userId, PgsBean pgsBean);
+
+    int updateByUserIdAndSsBean(Long userId,SsBean ssBean);
+
+    int updateByUserIdAndTasBean(Long userId,TasBean tasBean);
 }
