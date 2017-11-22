@@ -4,41 +4,24 @@ package org.obsidian.ceimp.bean;
  * Created by Administrator on 2017/11/20.
  */
 public class TasBean {
-
     private Integer ts;
-
     private Integer te;
-
+    private String school;
     private String major;
-
     private String classNum;
-
     private String username;
-
     private String sex;
-
     private String account;
-
     private String nation;
-
     private String political;
-
     private String job;
-
     private String charact;
-
     private String study;
-
     private String ability;
-
     private String total;
-
     private String ceRank;
-
-    private String majorSum;
-
+    private Integer majorSum;
     private String reason;
-
     private String opinion;
 
     @Override
@@ -46,6 +29,7 @@ public class TasBean {
         return "TasBean{" +
                 "ts=" + ts +
                 ", te=" + te +
+                ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
@@ -59,10 +43,18 @@ public class TasBean {
                 ", ability='" + ability + '\'' +
                 ", total='" + total + '\'' +
                 ", ceRank='" + ceRank + '\'' +
-                ", majorSum='" + majorSum + '\'' +
+                ", majorSum=" + majorSum +
                 ", reason='" + reason + '\'' +
                 ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public Integer getTs() {
@@ -185,11 +177,11 @@ public class TasBean {
         this.ceRank = ceRank;
     }
 
-    public String getMajorSum() {
+    public Integer getMajorSum() {
         return majorSum;
     }
 
-    public void setMajorSum(String majorSum) {
+    public void setMajorSum(Integer majorSum) {
         this.majorSum = majorSum;
     }
 

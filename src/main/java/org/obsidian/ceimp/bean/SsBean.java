@@ -4,50 +4,34 @@ package org.obsidian.ceimp.bean;
  * Created by Administrator on 2017/11/20.
  */
 public class SsBean {
-
     private Integer ts;
-
     private Integer te;
-
+    private String school;
     private String major;
-
     private String classNum;
-
     private String username;
-
     private String sex;
-
     private String account;
-
     private String nation;
-
     private String political;
-
     private String job;
-
     private String charact;
-
     private String study;
-
     private String ability;
-
     private String total;
-
     private String ceRank;
-
     private Integer majorSum;
-
     private String rank;
-
     private String reason;
-
     private String opinion;
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "SsBean{" +
                 "ts=" + ts +
                 ", te=" + te +
+                ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
@@ -66,6 +50,14 @@ public class SsBean {
                 ", reason='" + reason + '\'' +
                 ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public Integer getTs() {

@@ -53,18 +53,6 @@ public class NisServiceImpl implements NisService {
 
     @Transactional
     @Override
-    public List<Nis> selectAllByUserId(Long userId) {
-        NisExample example = new NisExample();
-        example.or().andUserIdEqualTo(userId);
-        List<Nis> list = nisMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public NisBean getNisBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         NisBean nisBean = new NisBean();
         nisBean.setTs(TimeUtil.getInstance().getThisYear() - 1);
@@ -97,6 +85,7 @@ public class NisServiceImpl implements NisService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
+            nisBean.setSchool(userBasicBean.getSchool());
             nisBean.setMajor(userBasicBean.getMajor());
             nisBean.setClassNum(userBasicBean.getClassNum());
             nisBean.setUsername(userBasicBean.getUsername());

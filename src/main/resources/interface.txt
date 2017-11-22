@@ -23,6 +23,7 @@
 		{
 			ts:String,开始时间
 			te:String,结束时间
+			school:String,
 			major:String,
 			classNum:String,
 			username:String,
@@ -80,6 +81,7 @@
 		{
 			ts:String,开始时间
 			te:String,结束时间
+			school:String,
 			major:String,
 			classNum:String,
 			username:String,
@@ -134,6 +136,7 @@
 		{
 			ts:String,开始时间
 			te:String,结束时间
+			school:String,
 			major:String,
 			classNum:String,
 			username:String,
@@ -182,6 +185,7 @@
 		{
 			ts:String,开始时间
 			te:String,结束时间
+			school:String,
 			major:String,
 			classNum:String,
 			username:String,
@@ -216,6 +220,7 @@
 		{
 			ts:String,开始时间
 			te:String,结束时间
+			school:String,
 			major:String,
 			classNum:String,
 			username:String,

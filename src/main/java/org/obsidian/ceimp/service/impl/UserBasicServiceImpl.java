@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.NgBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserSearchBean;
 import org.obsidian.ceimp.dao.UserBasicMapper;
@@ -82,5 +83,18 @@ public class UserBasicServiceImpl implements UserBasicService {
     @Override
     public UserBasicBean selectUserBasicBeanByUserId(Long userId) {
         return userBasicMapper.selectUserBasicBeanByUserId(userId);
+    }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndNgBean(Long userId,NgBean ngBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(ngBean.getSex());
+        userBasic.setPolitical(ngBean.getPolitical());
+        userBasic.setNation(ngBean.getNation());
+        userBasic.setPhone(ngBean.getPhone());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
     }
 }

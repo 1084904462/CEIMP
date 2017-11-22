@@ -8,8 +8,6 @@ import org.obsidian.ceimp.entity.PgsExample;
 import java.util.List;
 
 public interface PgsMapper {
-    PgsBean selectPgsBeanByUserIdAndYearScope(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
-
     long countByExample(PgsExample example);
 
     int deleteByExample(PgsExample example);

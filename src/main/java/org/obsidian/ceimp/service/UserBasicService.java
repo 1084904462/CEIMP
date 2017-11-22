@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.NgBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserSearchBean;
 import org.obsidian.ceimp.entity.UserBasic;
@@ -25,4 +26,6 @@ public interface UserBasicService {
     List<UserSearchBean> selectByAccountAndUsername(String account, String username);
 
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
+
+    int updateByUserIdAndNgBean(Long userId,NgBean ngBean);
 }

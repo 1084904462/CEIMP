@@ -8,8 +8,6 @@ import org.obsidian.ceimp.entity.NgExample;
 import java.util.List;
 
 public interface NgMapper {
-    NgBean selectNgBeanByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
-
     long countByExample(NgExample example);
 
     int deleteByExample(NgExample example);

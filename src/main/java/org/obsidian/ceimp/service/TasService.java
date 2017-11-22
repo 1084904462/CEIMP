@@ -11,7 +11,5 @@ import java.util.List;
 public interface TasService {
     Tas selectByUserIdAndYearScope(Long userId, Integer yearScope);
 
-    List<Tas> selectAllByUserId(Long userId);
-
     TasBean getTasBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }

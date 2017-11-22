@@ -53,18 +53,6 @@ public class PgsServiceImpl implements PgsService {
 
     @Transactional
     @Override
-    public List<Pgs> selectAllByUserId(Long userId) {
-        PgsExample example = new PgsExample();
-        example.or().andUserIdEqualTo(userId);
-        List<Pgs> list = pgsMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list;
-    }
-
-    @Transactional
-    @Override
     public PgsBean getPgsBeanByUserIdAndYearScope(Long userId, Integer yearScope) {
         PgsBean pgsBean = new PgsBean();
         pgsBean.setTs(TimeUtil.getInstance().getThisYear()-1);
@@ -90,6 +78,7 @@ public class PgsServiceImpl implements PgsService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
+            pgsBean.setSchool(userBasicBean.getSchool());
             pgsBean.setMajor(userBasicBean.getMajor());
             pgsBean.setClassNum(userBasicBean.getClassNum());
             pgsBean.setUsername(userBasicBean.getUsername());

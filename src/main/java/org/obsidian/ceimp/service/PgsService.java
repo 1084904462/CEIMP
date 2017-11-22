@@ -11,7 +11,5 @@ import java.util.List;
 public interface PgsService {
     Pgs selectByUserIdAndYearScope(Long userId, Integer yearScope);
 
-    List<Pgs> selectAllByUserId(Long userId);
-
     PgsBean getPgsBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }
