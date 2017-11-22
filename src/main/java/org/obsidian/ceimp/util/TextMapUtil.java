@@ -1,5 +1,7 @@
 package org.obsidian.ceimp.util;
 
+import org.obsidian.ceimp.bean.SsBean;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,7 +35,7 @@ public class TextMapUtil {
         return textMap;
     }
 
-    public Map<String,String> getSsMap(){
+    public Map<String,String> getSsMap(SsBean ssBean){
         Map<String,String> textMap = new HashMap<>();
         textMap.put("ts","2016");
         textMap.put("te","2017");
