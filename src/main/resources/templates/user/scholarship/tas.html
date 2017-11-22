@@ -153,18 +153,17 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
+					    <div class="input-group-addon">民族</div>
+						<select name="nation" id="nation"  class="selectpicker form-control" th:value="*{nation}"></select>
+					</div>
+				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
 						<div class="input-group-addon">担任职务</div>
 						<input type="text" class="form-control" data-toggle="popover" data-content="" data-placement="bottom" data-am-popover="{theme:'danger'}" data-html="true" placeholder="无职务则写无" id="job" th:value="*{job}" name="job"/>
 					</div>
 					<div class="length-message2"></div>
 				</div>
-				<div class="form-group col-md-5">
-					<div class="input-group">
-					    <div class="input-group-addon">民族</div>
-						<select name="nation" id="nation"  class="selectpicker form-control" th:value="*{nation}"></select>
-					</div>
-				</div>
-
 				<div class="form-group col-md-12">
 					<div class="input-group" style="width: 649px;">
 					    <div class="input-group-addon" id="zhuyao">主要事迹与表现</div>

@@ -157,13 +157,6 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-						<div class="input-group-addon" >联系电话</div>
-						<input type="text" class="form-control" th:value="*{phone}" name="phone" id="phone" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
-					</div>
-					<div class="length-message2" id="phone-message"></div>
-				</div>
-				<div class="form-group col-md-5">
-					<div class="input-group">
 						<div class="input-group-addon">政治面貌</div>
 						<select class="selectpicker form-control" >
 							<option value="群众" th:selected="*{political == '群众'}">群众</option>
@@ -172,6 +165,13 @@
 							<option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
 						</select>
 					</div>
+				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon" >联系电话</div>
+						<input type="text" class="form-control" th:value="*{phone}" name="phone" id="phone" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
+					</div>
+					<div class="length-message2" id="phone-message"></div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
