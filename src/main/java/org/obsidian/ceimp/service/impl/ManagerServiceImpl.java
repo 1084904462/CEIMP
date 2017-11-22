@@ -50,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Transactional
     @Override
-    public int update(Manager manager) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public int updateManager(Manager manager) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         manager.setPassword(MD5Util.getInstance().EncoderByMd5(manager.getPassword()));
         ManagerExample example = new ManagerExample();
         example.or().andManagerIdEqualTo(manager.getManagerId());

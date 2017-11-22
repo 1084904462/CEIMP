@@ -25,38 +25,11 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int insertUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
-        return userBasicMapper.insertSelective(userBasic);
-    }
-
-    @Transactional
-    @Override
     public int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
         UserBasicExample example = new UserBasicExample();
-        example.or().andUserIdEqualTo(userBasic.getUserId());
+        example.or().andAccountEqualTo(userBasic.getAccount());
         return userBasicMapper.updateByExampleSelective(userBasic,example);
-    }
-
-    @Transactional
-    @Override
-    public int deleteUserBasic(Long userId) {
-        UserBasicExample example = new UserBasicExample();
-        example.or().andUserIdEqualTo(userId);
-        return userBasicMapper.deleteByExample(example);
-    }
-
-    @Transactional
-    @Override
-    public UserBasic selectByUserId(Long userId) {
-        UserBasicExample example = new UserBasicExample();
-        example.or().andUserIdEqualTo(userId);
-        List<UserBasic> list = userBasicMapper.selectByExample(example);
-        if(list.isEmpty()){
-            return  null;
-        }
-        return list.get(0);
     }
 
     @Transactional

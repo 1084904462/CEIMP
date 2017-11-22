@@ -168,7 +168,7 @@ public class LoginController {
                     managerSessionMap.remove(managerId);  //移出managerSessionMap中的managerId对应的session
                     logger.info("管理员" + manager.getAccount() + "重复登录");
                 }
-                ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId());
+                ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId(),manager.getGrade());
                 session.setAttribute("managerLogBean",managerLogBean);
                 managerSessionMap.put(managerId,session); //把当前登录管理员的managerId和session放入managerSessionMap
                 statusBean.setStatus("登录成功");

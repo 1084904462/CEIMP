@@ -15,5 +15,5 @@ public interface ManagerService {
 
     Manager selectByManagerId(Long managerId);
 
-    int update(Manager manager) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    int updateManager(Manager manager) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }
