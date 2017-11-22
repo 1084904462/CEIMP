@@ -16,6 +16,7 @@
 	<script th:src="@{/js/bootstrap-select.min.js}"></script>
 	<script th:src="@{/js/user/scholarship/ss.js}"></script>
 	<script th:src="@{/js/user/scholarship/ng.js}"></script>
+	<script th:src="@{/js/user/nav.js}"></script>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top">
@@ -65,6 +66,12 @@
 					</div>
 					<div class="col-md-3"></div>
 				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon" >学院</div>
+						<input type="text" class="form-control" disabled="disabled" th:value="*{school}" name="school"/>
+					</div>
+				</div>
 				 <div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon" >学号</div>
@@ -91,12 +98,6 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-						<div class="input-group-addon">出生年月</div>
-						<input type="text" class="form-control" disabled="disabled" th:value="*{birth}" name="birth"/>
-					</div>
-				</div>
-				<div class="form-group col-md-5">
-					<div class="input-group">
 						<div class="input-group-addon"  style="border-right: 1px solid #ccc;">性别</div>
 						<label class="radio-inline">
 							<input type="radio" name="sex" value="男" id="man" th:checked="*{sex=='男'}"/> 男
@@ -108,13 +109,8 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-						<div class="input-group-addon">政治面貌</div>
-						<select class="selectpicker form-control" >
-							<option value="群众" th:selected="*{political == '群众'}">群众</option>
-							<option value="共青团员" th:selected="*{political == '共青团员'}">共青团员</option>
-							<option value="预备党员" th:selected="*{political == '预备党员'}">预备党员</option>
-							<option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
-						</select>
+						<div class="input-group-addon">出生年月</div>
+						<input type="text" class="form-control" disabled="disabled" th:value="*{birth}" name="birth"/>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
@@ -123,6 +119,17 @@
 						<input type="text" class="form-control" th:value="*{phone}" name="phone" id="phone" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
 					</div>
 					<div class="length-message2" id="phone-message"></div>
+				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon">政治面貌</div>
+						<select class="selectpicker form-control" >
+							<option value="群众" th:selected="*{political == '群众'}">群众</option>
+							<option value="共青团员" th:selected="*{political == '共青团员'}">共青团员</option>
+							<option value="预备党员" th:selected="*{political == '预备党员'}">预备党员</option>
+							<option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
+						</select>
+					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">

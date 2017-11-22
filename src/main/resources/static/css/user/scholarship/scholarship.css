@@ -31,7 +31,8 @@ nav{
 .dropdown{
 	/*border-bottom:3px  solid #00B5B5;*/
 	background: #f8f8f8;
-	width: 140px;
+	width: 100%;
+	margin-right: 20px;
 }
 .dropdown-menu1{
 	margin-top: 2%;
@@ -46,9 +47,9 @@ nav{
 .dropdown-menu1 li:nth-child(1) {
 	border-bottom:1px solid #ccc ;
 }
-.dropdown-menu1 li {
+.dropdown-menu1 li a{
 	margin-top: 2%;
-	width: 110px;
+	/*width: 110px;*/
 	height: 30px;
 	line-height: 30px;
 	display: block;
