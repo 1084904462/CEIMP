@@ -4,7 +4,7 @@
 	<meta charset="UTF-8"/>
 	<title>省政府奖学金</title>
 	<link rel='stylesheet prefetch' th:href='@{/css/bootstrap.min.css}'/>
-	<link rel='stylesheet' th:href='@{/css/jquery-ui.css}'/>
+	<link rel='stylesheet' th:href='@{/css/bootstrap-select.min.css}'/>
 	<link rel='stylesheet' th:href='@{/css/user/scholarship/scholarship.css}'/>
 	<link th:href="@{/css/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
 	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
@@ -13,6 +13,7 @@
 	<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
 	<script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
 	<script th:src="@{/js/moment-with-locales.js}"></script>
+	<script th:src="@{/js/bootstrap-select.min.js}"></script>
 	<script th:src="@{/js/user/scholarship/ss.js}"></script>
 	<script th:src="@{/js/user/scholarship/pgs.js}"></script>
 </head>
@@ -90,42 +91,53 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">联系电话</div>
-					    <input type="text" class="form-control" th:value="*{phone}" name="phone"/>
+						<div class="input-group-addon">出生年月</div>
+						<input type="text" class="form-control" disabled="disabled" th:value="*{birth}" name="birth"/>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon" style="border-right: 1px solid #ccc;">性别</div>
-					    <input type="text" class="form-control" th:value="*{sex}" name="sex"/>
+						<div class="input-group-addon"  style="border-right: 1px solid #ccc;">性别</div>
+						<label class="radio-inline">
+							<input type="radio" name="sex" value="男" id="man" th:checked="*{sex=='男'}"/> 男
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="sex"  value="女" id="women" th:checked="*{sex=='女'}"/>女
+						</label>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">政治面貌</div>
-					    <input type="text" class="form-control" th:value="*{political}" name="political"/>
+						<div class="input-group-addon">政治面貌</div>
+						<select class="selectpicker form-control" >
+							<option value="群众" th:selected="*{political == '群众'}">群众</option>
+							<option value="共青团员" th:selected="*{political == '共青团员'}">共青团员</option>
+							<option value="预备党员" th:selected="*{political == '预备党员'}">预备党员</option>
+							<option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">出生年月</div>
-					     <input type="text" class="form-control" disabled="disabled" th:value="*{birth}" name="birth"/>
+						<div class="input-group-addon" >联系电话</div>
+						<input type="text" class="form-control" th:value="*{phone}" name="phone" id="phone" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
+					</div>
+					<div class="length-message2" id="phone-message"></div>
+				</div>
+				<div class="form-group col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon">民族</div>
+						<select name="nation" id="nation"  class="selectpicker form-control" th:value="*{nation}"></select>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">民族</div>
-					     <input type="text" class="form-control" th:value="*{nation}" name="nation"/>
-					</div>
-				</div>
-				<div class="form-group col-md-5">
-					<div class="input-group">
-					    <div class="input-group-addon">入学时间</div>
-					     <input type="text" class="form-control" disabled="disabled" th:value="*{entrance}" name="entrance"/>
+						<div class="input-group-addon">入学时间</div>
+						<input type="text" class="form-control" disabled="disabled" th:value="*{entrance}" name="entrance"/>
 					</div>
 				</div>
 				<div class="form-group col-md-10">
-					<div class="input-group" style="width: 609px;">
+					<div class="input-group" style="width: 642px;">
 					    <div class="input-group-addon">身份证</div>
 					     <input type="text" class="form-control" disabled="disabled" th:value="*{identity}" name="identity"/>
 					</div>
@@ -157,11 +169,11 @@
 				<div class="form-group col-md-5">
 					<div class="input-group">
 						<div class="input-group-addon">通过必修课数</div>
-						<input type="text" class="form-control" disabled="disabled" style="width: 100px;border-radius: 4px;" th:value="*{passSum}" name="passSum"/>
+						<input type="text" class="form-control" disabled="disabled" style="width: 100px;" th:value="*{passSum}" name="passSum"/>
 					</div>
 				</div>
 				<div class="form-group col-md-10">
-					<div class="input-group" style="width: 609px;">
+					<div class="input-group" style="width: 642px;">
 					    <div class="input-group-addon" style="text-align: left;border:1px solid #ccc;border-radius: 4px;">获奖情况</div>
 					</div>
 				</div>

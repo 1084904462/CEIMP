@@ -36,4 +36,10 @@ public class AwardServiceImpl implements AwardService {
     public Long selectAwardIdBySubNameAndYearScope(String subName, Integer yearScope) {
         return awardMapper.selectAwardIdBySubNameAndYearScope(subName,yearScope);
     }
+
+    @Transactional
+    @Override
+    public int updateIsFilledByUserIdAndYearScopeAndSubName(Long userId, Integer yearScope,String subName) {
+        return awardMapper.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,subName);
+    }
 }

@@ -11,7 +11,5 @@ import java.util.List;
 public interface NisService {
     Nis selectByUserIdAndYearScope(Long userId, Integer yearScope);
 
-    List<Nis> selectAllByUserId(Long userId);
-
     NisBean getNisBeanByUserIdAndYearScope(Long userId,Integer yearScope);
 }

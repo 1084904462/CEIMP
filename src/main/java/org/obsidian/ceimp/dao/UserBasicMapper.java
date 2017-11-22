@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserSearchBean;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
@@ -8,6 +9,8 @@ import org.obsidian.ceimp.entity.UserBasicExample;
 import java.util.List;
 
 public interface UserBasicMapper {
+    UserBasicBean selectUserBasicBeanByUserId(Long userId);
+
     long countByExample(UserBasicExample example);
 
     int deleteByExample(UserBasicExample example);
@@ -31,5 +34,4 @@ public interface UserBasicMapper {
     int updateByPrimaryKey(UserBasic record);
 
     List<UserSearchBean> selectByAccountAndUsername(@Param("account") String account,@Param("username") String username);
-
 }

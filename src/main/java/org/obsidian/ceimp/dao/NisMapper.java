@@ -8,8 +8,6 @@ import org.obsidian.ceimp.entity.NisExample;
 import java.util.List;
 
 public interface NisMapper {
-    NisBean getNisBeanByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
-
     long countByExample(NisExample example);
 
     int deleteByExample(NisExample example);

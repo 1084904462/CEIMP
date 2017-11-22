@@ -1,11 +1,15 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.UserInfoBean;
 import org.obsidian.ceimp.entity.UserInfo;
 import org.obsidian.ceimp.entity.UserInfoExample;
 
+import java.util.List;
+
 public interface UserInfoMapper {
+    UserInfoBean selectUserInfoBeanByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+
     long countByExample(UserInfoExample example);
 
     int deleteByExample(UserInfoExample example);

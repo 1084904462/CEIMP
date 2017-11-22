@@ -11,7 +11,5 @@ import java.util.List;
 public interface SsService {
     Ss selectByUserIdAndYearScope(Long userId, Integer yearScope);
 
-    List<Ss> selectAllByUserId(Long userId);
-
     SsBean getSsBeanByUserIdAndYearScope(Long userId, Integer yearScope);
 }

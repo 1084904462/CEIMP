@@ -4,72 +4,88 @@ package org.obsidian.ceimp.bean;
  * Created by Administrator on 2017/11/20.
  */
 public class PgsBean {
-
     private Integer ts;
-
     private Integer te;
-
+    private String school;
     private String major;
-
     private String classNum;
-
     private String username;
-
     private String sex;
-
     private String birth;
-
     private String account;
-
     private String nation;
-
     private String entrance;
-
     private String political;
-
     private String phone;
-
     private String identity;
-
     private String gpRank;
-
     private String ceRank;
-
     private Integer majorSum;
-
-    private Integer passSum;
-
+    private String passSum;
     private String classSum;
-
     private String date1;
-
     private String award1;
-
     private String unit1;
-
     private String date2;
-
     private String award2;
-
     private String unit2;
-
     private String date3;
-
     private String award3;
-
     private String unit3;
-
     private String date4;
-
     private String award4;
-
     private String unit4;
-
     private String applyReason;
-
     private String recommendReason;
-
     private String opinion;
+
+    @Override
+    public String toString() {
+        return "PgsBean{" +
+                "ts=" + ts +
+                ", te=" + te +
+                ", school='" + school + '\'' +
+                ", major='" + major + '\'' +
+                ", classNum='" + classNum + '\'' +
+                ", username='" + username + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birth='" + birth + '\'' +
+                ", account='" + account + '\'' +
+                ", nation='" + nation + '\'' +
+                ", entrance='" + entrance + '\'' +
+                ", political='" + political + '\'' +
+                ", phone='" + phone + '\'' +
+                ", identity='" + identity + '\'' +
+                ", gpRank='" + gpRank + '\'' +
+                ", ceRank='" + ceRank + '\'' +
+                ", majorSum=" + majorSum +
+                ", passSum='" + passSum + '\'' +
+                ", classSum='" + classSum + '\'' +
+                ", date1='" + date1 + '\'' +
+                ", award1='" + award1 + '\'' +
+                ", unit1='" + unit1 + '\'' +
+                ", date2='" + date2 + '\'' +
+                ", award2='" + award2 + '\'' +
+                ", unit2='" + unit2 + '\'' +
+                ", date3='" + date3 + '\'' +
+                ", award3='" + award3 + '\'' +
+                ", unit3='" + unit3 + '\'' +
+                ", date4='" + date4 + '\'' +
+                ", award4='" + award4 + '\'' +
+                ", unit4='" + unit4 + '\'' +
+                ", applyReason='" + applyReason + '\'' +
+                ", recommendReason='" + recommendReason + '\'' +
+                ", opinion='" + opinion + '\'' +
+                '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
 
     public Integer getTs() {
         return ts;
@@ -199,11 +215,11 @@ public class PgsBean {
         this.majorSum = majorSum;
     }
 
-    public Integer getPassSum() {
+    public String getPassSum() {
         return passSum;
     }
 
-    public void setPassSum(Integer passSum) {
+    public void setPassSum(String passSum) {
         this.passSum = passSum;
     }
 
@@ -333,44 +349,5 @@ public class PgsBean {
 
     public void setOpinion(String opinion) {
         this.opinion = opinion;
-    }
-
-    @Override
-    public String toString() {
-        return "PgsBean{" +
-                "ts=" + ts +
-                ", te=" + te +
-                ", major='" + major + '\'' +
-                ", classNum='" + classNum + '\'' +
-                ", username='" + username + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birth='" + birth + '\'' +
-                ", account='" + account + '\'' +
-                ", nation='" + nation + '\'' +
-                ", entrance='" + entrance + '\'' +
-                ", political='" + political + '\'' +
-                ", phone='" + phone + '\'' +
-                ", identity='" + identity + '\'' +
-                ", gpRank='" + gpRank + '\'' +
-                ", ceRank='" + ceRank + '\'' +
-                ", majorSum=" + majorSum +
-                ", passSum=" + passSum +
-                ", classSum='" + classSum + '\'' +
-                ", date1='" + date1 + '\'' +
-                ", award1='" + award1 + '\'' +
-                ", unit1='" + unit1 + '\'' +
-                ", date2='" + date2 + '\'' +
-                ", award2='" + award2 + '\'' +
-                ", unit2='" + unit2 + '\'' +
-                ", date3='" + date3 + '\'' +
-                ", award3='" + award3 + '\'' +
-                ", unit3='" + unit3 + '\'' +
-                ", date4='" + date4 + '\'' +
-                ", award4='" + award4 + '\'' +
-                ", unit4='" + unit4 + '\'' +
-                ", applyReason='" + applyReason + '\'' +
-                ", recommendReason='" + recommendReason + '\'' +
-                ", opinion='" + opinion + '\'' +
-                '}';
     }
 }

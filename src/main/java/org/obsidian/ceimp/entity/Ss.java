@@ -7,8 +7,6 @@ public class Ss {
 
     private Integer yearScope;
 
-    private String rank;
-
     private String reason;
 
     public Long getSsId() {
@@ -33,14 +31,6 @@ public class Ss {
 
     public void setYearScope(Integer yearScope) {
         this.yearScope = yearScope;
-    }
-
-    public String getRank() {
-        return rank;
-    }
-
-    public void setRank(String rank) {
-        this.rank = rank == null ? null : rank.trim();
     }
 
     public String getReason() {

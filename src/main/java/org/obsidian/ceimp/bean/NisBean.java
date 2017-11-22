@@ -6,6 +6,7 @@ package org.obsidian.ceimp.bean;
 public class NisBean {
     private Integer ts;
     private Integer te;
+    private String school;
     private String major;
     private String classNum;
     private String username;
@@ -49,6 +50,7 @@ public class NisBean {
         return "NisBean{" +
                 "ts=" + ts +
                 ", te=" + te +
+                ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
@@ -87,6 +89,14 @@ public class NisBean {
                 ", applyReason='" + applyReason + '\'' +
                 ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public Integer getTs() {

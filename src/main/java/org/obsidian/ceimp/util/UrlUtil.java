@@ -55,4 +55,9 @@ public class UrlUtil {
     public String getZipFileName(String scholarshipName){
         return scholarshipName + ZIP_SUFFIX;
     }
+
+    public String getWordFileName(ZipInfoBean zipInfoBean)
+    {
+        return zipInfoBean.getAccount() + zipInfoBean.getUsername() + zipInfoBean.getScholarshipName() + WORD_SUFFIX;
+    }
 }

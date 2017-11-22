@@ -4,6 +4,7 @@
 	<meta charset="UTF-8"/>
 	<title>三好学生</title>
 	<link rel='stylesheet prefetch' th:href='@{/css/bootstrap.min.css}'/>
+	<link rel='stylesheet' th:href='@{/css/bootstrap-select.min.css}'/>
 	<link rel='stylesheet' th:href='@{/css/jquery-ui.css}'/>
 	<link rel='stylesheet' th:href='@{/css/user/scholarship/scholarship.css}'/>
 	<link rel='stylesheet' th:href='@{/css/user/scholarship/ss.css}'/>
@@ -14,6 +15,7 @@
 	<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
 	<script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
 	<script th:src="@{/js/moment-with-locales.js}"></script>
+	<script th:src="@{/js/bootstrap-select.min.js}"></script>
 	<script th:src="@{/js/user/scholarship/ss.js}"></script>
 	<script th:src="@{/js/user/scholarship/tas.js}"></script>
 </head>
@@ -92,20 +94,31 @@
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">性别</div>
-					    <input type="text" class="form-control" th:value="*{sex}" name="sex"/>
+					    <div class="input-group-addon">政治面貌</div>
+						<select class="selectpicker form-control" >
+							<option value="群众" th:selected="*{political == '群众'}">群众</option>
+							<option value="共青团员" th:selected="*{political == '共青团员'}">共青团员</option>
+							<option value="预备党员" th:selected="*{political == '预备党员'}">预备党员</option>
+							<option value="中共党员" th:selected="*{political == '中共党员'}">中共党员</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
-					    <div class="input-group-addon">政治面貌</div>
-					    <input type="text" class="form-control" th:value="*{political}" name="political"/>
+						<div class="input-group-addon"  style="border-right: 1px solid #ccc;">性别</div>
+						<label class="radio-inline">
+							<input type="radio" name="sex" value="男" id="man" th:checked="*{sex=='男'}"/> 男
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="sex"  value="女" id="women" th:checked="*{sex=='女'}"/>女
+						</label>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 					    <div class="input-group-addon">民族</div>
-					     <input type="text" class="form-control" th:value="*{nation}" name="nation"/>
+					     <!--<input type="text" class="form-control" th:value="*{nation}" name="nation"/>-->
+						<select name="nation" id="nation"  class="selectpicker form-control" th:value="*{nation}"></select>
 					</div>
 				</div>
 				<div class="form-group col-md-5">
@@ -148,18 +161,18 @@
 					</div>
 				</div>
 				<div class="form-group col-md-12">
-					<div class="input-group" style="width: 609px;">
+					<div class="input-group" style="width: 649px;">
 					    <div class="input-group-addon" id="zhuyao">主要事迹与表现</div>
 					</div>
-					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="200字以内" id="text1" data-toggle="popover" data-content="" data-placement="right" data-html="true" th:text="*{reason}" name="reason"></textarea>
+					<textarea class="form-control" rows="4" style="width: 649px;resize:none;" placeholder="200字以内" id="text1" data-toggle="popover" data-content="" data-placement="right" data-html="true" th:text="*{reason}" name="reason"></textarea>
 					<div class="message" id="message1"></div>
 					<div class="message" id="message2"></div>
 				</div>
 				<div class="form-group col-md-10">
-					<div class="input-group" style="width: 609px;">
+					<div class="input-group" style="width: 649px;">
 					    <div class="input-group-addon" id="zhuyao">二级学工组意见</div>
 					</div>
-					<textarea class="form-control" rows="4" style="width: 609px;" placeholder="100字以内" disabled="disabled" th:text="*{opinion}" name="opinion"></textarea>
+					<textarea class="form-control" rows="4" style="width: 649px;resize:none;" placeholder="100字以内" disabled="disabled" th:text="*{opinion}" name="opinion"></textarea>
 				</div>
 				<div class="form-group col-md-10">
 					<input type="submit" class="btn btn-primary" id="submit"/>

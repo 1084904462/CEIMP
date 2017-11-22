@@ -1,6 +1,10 @@
 package org.obsidian.ceimp.util;
 
+<<<<<<< HEAD
 import org.obsidian.ceimp.bean.SsBean;
+=======
+import org.obsidian.ceimp.bean.*;
+>>>>>>> d1b28ec8f7f39b6771e353e121851befc9d02fbb
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,19 +21,63 @@ public class TextMapUtil {
         return instance;
     }
 
-    public Map<String,String> getNgMap(){
+    public Map<String,String> getNgMap(NgBean ngBean){
+        String identity = ngBean.getIdentity();
+        char a = 'a';
+        Map<String,String> textMap = new HashMap<>();
+        textMap.put("ts",ngBean.getTs().toString());
+        textMap.put("te",ngBean.getTe().toString());
+        textMap.put("school",ngBean.getSchool());
+        textMap.put("major",ngBean.getMajor());
+        textMap.put("classId",ngBean.getClassNum());
+        textMap.put("username",ngBean.getUsername());
+        textMap.put("sex",ngBean.getSex());
+        textMap.put("birth",ngBean.getBirth());
+        textMap.put("userId",ngBean.getAccount());
+        textMap.put("nation",ngBean.getNation());
+        textMap.put("entrance",ngBean.getEntrance());
+        textMap.put("political",ngBean.getPolitical());
+        textMap.put("phone",ngBean.getPhone());
+        for(int i=0;i<18;i++){
+            textMap.put(String.valueOf((char)(a+i)),String.valueOf(identity.charAt(i)));
+        }
+        textMap.put("incomeSource",ngBean.getIncomeSource());
+        textMap.put("monthIncome",ngBean.getMonthIncome());
+        textMap.put("familySum",ngBean.getFamilySum());
+        textMap.put("address",ngBean.getAddress());
+        textMap.put("postalCode",ngBean.getPostalCode());
+        textMap.put("fName1",ngBean.getfName1());
+        textMap.put("age1",ngBean.getAge1());
+        textMap.put("relation1",ngBean.getRelation1());
+        textMap.put("workPlace1",ngBean.getWorkPlace1());
+        textMap.put("fName2",ngBean.getfName2());
+        textMap.put("age2",ngBean.getAge2());
+        textMap.put("relation2",ngBean.getRelation2());
+        textMap.put("workPlace2",ngBean.getWorkPlace2());
+        textMap.put("fName3",ngBean.getfName3());
+        textMap.put("age3",ngBean.getAge3());
+        textMap.put("relation3",ngBean.getRelation3());
+        textMap.put("workPlace3",ngBean.getWorkPlace3());
+        textMap.put("fName4",ngBean.getfName4());
+        textMap.put("age4",ngBean.getAge4());
+        textMap.put("relation4",ngBean.getRelation4());
+        textMap.put("workPlace4",ngBean.getWorkPlace4());
+        textMap.put("fName5",ngBean.getfName5());
+        textMap.put("age5",ngBean.getAge5());
+        textMap.put("relation5",ngBean.getRelation5());
+        textMap.put("workPlace5",ngBean.getWorkPlace5());
+        textMap.put("applyReason",ngBean.getApplyReason());
+        textMap.put("opinion",ngBean.getOpinion());
+        return textMap;
+    }
+
+    public Map<String,String> getNisMap(NisBean nisBean){
         Map<String,String> textMap = new HashMap<>();
 
         return textMap;
     }
 
-    public Map<String,String> getNisMap(){
-        Map<String,String> textMap = new HashMap<>();
-
-        return textMap;
-    }
-
-    public Map<String,String> getPgsMap(){
+    public Map<String,String> getPgsMap(PgsBean pgsBean){
         Map<String,String> textMap = new HashMap<>();
 
         return textMap;
@@ -58,7 +106,7 @@ public class TextMapUtil {
         return textMap;
     }
 
-    public Map<String,String> getTasMap(){
+    public Map<String,String> getTasMap(TasBean tasBean){
         Map<String,String> textMap = new HashMap<>();
 
         return textMap;

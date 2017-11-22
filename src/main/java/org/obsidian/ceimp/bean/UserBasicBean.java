@@ -4,7 +4,9 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2017/11/20.
  */
 public class UserBasicBean {
+    private String school;
     private String major;
+    private Integer majorSum;
     private String classNum;
     private String username;
     private String sex;
@@ -20,7 +22,9 @@ public class UserBasicBean {
     @Override
     public String toString() {
         return "UserBasicBean{" +
-                "major='" + major + '\'' +
+                "school='" + school + '\'' +
+                ", major='" + major + '\'' +
+                ", majorSum=" + majorSum +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
@@ -35,12 +39,28 @@ public class UserBasicBean {
                 '}';
     }
 
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
     public String getMajor() {
         return major;
     }
 
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public Integer getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(Integer majorSum) {
+        this.majorSum = majorSum;
     }
 
     public String getClassNum() {

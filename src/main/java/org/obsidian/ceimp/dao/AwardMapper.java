@@ -9,6 +9,10 @@ import org.obsidian.ceimp.entity.AwardExample;
 import java.util.List;
 
 public interface AwardMapper {
+    int updateIsFilledByUserIdAndYearScopeAndSubName(@Param("userId")Long userId,
+                                                     @Param("yearScope")Integer yearScope,
+                                                     @Param("subName")String subName);
+
     Long selectAwardIdBySubNameAndYearScope(@Param("subName") String subName,@Param("yearScope") Integer yearScope);
 
     List<ScholarshipFormBean> selectAllBySubNameAndYearScope(@Param("subName") String subName,

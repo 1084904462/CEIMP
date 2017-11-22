@@ -6,6 +6,7 @@ package org.obsidian.ceimp.bean;
 public class NgBean {
     private Integer ts;
     private Integer te;
+    private String school;
     private String major;
     private String classNum;
     private String username;
@@ -52,6 +53,7 @@ public class NgBean {
         return "NgBean{" +
                 "ts=" + ts +
                 ", te=" + te +
+                ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", classNum='" + classNum + '\'' +
                 ", username='" + username + '\'' +
@@ -93,6 +95,14 @@ public class NgBean {
                 ", applyReason='" + applyReason + '\'' +
                 ", opinion='" + opinion + '\'' +
                 '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public Integer getTs() {
