@@ -81,7 +81,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user" style="display: none;" id="hidden"  onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()">
 
-                        <li ><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        <li ><a href="#" data-toggle="modal" data-target="#changePassword" ><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
                         <li class="divider"></li>
                         <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
@@ -464,6 +464,55 @@
         </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+</div>
+<!--修改密码model-->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <input type="text" class="form-control" name="account" id="userID" placeholder="学号/卡号" autocomplete="off" disabled="disabled" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            原密码
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password1" placeholder="原密码" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            新密码
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password2" placeholder="新密码" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            确认新密码
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password3" placeholder="确认新密码" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确认修改</button>
+            </div>
+        </div>
+    </div>
 </div>
 
     </div>
