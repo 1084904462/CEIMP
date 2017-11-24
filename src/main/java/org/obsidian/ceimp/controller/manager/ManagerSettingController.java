@@ -45,19 +45,19 @@ public class ManagerSettingController {
     }
 
     /**
-     * 管理员重置密码
-     * @param logBean 用户账号，用户密码
-     * @return 重置成功
+     * 管理员重置密码为888888
+     * @param userAccountBean
+     * @return 重置密码成功
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/resetPassword")
     @ResponseBody
-    public String resetPassword(@RequestBody LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.info("account:" + logBean.getAccount());
+    public String resetPassword(@RequestBody UserAccountBean userAccountBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        logger.info(userAccountBean);
         UserBasic userBasic = new UserBasic();
-        userBasic.setAccount(logBean.getAccount());
-        userBasic.setPassword(logBean.getPassword());
+        userBasic.setAccount(userAccountBean.getAccount());
+        userBasic.setPassword("888888");
         int isReset = userBasicService.updateUserBasic(userBasic);
         StatusBean statusBean = new StatusBean();
         if(isReset == 0){
