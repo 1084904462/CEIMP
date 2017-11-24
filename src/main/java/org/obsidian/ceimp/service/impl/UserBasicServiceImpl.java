@@ -25,6 +25,12 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
+    public List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolId(List<String> searchKeyList,Long schoolId) {
+        return userBasicMapper.getUserSearchBeanBySearchKeyListAndSchoolId(searchKeyList,schoolId);
+    }
+
+    @Transactional
+    @Override
     public int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
         UserBasicExample example = new UserBasicExample();
@@ -42,12 +48,6 @@ public class UserBasicServiceImpl implements UserBasicService {
             return  null;
         }
         return list.get(0);
-    }
-
-    @Transactional
-    @Override
-    public List<UserSearchBean> selectByAccountAndUsername(String account, String username) {
-        return userBasicMapper.selectByAccountAndUsername(account,username);
     }
 
     @Transactional

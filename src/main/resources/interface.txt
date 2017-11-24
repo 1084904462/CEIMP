@@ -109,34 +109,40 @@
 	<-
 		/manager/scholarship/opinion/ng,get
 	->
-		model:NgOpinionFormBean
+		model:NgOpinionFormBeanList
 		{
-			major:String,		//专业
-			classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
-			account:String,		//学号
-			username:String,	//姓名
-			opinion:String		//国家助学金-院（系）意见
+			NgOpinionFormBean
+			{
+				major:String,		//专业
+				classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
+				account:String,		//学号
+				username:String,	//姓名
+				opinion:String		//国家助学金-院（系）意见
+			}
 		}
 
 修改国家助学金意见
 	<-
 		/manager/scholarship/opinion/ng,ajax,post
-		NgOpinionBeanList
+		NgOpinionUpdateBean
 		{
-			NgOpinionBean
+			opinion:String,
+			userAccountList:List<String>
 			{
-				account:String,
-				opinion:String
+				account:String
 			}
 		}
 	->
-		NgOpinionFormBean
+		NgOpinionFormBeanList
 		{
-			major:String,		//专业
-			classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
-			account:String,		//学号
-			username:String,	//姓名
-			opinion:String		//国家助学金-院（系）意见
+			NgOpinionFormBean
+			{
+				major:String,		//专业
+				classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
+				account:String,		//学号
+				username:String,	//姓名
+				opinion:String		//国家助学金-院（系）意见
+			}
 		}
 
 重置用户密码界面

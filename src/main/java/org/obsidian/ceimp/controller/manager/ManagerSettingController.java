@@ -71,14 +71,16 @@ public class ManagerSettingController {
     }
 
     /**
-     *
+     * 默认只能搜索本学院用户
+     * 先去除searchKey中的空格及转义字符
+     * 再截取中文、数字，并在两头添加'%'
      * @param searchBean
      * @param session 从session中的managerLogBean获取schoolId
      * @return
      */
     @PostMapping("/search")
     @ResponseBody
-    public String search(@RequestBody SearchBean searchBean,HttpSession session){
+    public String searchUser(@RequestBody SearchBean searchBean,HttpSession session){
         logger.info("searchKey:" + searchBean.getSearchKey());
         Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
         String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
@@ -86,15 +88,16 @@ public class ManagerSettingController {
         Pattern pattern1 = Pattern.compile("\\D+");
         Matcher matcher1 = pattern1.matcher(searchKey);
         while(matcher1.find()){
-            searchKeyList.add(matcher1.group());
+            searchKeyList.add("%" + matcher1.group() + "%");
         }
         Pattern pattern2 = Pattern.compile("\\d+");
         Matcher matcher2 = pattern2.matcher(searchKey);
         while(matcher2.find()){
-            searchKeyList.add(matcher2.group());
+            searchKeyList.add("%" + matcher2.group() + "%");
         }
-
-        return "1";
+        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanListBySearchKeyListAndSchoolId(searchKeyList,schoolId);
+        logger.info(userSearchBeanList);
+        return JSON.toJSONString(userSearchBeanList);
     }
 
     /**

@@ -9,6 +9,9 @@ import org.obsidian.ceimp.entity.UserBasicExample;
 import java.util.List;
 
 public interface UserBasicMapper {
+    List<UserSearchBean> getUserSearchBeanBySearchKeyListAndSchoolId(@Param("searchKeyList") List<String> searchKeyList,
+                                                                     @Param("schoolId")Long schoolId);
+
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
 
     long countByExample(UserBasicExample example);

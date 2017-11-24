@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.NgOpinionFormBean;
 import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.dao.OpinionMapper;
 import org.obsidian.ceimp.entity.Opinion;
@@ -7,6 +8,8 @@ import org.obsidian.ceimp.service.OpinionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/11/20.
@@ -33,5 +36,11 @@ public class OpinionServiceImpl implements OpinionService {
     @Override
     public Opinion selectByUserIdAndYearScope(Long userId, Integer yearScope) {
         return opinionMapper.selectByUserIdAndYearScope(userId,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public List<NgOpinionFormBean> getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(Long schoolId,String grade, Integer yearScope) {
+        return opinionMapper.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
     }
 }

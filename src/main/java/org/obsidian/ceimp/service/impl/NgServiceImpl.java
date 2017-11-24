@@ -30,6 +30,12 @@ public class NgServiceImpl implements NgService {
     @Autowired
     private UserBasicService userBasicService;
 
+
+    @Override
+    public int updateNgOpinion(String opinion, List<String> userAccountList, Integer yearScope) {
+        return ngMapper.updateNgOpinion(opinion,userAccountList,yearScope);
+    }
+
     @Transactional
     @Override
     public Ng selectByUserIdAndYearScope(Long userId,Integer yearScope) {

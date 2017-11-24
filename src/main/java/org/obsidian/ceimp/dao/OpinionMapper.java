@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.NgOpinionFormBean;
 import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.entity.OpinionExample;
@@ -8,6 +9,10 @@ import org.obsidian.ceimp.entity.OpinionExample;
 import java.util.List;
 
 public interface OpinionMapper {
+    List<NgOpinionFormBean> getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(@Param("schoolId")Long schoolId,
+                                                                           @Param("grade")String grade,
+                                                                           @Param("yearScope")Integer yearScope);
+
     Opinion selectByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(@Param("managerId") Long managerId,

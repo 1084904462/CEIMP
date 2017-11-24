@@ -11,11 +11,11 @@ import java.util.List;
  * Created by BillChen on 2017/11/13.
  */
 public interface UserBasicService {
+    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolId(List<String> searchKeyList,Long schoolId);
+
     int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     UserBasic selectByAccount(String account);
-
-    List<UserSearchBean> selectByAccountAndUsername(String account, String username);
 
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
 
