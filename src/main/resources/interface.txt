@@ -141,11 +141,11 @@
 
 重置用户密码界面
 	<-
-		/manager/setting/resetPassword,get
+		/manager/settings/resetPassword,get
 
 重置用户密码
 	<-
-		/manager/setting/resetPassword,ajax,post
+		/manager/settings/resetPassword,ajax,post
 		LogBeanBean
 		{
 			account:String,
@@ -159,7 +159,7 @@
 
 根据用户学号或姓名返回用户信息
 	<-
-		/manager/setting/search,ajax,get
+		/manager/settings/search,ajax,post
 		SearchBean
 		{
 			searchKey:String	//该搜索关键词可以是学号或姓名或学号和姓名
@@ -178,7 +178,7 @@
 
 管理员修改自己的密码
 	<-
-		/manager/setting/changePassword,post,form
+		/manager/settings/changePassword,post,form
 		PasswordBean
 		{
 			password:String,

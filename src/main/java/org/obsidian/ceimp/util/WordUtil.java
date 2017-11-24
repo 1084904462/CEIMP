@@ -1,6 +1,5 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.*;

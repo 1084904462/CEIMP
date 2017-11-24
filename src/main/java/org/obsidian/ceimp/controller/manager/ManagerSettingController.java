@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * Created by Administrator on 2017/11/20.
  */
 @Controller
-@RequestMapping("/manager/setting")
+@RequestMapping("/manager/settings")
 public class ManagerSettingController {
     private Logger logger = Logger.getLogger(this.getClass());
 
@@ -73,25 +76,25 @@ public class ManagerSettingController {
      * @param session 从session中的managerLogBean获取schoolId
      * @return
      */
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ResponseBody
-    public List<UserSearchBean> search(@RequestBody SearchBean searchBean,HttpSession session){
-        logger.info("searchKey:"+searchBean.getSearchKey());
+    public String search(@RequestBody SearchBean searchBean,HttpSession session){
+        logger.info("searchKey:" + searchBean.getSearchKey());
         Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
+        String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
+        List<String> searchKeyList = new ArrayList<>();
+        Pattern pattern1 = Pattern.compile("\\D+");
+        Matcher matcher1 = pattern1.matcher(searchKey);
+        while(matcher1.find()){
+            searchKeyList.add(matcher1.group());
+        }
+        Pattern pattern2 = Pattern.compile("\\d+");
+        Matcher matcher2 = pattern2.matcher(searchKey);
+        while(matcher2.find()){
+            searchKeyList.add(matcher2.group());
+        }
 
-        String [] accountSplit = searchBean.getSearchKey().split("\\D");
-        String account = "";
-        for(String accounts:accountSplit){
-            account = account + accounts;
-        }
-        logger.info(account);
-        String [] usernameSplit = searchBean.getSearchKey().split("\\d");
-        String username = "";
-        for(String usernames:usernameSplit){
-            username = username + usernames;
-        }
-        logger.info(username);
-        return userBasicService.selectByAccountAndUsername(account,username);
+        return "1";
     }
 
     /**

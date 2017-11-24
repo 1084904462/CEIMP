@@ -1,7 +1,9 @@
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.POIXMLTextExtractor;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.junit.runner.RunWith;
 import org.obsidian.ceimp.Application;
-import org.obsidian.ceimp.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -13,11 +15,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class Test {
 
 
-    @Autowired
-    private UserBasicService userBasicService;
 
     @org.junit.Test
     public void test(){
-        userBasicService.selectByAccountAndUsername("110","h");
+        try {
+            OPCPackage opcPackage = POIXMLDocument.openPackage("D:/a.docx");
+            POIXMLTextExtractor extractor = new XWPFWordExtractor(opcPackage);
+            String text2007 = extractor.getText();
+            System.out.println(text2007);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
