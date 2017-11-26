@@ -41,7 +41,7 @@
 			}
 		}
 
-奖学金表格打包
+奖学金表格打包//500
 	<-
 		/manager/scholarship/zip/{subName},form,post 	//通过js获取勾选列的数据，再模拟表单提交，详情百度
 		/manager/scholarship/zip/{subName}/{yearScope},form,post
@@ -55,7 +55,7 @@
 			}
 		}
 
-删除奖学金
+删除奖学金//完成
 	<-
 		/manager/scholarship/delete/{subName},ajax,post
 		UserAccountBeanList
@@ -71,7 +71,7 @@
 			status:String	//删除成功或删除失败
 		}
 
-查看奖学金意见
+查看奖学金意见//完成
 	<-
 		/manager/scholarship/opinion,get
 	->
@@ -84,7 +84,7 @@
 			tasOpinion:String	//三好学生-二级学工组意见
 		}
 
-修改奖学金意见
+修改奖学金意见//完成
 	<-
 		/manager/scholarship/opinion,ajax,post
 		ScholarshipOpinionBean
@@ -145,11 +145,11 @@
 			}
 		}
 
-重置用户密码界面
+重置用户密码界面//完成
 	<-
 		/manager/settings/resetPassword,get
 
-重置用户密码
+重置用户密码//完成
 	<-
 		/manager/settings/resetPassword,ajax,post
 		UserAccountBean
@@ -162,7 +162,7 @@
 			status:String
 		}
 
-根据用户学号或姓名返回用户信息
+根据用户学号或姓名返回用户信息//完成
 	<-
 		/manager/settings/search,ajax,post
 		SearchBean
@@ -181,7 +181,7 @@
 			}
 		}
 
-管理员修改自己的密码
+管理员修改自己的密码//完成
 	<-
 		/manager/settings/changePassword,post,form
 		PasswordBean
