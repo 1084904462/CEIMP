@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.controller.manager;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.service.NgService;
@@ -10,13 +11,16 @@ import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.UrlUtil;
 import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,7 +68,7 @@ public class ManagerScholarshipController {
         return "manager/showScholarship";
     }
 
-    /**
+    /*
      * 根据subName从数据库表scholarship中查询对应的奖学金名称scholarshipName(查询结果为模板名称model_name分割'模板'前面的字)
      * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路劲zipInputUrlList
      * 根据scholarshipName获取打包后生成的zip文件路径
@@ -73,8 +77,14 @@ public class ManagerScholarshipController {
      * @param response 将打包文件通过response返回给客户端
      * @throws IOException
      */
-    @PostMapping("/zip/{subName}")
-    public void getScholarshipZip(@PathVariable("subName") String subName, List<ZipInfoBean> zipInfoBeanList, HttpServletResponse response) throws IOException {
+/*
+    @PostMapping(value = "/zip/{subName}", consumes = {"application/x-www-form-urlencoded"})
+*/
+    @RequestMapping(value = "/zip/{subName}", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void getScholarshipZip(@PathVariable("subName") String subName, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        String jsonStr=request.getParameter("zipInfoBeanList");
+        List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
         logger.info("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
         String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
         logger.info("scholarshipName:" + scholarshipName);

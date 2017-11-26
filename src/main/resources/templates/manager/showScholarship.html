@@ -192,8 +192,8 @@
 
 
                                     <th>
-                                        <button type="button" class="btn btn-info btn-sm radius" >下载</button>
-                                        <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;" onclick="fire_ajax_submit(event)"   data-toggle="modal" data-target="">删除</button>
+                                        <button type="button" class="btn btn-info btn-sm radius" onclick="fire_ajax_download(event)" data-toggle="modal" data-target="#downloadScholarship">下载</button>
+                                        <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;"  onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
                                     </th>
                                 </tr>
 
@@ -224,24 +224,43 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="deleteScholarship" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!--删除Modal -->
+    <div class="modal fade" id="deleteScholarship" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">删除操作</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="deleteScholarship-content">
                     确认删除？
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary"  id="deleteScholarshipButton" >删除</button>
+                    <button type="button" class="btn btn-primary"  id="deleteScholarshipButton"  data-dismiss="modal">删除</button>
                 </div>
             </div>
         </div>
     </div>
+    <!--打包Modal -->
+    <div class="modal fade" id="downloadScholarship" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >下载操作</h4>
+                </div>
+                <div class="modal-body" id="downloadScholarship-content">
+                    确认下载？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary"  id="downloadScholarshipButton"  data-dismiss="modal">下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
@@ -251,50 +270,151 @@
 
 </script>
 <script th:inline="javascript">
-    function fire_ajax_submit(event) {
+
+    function fire_ajax_delete(event) {
 
 
         var account=[[${scholarshipFormBeanList}]];
 
-        var index=$($($($(event.target).parent())).parent()).prevAll().length-1;
+        var account1=[[${showScholarshipBean}]];
 
-        console.log(JSON.stringify(account[index]));
+        var UserAccountBean=[[${scholarshipFormBeanList}]];
 
-
-
-
+        var UserAccountBeanList = new Array();
 
 
 
 
-        $.ajax({
-            type: "post",
-            contentType: "application/json",
-            url: "/manager/scholarship/delete/{subName}",
-            data: JSON.stringify(account[index]),
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
+
+        var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+        UserAccountBeanList.push(UserAccountBean[index].account);
+        console.log(JSON.stringify(account[index].account));
+        console.log(JSON.stringify(account1.subName));
 
 
 
 
-                console.log("SUCCESS : ", data);
-
-
-            },
-            error: function (e) {
 
 
 
+        $("#deleteScholarshipButton").click(function(){
+            console.log("1");
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "/manager/scholarship/delete/"+account1.subName,//
+                data: JSON.stringify(UserAccountBeanList),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    location.reload();
 
-                console.log("Failed : ", e);
 
-            }
+
+
+                    console.log("SUCCESS : ", data);
+                   /* $("#deleteScholarship").data-dismiss="modal";*/
+                   $("#deleteScholarshipSuccess").style="display:block";
+
+
+                },
+                error: function (e) {
+
+
+
+                    alert("删除失败")
+
+
+                    console.log("Failed : ", e);
+
+                }
+            });
         });
 
+
     }
+    function fire_ajax_download(event) {
+
+
+        var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
+
+
+
+        var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+        var scholarshipFormBean=scholarshipFormBeanList[index];
+        var showScholarshipBean=[[${showScholarshipBean}]];
+
+        var indexList=new Array();
+
+
+
+        console.log(JSON.stringify(scholarshipFormBeanList[index]));
+        console.log(JSON.stringify(scholarshipFormBean));
+
+        var ZipInfoBean=new Array();
+
+
+
+
+        ZipInfoBean={account:scholarshipFormBean.account,username:scholarshipFormBean.username,scholarshipName:scholarshipFormBean.scholarshipName};
+        console.log(JSON.stringify(ZipInfoBean));
+        console.log(showScholarshipBean.subName);
+
+        var ZipInfoBeanList=new Array();
+        ZipInfoBeanList.push(ZipInfoBean);
+
+
+
+
+
+
+
+
+        $("#downloadScholarshipButton").click(function(){
+
+            console.log("1");
+            var tempform = document.createElement("form");
+            tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName;
+            tempform.method = "post";
+            tempform.style.display="none"
+            tempform.target="_blank";
+
+
+           /* for (var x in ZipInfoBean) {
+                var opt = document.createElement("input");
+                opt.name = x;
+                opt.value = ZipInfoBean[x];
+                tempform.appendChild(opt);
+            }
+*/
+            var opt2=document.createElement("input");
+            opt2.name="zipInfoBeanList";
+            opt2.value=JSON.stringify(ZipInfoBeanList);
+            console.log(JSON.stringify(ZipInfoBeanList));
+            var opt = document.createElement("input");
+            opt.type = "submit";
+            tempform.appendChild(opt2);
+            tempform.appendChild(opt);
+            document.body.appendChild(tempform);
+            tempform.submit();
+            document.body.removeChild(tempform);
+           console.log(tempform);
+        });
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 </script>
 </html>
