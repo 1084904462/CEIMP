@@ -105,7 +105,7 @@
 			tasOpinion:String
 		}
 
-查看国家助学金意见界面
+查看国家助学金意见界面//完成
 	<-
 		/manager/scholarship/opinion/ng,get
 	->
@@ -121,7 +121,7 @@
 			}
 		}
 
-修改国家助学金意见
+修改国家助学金意见//完成
 	<-
 		/manager/scholarship/opinion/ng,ajax,post
 		NgOpinionUpdateBean
