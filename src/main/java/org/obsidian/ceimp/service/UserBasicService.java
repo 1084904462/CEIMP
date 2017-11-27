@@ -11,7 +11,7 @@ import java.util.List;
  * Created by BillChen on 2017/11/13.
  */
 public interface UserBasicService {
-    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolId(List<String> searchKeyList,Long schoolId);
+    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(List<String> searchKeyList,Long schoolId,Integer yearScope);
 
     int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 

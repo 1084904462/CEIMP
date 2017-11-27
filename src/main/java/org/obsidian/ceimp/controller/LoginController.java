@@ -110,7 +110,7 @@ public class LoginController {
                 }
                 UserLogBean userLogBean = new UserLogBean(userBasic.getUserId(),userBasic.getAccount(),userBasic.getUsername());
                 session.setAttribute("userLogBean",userLogBean);
-                System.out.println(session.getMaxInactiveInterval());
+                session.setMaxInactiveInterval(86400);  //把session的时长设为1天
                 userSessionMap.put(userId,session); //把当前登录用户的userId和session放入userSessionMap
                 statusBean.setStatus("登录成功");
             }
@@ -169,6 +169,7 @@ public class LoginController {
                 }
                 ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId(),manager.getGrade());
                 session.setAttribute("managerLogBean",managerLogBean);
+                session.setMaxInactiveInterval(86400);  //把session的时长设为1天
                 managerSessionMap.put(managerId,session); //把当前登录管理员的managerId和session放入managerSessionMap
                 statusBean.setStatus("登录成功");
             }

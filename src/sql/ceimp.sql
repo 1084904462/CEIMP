@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-27 19:31:12
+Date: 2017-11-27 20:36:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -441,7 +441,7 @@ CREATE TABLE `user_info` (
   KEY `class_num_id` (`class_num_id`),
   CONSTRAINT `user_info_ibfk_2` FOREIGN KEY (`class_num_id`) REFERENCES `class_num` (`class_num_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_info
@@ -449,3 +449,9 @@ CREATE TABLE `user_info` (
 INSERT INTO `user_info` VALUES ('1', '1', '2017', '1', '共青团员', '110', '班长', '13.2', '62.5', '3.3', '79', '7', '10', '20', '20');
 INSERT INTO `user_info` VALUES ('2', '5', '2017', '3', '群众', '112', '无', '11', '60', '0', '71', '10', '20', '20', '20');
 INSERT INTO `user_info` VALUES ('3', '6', '2017', '4', '共青团员', '119', '无', '12', '61', '0', '73', '8', '16', '20', '20');
+INSERT INTO `user_info` VALUES ('5', '2', '2017', '2', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('6', '3', '2017', '1', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('7', '4', '2017', '2', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('8', '7', '2017', '5', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('9', '8', '2017', '6', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('10', '9', '2017', '7', '', '', '', '', '', '', '', '', '', '', '');

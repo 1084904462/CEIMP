@@ -8,6 +8,7 @@ import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -95,7 +96,8 @@ public class ManagerSettingController {
         while(matcher2.find()){
             searchKeyList.add("%" + matcher2.group() + "%");
         }
-        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanListBySearchKeyListAndSchoolId(searchKeyList,schoolId);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(searchKeyList,schoolId,yearScope);
         logger.info(userSearchBeanList);
         return JSON.toJSONString(userSearchBeanList);
     }

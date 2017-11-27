@@ -25,8 +25,8 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolId(List<String> searchKeyList,Long schoolId) {
-        return userBasicMapper.getUserSearchBeanBySearchKeyListAndSchoolId(searchKeyList,schoolId);
+    public List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(List<String> searchKeyList,Long schoolId,Integer yearScope) {
+        return userBasicMapper.getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(searchKeyList,schoolId,yearScope);
     }
 
     @Transactional
