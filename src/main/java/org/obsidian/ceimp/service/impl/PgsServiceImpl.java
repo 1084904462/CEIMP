@@ -42,6 +42,16 @@ public class PgsServiceImpl implements PgsService {
 
     @Transactional
     @Override
+    public List<PgsBean> getPgsBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<PgsBean> pgsBeanList = pgsMapper.getPgsBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<pgsBeanList.size();i++){
+            pgsBeanList.get(i).setTs(pgsBeanList.get(i).getTe() - 1);
+        }
+        return pgsBeanList;
+    }
+
+    @Transactional
+    @Override
     public Pgs selectByUserIdAndYearScope(Long userId, Integer yearScope) {
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
@@ -82,22 +92,22 @@ public class PgsServiceImpl implements PgsService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            pgsBean.setSchool(userBasicBean.getSchool());
-            pgsBean.setMajor(userBasicBean.getMajor());
-            pgsBean.setClassNum(userBasicBean.getClassNum());
             pgsBean.setUsername(userBasicBean.getUsername());
             pgsBean.setSex(userBasicBean.getSex());
             pgsBean.setBirth(userBasicBean.getBirth());
             pgsBean.setAccount(userBasicBean.getAccount());
             pgsBean.setNation(userBasicBean.getNation());
             pgsBean.setEntrance(userBasicBean.getEntrance());
-            pgsBean.setPolitical(userBasicBean.getPolitical());
-            pgsBean.setPhone(userBasicBean.getPhone());
             pgsBean.setIdentity(userBasicBean.getIdentity());
-            pgsBean.setMajorSum(userBasicBean.getMajorSum());
         }
         UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
         if(userInfoBean != null){
+            pgsBean.setSchool(userInfoBean.getSchool());
+            pgsBean.setMajor(userInfoBean.getMajor());
+            pgsBean.setClassNum(userInfoBean.getClassNum());
+            pgsBean.setPolitical(userInfoBean.getPolitical());
+            pgsBean.setPhone(userInfoBean.getPhone());
+            pgsBean.setMajorSum(userInfoBean.getMajorSum());
             pgsBean.setGpRank(userInfoBean.getGpRank());
             pgsBean.setCeRank(userInfoBean.getCeRank());
             pgsBean.setPassSum(userInfoBean.getPassSum());
@@ -114,7 +124,7 @@ public class PgsServiceImpl implements PgsService {
     @Transactional
     @Override
     public int insertPgs(Long userId, Integer yearScope, PgsBean pgsBean) {
-        userBasicService.updateByUserIdAndPgsBean(userId,pgsBean);
+        userInfoService.updateByUserIdAndPgsBeanAndYearScope(userId,pgsBean,yearScope);
         Pgs pgs = new Pgs();
         pgs.setUserId(userId);
         pgs.setYearScope(yearScope);
@@ -137,7 +147,7 @@ public class PgsServiceImpl implements PgsService {
     @Transactional
     @Override
     public int updatePgs(Long userId, Integer yearScope, PgsBean pgsBean) {
-        userBasicService.updateByUserIdAndPgsBean(userId,pgsBean);
+        userInfoService.updateByUserIdAndPgsBeanAndYearScope(userId,pgsBean,yearScope);
         Pgs pgs = new Pgs();
         pgs.setUserId(userId);
         pgs.setYearScope(yearScope);

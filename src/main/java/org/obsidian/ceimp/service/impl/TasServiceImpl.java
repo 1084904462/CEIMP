@@ -42,6 +42,16 @@ public class TasServiceImpl implements TasService {
 
     @Transactional
     @Override
+    public List<TasBean> getTasBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<TasBean> tasBeanList = tasMapper.getTasBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<tasBeanList.size();i++){
+            tasBeanList.get(i).setTs(tasBeanList.get(i).getTe() - 1);
+        }
+        return tasBeanList;
+    }
+
+    @Transactional
+    @Override
     public Tas selectByUserIdAndYearScope(Long userId, Integer yearScope) {
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
@@ -70,19 +80,19 @@ public class TasServiceImpl implements TasService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            tasBean.setSchool(userBasicBean.getSchool());
-            tasBean.setMajor(userBasicBean.getMajor());
-            tasBean.setClassNum(userBasicBean.getClassNum());
             tasBean.setUsername(userBasicBean.getUsername());
             tasBean.setSex(userBasicBean.getSex());
             tasBean.setAccount(userBasicBean.getAccount());
             tasBean.setNation(userBasicBean.getNation());
-            tasBean.setPolitical(userBasicBean.getPolitical());
-            tasBean.setJob(userBasicBean.getJob());
-            tasBean.setMajorSum(userBasicBean.getMajorSum());
         }
         UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
         if(userInfoBean != null){
+            tasBean.setSchool(userInfoBean.getSchool());
+            tasBean.setMajor(userInfoBean.getMajor());
+            tasBean.setClassNum(userInfoBean.getClassNum());
+            tasBean.setPolitical(userInfoBean.getPolitical());
+            tasBean.setJob(userInfoBean.getJob());
+            tasBean.setMajorSum(userInfoBean.getMajorSum());
             tasBean.setCharact(userInfoBean.getCharact());
             tasBean.setStudy(userInfoBean.getStudy());
             tasBean.setAbility(userInfoBean.getAbility());
@@ -99,7 +109,7 @@ public class TasServiceImpl implements TasService {
     @Transactional
     @Override
     public int insertTas(Long userId, Integer yearScope, TasBean tasBean) {
-        userBasicService.updateByUserIdAndTasBean(userId,tasBean);
+        userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
         Tas tas = new Tas();
         tas.setUserId(userId);
         tas.setYearScope(yearScope);
@@ -110,7 +120,7 @@ public class TasServiceImpl implements TasService {
     @Transactional
     @Override
     public int updateTas(Long userId, Integer yearScope, TasBean tasBean) {
-        userBasicService.updateByUserIdAndTasBean(userId,tasBean);
+        userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
         Tas tas = new Tas();
         tas.setUserId(userId);
         tas.setYearScope(yearScope);

@@ -100,7 +100,6 @@ public class LoginController {
         StatusBean statusBean = new StatusBean();
         UserBasic userBasic = userBasicService.selectByAccount(logBean.getAccount());
         if(userBasic != null){
-            logger.info(userBasic.toString());
             if(userBasic.getPassword().equals(MD5Util.getInstance().EncoderByMd5(logBean.getPassword()))){
                 Long userId = userBasic.getUserId();
                 HttpSession preSession = userSessionMap.get(userId);
@@ -111,6 +110,7 @@ public class LoginController {
                 }
                 UserLogBean userLogBean = new UserLogBean(userBasic.getUserId(),userBasic.getAccount(),userBasic.getUsername());
                 session.setAttribute("userLogBean",userLogBean);
+                System.out.println(session.getMaxInactiveInterval());
                 userSessionMap.put(userId,session); //把当前登录用户的userId和session放入userSessionMap
                 statusBean.setStatus("登录成功");
             }
@@ -159,7 +159,6 @@ public class LoginController {
         StatusBean statusBean = new StatusBean();
         Manager manager = managerService.selectByAccount(logBean.getAccount());
         if(manager != null){
-            logger.info(manager.toString());
             if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(logBean.getPassword()))) {
                 Long managerId = manager.getManagerId();
                 HttpSession preSession = managerSessionMap.get(managerId);

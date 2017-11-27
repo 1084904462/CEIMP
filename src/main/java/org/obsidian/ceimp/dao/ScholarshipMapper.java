@@ -1,13 +1,19 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.ResidentAndSituationBean;
 import org.obsidian.ceimp.bean.UserAccountBean;
+import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.entity.ScholarshipExample;
 
 import java.util.List;
 
 public interface ScholarshipMapper {
+    List<ResidentAndSituationBean> getResidentAndSituationBeanList(@Param("subName")String subName,
+                                                                   @Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList,
+                                                                   @Param("yearScope")Integer yearScope);
+
     int deleteAllBySubNameAndUserAccountBeanListAndYearScope(@Param("subName")String subName,
                                                              @Param("userAccountBeanList")List<UserAccountBean> userAccountBeanList,
                                                              @Param("yearScope")Integer yearScope);

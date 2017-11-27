@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.service;
 
 import org.obsidian.ceimp.bean.NgBean;
+import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.entity.Ng;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,8 @@ import java.util.List;
  * Created by BillChen on 2017/11/18.
  */
 public interface NgService {
+    List<NgBean> getNgBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope);
+
     int updateNgOpinion(String opinion, List<String> userAccountList,Integer yearScope);
 
     Ng selectByUserIdAndYearScope(Long userId,Integer yearScope);

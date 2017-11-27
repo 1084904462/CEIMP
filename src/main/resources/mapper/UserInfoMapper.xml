@@ -5,6 +5,10 @@
     <id column="info_id" jdbcType="BIGINT" property="infoId" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
+    <result column="class_num_id" jdbcType="BIGINT" property="classNumId" />
+    <result column="political" jdbcType="VARCHAR" property="political" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="charact" jdbcType="VARCHAR" property="charact" />
     <result column="study" jdbcType="VARCHAR" property="study" />
     <result column="ability" jdbcType="VARCHAR" property="ability" />
@@ -15,9 +19,13 @@
     <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
   </resultMap>
   <select id="selectUserInfoBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.UserInfoBean">
-    select user_info.charact charact,user_info.study study,user_info.ability ability,user_info.total total,
-    user_info.gp gpRank,user_info.ce ceRank,user_info.pass_sum passSum,user_info.class_sum classSum
-    from user_info where user_info.user_id = #{userId} and user_info.year_scope = #{yearScope}
+    select school.name school,major.name major,major.sum majorSum,class_num.num classNum,
+    user_info.political political,user_info.phone phone,user_info.job job,user_info.charact charact,
+    user_info.study study,user_info.ability ability,user_info.total total,user_info.gp gpRank,
+    user_info.ce ceRank,user_info.pass_sum passSum,user_info.class_sum classSum from user_info,school,major,
+    class_num where school.school_id = major.school_id and major.major_id = class_num.major_id and
+    class_num.class_num_id = user_info.class_num_id and user_info.user_id = #{userId} and
+    user_info.year_scope = #{yearScope}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +86,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    info_id, user_id, year_scope, charact, study, ability, total, gp, ce, pass_sum, class_sum
+    info_id, user_id, year_scope, class_num_id, political, phone, job, charact, study, 
+    ability, total, gp, ce, pass_sum, class_sum
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample" resultMap="BaseResultMap">
     select
@@ -113,13 +122,17 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.UserInfo">
     insert into user_info (info_id, user_id, year_scope, 
-      charact, study, ability, 
-      total, gp, ce, pass_sum, 
-      class_sum)
+      class_num_id, political, phone, 
+      job, charact, study, 
+      ability, total, gp, 
+      ce, pass_sum, class_sum
+      )
     values (#{infoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
-      #{charact,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, #{ability,jdbcType=VARCHAR}, 
-      #{total,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, 
-      #{classSum,jdbcType=VARCHAR})
+      #{classNumId,jdbcType=BIGINT}, #{political,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{charact,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, 
+      #{ability,jdbcType=VARCHAR}, #{total,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, 
+      #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, #{classSum,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.UserInfo">
     insert into user_info
@@ -132,6 +145,18 @@
       </if>
       <if test="yearScope != null">
         year_scope,
+      </if>
+      <if test="classNumId != null">
+        class_num_id,
+      </if>
+      <if test="political != null">
+        political,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="job != null">
+        job,
       </if>
       <if test="charact != null">
         charact,
@@ -167,6 +192,18 @@
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="classNumId != null">
+        #{classNumId,jdbcType=BIGINT},
+      </if>
+      <if test="political != null">
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
       </if>
       <if test="charact != null">
         #{charact,jdbcType=VARCHAR},
@@ -212,6 +249,18 @@
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
       </if>
+      <if test="record.classNumId != null">
+        class_num_id = #{record.classNumId,jdbcType=BIGINT},
+      </if>
+      <if test="record.political != null">
+        political = #{record.political,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
       <if test="record.charact != null">
         charact = #{record.charact,jdbcType=VARCHAR},
       </if>
@@ -246,6 +295,10 @@
     set info_id = #{record.infoId,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
+      class_num_id = #{record.classNumId,jdbcType=BIGINT},
+      political = #{record.political,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
       charact = #{record.charact,jdbcType=VARCHAR},
       study = #{record.study,jdbcType=VARCHAR},
       ability = #{record.ability,jdbcType=VARCHAR},
@@ -266,6 +319,18 @@
       </if>
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
+      </if>
+      <if test="classNumId != null">
+        class_num_id = #{classNumId,jdbcType=BIGINT},
+      </if>
+      <if test="political != null">
+        political = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
       </if>
       <if test="charact != null">
         charact = #{charact,jdbcType=VARCHAR},
@@ -298,6 +363,10 @@
     update user_info
     set user_id = #{userId,jdbcType=BIGINT},
       year_scope = #{yearScope,jdbcType=INTEGER},
+      class_num_id = #{classNumId,jdbcType=BIGINT},
+      political = #{political,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
       charact = #{charact,jdbcType=VARCHAR},
       study = #{study,jdbcType=VARCHAR},
       ability = #{ability,jdbcType=VARCHAR},

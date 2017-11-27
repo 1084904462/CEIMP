@@ -33,8 +33,8 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public Long selectAwardIdBySubNameAndYearScope(String subName, Integer yearScope) {
-        return awardMapper.selectAwardIdBySubNameAndYearScope(subName,yearScope);
+    public Long selectAwardIdByUserIdSubNameAndYearScope(Long userId,String subName, Integer yearScope) {
+        return awardMapper.selectAwardIdByUserIdSubNameAndYearScope(userId,subName,yearScope);
     }
 
     @Transactional

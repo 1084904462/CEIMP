@@ -2,7 +2,9 @@ package org.obsidian.ceimp.util;
 
 import org.obsidian.ceimp.bean.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,6 +69,14 @@ public class TextMapUtil {
         return textMap;
     }
 
+    public List<Map<String,String>> getNgMapList(List<NgBean> ngBeanList){
+        List<Map<String,String>> ngMapList = new ArrayList<>();
+        for(int i=0;i<ngBeanList.size();i++){
+            ngMapList.add(this.getNgMap(ngBeanList.get(i)));
+        }
+        return ngMapList;
+    }
+
     public Map<String,String> getNisMap(NisBean nisBean){
         String identity = nisBean.getIdentity();
         char a = 'a';
@@ -113,6 +123,14 @@ public class TextMapUtil {
         return textMap;
     }
 
+    public List<Map<String,String>> getNisMapList(List<NisBean> nisBeanList){
+        List<Map<String,String>> nisMapList = new ArrayList<>();
+        for(int i=0;i<nisBeanList.size();i++){
+            nisMapList.add(this.getNisMap(nisBeanList.get(i)));
+        }
+        return nisMapList;
+    }
+
     public Map<String,String> getPgsMap(PgsBean pgsBean){
         String identity = pgsBean.getIdentity();
         char a = 'a';
@@ -154,6 +172,14 @@ public class TextMapUtil {
         return textMap;
     }
 
+    public List<Map<String,String>> getPgsMapList(List<PgsBean> pgsBeanList){
+        List<Map<String,String>> pgsMapList = new ArrayList<>();
+        for(int i=0;i<pgsBeanList.size();i++){
+            pgsMapList.add(this.getPgsMap(pgsBeanList.get(i)));
+        }
+        return pgsMapList;
+    }
+
     public Map<String,String> getSsMap(SsBean ssBean){
         Map<String,String> textMap = new HashMap<>();
         textMap.put("ts",ssBean.getTs().toString());
@@ -177,6 +203,14 @@ public class TextMapUtil {
         return textMap;
     }
 
+    public List<Map<String,String>> getSsMapList(List<SsBean> ssBeanList){
+        List<Map<String,String>> ssMapList = new ArrayList<>();
+        for(int i=0;i<ssBeanList.size();i++){
+            ssMapList.add(this.getSsMap(ssBeanList.get(i)));
+        }
+        return ssMapList;
+    }
+
     public Map<String,String> getTasMap(TasBean tasBean){
         Map<String,String> textMap = new HashMap<>();
         textMap.put("ts",tasBean.getTs().toString());
@@ -197,5 +231,13 @@ public class TextMapUtil {
         textMap.put("reason",tasBean.getReason());
         textMap.put("opinion",tasBean.getOpinion());
         return textMap;
+    }
+
+    public List<Map<String,String>> getTasMapList(List<TasBean> tasBeanList){
+        List<Map<String,String>> tasMapList = new ArrayList<>();
+        for(int i=0;i<tasBeanList.size();i++){
+            tasMapList.add(this.getTasMap(tasBeanList.get(i)));
+        }
+        return tasMapList;
     }
 }

@@ -18,14 +18,4 @@ public interface UserBasicService {
     UserBasic selectByAccount(String account);
 
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
-
-    int updateByUserIdAndNgBean(Long userId,NgBean ngBean);
-
-    int updateByUserIdAndNisBean(Long userId, NisBean nisBean);
-
-    int updateByUserIdAndPgsBean(Long userId, PgsBean pgsBean);
-
-    int updateByUserIdAndSsBean(Long userId,SsBean ssBean);
-
-    int updateByUserIdAndTasBean(Long userId,TasBean tasBean);
 }

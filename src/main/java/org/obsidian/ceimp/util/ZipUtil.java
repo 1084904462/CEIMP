@@ -3,6 +3,7 @@ package org.obsidian.ceimp.util;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -18,11 +19,13 @@ public class ZipUtil {
         return instance;
     }
 
-    public void zip(List<String> zipInputUrlList, String zipOutputUrl, HttpServletResponse response,String scholarshipName) throws IOException{
+    public void zip(List<String> modelNameList, List<Map<String,String>> textMapList,List<String> zipInputUrlList, String zipOutputUrl, HttpServletResponse response, String scholarshipName) throws IOException{
+        WordUtil.getInstance().generateAllWord(modelNameList,zipInputUrlList,textMapList);
         this.zipAllWord(zipInputUrlList,zipOutputUrl);
         String fileName = UrlUtil.getInstance().getZipFileName(scholarshipName);
         DownloadUtil.getInstance().download(zipOutputUrl,response,fileName);
         DeleteUtil.getInstance().delete(zipOutputUrl);
+        DeleteUtil.getInstance().deleteAll(zipInputUrlList);
     }
 
     private void zipAllWord(List<String> zipInputUrlList,String zipOutputUrl) throws IOException{

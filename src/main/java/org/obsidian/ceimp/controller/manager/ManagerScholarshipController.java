@@ -11,7 +11,6 @@ import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.UrlUtil;
 import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/18.
@@ -68,31 +68,32 @@ public class ManagerScholarshipController {
         return "manager/showScholarship";
     }
 
-    /*
+    /**
      * 根据subName从数据库表scholarship中查询对应的奖学金名称scholarshipName(查询结果为模板名称model_name分割'模板'前面的字)
      * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路劲zipInputUrlList
      * 根据scholarshipName获取打包后生成的zip文件路径
      * @param subName 奖学金名称缩写
-     * @param zipInfoBeanList 包含学号account、姓名username、奖学金名称scholarshipName
+     * @param request 从中获取zipInfoBeanList，包含学号account、姓名username、奖学金名称scholarshipName
      * @param response 将打包文件通过response返回给客户端
      * @throws IOException
      */
-/*
-    @PostMapping(value = "/zip/{subName}", consumes = {"application/x-www-form-urlencoded"})
-*/
-    @RequestMapping(value = "/zip/{subName}", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
-            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping("/zip/{subName}")
     public void getScholarshipZip(@PathVariable("subName") String subName, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String jsonStr=request.getParameter("zipInfoBeanList");
         List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
         logger.info("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
         String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
         logger.info("scholarshipName:" + scholarshipName);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
+        logger.info("modelNameList:" + modelNameList);
+        List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
+        logger.info("textMapList:" + textMapList);
         List<String> zipInputUrlList = UrlUtil.getInstance().getZipInputUrlList(subName,zipInfoBeanList);
         logger.info("zipInputUrlList:" + zipInputUrlList);
         String zipOutputUrl = UrlUtil.getInstance().getZipOutputUrl(scholarshipName);
         logger.info("zipOutputUrl:" + zipOutputUrl);
-        ZipUtil.getInstance().zip(zipInputUrlList,zipOutputUrl,response,scholarshipName);
+        ZipUtil.getInstance().zip(modelNameList,textMapList,zipInputUrlList,zipOutputUrl,response,scholarshipName);
     }
 
     /**

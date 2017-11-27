@@ -42,6 +42,16 @@ public class NisServiceImpl implements NisService {
 
     @Transactional
     @Override
+    public List<NisBean> getNisBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<NisBean> nisBeanList = nisMapper.getNisBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<nisBeanList.size();i++){
+            nisBeanList.get(i).setTs(nisBeanList.get(i).getTe() - 1);
+        }
+        return nisBeanList;
+    }
+
+    @Transactional
+    @Override
     public Nis selectByUserIdAndYearScope(Long userId, Integer yearScope) {
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
@@ -89,22 +99,22 @@ public class NisServiceImpl implements NisService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            nisBean.setSchool(userBasicBean.getSchool());
-            nisBean.setMajor(userBasicBean.getMajor());
-            nisBean.setClassNum(userBasicBean.getClassNum());
             nisBean.setUsername(userBasicBean.getUsername());
             nisBean.setSex(userBasicBean.getSex());
             nisBean.setBirth(userBasicBean.getBirth());
             nisBean.setAccount(userBasicBean.getAccount());
             nisBean.setNation(userBasicBean.getNation());
             nisBean.setEntrance(userBasicBean.getEntrance());
-            nisBean.setPolitical(userBasicBean.getPolitical());
-            nisBean.setPhone(userBasicBean.getPhone());
             nisBean.setIdentity(userBasicBean.getIdentity());
-            nisBean.setMajorSum(userBasicBean.getMajorSum());
         }
         UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
         if(userInfoBean != null){
+            nisBean.setSchool(userInfoBean.getSchool());
+            nisBean.setMajor(userInfoBean.getMajor());
+            nisBean.setClassNum(userInfoBean.getClassNum());
+            nisBean.setPolitical(userInfoBean.getPolitical());
+            nisBean.setPhone(userInfoBean.getPhone());
+            nisBean.setMajorSum(userInfoBean.getMajorSum());
             nisBean.setGpRank(userInfoBean.getGpRank());
             nisBean.setCeRank(userInfoBean.getCeRank());
             nisBean.setPassSum(userInfoBean.getPassSum());
@@ -120,7 +130,7 @@ public class NisServiceImpl implements NisService {
     @Transactional
     @Override
     public int insertNis(Long userId, Integer yearScope, NisBean nisBean) {
-        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
+        userInfoService.updateByUserIdAndNisBeanAndYearScope(userId,nisBean,yearScope);
         Nis nis = new Nis();
         nis.setUserId(userId);
         nis.setYearScope(yearScope);
@@ -150,7 +160,7 @@ public class NisServiceImpl implements NisService {
     @Transactional
     @Override
     public int updateNis(Long userId, Integer yearScope, NisBean nisBean) {
-        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
+        userInfoService.updateByUserIdAndNisBeanAndYearScope(userId,nisBean,yearScope);
         Nis nis = new Nis();
         nis.setUserId(userId);
         nis.setYearScope(yearScope);

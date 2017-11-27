@@ -4,6 +4,13 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2017/11/19.
  */
 public class UserInfoBean {
+    private String school;
+    private String major;
+    private Integer majorSum;
+    private String classNum;
+    private String political;
+    private String phone;
+    private String job;
     private String charact;
     private String study;
     private String ability;
@@ -16,7 +23,14 @@ public class UserInfoBean {
     @Override
     public String toString() {
         return "UserInfoBean{" +
-                "charact='" + charact + '\'' +
+                "school='" + school + '\'' +
+                ", major='" + major + '\'' +
+                ", majorSum=" + majorSum +
+                ", classNum='" + classNum + '\'' +
+                ", political='" + political + '\'' +
+                ", phone='" + phone + '\'' +
+                ", job='" + job + '\'' +
+                ", charact='" + charact + '\'' +
                 ", study='" + study + '\'' +
                 ", ability='" + ability + '\'' +
                 ", total='" + total + '\'' +
@@ -25,6 +39,62 @@ public class UserInfoBean {
                 ", passSum='" + passSum + '\'' +
                 ", classSum='" + classSum + '\'' +
                 '}';
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public Integer getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(Integer majorSum) {
+        this.majorSum = majorSum;
+    }
+
+    public String getClassNum() {
+        return classNum;
+    }
+
+    public void setClassNum(String classNum) {
+        this.classNum = classNum;
+    }
+
+    public String getPolitical() {
+        return political;
+    }
+
+    public void setPolitical(String political) {
+        this.political = political;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public String getCharact() {

@@ -35,6 +35,4 @@ public interface UserBasicMapper {
     int updateByPrimaryKeySelective(UserBasic record);
 
     int updateByPrimaryKey(UserBasic record);
-
-    List<UserSearchBean> selectByAccountAndUsername(@Param("account") String account,@Param("username") String username);
 }

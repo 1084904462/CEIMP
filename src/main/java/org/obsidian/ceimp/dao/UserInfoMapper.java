@@ -8,7 +8,7 @@ import org.obsidian.ceimp.entity.UserInfoExample;
 import java.util.List;
 
 public interface UserInfoMapper {
-    UserInfoBean selectUserInfoBeanByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+    UserInfoBean selectUserInfoBeanByUserIdAndYearScope(@Param("userId")Long userId, @Param("yearScope")Integer yearScope);
 
     long countByExample(UserInfoExample example);
 

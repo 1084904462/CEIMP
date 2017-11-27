@@ -13,9 +13,10 @@
     award.year_scope = #{yearScope} and award.scholarship_id = scholarship.scholarship_id
     and scholarship.sub_name = #{subName}
   </update>
-  <select id="selectAwardIdBySubNameAndYearScope" parameterType="map" resultType="java.lang.Long">
-    select award.award_id from award,scholarship where award.scholarship_id = scholarship.scholarship_id and
-    scholarship.sub_name = #{subName} and award.year_scope = #{yearScope}
+  <select id="selectAwardIdByUserIdSubNameAndYearScope" parameterType="map" resultType="java.lang.Long">
+    select award.award_id from award,scholarship where award.user_id = #{userId} and
+    award.scholarship_id = scholarship.scholarship_id and scholarship.sub_name = #{subName} and
+    award.year_scope = #{yearScope}
   </select>
   <select id="selectAllByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.AwardBean">
     select scholarship.name awardName,scholarship.sub_name subName,IFNULL(award.is_filled,-1) isFilled,
@@ -24,10 +25,13 @@
   </select>
   <select id="selectAllBySubNameAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipFormBean" statementType="STATEMENT">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username,
-    scholarship.name scholarshipName from major,class_num,user_basic,scholarship where major.major_id = class_num.major_id
-    and class_num.class_num_id = user_basic.class_num_id and user_basic.user_id
-    in (select ${subName}.user_id from ${subName} where year_scope = ${yearScope}) and scholarship.sub_name = "${subName}"
-    and major.grade = "${grade}"
+    scholarship.name scholarshipName from award,major,class_num,user_basic,user_info,scholarship where
+    major.major_id = class_num.major_id and class_num.class_num_id = user_info.class_num_id and
+    user_info.year_scope = ${yearScope} and award.year_scope = user_info.year_scope and
+    user_info.user_id = user_basic.user_id and award.user_id = user_basic.user_id
+    and award.scholarship_id = scholarship.scholarship_id and scholarship.sub_name = "${subName}"
+    and major.grade = "${grade}" and user_basic.user_id in
+    (select ${subName}.user_id from ${subName} where year_scope = ${yearScope})
   </select>
   <select id="selectByUserIdAndSubNameAndYearScope" parameterType="map" resultMap="BaseResultMap">
     select award.* from award,scholarship

@@ -6,31 +6,24 @@
     <result column="account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="class_num_id" jdbcType="BIGINT" property="classNumId" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="birth" jdbcType="VARCHAR" property="birth" />
     <result column="nation" jdbcType="VARCHAR" property="nation" />
     <result column="entrance" jdbcType="VARCHAR" property="entrance" />
-    <result column="political" jdbcType="VARCHAR" property="political" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="identity" jdbcType="VARCHAR" property="identity" />
-    <result column="job" jdbcType="VARCHAR" property="job" />
   </resultMap>
   <select id="getUserSearchBeanBySearchKeyListAndSchoolId" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
     from major,class_num,user_basic where major.major_id = class_num.major_id and
     class_num.class_num_id = user_basic.class_num_id and major.school_id = #{schoolId} and
     <foreach collection="searchKeyList" index="index" item="searchKey" open="(" separator="or" close=")">
-    user_basic.account like #{searchKey} or user_basic.username like #{searchKey}
+      user_basic.account like #{searchKey} or user_basic.username like #{searchKey}
     </foreach>
   </select>
   <select id="selectUserBasicBeanByUserId" parameterType="java.lang.Long" resultType="org.obsidian.ceimp.bean.UserBasicBean">
-    select school.name school,major.name major,major.sum majorSum,class_num.num classNum,user_basic.username username,user_basic.sex sex,
-    user_basic.birth birth,user_basic.account account,user_basic.nation nation,user_basic.entrance entrance,
-    user_basic.political political,user_basic.phone phone,user_basic.identity identity,
-    user_basic.job job from school,major,class_num,user_basic where school.school_id = major.school_id and
-    major.major_id = class_num.major_id and class_num.class_num_id = user_basic.class_num_id and
-    user_basic.user_id = #{userId}
+    select user_basic.account account,user_basic.username username,user_basic.sex sex,
+    user_basic.birth birth,user_basic.nation nation,user_basic.entrance entrance,
+    user_basic.identity identity from user_basic where user_basic.user_id = #{userId}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -91,8 +84,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, account, password, username, class_num_id, sex, birth, nation, entrance, 
-    political, phone, identity, job
+    user_id, account, password, username, sex, birth, nation, entrance, identity
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserBasicExample" resultMap="BaseResultMap">
     select
@@ -115,14 +107,6 @@
     from user_basic
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <select id="selectByAccountAndUsername" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
-    select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
-    from user_basic,class_num,major
-    where user_basic.account like CONCAT('%',#{account},'%')
-    and user_basic.username like CONCAT('%',#{username},'%')
-    and user_basic.class_num_id = class_num.class_num_id
-    and class_num.major_id = major.major_id
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_basic
     where user_id = #{userId,jdbcType=BIGINT}
@@ -135,15 +119,13 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.UserBasic">
     insert into user_basic (user_id, account, password, 
-      username, class_num_id, sex, 
-      birth, nation, entrance, 
-      political, phone, identity, 
-      job)
+      username, sex, birth, 
+      nation, entrance, identity
+      )
     values (#{userId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR}, #{classNumId,jdbcType=BIGINT}, #{sex,jdbcType=VARCHAR}, 
-      #{birth,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{entrance,jdbcType=VARCHAR}, 
-      #{political,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
-      #{job,jdbcType=VARCHAR})
+      #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
+      #{nation,jdbcType=VARCHAR}, #{entrance,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.UserBasic">
     insert into user_basic
@@ -160,9 +142,6 @@
       <if test="username != null">
         username,
       </if>
-      <if test="classNumId != null">
-        class_num_id,
-      </if>
       <if test="sex != null">
         sex,
       </if>
@@ -175,17 +154,8 @@
       <if test="entrance != null">
         entrance,
       </if>
-      <if test="political != null">
-        political,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
       <if test="identity != null">
         identity,
-      </if>
-      <if test="job != null">
-        job,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -201,9 +171,6 @@
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="classNumId != null">
-        #{classNumId,jdbcType=BIGINT},
-      </if>
       <if test="sex != null">
         #{sex,jdbcType=VARCHAR},
       </if>
@@ -216,17 +183,8 @@
       <if test="entrance != null">
         #{entrance,jdbcType=VARCHAR},
       </if>
-      <if test="political != null">
-        #{political,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="identity != null">
         #{identity,jdbcType=VARCHAR},
-      </if>
-      <if test="job != null">
-        #{job,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -251,9 +209,6 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.classNumId != null">
-        class_num_id = #{record.classNumId,jdbcType=BIGINT},
-      </if>
       <if test="record.sex != null">
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
@@ -266,17 +221,8 @@
       <if test="record.entrance != null">
         entrance = #{record.entrance,jdbcType=VARCHAR},
       </if>
-      <if test="record.political != null">
-        political = #{record.political,jdbcType=VARCHAR},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
       <if test="record.identity != null">
         identity = #{record.identity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.job != null">
-        job = #{record.job,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -289,15 +235,11 @@
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
-      class_num_id = #{record.classNumId,jdbcType=BIGINT},
       sex = #{record.sex,jdbcType=VARCHAR},
       birth = #{record.birth,jdbcType=VARCHAR},
       nation = #{record.nation,jdbcType=VARCHAR},
       entrance = #{record.entrance,jdbcType=VARCHAR},
-      political = #{record.political,jdbcType=VARCHAR},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      identity = #{record.identity,jdbcType=VARCHAR},
-      job = #{record.job,jdbcType=VARCHAR}
+      identity = #{record.identity,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -314,9 +256,6 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="classNumId != null">
-        class_num_id = #{classNumId,jdbcType=BIGINT},
-      </if>
       <if test="sex != null">
         sex = #{sex,jdbcType=VARCHAR},
       </if>
@@ -329,17 +268,8 @@
       <if test="entrance != null">
         entrance = #{entrance,jdbcType=VARCHAR},
       </if>
-      <if test="political != null">
-        political = #{political,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
       <if test="identity != null">
         identity = #{identity,jdbcType=VARCHAR},
-      </if>
-      <if test="job != null">
-        job = #{job,jdbcType=VARCHAR},
       </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
@@ -349,15 +279,11 @@
     set account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
-      class_num_id = #{classNumId,jdbcType=BIGINT},
       sex = #{sex,jdbcType=VARCHAR},
       birth = #{birth,jdbcType=VARCHAR},
       nation = #{nation,jdbcType=VARCHAR},
       entrance = #{entrance,jdbcType=VARCHAR},
-      political = #{political,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      identity = #{identity,jdbcType=VARCHAR},
-      job = #{job,jdbcType=VARCHAR}
+      identity = #{identity,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

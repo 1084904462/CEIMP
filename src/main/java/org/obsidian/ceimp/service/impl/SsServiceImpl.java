@@ -42,6 +42,16 @@ public class SsServiceImpl implements SsService {
 
     @Transactional
     @Override
+    public List<SsBean> getSsBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<SsBean> ssBeanList = ssMapper.getSsBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<ssBeanList.size();i++){
+            ssBeanList.get(i).setTs(ssBeanList.get(i).getTe() - 1);
+        }
+        return ssBeanList;
+    }
+
+    @Transactional
+    @Override
     public Ss selectByUserIdAndYearScope(Long userId, Integer yearScope) {
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
@@ -70,19 +80,19 @@ public class SsServiceImpl implements SsService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            ssBean.setSchool(userBasicBean.getSchool());
-            ssBean.setMajor(userBasicBean.getMajor());
-            ssBean.setClassNum(userBasicBean.getClassNum());
             ssBean.setUsername(userBasicBean.getUsername());
             ssBean.setSex(userBasicBean.getSex());
             ssBean.setAccount(userBasicBean.getAccount());
             ssBean.setNation(userBasicBean.getNation());
-            ssBean.setPolitical(userBasicBean.getPolitical());
-            ssBean.setJob(userBasicBean.getJob());
-            ssBean.setMajorSum(userBasicBean.getMajorSum());
         }
         UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
         if(userInfoBean != null){
+            ssBean.setSchool(userInfoBean.getSchool());
+            ssBean.setMajor(userInfoBean.getMajor());
+            ssBean.setClassNum(userInfoBean.getClassNum());
+            ssBean.setPolitical(userInfoBean.getPolitical());
+            ssBean.setJob(userInfoBean.getJob());
+            ssBean.setMajorSum(userInfoBean.getMajorSum());
             ssBean.setCharact(userInfoBean.getCharact());
             ssBean.setStudy(userInfoBean.getStudy());
             ssBean.setAbility(userInfoBean.getAbility());
@@ -101,7 +111,7 @@ public class SsServiceImpl implements SsService {
     @Transactional
     @Override
     public int insertSs(Long userId, Integer yearScope, SsBean ssBean) {
-        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
+        userInfoService.updateByUserIdAndSsBeanAndYearScope(userId,ssBean,yearScope);
         Ss ss = new Ss();
         ss.setUserId(userId);
         ss.setYearScope(yearScope);
@@ -112,7 +122,7 @@ public class SsServiceImpl implements SsService {
     @Transactional
     @Override
     public int updateSs(Long userId, Integer yearScope, SsBean ssBean) {
-        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
+        userInfoService.updateByUserIdAndSsBeanAndYearScope(userId,ssBean,yearScope);
         Ss ss = new Ss();
         ss.setUserId(userId);
         ss.setYearScope(yearScope);
