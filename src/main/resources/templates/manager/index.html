@@ -503,13 +503,13 @@
                         <div class="input-group-addon">
                             确认新密码
                         </div>
-                        <input type="password" class="form-control" name="password" id="password3" placeholder="确认新密码" autocomplete="off" />
+                        <input type="password" class="form-control" name="confirmPassword" id="password3" placeholder="确认新密码" autocomplete="off" />
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确认修改</button>
+                <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_reset(event)" data-dismiss="modal">确认修改</button>
             </div>
         </div>
     </div>
@@ -519,6 +519,37 @@
 </body>
 
 <script>
+    function fire_ajax_reset(event) {
+
+          /*  if ($("#userID").val()=="") {
+                alert("请输入账号");
+
+            }*/
+            if ($("#password2").val()==$("#password3").val()) {
+                $.ajax({
+                    method:"post",
+                    url:"/manager/settings/changePassword",
+                    data:{
+                        "password":$("#password2").val(),
+                        "confirmPassword":$("#password3").val()
+                    },
+                    dataType: "json",
+                    success:function () {
+                        console.log("success");
+                        alert("修改成功");
+                        location.reload();
+                    },
+                    error:function (result) {
+                        console.log("fail");
+                    }
+                });
+            }
+            else{
+               alert("新密码不一样");
+            }
+
+
+    }
 
 </script>
 </html>
