@@ -269,8 +269,7 @@
 </script>
 <script th:inline="javascript">
     $(document).ready(function() {
-        var ngOpinionFormBeanList=[[${ngOpinionFormBeanList}]];
-        console.log(ngOpinionFormBeanList[1].opinion);
+
         var oTable=$('#dataTables-example').DataTable({
             responsive: true,
             "order": [[ 1, "desc" ]],
@@ -309,7 +308,7 @@
 
             let iterable = new Array(checked.length);
             var i=0;
-            var userAccountList=new Array();
+            var userAccountList=[];
 
             for (let value of iterable) {
 
@@ -318,7 +317,10 @@
 
                 i++;
             }
-            ngOpinionUpdateBean={opinion:opinion};
+/*
+            ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
+*/
+            ngOpinionUpdateBean={"opinion":"同意一档国家助学金","userAccountList":["1160299070","1160299002"]};
 
             console.log(JSON.stringify(ngOpinionUpdateBean));
             $.ajax({
