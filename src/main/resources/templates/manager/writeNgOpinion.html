@@ -25,7 +25,9 @@
     <script th:src="@{/static/vendor/datatables-plugins/dataTables.bootstrap.min.js}"></script>
     <script th:src="@{/static/vendor/datatables-responsive/dataTables.responsive.js}"></script>
     <script th:src="@{/static/dist/js/sb-admin-2.js}"></script>
+<!--
     <script th:src="@{/static/js/manager/writeNgOpinion.js}"></script>
+-->
     <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>-->
 </head>
 <body>
@@ -175,33 +177,13 @@
 
                                     <th>姓名</th>
                                     <th >国家助学金-院（系）意见</th>
-                                    <th class="setWidth">操作</th>
+
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
-                                    </th>
-                                    <td >1</td>
-                                    <td ></td>
-                                    <td  class="account">2</td>
-                                    <td >3</td>
-                                    <td >
-                                        <select name="opinion16" id="opinion16">
-                                            <option value="同意一档">同意一档</option>
-                                            <option value="同意二档" selected="selected">同意二档</option>
-                                        </select>
-                                    </td>
 
-
-
-                                    <th>
-                                        <button type="button" class="btn btn-info btn-sm radius" onclick="fire_ajax_update(event)" data-toggle="modal" data-target="#downloadScholarship">修改</button>
-                                    </th>
-                                </tr>
-                                <tr th:each="person : ${NgOpinionFormBeanList}" >
+                                <tr th:each="person : ${ngOpinionFormBeanList}" >
                                     <th scope="row">
                                         <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                     </th>
@@ -209,25 +191,27 @@
                                     <td th:text="${person.classNum}"></td>
                                     <td th:text="${person.account}" class="account">2</td>
                                     <td th:text="${person.username}">3</td>
-                                    <td th:text="${person.opinion}">
-                                        <select name="opinion15" id="opinion15">
-                                            <option value="同意一档" >同意一档</option>
-                                            <option value="同意二档" >同意二档</option>
-                                        </select>
+                                    <td th:text="${person.opinion}" >
+                                    无
                                     </td>
 
 
 
-                                    <th>
-                                        <button type="button" class="btn btn-info btn-sm radius" onclick="fire_ajax_update(event)" data-toggle="modal" data-target="#downloadScholarship">修改</button>
-                                    </th>
+
                                 </tr>
 
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
                              <span class="panel-body_number">已选 <span id="checkedNumber15">0</span> 人</span>
-                            <span class="panel-body_number"> <button type="button" class="btn btn-default btn-sm radius" >批量下载</button> </span>
+                            <span class="panel-body_number ">
+                                <button type="button" class="btn btn-default btn-sm radius" id="batchChangeScholarshipButton">批量修改</button>
+                                <select name="opinion16" id="opinion16">
+                                             <option value="" selected="selected"></option>
+                                            <option value="同意一档">同意一档国家助学金</option>
+                                            <option value="同意二档" >同意二档国家助学金</option>
+                                </select>
+                            </span>
                         </div>
                         
                         <!-- /.panel-body -->
@@ -295,6 +279,100 @@
 
 </script>
 <script th:inline="javascript">
+    $(document).ready(function() {
+        var ngOpinionFormBeanList=[[${ngOpinionFormBeanList}]];
+        console.log(ngOpinionFormBeanList[1].opinion);
+        var oTable=$('#dataTables-example').DataTable({
+            responsive: true,
+            "order": [[ 1, "desc" ]],
+            "columnDefs": [{ "targets": [0,5], "orderable": false }]
+
+        });
+        var allPages = oTable.cells( ).nodes( );
+
+        $('#checkAll').click(function () {
+            if ($(this).hasClass('allChecked')) {
+                $(allPages).find('input[name="subBox"]').prop('checked', false);
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+            } else {
+                $(allPages).find('input[name="subBox"]').prop('checked', true);
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+            }
+            $(this).toggleClass('allChecked');
+        });
+
+
+
+
+
+
+
+        var $subBox = $(allPages).find('input[name="subBox"]');
+        $subBox.click(function(){
+            /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+            $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+
+        });
+        $("#batchChangeScholarshipButton").click(function () {
+            var checked=$(allPages).find('input[name="subBox"]:checked');
+            var ngOpinionUpdateBean=new Array();
+            var opinion=$("#opinion16").find("option:selected").text();
+
+            let iterable = new Array(checked.length);
+            var i=0;
+            var userAccountList=new Array();
+
+            for (let value of iterable) {
+
+                console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                 userAccountList.push({account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML});
+
+                i++;
+            }
+            ngOpinionUpdateBean={opinion:opinion};
+
+            console.log(JSON.stringify(ngOpinionUpdateBean));
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "/manager/scholarship/opinion/ng",
+                data: JSON.stringify(ngOpinionUpdateBean),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    console.log("SUCCESS : ", data);
+                    alert("成功批量修改");
+
+                    location.reload();
+
+
+
+
+                },
+                error: function (e) {
+
+
+
+                    alert("修改失败")
+
+
+                    console.log("Failed : ", e);
+
+                }
+            });
+
+
+
+
+
+
+
+
+        });
+
+    });
+/*
     function fire_ajax_update(event) {
 
 
@@ -306,22 +384,22 @@
 
         var index=$($($($(event.target).parent())).parent()).prevAll().length;
         var account=$($($($(event.target).parent()).parent()).children())[3].innerHTML;
-/*
-        var opinion=$($($($(event.target).parent()).parent()).children())[5].innerHTML;
-*/
+        /!*
+                var opinion=$($($($(event.target).parent()).parent()).children())[5].innerHTML;
+        *!/
         var opinion=$("#opinion16").find("option:selected").text();
 
         var userAccountList={account:account};
-        var NgOpinionUpdateBean=new Array();
-/*
-        var userAccountBean={account:account};
+        var ngOpinionUpdateBean=new Array();
+        /!*
+                var userAccountBean={account:account};
 
-*/
-        NgOpinionUpdateBean.push({opinion: opinion,userAccountList});
+        *!/
+        ngOpinionUpdateBean.push({opinion: opinion,userAccountList});
 
 
         console.log(userAccountList);
-        console.log(NgOpinionUpdateBean);
+        console.log(ngOpinionUpdateBean);
 
 
 
@@ -334,7 +412,7 @@
             type: "post",
             contentType: "application/json",
             url: "/manager/scholarship/opinion/ng",//
-            data: JSON.stringify(NgOpinionUpdateBean),
+            data: JSON.stringify(ngOpinionUpdateBean),
             dataType: 'json',
             cache: false,
             timeout: 600000,
@@ -347,10 +425,10 @@
 
 
 
-                /* $("#deleteScholarship").data-dismiss="modal";*/
-                /*
+                /!* $("#deleteScholarship").data-dismiss="modal";*!/
+                /!*
                                     $("#deleteScholarshipSuccess").style="display:block";
-                */
+                *!/
 
 
             },
@@ -368,6 +446,8 @@
 
 
     }
+*/
+
 
 </script>
 </html>

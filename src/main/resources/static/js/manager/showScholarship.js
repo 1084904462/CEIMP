@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 
 
-    $("#checkAll2").click(function() {
+    /*$("#checkAll2").click(function() {
         if ($(this).hasClass('checked')) {
             $('input[name="subBox"]').prop("checked",false);
             $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
@@ -34,13 +34,18 @@ $(document).ready(function() {
             $('input[name="subBox"]').prop("checked",true);
             $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
         $(this).toggleClass('checked');
-    });
+    });*/
     var $subBox = $(allPages).find('input[name="subBox"]');
     $subBox.click(function(){
         /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
         $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
 
     });
+
+    $("#batchDownload").click(function () {
+
+    });
+
 });
 
 /*$(document).ready(function() {
