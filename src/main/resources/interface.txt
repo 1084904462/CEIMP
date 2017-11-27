@@ -66,12 +66,7 @@
 
 
 			}
-			UserAccountBean
-            			{
-            				account:String
 
-
-            			}
 
 		}
 	->

@@ -2,6 +2,7 @@
 
 <!-- /#wrapper -->
 function loadPage(url) {
+
     if (!url.match("/add")) {
         //消除连续两次模态框显示导致的17px叠加偏移
         $('.main-body').css('padding-right', '0');
