@@ -135,9 +135,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active"><a href="#">2016级</a></li>
-                                <li role="presentation"><a href="#" >2015级</a></li> <!--style="color: grey"-->
-                                <!--<li role="presentation" ><a href="#" >Messages</a></li>&lt;!&ndash;style="color: grey"&ndash;&gt;-->
+                                <li role="presentation" class="active" id="b1"  ><a href="javascript:void(0)" th:text="${session.managerLogBean.grade}+'级'">2016级</a></li>
+                                <!--<li role="presentation" ><a href="javascript:void(0)" >Messages</a></li>&lt;!&ndash;style="color: grey"&ndash;&gt;-->
                             </ul>
                         </div>
                         <!-- /.panel-heading -->
@@ -194,12 +193,13 @@
                             <!-- /.table-responsive -->
                              <span class="panel-body_number">已选 <span id="checkedNumber15">0</span> 人</span>
                             <span class="panel-body_number ">
-                                <button type="button" class="btn btn-default btn-sm radius" id="batchChangeScholarshipButton">批量修改</button>
-                                <select name="opinion16" id="opinion16">
-                                             <option value="" selected="selected"></option>
-                                            <option value="同意一档">同意一档国家助学金</option>
+                                  <select name="opinion16" id="opinion16" style="height: 35px;">
+                                            <option value="" ></option>
+                                            <option value="同意一档" selected="selected">同意一档国家助学金</option>
                                             <option value="同意二档" >同意二档国家助学金</option>
                                 </select>
+                                <button type="button" class="btn btn-default btn-sm radius" id="batchChangeScholarshipButton">批量修改</button>
+
                             </span>
                         </div>
                         
@@ -331,7 +331,6 @@
                 timeout: 600000,
                 success: function (data) {
                     console.log("SUCCESS : ", data);
-                    alert("成功批量修改");
 
                     location.reload();
 
@@ -436,7 +435,207 @@
 
     }
 */
+    function fire_ajax_update(event) {
+        var showScholarshipBean=[[${showScholarshipBean}]];
+        /*$("#b1").className="";
+        $("#b2").className="active";*/
+        console.log();
+        $("#b2").attr("class","");
+        $("#b1").attr("class","active");
 
+
+
+
+
+        $.ajax({
+            type: "get",
+            contentType: "application/json",
+            url: "/manager/scholarship/"+showScholarshipBean.subName+"/"+showScholarshipBean.grade[0],//
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+
+            success: function (data) {
+                let iterable = new Array(data.length);
+                $(".table tbody").html("");
+
+                var i=0;
+
+
+                for (let value of iterable) {
+                    var input=document.createElement("input");
+                    input.setAttribute("type","checkbox");
+                    input.setAttribute("name","subBox");
+                    input.setAttribute("style","margin-top:7px;");
+
+
+
+                    var button=document.createElement("button");
+                    button.innerHTML = "下载";
+                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                    button.setAttribute("onclick","fire_ajax_download(event)");
+
+
+                    var button2=document.createElement("button");
+                    button2.innerHTML = "删除";
+                    button2.className="btn btn-danger2 btn-sm interval radius";
+                    button2.setAttribute("style","margin-left:30px;");
+                    button2.setAttribute("onclick","fire_ajax_delete(event)");
+                    button2.setAttribute("data-toggle","modal");
+                    button2.setAttribute("data-target","#deleteScholarship");
+
+
+
+                    var tr=document.createElement("tr");
+                    var td1=document.createElement("td");
+                    var td2=document.createElement("td");
+                    var td3=document.createElement("td");
+                    var td4=document.createElement("td");
+                    var td5=document.createElement("td");
+                    var td6=document.createElement("td");
+                    var td7=document.createElement("td");
+
+                    td1.append(input);
+                    td2.append(data[i].major);
+                    td3.append(data[i].classNum);
+                    td4.append(data[i].account);
+                    td5.append(data[i].username);
+                    td6.append(data[i].scholarshipName);
+                    td7.append(button,button2);
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+
+                    tr.append(td7);
+                    i++;
+
+
+                    $(".table").append(tr);}
+
+
+
+
+
+                console.log("SUCCESS : ", data);
+
+
+
+            },
+            error: function (e) {
+
+
+
+
+                console.log("Failed : ", e);
+
+            }
+        });
+
+    }
+
+    function fire_ajax_update2(event) {
+        var showScholarshipBean=[[${showScholarshipBean}]];
+        /*$("#b1").className="";
+        $("#b2").className="active";*/
+        console.log();
+        $("#b1").attr("class","");
+        $("#b2").attr("class","active");
+
+
+
+
+
+        $.ajax({
+            type: "get",
+            contentType: "application/json",
+            url: "/manager/scholarship/"+showScholarshipBean.subName+"/"+showScholarshipBean.grade[1],//
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+
+            success: function (data) {
+                let iterable = new Array(data.length);
+                $(".table tbody").html("");
+
+                var i=0;
+
+
+                for (let value of iterable) {
+                    var input=document.createElement("input");
+                    input.setAttribute("type","checkbox");
+                    input.setAttribute("name","subBox");
+                    input.setAttribute("style","margin-top:7px;");
+
+
+
+                    var button=document.createElement("button");
+                    button.innerHTML = "下载";
+                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                    button.setAttribute("onclick","fire_ajax_download(event)");
+
+
+                    var button2=document.createElement("button");
+                    button2.innerHTML = "删除";
+                    button2.className="btn btn-danger2 btn-sm interval radius";
+                    button2.setAttribute("style","margin-left:30px;");
+                    button2.setAttribute("onclick","fire_ajax_delete(event)");
+                    button2.setAttribute("data-toggle","modal");
+                    button2.setAttribute("data-target","#deleteScholarship");
+
+
+
+                    var tr=document.createElement("tr");
+                    var td1=document.createElement("td");
+                    var td2=document.createElement("td");
+                    var td3=document.createElement("td");
+                    var td4=document.createElement("td");
+                    var td5=document.createElement("td");
+                    var td6=document.createElement("td");
+                    var td7=document.createElement("td");
+
+                    td1.append(input);
+                    td2.append(data[i].major);
+                    td3.append(data[i].classNum);
+                    td4.append(data[i].account);
+                    td5.append(data[i].username);
+                    td6.append(data[i].scholarshipName);
+                    td7.append(button,button2);
+                    tr.append(td1);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+                    tr.append(td5);
+                    tr.append(td6);
+
+                    tr.append(td7);
+                    i++;
+
+
+                    $(".table").append(tr);}
+
+
+
+
+
+                console.log("SUCCESS : ", data);
+
+
+
+            },
+            error: function (e) {
+
+
+
+
+                console.log("Failed : ", e);
+
+            }
+        });
+
+    }
 
 </script>
 </html>
