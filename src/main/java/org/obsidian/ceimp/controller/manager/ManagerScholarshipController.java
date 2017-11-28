@@ -91,14 +91,13 @@ public class ManagerScholarshipController {
      * @param response 将打包文件通过response返回给客户端
      * @throws IOException
      */
-    @PostMapping("/zip/{subName}")
-    public void getScholarshipZip(@PathVariable("subName") String subName, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    @PostMapping("/zip/{subName}/{yearScope}")
+    public void getScholarshipZip(@PathVariable("subName") String subName,@PathVariable("yearScope")Integer yearScope, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String jsonStr=request.getParameter("zipInfoBeanList");
         List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
         logger.info("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
         String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
         logger.info("scholarshipName:" + scholarshipName);
-        int yearScope = TimeUtil.getInstance().getThisYear();
         List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
         logger.info("modelNameList:" + modelNameList);
         List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
