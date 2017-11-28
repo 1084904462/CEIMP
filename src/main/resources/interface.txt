@@ -19,8 +19,6 @@
 查看奖学金界面
 	<-
 		/manager/scholarship/{subName},get		//该url用于左侧的导航栏的超链接,grade默认为最新需要综测的年级
-		/manager/scholarship/{subName}/{grade},ajax,get	//默认为本次综测的年份
-		/manager/scholarship/{subName}/{grade}/{yearScope},ajax,get
 	->
 		model:ShowScholarshipBean
 		{
@@ -41,10 +39,28 @@
 			}
 		}
 
-奖学金表格打包//500
 	<-
-		/manager/scholarship/zip/{subName},form,post 	//通过js获取勾选列的数据，再模拟表单提交，详情百度
-		/manager/scholarship/zip/{subName}/{yearScope},form,post
+		/manager/scholarship/{subName}/{grade},ajax,get
+		{
+			yearScope:Integer
+		}
+	->
+		ScholarshipFormBeanList	//这是个list，需要循环获取
+		{
+			ScholarshipFormBean
+			{
+				major:String,		//专业
+				classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
+				account:String,		//学号
+				username:String,	//姓名
+				scholarshipName:String	//获奖名称，注意，与上面的scholarshipName，该项可分单项奖学金等
+			}
+		}
+
+
+奖学金表格打包
+	<-
+		/manager/scholarship/zip/{subName}/{yearScope},form,post //通过js获取勾选列的数据，再模拟表单提交，详情百度
 		ZipInfoBeanList
 		{
 			ZipInfoBean
@@ -63,11 +79,7 @@
 			UserAccountBean
 			{
 				account:String
-
-
 			}
-
-
 		}
 	->
 		StatusBean
@@ -132,9 +144,6 @@
 		{
 			opinion:String,
 			userAccountList:List<String>
-			{
-				account:String
-			}
 		}
 	->
 		NgOpinionFormBeanList

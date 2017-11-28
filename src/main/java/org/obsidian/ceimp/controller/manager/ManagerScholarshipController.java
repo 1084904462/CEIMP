@@ -180,7 +180,6 @@ public class ManagerScholarshipController {
     @PostMapping("/opinion/ng")
     @ResponseBody
     public String updateNgOpinion(HttpSession session,@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
-        System.out.println("123");
         logger.info(ngOpinionUpdateBean);
         Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
         String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
