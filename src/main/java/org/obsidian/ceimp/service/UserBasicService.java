@@ -1,8 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.NgBean;
-import org.obsidian.ceimp.bean.UserBasicBean;
-import org.obsidian.ceimp.bean.UserSearchBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.UserBasic;
 
 import java.io.UnsupportedEncodingException;
@@ -13,19 +11,11 @@ import java.util.List;
  * Created by BillChen on 2017/11/13.
  */
 public interface UserBasicService {
-    int insertUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(List<String> searchKeyList,Long schoolId,Integer yearScope);
 
     int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    int deleteUserBasic(Long userId);
-
-    UserBasic selectByUserId(Long userId);
-
     UserBasic selectByAccount(String account);
 
-    List<UserSearchBean> selectByAccountAndUsername(String account, String username);
-
     UserBasicBean selectUserBasicBeanByUserId(Long userId);
-
-    int updateByUserIdAndNgBean(Long userId,NgBean ngBean);
 }

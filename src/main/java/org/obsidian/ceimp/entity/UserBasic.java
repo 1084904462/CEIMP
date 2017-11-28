@@ -9,8 +9,6 @@ public class UserBasic {
 
     private String username;
 
-    private Long classNumId;
-
     private String sex;
 
     private String birth;
@@ -19,32 +17,7 @@ public class UserBasic {
 
     private String entrance;
 
-    private String political;
-
-    private String phone;
-
     private String identity;
-
-    private String job;
-
-    @Override
-    public String toString() {
-        return "UserBasic{" +
-                "userId=" + userId +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
-                ", classNumId=" + classNumId +
-                ", sex='" + sex + '\'' +
-                ", birth='" + birth + '\'' +
-                ", nation='" + nation + '\'' +
-                ", entrance='" + entrance + '\'' +
-                ", political='" + political + '\'' +
-                ", phone='" + phone + '\'' +
-                ", identity='" + identity + '\'' +
-                ", job='" + job + '\'' +
-                '}';
-    }
 
     public Long getUserId() {
         return userId;
@@ -76,14 +49,6 @@ public class UserBasic {
 
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
-    }
-
-    public Long getClassNumId() {
-        return classNumId;
-    }
-
-    public void setClassNumId(Long classNumId) {
-        this.classNumId = classNumId;
     }
 
     public String getSex() {
@@ -118,35 +83,11 @@ public class UserBasic {
         this.entrance = entrance == null ? null : entrance.trim();
     }
 
-    public String getPolitical() {
-        return political;
-    }
-
-    public void setPolitical(String political) {
-        this.political = political == null ? null : political.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
-
     public String getIdentity() {
         return identity;
     }
 
     public void setIdentity(String identity) {
         this.identity = identity == null ? null : identity.trim();
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job == null ? null : job.trim();
     }
 }

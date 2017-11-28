@@ -2,12 +2,14 @@ package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.NgBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
+import org.obsidian.ceimp.bean.UserInfoBean;
 import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.dao.NgMapper;
 import org.obsidian.ceimp.entity.Ng;
 import org.obsidian.ceimp.entity.NgExample;
 import org.obsidian.ceimp.service.NgService;
 import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.service.UserInfoService;
 import org.obsidian.ceimp.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,24 @@ public class NgServiceImpl implements NgService {
 
     @Autowired
     private UserBasicService userBasicService;
+
+    @Autowired
+    private UserInfoService userInfoService;
+
+    @Transactional
+    @Override
+    public List<NgBean> getNgBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<NgBean> ngBeanList = ngMapper.getNgBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<ngBeanList.size();i++){
+            ngBeanList.get(i).setTe(ngBeanList.get(i).getTs() + 1);
+        }
+        return ngBeanList;
+    }
+
+    @Override
+    public int updateNgOpinion(String opinion, List<String> userAccountList, Integer yearScope) {
+        return ngMapper.updateNgOpinion(opinion,userAccountList,yearScope);
+    }
 
     @Transactional
     @Override
@@ -88,18 +108,21 @@ public class NgServiceImpl implements NgService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            ngBean.setSchool(userBasicBean.getSchool());
-            ngBean.setMajor(userBasicBean.getMajor());
-            ngBean.setClassNum(userBasicBean.getClassNum());
             ngBean.setUsername(userBasicBean.getUsername());
             ngBean.setSex(userBasicBean.getSex());
             ngBean.setBirth(userBasicBean.getBirth());
             ngBean.setAccount(userBasicBean.getAccount());
             ngBean.setNation(userBasicBean.getNation());
             ngBean.setEntrance(userBasicBean.getEntrance());
-            ngBean.setPolitical(userBasicBean.getPolitical());
-            ngBean.setPhone(userBasicBean.getPhone());
             ngBean.setIdentity(userBasicBean.getIdentity());
+        }
+        UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
+        if(userInfoBean != null){
+            ngBean.setSchool(userInfoBean.getSchool());
+            ngBean.setMajor(userInfoBean.getMajor());
+            ngBean.setClassNum(userInfoBean.getClassNum());
+            ngBean.setPolitical(userInfoBean.getPolitical());
+            ngBean.setPhone(userInfoBean.getPhone());
         }
         return ngBean;
     }
@@ -107,7 +130,7 @@ public class NgServiceImpl implements NgService {
     @Transactional
     @Override
     public int insertNg(Long userId,Integer yearScope,NgBean ngBean) {
-        userBasicService.updateByUserIdAndNgBean(userId,ngBean);
+        userInfoService.updateByUserIdAndNgBeanAndYearScope(userId,ngBean,yearScope);
         Ng ng = new Ng();
         ng.setUserId(userId);
         ng.setYearScope(yearScope);
@@ -145,7 +168,7 @@ public class NgServiceImpl implements NgService {
     @Transactional
     @Override
     public int updateNg(Long userId,Integer yearScope,NgBean ngBean) {
-        userBasicService.updateByUserIdAndNgBean(userId,ngBean);
+        userInfoService.updateByUserIdAndNgBeanAndYearScope(userId,ngBean,yearScope);
         Ng ng = new Ng();
         ng.setUserId(userId);
         ng.setYearScope(yearScope);
@@ -200,8 +223,6 @@ public class NgServiceImpl implements NgService {
         ZipInfoBean zipInfoBean = new ZipInfoBean(ngBean.getAccount(),ngBean.getUsername(),"国家助学金");
         String modelInputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
         String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl("ng",zipInfoBean);
-        System.out.println(modelInputUrl);
-        System.out.println(wordOutputUrl);
         Map<String,String> textMap = TextMapUtil.getInstance().getNgMap(ngBean);
         WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
         String fileName = UrlUtil.getInstance().getWordFileName(zipInfoBean);

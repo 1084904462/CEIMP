@@ -1,8 +1,7 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
-
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by BillChen on 2017/10/15.
@@ -24,6 +23,12 @@ public class DeleteUtil {
         File file = new File(inputUrl);
         if(file.exists() && file.isFile()){
             file.delete();
+        }
+    }
+
+    public void deleteAll(List<String> inputUrlList){
+        for(int i=0;i<inputUrlList.size();i++){
+            this.delete(inputUrlList.get(i));
         }
     }
 }

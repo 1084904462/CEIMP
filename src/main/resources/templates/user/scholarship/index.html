@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Document</title>
+    <title>在线文档生成</title>
     <link rel='stylesheet prefetch' th:href='@{/static/css/bootstrap.min.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/jquery-ui.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/user/scholarship/scholarship.css}'/>
     <link rel='stylesheet' th:href='@{/static/css/user/scholarship/index.css}'/>
     <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
     <script th:src="@{/static/js/bootstrap.min.js}"></script>
-    <script th:src="@{/static/js/user/scholarship/ss.js}"></script>
+    <script th:src="@{/static/js/user/nav.js}"></script>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top">
@@ -28,7 +28,7 @@
             <li><a href="#">综测信息填写</a></li>
             <li><a href="#">查看审核状态</a></li>
             <li><a href="#">查看公示结果</a></li>
-            <li><a href="#">在线文档生成</a></li>
+            <li><a href="/scholarship/index">在线文档生成</a></li>
         </ul>
         <ul class="nav navbar-nav">
             <li class="navbar-text">
@@ -36,7 +36,7 @@
                     <span class="caret">123</span>
                 </a>
                 <ul class="dropdown-menu1">
-                    <li><a href="#">修改密码</a></li>
+                    <li><a href="#">个人信息</a></li>
                     <li><a href="/userLogout">退出登录</a></li>
                 </ul>
             </li>

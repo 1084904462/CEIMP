@@ -7,6 +7,13 @@
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
     <result column="sub_name" jdbcType="VARCHAR" property="subName" />
   </resultMap>
+  <select id="getResidentAndSituationBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.ResidentAndSituationBean" statementType="STATEMENT">
+    select ${subName}.resident resident,${subName}.situation situation from ${subName},user_basic where
+    ${subName}.year_scope = ${yearScope} and ${subName}.user_id = user_basic.user_id and user_basic.account in
+    <foreach collection="zipInfoBeanList" index="index" item="zipInfoBean" open="(" separator="," close=")">
+      ${zipInfoBean.account}
+    </foreach>
+  </select>
   <delete id="deleteAllBySubNameAndUserAccountBeanListAndYearScope" parameterType="map" statementType="STATEMENT">
     delete from ${subName} where ${subName}.year_scope = ${yearScope} and ${subName}.user_id in
     (

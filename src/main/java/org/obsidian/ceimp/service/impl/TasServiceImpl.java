@@ -3,6 +3,7 @@ package org.obsidian.ceimp.service.impl;
 import org.obsidian.ceimp.bean.TasBean;
 import org.obsidian.ceimp.bean.UserBasicBean;
 import org.obsidian.ceimp.bean.UserInfoBean;
+import org.obsidian.ceimp.bean.ZipInfoBean;
 import org.obsidian.ceimp.dao.TasMapper;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.entity.Tas;
@@ -11,12 +12,15 @@ import org.obsidian.ceimp.service.OpinionService;
 import org.obsidian.ceimp.service.TasService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.service.UserInfoService;
-import org.obsidian.ceimp.util.TimeUtil;
+import org.obsidian.ceimp.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/18.
@@ -35,6 +39,16 @@ public class TasServiceImpl implements TasService {
 
     @Autowired
     private OpinionService opinionService;
+
+    @Transactional
+    @Override
+    public List<TasBean> getTasBeanList(List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
+        List<TasBean> tasBeanList = tasMapper.getTasBeanList(zipInfoBeanList,yearScope);
+        for(int i=0;i<tasBeanList.size();i++){
+            tasBeanList.get(i).setTs(tasBeanList.get(i).getTe() - 1);
+        }
+        return tasBeanList;
+    }
 
     @Transactional
     @Override
@@ -66,19 +80,19 @@ public class TasServiceImpl implements TasService {
         }
         UserBasicBean userBasicBean = userBasicService.selectUserBasicBeanByUserId(userId);
         if(userBasicBean != null){
-            tasBean.setSchool(userBasicBean.getSchool());
-            tasBean.setMajor(userBasicBean.getMajor());
-            tasBean.setClassNum(userBasicBean.getClassNum());
             tasBean.setUsername(userBasicBean.getUsername());
             tasBean.setSex(userBasicBean.getSex());
             tasBean.setAccount(userBasicBean.getAccount());
             tasBean.setNation(userBasicBean.getNation());
-            tasBean.setPolitical(userBasicBean.getPolitical());
-            tasBean.setJob(userBasicBean.getJob());
-            tasBean.setMajorSum(userBasicBean.getMajorSum());
         }
         UserInfoBean userInfoBean = userInfoService.selectUserInfoBeanByUserIdAndYearScope(userId,yearScope);
         if(userInfoBean != null){
+            tasBean.setSchool(userInfoBean.getSchool());
+            tasBean.setMajor(userInfoBean.getMajor());
+            tasBean.setClassNum(userInfoBean.getClassNum());
+            tasBean.setPolitical(userInfoBean.getPolitical());
+            tasBean.setJob(userInfoBean.getJob());
+            tasBean.setMajorSum(userInfoBean.getMajorSum());
             tasBean.setCharact(userInfoBean.getCharact());
             tasBean.setStudy(userInfoBean.getStudy());
             tasBean.setAbility(userInfoBean.getAbility());
@@ -90,5 +104,42 @@ public class TasServiceImpl implements TasService {
             tasBean.setOpinion(opinion.getTasOpinion());
         }
         return tasBean;
+    }
+
+    @Transactional
+    @Override
+    public int insertTas(Long userId, Integer yearScope, TasBean tasBean) {
+        userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
+        Tas tas = new Tas();
+        tas.setUserId(userId);
+        tas.setYearScope(yearScope);
+        tas.setReason(tasBean.getReason());
+        return tasMapper.insertSelective(tas);
+    }
+
+    @Transactional
+    @Override
+    public int updateTas(Long userId, Integer yearScope, TasBean tasBean) {
+        userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
+        Tas tas = new Tas();
+        tas.setUserId(userId);
+        tas.setYearScope(yearScope);
+        tas.setReason(tasBean.getReason());
+        TasExample example = new TasExample();
+        example.or().andUserIdEqualTo(userId).andYearScopeEqualTo(yearScope);
+        return tasMapper.updateByExampleSelective(tas,example);
+    }
+
+    @Override
+    public void getTasWord(TasBean tasBean, HttpServletResponse response) throws IOException {
+        String modelName = "三好学生模板";
+        ZipInfoBean zipInfoBean = new ZipInfoBean(tasBean.getAccount(),tasBean.getUsername(),"三好学生");
+        String modelInputUrl = UrlUtil.getInstance().getModelInputUrl(modelName);
+        String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl("tas",zipInfoBean);
+        Map<String,String> textMap = TextMapUtil.getInstance().getTasMap(tasBean);
+        WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
+        String fileName = UrlUtil.getInstance().getWordFileName(zipInfoBean);
+        DownloadUtil.getInstance().download(wordOutputUrl,response,fileName);
+        DeleteUtil.getInstance().delete(wordOutputUrl);
     }
 }

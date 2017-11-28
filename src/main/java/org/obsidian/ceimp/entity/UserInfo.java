@@ -7,6 +7,14 @@ public class UserInfo {
 
     private Integer yearScope;
 
+    private Long classNumId;
+
+    private String political;
+
+    private String phone;
+
+    private String job;
+
     private String charact;
 
     private String study;
@@ -45,6 +53,38 @@ public class UserInfo {
 
     public void setYearScope(Integer yearScope) {
         this.yearScope = yearScope;
+    }
+
+    public Long getClassNumId() {
+        return classNumId;
+    }
+
+    public void setClassNumId(Long classNumId) {
+        this.classNumId = classNumId;
+    }
+
+    public String getPolitical() {
+        return political;
+    }
+
+    public void setPolitical(String political) {
+        this.political = political == null ? null : political.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job == null ? null : job.trim();
     }
 
     public String getCharact() {

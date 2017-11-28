@@ -1,34 +1,34 @@
 package org.obsidian.ceimp.controller.manager;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.alibaba.fastjson.JSON;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
  * Created by Administrator on 2017/11/20.
  */
 @Controller
+@RequestMapping("/manager/settings")
 public class ManagerSettingController {
-
-    private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(this.getClass());
-
-
+    private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
     private UserBasicService userBasicService;
@@ -40,76 +40,104 @@ public class ManagerSettingController {
      * 进入重置密码页面
      * @return 重置密码页面
      */
-    @GetMapping("/manager/resetPassword")
+    @GetMapping("/resetPassword")
     public String pageResetPassword(){
         return "manager/resetPassword";
     }
 
     /**
-     * 管理员重置密码
-     * @param logBean 用户账号，用户密码
-     * @return 重置成功
+     * 管理员重置密码为888888
+     * @param userAccountBean
+     * @return 重置密码成功
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
-
-    @PostMapping("/manager/resetPassword")
+    @PostMapping("/resetPassword")
     @ResponseBody
-    public String resetPassword(LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.info("account:"+logBean.getAccount());
+    public String resetPassword(@RequestBody UserAccountBean userAccountBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        logger.info(userAccountBean);
+        UserBasic userBasic = new UserBasic();
+        userBasic.setAccount(userAccountBean.getAccount());
+        userBasic.setPassword("888888");
+        int isReset = userBasicService.updateUserBasic(userBasic);
         StatusBean statusBean = new StatusBean();
-        UserBasic userBasic = userBasicService.selectByAccount(logBean.getAccount());
-        userBasic.setPassword(logBean.getPassword());
-        userBasicService.updateUserBasic(userBasic);
-        statusBean.setStatus("重置成功");
+        if(isReset == 0){
+            statusBean.setStatus("重置密码失败");
+        }
+        else{
+            statusBean.setStatus("重置密码成功");
+        }
+        logger.info(statusBean);
         return JSON.toJSONString(statusBean);
     }
 
-    @GetMapping("/manager/search")
+    /**
+     * 默认只能搜索本学院用户
+     * 先去除searchKey中的空格及转义字符
+     * 再截取中文、数字，并在两头添加'%'
+     * @param searchBean
+     * @param session 从session中的managerLogBean获取schoolId
+     * @return
+     */
+    @PostMapping("/search")
     @ResponseBody
-    public List<UserSearchBean> search(SearchBean searchBean){
-        logger.info("searchKey:"+searchBean.getSearchKey());
-        String [] accountSplit = searchBean.getSearchKey().split("\\D");
-        String account = "";
-        for(String accounts:accountSplit){
-            account = account + accounts;
+    public String searchUser(@RequestBody SearchBean searchBean,HttpSession session){
+        logger.info("searchKey:" + searchBean.getSearchKey());
+        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
+        String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
+        List<String> searchKeyList = new ArrayList<>();
+        Pattern pattern1 = Pattern.compile("\\D+");
+        Matcher matcher1 = pattern1.matcher(searchKey);
+        while(matcher1.find()){
+            searchKeyList.add("%" + matcher1.group() + "%");
         }
-        logger.info(account);
-        String [] usernameSplit = searchBean.getSearchKey().split("\\d");
-        String username = "";
-        for(String usernames:usernameSplit){
-            username = username + usernames;
+        Pattern pattern2 = Pattern.compile("\\d+");
+        Matcher matcher2 = pattern2.matcher(searchKey);
+        while(matcher2.find()){
+            searchKeyList.add("%" + matcher2.group() + "%");
         }
-        logger.info(username);
-        return userBasicService.selectByAccountAndUsername(account,username);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(searchKeyList,schoolId,yearScope);
+        logger.info(userSearchBeanList);
+        return JSON.toJSONString(userSearchBeanList);
     }
 
     /**
-     * 管理员修改密码
-     * @param passwordBean 密码，确认密码
-     * @param session 管理员信息
+     * 管理员修改自己的密码
+     * @param passwordBean 新密码，确认密码
+     * @param session 从session中的managerLogBean获取managerId
      * @return 修改结果
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
-    @PostMapping("/manager/changePassword")
+    @PostMapping("/changePassword")
     @ResponseBody
     public String changePassword(PasswordBean passwordBean, HttpSession session) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Long managerId = ((ManagerLogBean) session.getAttribute("managerLogBean")).getManagerId();
         Manager manager = managerService.selectByManagerId(managerId);
         StatusBean statusBean = new StatusBean();
-        if(passwordBean.getPassword().equals(passwordBean.getConfirmPassword())){
-            if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getPassword()))){
-                manager.setPassword(passwordBean.getPassword());
-                managerService.update(manager);
-                statusBean.setStatus("修改成功");
+        if(passwordBean.getPassword().length() >= 6){
+            if(passwordBean.getPassword().length() <= 16){
+                if(passwordBean.getPassword().equals(passwordBean.getConfirmPassword())){
+                    if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getPassword()))){
+                        manager.setPassword(passwordBean.getPassword());
+                        managerService.updateManager(manager);
+                        statusBean.setStatus("修改成功");
+                    }
+                    else{
+                        statusBean.setStatus("新密码与原密码相同");
+                    }
+                }
+                else {
+                    statusBean.setStatus("两次密码输入不同");
+                }
             }
             else{
-                statusBean.setStatus("新密码与原密码相同");
+                statusBean.setStatus("新密码不能大于16位");
             }
         }
-        else {
-            statusBean.setStatus("两次密码输入不同");
+        else{
+            statusBean.setStatus("新密码不能小于6位");
         }
         return JSON.toJSONString(statusBean);
     }

@@ -1,6 +1,5 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
 import org.apache.poi.xwpf.usermodel.*;
 
 import java.io.*;
@@ -24,6 +23,11 @@ public class WordUtil {
         return instance;
     }
 
+    public void generateAllWord(List<String> modelNameList,List<String> zipInputUrlList, List<Map<String,String>> textMapList){
+        for(int i=0;i<modelNameList.size();i++){
+            this.generateWord(modelNameList.get(i),zipInputUrlList.get(i),textMapList.get(i));
+        }
+    }
     /**
      *  用一个docx文档作为模板，然后替换其中的内容，再写入目标文档中
      * @param inputUrl 输入URL

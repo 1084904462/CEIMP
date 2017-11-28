@@ -29,6 +29,7 @@
     <script th:src="@{/static/js/manager/index.js}"></script>
 </head>
 <body class="main-body">
+<button type="button" id="test2"/>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -75,13 +76,13 @@
 
 
                 <li class="dropdown">
-                    <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="#">
+                    <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="javascript:void(0)">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
+                        <font style="margin-left: 15px;margin-right: 30px;" th:text="${session.managerLogBean.account}" ></font>
                     </a>
                     <ul class="dropdown-menu dropdown-user" style="display: none;" id="hidden"  onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()">
 
-                        <li ><a href="#"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        <li ><a href="javascript:void(0)" data-toggle="modal" data-target="#changePassword" ><i class="fa fa-gear fa-fw"></i> 修改密码</a>
                         </li>
                         <li class="divider"></li>
                         <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
@@ -98,53 +99,41 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                       <!-- <li class="sidebar-search">
-                           &lt;!&ndash; <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search..."/>
-                                <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                            </div>&ndash;&gt;
-                            &lt;!&ndash; /input-group &ndash;&gt;
-                        </li>-->
-                        <li  onclick="loadPage('index.html')"><!--showScholarship.htmlhtml'onclick="loadPage()" -->
-                            <a href="#" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
-                           <!--   -->
+                        <li>
+                            <a href="/manager/index" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
                         </li>
                        
                         <li>
-                            <a href="#">
+                            <a href="javascript:void(0)">
                             	<i class="fa fa-table fa-fw"></i>  
                             查看名单
                             	<span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
+                                <li onclick=""><a href="/manager/scholarship/ng"><span class="text">国家助学金</span></a>
+                                </li>
                                 <li onclick=""><a href="/manager/scholarship/nis"><span class="text">国家励志奖学金</span></a>
                                 </li>
-                                 <li onclick=""><a href="/manager/scholarship/ng"><span class="text">国家助学金</span></a>
+                                <li onclick=""><a href="/manager/scholarship/pgs"><span class="text">省政府奖学金</span></a>
                                 </li>
-                                 <li onclick=""><a href="/manager/scholarship/pgs"><span class="text">省政府奖学金</span></a>
-                                </li>
-                                 <li onclick=""><a href="/manager/scholarship/ss"><span class="text">校奖学金</span></a>
+                                <li onclick=""><a href="/manager/scholarship/ss"><span class="text">校奖学金</span></a>
                                 </li>
                                 <li onclick=""><a href="/manager/scholarship/tas"><span class="text">三好学生</span></a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
+                            <a href="javascript:void(0)"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                
-                               <li onclick=""><a href="/manager/writeOpinion"><span class="text ">奖学金意见填写</span></a>
+                               <li onclick=""><a href="/manager/scholarship/opinion"><span class="text ">奖学金意见填写</span></a>
                                 </li>
-                                 <li onclick=""><a><span class="text">国家助学金审批意见</span></a>
+                                 <li onclick=""><a href="/manager/scholarship/opinion/ng"><span class="text">国家助学金审批意见</span></a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
+                            <a href="/manager/settings/resetPassword"><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
                             
                             <!-- /.nav-second-level -->
                         </li>
@@ -465,11 +454,95 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+<!--修改密码model-->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <input type="text" class="form-control" name="account" id="userID" th:value="${session.managerLogBean.account}" autocomplete="off" disabled="disabled" />
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            原密码
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password1" placeholder="原密码" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            新密码
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password2" placeholder="新密码" autocomplete="off" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            确认新密码
+                        </div>
+                        <input type="password" class="form-control" name="confirmPassword" id="password3" placeholder="确认新密码" autocomplete="off" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_reset(event)" data-dismiss="modal">确认修改</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     </div>
 </body>
 
 <script>
+    $("#test2").click(function () {
+        console.log(session.);
+    });
+    function fire_ajax_reset(event) {
+
+          /*  if ($("#userID").val()=="") {
+                alert("请输入账号");
+
+            }*/
+            if ($("#password2").val()==$("#password3").val()) {
+                $.ajax({
+                    method:"post",
+                    url:"/manager/settings/changePassword",
+                    data:{
+                        "password":$("#password2").val(),
+                        "confirmPassword":$("#password3").val()
+                    },
+                    dataType: "json",
+                    success:function () {
+                        console.log("success");
+                        alert("修改成功");
+                        location.reload();
+                    },
+                    error:function (result) {
+                        console.log("fail");
+                    }
+                });
+            }
+            else{
+               alert("新密码不一样");
+            }
+
+
+    }
 
 </script>
 </html>

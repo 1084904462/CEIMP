@@ -7,6 +7,19 @@
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
   </resultMap>
+  <select id="getTasBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.TasBean">
+    select tas.year_scope te,school.name school,major.name major,class_num.num classNum,user_basic.username username,
+    user_basic.sex sex,user_basic.account account,user_basic.nation nation,user_info.political political,
+    user_info.job job,user_info.charact charact,user_info.study study,user_info.ability ability,user_info.total total,
+    user_info.ce ceRank,major.sum majorSum,tas.reason reason,opinion.tas_opinion opinion from tas,school,major,class_num,
+    user_basic,user_info,opinion where tas.user_id = user_basic.user_id and user_info.user_id = user_basic.user_id and
+    tas.year_scope = user_info.year_scope and tas.year_scope = opinion.year_scope and opinion.year_scope = #{yearScope}
+    and school.school_id = major.school_id and major.major_id = class_num.major_id and
+    class_num.class_num_id = user_info.class_num_id and user_basic.account in
+    <foreach collection="zipInfoBeanList" index="index" item="zipInfoBean" open="(" separator="," close=")">
+      #{zipInfoBean.account}
+    </foreach>
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

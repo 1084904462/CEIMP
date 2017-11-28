@@ -1,13 +1,25 @@
 package org.obsidian.ceimp.bean;
 
 /**
- * Created by Administrator on 2017/11/20.
+ * Created by BillChen on 2017/11/24.
  */
-public class UserSearchBean {
+public class NgOpinionFormBean {
     private String major;
     private String classNum;
     private String account;
     private String username;
+    private String opinion;
+
+    @Override
+    public String toString() {
+        return "NgOpinionFormBean{" +
+                "major='" + major + '\'' +
+                ", classNum='" + classNum + '\'' +
+                ", account='" + account + '\'' +
+                ", username='" + username + '\'' +
+                ", opinion='" + opinion + '\'' +
+                '}';
+    }
 
     public String getMajor() {
         return major;
@@ -41,13 +53,11 @@ public class UserSearchBean {
         this.username = username;
     }
 
-    @Override
-    public String toString() {
-        return "UserSearchBean{" +
-                "major='" + major + '\'' +
-                ", classNum='" + classNum + '\'' +
-                ", account='" + account + '\'' +
-                ", username='" + username + '\'' +
-                '}';
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 }

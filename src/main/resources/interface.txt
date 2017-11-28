@@ -1,251 +1,5 @@
 ---------------------用户端---------------------
 
-奖学金首页
-	<-
-		/scholarship/index,get
-	->
-		model:AwardBeanList
-		{
-			AwardBean
-			{
-				awardName:String,
-				subName:String	//用于奖学金超链接
-				isFilled:Integer,-1-没有获得该奖学金,0-未填,1-已填
-				userId:Long 	//这个没什么用处
-			}
-		}
-
-国家助学金界面
-	<-
-		/scholarship/ng,get
-	->
-		model:NgBean
-		{
-			ts:String,开始时间
-			te:String,结束时间
-			school:String,
-			major:String,
-			classNum:String,
-			username:String,
-			sex:String,
-			birth:String,
-			account:String,
-			nation:String,
-			entrance:String,//入学年月
-			political:String,
-			phone:String,
-			identity:String,
-			resident:String,//户口
-			incomeSource:String,
-			monthIncome:String,
-			familySum:String,
-			address:String,
-			postalCode:String,
-			situation:String,
-			fName1:String,
-			age1:String,
-			relation1:String,
-			workPlace1:String,
-			fName2:String,
-			age2:String,
-			relation2:String,
-			workPlace2:String,
-			fName3:String,
-			age3:String,
-			relation3:String,
-			workPlace3:String,
-			fName4:String,
-			age4:String,
-			relation4:String,
-			workPlace4:String,
-			fName5:String,
-			age5:String,
-			relation5:String,
-			workPlace5:String,
-			applyReason:String,
-			opinion:String
-		}
-
-国家助学金提交
-	<-
-		/scholarship/ng,form,post
-		{
-			NgBean
-		}
-
-国家励志奖学金界面
-	<-
-		/scholarship/nis,get
-	->
-		model:NisBean
-		{
-			ts:String,开始时间
-			te:String,结束时间
-			school:String,
-			major:String,
-			classNum:String,
-			username:String,
-			sex:String,
-			birth:String,
-			account:String,
-			nation:String,
-			entrance:String,
-			political:String,
-			phone:String,
-			identity:String,
-			gpRank:String,
-			ceRank:String,
-			majorSum:Integer,
-			passSum:String,
-			classSum:String,
-			date1:String,
-			award1,String,
-			unit1:String,
-			date2:String,
-			award2,String,
-			unit2:String,
-			date3:String,
-			award3,String,
-			unit3:String,
-			date4:String,
-			award4,String,
-			unit4:String,
-			resident:String,
-			incomeSource:String,
-			monthIncome:String,
-			familySum:String,
-			address:String,
-			postalCode:String,
-			situation:String,
-			applyReason:String,
-			opinion:String
-		}
-
-国家励志奖学金提交
-	<-
-		/scholarship/nis,form,post
-		{
-			NisBean
-		}
-
-省政府奖学金界面
-	<-
-		/scholarship/pgs,get
-	->
-		model:PgsBean
-		{
-			ts:String,开始时间
-			te:String,结束时间
-			school:String,
-			major:String,
-			classNum:String,
-			username:String,
-			sex:String,
-			birth:String,
-			account:String,
-			nation:String,
-			entrance:String,
-			political:String,
-			phone:String,
-			identity:String,
-			gpRank:String,
-			ceRank:String,
-			majorSum:Integer,
-			passSum:String,
-			classSum:String,
-			date1:String,
-			award1,String,
-			unit1:String,
-			date2:String,
-			award2,String,
-			unit2:String,
-			date3:String,
-			award3,String,
-			unit3:String,
-			date4:String,
-			award4,String,
-			unit4:String,
-			applyReason:String,
-			recommendReason:String,
-			opinion:String
-		}
-
-省政府奖学金提交
-	<-
-		/scholarship/pgs,form,post
-		{
-			PgsBean
-		}
-
-校奖学金界面
-	<-
-		/scholarship/ss,get
-	->
-		model:SsBean
-		{
-			ts:String,开始时间
-			te:String,结束时间
-			school:String,
-			major:String,
-			classNum:String,
-			username:String,
-			sex:String,
-			account:String,
-			nation:String,
-			political:String,
-			job:String,
-			character:String,
-			study:String,
-			ability:String,
-			all:String,
-			ceRank:String,//问题
-			majorSum:Integer,
-			level:String,
-			reason:String,
-			opinion:String
-		}
-
-校奖学金提交
-	<-
-		/scholarship/ss,form,post
-		{
-			SsBean
-		}
-
-三好学生界面
-	<-
-		/scholarship/tas,get
-	->
-		model:TasBean
-		{
-			ts:String,开始时间
-			te:String,结束时间
-			school:String,
-			major:String,
-			classNum:String,
-			username:String,
-			sex:String,
-			account:String,
-			nation:String,
-			political:String,
-			job:String,
-			character:String,
-			study:String,
-			ability:String,
-			all:String,
-			ceRank:String,
-			majorSum:Integer,
-			reason:String,
-			opinion:String
-		}
-
-三好学生提交
-	<-
-		/scholarship/tas,form,post
-		{
-			TasBean
-		}
-
 
 
 
@@ -287,7 +41,7 @@
 			}
 		}
 
-奖学金表格打包
+奖学金表格打包//500
 	<-
 		/manager/scholarship/zip/{subName},form,post 	//通过js获取勾选列的数据，再模拟表单提交，详情百度
 		/manager/scholarship/zip/{subName}/{yearScope},form,post
@@ -301,7 +55,7 @@
 			}
 		}
 
-删除奖学金
+删除奖学金//完成
 	<-
 		/manager/scholarship/delete/{subName},ajax,post
 		UserAccountBeanList
@@ -309,7 +63,11 @@
 			UserAccountBean
 			{
 				account:String
+
+
 			}
+
+
 		}
 	->
 		StatusBean
@@ -317,7 +75,7 @@
 			status:String	//删除成功或删除失败
 		}
 
-查看奖学金意见
+查看奖学金意见//完成
 	<-
 		/manager/scholarship/opinion,get
 	->
@@ -330,7 +88,7 @@
 			tasOpinion:String	//三好学生-二级学工组意见
 		}
 
-修改奖学金意见
+修改奖学金意见//完成
 	<-
 		/manager/scholarship/opinion,ajax,post
 		ScholarshipOpinionBean
@@ -351,51 +109,56 @@
 			tasOpinion:String
 		}
 
-查看国家助学金意见界面
+查看国家助学金意见界面//完成
 	<-
 		/manager/scholarship/opinion/ng,get
 	->
-		model:NgOpinionFormBean
+		model:NgOpinionFormBeanList
 		{
-			major:String,		//专业
-			classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
-			account:String,		//学号
-			username:String,	//姓名
-			opinion:String		//国家助学金-院（系）意见
+			NgOpinionFormBean
+			{
+				major:String,		//专业
+				classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
+				account:String,		//学号
+				username:String,	//姓名
+				opinion:String		//国家助学金-院（系）意见
+			}
 		}
 
-修改国家助学金意见
+修改国家助学金意见//完成
 	<-
 		/manager/scholarship/opinion/ng,ajax,post
-		NgOpinionBeanList
+		NgOpinionUpdateBean
 		{
-			NgOpinionBean
+			opinion:String,
+			userAccountList:List<String>
 			{
-				account:String,
-				opinion:String
+				account:String
 			}
 		}
 	->
-		NgOpinionFormBean
+		NgOpinionFormBeanList
 		{
-			major:String,		//专业
-			classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
-			account:String,		//学号
-			username:String,	//姓名
-			opinion:String		//国家助学金-院（系）意见
+			NgOpinionFormBean
+			{
+				major:String,		//专业
+				classNum:String,	//班级号，这个只有数字，显示的时候需要在前面加上major
+				account:String,		//学号
+				username:String,	//姓名
+				opinion:String		//国家助学金-院（系）意见
+			}
 		}
 
-重置用户密码界面
+重置用户密码界面//完成
 	<-
-		/manager/resetPassword,get
+		/manager/settings/resetPassword,get
 
-重置用户密码
+重置用户密码//完成
 	<-
-		/manager/resetPassword,ajax,post
-		LogBeanBean
+		/manager/settings/resetPassword,ajax,post
+		UserAccountBean
 		{
-			account:String,
-			password:String
+				account:String
 		}
 	->
 		StatusBean
@@ -403,9 +166,9 @@
 			status:String
 		}
 
-根据用户学号或姓名返回用户信息
+根据用户学号或姓名返回用户信息//完成
 	<-
-		/manager/search,ajax,get
+		/manager/settings/search,ajax,post
 		SearchBean
 		{
 			searchKey:String	//该搜索关键词可以是学号或姓名或学号和姓名
@@ -422,12 +185,16 @@
 			}
 		}
 
-管理员修改自己的密码
+管理员修改自己的密码//完成
 	<-
-		/manager/changePassword,post,form
+		/manager/settings/changePassword,post,form
 		PasswordBean
 		{
 			password:String,
 			confirmPassword:String
 		}
-
+	->
+		StatusBean
+		{
+			status:String
+		}
