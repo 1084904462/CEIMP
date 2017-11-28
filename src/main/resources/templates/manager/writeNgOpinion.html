@@ -318,7 +318,6 @@
                 i++;
             }
             ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
-           /* ngOpinionUpdateBean={"opinion":"同意一档国家助学金","userAccountList":["1160299070","1160299002"]};*/
 
             console.log(JSON.stringify(ngOpinionUpdateBean));
             $.ajax({
@@ -331,7 +330,6 @@
                 timeout: 600000,
                 success: function (data) {
                     console.log("SUCCESS : ", data);
-                    alert("成功批量修改");
 
                     location.reload();
 
