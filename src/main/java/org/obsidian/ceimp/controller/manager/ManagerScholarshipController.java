@@ -78,8 +78,7 @@ public class ManagerScholarshipController {
     @GetMapping("/{subName}/{grade}")
     @ResponseBody
     public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade,@RequestParam(value = "yearScope",required = false)Integer yearScope){
-        logger.info("subName:" + subName);
-        logger.info("grade:" + grade);
+        logger.info("subName:" + subName + " grade:" + grade);
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
         }
@@ -91,7 +90,7 @@ public class ManagerScholarshipController {
 
     /**
      * 根据subName从数据库表scholarship中查询对应的奖学金名称scholarshipName(查询结果为模板名称model_name分割'模板'前面的字)
-     * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路劲zipInputUrlList
+     * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路径zipInputUrlList
      * 根据scholarshipName获取打包后生成的zip文件路径
      * @param subName 奖学金名称缩写
      * @param yearScope 年份
