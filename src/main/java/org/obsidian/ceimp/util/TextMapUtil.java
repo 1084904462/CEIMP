@@ -2,11 +2,10 @@ package org.obsidian.ceimp.util;
 
 import org.obsidian.ceimp.bean.SsBean;
 import org.obsidian.ceimp.bean.*;
-<<<<<<< HEAD
-=======
+
 
 import java.util.ArrayList;
->>>>>>> 91717322cb73c8f08aebd80f2dc3bc1d534ee06b
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

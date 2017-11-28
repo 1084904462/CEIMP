@@ -68,6 +68,20 @@ public class ManagerScholarshipController {
         return "manager/showScholarship";
     }
 
+    @GetMapping("/{subName}/{grade}")
+    @ResponseBody
+    public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade,@RequestParam(value = "yearScope",required = false)Integer yearScope){
+        logger.info("subName:" + subName);
+        logger.info("grade:"+grade);
+        if(yearScope == null){
+            yearScope = TimeUtil.getInstance().getThisYear();
+        }
+        logger.info("yearScope:"+yearScope);
+        List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
+        logger.info("scholarshipFormBeanList:"+scholarshipFormBeanList);
+        return JSON.toJSONString(scholarshipFormBeanList);
+    }
+
     /**
      * 根据subName从数据库表scholarship中查询对应的奖学金名称scholarshipName(查询结果为模板名称model_name分割'模板'前面的字)
      * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路劲zipInputUrlList
