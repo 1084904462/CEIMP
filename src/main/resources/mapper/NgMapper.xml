@@ -54,10 +54,11 @@
     </foreach>
   </select>
   <update id="updateNgOpinion" parameterType="map">
-    update ng set ng.opinion = #{opinion} where ng.year_scope = #{yearScope} ng.user_id in
+    update ng set ng.opinion = #{opinion} where ng.year_scope = #{yearScope} and ng.user_id in
+    (select user_basic.user_id from user_basic where user_basic.account in
     <foreach collection="userAccountList" index="index" item="account" open="(" separator="," close=")">
-      #{account}
-    </foreach>
+    #{account}
+    </foreach>)
   </update>
   <sql id="Example_Where_Clause">
     <where>
