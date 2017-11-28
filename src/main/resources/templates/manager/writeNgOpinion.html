@@ -313,14 +313,12 @@
             for (let value of iterable) {
 
                 console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
-                 userAccountList.push({account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML});
+                 userAccountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
 
                 i++;
             }
-/*
             ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
-*/
-            ngOpinionUpdateBean={"opinion":"同意一档国家助学金","userAccountList":["1160299070","1160299002"]};
+           /* ngOpinionUpdateBean={"opinion":"同意一档国家助学金","userAccountList":["1160299070","1160299002"]};*/
 
             console.log(JSON.stringify(ngOpinionUpdateBean));
             $.ajax({
