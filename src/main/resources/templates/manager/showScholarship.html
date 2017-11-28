@@ -183,7 +183,7 @@
 
 
                                     <th>
-                                        <button type="button" class="btn btn-info btn-sm radius" onclick="fire_ajax_download(event)" data-toggle="modal" data-target="#downloadScholarship">下载</button>
+                                        <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
                                         <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;"  onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
                                     </th>
                                 </tr>
@@ -192,7 +192,7 @@
                             </table>
                             <!-- /.table-responsive -->
                              <span class="panel-body_number">已选 <span id="checkedNumber15">0</span> 人</span>
-                            <span class="panel-body_number"> <button type="button" class="btn btn-default btn-sm radius" id="batchDownload"  data-toggle="modal" data-target="#batchDownloadScholarship">批量下载</button> </span>
+                            <span class="panel-body_number"> <button type="button" class="btn btn-default btn-sm radius downloadScholarshipButton" id="batchDownload"  onclick="fire_ajax_download(event)">批量下载</button> </span>
                         </div>
                         
                         <!-- /.panel-body -->
@@ -246,7 +246,7 @@
                     确认下载？
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary"  id="downloadScholarshipButton"  data-dismiss="modal">下载</button>
+                    <button type="button" class="btn btn-primary"   data-dismiss="modal">下载</button>
                 </div>
             </div>
         </div>
@@ -476,11 +476,11 @@
 
 
 
-        $("#downloadScholarshipButton").click(function(){
+
 
             console.log("1");
             var tempform = document.createElement("form");
-            tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName;
+            tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
             tempform.method = "post";
             tempform.style.display="none"
             tempform.target="_blank";
@@ -505,7 +505,7 @@
             tempform.submit();
             document.body.removeChild(tempform);
            console.log(tempform);
-        });
+
 
 
     }

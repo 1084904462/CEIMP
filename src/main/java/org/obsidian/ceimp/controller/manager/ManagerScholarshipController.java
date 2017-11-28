@@ -68,6 +68,20 @@ public class ManagerScholarshipController {
         return "manager/showScholarship";
     }
 
+    @GetMapping("/{subName}/{grade}")
+    @ResponseBody
+    public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade,@RequestParam(value = "yearScope",required = false)Integer yearScope){
+        logger.info("subName:" + subName);
+        logger.info("grade:"+grade);
+        if(yearScope == null){
+            yearScope = TimeUtil.getInstance().getThisYear();
+        }
+        logger.info("yearScope:"+yearScope);
+        List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
+        logger.info("scholarshipFormBeanList:"+scholarshipFormBeanList);
+        return JSON.toJSONString(scholarshipFormBeanList);
+    }
+
     /**
      * 根据subName从数据库表scholarship中查询对应的奖学金名称scholarshipName(查询结果为模板名称model_name分割'模板'前面的字)
      * 根据subName和zipInfoBeanList获取需要打包的所有奖学金文件路劲zipInputUrlList
@@ -77,14 +91,13 @@ public class ManagerScholarshipController {
      * @param response 将打包文件通过response返回给客户端
      * @throws IOException
      */
-    @PostMapping("/zip/{subName}")
-    public void getScholarshipZip(@PathVariable("subName") String subName, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    @PostMapping("/zip/{subName}/{yearScope}")
+    public void getScholarshipZip(@PathVariable("subName") String subName,@PathVariable("yearScope")Integer yearScope, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String jsonStr=request.getParameter("zipInfoBeanList");
         List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
         logger.info("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
         String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
         logger.info("scholarshipName:" + scholarshipName);
-        int yearScope = TimeUtil.getInstance().getThisYear();
         List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
         logger.info("modelNameList:" + modelNameList);
         List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
