@@ -1,11 +1,7 @@
 package org.obsidian.ceimp.util;
 
-<<<<<<< HEAD
 import org.obsidian.ceimp.bean.SsBean;
-=======
 import org.obsidian.ceimp.bean.*;
->>>>>>> d1b28ec8f7f39b6771e353e121851befc9d02fbb
-
 import java.util.HashMap;
 import java.util.Map;
 
