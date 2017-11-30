@@ -154,7 +154,7 @@
                                 <tr>
                                     <th>
 
-                                        <input type="checkbox" id="checkAll" name=""/>
+                                        <input type="checkbox" id="checkAll" name="all"/>
 
                                     </th>
                                     <th >专业
@@ -287,14 +287,31 @@
 
         });
         var allPages = oTable.cells( ).nodes( );
+        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+            $('#batchDownload').prop('disabled', "disabled");}
+        else{
+            $('#batchDownload').prop('disabled', "");
+        }
 
         $('#checkAll').click(function () {
             if ($(this).hasClass('allChecked')) {
                 $(allPages).find('input[name="subBox"]').prop('checked', false);
                 $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+
             } else {
                 $(allPages).find('input[name="subBox"]').prop('checked', true);
                 $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                $('#batchDownload').prop('disabled', "");
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
             }
             $(this).toggleClass('allChecked');
         });
@@ -317,10 +334,29 @@
         $subBox.click(function(){
             /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
             $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+            if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                $('#batchDownload').prop('disabled', "disabled");}
+            else{
+                $('#batchDownload').prop('disabled', "");
+            }
+            if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                $('#checkAll').prop("checked",true);
+                $('#checkAll').prop("class","allChecked");
+
+
+
+            }
+            else{
+                $('#checkAll').prop("checked",false);
+                $('#checkAll').prop("class","");
+
+
+            }
 
         });
 
         $("#batchDownload").click(function () {
+            console.log(showScholarshipBean.yearScope);
             var checked=$(allPages).find('input[name="subBox"]:checked');
             var zipInfoBeanList=new Array();
             let iterable = new Array(checked.length);
@@ -378,6 +414,10 @@
         console.log();
         $("#b2").attr("class","");
         $("#b1").attr("class","active");
+        $('#checkAll').attr('class','');
+
+        $('#checkAll').prop('checked',false);
+
 
 
 
@@ -392,10 +432,22 @@
             timeout: 600000,
 
             success: function (data) {
+                if ($('#dataTables-example').hasClass('dataTable')) {
+                    dttable = $('#dataTables-example').dataTable();
+                    dttable.fnClearTable(); //清空一下table
+                    dttable.fnDestroy(); //还原初始化了的datatable
+                    var oTable=$('#dataTables-example').DataTable({
+                        responsive: true,
+                        "order": [[ 1, "desc" ]],
+                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+
+                    });
+                }
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
 
                 var i=0;
+
 
 
                 for (let value of iterable) {
@@ -449,13 +501,85 @@
                     i++;
 
 
-                    $(".table").append(tr);}
+                    oTable.row.add(tr);}
+                oTable.draw();
+                var allPages = oTable.cells( ).nodes( );
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+
+                $('#checkAll').click(function () {
+                    if ($(this).hasClass('')) {
+                        $(allPages).find('input[name="subBox"]').prop('checked', false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="";
 
 
+                    } else {
+                        $(allPages).find('input[name="subBox"]').prop('checked', true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        $('#batchDownload').prop('disabled', "");
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="allChecked";
+
+                    }
+                });
+
+
+
+
+
+
+                /*$("#checkAll2").click(function() {
+                    if ($(this).hasClass('checked')) {
+                        $('input[name="subBox"]').prop("checked",false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+                    else {
+                        $('input[name="subBox"]').prop("checked",true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+                    $(this).toggleClass('checked');
+                });*/
+                var $subBox = $(allPages).find('input[name="subBox"]');
+                $subBox.click(function(){
+                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                        $('#batchDownload').prop('disabled', "disabled");}
+                    else{
+                        $('#batchDownload').prop('disabled', "");
+                    }
+                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                        $('#checkAll').prop("checked",true);
+                        $('#checkAll').prop("class","allChecked");
+
+
+
+                    }
+                    else{
+                        $('#checkAll').prop("checked",false);
+                        $('#checkAll').prop("class","");
+
+
+                    }
+
+                });
 
 
 
                 console.log("SUCCESS : ", data);
+
+
 
 
 
@@ -467,8 +591,12 @@
 
                 console.log("Failed : ", e);
 
-            }
+            },
+
         });
+        $('#dataTables-example').DataTable().draw();
+
+
 
     }
 
@@ -479,6 +607,10 @@
         console.log();
         $("#b1").attr("class","");
         $("#b2").attr("class","active");
+        console.log($('#checkAll'));
+        $('#checkAll').attr('class','');
+
+
 
 
 
@@ -493,6 +625,22 @@
             timeout: 600000,
 
             success: function (data) {
+
+                if ($('#dataTables-example').hasClass('dataTable')) {
+                    dttable = $('#dataTables-example').dataTable();
+                    dttable.fnClearTable(); //清空一下table
+                    dttable.fnDestroy(); //还原初始化了的datatable
+                    var oTable=$('#dataTables-example').DataTable({
+                        responsive: true,
+                        "order": [[ 1, "desc" ]],
+                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+
+                    });
+                }
+
+                    $('#checkAll').prop('checked',false);
+
+
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
 
@@ -510,7 +658,9 @@
                     var button=document.createElement("button");
                     button.innerHTML = "下载";
                     button.className="btn btn-info btn-sm radius downloadScholarshipButton";
+/*
                     button.setAttribute("onclick","fire_ajax_download(event)");
+*/
 
 
                     var button2=document.createElement("button");
@@ -550,7 +700,188 @@
                     i++;
 
 
-                    $(".table").append(tr);}
+                    $(".table").append(tr);
+
+
+                    oTable.row.add(tr);}
+                    oTable.draw();
+                var allPages = oTable.cells( ).nodes( );
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+
+                $('#checkAll').click(function () {
+                    if ($(this).hasClass('')) {
+                        $(allPages).find('input[name="subBox"]').prop('checked', false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="";
+
+
+                    } else {
+                        $(allPages).find('input[name="subBox"]').prop('checked', true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        $('#batchDownload').prop('disabled', "");
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="allChecked";
+                    }
+                });
+
+
+
+
+
+
+                /*$("#checkAll2").click(function() {
+                    if ($(this).hasClass('checked')) {
+                        $('input[name="subBox"]').prop("checked",false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+                    else {
+                        $('input[name="subBox"]').prop("checked",true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+                    $(this).toggleClass('checked');
+                });*/
+                var $subBox = $(allPages).find('input[name="subBox"]');
+                $subBox.click(function(){
+                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                        $('#batchDownload').prop('disabled', "disabled");}
+                    else{
+                        $('#batchDownload').prop('disabled', "");
+                    }
+                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                        $('#checkAll').prop("checked",true);
+                        $('#checkAll').prop("class","allChecked");
+
+
+
+                    }
+                    else{
+                        $('#checkAll').prop("checked",false);
+                        $('#checkAll').prop("class","");
+
+
+                    }
+
+                });
+                $("#batchDownload").click(function () {
+s
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var zipInfoBeanList=new Array();
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var zipInfoBean;
+
+                    for (let value of iterable) {
+
+                        zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
+                        zipInfoBeanList.push(zipInfoBean);
+                        i++;
+                    }
+
+                    var account1=[[${showScholarshipBean}]];
+                    var showScholarshipBean=[[${showScholarshipBean}]];
+
+
+
+                    var tempform = document.createElement("form");
+                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                    tempform.method = "post";
+                    tempform.style.display="none"
+                    tempform.target="_blank";
+
+
+                    /* for (var x in ZipInfoBean) {
+                         var opt = document.createElement("input");
+                         opt.name = x;
+                         opt.value = ZipInfoBean[x];
+                         tempform.appendChild(opt);
+                     }
+         */
+                    var opt2=document.createElement("input");
+                    opt2.name="zipInfoBeanList";
+                    opt2.value=JSON.stringify(zipInfoBeanList);
+                    var opt = document.createElement("input");
+                    opt.type = "submit";
+                    tempform.appendChild(opt2);
+                    tempform.appendChild(opt);
+                    document.body.appendChild(tempform);
+                    tempform.submit();
+                    document.body.removeChild(tempform);
+
+
+
+
+                });
+                $('.downloadScholarshipButton').click(function (event) {
+                    var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
+
+
+
+                    var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+                    var scholarshipFormBean=scholarshipFormBeanList[index];
+                    var showScholarshipBean=[[${showScholarshipBean}]];
+
+                    var indexList=new Array();
+
+
+                    var ZipInfoBean=new Array();
+
+                    var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+                    var username=$($($(event.target).parent()).parent()).children()[2].innerHTML;
+                    var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
+
+                    console.log(account);
+
+
+
+
+                    ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
+
+
+                    var ZipInfoBeanList=new Array();
+                    ZipInfoBeanList.push(ZipInfoBean);
+                    var tempform = document.createElement("form");
+                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                    tempform.method = "post";
+                    tempform.style.display="none"
+                    tempform.target="_blank";
+
+
+                    /* for (var x in ZipInfoBean) {
+                         var opt = document.createElement("input");
+                         opt.name = x;
+                         opt.value = ZipInfoBean[x];
+                         tempform.appendChild(opt);
+                     }
+         */
+                    var opt2=document.createElement("input");
+                    opt2.name="zipInfoBeanList";
+                    opt2.value=JSON.stringify(ZipInfoBeanList);
+                    console.log(JSON.stringify(ZipInfoBeanList));
+                    var opt = document.createElement("input");
+                    opt.type = "submit";
+                    tempform.appendChild(opt2);
+                    tempform.appendChild(opt);
+                    document.body.appendChild(tempform);
+                    tempform.submit();
+                    document.body.removeChild(tempform);
+                });
+
+
+
 
 
 
@@ -570,6 +901,7 @@
 
             }
         });
+
 
     }
 
@@ -651,6 +983,7 @@
         var showScholarshipBean=[[${showScholarshipBean}]];
 
         var indexList=new Array();
+        console.log(showScholarshipBean.yearScope);
 
 
 

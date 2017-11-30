@@ -277,14 +277,31 @@
 
         });
         var allPages = oTable.cells( ).nodes( );
+        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+            $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+        else{
+            $('#batchChangeScholarshipButton').prop('disabled', "");
+        }
 
         $('#checkAll').click(function () {
             if ($(this).hasClass('allChecked')) {
                 $(allPages).find('input[name="subBox"]').prop('checked', false);
                 $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+                else{
+                    $('#batchChangeScholarshipButton').prop('disabled', "");
+                }
+
             } else {
                 $(allPages).find('input[name="subBox"]').prop('checked', true);
                 $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                $('#batchChangeScholarshipButton').prop('disabled', "");
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+                else{
+                    $('#batchChangeScholarshipButton').prop('disabled', "");
+                }
             }
             $(this).toggleClass('allChecked');
         });
@@ -294,11 +311,37 @@
 
 
 
-
+        /*$("#checkAll2").click(function() {
+            if ($(this).hasClass('checked')) {
+                $('input[name="subBox"]').prop("checked",false);
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+            else {
+                $('input[name="subBox"]').prop("checked",true);
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
+            $(this).toggleClass('checked');
+        });*/
         var $subBox = $(allPages).find('input[name="subBox"]');
         $subBox.click(function(){
             /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
             $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+            if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+            else{
+                $('#batchChangeScholarshipButton').prop('disabled', "");
+            }
+            if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                $('#checkAll').prop("checked",true);
+                $('#checkAll').prop("class","allChecked");
+
+
+
+            }
+            else{
+                $('#checkAll').prop("checked",false);
+                $('#checkAll').prop("class","");
+
+
+            }
 
         });
         $("#batchChangeScholarshipButton").click(function () {
