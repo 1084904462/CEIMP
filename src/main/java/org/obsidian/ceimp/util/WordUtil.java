@@ -82,10 +82,24 @@ public class WordUtil {
                 String runText = run.toString();
                 matcher = this.matcher(runText);
                 if(matcher.find()){
-                    while((matcher = this.matcher(runText)).find()){
-                        runText = matcher.replaceFirst(String.valueOf(textMap.get(matcher.group(1))));
+                    if(matcher.group(1).equals("applyReason") || matcher.group(1).equals("opinion") ||
+                            matcher.group(1).equals("reason") || matcher.group(1).equals("recommendReason")){
+                        String[] strings = textMap.get(matcher.group(1)).split("\\s+");
+                        run.setText(strings[0],0);
+                        if(strings.length > 1){
+                            for(int j=1;j<strings.length;j++){
+                                run.addBreak();
+                                run.setText("    " + strings[j],j);
+                            }
+                        }
                     }
-                    run.setText(runText,0);
+                    else{
+                        run.setText(matcher.replaceFirst(String.valueOf(textMap.get(matcher.group(1)))),0);
+                    }
+//                    while((matcher = this.matcher(runText)).find()){
+//                        runText = matcher.replaceFirst(String.valueOf(textMap.get(matcher.group(1))));
+//                    }
+//                    run.setText(runText,0);
                 }
             }
         }
