@@ -130,6 +130,7 @@ public class NisServiceImpl implements NisService {
     @Transactional
     @Override
     public int insertNis(Long userId, Integer yearScope, NisBean nisBean) {
+        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
         userInfoService.updateByUserIdAndNisBeanAndYearScope(userId,nisBean,yearScope);
         Nis nis = new Nis();
         nis.setUserId(userId);
@@ -160,6 +161,7 @@ public class NisServiceImpl implements NisService {
     @Transactional
     @Override
     public int updateNis(Long userId, Integer yearScope, NisBean nisBean) {
+        userBasicService.updateByUserIdAndNisBean(userId,nisBean);
         userInfoService.updateByUserIdAndNisBeanAndYearScope(userId,nisBean,yearScope);
         Nis nis = new Nis();
         nis.setUserId(userId);

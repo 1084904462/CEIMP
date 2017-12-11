@@ -55,4 +55,68 @@ public class UserBasicServiceImpl implements UserBasicService {
     public UserBasicBean selectUserBasicBeanByUserId(Long userId) {
         return userBasicMapper.selectUserBasicBeanByUserId(userId);
     }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndNgBean(Long userId, NgBean ngBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(ngBean.getSex());
+        userBasic.setBirth(ngBean.getBirth());
+        userBasic.setNation(ngBean.getNation());
+        userBasic.setEntrance(ngBean.getEntrance());
+        userBasic.setIdentity(ngBean.getIdentity());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndNisBean(Long userId, NisBean nisBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(nisBean.getSex());
+        userBasic.setBirth(nisBean.getBirth());
+        userBasic.setNation(nisBean.getNation());
+        userBasic.setEntrance(nisBean.getEntrance());
+        userBasic.setIdentity(nisBean.getIdentity());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndPgsBean(Long userId, PgsBean pgsBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(pgsBean.getSex());
+        userBasic.setBirth(pgsBean.getBirth());
+        userBasic.setNation(pgsBean.getNation());
+        userBasic.setEntrance(pgsBean.getEntrance());
+        userBasic.setIdentity(pgsBean.getIdentity());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndSsBean(Long userId, SsBean ssBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(ssBean.getSex());
+        userBasic.setNation(ssBean.getNation());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    }
+
+    @Transactional
+    @Override
+    public int updateByUserIdAndTasBean(Long userId, TasBean tasBean) {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setSex(tasBean.getSex());
+        userBasic.setNation(tasBean.getNation());
+        UserBasicExample example = new UserBasicExample();
+        example.or().andUserIdEqualTo(userId);
+        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    }
 }

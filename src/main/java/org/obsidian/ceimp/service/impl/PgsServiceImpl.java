@@ -124,6 +124,7 @@ public class PgsServiceImpl implements PgsService {
     @Transactional
     @Override
     public int insertPgs(Long userId, Integer yearScope, PgsBean pgsBean) {
+        userBasicService.updateByUserIdAndPgsBean(userId,pgsBean);
         userInfoService.updateByUserIdAndPgsBeanAndYearScope(userId,pgsBean,yearScope);
         Pgs pgs = new Pgs();
         pgs.setUserId(userId);
@@ -147,6 +148,7 @@ public class PgsServiceImpl implements PgsService {
     @Transactional
     @Override
     public int updatePgs(Long userId, Integer yearScope, PgsBean pgsBean) {
+        userBasicService.updateByUserIdAndPgsBean(userId,pgsBean);
         userInfoService.updateByUserIdAndPgsBeanAndYearScope(userId,pgsBean,yearScope);
         Pgs pgs = new Pgs();
         pgs.setUserId(userId);

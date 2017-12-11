@@ -130,6 +130,7 @@ public class NgServiceImpl implements NgService {
     @Transactional
     @Override
     public int insertNg(Long userId,Integer yearScope,NgBean ngBean) {
+        userBasicService.updateByUserIdAndNgBean(userId,ngBean);
         userInfoService.updateByUserIdAndNgBeanAndYearScope(userId,ngBean,yearScope);
         Ng ng = new Ng();
         ng.setUserId(userId);
@@ -168,6 +169,7 @@ public class NgServiceImpl implements NgService {
     @Transactional
     @Override
     public int updateNg(Long userId,Integer yearScope,NgBean ngBean) {
+        userBasicService.updateByUserIdAndNgBean(userId,ngBean);
         userInfoService.updateByUserIdAndNgBeanAndYearScope(userId,ngBean,yearScope);
         Ng ng = new Ng();
         ng.setUserId(userId);

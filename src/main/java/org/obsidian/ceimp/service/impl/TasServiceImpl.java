@@ -109,6 +109,7 @@ public class TasServiceImpl implements TasService {
     @Transactional
     @Override
     public int insertTas(Long userId, Integer yearScope, TasBean tasBean) {
+        userBasicService.updateByUserIdAndTasBean(userId,tasBean);
         userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
         Tas tas = new Tas();
         tas.setUserId(userId);
@@ -120,6 +121,7 @@ public class TasServiceImpl implements TasService {
     @Transactional
     @Override
     public int updateTas(Long userId, Integer yearScope, TasBean tasBean) {
+        userBasicService.updateByUserIdAndTasBean(userId,tasBean);
         userInfoService.updateByUserIdAndTasBeanAndYearScope(userId,tasBean,yearScope);
         Tas tas = new Tas();
         tas.setUserId(userId);

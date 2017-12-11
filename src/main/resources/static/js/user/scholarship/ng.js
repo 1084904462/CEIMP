@@ -8,6 +8,35 @@ $(function () {
     });
     $("#nation").html(optionString);
     $("#nation" ).selectpicker('refresh');
+    $('#birth').datetimepicker({
+        bootcssVer:3,
+        language: 'zh-CN',
+        format: 'yyyy'+'年'+'m'+'月',
+        startView: "year",
+        minView: "year",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+    });
+    $('#entrance').datetimepicker({
+        bootcssVer:3,
+        language: 'zh-CN',
+        format: 'yyyy'+'年'+'m'+'月',
+        startView: "year",
+        minView: "year",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+    });
+    $("#identity").keyup(function () {
+        var idNo=$("#identity").val();
+        var regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if(regIdNo.test(idNo)){
+            $("#identity-message").html("");
+            $("#submit").attr("disabled",false);
+        }
+        else{
+            $("#identity-message").html("请输入正确的身份证号");
+        }
+    });
     $("#phone").keyup(function(){
         $("#phone").popover('hide');
         var r=/^[0-9]*$/;
@@ -411,7 +440,7 @@ $(function () {
             ||($("#a2-message").html()!="")||($("#a3-message").html()!="")||($("#a4-message").html()!="")||($("#a5-message").html()!="")
             ||($("#p1-message").html()!="")||($("#p2-message").html()!="")||($("#p3-message").html()!="") ||($("#p4-message").html()!="")
             ||($("#p5-message").html()!="")||($("#r1-message").html()!="")||($("#r2-message").html()!="") ||($("#r3-message").html()!="")
-            ||($("#r4-message").html()!="")||($("#r5-message").html()!="")
+            ||($("#r4-message").html()!="")||($("#r5-message").html()!="")||($("#identity-message").html()!="")
             ){    
             $("#submit").attr("disabled",true);
          }

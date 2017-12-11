@@ -111,6 +111,7 @@ public class SsServiceImpl implements SsService {
     @Transactional
     @Override
     public int insertSs(Long userId, Integer yearScope, SsBean ssBean) {
+        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
         userInfoService.updateByUserIdAndSsBeanAndYearScope(userId,ssBean,yearScope);
         Ss ss = new Ss();
         ss.setUserId(userId);
@@ -122,6 +123,7 @@ public class SsServiceImpl implements SsService {
     @Transactional
     @Override
     public int updateSs(Long userId, Integer yearScope, SsBean ssBean) {
+        userBasicService.updateByUserIdAndSsBean(userId,ssBean);
         userInfoService.updateByUserIdAndSsBeanAndYearScope(userId,ssBean,yearScope);
         Ss ss = new Ss();
         ss.setUserId(userId);
