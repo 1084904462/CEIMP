@@ -1,13 +1,4 @@
-th:nth-child(1) {
-    vertical-align: middle;
-    text-align: center;
-    width: 9%;
-}
-tr th:nth-child(8) {
-    vertical-align: middle;
-    text-align: center;
-    width: 15%;
-}
+
 
 .btn-danger2 {
     color: #fff;
