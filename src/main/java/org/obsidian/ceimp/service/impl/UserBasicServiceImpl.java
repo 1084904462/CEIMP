@@ -41,7 +41,7 @@ public class UserBasicServiceImpl implements UserBasicService {
                 if(preSession != null){ //如果原先已有该用户登录的session
                     preSession.setAttribute("userLogBean","");    //把原登录用户的session失效
                     userSessionMap.remove(userId);  //移出userSessionMap中的userId对应的session
-                    logger.info("用户" + userBasic.getAccount() + userBasic.getUsername() + "重复登录");
+                    logger.debug("用户" + userBasic.getAccount() + userBasic.getUsername() + "重复登录");
                 }
                 UserLogBean userLogBean = new UserLogBean(userBasic.getUserId(),userBasic.getAccount(),userBasic.getUsername());
                 session.setAttribute("userLogBean",userLogBean);

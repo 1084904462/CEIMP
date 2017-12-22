@@ -55,7 +55,7 @@ public class ManagerSettingController {
     @PostMapping("/resetPassword")
     @ResponseBody
     public String resetPassword(@RequestBody UserAccountBean userAccountBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.info(userAccountBean);
+        logger.debug(userAccountBean);
         UserBasic userBasic = new UserBasic();
         userBasic.setAccount(userAccountBean.getAccount());
         userBasic.setPassword("888888");
@@ -67,7 +67,7 @@ public class ManagerSettingController {
         else{
             statusBean.setStatus("重置密码成功");
         }
-        logger.info(statusBean);
+        logger.debug(statusBean);
         return JSON.toJSONString(statusBean);
     }
 
@@ -82,7 +82,7 @@ public class ManagerSettingController {
     @PostMapping("/search")
     @ResponseBody
     public String searchUser(@RequestBody SearchBean searchBean,HttpSession session){
-        logger.info("searchKey:" + searchBean.getSearchKey());
+        logger.debug("searchKey:" + searchBean.getSearchKey());
         Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
         String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
         List<String> searchKeyList = new ArrayList<>();
@@ -98,7 +98,7 @@ public class ManagerSettingController {
         }
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(searchKeyList,schoolId,yearScope);
-        logger.info(userSearchBeanList);
+        logger.debug(userSearchBeanList);
         return JSON.toJSONString(userSearchBeanList);
     }
 

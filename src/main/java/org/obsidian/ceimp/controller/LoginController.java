@@ -89,9 +89,9 @@ public class LoginController {
     @PostMapping("/userLogin")
     @ResponseBody
     public String userLogin(HttpSession session, LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.info("sessionId:" + session.getId() + " userAccount:" + logBean.getAccount());
+        logger.debug("sessionId:" + session.getId() + " userAccount:" + logBean.getAccount());
         StatusBean statusBean = userBasicService.userLogin(session,logBean,userSessionMap);
-        logger.info(statusBean);
+        logger.debug(statusBean);
         return JSON.toJSONString(statusBean);
     }
 
@@ -108,7 +108,7 @@ public class LoginController {
             if(userLogBean != null){
                 session.setAttribute("userLogBean",null);
                 userSessionMap.remove(userLogBean.getUserId());
-                logger.info("用户" + userLogBean.getAccount() + userLogBean.getUsername() + "退出登录");
+                logger.debug("用户" + userLogBean.getAccount() + userLogBean.getUsername() + "退出登录");
             }
         }
         else{
@@ -128,9 +128,9 @@ public class LoginController {
     @PostMapping("/managerLogin")
     @ResponseBody
     public String managerLogin(HttpSession session,LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.info("sessionId:" + session.getId() + " managerAccount:" + logBean.getAccount());
+        logger.debug("sessionId:" + session.getId() + " managerAccount:" + logBean.getAccount());
         StatusBean statusBean = managerService.managerLogin(session,logBean,managerSessionMap);
-        logger.info(statusBean);
+        logger.debug(statusBean);
         return JSON.toJSONString(statusBean);
     }
 
@@ -147,7 +147,7 @@ public class LoginController {
             if(managerLogBean != null){
                 session.setAttribute("managerLogBean",null);
                 managerSessionMap.remove(managerLogBean.getManagerId());
-                logger.info("管理员" + managerLogBean.getAccount() + "退出登录");
+                logger.debug("管理员" + managerLogBean.getAccount() + "退出登录");
             }
         }
         else {

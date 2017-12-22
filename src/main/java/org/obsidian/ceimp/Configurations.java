@@ -28,7 +28,7 @@ public class Configurations {
 
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
-        logger.info("=============Load sqlSessionFactory=============");
+        logger.debug("=============Load sqlSessionFactory=============");
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -38,7 +38,7 @@ public class Configurations {
 
     @Bean
     public PlatformTransactionManager transactionManager() {
-        logger.info("=============PlatformTransactionManager=============");
+        logger.debug("=============PlatformTransactionManager=============");
         return new DataSourceTransactionManager(dataSource());
     }
 

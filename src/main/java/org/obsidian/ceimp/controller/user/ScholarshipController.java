@@ -64,7 +64,7 @@ public class ScholarshipController {
         Long userId = ((UserLogBean) session.getAttribute("userLogBean")).getUserId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<AwardBean> awardBeanList = awardService.selectAllByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入奖学金首页：" + awardBeanList);
+        logger.debug(userId + "进入奖学金首页：" + awardBeanList);
         model.addAttribute("awardBeanList",awardBeanList);
         return "user/scholarship/index";
     }
@@ -87,7 +87,7 @@ public class ScholarshipController {
             return "redirect:/scholarship/index";
         }
         NgBean ngBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入国家助学金页面：" + ngBean);
+        logger.debug(userId + "进入国家助学金页面：" + ngBean);
         model.addAttribute("ngBean",ngBean);
         return "user/scholarship/ng";
     }
@@ -101,7 +101,7 @@ public class ScholarshipController {
             return "redirect:/scholarship/index";
         }
         NisBean nisBean = nisService.getNisBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入国家励志奖学金页面：" + nisBean);
+        logger.debug(userId + "进入国家励志奖学金页面：" + nisBean);
         model.addAttribute("nisBean",nisBean);
         return "user/scholarship/nis";
     }
@@ -115,7 +115,7 @@ public class ScholarshipController {
             return "redirect:/scholarship/index";
         }
         PgsBean pgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入省政府奖学金界面：" + pgsBean);
+        logger.debug(userId + "进入省政府奖学金界面：" + pgsBean);
         model.addAttribute("pgsBean",pgsBean);
         return "user/scholarship/pgs";
     }
@@ -129,7 +129,7 @@ public class ScholarshipController {
             return "redirect:/scholarship/index";
         }
         SsBean ssBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入校奖学金界面：" + ssBean);
+        logger.debug(userId + "进入校奖学金界面：" + ssBean);
         model.addAttribute("ssBean",ssBean);
         return "user/scholarship/ss";
     }
@@ -143,7 +143,7 @@ public class ScholarshipController {
             return "redirect:/scholarship/index";
         }
         TasBean tasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "进入三好学生界面：" + tasBean);
+        logger.debug(userId + "进入三好学生界面：" + tasBean);
         model.addAttribute("tasBean",tasBean);
         return "user/scholarship/tas";
     }
@@ -151,7 +151,7 @@ public class ScholarshipController {
     @PostMapping("/ng")
     public void ngSubmit(NgBean ngBean, HttpSession session, HttpServletResponse response) throws IOException {
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        logger.info(userId + "提交国家助学金：" + ngBean);
+        logger.debug(userId + "提交国家助学金：" + ngBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Ng ng = ngService.selectByUserIdAndYearScope(userId,yearScope);
         if(ng == null){
@@ -162,14 +162,14 @@ public class ScholarshipController {
             ngService.updateNg(userId,yearScope,ngBean);
         }
         NgBean wordNgBean = ngService.getNgBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "生成国家助学金文档：" + wordNgBean);
+        logger.debug(userId + "生成国家助学金文档：" + wordNgBean);
         ngService.getNgWord(wordNgBean,response);
     }
 
     @PostMapping("/nis")
     public void nisSubmit(NisBean nisBean,HttpSession session,HttpServletResponse response) throws IOException {
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        logger.info(userId + "提交国家励志奖学金：" + nisBean);
+        logger.debug(userId + "提交国家励志奖学金：" + nisBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Nis nis = nisService.selectByUserIdAndYearScope(userId,yearScope);
         if(nis == null){
@@ -180,14 +180,14 @@ public class ScholarshipController {
             nisService.updateNis(userId,yearScope,nisBean);
         }
         NisBean wordNisBean = nisService.getNisBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "生成国家励志奖学金文档：" + wordNisBean);
+        logger.debug(userId + "生成国家励志奖学金文档：" + wordNisBean);
         nisService.getNisWord(wordNisBean,response);
     }
 
     @PostMapping("/pgs")
     public void pgsSubmit(PgsBean pgsBean,HttpSession session,HttpServletResponse response) throws IOException {
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        logger.info(userId + "提交省政府奖学金：" + pgsBean);
+        logger.debug(userId + "提交省政府奖学金：" + pgsBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Pgs pgs = pgsService.selectByUserIdAndYearScope(userId,yearScope);
         if(pgs == null){
@@ -198,14 +198,14 @@ public class ScholarshipController {
             pgsService.updatePgs(userId,yearScope,pgsBean);
         }
         PgsBean wordPgsBean = pgsService.getPgsBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "生成省政府奖学金文档：" + wordPgsBean);
+        logger.debug(userId + "生成省政府奖学金文档：" + wordPgsBean);
         pgsService.getPgsWord(wordPgsBean,response);
     }
 
     @PostMapping("/ss")
     public void ssSubmit(SsBean ssBean,HttpSession session,HttpServletResponse response) throws IOException {
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        logger.info(userId + "提交校奖学金：" + ssBean);
+        logger.debug(userId + "提交校奖学金：" + ssBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Ss ss = ssService.selectByUserIdAndYearScope(userId,yearScope);
         if(ss == null){
@@ -216,14 +216,14 @@ public class ScholarshipController {
             ssService.updateSs(userId,yearScope,ssBean);
         }
         SsBean wordSsBean = ssService.getSsBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "生成校奖学金文档：" + wordSsBean);
+        logger.debug(userId + "生成校奖学金文档：" + wordSsBean);
         ssService.getSsWord(wordSsBean,response);
     }
 
     @PostMapping("/tas")
     public void tasSubmit(TasBean tasBean,HttpSession session,HttpServletResponse response) throws IOException {
         Long userId = ((UserLogBean)session.getAttribute("userLogBean")).getUserId();
-        logger.info(userId + "提交三好学生：" + tasBean);
+        logger.debug(userId + "提交三好学生：" + tasBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Tas tas = tasService.selectByUserIdAndYearScope(userId,yearScope);
         if(tas == null){
@@ -234,7 +234,7 @@ public class ScholarshipController {
             tasService.updateTas(userId,yearScope,tasBean);
         }
         TasBean wordTasBean = tasService.getTasBeanByUserIdAndYearScope(userId,yearScope);
-        logger.info(userId + "生成三好学生文档：" + wordTasBean);
+        logger.debug(userId + "生成三好学生文档：" + wordTasBean);
         tasService.getTasWord(wordTasBean,response);
     }
 }

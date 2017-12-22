@@ -19,14 +19,14 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        logger.info("=============Load Static Resources=============");
+        logger.debug("=============Load Static Resources=============");
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         super.addResourceHandlers(registry);
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        logger.info("=============Load Interceptors=============");
+        logger.debug("=============Load Interceptors=============");
         registry.addInterceptor(new ManagerLogInterceptor())
                 .addPathPatterns("/manager/**");
         registry.addInterceptor(new UserLogInterceptor())

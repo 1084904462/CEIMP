@@ -34,7 +34,7 @@ public class ManagerLogInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        logger.info("当前登录管理员身份失效");
+        logger.debug("当前登录管理员身份失效");
         response.sendRedirect("/login");
         return false;
     }

@@ -43,7 +43,7 @@ public class ManagerServiceImpl implements ManagerService {
                 if(preSession != null){ //如果原先已有该管理员登录的session
                     preSession.setAttribute("managerLogBean","");     //把原登录管理员的session失效
                     managerSessionMap.remove(managerId);  //移出managerSessionMap中的managerId对应的session
-                    logger.info("管理员" + manager.getAccount() + "重复登录");
+                    logger.debug("管理员" + manager.getAccount() + "重复登录");
                 }
                 ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId(),manager.getGrade());
                 session.setAttribute("managerLogBean",managerLogBean);

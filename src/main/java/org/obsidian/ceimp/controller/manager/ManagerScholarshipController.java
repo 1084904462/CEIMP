@@ -56,14 +56,14 @@ public class ManagerScholarshipController {
      */
     @GetMapping("/{subName}")
     public String showScholarship(@PathVariable("subName") String subName, HttpSession session, Model model){
-        logger.info("subName:" + subName);
+        logger.debug("subName:" + subName);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         ShowScholarshipBean showScholarshipBean = scholarshipService.getShowScholarshipBean(subName,managerLogBean.getSchoolId());
-        logger.info(showScholarshipBean);
+        logger.debug(showScholarshipBean);
         model.addAttribute("showScholarshipBean",showScholarshipBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,showScholarshipBean.getGrade().get(0));
-        logger.info(scholarshipFormBeanList);
+        logger.debug(scholarshipFormBeanList);
         model.addAttribute("scholarshipFormBeanList",scholarshipFormBeanList);
         return "manager/showScholarship";
     }
@@ -78,13 +78,13 @@ public class ManagerScholarshipController {
     @GetMapping("/{subName}/{grade}")
     @ResponseBody
     public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade,@RequestParam(value = "yearScope",required = false)Integer yearScope){
-        logger.info("subName:" + subName + " grade:" + grade);
+        logger.debug("subName:" + subName + " grade:" + grade);
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
         }
-        logger.info("yearScope:" + yearScope);
+        logger.debug("yearScope:" + yearScope);
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
-        logger.info("scholarshipFormBeanList:" + scholarshipFormBeanList);
+        logger.debug("scholarshipFormBeanList:" + scholarshipFormBeanList);
         return JSON.toJSONString(scholarshipFormBeanList);
     }
 
@@ -102,17 +102,17 @@ public class ManagerScholarshipController {
     public void getScholarshipZip(@PathVariable("subName") String subName,@PathVariable("yearScope")Integer yearScope, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String jsonStr=request.getParameter("zipInfoBeanList");
         List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
-        logger.info("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
+        logger.debug("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
         String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
-        logger.info("scholarshipName:" + scholarshipName);
+        logger.debug("scholarshipName:" + scholarshipName);
         List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
-        logger.info("modelNameList:" + modelNameList);
+        logger.debug("modelNameList:" + modelNameList);
         List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
-        logger.info("textMapList:" + textMapList);
+        logger.debug("textMapList:" + textMapList);
         List<String> zipInputUrlList = UrlUtil.getInstance().getZipInputUrlList(subName,zipInfoBeanList);
-        logger.info("zipInputUrlList:" + zipInputUrlList);
+        logger.debug("zipInputUrlList:" + zipInputUrlList);
         String zipOutputUrl = UrlUtil.getInstance().getZipOutputUrl(scholarshipName);
-        logger.info("zipOutputUrl:" + zipOutputUrl);
+        logger.debug("zipOutputUrl:" + zipOutputUrl);
         ZipUtil.getInstance().zip(modelNameList,textMapList,zipInputUrlList,zipOutputUrl,response,scholarshipName);
     }
 
@@ -126,7 +126,7 @@ public class ManagerScholarshipController {
     @PostMapping("/delete/{subName}")
     @ResponseBody
     public String deleteScholarship(@PathVariable("subName") String subName,@RequestBody List<UserAccountBean> userAccountBeanList){
-        logger.info("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
+        logger.debug("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
         int yearScope = TimeUtil.getInstance().getThisYear();
         Integer isDelete = scholarshipService.deleteBySubNameAndUserAccountBeanListAndYearScope(subName,userAccountBeanList,yearScope);
         StatusBean statusBean = new StatusBean();
@@ -152,7 +152,7 @@ public class ManagerScholarshipController {
         Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         ScholarshipOpinionBean scholarshipOpinionBean = opinionService.selectByManagerIdAndYearScope(managerId,yearScope);
-        logger.info(scholarshipOpinionBean);
+        logger.debug(scholarshipOpinionBean);
         model.addAttribute("scholarshipOpinionBean",scholarshipOpinionBean);
         return "manager/writeOpinion";
     }
@@ -168,12 +168,12 @@ public class ManagerScholarshipController {
     @PostMapping("/opinion")
     @ResponseBody
     public String updateScholarshipOpinion(HttpSession session,@RequestBody ScholarshipOpinionBean scholarshipOpinionBean){
-        logger.info(scholarshipOpinionBean);
+        logger.debug(scholarshipOpinionBean);
         Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         opinionService.updateByManagerIdAndYearScopeAndScholarshipOpinionBean(managerId,yearScope,scholarshipOpinionBean);
         ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.selectByManagerIdAndYearScope(managerId,yearScope);
-        logger.info(newScholarshipOpinionBean);
+        logger.debug(newScholarshipOpinionBean);
         return JSON.toJSONString(newScholarshipOpinionBean);
     }
 
@@ -192,7 +192,7 @@ public class ManagerScholarshipController {
         String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-        logger.info(ngOpinionFormBeanList);
+        logger.debug(ngOpinionFormBeanList);
         model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
         return "manager/writeNgOpinion";
     }
@@ -200,14 +200,14 @@ public class ManagerScholarshipController {
     @PostMapping("/opinion/ng")
     @ResponseBody
     public String updateNgOpinion(HttpSession session,@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
-        logger.info(ngOpinionUpdateBean);
+        logger.debug(ngOpinionUpdateBean);
         Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
         String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
         int yearScope = TimeUtil.getInstance().getThisYear();
         int updateSum = ngService.updateNgOpinion(ngOpinionUpdateBean.getOpinion(),ngOpinionUpdateBean.getUserAccountList(),yearScope);
-        logger.info("updateSum:" + updateSum);
+        logger.debug("updateSum:" + updateSum);
         List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-        logger.info(ngOpinionFormBeanList);
+        logger.debug(ngOpinionFormBeanList);
         return JSON.toJSONString(ngOpinionFormBeanList);
     }
 }
