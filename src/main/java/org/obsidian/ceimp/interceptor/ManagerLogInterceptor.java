@@ -19,11 +19,19 @@ public class ManagerLogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         HttpSession session = request.getSession(true);
-        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
-        if(managerLogBean != null){
-            HttpSession preSession = LoginController.getManagerSessionMap().get(managerLogBean.getManagerId());
-            if(session.getId().equals(preSession.getId())){
-                return true;
+        Object managerLog = session.getAttribute("managerLogBean");
+        if(managerLog != null){
+            if(managerLog == ""){
+                session.setAttribute("managerLogBean",null);
+                response.sendRedirect("/loginInvalid");
+                return false;
+            }
+            else{
+                ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+                HttpSession preSession = LoginController.getManagerSessionMap().get(managerLogBean.getManagerId());
+                if(session.getId().equals(preSession.getId())){
+                    return true;
+                }
             }
         }
         logger.info("当前登录管理员身份失效");

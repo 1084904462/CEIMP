@@ -19,11 +19,19 @@ public class UserLogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         HttpSession session = request.getSession(true);
-        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-        if(userLogBean != null){
-            HttpSession preSession = LoginController.getUserSessionMap().get(userLogBean.getUserId());
-            if(session.getId().equals(preSession.getId())){
-                return true;
+        Object userLog = session.getAttribute("userLogBean");
+        if(userLog != null){
+            if(userLog == ""){
+                session.setAttribute("userLogBean",null);
+                response.sendRedirect("/loginInvalid");
+                return false;
+            }
+            else{
+                UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
+                HttpSession preSession = LoginController.getUserSessionMap().get(userLogBean.getUserId());
+                if(session.getId().equals(preSession.getId())){
+                    return true;
+                }
             }
         }
         logger.info("当前登录用户身份失效");

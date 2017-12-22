@@ -64,8 +64,7 @@ $(function(){
             dataType: "json",
             success:function (result) {
                 if(result.status == "登录成功"){
-                    toastr.success(result.status);
-                    window.setTimeout("self.location='/login'",1500);
+                    window.location.href="/login";
                 }
                 else{
                     toastr.error(result.status);
@@ -98,8 +97,7 @@ $(function(){
             dataType: "json",
             success:function (result) {
                 if(result.status == "登录成功"){
-                    toastr.success(result.status);
-                    window.setTimeout("self.location='/login'",1500);
+                    window.location.href="/login";
                 }
                 else{
                     toastr.error(result.status);

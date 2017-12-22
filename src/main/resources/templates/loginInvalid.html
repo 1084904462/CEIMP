@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户身份过期</title>
+    <link rel="stylesheet" th:href="@{css/font-awesome.min.css}"/>
+    <link rel='stylesheet prefetch' th:href='@{css/bootstrap.min.css}'/>
+    <link rel='stylesheet' th:href='@{css/toastr.min.css}'/>
+    <link rel="stylesheet" th:href="@{css/login.css}"/>
+    <script th:src="@{js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+    <script th:src="@{js/toastr.min.js}"></script>
+</head>
+<body>
+    <center>
+        <div style="padding:36px 80px;border:1px solid #a9a9a9;text-align:center;margin:20% auto;background: #ffffff no-repeat;width:55%;">
+            <p>用户身份过期，你的账号可能在异地登录，请返回重新登录！</p>
+            <a href="/login">如果你的浏览器没有反应，请点击这里......</a>
+        </div>
+    </center>
+</body>
+</html>
