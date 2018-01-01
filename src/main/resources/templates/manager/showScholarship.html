@@ -1071,7 +1071,6 @@
     function fire_ajax_delete(event) {
 
 
-        var account=[[${scholarshipFormBeanList}]];
 
         var account1=[[${showScholarshipBean}]];
 
@@ -1081,13 +1080,12 @@
 
 
 
+        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
 
 
         var index=$($($($(event.target).parent())).parent()).prevAll().length;
 
-        UserAccountBeanList.push(UserAccountBean[index].account);
-        console.log(JSON.stringify(account[index].account));
-        console.log(JSON.stringify(account1.subName));
+        UserAccountBeanList.push(account);
 
 
 
