@@ -210,6 +210,16 @@ public class ManagerScholarshipController {
         return "manager/writeNgOpinion";
     }
 
+    @GetMapping("/opinion/ng/{grade}")
+    @ResponseBody
+    public String showNgOpinionByGrade(@PathVariable("grade") String grade,HttpSession session){
+        logger.debug("grade:" + grade);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanList(managerLogBean.getSchoolId(),grade,yearScope);
+        return JSON.toJSONString(ngOpinionFormBeanList);
+    }
+
     /**
      * 通过ngOpinionUpdateBean里的opinion和userAccountList更新对应用户的国家助学金意见
      * @param ngOpinionUpdateBean
