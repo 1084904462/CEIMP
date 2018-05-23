@@ -28,16 +28,16 @@
     major.school_id = opinion.school_id and opinion.grade = major.grade and
     opinion.year_scope = #{yearScope} and user_basic.user_id = #{userId};
   </select>
-  <update id="updateByManagerIdAndYearScopeAndScholarshipOpinionBean" parameterType="map">
+  <update id="update" parameterType="map">
     update opinion set opinion.nis_opinion = #{scholarshipOpinionBean.nisOpinion},
     opinion.pgs_recommend = #{scholarshipOpinionBean.pgsRecommend},opinion.pgs_opinion = #{scholarshipOpinionBean.pgsOpinion},
     opinion.ss_opinion = #{scholarshipOpinionBean.ssOpinion},opinion.tas_opinion = #{scholarshipOpinionBean.tasOpinion}
-    where opinion.manager_id = #{managerId} and opinion.year_scope = #{yearScope}
+    where opinion.school_id = #{schoolId} and opinion.grade = #{grade} and opinion.year_scope = #{yearScope};
   </update>
   <select id="getBean" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipOpinionBean">
-    select opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,opinion.pgs_opinion pgsOpinion,
-    opinion.ss_opinion ssOpinion,opinion.tas_opinion tasOpinion from opinion where opinion.manager_id = #{managerId}
-    and opinion.year_scope = #{yearScope}
+    select opinion.grade,opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,opinion.pgs_opinion pgsOpinion,
+    opinion.ss_opinion ssOpinion,opinion.tas_opinion tasOpinion from opinion where opinion.school_id = #{schoolId}
+    and opinion.year_scope = #{yearScope} and opinion.grade = #{grade};
   </select>
   <sql id="Example_Where_Clause">
     <where>

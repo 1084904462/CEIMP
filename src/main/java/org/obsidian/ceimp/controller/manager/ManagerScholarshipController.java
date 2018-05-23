@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.UserBasic;
-import org.obsidian.ceimp.service.BasicScholarshipService;
-import org.obsidian.ceimp.service.OpinionService;
-import org.obsidian.ceimp.service.ScholarshipService;
-import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.UrlUtil;
 import org.obsidian.ceimp.util.ZipUtil;
@@ -43,6 +40,9 @@ public class ManagerScholarshipController {
     private ScholarshipService scholarshipService;
 
     @Autowired
+    private MajorService majorService;
+
+    @Autowired
     private OpinionService opinionService;
 
     /**
@@ -75,16 +75,13 @@ public class ManagerScholarshipController {
      * 根据subName、grade、yearScope获取scholarshipFormBeanList
      * @param subName
      * @param grade
-     * @param yearScope
      * @return
      */
     @GetMapping("/{subName}/{grade}")
     @ResponseBody
-    public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade,@RequestParam(value = "yearScope",required = false)Integer yearScope){
+    public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade){
         logger.debug("subName:" + subName + " grade:" + grade);
-        if(yearScope == null){
-            yearScope = TimeUtil.getInstance().getThisYear();
-        }
+        int yearScope = TimeUtil.getInstance().getThisYear();
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
         return JSON.toJSONString(scholarshipFormBeanList);
     }
@@ -149,11 +146,12 @@ public class ManagerScholarshipController {
      * @return
      */
     @GetMapping("/opinion")
-    public String pageScholarshipOpinion(HttpSession session,Model model){
-        Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
+    public String pageScholarshipOpinion(HttpSession session, Model model){
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerId,yearScope);
-        logger.debug(scholarshipOpinionBean);
+        List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
+        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),gradeList.get(0),yearScope);
+        model.addAttribute("gradeList",gradeList);
         model.addAttribute("scholarshipOpinionBean",scholarshipOpinionBean);
         return "manager/writeOpinion";
     }
@@ -166,15 +164,14 @@ public class ManagerScholarshipController {
      * @param scholarshipOpinionBean
      * @return
      */
-    @PostMapping("/opinion")
+    @PostMapping("/opinion/{grade}")
     @ResponseBody
-    public String updateScholarshipOpinion(HttpSession session,@RequestBody ScholarshipOpinionBean scholarshipOpinionBean){
+    public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean, @PathVariable("grade") String grade){
         logger.debug(scholarshipOpinionBean);
-        Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        opinionService.updateByManagerIdAndYearScopeAndScholarshipOpinionBean(managerId,yearScope,scholarshipOpinionBean);
-        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.getBean(managerId,yearScope);
-        logger.debug(newScholarshipOpinionBean);
+        opinionService.update(managerLogBean.getSchoolId(),grade,yearScope,scholarshipOpinionBean);
+        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
         return JSON.toJSONString(newScholarshipOpinionBean);
     }
 

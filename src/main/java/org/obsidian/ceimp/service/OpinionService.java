@@ -10,9 +10,9 @@ import java.util.List;
  * Created by BillChen on 2017/11/20.
  */
 public interface OpinionService {
-    ScholarshipOpinionBean getBean(Long managerId,Integer yearScope);
+    ScholarshipOpinionBean getBean(Long SchoolId,String grade,Integer yearScope);
 
-    int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(Long managerId,Integer yearScope,ScholarshipOpinionBean scholarshipOpinionBean);
+    int update(Long schoolId,String grade,Integer yearScope,ScholarshipOpinionBean scholarshipOpinionBean);
 
     Opinion get(Long userId,Integer yearScope);
 

@@ -22,14 +22,14 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Transactional
     @Override
-    public ScholarshipOpinionBean getBean(Long managerId, Integer yearScope) {
-        return opinionMapper.getBean(managerId,yearScope);
+    public ScholarshipOpinionBean getBean(Long schoolId,String grade, Integer yearScope) {
+        return opinionMapper.getBean(schoolId,grade,yearScope);
     }
 
     @Transactional
     @Override
-    public int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(Long managerId, Integer yearScope, ScholarshipOpinionBean scholarshipOpinionBean) {
-        return opinionMapper.updateByManagerIdAndYearScopeAndScholarshipOpinionBean(managerId,yearScope,scholarshipOpinionBean);
+    public int update(Long schoolId,String grade, Integer yearScope, ScholarshipOpinionBean scholarshipOpinionBean) {
+        return opinionMapper.update(schoolId,grade,yearScope,scholarshipOpinionBean);
     }
 
     @Transactional

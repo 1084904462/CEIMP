@@ -15,10 +15,9 @@ public interface OpinionMapper {
 
     Opinion get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
-    int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(@Param("managerId") Long managerId,
-        @Param("yearScope") Integer yearScope,@Param("scholarshipOpinionBean")ScholarshipOpinionBean scholarshipOpinionBean);
+    int update(@Param("managerId") Long managerId,@Param("grade")String grade, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
 
-    ScholarshipOpinionBean getBean(@Param("managerId") Long managerId,@Param("yearScope") Integer yearScope);
+    ScholarshipOpinionBean getBean(@Param("schoolId") Long managerId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
 
     long countByExample(OpinionExample example);
 
