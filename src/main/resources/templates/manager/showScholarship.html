@@ -322,6 +322,7 @@
 </body>
 <script th:inline="javascript">
     $(document).ready(function() {
+
         $("#batchDownload").prop("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownload");
 
         var oTable=$('#dataTables-example').DataTable({
@@ -632,10 +633,57 @@
 
                 $('.downloadScholarshipButton').click(function (event) {
                     var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
+
                     var index=$($($($(event.target).parent())).parent()).prevAll().length;
                     console.log("index:"+index);
                     var scholarshipFormBean=scholarshipFormBeanList[index];
                     var showScholarshipBean=[[${showScholarshipBean}]];
+
+
+                    var indexList=new Array();
+
+
+                    var ZipInfoBean=new Array();
+
+                    var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+                    var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
+                    var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
+
+
+
+
+
+                    ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
+
+
+                    var ZipInfoBeanList=new Array();
+                    ZipInfoBeanList.push(ZipInfoBean);
+                    var tempform = document.createElement("form");
+                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                    tempform.method = "post";
+                    tempform.style.display="none"
+                    tempform.target="_blank";
+
+
+                    /* for (var x in ZipInfoBean) {
+                         var opt = document.createElement("input");
+                         opt.name = x;
+                         opt.value = ZipInfoBean[x];
+                         tempform.appendChild(opt);
+                     }
+         */
+                    var opt2=document.createElement("input");
+                    opt2.name="zipInfoBeanList";
+                    opt2.value=JSON.stringify(ZipInfoBeanList);
+                    console.log(JSON.stringify(ZipInfoBeanList));
+                    var opt = document.createElement("input");
+                    opt.type = "submit";
+                    tempform.appendChild(opt2);
+                    tempform.appendChild(opt);
+                    document.body.appendChild(tempform);
+                    tempform.submit();
+                    document.body.removeChild(tempform);
+                });
 
                     var indexList=new Array();
 
@@ -930,17 +978,21 @@
     }
 
     function fire_ajax_delete(event) {
+
         var account1=[[${showScholarshipBean}]];
 
         var UserAccountBean=[[${scholarshipFormBeanList}]];
 
         var UserAccountBeanList = new Array();
 
+
+
         var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
 
         var index=$($($($(event.target).parent())).parent()).prevAll().length;
 
         UserAccountBeanList.push(account);
+
 
         $("#deleteScholarshipButton").click(function(){
             console.log("1");
@@ -987,6 +1039,9 @@
         var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
         var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
         var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
+
+
+
 
         ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
         console.log(JSON.stringify(ZipInfoBean));
