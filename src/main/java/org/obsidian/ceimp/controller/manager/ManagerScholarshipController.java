@@ -82,8 +82,7 @@ public class ManagerScholarshipController {
     public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade){
         logger.debug("subName:" + subName + " grade:" + grade);
         int yearScope = TimeUtil.getInstance().getThisYear();
-        List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
-        return JSON.toJSONString(scholarshipFormBeanList);
+        return JSON.toJSONString(scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade));
     }
 
     /**
@@ -126,15 +125,7 @@ public class ManagerScholarshipController {
     public String deleteScholarship(@PathVariable("subName") String subName,@RequestBody List<UserAccountBean> userAccountBeanList){
         logger.debug("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Integer isDelete = scholarshipService.deleteAll(subName,userAccountBeanList,yearScope);
-        StatusBean statusBean = new StatusBean();
-        if(isDelete != 0){
-            statusBean.setStatus("删除成功");
-        }
-        else{
-            statusBean.setStatus("删除失败");
-        }
-        return JSON.toJSONString(statusBean);
+        return JSON.toJSONString(scholarshipService.deleteAll(subName,userAccountBeanList,yearScope)!=0?new StatusBean("删除成功"):new StatusBean("删除失败"));
     }
 
 
@@ -168,8 +159,7 @@ public class ManagerScholarshipController {
         logger.debug("grade:" + grade);
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
-        return JSON.toJSONString(scholarshipOpinionBean);
+        return JSON.toJSONString(opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope));
     }
 
 
@@ -186,8 +176,7 @@ public class ManagerScholarshipController {
         logger.debug(scholarshipOpinionBean);
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        int result = opinionService.update(managerLogBean.getSchoolId(),yearScope,scholarshipOpinionBean);
-        return JSON.toJSONString(result);
+        return JSON.toJSONString(opinionService.update(managerLogBean.getSchoolId(),yearScope,scholarshipOpinionBean));
     }
 
 
@@ -216,8 +205,7 @@ public class ManagerScholarshipController {
         logger.debug("grade:" + grade);
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanList(managerLogBean.getSchoolId(),grade,yearScope);
-        return JSON.toJSONString(ngOpinionFormBeanList);
+        return JSON.toJSONString(opinionService.getNgOpinionFormBeanList(managerLogBean.getSchoolId(),grade,yearScope));
     }
 
     /**

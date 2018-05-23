@@ -5,7 +5,6 @@ package org.obsidian.ceimp.bean;
  */
 public class ScholarshipOpinionBean {
     private String grade;
-    private Integer yearScope;
     private String nisOpinion;
     private String pgsRecommend;
     private String pgsOpinion;
@@ -15,9 +14,8 @@ public class ScholarshipOpinionBean {
     public ScholarshipOpinionBean() {
     }
 
-    public ScholarshipOpinionBean(String grade, Integer yearScope, String nisOpinion, String pgsRecommend, String pgsOpinion, String ssOpinion, String tasOpinion) {
+    public ScholarshipOpinionBean(String grade, String nisOpinion, String pgsRecommend, String pgsOpinion, String ssOpinion, String tasOpinion) {
         this.grade = grade;
-        this.yearScope = yearScope;
         this.nisOpinion = nisOpinion;
         this.pgsRecommend = pgsRecommend;
         this.pgsOpinion = pgsOpinion;
@@ -29,7 +27,6 @@ public class ScholarshipOpinionBean {
     public String toString() {
         return "ScholarshipOpinionBean{" +
                 "grade='" + grade + '\'' +
-                ", yearScope=" + yearScope +
                 ", nisOpinion='" + nisOpinion + '\'' +
                 ", pgsRecommend='" + pgsRecommend + '\'' +
                 ", pgsOpinion='" + pgsOpinion + '\'' +
@@ -44,14 +41,6 @@ public class ScholarshipOpinionBean {
 
     public void setGrade(String grade) {
         this.grade = grade;
-    }
-
-    public Integer getYearScope() {
-        return yearScope;
-    }
-
-    public void setYearScope(Integer yearScope) {
-        this.yearScope = yearScope;
     }
 
     public String getNisOpinion() {

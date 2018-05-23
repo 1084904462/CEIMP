@@ -16,7 +16,7 @@ public interface OpinionMapper {
 
     Opinion get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
-    int update(@Param("managerId") Long managerId, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
+    int update(@Param("schoolId") Long schoolId, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
 
     ScholarshipOpinionBean getBean(@Param("schoolId") Long managerId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
 
