@@ -87,6 +87,7 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     @Transactional
     @Override
     public int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
+//        awardService.updateIsFilled();
         return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope);
     }
 

@@ -12,9 +12,9 @@ import java.util.List;
 public interface OpinionService {
     ScholarshipOpinionBean getBean(Long SchoolId,String grade,Integer yearScope);
 
-    int update(Long schoolId,String grade,Integer yearScope,ScholarshipOpinionBean scholarshipOpinionBean);
+    int update(Long schoolId,Integer yearScope,ScholarshipOpinionBean scholarshipOpinionBean);
 
     Opinion get(Long userId,Integer yearScope);
 
-    List<NgOpinionFormBean> getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(Long schoolId,String grade,Integer yearScope);
+    List<NgOpinionFormBean> getNgOpinionFormBeanList(Long schoolId,String grade,Integer yearScope);
 }

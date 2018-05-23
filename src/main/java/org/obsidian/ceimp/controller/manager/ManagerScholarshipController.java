@@ -164,15 +164,14 @@ public class ManagerScholarshipController {
      * @param scholarshipOpinionBean
      * @return
      */
-    @PostMapping("/opinion/{grade}")
+    @PostMapping("/opinion")
     @ResponseBody
-    public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean, @PathVariable("grade") String grade){
+    public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean){
         logger.debug(scholarshipOpinionBean);
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        opinionService.update(managerLogBean.getSchoolId(),grade,yearScope,scholarshipOpinionBean);
-        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
-        return JSON.toJSONString(newScholarshipOpinionBean);
+        int result = opinionService.update(managerLogBean.getSchoolId(),yearScope,scholarshipOpinionBean);
+        return JSON.toJSONString(result);
     }
 
 
@@ -186,11 +185,12 @@ public class ManagerScholarshipController {
      */
     @GetMapping("/opinion/ng")
     public String pageNgOpinion(HttpSession session,Model model){
-//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-//        int yearScope = TimeUtil.getInstance().getThisYear();
-//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-//        logger.debug(ngOpinionFormBeanList);
-//        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
+        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanList(managerLogBean.getSchoolId(),gradeList.get(0),yearScope);
+        model.addAttribute("gradeList",gradeList);
+        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
         return "manager/writeNgOpinion";
     }
 
