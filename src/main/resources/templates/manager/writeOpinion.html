@@ -136,8 +136,10 @@
                       <div class="panel panel-default">
                           <div class="panel-heading" style="padding: 0px;margin: 0px;">
                               <ul class="nav nav-tabs" >
-                                  <li role="presentation" class="active" id="b1"  onclick="valueChange()"><a href="javascript:void(0)" >2016级</a></li>
-                                  <li role="presentation" id="b2" onclick="valueChange2()"><a href="javascript:void(0)"  >2015级</a></li>
+                                  <li role="presentation" class="active" id="b1"  onclick="valueChange()"><a href="javascript:void(0)" th:text="${gradeList.get(0)}+级">2016级</a></li>
+                                  <li role="presentation" id="b2" onclick="valueChange2()"><a href="javascript:void(0)"  th:text="${gradeList.get(1)}+级">2015级</a></li>
+                                  <li role="presentation" id="b3" onclick="valueChange3()"><a href="javascript:void(0)"  th:text="${gradeList.get(2)}+级">2015级</a></li>
+
                               </ul>
                           </div>
                           <!-- /.panel-heading -->
@@ -261,6 +263,118 @@
                               </div>
                               <!--2015级数据-->
                               <div id="judge2">
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  校奖学金<small>---二级学工组意见</small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  国家励志奖学金<small>---院（系）意见
+                                              </small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  省政府奖学金<small>---院（系）意见</small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div><div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              省政府奖学金<small>---推荐理由</small>
+                                          </div>
+
+
+
+                                          <!-- /.panel-heading -->
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          <!-- /.panel-body -->
+                                      </div>
+                                      <!-- /.panel -->
+                                  </div><div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              三好学生<small>---二级学工组意见</small>
+                                          </div>
+
+
+
+                                          <!-- /.panel-heading -->
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          <!-- /.panel-body -->
+                                      </div>
+                                      <!-- /.panel -->
+                                  </div>
+
+
+                                  </div>
+
+                              </div>
+                              <!--2014级数据-->
+                              <div id="judge3">
                                   <div class="row">
                                       <div class="col-lg-6">
                                           <div class="panel panel-default">
@@ -519,23 +633,49 @@
 </body>
 <script th:inline="javascript">
     var scholarshipOpinionBean=[[${scholarshipOpinionBean}]];
+    var gradeList=[[${gradeList}]];
+    var grade=gradeList[0];
     $("#judge2").css('display','none');
     var year="2016"
     function valueChange(){
+        $("#b3").attr("class","");
         $("#b2").attr("class","");
         $("#b1").attr("class","active");
         $("#judge1").css('display','block');
         $("#judge2").css('display','none');
-        this.year="2016"
+        $("#judge3").css('display','none');
+
+        grade=gradeList[0]
+        console.log(grade)
+
 
 
     }
     function valueChange2(){
         $("#b1").attr("class","");
+        $("#b3").attr("class","");
+
         $("#b2").attr("class","active");
         $("#judge2").css('display','block');
         $("#judge1").css('display','none');
-        this.year="2015"
+        $("#judge3").css('display','none');
+
+        grade=gradeList[1]
+
+
+
+
+    }
+    function valueChange3(){
+        $("#b1").attr("class","");
+        $("#b2").attr("class","");
+        $("#b3").attr("class","active");
+        $("#judge3").css('display','block');
+        $("#judge1").css('display','none');
+        $("#judge2").css('display','none');
+
+        grade=gradeList[2]
+
 
 
 
@@ -550,7 +690,7 @@
         var ssOpinion=$('#ssOpinion').val();
         var tasOpinion=$('#tasOpinion').val();
 
-        var ScholarshipOpinionBean={nisOpinion:nisOpinion,pgsRecommend:pgsRecommend,pgsOpinion:pgsOpinion,ssOpinion:ssOpinion,tasOpinion:tasOpinion};
+        var ScholarshipOpinionBean={grade:grade,nisOpinion:nisOpinion,pgsRecommend:pgsRecommend,pgsOpinion:pgsOpinion,ssOpinion:ssOpinion,tasOpinion:tasOpinion};
 
 console.log(ScholarshipOpinionBean);
 
@@ -578,10 +718,7 @@ console.log(ScholarshipOpinionBean);
 
 
 
-                /* $("#deleteScholarship").data-dismiss="modal";*/
-                /*
-                                    $("#deleteScholarshipSuccess").style="display:block";
-                */
+
 
 
             },

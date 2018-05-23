@@ -164,7 +164,7 @@ public class ManagerScholarshipController {
      * @param scholarshipOpinionBean
      * @return
      */
-    @PostMapping("/opinion/{grade}")
+    @PostMapping("/opinion")
     @ResponseBody
     public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean, @PathVariable("grade") String grade){
         logger.debug(scholarshipOpinionBean);
