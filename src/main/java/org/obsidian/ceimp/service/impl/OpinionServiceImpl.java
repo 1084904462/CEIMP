@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.NgOpinionFormBean;
+import org.obsidian.ceimp.bean.NgOpinionUpdateBean;
 import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.dao.OpinionMapper;
 import org.obsidian.ceimp.entity.Opinion;
@@ -42,5 +43,11 @@ public class OpinionServiceImpl implements OpinionService {
     @Override
     public List<NgOpinionFormBean> getNgOpinionFormBeanList(Long schoolId,String grade, Integer yearScope) {
         return opinionMapper.getNgOpinionFormBeanList(schoolId,grade,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public int updateNgOpinion(NgOpinionUpdateBean ngOpinionUpdateBean, Integer yearScope) {
+        return opinionMapper.updateNgOpinion(ngOpinionUpdateBean,yearScope);
     }
 }

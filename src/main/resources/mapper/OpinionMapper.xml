@@ -11,6 +11,12 @@
     <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
     <result column="tas_opinion" jdbcType="VARCHAR" property="tasOpinion" />
   </resultMap>
+  <update id="updateNgOpinion" parameterType="map">
+    update ng,user_basic set ng.opinion = #{bean.opinion} where ng.user_id = user_basic.user_id and user_basic.account in
+    <foreach collection="bean.userAccountList" index="index" item="account" open="(" separator="," close=")">
+      #{account}
+    </foreach>;
+  </update>
   <select id="getNgOpinionFormBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.NgOpinionFormBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username,
     ng.opinion opinion from major,class_num,user_basic,user_info,ng where major.school_id = #{schoolId} and

@@ -10,8 +10,7 @@ import org.obsidian.ceimp.entity.UserBasicExample;
 import java.util.List;
 
 public interface UserBasicMapper {
-    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(@Param("searchKeyList") List<String> searchKeyList,
-                                                                     @Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
+    List<UserSearchBean> searchUser(@Param("list") List<String> list, @Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
 
     int update(@Param("userId")Long userId,@Param("bean") BasicScholarshipBean bean);
 

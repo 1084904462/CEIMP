@@ -210,18 +210,16 @@ public class ManagerScholarshipController {
         return "manager/writeNgOpinion";
     }
 
+    /**
+     * 通过ngOpinionUpdateBean里的opinion和userAccountList更新对应用户的国家助学金意见
+     * @param ngOpinionUpdateBean
+     * @return
+     */
     @PostMapping("/opinion/ng")
     @ResponseBody
-    public String updateNgOpinion(HttpSession session,@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
-//        logger.debug(ngOpinionUpdateBean);
-//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-//        String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
-//        int yearScope = TimeUtil.getInstance().getThisYear();
-//        int updateSum = ngService.updateNgOpinion(ngOpinionUpdateBean.getOpinion(),ngOpinionUpdateBean.getUserAccountList(),yearScope);
-//        logger.debug("updateSum:" + updateSum);
-//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-//        logger.debug(ngOpinionFormBeanList);
-//        return JSON.toJSONString(ngOpinionFormBeanList);
-        return "";
+    public String updateNgOpinion(@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
+        logger.debug(ngOpinionUpdateBean);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        return JSON.toJSONString(opinionService.updateNgOpinion(ngOpinionUpdateBean,yearScope));
     }
 }

@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by BillChen on 2017/11/13.
@@ -52,12 +55,6 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(List<String> searchKeyList,Long schoolId,Integer yearScope) {
-        return userBasicMapper.getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(searchKeyList,schoolId,yearScope);
-    }
-
-    @Transactional
-    @Override
     public int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
         UserBasicExample example = new UserBasicExample();
@@ -75,5 +72,23 @@ public class UserBasicServiceImpl implements UserBasicService {
             return  null;
         }
         return list.get(0);
+    }
+
+    @Transactional
+    @Override
+    public List<UserSearchBean> searchUser(SearchBean searchBean, Long schoolId, Integer yearScope) {
+        String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
+        List<String> searchKeyList = new ArrayList<>();
+        Pattern pattern1 = Pattern.compile("\\D+");
+        Matcher matcher1 = pattern1.matcher(searchKey);
+        while(matcher1.find()){
+            searchKeyList.add("%" + matcher1.group() + "%");
+        }
+        Pattern pattern2 = Pattern.compile("\\d+");
+        Matcher matcher2 = pattern2.matcher(searchKey);
+        while(matcher2.find()){
+            searchKeyList.add("%" + matcher2.group() + "%");
+        }
+        return userBasicMapper.searchUser(searchKeyList,schoolId,yearScope);
     }
 }
