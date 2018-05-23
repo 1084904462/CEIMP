@@ -8,6 +8,14 @@
     <result column="is_filled" jdbcType="INTEGER" property="isFilled" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
   </resultMap>
+  <update id="cancelIsFilled" parameterType="map">
+    update user_basic,award,scholarship set award.is_filled = 0 where award.user_id = user_basic.user_id and
+    award.year_scope = #{yearScope} and award.scholarship_id = scholarship.scholarship_id and
+    scholarship.sub_name = #{subName} and user_basic.account in
+    <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
+      #{bean.account}
+    </foreach>
+  </update>
   <update id="updateIsFilled" parameterType="map">
     update award,scholarship set award.is_filled = 1 where award.user_id = #{userId} and
     award.year_scope = #{yearScope} and award.scholarship_id = scholarship.scholarship_id

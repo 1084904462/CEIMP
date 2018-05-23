@@ -60,7 +60,7 @@ public class ManagerScholarshipController {
      * @return
      */
     @GetMapping("/{subName}")
-    public String showScholarship(@PathVariable("subName") String subName, HttpSession session, Model model){
+    public String pageScholarship(@PathVariable("subName") String subName, HttpSession session, Model model){
         logger.debug("subName:" + subName);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         ShowScholarshipBean showScholarshipBean = scholarshipService.getShowScholarshipBean(subName,managerLogBean.getSchoolId());
@@ -154,6 +154,22 @@ public class ManagerScholarshipController {
         model.addAttribute("gradeList",gradeList);
         model.addAttribute("scholarshipOpinionBean",scholarshipOpinionBean);
         return "manager/writeOpinion";
+    }
+
+    /**
+     * 根据grade返回对应年级的奖学金意见
+     * @param grade
+     * @param session
+     * @return
+     */
+    @GetMapping("/opinion/{grade}")
+    @ResponseBody
+    public String showScholarshipOpinionByGrade(@PathVariable("grade") String grade,HttpSession session){
+        logger.debug("grade:" + grade);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
+        return JSON.toJSONString(scholarshipOpinionBean);
     }
 
 

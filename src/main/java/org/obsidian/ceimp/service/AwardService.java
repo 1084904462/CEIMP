@@ -2,6 +2,7 @@ package org.obsidian.ceimp.service;
 
 import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.bean.ScholarshipFormBean;
+import org.obsidian.ceimp.bean.UserAccountBean;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface AwardService {
     Boolean exist(Long userId,String subName,Integer yearScope);
 
     int updateIsFilled(Long userId,Integer yearScope,String subName);
+
+    int cancelIsFilled(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 }
