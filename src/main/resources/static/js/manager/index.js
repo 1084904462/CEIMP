@@ -9,14 +9,7 @@ function loadPage(url) {
         $('#circleModal').modal('show');
     }
     $('html,body').animate({scrollTop: 0}, 1);
-    //加时间戳，兼容ie9
-    var ts = "?ts=" + new Date().getTime();
-    if (url.indexOf("?") != -1) {
-        url = url.replace('?', ts + "&");
-    }
-    else {
-        url = url + ts;
-    }
+
     window.location.href=url;
 }
 
