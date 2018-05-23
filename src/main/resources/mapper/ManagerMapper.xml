@@ -7,7 +7,6 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="manager_type" jdbcType="INTEGER" property="managerType" />
     <result column="school_id" jdbcType="BIGINT" property="schoolId" />
-    <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    manager_id, account, password, manager_type, school_id, grade
+    manager_id, account, password, manager_type, school_id
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.ManagerExample" resultMap="BaseResultMap">
     select
@@ -103,11 +102,9 @@
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Manager">
     insert into manager (manager_id, account, password, 
-      manager_type, school_id, grade
-      )
+      manager_type, school_id)
     values (#{managerId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{managerType,jdbcType=INTEGER}, #{schoolId,jdbcType=BIGINT}, #{grade,jdbcType=VARCHAR}
-      )
+      #{managerType,jdbcType=INTEGER}, #{schoolId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Manager">
     insert into manager
@@ -127,9 +124,6 @@
       <if test="schoolId != null">
         school_id,
       </if>
-      <if test="grade != null">
-        grade,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="managerId != null">
@@ -146,9 +140,6 @@
       </if>
       <if test="schoolId != null">
         #{schoolId,jdbcType=BIGINT},
-      </if>
-      <if test="grade != null">
-        #{grade,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,9 +167,6 @@
       <if test="record.schoolId != null">
         school_id = #{record.schoolId,jdbcType=BIGINT},
       </if>
-      <if test="record.grade != null">
-        grade = #{record.grade,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,8 +178,7 @@
       account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       manager_type = #{record.managerType,jdbcType=INTEGER},
-      school_id = #{record.schoolId,jdbcType=BIGINT},
-      grade = #{record.grade,jdbcType=VARCHAR}
+      school_id = #{record.schoolId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,9 +198,6 @@
       <if test="schoolId != null">
         school_id = #{schoolId,jdbcType=BIGINT},
       </if>
-      <if test="grade != null">
-        grade = #{grade,jdbcType=VARCHAR},
-      </if>
     </set>
     where manager_id = #{managerId,jdbcType=BIGINT}
   </update>
@@ -222,8 +206,7 @@
     set account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       manager_type = #{managerType,jdbcType=INTEGER},
-      school_id = #{schoolId,jdbcType=BIGINT},
-      grade = #{grade,jdbcType=VARCHAR}
+      school_id = #{schoolId,jdbcType=BIGINT}
     where manager_id = #{managerId,jdbcType=BIGINT}
   </update>
 </mapper>

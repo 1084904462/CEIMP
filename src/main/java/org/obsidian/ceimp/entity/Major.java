@@ -9,8 +9,6 @@ public class Major {
 
     private String grade;
 
-    private Integer sum;
-
     public Long getMajorId() {
         return majorId;
     }
@@ -41,13 +39,5 @@ public class Major {
 
     public void setGrade(String grade) {
         this.grade = grade == null ? null : grade.trim();
-    }
-
-    public Integer getSum() {
-        return sum;
-    }
-
-    public void setSum(Integer sum) {
-        this.sum = sum;
     }
 }

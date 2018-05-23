@@ -2,7 +2,6 @@ package org.obsidian.ceimp.interceptor;
 
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.UserLogBean;
-import org.obsidian.ceimp.controller.LoginController;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,20 +18,9 @@ public class UserLogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         HttpSession session = request.getSession(true);
-        Object userLog = session.getAttribute("userLogBean");
-        if(userLog != null){
-            if(userLog == ""){
-                session.setAttribute("userLogBean",null);
-                response.sendRedirect("/loginInvalid");
-                return false;
-            }
-            else{
-                UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-                HttpSession preSession = LoginController.getUserSessionMap().get(userLogBean.getUserId());
-                if(session.getId().equals(preSession.getId())){
-                    return true;
-                }
-            }
+        UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
+        if(userLogBean != null){
+            return true;
         }
         logger.debug("当前登录用户身份失效");
         response.sendRedirect("/login");

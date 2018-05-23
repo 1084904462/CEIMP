@@ -284,73 +284,73 @@ public class SsExample {
             return (Criteria) this;
         }
 
-        public Criteria andReasonIsNull() {
-            addCriterion("reason is null");
+        public Criteria andApplyReasonIsNull() {
+            addCriterion("apply_reason is null");
             return (Criteria) this;
         }
 
-        public Criteria andReasonIsNotNull() {
-            addCriterion("reason is not null");
+        public Criteria andApplyReasonIsNotNull() {
+            addCriterion("apply_reason is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReasonEqualTo(String value) {
-            addCriterion("reason =", value, "reason");
+        public Criteria andApplyReasonEqualTo(String value) {
+            addCriterion("apply_reason =", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonNotEqualTo(String value) {
-            addCriterion("reason <>", value, "reason");
+        public Criteria andApplyReasonNotEqualTo(String value) {
+            addCriterion("apply_reason <>", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonGreaterThan(String value) {
-            addCriterion("reason >", value, "reason");
+        public Criteria andApplyReasonGreaterThan(String value) {
+            addCriterion("apply_reason >", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonGreaterThanOrEqualTo(String value) {
-            addCriterion("reason >=", value, "reason");
+        public Criteria andApplyReasonGreaterThanOrEqualTo(String value) {
+            addCriterion("apply_reason >=", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonLessThan(String value) {
-            addCriterion("reason <", value, "reason");
+        public Criteria andApplyReasonLessThan(String value) {
+            addCriterion("apply_reason <", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonLessThanOrEqualTo(String value) {
-            addCriterion("reason <=", value, "reason");
+        public Criteria andApplyReasonLessThanOrEqualTo(String value) {
+            addCriterion("apply_reason <=", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonLike(String value) {
-            addCriterion("reason like", value, "reason");
+        public Criteria andApplyReasonLike(String value) {
+            addCriterion("apply_reason like", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonNotLike(String value) {
-            addCriterion("reason not like", value, "reason");
+        public Criteria andApplyReasonNotLike(String value) {
+            addCriterion("apply_reason not like", value, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonIn(List<String> values) {
-            addCriterion("reason in", values, "reason");
+        public Criteria andApplyReasonIn(List<String> values) {
+            addCriterion("apply_reason in", values, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonNotIn(List<String> values) {
-            addCriterion("reason not in", values, "reason");
+        public Criteria andApplyReasonNotIn(List<String> values) {
+            addCriterion("apply_reason not in", values, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonBetween(String value1, String value2) {
-            addCriterion("reason between", value1, value2, "reason");
+        public Criteria andApplyReasonBetween(String value1, String value2) {
+            addCriterion("apply_reason between", value1, value2, "applyReason");
             return (Criteria) this;
         }
 
-        public Criteria andReasonNotBetween(String value1, String value2) {
-            addCriterion("reason not between", value1, value2, "reason");
+        public Criteria andApplyReasonNotBetween(String value1, String value2) {
+            addCriterion("apply_reason not between", value1, value2, "applyReason");
             return (Criteria) this;
         }
     }

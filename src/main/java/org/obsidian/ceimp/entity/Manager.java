@@ -11,20 +11,6 @@ public class Manager {
 
     private Long schoolId;
 
-    private String grade;
-
-    @Override
-    public String toString() {
-        return "Manager{" +
-                "managerId=" + managerId +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                ", managerType=" + managerType +
-                ", schoolId=" + schoolId +
-                ", grade='" + grade + '\'' +
-                '}';
-    }
-
     public Long getManagerId() {
         return managerId;
     }
@@ -63,13 +49,5 @@ public class Manager {
 
     public void setSchoolId(Long schoolId) {
         this.schoolId = schoolId;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade == null ? null : grade.trim();
     }
 }

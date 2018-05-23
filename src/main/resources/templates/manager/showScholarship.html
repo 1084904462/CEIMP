@@ -20,6 +20,12 @@
     <link th:href="@{/static/css/manager/showScholarship.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/static/vendor/jquery/jquery.min.js}"></script>
 
+
+    <script th:src="@{/static/build/react.js}"></script>
+    <script th:src="@{/static/build/react-dom.js}"></script>
+    <script th:src="@{/static/build/browser.min.js}"></script>
+
+
     <script th:src="@{/static/vendor/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/static/vendor/metisMenu/metisMenu.min.js}"></script>
     <script th:src="@{/static/vendor/datatables/js/jquery.dataTables.min.js}"></script>
@@ -156,7 +162,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     
-                    <h1 class="page-header" th:text="${showScholarshipBean.scholarshipName}"></h1>
+                    <h1 id="header" ></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -166,9 +172,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" >2016级</a></li>
-                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)"  >2015级</a></li> <!--style="color: grey"-->
-                                <!--<li role="presentation" ><a href="javascript:void(0)" >Messages</a></li>&lt;!&ndash;style="color: grey"&ndash;&gt;-->
+                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(0)}">2016</a></li>
+                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(1)}">2016</a></li>
+                                <li role="presentation" id="b3" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(2)}">2016</a></li>
                             </ul>
                         </div>
                         <!-- /.panel-heading -->
@@ -200,12 +206,12 @@
                                     <th class="setWidth" style="width: 16%">操作</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="TBody">
 
                                 <tr th:each="person : ${scholarshipFormBeanList}" >
-                                    <th scope="row" class="checkbox-center">
+                                    <td scope="row" class="checkbox-center">
                                         <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
-                                    </th >
+                                    </td >
                                     <td th:text="${person.major}"></td>
                                     <td th:text="${person.classNum}"></td>
                                     <td th:text="${person.account}" class="account"></td>
@@ -214,17 +220,18 @@
 
 
 
-                                    <th style="text-align: center;">
+                                    <td style="text-align: center;">
                                         <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
                                         <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;"  onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
-                                    </th>
+                                    </td>
                                 </tr>
 
                                 </tbody>
+
                             </table>
                             <!-- /.table-responsive -->
                              <span class="panel-body_number">已选 <span id="checkedNumber15">0</span> 人</span>
-                            <span class="panel-body_number"> <button type="button" class="btn btn-default btn-sm radius downloadScholarshipButton"   >批量下载</button> </span>
+                            <span class="panel-body_number"> <button type="button" class="btn btn-default btn-sm radius " id="batchDownload"  >批量下载</button> </span>
                         </div>
                         
                         <!-- /.panel-body -->
@@ -306,25 +313,16 @@
         <div class="modal-dialog modal-circle">
             <div class="modal-content" style="height: 80px;">
                 <div style="line-height: 80px;margin-left: 35%;" >
-
                     <img th:src="@{/static/img/loadingImg.gif}" width="40px;" height="40px;"/>
                     <label class="modal-body-title">&nbsp;&nbsp;&nbsp;数据加载中......</label>
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-
-
 </body>
-<script>
-
-
-</script>
 <script th:inline="javascript">
     $(document).ready(function() {
-
-        $(".downloadScholarshipButton").prop("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownload");
+        $("#batchDownload").prop("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownload");
 
         var oTable=$('#dataTables-example').DataTable({
             responsive: true,
@@ -362,11 +360,6 @@
             $(this).toggleClass('allChecked');
         });
 
-
-
-
-
-
         /*$("#checkAll2").click(function() {
             if ($(this).hasClass('checked')) {
                 $('input[name="subBox"]').prop("checked",false);
@@ -388,17 +381,11 @@
             if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
                 $('#checkAll').prop("checked",true);
                 $('#checkAll').prop("class","allChecked");
-
-
-
             }
             else{
                 $('#checkAll').prop("checked",false);
                 $('#checkAll').prop("class","");
-
-
             }
-
         });
 
         $(".batchDownload").click(function () {
@@ -422,14 +409,11 @@
             var account1=[[${showScholarshipBean}]];
             var showScholarshipBean=[[${showScholarshipBean}]];
 
-
-
             var tempform = document.createElement("form");
             tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
             tempform.method = "post";
             tempform.style.display="none"
             tempform.target="_blank";
-
 
             /* for (var x in ZipInfoBean) {
                  var opt = document.createElement("input");
@@ -448,12 +432,7 @@
             document.body.appendChild(tempform);
             tempform.submit();
             document.body.removeChild(tempform);
-
-
-
-
         });
-
     });
 
     function fire_ajax_update(event) {
@@ -464,14 +443,9 @@
         $("#b2").attr("class","");
         $("#b1").attr("class","active");
         $('#checkAll').attr('class','');
-        $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadOne");
-        $(".downloadScholarshipButton").off('click');
+        $("#batchDownload").attr("class","btn btn-default btn-sm radius  batchDownloadOne");
+        $("#batchDownload").off('click');
         $('#checkAll').prop('checked',false);
-
-
-
-
-
 
         $.ajax({
             type: "get",
@@ -490,7 +464,6 @@
                         responsive: true,
                         "order": [[ 1, "desc" ]],
                         "columnDefs": [{ "targets": [0, 6], "orderable": false }]
-
                     });
                 }
                 let iterable = new Array(data.length);
@@ -498,21 +471,16 @@
 
                 var i=0;
 
-
-
                 for (let value of iterable) {
                     var input=document.createElement("input");
                     input.setAttribute("type","checkbox");
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
                     var button=document.createElement("button");
                     button.innerHTML = "下载";
                     button.className="btn btn-info btn-sm radius downloadScholarshipButton";
                     button.setAttribute("onclick","fire_ajax_download(event)");
-
 
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
@@ -522,8 +490,6 @@
                     button2.setAttribute("data-toggle","modal");
                     button2.setAttribute("data-target","#deleteScholarship");
 
-
-
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
                     var td2=document.createElement("td");
@@ -532,9 +498,6 @@
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
                     var td7=document.createElement("td");
-
-
-
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -552,7 +515,6 @@
 
                     tr.append(td7);
                     i++;
-
 
                     oTable.row.add(tr);}
                 oTable.draw();
@@ -613,14 +575,11 @@
 
                     console.log(zipInfoBeanList);
 
-
-
                     var tempform = document.createElement("form");
                     tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
                     tempform.method = "post";
                     tempform.style.display="none"
                     tempform.target="_blank";
-
 
                     /* for (var x in ZipInfoBean) {
                          var opt = document.createElement("input");
@@ -641,9 +600,6 @@
                     document.body.removeChild(tempform);
 
                 });
-
-
-
 
 
                 /*$("#checkAll2").click(function() {
@@ -667,42 +623,64 @@
                     if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
                         $('#checkAll').prop("checked",true);
                         $('#checkAll').prop("class","allChecked");
-
-
-
                     }
                     else{
                         $('#checkAll').prop("checked",false);
                         $('#checkAll').prop("class","");
-
-
                     }
-
                 });
 
+                $('.downloadScholarshipButton').click(function (event) {
+                    var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
+                    var index=$($($($(event.target).parent())).parent()).prevAll().length;
+                    console.log("index:"+index);
+                    var scholarshipFormBean=scholarshipFormBeanList[index];
+                    var showScholarshipBean=[[${showScholarshipBean}]];
 
+                    var indexList=new Array();
 
+                    var ZipInfoBean=new Array();
+
+                    var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+                    var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
+                    var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
+
+                    ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
+
+                    var ZipInfoBeanList=new Array();
+                    ZipInfoBeanList.push(ZipInfoBean);
+                    var tempform = document.createElement("form");
+                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                    tempform.method = "post";
+                    tempform.style.display="none"
+                    tempform.target="_blank";
+
+                    /* for (var x in ZipInfoBean) {
+                         var opt = document.createElement("input");
+                         opt.name = x;
+                         opt.value = ZipInfoBean[x];
+                         tempform.appendChild(opt);
+                     }
+         */
+                    var opt2=document.createElement("input");
+                    opt2.name="zipInfoBeanList";
+                    opt2.value=JSON.stringify(ZipInfoBeanList);
+                    console.log(JSON.stringify(ZipInfoBeanList));
+                    var opt = document.createElement("input");
+                    opt.type = "submit";
+                    tempform.appendChild(opt2);
+                    tempform.appendChild(opt);
+                    document.body.appendChild(tempform);
+                    tempform.submit();
+                    document.body.removeChild(tempform);
+                });
                 console.log("SUCCESS : ", data);
-
-
-
-
-
             },
             error: function (e) {
-
-
-
-
                 console.log("Failed : ", e);
-
             },
-
         });
         $('#dataTables-example').DataTable().draw();
-
-
-
     }
 
     function fire_ajax_update2(event) {
@@ -712,17 +690,10 @@
         console.log();
         $("#b1").attr("class","");
         $("#b2").attr("class","active");
-        $(".downloadScholarshipButton").prop("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadTwo");
-        $(".downloadScholarshipButton").off('click');
-
+        $("#batchDownload").prop("class","btn btn-default btn-sm radius  batchDownloadTwo");
+        $("#batchDownload").off('click');
         console.log($('#checkAll'));
         $('#checkAll').attr('class','');
-
-
-
-
-
-
 
         $.ajax({
             type: "get",
@@ -742,18 +713,13 @@
                         responsive: true,
                         "order": [[ 1, "desc" ]],
                         "columnDefs": [{ "targets": [0, 6], "orderable": false }]
-
                     });
                 }
-
                     $('#checkAll').prop('checked',false);
-
-
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
 
                 var i=0;
-
 
                 for (let value of iterable) {
                     var input=document.createElement("input");
@@ -761,16 +727,12 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
                     var button=document.createElement("button");
                     button.innerHTML = "下载";
                     button.className="btn btn-info btn-sm radius downloadScholarshipButton";
 /*
                     button.setAttribute("onclick","fire_ajax_download(event)");
 */
-
-
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
@@ -778,8 +740,6 @@
                     button2.setAttribute("onclick","fire_ajax_delete(event)");
                     button2.setAttribute("data-toggle","modal");
                     button2.setAttribute("data-target","#deleteScholarship");
-
-
 
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
@@ -807,9 +767,7 @@
                     tr.append(td7);
                     i++;
 
-
                     $(".table").append(tr);
-
 
                     oTable.row.add(tr);}
                     oTable.draw();
@@ -832,8 +790,6 @@
                             $('#batchDownload').prop('disabled', "");
                         }
                         $('#checkAll').className="";
-
-
                     } else {
                         $(allPages).find('input[name="subBox"]').prop('checked', true);
                         $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
@@ -846,11 +802,6 @@
                         $('#checkAll').className="allChecked";
                     }
                 });
-
-
-
-
-
 
                 /*$("#checkAll2").click(function() {
                     if ($(this).hasClass('checked')) {
@@ -873,17 +824,11 @@
                     if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
                         $('#checkAll').prop("checked",true);
                         $('#checkAll').prop("class","allChecked");
-
-
-
                     }
                     else{
                         $('#checkAll').prop("checked",false);
                         $('#checkAll').prop("class","");
-
-
                     }
-
                 });
                 $(".batchDownloadTwo").click(function () {
                     console.log("batchDownloadTwo be clicked");
@@ -906,14 +851,11 @@
                     var account1=[[${showScholarshipBean}]];
                     var showScholarshipBean=[[${showScholarshipBean}]];
 
-
-
                     var tempform = document.createElement("form");
                     tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
                     tempform.method = "post";
                     tempform.style.display="none"
                     tempform.target="_blank";
-
 
                     /* for (var x in ZipInfoBean) {
                          var opt = document.createElement("input");
@@ -932,15 +874,12 @@
                     document.body.appendChild(tempform);
                     tempform.submit();
                     document.body.removeChild(tempform);
-
                 });
                 $('.downloadScholarshipButton').click(function (event) {
                     var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
 
-
-
                     var index=$($($($(event.target).parent())).parent()).prevAll().length;
-
+                    console.log("index:"+index);
                     var scholarshipFormBean=scholarshipFormBeanList[index];
                     var showScholarshipBean=[[${showScholarshipBean}]];
 
@@ -950,15 +889,10 @@
                     var ZipInfoBean=new Array();
 
                     var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
-                    var username=$($($(event.target).parent()).parent()).children()[2].innerHTML;
+                    var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
                     var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
 
-
-
-
-
                     ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
-
 
                     var ZipInfoBeanList=new Array();
                     ZipInfoBeanList.push(ZipInfoBean);
@@ -967,7 +901,6 @@
                     tempform.method = "post";
                     tempform.style.display="none"
                     tempform.target="_blank";
-
 
                     /* for (var x in ZipInfoBean) {
                          var opt = document.createElement("input");
@@ -988,59 +921,26 @@
                     tempform.submit();
                     document.body.removeChild(tempform);
                 });
-
-
-
-
-
-
-
-
                 console.log("SUCCESS : ", data);
-
-
-
             },
             error: function (e) {
-
-
-
-
                 console.log("Failed : ", e);
-
             }
         });
-
-
     }
 
-
     function fire_ajax_delete(event) {
-
-
-        var account=[[${scholarshipFormBeanList}]];
-
         var account1=[[${showScholarshipBean}]];
 
         var UserAccountBean=[[${scholarshipFormBeanList}]];
 
         var UserAccountBeanList = new Array();
 
-
-
-
+        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
 
         var index=$($($($(event.target).parent())).parent()).prevAll().length;
 
-        UserAccountBeanList.push(UserAccountBean[index].account);
-        console.log(JSON.stringify(account[index].account));
-        console.log(JSON.stringify(account1.subName));
-
-
-
-
-
-
+        UserAccountBeanList.push(account);
 
         $("#deleteScholarshipButton").click(function(){
             console.log("1");
@@ -1055,38 +955,23 @@
                 success: function (data) {
                     location.reload();
 
-
-
-
                     console.log("SUCCESS : ", data);
                    /* $("#deleteScholarship").data-dismiss="modal";*/
                    $("#deleteScholarshipSuccess").style="display:block";
-
-
                 },
                 error: function (e) {
-
-
-
                     alert("删除失败")
-
-
                     console.log("Failed : ", e);
-
                 }
             });
         });
-
-
     }
     function fire_ajax_download(event) {
-
-
         var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
 
-
-
         var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+        console.log("index:"+index);
 
         var scholarshipFormBean=scholarshipFormBeanList[index];
         var showScholarshipBean=[[${showScholarshipBean}]];
@@ -1094,74 +979,48 @@
         var indexList=new Array();
         console.log(showScholarshipBean.yearScope);
 
-
-
         console.log(JSON.stringify(scholarshipFormBeanList[index]));
         console.log(JSON.stringify(scholarshipFormBean));
 
         var ZipInfoBean=new Array();
 
+        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+        var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
+        var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
 
-
-
-        ZipInfoBean={account:scholarshipFormBean.account,username:scholarshipFormBean.username,scholarshipName:scholarshipFormBean.scholarshipName};
+        ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
         console.log(JSON.stringify(ZipInfoBean));
         console.log(showScholarshipBean.subName);
 
         var ZipInfoBeanList=new Array();
         ZipInfoBeanList.push(ZipInfoBean);
 
+        console.log("1");
+        var tempform = document.createElement("form");
+        tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+        tempform.method = "post";
+        tempform.style.display="none"
+        tempform.target="_blank";
 
-
-
-
-
-
-
-
-
-            console.log("1");
-            var tempform = document.createElement("form");
-            tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-            tempform.method = "post";
-            tempform.style.display="none"
-            tempform.target="_blank";
-
-
-           /* for (var x in ZipInfoBean) {
-                var opt = document.createElement("input");
-                opt.name = x;
-                opt.value = ZipInfoBean[x];
-                tempform.appendChild(opt);
-            }
-*/
-            var opt2=document.createElement("input");
-            opt2.name="zipInfoBeanList";
-            opt2.value=JSON.stringify(ZipInfoBeanList);
-            console.log(JSON.stringify(ZipInfoBeanList));
+       /* for (var x in ZipInfoBean) {
             var opt = document.createElement("input");
-            opt.type = "submit";
-            tempform.appendChild(opt2);
+            opt.name = x;
+            opt.value = ZipInfoBean[x];
             tempform.appendChild(opt);
-            document.body.appendChild(tempform);
-            tempform.submit();
-            document.body.removeChild(tempform);
-           console.log(tempform);
-
-
-
+        }
+*/
+        var opt2=document.createElement("input");
+        opt2.name="zipInfoBeanList";
+        opt2.value=JSON.stringify(ZipInfoBeanList);
+        console.log(JSON.stringify(ZipInfoBeanList));
+        var opt = document.createElement("input");
+        opt.type = "submit";
+        tempform.appendChild(opt2);
+        tempform.appendChild(opt);
+        document.body.appendChild(tempform);
+        tempform.submit();
+        document.body.removeChild(tempform);
+        console.log(tempform);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </html>

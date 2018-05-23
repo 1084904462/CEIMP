@@ -9,11 +9,11 @@ import java.util.List;
  * Created by BillChen on 2017/11/14.
  */
 public interface AwardService {
-    List<AwardBean> selectAllByUserIdAndYearScope(Long userId, Integer yearScope);
+    List<AwardBean> getList(Long userId, Integer yearScope);
 
     List<ScholarshipFormBean> selectAllBySubNameAndYearScope(String subName,Integer yearScope,String grade);
 
-    Long selectAwardIdByUserIdSubNameAndYearScope(Long userId,String subName,Integer yearScope);
+    Boolean exist(Long userId,String subName,Integer yearScope);
 
-    int updateIsFilledByUserIdAndYearScopeAndSubName(Long userId,Integer yearScope,String subName);
+    int updateIsFilled(Long userId,Integer yearScope,String subName);
 }

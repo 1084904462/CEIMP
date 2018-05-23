@@ -8,17 +8,17 @@
     <result column="is_filled" jdbcType="INTEGER" property="isFilled" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
   </resultMap>
-  <update id="updateIsFilledByUserIdAndYearScopeAndSubName" parameterType="map">
+  <update id="updateIsFilled" parameterType="map">
     update award,scholarship set award.is_filled = 1 where award.user_id = #{userId} and
     award.year_scope = #{yearScope} and award.scholarship_id = scholarship.scholarship_id
     and scholarship.sub_name = #{subName}
   </update>
-  <select id="selectAwardIdByUserIdSubNameAndYearScope" parameterType="map" resultType="java.lang.Long">
-    select award.award_id from award,scholarship where award.user_id = #{userId} and
+  <select id="exist" parameterType="map" resultType="java.lang.Boolean">
+    select exists(select true from award,scholarship where award.user_id = #{userId} and
     award.scholarship_id = scholarship.scholarship_id and scholarship.sub_name = #{subName} and
-    award.year_scope = #{yearScope}
+    award.year_scope = #{yearScope}) exist
   </select>
-  <select id="selectAllByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.AwardBean">
+  <select id="getList" parameterType="map" resultType="org.obsidian.ceimp.bean.AwardBean">
     select scholarship.name awardName,scholarship.sub_name subName,IFNULL(award.is_filled,-1) isFilled,
     IFNULL(award.user_id,0) userId from scholarship left join award on scholarship.scholarship_id =
     award.scholarship_id and award.user_id = #{userId} and award.year_scope = #{yearScope}

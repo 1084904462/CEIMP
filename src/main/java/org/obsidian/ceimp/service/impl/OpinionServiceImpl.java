@@ -22,8 +22,8 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Transactional
     @Override
-    public ScholarshipOpinionBean selectByManagerIdAndYearScope(Long managerId, Integer yearScope) {
-        return opinionMapper.selectByManagerIdAndYearScope(managerId,yearScope);
+    public ScholarshipOpinionBean getBean(Long managerId, Integer yearScope) {
+        return opinionMapper.getBean(managerId,yearScope);
     }
 
     @Transactional
@@ -34,8 +34,8 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Transactional
     @Override
-    public Opinion selectByUserIdAndYearScope(Long userId, Integer yearScope) {
-        return opinionMapper.selectByUserIdAndYearScope(userId,yearScope);
+    public Opinion get(Long userId, Integer yearScope) {
+        return opinionMapper.get(userId,yearScope);
     }
 
     @Transactional

@@ -43,29 +43,7 @@
                 </button>
                 <div class="navbar-brand" >综合测评管理系统管理员端</div>
             </div>
-            <!-- /.navbar-header -->
 
-            <!--  <ul class="nav navbar-top-links navbar-right">
-
-
-
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-                          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                          <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
-                      </a>
-                      <ul class="dropdown-menu dropdown-user">
-
-                          <li><a href="javascript:void(0)"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
-                          </li>
-                          <li class="divider"></li>
-                          <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
-                          </li>
-                      </ul>
-                      &lt;!&ndash; /.dropdown-user &ndash;&gt;
-                  </li>
-                  &lt;!&ndash; /.dropdown &ndash;&gt;
-              </ul>-->
 
 
 
@@ -152,115 +130,368 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+              <!--panael-->
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="panel panel-default">
+                          <div class="panel-heading" style="padding: 0px;margin: 0px;">
+                              <ul class="nav nav-tabs" >
+                                  <li role="presentation" class="active" id="b1"  onclick="valueChange()"><a href="javascript:void(0)" >2016级</a></li>
+                                  <li role="presentation" id="b2" onclick="valueChange2()"><a href="javascript:void(0)"  >2015级</a></li>
+                              </ul>
+                          </div>
+                          <!-- /.panel-heading -->
+                          <div class="panel-body">
+
+
+
+
+
+
+                              <!--2016级数据-->
+                              <div id="judge1">
+                                  <div class="row">
+                     <div class="col-lg-6">
+                         <div class="panel panel-default">
+                             <div class="panel-heading">
+                                 校奖学金<small>---二级学工组意见</small>
+                             </div>
+
+
+
+                             <!-- /.panel-heading -->
+                             <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                 <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                             </div>
+                             <!-- /.panel-body -->
+                         </div>
+                         <!-- /.panel -->
+                     </div>
+                     <div class="col-lg-6">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             国家励志奖学金<small>---院（系）意见
+                         </small>
+                         </div>
+
+
+
+                         <!-- /.panel-heading -->
+                         <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                             <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                         </div>
+                         <!-- /.panel-body -->
+                     </div>
+                     <!-- /.panel -->
+                 </div>
+                     <div class="col-lg-6">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             省政府奖学金<small>---院（系）意见</small>
+                         </div>
+
+
+
+                         <!-- /.panel-heading -->
+                         <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                             <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                         </div>
+                         <!-- /.panel-body -->
+                     </div>
+                     <!-- /.panel -->
+                 </div><div class="col-lg-6">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             省政府奖学金<small>---推荐理由</small>
+                         </div>
+
+
+
+                         <!-- /.panel-heading -->
+                         <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                             <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                         </div>
+                         <!-- /.panel-body -->
+                     </div>
+                     <!-- /.panel -->
+                 </div><div class="col-lg-6">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             三好学生<small>---二级学工组意见</small>
+                         </div>
+
+
+
+                         <!-- /.panel-heading -->
+                         <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                             <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                         </div>
+                         <!-- /.panel-body -->
+                     </div>
+                     <!-- /.panel -->
+                 </div>
+
+
+                 </div>
+                              </div>
+                              <!--2015级数据-->
+                              <div id="judge2">
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  校奖学金<small>---二级学工组意见</small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  国家励志奖学金<small>---院（系）意见
+                                              </small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                  省政府奖学金<small>---院（系）意见</small>
+                                              </div>
+
+
+
+                                              <!-- /.panel-heading -->
+                                              <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                                  <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                              </div>
+                                              <!-- /.panel-body -->
+                                          </div>
+                                          <!-- /.panel -->
+                                      </div><div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              省政府奖学金<small>---推荐理由</small>
+                                          </div>
+
+
+
+                                          <!-- /.panel-heading -->
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          <!-- /.panel-body -->
+                                      </div>
+                                      <!-- /.panel -->
+                                  </div><div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              三好学生<small>---二级学工组意见</small>
+                                          </div>
+
+
+
+                                          <!-- /.panel-heading -->
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          <!-- /.panel-body -->
+                                      </div>
+                                      <!-- /.panel -->
+                                  </div>
+
+
+                                  </div>
+
+                              </div>
+                            <!--  <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              校奖学金<small>-&#45;&#45;二级学工组意见</small>
+                                          </div>
+
+
+
+                                          &lt;!&ndash; /.panel-heading &ndash;&gt;
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          &lt;!&ndash; /.panel-body &ndash;&gt;
+                                      </div>
+                                      &lt;!&ndash; /.panel &ndash;&gt;
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              国家励志奖学金<small>-&#45;&#45;院（系）意见
+                                          </small>
+                                          </div>
+
+
+
+                                          &lt;!&ndash; /.panel-heading &ndash;&gt;
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          &lt;!&ndash; /.panel-body &ndash;&gt;
+                                      </div>
+                                      &lt;!&ndash; /.panel &ndash;&gt;
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="panel panel-default">
+                                          <div class="panel-heading">
+                                              省政府奖学金<small>-&#45;&#45;院（系）意见</small>
+                                          </div>
+
+
+
+                                          &lt;!&ndash; /.panel-heading &ndash;&gt;
+                                          <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                              <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                          </div>
+                                          &lt;!&ndash; /.panel-body &ndash;&gt;
+                                      </div>
+                                      &lt;!&ndash; /.panel &ndash;&gt;
+                                  </div><div class="col-lg-6">
+                                  <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                          省政府奖学金<small>-&#45;&#45;推荐理由</small>
+                                      </div>
+
+
+
+                                      &lt;!&ndash; /.panel-heading &ndash;&gt;
+                                      <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                          <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                      </div>
+                                      &lt;!&ndash; /.panel-body &ndash;&gt;
+                                  </div>
+                                  &lt;!&ndash; /.panel &ndash;&gt;
+                              </div><div class="col-lg-6">
+                                  <div class="panel panel-default">
+                                      <div class="panel-heading">
+                                          三好学生<small>-&#45;&#45;二级学工组意见</small>
+                                      </div>
+
+
+
+                                      &lt;!&ndash; /.panel-heading &ndash;&gt;
+                                      <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                                          <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                                      </div>
+                                      &lt;!&ndash; /.panel-body &ndash;&gt;
+                                  </div>
+                                  &lt;!&ndash; /.panel &ndash;&gt;
+                              </div>
+
+
+                              </div>-->
+                          </div>
+
+                          <!-- /.panel-body -->
+                      </div>
+                      <!-- /.panel -->
+                  </div>
+                  <!-- /.col-lg-12 -->
+              </div>
+
+
+
             <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            校奖学金<small>---二级学工组意见</small> 
-                        </div>
 
-
-
-                        <!-- /.panel-heading -->
-                        <div class="panel-body" style="padding:0px;margin:0px;">
-
-
-                            <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
-
-
-
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        国家励志奖学金<small>---院（系）意见
-                    </small> 
-                    </div>
-
-
-
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" style="padding:0px;margin:0px;">
-
-
-                        <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
-
-
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-                <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        省政府奖学金<small>---院（系）意见</small>
-                    </div>
-
-
-
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" style="padding:0px;margin:0px;">
-
-
-                        <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
-
-
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div><div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        省政府奖学金<small>---推荐理由</small> 
-                    </div>
-
-
-
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" style="padding:0px;margin:0px;">
-
-
-                        <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
-
-
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div><div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        三好学生<small>---二级学工组意见</small> 
-                    </div>
-
-
-
-                    <!-- /.panel-heading -->
-                    <div class="panel-body" style="padding:0px;margin:0px;">
-
-
-                        <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
-
-
-
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-
-               
-            </div>
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
@@ -288,9 +519,29 @@
 </body>
 <script th:inline="javascript">
     var scholarshipOpinionBean=[[${scholarshipOpinionBean}]];
-    console.log(scholarshipOpinionBean);
+    $("#judge2").css('display','none');
+    var year="2016"
+    function valueChange(){
+        $("#b2").attr("class","");
+        $("#b1").attr("class","active");
+        $("#judge1").css('display','block');
+        $("#judge2").css('display','none');
+        this.year="2016"
+
+
+    }
+    function valueChange2(){
+        $("#b1").attr("class","");
+        $("#b2").attr("class","active");
+        $("#judge2").css('display','block');
+        $("#judge1").css('display','none');
+        this.year="2015"
+
+
+
+    }
     function fire_ajax_submit(event) {
-        console.log("1");
+        console.log(year);
         var nisOpinion=$('#nisOpinion').val();
         var pgsRecommend=$('#pgsRecommend').val();
 

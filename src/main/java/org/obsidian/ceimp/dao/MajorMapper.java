@@ -7,7 +7,9 @@ import org.obsidian.ceimp.entity.MajorExample;
 import java.util.List;
 
 public interface MajorMapper {
-    List<String> selectAllGradeBySchoolId(Long schoolId);
+    List<String> getAll(Long schoolId);
+
+    List<String> getLastThree(Long schoolId);
 
     long countByExample(MajorExample example);
 

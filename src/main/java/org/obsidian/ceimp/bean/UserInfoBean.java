@@ -6,7 +6,6 @@ package org.obsidian.ceimp.bean;
 public class UserInfoBean {
     private String school;
     private String major;
-    private Integer majorSum;
     private String classNum;
     private String political;
     private String phone;
@@ -19,13 +18,13 @@ public class UserInfoBean {
     private String ceRank;
     private String passSum;
     private String classSum;
+    private String majorSum;
 
     @Override
     public String toString() {
         return "UserInfoBean{" +
                 "school='" + school + '\'' +
                 ", major='" + major + '\'' +
-                ", majorSum=" + majorSum +
                 ", classNum='" + classNum + '\'' +
                 ", political='" + political + '\'' +
                 ", phone='" + phone + '\'' +
@@ -38,6 +37,7 @@ public class UserInfoBean {
                 ", ceRank='" + ceRank + '\'' +
                 ", passSum='" + passSum + '\'' +
                 ", classSum='" + classSum + '\'' +
+                ", majorSum=" + majorSum +
                 '}';
     }
 
@@ -55,14 +55,6 @@ public class UserInfoBean {
 
     public void setMajor(String major) {
         this.major = major;
-    }
-
-    public Integer getMajorSum() {
-        return majorSum;
-    }
-
-    public void setMajorSum(Integer majorSum) {
-        this.majorSum = majorSum;
     }
 
     public String getClassNum() {
@@ -159,5 +151,13 @@ public class UserInfoBean {
 
     public void setClassSum(String classSum) {
         this.classSum = classSum;
+    }
+
+    public String getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(String majorSum) {
+        this.majorSum = majorSum;
     }
 }

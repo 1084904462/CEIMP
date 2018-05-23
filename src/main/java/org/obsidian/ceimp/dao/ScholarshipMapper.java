@@ -10,13 +10,9 @@ import org.obsidian.ceimp.entity.ScholarshipExample;
 import java.util.List;
 
 public interface ScholarshipMapper {
-    List<ResidentAndSituationBean> getResidentAndSituationBeanList(@Param("subName")String subName,
-                                                                   @Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList,
-                                                                   @Param("yearScope")Integer yearScope);
+    List<ResidentAndSituationBean> getBeanList(@Param("subName")String subName, @Param("list")List<ZipInfoBean> list, @Param("yearScope")Integer yearScope);
 
-    int deleteAllBySubNameAndUserAccountBeanListAndYearScope(@Param("subName")String subName,
-                                                             @Param("userAccountBeanList")List<UserAccountBean> userAccountBeanList,
-                                                             @Param("yearScope")Integer yearScope);
+    int deleteAll(@Param("subName")String subName, @Param("list")List<UserAccountBean> list, @Param("yearScope")Integer yearScope);
 
     long countByExample(ScholarshipExample example);
 
@@ -39,6 +35,4 @@ public interface ScholarshipMapper {
     int updateByPrimaryKeySelective(Scholarship record);
 
     int updateByPrimaryKey(Scholarship record);
-
-    Scholarship selectBySubName(@Param("subName")String subName);
 }

@@ -1,15 +1,18 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.obsidian.ceimp.bean.PgsBean;
-import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.bean.BasicScholarshipBean;
 import org.obsidian.ceimp.entity.Pgs;
 import org.obsidian.ceimp.entity.PgsExample;
 
 import java.util.List;
 
 public interface PgsMapper {
-    List<PgsBean> getPgsBeanList(@Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList, @Param("yearScope")Integer yearScope);
+    int insertPgs(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    int updatePgs(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    Pgs get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     long countByExample(PgsExample example);
 

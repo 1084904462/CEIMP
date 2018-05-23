@@ -35,31 +35,37 @@
     <result column="apply_reason" jdbcType="VARCHAR" property="applyReason" />
     <result column="opinion" jdbcType="VARCHAR" property="opinion" />
   </resultMap>
-  <select id="getNgBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.NgBean">
-    select ng.year_scope ts,school.name school,major.name major,class_num.num classNum,user_basic.username username,
-    user_basic.sex sex,user_basic.birth birth,user_basic.account account,user_basic.nation nation,
-    user_basic.entrance entrance,user_info.political political,user_info.phone phone,user_basic.identity identity,
-    ng.resident resident,ng.income_source incomeSource,ng.month_income monthIncome,ng.family_sum familySum,
-    ng.address address,ng.postal_code postalCode,ng.situation situation,ng.f_name1 fName1,ng.age1 age1,
-    ng.relation1 relation1,ng.work_place1 workPlace1,ng.f_name2 fName2,ng.age2 age2,ng.relation2 relation2,
-    ng.work_place2 workPlace2,ng.f_name3 fName3,ng.age3 age3,ng.relation3 relation3,ng.work_place3 workPlace3,
-    ng.f_name4 fName4,ng.age4 age4,ng.relation4 relation4,ng.work_place4 workPlace4,ng.f_name5 fName5,ng.age5 age5,
-    ng.relation5 relation5,ng.work_place5 workPlace5,ng.apply_reason applyReason,ng.opinion opinion from
-    ng,school,major,class_num,user_basic,user_info where ng.user_id = user_basic.user_id and
-    user_info.user_id = user_basic.user_id and ng.year_scope = user_info.year_scope and ng.year_scope = #{yearScope}
-    and school.school_id = major.school_id and major.major_id = class_num.major_id and
-    class_num.class_num_id = user_info.class_num_id and user_basic.account in
-    <foreach collection="zipInfoBeanList" index="index" item="zipInfoBean" open="(" separator="," close=")">
-      #{zipInfoBean.account}
-    </foreach>
-  </select>
-  <update id="updateNgOpinion" parameterType="map">
-    update ng set ng.opinion = #{opinion} where ng.year_scope = #{yearScope} and ng.user_id in
-    (select user_basic.user_id from user_basic where user_basic.account in
-    <foreach collection="userAccountList" index="index" item="account" open="(" separator="," close=")">
-    #{account}
-    </foreach>)
+  <insert id="insertNg" parameterType="map">
+    insert into ng(user_id,year_scope,resident,income_source,month_income,family_sum,address,postal_code,situation,
+    f_name1,age1,relation1,work_place1,f_name2,age2,relation2,work_place2,f_name3,age3,relation3,work_place3,
+    f_name4,age4,relation4,work_place4,f_name5,age5,relation5,work_place5,apply_reason)
+    values(#{userId},#{yearScope},#{bean.resident},#{bean.incomeSource},#{bean.monthIncome},#{bean.familySum},
+    #{bean.address},#{bean.postalCode},#{bean.situation},#{bean.fName1},#{bean.age1},#{bean.relation1},#{bean.workPlace1},
+    #{bean.fName2},#{bean.age2},#{bean.relation2},#{bean.workPlace2},#{bean.fName3},#{bean.age3},#{bean.relation3},
+    #{bean.workPlace3},#{bean.fName4},#{bean.age4},#{bean.relation4},#{bean.workPlace4},#{bean.fName5},#{bean.age5},
+    #{bean.relation5},#{bean.workPlace5},#{bean.applyReason});
+  </insert>
+  <update id="updateNg" parameterType="map">
+    update ng set resident=#{bean.resident},income_source=#{bean.incomeSource},month_income=#{bean.monthIncome},family_sum=#{bean.familySum},
+    address=#{bean.address},postal_code=#{bean.postalCode},situation=#{bean.situation},f_name1=#{bean.fName1},
+    age1=#{bean.age1},relation1=#{bean.relation1},work_place1=#{bean.workPlace1},f_name2=#{bean.fName2},
+    age2=#{bean.age2},relation2=#{bean.relation2},work_place2=#{bean.workPlace2},f_name3=#{bean.fName3},
+    age3=#{bean.age3},relation3=#{bean.relation3},work_place3=#{bean.workPlace3},f_name4=#{bean.fName4},
+    age4=#{bean.age4},relation4=#{bean.relation4},work_place4=#{bean.workPlace4},f_name5=#{bean.fName5},
+    age5=#{bean.age5},relation5=#{bean.relation5},work_place5=#{bean.workPlace5},apply_reason=#{bean.applyReason}
+    where user_id=#{userId} and year_scope=#{yearScope};
   </update>
+  <select id="get" parameterType="map" resultType="org.obsidian.ceimp.entity.Ng">
+    select ng.ng_id ngId,ng.user_id userId,ng.year_scope yearScope,ng.resident resident,
+    ng.income_source incomeSource,ng.month_income monthIncome,ng.family_sum familySum,
+    ng.address address,ng.postal_code postalCode,ng.situation situation,ng.f_name1 fName1,
+    ng.age1 age1,ng.relation1 relation1,ng.work_place1 workPlace1,ng.f_name2 fName2,
+    ng.age2 age2,ng.relation2 relation2,ng.work_place2 workPlace2,ng.f_name3 fName3,
+    ng.age3 age3,ng.relation3 relation3,ng.work_place3 workPlace3,ng.f_name4 fName4,
+    ng.age4 age4,ng.relation4 relation4,ng.work_place4 workPlace4,ng.f_name5 fName5,
+    ng.age5 age5,ng.relation5 relation5,ng.work_place5 workPlace5,ng.apply_reason applyReason,
+    ng.opinion opinion from ng where ng.user_id = #{userId} and ng.year_scope = #{yearScope};
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -1,8 +1,10 @@
 package org.obsidian.ceimp.util;
 
-import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,29 +23,22 @@ public class DownloadUtil {
     }
 
     /**
-     * 下载文件，包括单张奖学金word以及奖学金解压包
-     * @param url 文件路径
-     * @param response
-     * @param fileName 文件名
+     * 下载文件
+     * @return
      * @throws IOException
      */
-    public void download(String url,HttpServletResponse response,String fileName) throws IOException{
-        // 读到流中
-        InputStream inStream = new FileInputStream(url);// 文件的存放路径
-        // 设置输出的格式
-        response.reset();
-        response.setContentType("bin");
-        response.setHeader("Content-Disposition", "attachment;filename="
-                .concat(String.valueOf(URLEncoder.encode(fileName, "UTF-8"))));
-        // 循环取出流中的数据
-        byte[] b = new byte[100];
-        int len;
-        try {
-            while ((len = inStream.read(b)) > 0)
-                response.getOutputStream().write(b, 0, len);
-            inStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public ResponseEntity<byte[]> download(String url) throws IOException{
+        File file = new File(url);
+        InputStream is = new FileInputStream(file);
+        byte[] body = new byte[is.available()];
+        is.read(body);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attchement;filename=" + String.valueOf(URLEncoder.encode(file.getName(),"UTF-8")));
+        HttpStatus statusCode = HttpStatus.OK;
+        is.close();
+        if(file.exists()){
+            file.delete();
         }
+        return new ResponseEntity<byte[]>(body, headers, statusCode);
     }
 }

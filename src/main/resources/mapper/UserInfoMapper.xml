@@ -13,19 +13,26 @@
     <result column="study" jdbcType="VARCHAR" property="study" />
     <result column="ability" jdbcType="VARCHAR" property="ability" />
     <result column="total" jdbcType="VARCHAR" property="total" />
-    <result column="gp" jdbcType="VARCHAR" property="gp" />
-    <result column="ce" jdbcType="VARCHAR" property="ce" />
+    <result column="gp_rank" jdbcType="VARCHAR" property="gpRank" />
+    <result column="ce_rank" jdbcType="VARCHAR" property="ceRank" />
     <result column="pass_sum" jdbcType="VARCHAR" property="passSum" />
     <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
+    <result column="major_sum" jdbcType="VARCHAR" property="majorSum" />
   </resultMap>
-  <select id="selectUserInfoBeanByUserIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.UserInfoBean">
-    select school.name school,major.name major,major.sum majorSum,class_num.num classNum,
-    user_info.political political,user_info.phone phone,user_info.job job,user_info.charact charact,
-    user_info.study study,user_info.ability ability,user_info.total total,user_info.gp gpRank,
-    user_info.ce ceRank,user_info.pass_sum passSum,user_info.class_sum classSum from user_info,school,major,
-    class_num where school.school_id = major.school_id and major.major_id = class_num.major_id and
-    class_num.class_num_id = user_info.class_num_id and user_info.user_id = #{userId} and
-    user_info.year_scope = #{yearScope}
+  <update id="update" parameterType="map">
+    update user_info set political=#{bean.political},phone=#{bean.phone},job=#{bean.job},charact=#{bean.charact},
+    study=#{bean.study},ability=#{bean.ability},total=#{bean.total},gp_rank=#{bean.gpRank},ce_rank=#{bean.ceRank},
+    pass_sum=#{bean.passSum},class_sum=#{bean.classSum},major_sum=#{bean.majorSum}
+    where user_id=#{userId} and year_scope=#{yearScope};
+  </update>
+  <select id="getBean" parameterType="map" resultType="org.obsidian.ceimp.bean.UserInfoBean">
+    select school.name school,major.name major,class_num.num classNum,user_info.political political,
+    user_info.phone phone,user_info.job job,user_info.charact charact,user_info.study study,
+    user_info.ability ability,user_info.total total,user_info.gp_rank gpRank,user_info.ce_rank ceRank,
+    user_info.pass_sum passSum,user_info.class_sum classSum,user_info.major_sum majorSum
+    from user_info,school,major,class_num where school.school_id = major.school_id and
+    major.major_id = class_num.major_id and class_num.class_num_id = user_info.class_num_id and
+    user_info.user_id = #{userId} and user_info.year_scope = #{yearScope}
   </select>
   <sql id="Example_Where_Clause">
     <where>
@@ -87,7 +94,7 @@
   </sql>
   <sql id="Base_Column_List">
     info_id, user_id, year_scope, class_num_id, political, phone, job, charact, study, 
-    ability, total, gp, ce, pass_sum, class_sum
+    ability, total, gp_rank, ce_rank, pass_sum, class_sum, major_sum
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.UserInfoExample" resultMap="BaseResultMap">
     select
@@ -124,15 +131,15 @@
     insert into user_info (info_id, user_id, year_scope, 
       class_num_id, political, phone, 
       job, charact, study, 
-      ability, total, gp, 
-      ce, pass_sum, class_sum
-      )
+      ability, total, gp_rank, 
+      ce_rank, pass_sum, class_sum, 
+      major_sum)
     values (#{infoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
       #{classNumId,jdbcType=BIGINT}, #{political,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{job,jdbcType=VARCHAR}, #{charact,jdbcType=VARCHAR}, #{study,jdbcType=VARCHAR}, 
-      #{ability,jdbcType=VARCHAR}, #{total,jdbcType=VARCHAR}, #{gp,jdbcType=VARCHAR}, 
-      #{ce,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, #{classSum,jdbcType=VARCHAR}
-      )
+      #{ability,jdbcType=VARCHAR}, #{total,jdbcType=VARCHAR}, #{gpRank,jdbcType=VARCHAR}, 
+      #{ceRank,jdbcType=VARCHAR}, #{passSum,jdbcType=VARCHAR}, #{classSum,jdbcType=VARCHAR}, 
+      #{majorSum,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.UserInfo">
     insert into user_info
@@ -170,17 +177,20 @@
       <if test="total != null">
         total,
       </if>
-      <if test="gp != null">
-        gp,
+      <if test="gpRank != null">
+        gp_rank,
       </if>
-      <if test="ce != null">
-        ce,
+      <if test="ceRank != null">
+        ce_rank,
       </if>
       <if test="passSum != null">
         pass_sum,
       </if>
       <if test="classSum != null">
         class_sum,
+      </if>
+      <if test="majorSum != null">
+        major_sum,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -217,17 +227,20 @@
       <if test="total != null">
         #{total,jdbcType=VARCHAR},
       </if>
-      <if test="gp != null">
-        #{gp,jdbcType=VARCHAR},
+      <if test="gpRank != null">
+        #{gpRank,jdbcType=VARCHAR},
       </if>
-      <if test="ce != null">
-        #{ce,jdbcType=VARCHAR},
+      <if test="ceRank != null">
+        #{ceRank,jdbcType=VARCHAR},
       </if>
       <if test="passSum != null">
         #{passSum,jdbcType=VARCHAR},
       </if>
       <if test="classSum != null">
         #{classSum,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSum != null">
+        #{majorSum,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -273,17 +286,20 @@
       <if test="record.total != null">
         total = #{record.total,jdbcType=VARCHAR},
       </if>
-      <if test="record.gp != null">
-        gp = #{record.gp,jdbcType=VARCHAR},
+      <if test="record.gpRank != null">
+        gp_rank = #{record.gpRank,jdbcType=VARCHAR},
       </if>
-      <if test="record.ce != null">
-        ce = #{record.ce,jdbcType=VARCHAR},
+      <if test="record.ceRank != null">
+        ce_rank = #{record.ceRank,jdbcType=VARCHAR},
       </if>
       <if test="record.passSum != null">
         pass_sum = #{record.passSum,jdbcType=VARCHAR},
       </if>
       <if test="record.classSum != null">
         class_sum = #{record.classSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majorSum != null">
+        major_sum = #{record.majorSum,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -303,10 +319,11 @@
       study = #{record.study,jdbcType=VARCHAR},
       ability = #{record.ability,jdbcType=VARCHAR},
       total = #{record.total,jdbcType=VARCHAR},
-      gp = #{record.gp,jdbcType=VARCHAR},
-      ce = #{record.ce,jdbcType=VARCHAR},
+      gp_rank = #{record.gpRank,jdbcType=VARCHAR},
+      ce_rank = #{record.ceRank,jdbcType=VARCHAR},
       pass_sum = #{record.passSum,jdbcType=VARCHAR},
-      class_sum = #{record.classSum,jdbcType=VARCHAR}
+      class_sum = #{record.classSum,jdbcType=VARCHAR},
+      major_sum = #{record.majorSum,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -344,17 +361,20 @@
       <if test="total != null">
         total = #{total,jdbcType=VARCHAR},
       </if>
-      <if test="gp != null">
-        gp = #{gp,jdbcType=VARCHAR},
+      <if test="gpRank != null">
+        gp_rank = #{gpRank,jdbcType=VARCHAR},
       </if>
-      <if test="ce != null">
-        ce = #{ce,jdbcType=VARCHAR},
+      <if test="ceRank != null">
+        ce_rank = #{ceRank,jdbcType=VARCHAR},
       </if>
       <if test="passSum != null">
         pass_sum = #{passSum,jdbcType=VARCHAR},
       </if>
       <if test="classSum != null">
         class_sum = #{classSum,jdbcType=VARCHAR},
+      </if>
+      <if test="majorSum != null">
+        major_sum = #{majorSum,jdbcType=VARCHAR},
       </if>
     </set>
     where info_id = #{infoId,jdbcType=BIGINT}
@@ -371,10 +391,11 @@
       study = #{study,jdbcType=VARCHAR},
       ability = #{ability,jdbcType=VARCHAR},
       total = #{total,jdbcType=VARCHAR},
-      gp = #{gp,jdbcType=VARCHAR},
-      ce = #{ce,jdbcType=VARCHAR},
+      gp_rank = #{gpRank,jdbcType=VARCHAR},
+      ce_rank = #{ceRank,jdbcType=VARCHAR},
       pass_sum = #{passSum,jdbcType=VARCHAR},
-      class_sum = #{classSum,jdbcType=VARCHAR}
+      class_sum = #{classSum,jdbcType=VARCHAR},
+      major_sum = #{majorSum,jdbcType=VARCHAR}
     where info_id = #{infoId,jdbcType=BIGINT}
   </update>
 </mapper>

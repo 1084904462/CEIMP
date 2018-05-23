@@ -7,16 +7,14 @@ public class ManagerLogBean {
     private Long managerId;
     private String account;
     private Long schoolId;
-    private String grade;
 
     public ManagerLogBean() {
     }
 
-    public ManagerLogBean(Long managerId, String account, Long schoolId, String grade) {
+    public ManagerLogBean(Long managerId, String account, Long schoolId) {
         this.managerId = managerId;
         this.account = account;
         this.schoolId = schoolId;
-        this.grade = grade;
     }
 
     @Override
@@ -25,7 +23,6 @@ public class ManagerLogBean {
                 "managerId=" + managerId +
                 ", account='" + account + '\'' +
                 ", schoolId=" + schoolId +
-                ", grade='" + grade + '\'' +
                 '}';
     }
 
@@ -51,13 +48,5 @@ public class ManagerLogBean {
 
     public void setSchoolId(Long schoolId) {
         this.schoolId = schoolId;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
     }
 }

@@ -1,17 +1,20 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.obsidian.ceimp.bean.SsBean;
-import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.bean.BasicScholarshipBean;
 import org.obsidian.ceimp.entity.Ss;
 import org.obsidian.ceimp.entity.SsExample;
 
 import java.util.List;
 
 public interface SsMapper {
-    List<SsBean> getSsBeanList(@Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList, @Param("yearScope")Integer yearScope);
+    int insertSs(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
 
-    String selectRankByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+    int updateSs(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    Ss get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+
+    String getRank(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     long countByExample(SsExample example);
 

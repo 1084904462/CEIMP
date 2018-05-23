@@ -23,13 +23,15 @@ public class UserInfo {
 
     private String total;
 
-    private String gp;
+    private String gpRank;
 
-    private String ce;
+    private String ceRank;
 
     private String passSum;
 
     private String classSum;
+
+    private String majorSum;
 
     public Long getInfoId() {
         return infoId;
@@ -119,20 +121,20 @@ public class UserInfo {
         this.total = total == null ? null : total.trim();
     }
 
-    public String getGp() {
-        return gp;
+    public String getGpRank() {
+        return gpRank;
     }
 
-    public void setGp(String gp) {
-        this.gp = gp == null ? null : gp.trim();
+    public void setGpRank(String gpRank) {
+        this.gpRank = gpRank == null ? null : gpRank.trim();
     }
 
-    public String getCe() {
-        return ce;
+    public String getCeRank() {
+        return ceRank;
     }
 
-    public void setCe(String ce) {
-        this.ce = ce == null ? null : ce.trim();
+    public void setCeRank(String ceRank) {
+        this.ceRank = ceRank == null ? null : ceRank.trim();
     }
 
     public String getPassSum() {
@@ -149,5 +151,13 @@ public class UserInfo {
 
     public void setClassSum(String classSum) {
         this.classSum = classSum == null ? null : classSum.trim();
+    }
+
+    public String getMajorSum() {
+        return majorSum;
+    }
+
+    public void setMajorSum(String majorSum) {
+        this.majorSum = majorSum == null ? null : majorSum.trim();
     }
 }

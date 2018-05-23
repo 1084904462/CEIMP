@@ -9,17 +9,15 @@ import org.obsidian.ceimp.entity.AwardExample;
 import java.util.List;
 
 public interface AwardMapper {
-    int updateIsFilledByUserIdAndYearScopeAndSubName(@Param("userId")Long userId,
-                                                     @Param("yearScope")Integer yearScope,
-                                                     @Param("subName")String subName);
+    int updateIsFilled(@Param("userId")Long userId, @Param("yearScope")Integer yearScope, @Param("subName")String subName);
 
-    Long selectAwardIdByUserIdSubNameAndYearScope(@Param("userId")Long userId,@Param("subName") String subName,@Param("yearScope") Integer yearScope);
+    Boolean exist(@Param("userId")Long userId,@Param("subName") String subName,@Param("yearScope") Integer yearScope);
 
     List<ScholarshipFormBean> selectAllBySubNameAndYearScope(@Param("subName") String subName,
                                                              @Param("yearScope") Integer yearScope,
                                                              @Param("grade") String grade);
 
-    List<AwardBean> selectAllByUserIdAndYearScope(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
+    List<AwardBean> getList(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
 
     long countByExample(AwardExample example);
 

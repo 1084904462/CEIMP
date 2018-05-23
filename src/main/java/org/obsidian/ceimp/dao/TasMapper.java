@@ -1,15 +1,18 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.obsidian.ceimp.bean.TasBean;
-import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.bean.BasicScholarshipBean;
 import org.obsidian.ceimp.entity.Tas;
 import org.obsidian.ceimp.entity.TasExample;
 
 import java.util.List;
 
 public interface TasMapper {
-    List<TasBean> getTasBeanList(@Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList, @Param("yearScope")Integer yearScope);
+    int insertTas(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    int updateTas(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    Tas get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     long countByExample(TasExample example);
 

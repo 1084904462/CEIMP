@@ -3163,7 +3163,7 @@ jQuery.event = {
 
 	special: {
 		load: {
-			// Prevent triggered image.load events from bubbling to window.load
+			// Prevent triggered picture.load events from bubbling to window.load
 			noBubble: true
 		},
 
@@ -5196,7 +5196,7 @@ if ( document.querySelectorAll ) {
 				docElem.msMatchesSelector;
 
 		// Build QSA regex
-		// Regex strategy adopted from Diego Perini
+		// Regex c1_strategy adopted from Diego Perini
 		assert(function( div ) {
 			// Select is set to empty string on purpose
 			// This is to test IE's treatment of not explictly
@@ -6092,7 +6092,7 @@ function cloneFixAttributes( src, dest ) {
 		}
 
 		// This path appears unavoidable for IE9. When cloning an object
-		// element in IE9, the outerHTML strategy above is not sufficient.
+		// element in IE9, the outerHTML c1_strategy above is not sufficient.
 		// If the src has innerHTML and the destination does not,
 		// copy the src.innerHTML into the dest.innerHTML. #10324
 		if ( jQuery.support.html5Clone && (src.innerHTML && !jQuery.trim(dest.innerHTML)) ) {

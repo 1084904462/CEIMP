@@ -4,7 +4,10 @@ import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.ScholarshipMapper;
 import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.entity.ScholarshipExample;
-import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.service.AwardService;
+import org.obsidian.ceimp.service.BasicScholarshipService;
+import org.obsidian.ceimp.service.MajorService;
+import org.obsidian.ceimp.service.ScholarshipService;
 import org.obsidian.ceimp.util.TextMapUtil;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.UrlUtil;
@@ -22,6 +25,9 @@ import java.util.Map;
 @Service
 public class ScholarshipServiceImpl implements ScholarshipService {
     @Autowired
+    private BasicScholarshipService basicScholarshipService;
+
+    @Autowired
     private ScholarshipMapper scholarshipMapper;
 
     @Autowired
@@ -30,46 +36,11 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     @Autowired
     private AwardService awardService;
 
-    @Autowired
-    private NgService ngService;
-
-    @Autowired
-    private NisService nisService;
-
-    @Autowired
-    private PgsService pgsService;
-
-    @Autowired
-    private SsService ssService;
-
-    @Autowired
-    private TasService tasService;
-
     @Transactional
     @Override
     public List<Map<String, String>> getTextMapList(String subName, List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
-        List<Map<String,String>> textMapList = null;
-        if(subName.equals("ng")){
-            List<NgBean> ngBeanList = ngService.getNgBeanList(zipInfoBeanList,yearScope);
-            textMapList = TextMapUtil.getInstance().getNgMapList(ngBeanList);
-        }
-        else if(subName.equals("nis")){
-            List<NisBean> nisBeanList = nisService.getNisBeanList(zipInfoBeanList,yearScope);
-            textMapList = TextMapUtil.getInstance().getNisMapList(nisBeanList);
-        }
-        else if(subName.equals("pgs")){
-            List<PgsBean> pgsBeanList = pgsService.getPgsBeanList(zipInfoBeanList,yearScope);
-            textMapList = TextMapUtil.getInstance().getPgsMapList(pgsBeanList);
-        }
-        else if(subName.equals("ss")){
-            List<SsBean> ssBeanList = ssService.getSsBeanList(zipInfoBeanList,yearScope);
-            textMapList = TextMapUtil.getInstance().getSsMapList(ssBeanList);
-        }
-        else if(subName.equals("tas")){
-            List<TasBean> tasBeanList = tasService.getTasBeanList(zipInfoBeanList,yearScope);
-            textMapList = TextMapUtil.getInstance().getTasMapList(tasBeanList);
-        }
-        return textMapList;
+        List<BasicScholarshipBean> beanList = basicScholarshipService.getBeanList(subName,zipInfoBeanList,yearScope);
+        return TextMapUtil.getInstance().getList(beanList);
     }
 
     @Transactional
@@ -77,7 +48,7 @@ public class ScholarshipServiceImpl implements ScholarshipService {
     public List<String> getModelNameList(String subName,String scholarshipName, List<ZipInfoBean> zipInfoBeanList, Integer yearScope) {
         List<String> modelNameList = new ArrayList<>();
         if(subName.equals("ng") || subName.equals("nis")){
-            List<ResidentAndSituationBean> list = scholarshipMapper.getResidentAndSituationBeanList(subName,zipInfoBeanList,yearScope);
+            List<ResidentAndSituationBean> list = scholarshipMapper.getBeanList(subName,zipInfoBeanList,yearScope);
             for(int i=0;i<zipInfoBeanList.size();i++){
                 if(list.get(i).getResident().equals("城镇") && list.get(i).getSituation().equals("家庭经济特别困难")){
                     modelNameList.add(UrlUtil.getInstance().getModelInputUrl(scholarshipName + "模板1"));
@@ -103,7 +74,7 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Transactional
     @Override
-    public String selectScholarshipNameBySubName(String subName) {
+    public String getScholarshipName(String subName) {
         ScholarshipExample example = new ScholarshipExample();
         example.or().andSubNameEqualTo(subName);
         List<Scholarship> list = scholarshipMapper.selectByExample(example);
@@ -115,15 +86,15 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Transactional
     @Override
-    public int deleteBySubNameAndUserAccountBeanListAndYearScope(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
-        return scholarshipMapper.deleteAllBySubNameAndUserAccountBeanListAndYearScope(subName,userAccountBeanList,yearScope);
+    public int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
+        return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope);
     }
 
     public ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId){
         ShowScholarshipBean showScholarshipBean = new ShowScholarshipBean();
-        showScholarshipBean.setScholarshipName(this.selectScholarshipNameBySubName(subName));
+        showScholarshipBean.setScholarshipName(this.getScholarshipName(subName));
         showScholarshipBean.setSubName(subName);
-        showScholarshipBean.setGrade(majorService.selectAllGradeBySchoolId(schoolId));
+        showScholarshipBean.setGrade(majorService.getLastThree(schoolId));
         showScholarshipBean.setYearScope(TimeUtil.getInstance().getThisYear());
         return showScholarshipBean;
     }

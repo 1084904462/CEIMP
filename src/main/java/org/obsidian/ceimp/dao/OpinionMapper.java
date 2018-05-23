@@ -13,12 +13,12 @@ public interface OpinionMapper {
                                                                            @Param("grade")String grade,
                                                                            @Param("yearScope")Integer yearScope);
 
-    Opinion selectByUserIdAndYearScope(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
+    Opinion get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     int updateByManagerIdAndYearScopeAndScholarshipOpinionBean(@Param("managerId") Long managerId,
         @Param("yearScope") Integer yearScope,@Param("scholarshipOpinionBean")ScholarshipOpinionBean scholarshipOpinionBean);
 
-    ScholarshipOpinionBean selectByManagerIdAndYearScope(@Param("managerId") Long managerId,@Param("yearScope") Integer yearScope);
+    ScholarshipOpinionBean getBean(@Param("managerId") Long managerId,@Param("yearScope") Integer yearScope);
 
     long countByExample(OpinionExample example);
 

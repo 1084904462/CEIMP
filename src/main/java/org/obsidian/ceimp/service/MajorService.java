@@ -6,5 +6,7 @@ import java.util.List;
  * Created by BillChen on 2017/11/18.
  */
 public interface MajorService {
-    List<String> selectAllGradeBySchoolId(Long schoolId);
+    List<String> getAll(Long schoolId);
+
+    List<String> getLastThree(Long schoolId);
 }

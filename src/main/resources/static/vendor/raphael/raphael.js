@@ -3440,22 +3440,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return out;
 	    };
 	    /*\
-	     * Paper.image
+	     * Paper.picture
 	     [ method ]
 	     **
-	     * Embeds an image into the surface.
+	     * Embeds an picture into the surface.
 	     **
 	     > Parameters
 	     **
-	     - src (string) URI of the source image
+	     - src (string) URI of the source picture
 	     - x (number) x coordinate position
 	     - y (number) y coordinate position
-	     - width (number) width of the image
-	     - height (number) height of the image
-	     = (object) Raphaël element object with type “image”
+	     - width (number) width of the picture
+	     - height (number) height of the picture
+	     = (object) Raphaël element object with type “picture”
 	     **
 	     > Usage
-	     | var c = paper.image("apple.png", 10, 10, 80, 80);
+	     | var c = paper.picture("apple.png", 10, 10, 80, 80);
 	    \*/
 	    paperproto.image = function (src, x, y, w, h) {
 	        var out = R._engine.image(this, src || "about:blank", x || 0, y || 0, w || 0, h || 0);
@@ -6354,7 +6354,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        var isURL = Str(value).match(R._ISURL);
 	                        if (isURL) {
 	                            el = $("pattern");
-	                            var ig = $("image");
+	                            var ig = $("picture");
 	                            el.id = R.createUUID();
 	                            $(el, {x: 0, y: 0, patternUnits: "userSpaceOnUse", height: 1, width: 1});
 	                            $(ig, {x: 0, y: 0, "xlink:href": isURL[1]});
@@ -6849,7 +6849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     o cursor (string) CSS type of the cursor
 	     o cx (number) the x-axis coordinate of the center of the circle, or ellipse
 	     o cy (number) the y-axis coordinate of the center of the circle, or ellipse
-	     o fill (string) colour, gradient or image
+	     o fill (string) colour, gradient or picture
 	     o fill-opacity (number)
 	     o font (string)
 	     o font-family (string)
@@ -6862,7 +6862,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     o r (number) radius of the circle, ellipse or rounded corner on the rect
 	     o rx (number) horisontal radius of the ellipse
 	     o ry (number) vertical radius of the ellipse
-	     o src (string) image URL, only works for @Element.image element
+	     o src (string) picture URL, only works for @Element.picture element
 	     o stroke (string) stroke colour
 	     o stroke-dasharray (string) [“”, “none”, “`-`”, “`.`”, “`-.`”, “`-..`”, “`. `”, “`- `”, “`--`”, “`- .`”, “`--.`”, “`--..`”]
 	     o stroke-linecap (string) [“`butt`”, “`square`”, “`round`”]
@@ -7091,7 +7091,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return res;
 	    };
 	    R._engine.image = function (svg, src, x, y, w, h) {
-	        var el = $("image");
+	        var el = $("picture");
 	        $(el, {x: x, y: y, width: w, height: h, preserveAspectRatio: "none"});
 	        el.setAttributeNS(xlink, "href", src);
 	        svg.canvas && svg.canvas.appendChild(el);

@@ -16,9 +16,9 @@ public interface ScholarshipService {
 
     List<String> getModelNameList(String subName,String scholarshipName, List<ZipInfoBean> zipInfoBeanList,Integer yearScope);
 
-    String selectScholarshipNameBySubName(String subName);
+    String getScholarshipName(String subName);
 
-    int deleteBySubNameAndUserAccountBeanListAndYearScope(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
+    int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 
     ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId);
 

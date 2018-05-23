@@ -114,14 +114,14 @@ public class ManagerSettingController {
     @ResponseBody
     public String changePassword(PasswordBean passwordBean, HttpSession session) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Long managerId = ((ManagerLogBean) session.getAttribute("managerLogBean")).getManagerId();
-        Manager manager = managerService.selectByManagerId(managerId);
+        Manager manager = managerService.get(managerId);
         StatusBean statusBean = new StatusBean();
         if(passwordBean.getPassword().length() >= 6){
             if(passwordBean.getPassword().length() <= 16){
                 if(passwordBean.getPassword().equals(passwordBean.getConfirmPassword())){
                     if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getPassword()))){
                         manager.setPassword(passwordBean.getPassword());
-                        managerService.updateManager(manager);
+                        managerService.update(manager);
                         statusBean.setStatus("修改成功");
                     }
                     else{

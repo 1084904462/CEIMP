@@ -363,66 +363,6 @@ public class MajorExample {
             addCriterion("grade not between", value1, value2, "grade");
             return (Criteria) this;
         }
-
-        public Criteria andSumIsNull() {
-            addCriterion("sum is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumIsNotNull() {
-            addCriterion("sum is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumEqualTo(Integer value) {
-            addCriterion("sum =", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumNotEqualTo(Integer value) {
-            addCriterion("sum <>", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumGreaterThan(Integer value) {
-            addCriterion("sum >", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sum >=", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumLessThan(Integer value) {
-            addCriterion("sum <", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumLessThanOrEqualTo(Integer value) {
-            addCriterion("sum <=", value, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumIn(List<Integer> values) {
-            addCriterion("sum in", values, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumNotIn(List<Integer> values) {
-            addCriterion("sum not in", values, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumBetween(Integer value1, Integer value2) {
-            addCriterion("sum between", value1, value2, "sum");
-            return (Criteria) this;
-        }
-
-        public Criteria andSumNotBetween(Integer value1, Integer value2) {
-            addCriterion("sum not between", value1, value2, "sum");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {

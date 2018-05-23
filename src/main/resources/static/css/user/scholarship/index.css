@@ -7,7 +7,8 @@
 	font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
 }
 .col-md-3{
-	height:300px;
+	height:350px;
+	margin-top:-5%;
 }
 .col-md-3:nth-child(5){
 	width: 350px;

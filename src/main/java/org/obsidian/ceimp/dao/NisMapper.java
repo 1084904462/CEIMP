@@ -1,15 +1,18 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.obsidian.ceimp.bean.NisBean;
-import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.bean.BasicScholarshipBean;
 import org.obsidian.ceimp.entity.Nis;
 import org.obsidian.ceimp.entity.NisExample;
 
 import java.util.List;
 
 public interface NisMapper {
-    List<NisBean> getNisBeanList(@Param("zipInfoBeanList")List<ZipInfoBean> zipInfoBeanList, @Param("yearScope")Integer yearScope);
+    int insertNis(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    int updateNis(@Param("userId")Long userId,@Param("yearScope")Integer yearScope,@Param("bean")BasicScholarshipBean basicScholarshipBean);
+
+    Nis get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
     long countByExample(NisExample example);
 

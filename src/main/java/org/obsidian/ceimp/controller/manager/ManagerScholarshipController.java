@@ -4,19 +4,21 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
-import org.obsidian.ceimp.service.NgService;
+import org.obsidian.ceimp.entity.UserBasic;
+import org.obsidian.ceimp.service.BasicScholarshipService;
 import org.obsidian.ceimp.service.OpinionService;
 import org.obsidian.ceimp.service.ScholarshipService;
+import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.obsidian.ceimp.util.UrlUtil;
 import org.obsidian.ceimp.util.ZipUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,13 +34,16 @@ public class ManagerScholarshipController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @Autowired
+    private BasicScholarshipService basicScholarshipService;
+
+    @Autowired
+    private UserBasicService userBasicService;
+
+    @Autowired
     private ScholarshipService scholarshipService;
 
     @Autowired
     private OpinionService opinionService;
-
-    @Autowired
-    private NgService ngService;
 
     /**
      * showScholarshipBean
@@ -46,7 +51,7 @@ public class ManagerScholarshipController {
      * 根据session中managerLogBean的schoolId查询数据库中表major对应所有年级
      * 默认年份为当前年份
      *
-     * ScholarshipFormBeanList
+     * scholarshipFormBeanList
      * 根据subName判断从ng、nis、pgs、ss、tas哪张表查询数据，根据yearScope判断查询哪年，获得userIdList
      * 关联表major、class_num、user_basic根据userIdList查询major、classNum、account、username
      * 根据grade判断查询表major中的grade为哪个年级
@@ -59,11 +64,9 @@ public class ManagerScholarshipController {
         logger.debug("subName:" + subName);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         ShowScholarshipBean showScholarshipBean = scholarshipService.getShowScholarshipBean(subName,managerLogBean.getSchoolId());
-        logger.debug(showScholarshipBean);
         model.addAttribute("showScholarshipBean",showScholarshipBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,showScholarshipBean.getGrade().get(0));
-        logger.debug(scholarshipFormBeanList);
         model.addAttribute("scholarshipFormBeanList",scholarshipFormBeanList);
         return "manager/showScholarship";
     }
@@ -82,9 +85,7 @@ public class ManagerScholarshipController {
         if(yearScope == null){
             yearScope = TimeUtil.getInstance().getThisYear();
         }
-        logger.debug("yearScope:" + yearScope);
         List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
-        logger.debug("scholarshipFormBeanList:" + scholarshipFormBeanList);
         return JSON.toJSONString(scholarshipFormBeanList);
     }
 
@@ -95,25 +96,25 @@ public class ManagerScholarshipController {
      * @param subName 奖学金名称缩写
      * @param yearScope 年份
      * @param request 从中获取zipInfoBeanList，包含学号account、姓名username、奖学金名称scholarshipName
-     * @param response 将打包文件通过response返回给客户端
      * @throws IOException
      */
     @PostMapping("/zip/{subName}/{yearScope}")
-    public void getScholarshipZip(@PathVariable("subName") String subName,@PathVariable("yearScope")Integer yearScope, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public ResponseEntity<byte[]> generateScholarshipZip(@PathVariable("subName") String subName, @PathVariable("yearScope")Integer yearScope, HttpServletRequest request) throws IOException {
         String jsonStr=request.getParameter("zipInfoBeanList");
         List<ZipInfoBean> zipInfoBeanList = new ArrayList<>(JSONArray.parseArray(jsonStr, ZipInfoBean.class));
-        logger.debug("subName:" + subName + " zipInfoBeanList:" + zipInfoBeanList);
-        String scholarshipName = scholarshipService.selectScholarshipNameBySubName(subName);
-        logger.debug("scholarshipName:" + scholarshipName);
-        List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
-        logger.debug("modelNameList:" + modelNameList);
-        List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
-        logger.debug("textMapList:" + textMapList);
-        List<String> zipInputUrlList = UrlUtil.getInstance().getZipInputUrlList(subName,zipInfoBeanList);
-        logger.debug("zipInputUrlList:" + zipInputUrlList);
-        String zipOutputUrl = UrlUtil.getInstance().getZipOutputUrl(scholarshipName);
-        logger.debug("zipOutputUrl:" + zipOutputUrl);
-        ZipUtil.getInstance().zip(modelNameList,textMapList,zipInputUrlList,zipOutputUrl,response,scholarshipName);
+        if(zipInfoBeanList.size() == 1){
+            UserBasic userBasic = userBasicService.selectByAccount(zipInfoBeanList.get(0).getAccount());
+            BasicScholarshipBean bean = basicScholarshipService.getBean(subName,userBasic.getUserId(),yearScope);
+            return basicScholarshipService.generateWord(subName,bean);
+        }
+        else{
+            List<String> zipInputUrlList = UrlUtil.getInstance().getZipInputUrlList(zipInfoBeanList);
+            String scholarshipName = scholarshipService.getScholarshipName(subName);
+            String zipOutputUrl = UrlUtil.getInstance().getZipOutputUrl(scholarshipName);
+            List<String> modelNameList = scholarshipService.getModelNameList(subName,scholarshipName,zipInfoBeanList,yearScope);
+            List<Map<String,String>> textMapList = scholarshipService.getTextMapList(subName,zipInfoBeanList,yearScope);
+            return ZipUtil.getInstance().zip(modelNameList,textMapList,zipInputUrlList,zipOutputUrl);
+        }
     }
 
     /**
@@ -128,7 +129,7 @@ public class ManagerScholarshipController {
     public String deleteScholarship(@PathVariable("subName") String subName,@RequestBody List<UserAccountBean> userAccountBeanList){
         logger.debug("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
         int yearScope = TimeUtil.getInstance().getThisYear();
-        Integer isDelete = scholarshipService.deleteBySubNameAndUserAccountBeanListAndYearScope(subName,userAccountBeanList,yearScope);
+        Integer isDelete = scholarshipService.deleteAll(subName,userAccountBeanList,yearScope);
         StatusBean statusBean = new StatusBean();
         if(isDelete != 0){
             statusBean.setStatus("删除成功");
@@ -151,7 +152,7 @@ public class ManagerScholarshipController {
     public String pageScholarshipOpinion(HttpSession session,Model model){
         Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
         int yearScope = TimeUtil.getInstance().getThisYear();
-        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.selectByManagerIdAndYearScope(managerId,yearScope);
+        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerId,yearScope);
         logger.debug(scholarshipOpinionBean);
         model.addAttribute("scholarshipOpinionBean",scholarshipOpinionBean);
         return "manager/writeOpinion";
@@ -172,7 +173,7 @@ public class ManagerScholarshipController {
         Long managerId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getManagerId();
         int yearScope = TimeUtil.getInstance().getThisYear();
         opinionService.updateByManagerIdAndYearScopeAndScholarshipOpinionBean(managerId,yearScope,scholarshipOpinionBean);
-        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.selectByManagerIdAndYearScope(managerId,yearScope);
+        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.getBean(managerId,yearScope);
         logger.debug(newScholarshipOpinionBean);
         return JSON.toJSONString(newScholarshipOpinionBean);
     }
@@ -188,26 +189,26 @@ public class ManagerScholarshipController {
      */
     @GetMapping("/opinion/ng")
     public String pageNgOpinion(HttpSession session,Model model){
-        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-        String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-        logger.debug(ngOpinionFormBeanList);
-        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
+//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
+//        int yearScope = TimeUtil.getInstance().getThisYear();
+//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
+//        logger.debug(ngOpinionFormBeanList);
+//        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
         return "manager/writeNgOpinion";
     }
 
     @PostMapping("/opinion/ng")
     @ResponseBody
     public String updateNgOpinion(HttpSession session,@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
-        logger.debug(ngOpinionUpdateBean);
-        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-        String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        int updateSum = ngService.updateNgOpinion(ngOpinionUpdateBean.getOpinion(),ngOpinionUpdateBean.getUserAccountList(),yearScope);
-        logger.debug("updateSum:" + updateSum);
-        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-        logger.debug(ngOpinionFormBeanList);
-        return JSON.toJSONString(ngOpinionFormBeanList);
+//        logger.debug(ngOpinionUpdateBean);
+//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
+//        String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
+//        int yearScope = TimeUtil.getInstance().getThisYear();
+//        int updateSum = ngService.updateNgOpinion(ngOpinionUpdateBean.getOpinion(),ngOpinionUpdateBean.getUserAccountList(),yearScope);
+//        logger.debug("updateSum:" + updateSum);
+//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
+//        logger.debug(ngOpinionFormBeanList);
+//        return JSON.toJSONString(ngOpinionFormBeanList);
+        return "";
     }
 }

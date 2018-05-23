@@ -1229,7 +1229,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 	if ( (support.qsa = rnative.test( document.querySelectorAll )) ) {
 		// Build QSA regex
-		// Regex strategy adopted from Diego Perini
+		// Regex c1_strategy adopted from Diego Perini
 		assert(function( el ) {
 			// Select is set to empty string on purpose
 			// This is to test IE's treatment of not explicitly
@@ -5215,7 +5215,7 @@ jQuery.event = {
 	special: {
 		load: {
 
-			// Prevent triggered image.load events from bubbling to window.load
+			// Prevent triggered picture.load events from bubbling to window.load
 			noBubble: true
 		},
 		focus: {

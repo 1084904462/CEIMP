@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>奖学金意见填写</title>
+    <link th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/datatables-responsive/dataTables.responsive.css}" rel="stylesheet"/>
+    <link th:href="@{/static/dist/css/sb-admin-2.css}" rel="stylesheet"/>
+    <link th:href="@{/static/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link th:href="@{/static/css/manager/writeOpinion.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/static/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/static/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/metisMenu/metisMenu.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-plugins/dataTables.bootstrap.min.js}"></script>
+    <script th:src="@{/static/vendor/datatables-responsive/dataTables.responsive.js}"></script>
+    <script th:src="@{/static/dist/js/sb-admin-2.js}"></script>
+    <script th:src="@{/static/js/manager/writeOpinion.js}"></script>
+    <script th:src="@{/static/js/manager/index.js}"></script>
+
+</head>
+<body class="main-body">
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" >综合测评管理系统管理员端</div>
+            </div>
+            <!-- /.navbar-header -->
+
+            <!--  <ul class="nav navbar-top-links navbar-right">
+
+
+
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                          <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+
+                          <li><a href="javascript:void(0)"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                          </li>
+                      </ul>
+                      &lt;!&ndash; /.dropdown-user &ndash;&gt;
+                  </li>
+                  &lt;!&ndash; /.dropdown &ndash;&gt;
+              </ul>-->
+
+
+
+
+
+            <ul class="nav navbar-top-links navbar-right">
+
+
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="javascript:void(0)">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <font style="margin-left: 15px;margin-right: 30px;" th:text="${session.managerLogBean.account}" ></font>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" style="display: none;" id="hidden"  onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()">
+
+                        <li ><a href="javascript:void(0)" data-toggle="modal" data-target="#changePassword" ><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+
+
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a onclick="loadPage('/manager/index')" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-table fa-fw"></i>
+                                查看名单
+                                <span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li onclick="loadPage('/manager/scholarship/ng')"><a ><span class="text">国家助学金</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/scholarship/nis')"><a ><span class="text">国家励志奖学金</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/scholarship/pgs')"><a ><span class="text">省政府奖学金</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/scholarship/ss')"><a ><span class="text">校奖学金</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/scholarship/tas')"><a ><span class="text">三好学生</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="fa fa-edit fa-fw"></i> 填写意见<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li onclick="loadPage('/manager/scholarship/opinion')"><a ><span class="text ">奖学金意见填写</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/scholarship/opinion/ng')"><a><span class="text">国家助学金审批意见</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a onclick="loadPage('/manager/settings/resetPassword')" ><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
+
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+          <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">奖学金意见填写<button type="button" class="btn btn-default radius" style="float:right;margin-top:0px;" onclick="fire_ajax_submit(event)">保存意见</button></h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            校奖学金<small>---二级学工组意见</small> 
+                        </div>
+
+
+
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                            <textarea th:text="${scholarshipOpinionBean.ssOpinion}" class="form-control22" rows="12 " placeholder="Textarea"  id="ssOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        国家励志奖学金<small>---院（系）意见
+                    </small> 
+                    </div>
+
+
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                        <textarea th:text="${scholarshipOpinionBean.nisOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="nisOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+                <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        省政府奖学金<small>---院（系）意见</small>
+                    </div>
+
+
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                        <textarea th:text="${scholarshipOpinionBean.pgsOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div><div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        省政府奖学金<small>---推荐理由</small> 
+                    </div>
+
+
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                        <textarea th:text="${scholarshipOpinionBean.pgsRecommend}" class="form-control22" rows="12 " placeholder="Textarea" id="pgsRecommend" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div><div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        三好学生<small>---二级学工组意见</small> 
+                    </div>
+
+
+
+                    <!-- /.panel-heading -->
+                    <div class="panel-body" style="padding:0px;margin:0px;">
+
+
+                        <textarea th:text="${scholarshipOpinionBean.tasOpinion}" class="form-control22" rows="12 " placeholder="Textarea" id="tasOpinion" style="y-overflow:auto; width: 100%;   background-color:white;margin:0px;border:0px;outline:medium;"></textarea>
+
+
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+
+               
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+<!--转圈圈model-->
+<div class="modal fade" id="circleModal" tabindex="-1" role="dialog" aria-labelledby="circleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-circle">
+        <div class="modal-content" style="height: 80px;">
+        	<div style="line-height: 80px;margin-left: 35%;" >
+
+            <img th:src="@{/static/img/loadingImg.gif}" width="40px;" height="40px;"/>
+            <label class="modal-body-title">&nbsp;&nbsp;&nbsp;数据加载中......</label>
+
+        </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+
+    </div>
+</body>
+<script th:inline="javascript">
+    var scholarshipOpinionBean=[[${scholarshipOpinionBean}]];
+    console.log(scholarshipOpinionBean);
+    function fire_ajax_submit(event) {
+        console.log("1");
+        var nisOpinion=$('#nisOpinion').val();
+        var pgsRecommend=$('#pgsRecommend').val();
+
+        var pgsOpinion=$('#pgsOpinion').val();
+
+        var ssOpinion=$('#ssOpinion').val();
+        var tasOpinion=$('#tasOpinion').val();
+
+        var ScholarshipOpinionBean={nisOpinion:nisOpinion,pgsRecommend:pgsRecommend,pgsOpinion:pgsOpinion,ssOpinion:ssOpinion,tasOpinion:tasOpinion};
+
+console.log(ScholarshipOpinionBean);
+
+
+
+
+
+
+
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/manager/scholarship/opinion",//
+            data: JSON.stringify(ScholarshipOpinionBean),
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log("SUCCESS : ", data);
+                alert("成功提交");
+
+                location.reload();
+
+
+
+
+                /* $("#deleteScholarship").data-dismiss="modal";*/
+                /*
+                                    $("#deleteScholarshipSuccess").style="display:block";
+                */
+
+
+            },
+            error: function (e) {
+
+
+
+                alert("提交失败")
+
+
+                console.log("Failed : ", e);
+
+            }
+        });
+
+
+    }
+
+</script>
+</html>

@@ -19,7 +19,13 @@ public class MajorServiceImpl implements MajorService {
 
     @Transactional
     @Override
-    public List<String> selectAllGradeBySchoolId(Long schoolId) {
-        return majorMapper.selectAllGradeBySchoolId(schoolId);
+    public List<String> getAll(Long schoolId) {
+        return majorMapper.getAll(schoolId);
+    }
+
+    @Transactional
+    @Override
+    public List<String> getLastThree(Long schoolId) {
+        return majorMapper.getLastThree(schoolId);
     }
 }

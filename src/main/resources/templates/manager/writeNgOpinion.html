@@ -165,8 +165,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active" id="b1"  ><a href="javascript:void(0)" th:text="${session.managerLogBean.grade}+'级'">2016级</a></li>
-                                <!--<li role="presentation" ><a href="javascript:void(0)" >Messages</a></li>&lt;!&ndash;style="color: grey"&ndash;&gt;-->
+                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" >2016级</a></li>
+                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)"  >2015级</a></li>                                <!--<li role="presentation" ><a href="javascript:void(0)" >Messages</a></li>&lt;!&ndash;style="color: grey"&ndash;&gt;-->
                             </ul>
                         </div>
                         <!-- /.panel-heading -->
@@ -195,6 +195,7 @@
 
                                     <th>姓名</th>
                                     <th >国家助学金-院（系）意见</th>
+                                    <th>操作</th>
 
 
                                 </tr>
@@ -211,6 +212,9 @@
                                     <td th:text="${person.username}">3</td>
                                     <td th:text="${person.opinion}" >
                                     无
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton"  >下载</button>
                                     </td>
 
 
@@ -312,6 +316,10 @@
 <script th:inline="javascript">
     $(document).ready(function() {
 
+
+
+
+
         var oTable=$('#dataTables-example').DataTable({
             responsive: true,
             "order": [[ 1, "desc" ]],
@@ -353,15 +361,7 @@
 
 
 
-        /*$("#checkAll2").click(function() {
-            if ($(this).hasClass('checked')) {
-                $('input[name="subBox"]').prop("checked",false);
-                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-            else {
-                $('input[name="subBox"]').prop("checked",true);
-                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-            $(this).toggleClass('checked');
-        });*/
+
         var $subBox = $(allPages).find('input[name="subBox"]');
         $subBox.click(function(){
             /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -444,86 +444,12 @@
         });
 
     });
-/*
-    function fire_ajax_update(event) {
 
-
-
-
-
-
-
-
-        var index=$($($($(event.target).parent())).parent()).prevAll().length;
-        var account=$($($($(event.target).parent()).parent()).children())[3].innerHTML;
-        /!*
-                var opinion=$($($($(event.target).parent()).parent()).children())[5].innerHTML;
-        *!/
-        var opinion=$("#opinion16").find("option:selected").text();
-
-        var userAccountList={account:account};
-        var ngOpinionUpdateBean=new Array();
-        /!*
-                var userAccountBean={account:account};
-
-        *!/
-        ngOpinionUpdateBean.push({opinion: opinion,userAccountList});
-
-
-        console.log(userAccountList);
-        console.log(ngOpinionUpdateBean);
-
-
-
-
-
-
-
-
-        $.ajax({
-            type: "post",
-            contentType: "application/json",
-            url: "/manager/scholarship/opinion/ng",//
-            data: JSON.stringify(ngOpinionUpdateBean),
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-                console.log("SUCCESS : ", data);
-                alert("成功重置");
-
-                location.reload();
-
-
-
-
-                /!* $("#deleteScholarship").data-dismiss="modal";*!/
-                /!*
-                                    $("#deleteScholarshipSuccess").style="display:block";
-                *!/
-
-
-            },
-            error: function (e) {
-
-
-
-                alert("删除失败")
-
-
-                console.log("Failed : ", e);
-
-            }
-        });
-
-
-    }
-*/
     function fire_ajax_update(event) {
         var showScholarshipBean=[[${showScholarshipBean}]];
         /*$("#b1").className="";
         $("#b2").className="active";*/
-        console.log();
+        console.log("tab1")
         $("#b2").attr("class","");
         $("#b1").attr("class","active");
 
@@ -560,13 +486,7 @@
                     button.setAttribute("onclick","fire_ajax_download(event)");
 
 
-                    var button2=document.createElement("button");
-                    button2.innerHTML = "删除";
-                    button2.className="btn btn-danger2 btn-sm interval radius";
-                    button2.setAttribute("style","margin-left:30px;");
-                    button2.setAttribute("onclick","fire_ajax_delete(event)");
-                    button2.setAttribute("data-toggle","modal");
-                    button2.setAttribute("data-target","#deleteScholarship");
+
 
 
 
@@ -585,7 +505,7 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].scholarshipName);
-                    td7.append(button,button2);
+                    td7.append(button);
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
@@ -624,7 +544,7 @@
         var showScholarshipBean=[[${showScholarshipBean}]];
         /*$("#b1").className="";
         $("#b2").className="active";*/
-        console.log();
+        console.log("tab2");
         $("#b1").attr("class","");
         $("#b2").attr("class","active");
 
@@ -661,13 +581,7 @@
                     button.setAttribute("onclick","fire_ajax_download(event)");
 
 
-                    var button2=document.createElement("button");
-                    button2.innerHTML = "删除";
-                    button2.className="btn btn-danger2 btn-sm interval radius";
-                    button2.setAttribute("style","margin-left:30px;");
-                    button2.setAttribute("onclick","fire_ajax_delete(event)");
-                    button2.setAttribute("data-toggle","modal");
-                    button2.setAttribute("data-target","#deleteScholarship");
+
 
 
 
@@ -686,7 +600,7 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].scholarshipName);
-                    td7.append(button,button2);
+                    td7.append(button);
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);

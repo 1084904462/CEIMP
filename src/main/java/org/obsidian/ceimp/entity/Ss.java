@@ -7,7 +7,7 @@ public class Ss {
 
     private Integer yearScope;
 
-    private String reason;
+    private String applyReason;
 
     public Long getSsId() {
         return ssId;
@@ -33,11 +33,11 @@ public class Ss {
         this.yearScope = yearScope;
     }
 
-    public String getReason() {
-        return reason;
+    public String getApplyReason() {
+        return applyReason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason == null ? null : reason.trim();
+    public void setApplyReason(String applyReason) {
+        this.applyReason = applyReason == null ? null : applyReason.trim();
     }
 }

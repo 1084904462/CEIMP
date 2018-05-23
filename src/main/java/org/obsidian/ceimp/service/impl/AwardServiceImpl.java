@@ -21,8 +21,8 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public List<AwardBean> selectAllByUserIdAndYearScope(Long userId, Integer yearScope) {
-        return awardMapper.selectAllByUserIdAndYearScope(userId,yearScope);
+    public List<AwardBean> getList(Long userId, Integer yearScope) {
+        return awardMapper.getList(userId,yearScope);
     }
 
     @Transactional
@@ -33,13 +33,13 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public Long selectAwardIdByUserIdSubNameAndYearScope(Long userId,String subName, Integer yearScope) {
-        return awardMapper.selectAwardIdByUserIdSubNameAndYearScope(userId,subName,yearScope);
+    public Boolean exist(Long userId,String subName, Integer yearScope) {
+        return awardMapper.exist(userId,subName,yearScope);
     }
 
     @Transactional
     @Override
-    public int updateIsFilledByUserIdAndYearScopeAndSubName(Long userId, Integer yearScope,String subName) {
-        return awardMapper.updateIsFilledByUserIdAndYearScopeAndSubName(userId,yearScope,subName);
+    public int updateIsFilled(Long userId, Integer yearScope,String subName) {
+        return awardMapper.updateIsFilled(userId,yearScope,subName);
     }
 }

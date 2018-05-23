@@ -41,5 +41,4 @@ public class Configurations {
         logger.debug("=============PlatformTransactionManager=============");
         return new DataSourceTransactionManager(dataSource());
     }
-
 }

@@ -3,6 +3,7 @@ package org.obsidian.ceimp.util;
 import org.obsidian.ceimp.bean.ZipInfoBean;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,17 +35,21 @@ public class UrlUtil {
         return MODEL_INPUT_URL + modelName + WORD_SUFFIX;
     }
 
-    public String getWordOutputUrl(String subName,ZipInfoBean zipInfoBean){
-        return WORD_OUTPUT_URL + subName + DIVIDE + zipInfoBean.getAccount()
-                + zipInfoBean.getUsername() + zipInfoBean.getScholarshipName() + WORD_SUFFIX;
+    public String getWordOutputUrl(ZipInfoBean zipInfoBean){
+        return WORD_OUTPUT_URL + zipInfoBean.getAccount() + zipInfoBean.getUsername() + zipInfoBean.getScholarshipName() + WORD_SUFFIX;
     }
 
-    public List<String> getZipInputUrlList(String subName,List<ZipInfoBean> zipInfoBeanList){
+    public List<String> getZipInputUrlList(List<ZipInfoBean> zipInfoBeanList){
         List<String> zipInputUrlList = new ArrayList<>();
         for(int i=0;i<zipInfoBeanList.size();i++){
-            zipInputUrlList.add(ZIP_INPUT_URL + subName + DIVIDE + zipInfoBeanList.get(i).getAccount()
+            zipInputUrlList.add(ZIP_INPUT_URL + zipInfoBeanList.get(i).getAccount()
                     + zipInfoBeanList.get(i).getUsername() + zipInfoBeanList.get(i).getScholarshipName() + WORD_SUFFIX);
         }
+        zipInputUrlList.sort(new Comparator<String>() {
+            public int compare(String a, String b) {
+                return a.compareTo(b);
+            }
+        });
         return zipInputUrlList;
     }
 

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by BillChen on 2017/11/13.
@@ -32,22 +30,6 @@ public class LoginController {
 
     @Autowired
     private ManagerService managerService;
-
-    /*存放所有登录用户的session*/
-    private static final Map<Long,HttpSession> userSessionMap = new HashMap<>();
-
-    /*存放所有登录管理员的session*/
-    private static final Map<Long,HttpSession> managerSessionMap = new HashMap<>();
-
-    /*只用于UserLogInterceptor拦截用户请求*/
-    public static Map<Long, HttpSession> getUserSessionMap() {
-        return userSessionMap;
-    }
-
-    /*只用于ManagerLogInterceptor拦截管理员请求*/
-    public static Map<Long, HttpSession> getManagerSessionMap() {
-        return managerSessionMap;
-    }
 
     /**
      * 项目根路径
@@ -90,8 +72,7 @@ public class LoginController {
     @ResponseBody
     public String userLogin(HttpSession session, LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         logger.debug("sessionId:" + session.getId() + " userAccount:" + logBean.getAccount());
-        StatusBean statusBean = userBasicService.userLogin(session,logBean,userSessionMap);
-        logger.debug(statusBean);
+        StatusBean statusBean = userBasicService.userLogin(session,logBean);
         return JSON.toJSONString(statusBean);
     }
 
@@ -102,16 +83,8 @@ public class LoginController {
      */
     @GetMapping("/userLogout")
     public String userLogout(HttpSession session){
-        Object userLog = session.getAttribute("userLogBean");
-        if(userLog != ""){
-            UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
-            if(userLogBean != null){
-                session.setAttribute("userLogBean",null);
-                userSessionMap.remove(userLogBean.getUserId());
-                logger.debug("用户" + userLogBean.getAccount() + userLogBean.getUsername() + "退出登录");
-            }
-        }
-        else{
+        UserLogBean userLogBean = (UserLogBean)session.getAttribute("userLogBean");
+        if(userLogBean != null){
             session.setAttribute("userLogBean",null);
         }
         return "redirect:/login";
@@ -129,8 +102,7 @@ public class LoginController {
     @ResponseBody
     public String managerLogin(HttpSession session,LogBean logBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         logger.debug("sessionId:" + session.getId() + " managerAccount:" + logBean.getAccount());
-        StatusBean statusBean = managerService.managerLogin(session,logBean,managerSessionMap);
-        logger.debug(statusBean);
+        StatusBean statusBean = managerService.managerLogin(session,logBean);
         return JSON.toJSONString(statusBean);
     }
 
@@ -141,28 +113,10 @@ public class LoginController {
      */
     @GetMapping("/managerLogout")
     public String managerLogout(HttpSession session){
-        Object managerLog = session.getAttribute("managerLogBean");
-        if(managerLog != ""){
-            ManagerLogBean managerLogBean =(ManagerLogBean) session.getAttribute("managerLogBean");
-            if(managerLogBean != null){
-                session.setAttribute("managerLogBean",null);
-                managerSessionMap.remove(managerLogBean.getManagerId());
-                logger.debug("管理员" + managerLogBean.getAccount() + "退出登录");
-            }
-        }
-        else {
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        if(managerLogBean != null){
             session.setAttribute("managerLogBean",null);
         }
         return "redirect:/login";
-    }
-
-
-    /**
-     * 用户重复登录，使前一个用户重定向至登录失效界面
-     * @return
-     */
-    @GetMapping("/loginInvalid")
-    public String loginInvalid(){
-        return "loginInvalid";
     }
 }

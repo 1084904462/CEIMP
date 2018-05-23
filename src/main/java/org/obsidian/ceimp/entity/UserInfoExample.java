@@ -834,143 +834,143 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andGpIsNull() {
-            addCriterion("gp is null");
+        public Criteria andGpRankIsNull() {
+            addCriterion("gp_rank is null");
             return (Criteria) this;
         }
 
-        public Criteria andGpIsNotNull() {
-            addCriterion("gp is not null");
+        public Criteria andGpRankIsNotNull() {
+            addCriterion("gp_rank is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGpEqualTo(String value) {
-            addCriterion("gp =", value, "gp");
+        public Criteria andGpRankEqualTo(String value) {
+            addCriterion("gp_rank =", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpNotEqualTo(String value) {
-            addCriterion("gp <>", value, "gp");
+        public Criteria andGpRankNotEqualTo(String value) {
+            addCriterion("gp_rank <>", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpGreaterThan(String value) {
-            addCriterion("gp >", value, "gp");
+        public Criteria andGpRankGreaterThan(String value) {
+            addCriterion("gp_rank >", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpGreaterThanOrEqualTo(String value) {
-            addCriterion("gp >=", value, "gp");
+        public Criteria andGpRankGreaterThanOrEqualTo(String value) {
+            addCriterion("gp_rank >=", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpLessThan(String value) {
-            addCriterion("gp <", value, "gp");
+        public Criteria andGpRankLessThan(String value) {
+            addCriterion("gp_rank <", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpLessThanOrEqualTo(String value) {
-            addCriterion("gp <=", value, "gp");
+        public Criteria andGpRankLessThanOrEqualTo(String value) {
+            addCriterion("gp_rank <=", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpLike(String value) {
-            addCriterion("gp like", value, "gp");
+        public Criteria andGpRankLike(String value) {
+            addCriterion("gp_rank like", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpNotLike(String value) {
-            addCriterion("gp not like", value, "gp");
+        public Criteria andGpRankNotLike(String value) {
+            addCriterion("gp_rank not like", value, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpIn(List<String> values) {
-            addCriterion("gp in", values, "gp");
+        public Criteria andGpRankIn(List<String> values) {
+            addCriterion("gp_rank in", values, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpNotIn(List<String> values) {
-            addCriterion("gp not in", values, "gp");
+        public Criteria andGpRankNotIn(List<String> values) {
+            addCriterion("gp_rank not in", values, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpBetween(String value1, String value2) {
-            addCriterion("gp between", value1, value2, "gp");
+        public Criteria andGpRankBetween(String value1, String value2) {
+            addCriterion("gp_rank between", value1, value2, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andGpNotBetween(String value1, String value2) {
-            addCriterion("gp not between", value1, value2, "gp");
+        public Criteria andGpRankNotBetween(String value1, String value2) {
+            addCriterion("gp_rank not between", value1, value2, "gpRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeIsNull() {
-            addCriterion("ce is null");
+        public Criteria andCeRankIsNull() {
+            addCriterion("ce_rank is null");
             return (Criteria) this;
         }
 
-        public Criteria andCeIsNotNull() {
-            addCriterion("ce is not null");
+        public Criteria andCeRankIsNotNull() {
+            addCriterion("ce_rank is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCeEqualTo(String value) {
-            addCriterion("ce =", value, "ce");
+        public Criteria andCeRankEqualTo(String value) {
+            addCriterion("ce_rank =", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeNotEqualTo(String value) {
-            addCriterion("ce <>", value, "ce");
+        public Criteria andCeRankNotEqualTo(String value) {
+            addCriterion("ce_rank <>", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeGreaterThan(String value) {
-            addCriterion("ce >", value, "ce");
+        public Criteria andCeRankGreaterThan(String value) {
+            addCriterion("ce_rank >", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeGreaterThanOrEqualTo(String value) {
-            addCriterion("ce >=", value, "ce");
+        public Criteria andCeRankGreaterThanOrEqualTo(String value) {
+            addCriterion("ce_rank >=", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeLessThan(String value) {
-            addCriterion("ce <", value, "ce");
+        public Criteria andCeRankLessThan(String value) {
+            addCriterion("ce_rank <", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeLessThanOrEqualTo(String value) {
-            addCriterion("ce <=", value, "ce");
+        public Criteria andCeRankLessThanOrEqualTo(String value) {
+            addCriterion("ce_rank <=", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeLike(String value) {
-            addCriterion("ce like", value, "ce");
+        public Criteria andCeRankLike(String value) {
+            addCriterion("ce_rank like", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeNotLike(String value) {
-            addCriterion("ce not like", value, "ce");
+        public Criteria andCeRankNotLike(String value) {
+            addCriterion("ce_rank not like", value, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeIn(List<String> values) {
-            addCriterion("ce in", values, "ce");
+        public Criteria andCeRankIn(List<String> values) {
+            addCriterion("ce_rank in", values, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeNotIn(List<String> values) {
-            addCriterion("ce not in", values, "ce");
+        public Criteria andCeRankNotIn(List<String> values) {
+            addCriterion("ce_rank not in", values, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeBetween(String value1, String value2) {
-            addCriterion("ce between", value1, value2, "ce");
+        public Criteria andCeRankBetween(String value1, String value2) {
+            addCriterion("ce_rank between", value1, value2, "ceRank");
             return (Criteria) this;
         }
 
-        public Criteria andCeNotBetween(String value1, String value2) {
-            addCriterion("ce not between", value1, value2, "ce");
+        public Criteria andCeRankNotBetween(String value1, String value2) {
+            addCriterion("ce_rank not between", value1, value2, "ceRank");
             return (Criteria) this;
         }
 
@@ -1111,6 +1111,76 @@ public class UserInfoExample {
 
         public Criteria andClassSumNotBetween(String value1, String value2) {
             addCriterion("class_sum not between", value1, value2, "classSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumIsNull() {
+            addCriterion("major_sum is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumIsNotNull() {
+            addCriterion("major_sum is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumEqualTo(String value) {
+            addCriterion("major_sum =", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumNotEqualTo(String value) {
+            addCriterion("major_sum <>", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumGreaterThan(String value) {
+            addCriterion("major_sum >", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumGreaterThanOrEqualTo(String value) {
+            addCriterion("major_sum >=", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumLessThan(String value) {
+            addCriterion("major_sum <", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumLessThanOrEqualTo(String value) {
+            addCriterion("major_sum <=", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumLike(String value) {
+            addCriterion("major_sum like", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumNotLike(String value) {
+            addCriterion("major_sum not like", value, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumIn(List<String> values) {
+            addCriterion("major_sum in", values, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumNotIn(List<String> values) {
+            addCriterion("major_sum not in", values, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumBetween(String value1, String value2) {
+            addCriterion("major_sum between", value1, value2, "majorSum");
+            return (Criteria) this;
+        }
+
+        public Criteria andMajorSumNotBetween(String value1, String value2) {
+            addCriterion("major_sum not between", value1, value2, "majorSum");
             return (Criteria) this;
         }
     }

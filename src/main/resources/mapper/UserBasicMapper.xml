@@ -21,7 +21,11 @@
       user_basic.account like #{searchKey} or user_basic.username like #{searchKey}
     </foreach>
   </select>
-  <select id="selectUserBasicBeanByUserId" parameterType="java.lang.Long" resultType="org.obsidian.ceimp.bean.UserBasicBean">
+  <update id="update" parameterType="map">
+    update user_basic set sex=#{bean.sex},birth=#{bean.birth},nation=#{bean.nation},entrance=#{bean.entrance},
+    identity=#{bean.identity} where user_id=#{userId};
+  </update>
+  <select id="getBean" parameterType="java.lang.Long" resultType="org.obsidian.ceimp.bean.UserBasicBean">
     select user_basic.account account,user_basic.username username,user_basic.sex sex,
     user_basic.birth birth,user_basic.nation nation,user_basic.entrance entrance,
     user_basic.identity identity from user_basic where user_basic.user_id = #{userId}

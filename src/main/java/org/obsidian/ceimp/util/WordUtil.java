@@ -46,8 +46,6 @@ public class WordUtil {
             document.write(os);
             is.close();
             os.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,8 +80,8 @@ public class WordUtil {
                 String runText = run.toString();
                 matcher = this.matcher(runText);
                 if(matcher.find()){
-                    if(matcher.group(1).equals("applyReason") || matcher.group(1).equals("opinion") ||
-                            matcher.group(1).equals("reason") || matcher.group(1).equals("recommendReason")){
+                    if("applyReason".equals(matcher.group(1)) || "opinion".equals(matcher.group(1)) ||
+                            "recommendReason".equals(matcher.group(1))){
                         String[] strings = textMap.get(matcher.group(1)).split("\\s+");
                         run.setText(strings[0],0);
                         if(strings.length > 1){

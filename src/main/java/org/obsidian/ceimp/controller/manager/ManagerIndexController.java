@@ -22,9 +22,4 @@ public class ManagerIndexController {
     public String managerIndex(){
         return "manager/index";
     }
-
-    @GetMapping("/writeOpinion")
-    public String writeOpinion(){
-        return "manager/writeOpinion";
-    }
 }

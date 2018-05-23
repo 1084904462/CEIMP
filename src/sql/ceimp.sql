@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2017-11-28 17:24:43
+Date: 2018-05-23 09:54:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,37 +20,59 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `award`;
 CREATE TABLE `award` (
-  `award_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `scholarship_id` bigint(20) NOT NULL,
+  `award_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '获奖id',
+  `user_id` bigint(20) NOT NULL COMMENT '用户id',
+  `scholarship_id` bigint(20) NOT NULL COMMENT '奖学金id',
   `is_filled` int(20) NOT NULL COMMENT '是否已填写，0-未填，1-已填',
-  `year_scope` int(20) NOT NULL,
+  `year_scope` int(20) NOT NULL COMMENT '适用年份',
   PRIMARY KEY (`award_id`),
   UNIQUE KEY `award_id` (`award_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   KEY `scholarship_id` (`scholarship_id`),
   CONSTRAINT `award_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `award_ibfk_2` FOREIGN KEY (`scholarship_id`) REFERENCES `scholarship` (`scholarship_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of award
 -- ----------------------------
-INSERT INTO `award` VALUES ('1', '1', '1', '1', '2017');
-INSERT INTO `award` VALUES ('2', '1', '2', '1', '2017');
-INSERT INTO `award` VALUES ('3', '1', '3', '1', '2017');
-INSERT INTO `award` VALUES ('4', '1', '4', '1', '2017');
-INSERT INTO `award` VALUES ('5', '1', '5', '1', '2017');
-INSERT INTO `award` VALUES ('8', '5', '5', '1', '2017');
-INSERT INTO `award` VALUES ('9', '6', '8', '1', '2017');
-INSERT INTO `award` VALUES ('10', '5', '1', '1', '2017');
-INSERT INTO `award` VALUES ('11', '6', '1', '1', '2017');
-INSERT INTO `award` VALUES ('12', '5', '2', '1', '2017');
-INSERT INTO `award` VALUES ('13', '6', '2', '1', '2017');
-INSERT INTO `award` VALUES ('14', '5', '3', '1', '2017');
-INSERT INTO `award` VALUES ('15', '6', '3', '1', '2017');
-INSERT INTO `award` VALUES ('16', '5', '4', '1', '2017');
-INSERT INTO `award` VALUES ('17', '6', '4', '1', '2017');
+INSERT INTO `award` VALUES ('1', '1', '1', '1', '2018');
+INSERT INTO `award` VALUES ('2', '1', '2', '1', '2018');
+INSERT INTO `award` VALUES ('3', '1', '3', '1', '2018');
+INSERT INTO `award` VALUES ('4', '1', '4', '1', '2018');
+INSERT INTO `award` VALUES ('5', '1', '5', '1', '2018');
+INSERT INTO `award` VALUES ('8', '5', '5', '1', '2018');
+INSERT INTO `award` VALUES ('9', '6', '8', '1', '2018');
+INSERT INTO `award` VALUES ('10', '5', '1', '1', '2018');
+INSERT INTO `award` VALUES ('11', '6', '1', '1', '2018');
+INSERT INTO `award` VALUES ('12', '5', '2', '1', '2018');
+INSERT INTO `award` VALUES ('13', '6', '2', '1', '2018');
+INSERT INTO `award` VALUES ('14', '5', '3', '1', '2018');
+INSERT INTO `award` VALUES ('15', '6', '3', '1', '2018');
+INSERT INTO `award` VALUES ('16', '5', '4', '1', '2018');
+INSERT INTO `award` VALUES ('17', '6', '4', '1', '2018');
+INSERT INTO `award` VALUES ('18', '7', '1', '1', '2018');
+INSERT INTO `award` VALUES ('19', '8', '1', '1', '2018');
+INSERT INTO `award` VALUES ('20', '10', '1', '1', '2018');
+INSERT INTO `award` VALUES ('21', '13', '1', '1', '2018');
+INSERT INTO `award` VALUES ('22', '14', '1', '1', '2018');
+INSERT INTO `award` VALUES ('23', '18', '1', '1', '2018');
+INSERT INTO `award` VALUES ('24', '19', '1', '1', '2018');
+INSERT INTO `award` VALUES ('25', '20', '1', '1', '2018');
+INSERT INTO `award` VALUES ('26', '27', '1', '1', '2018');
+INSERT INTO `award` VALUES ('27', '9', '1', '1', '2018');
+INSERT INTO `award` VALUES ('28', '11', '1', '1', '2018');
+INSERT INTO `award` VALUES ('29', '12', '1', '1', '2018');
+INSERT INTO `award` VALUES ('30', '15', '1', '1', '2018');
+INSERT INTO `award` VALUES ('31', '16', '1', '1', '2018');
+INSERT INTO `award` VALUES ('32', '17', '1', '1', '2018');
+INSERT INTO `award` VALUES ('33', '21', '1', '1', '2018');
+INSERT INTO `award` VALUES ('34', '22', '1', '1', '2018');
+INSERT INTO `award` VALUES ('35', '23', '1', '1', '2018');
+INSERT INTO `award` VALUES ('36', '24', '1', '1', '2018');
+INSERT INTO `award` VALUES ('37', '25', '1', '1', '2018');
+INSERT INTO `award` VALUES ('38', '26', '1', '1', '2018');
+INSERT INTO `award` VALUES ('39', '28', '1', '1', '2018');
 
 -- ----------------------------
 -- Table structure for `class_num`
@@ -107,6 +129,7 @@ INSERT INTO `class_num` VALUES ('35', '1609', '13');
 INSERT INTO `class_num` VALUES ('36', '1610', '13');
 INSERT INTO `class_num` VALUES ('37', '1611', '13');
 INSERT INTO `class_num` VALUES ('38', '1612', '13');
+INSERT INTO `class_num` VALUES ('39', '141', '14');
 
 -- ----------------------------
 -- Table structure for `major`
@@ -117,7 +140,6 @@ CREATE TABLE `major` (
   `name` varchar(50) NOT NULL COMMENT '专业名称',
   `school_id` bigint(20) NOT NULL COMMENT '学院id',
   `grade` varchar(20) NOT NULL COMMENT '年级',
-  `sum` int(20) NOT NULL COMMENT '专业人数',
   PRIMARY KEY (`major_id`),
   UNIQUE KEY `major_id` (`major_id`) USING BTREE,
   KEY `school_id` (`school_id`),
@@ -127,19 +149,20 @@ CREATE TABLE `major` (
 -- ----------------------------
 -- Records of major
 -- ----------------------------
-INSERT INTO `major` VALUES ('1', '软件工程', '1', '2015', '74');
-INSERT INTO `major` VALUES ('2', '计算机科学与技术', '1', '2015', '96');
-INSERT INTO `major` VALUES ('3', '数字媒体技术', '1', '2015', '60');
-INSERT INTO `major` VALUES ('4', '物联网工程', '1', '2015', '54');
-INSERT INTO `major` VALUES ('5', '通信工程', '1', '2015', '58');
-INSERT INTO `major` VALUES ('6', '电子信息工程', '1', '2015', '52');
-INSERT INTO `major` VALUES ('7', '软件工程', '1', '2016', '78');
-INSERT INTO `major` VALUES ('8', '计算机科学与技术', '1', '2016', '98');
-INSERT INTO `major` VALUES ('9', '数字媒体技术', '1', '2016', '63');
-INSERT INTO `major` VALUES ('10', '物联网工程', '1', '2016', '57');
-INSERT INTO `major` VALUES ('11', '通信工程', '1', '2016', '56');
-INSERT INTO `major` VALUES ('12', '电子信息工程', '1', '2016', '50');
-INSERT INTO `major` VALUES ('13', '信息大类', '1', '2016', '420');
+INSERT INTO `major` VALUES ('1', '软件工程', '1', '2015');
+INSERT INTO `major` VALUES ('2', '计算机科学与技术', '1', '2015');
+INSERT INTO `major` VALUES ('3', '数字媒体技术', '1', '2015');
+INSERT INTO `major` VALUES ('4', '物联网工程', '1', '2015');
+INSERT INTO `major` VALUES ('5', '通信工程', '1', '2015');
+INSERT INTO `major` VALUES ('6', '电子信息工程', '1', '2015');
+INSERT INTO `major` VALUES ('7', '软件工程', '1', '2016');
+INSERT INTO `major` VALUES ('8', '计算机科学与技术', '1', '2016');
+INSERT INTO `major` VALUES ('9', '数字媒体技术', '1', '2016');
+INSERT INTO `major` VALUES ('10', '物联网工程', '1', '2016');
+INSERT INTO `major` VALUES ('11', '通信工程', '1', '2016');
+INSERT INTO `major` VALUES ('12', '电子信息工程', '1', '2016');
+INSERT INTO `major` VALUES ('13', '信息大类', '1', '2016');
+INSERT INTO `major` VALUES ('14', '软件工程', '1', '2014');
 
 -- ----------------------------
 -- Table structure for `manager`
@@ -151,18 +174,18 @@ CREATE TABLE `manager` (
   `password` varchar(50) NOT NULL COMMENT '登录密码',
   `manager_type` int(20) NOT NULL COMMENT '管理员类型 1-高级管理员，2-子管理员',
   `school_id` bigint(20) NOT NULL COMMENT '所属学院id',
-  `grade` varchar(20) NOT NULL COMMENT '所管理的年级',
   PRIMARY KEY (`manager_id`),
   UNIQUE KEY `manager_id` (`manager_id`) USING BTREE,
   UNIQUE KEY `account` (`account`) USING BTREE,
   KEY `school_id` (`school_id`),
   CONSTRAINT `manager_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of manager
 -- ----------------------------
-INSERT INTO `manager` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1', '2015');
+INSERT INTO `manager` VALUES ('1', '1150299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1');
+INSERT INTO `manager` VALUES ('2', '1150299001', 'ZTLcLq+BaR2y9kFF0eCBzw==', '1', '1');
 
 -- ----------------------------
 -- Table structure for `ng`
@@ -205,14 +228,37 @@ CREATE TABLE `ng` (
   UNIQUE KEY `ng_id` (`ng_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `ng_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ng
 -- ----------------------------
-INSERT INTO `ng` VALUES ('1', '1', '2017', '农村', '打工', '3000', '5', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '啊', '同意一档国家助学金');
-INSERT INTO `ng` VALUES ('2', '5', '2017', '农村', '务农', '5000', '3', '地球', '233333', '家庭经济一般困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '啊啊啊', '同意一档国家助学金');
-INSERT INTO `ng` VALUES ('3', '6', '2017', '农村', '务农', '2000', '3', '杭州市', '315300', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '啊啊', '同意一档国家助学金');
+INSERT INTO `ng` VALUES ('1', '2', '2018', '农村', '打工', '3000', '5', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '我热爱学习。\r\n专业成绩名列前茅。', '同意一档国家助学金');
+INSERT INTO `ng` VALUES ('2', '5', '2018', '农村', '务农', '5000', '3', '地球', '233333', '家庭经济一般困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '好学', '同意一档国家助学金');
+INSERT INTO `ng` VALUES ('3', '6', '2018', '农村', '务农', '2000', '3', '杭州市', '315300', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '啊啊', '同意一档国家助学金');
+INSERT INTO `ng` VALUES ('4', '7', '2018', '农村', '打工', '3000', '3', '浙江省', '333333', '家庭经济一般困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '喜欢学习', '同意二档国家助学金');
+INSERT INTO `ng` VALUES ('5', '8', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('6', '10', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('7', '13', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意二档国家助学金');
+INSERT INTO `ng` VALUES ('8', '14', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('9', '18', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('10', '19', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('11', '20', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('12', '27', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('13', '9', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('14', '11', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('15', '12', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意二档国家助学金');
+INSERT INTO `ng` VALUES ('16', '15', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('17', '16', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意二档国家助学金');
+INSERT INTO `ng` VALUES ('18', '17', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意二档国家助学金');
+INSERT INTO `ng` VALUES ('19', '21', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('20', '22', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('21', '23', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('22', '24', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('23', '25', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('24', '26', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('25', '28', '2018', '农村', '打工', '2330', '4', '浙江省', '315315', '家庭经济特别困难', '陈伟', '20', '本人', '浙江科技学院', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '我热爱学习', '同意国家一档奖学金');
+INSERT INTO `ng` VALUES ('26', '1', '2018', '农村', '打工仔', '30000', '50', '浙江省慈溪市', '315300', '家庭经济一般困难', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '诺基亚', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '陈伟', '20', '本人', '浙江科技学院', '我爱学习！\r\n学习使我快乐！\r\n真的很快乐！', '');
 
 -- ----------------------------
 -- Table structure for `nis`
@@ -246,14 +292,15 @@ CREATE TABLE `nis` (
   UNIQUE KEY `nis_id` (`nis_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `nis_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of nis
 -- ----------------------------
-INSERT INTO `nis` VALUES ('1', '1', '2017', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '城镇', '打工', '3000', '5', '浙江省', '315315', '家庭经济特别困难', '啊');
-INSERT INTO `nis` VALUES ('2', '5', '2017', '2017年10月', '啊', '啊', '2017年10月', '啊', '去', '2017年10月', '去', '去', '2017年10月', '去', '我', '城镇', '务农', '5000', '3', '慈溪市', '315315', '家庭经济一般困难', '我');
-INSERT INTO `nis` VALUES ('3', '6', '2017', '2017年10月', '个', '个', '2017年10月', '额', '额', '2017年10月', '额', '我', '2017年10月', '去', '去', '农村', '打工', '3000', '5', '杭州市', '315310', '家庭经济特别困难', '去');
+INSERT INTO `nis` VALUES ('2', '5', '2018', '2017年10月', '啊', '啊', '2017年10月', '啊', '去', '2017年10月', '去', '去', '2017年10月', '去', '我', '城镇', '务农', '5000', '3', '慈溪市', '315315', '家庭经济一般困难', '我');
+INSERT INTO `nis` VALUES ('3', '6', '2018', '2017年10月', '个', '个', '2017年10月', '额', '额', '2017年10月', '额', '我', '2017年10月', '去', '去', '农村', '打工', '3000', '5', '杭州市', '315310', '家庭经济特别困难', '去');
+INSERT INTO `nis` VALUES ('4', '2', '2018', '', '', '', '', '', '', '', '', '', '', '', '', '城镇', '1', '1', '1', '1', '111111', '家庭经济一般困难', 'DSDS');
+INSERT INTO `nis` VALUES ('5', '1', '2018', '2018年1月', '啊哈', '啊', '2018年6月', '啊', '啊', '2009年2月', '啊哈', '浙江省教育厅', '2018年1月', '啊', '浙江省教育厅', '城镇', '打工仔', '30000', '51', '浙江省慈溪市', '315300', '家庭经济特别困难', '我爱学习！\r\n学习使我快乐！\r\n真的很快乐！');
 
 -- ----------------------------
 -- Table structure for `opinion`
@@ -261,7 +308,8 @@ INSERT INTO `nis` VALUES ('3', '6', '2017', '2017年10月', '个', '个', '2017�
 DROP TABLE IF EXISTS `opinion`;
 CREATE TABLE `opinion` (
   `opinion_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `manager_id` bigint(20) NOT NULL,
+  `grade` varchar(20) NOT NULL,
+  `school_id` bigint(20) NOT NULL,
   `year_scope` int(20) NOT NULL COMMENT '适用年份',
   `nis_opinion` varchar(500) DEFAULT '',
   `pgs_recommend` varchar(500) DEFAULT '',
@@ -270,15 +318,16 @@ CREATE TABLE `opinion` (
   `tas_opinion` varchar(500) DEFAULT '',
   PRIMARY KEY (`opinion_id`),
   UNIQUE KEY `opinion_id` (`opinion_id`) USING BTREE,
-  KEY `manager_id` (`manager_id`),
-  CONSTRAINT `opinion_ibfk_1` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`manager_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `school_id` (`school_id`),
+  CONSTRAINT `opinion_ibfk_1` FOREIGN KEY (`school_id`) REFERENCES `school` (`school_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of opinion
 -- ----------------------------
-INSERT INTO `opinion` VALUES ('1', '1', '2017', '小', '菜', '鸡', '唧', '唧');
-INSERT INTO `opinion` VALUES ('2', '1', '2016', '这', '个', '是', '测', '试');
+INSERT INTO `opinion` VALUES ('1', '2015', '1', '2018', '该生勤奋刻苦，敢于拼搏，批准申报国家励志奖学金。', '该生专业成绩名列前茅，敢于钻研，批准申报省政府奖学金。', '同意申报。', '该生成绩优异，批准申报校奖学金。', '同意申请三好学生');
+INSERT INTO `opinion` VALUES ('2', '2015', '1', '2017', '这', '个', '是', '测', '试');
+INSERT INTO `opinion` VALUES ('3', '2016', '1', '2018', '234', '11', '22', '33', '44');
 
 -- ----------------------------
 -- Table structure for `pgs`
@@ -305,14 +354,15 @@ CREATE TABLE `pgs` (
   UNIQUE KEY `pgs_id` (`pgs_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `pgs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pgs
 -- ----------------------------
-INSERT INTO `pgs` VALUES ('1', '1', '2017', '2017年11月', '啊哈', '浙江省教育厅', '2017年11月', '啊哈', '浙江省教育厅', '2017年11月', '啊哈', '浙江省教育厅', '2017年11月', '啊哈', '浙江省教育厅', '啊');
-INSERT INTO `pgs` VALUES ('2', '5', '2017', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '我');
-INSERT INTO `pgs` VALUES ('3', '6', '2017', '2017年11月', '分', '分', '2017年11月', '额', '人', '2017年11月', '人', '人', '2017年11月', '额', '去', '去');
+INSERT INTO `pgs` VALUES ('2', '5', '2018', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '2017年11月', '啊', '啊', '我');
+INSERT INTO `pgs` VALUES ('3', '6', '2018', '2017年11月', '分', '分', '2017年11月', '额', '人', '2017年11月', '人', '人', '2017年11月', '额', '去', '去');
+INSERT INTO `pgs` VALUES ('4', '2', '2018', '2017年11月', '啊哈', '浙江省教育厅', '', '', '', '', '', '', '', '', '', '奶思');
+INSERT INTO `pgs` VALUES ('5', '1', '2018', '1899年1月', '啊哈啊', '羡慕', '1899年5月', '啊哈啊', '羡慕', '1899年2月', '啊哈啊', '羡慕', '1899年2月', '啊哈啊', '羡慕', '羡慕的要死！\r\n要死！\r\n要！');
 
 -- ----------------------------
 -- Table structure for `scholarship`
@@ -372,19 +422,19 @@ CREATE TABLE `ss` (
   `ss_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '校奖学金',
   `user_id` bigint(20) NOT NULL COMMENT '用户基本信息id',
   `year_scope` int(20) NOT NULL COMMENT '适用年份',
-  `reason` varchar(500) DEFAULT '' COMMENT '主要事迹与表现',
+  `apply_reason` varchar(500) DEFAULT '' COMMENT '主要事迹与表现',
   PRIMARY KEY (`ss_id`),
   UNIQUE KEY `ss_id` (`ss_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `ss_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ss
 -- ----------------------------
-INSERT INTO `ss` VALUES ('1', '1', '2017', '厉害啊');
-INSERT INTO `ss` VALUES ('2', '5', '2017', '好');
-INSERT INTO `ss` VALUES ('3', '6', '2017', '我');
+INSERT INTO `ss` VALUES ('2', '5', '2018', '好');
+INSERT INTO `ss` VALUES ('3', '6', '2018', '我');
+INSERT INTO `ss` VALUES ('4', '1', '2018', '过分了啊！\r\n真的过分！\r\n过分！');
 
 -- ----------------------------
 -- Table structure for `tas`
@@ -394,19 +444,19 @@ CREATE TABLE `tas` (
   `tas_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '三好学生id',
   `user_id` bigint(20) NOT NULL COMMENT '用户基本信息id',
   `year_scope` int(20) NOT NULL COMMENT '适用年份',
-  `reason` varchar(500) DEFAULT '' COMMENT '主要事迹与表现',
+  `apply_reason` varchar(500) DEFAULT '' COMMENT '主要事迹与表现',
   PRIMARY KEY (`tas_id`),
   UNIQUE KEY `tas_id` (`tas_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   CONSTRAINT `tas_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tas
 -- ----------------------------
-INSERT INTO `tas` VALUES ('2', '1', '2017', '牛逼');
-INSERT INTO `tas` VALUES ('3', '5', '2017', '啊');
-INSERT INTO `tas` VALUES ('4', '6', '2017', '好');
+INSERT INTO `tas` VALUES ('3', '5', '2018', '牛逼');
+INSERT INTO `tas` VALUES ('4', '6', '2018', '好');
+INSERT INTO `tas` VALUES ('6', '1', '2018', '我爱学习！\r\n学习使我快乐！\r\n真的很快乐！\r\n羡慕~1');
 
 -- ----------------------------
 -- Table structure for `user_basic`
@@ -425,7 +475,7 @@ CREATE TABLE `user_basic` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_id` (`user_id`) USING BTREE,
   UNIQUE KEY `account` (`account`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_basic
@@ -458,6 +508,7 @@ INSERT INTO `user_basic` VALUES ('25', '1160299010', 'ZTLcLq+BaR2y9kFF0eCBzw==',
 INSERT INTO `user_basic` VALUES ('26', '1160299011', 'ZTLcLq+BaR2y9kFF0eCBzw==', '通信王', '女', '1998年06月', '汉族', '2016年09月', '312521199806127781');
 INSERT INTO `user_basic` VALUES ('27', '1160299012', 'ZTLcLq+BaR2y9kFF0eCBzw==', '电子初', '女', '1997年10月', '汉族', '2016年09月', '312151199710232341');
 INSERT INTO `user_basic` VALUES ('28', '1160299013', 'ZTLcLq+BaR2y9kFF0eCBzw==', '电子痕', '女', '1997年12月', '汉族', '2016年09月', '331215199712101242');
+INSERT INTO `user_basic` VALUES ('29', '1140299070', 'ZTLcLq+BaR2y9kFF0eCBzw==', '软工陈', '男', '1997年10月', '汉族', '2014年09月', '330282199626733333');
 
 -- ----------------------------
 -- Table structure for `user_info`
@@ -475,61 +526,63 @@ CREATE TABLE `user_info` (
   `study` varchar(20) DEFAULT '' COMMENT '学业素质',
   `ability` varchar(20) DEFAULT '' COMMENT '发展能力',
   `total` varchar(20) DEFAULT '' COMMENT '总分',
-  `gp` varchar(20) DEFAULT '' COMMENT '绩点排名',
-  `ce` varchar(20) DEFAULT '' COMMENT '综测排名',
+  `gp_rank` varchar(20) DEFAULT '' COMMENT '绩点排名',
+  `ce_rank` varchar(20) DEFAULT '' COMMENT '综测排名',
   `pass_sum` varchar(20) DEFAULT '' COMMENT '通过必修课数',
   `class_sum` varchar(20) DEFAULT '' COMMENT '总必修课数',
+  `major_sum` varchar(20) DEFAULT '' COMMENT '专业总人数',
   PRIMARY KEY (`info_id`),
   UNIQUE KEY `info_id` (`info_id`) USING BTREE,
   KEY `user_id` (`user_id`),
   KEY `class_num_id` (`class_num_id`),
   CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_basic` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_info_ibfk_2` FOREIGN KEY (`class_num_id`) REFERENCES `class_num` (`class_num_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('1', '1', '2017', '1', '共青团员', '110', '班长', '13.2', '62.5', '3.3', '79', '7', '10', '20', '20');
-INSERT INTO `user_info` VALUES ('2', '1', '2016', '1', '群众', '112', '无', '11', '60', '0', '71', '10', '20', '20', '20');
-INSERT INTO `user_info` VALUES ('3', '2', '2017', '2', '共青团员', '119', '无', '12', '61', '0', '73', '8', '16', '20', '20');
-INSERT INTO `user_info` VALUES ('5', '2', '2016', '2', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('6', '3', '2017', '1', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('7', '4', '2017', '2', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('11', '5', '2017', '14', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('12', '6', '2017', '15', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('13', '7', '2017', '3', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('14', '8', '2017', '4', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('15', '9', '2017', '5', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('16', '10', '2017', '6', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('17', '11', '2017', '7', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('18', '12', '2017', '8', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('19', '13', '2017', '9', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('20', '14', '2017', '10', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('21', '15', '2017', '11', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('22', '16', '2017', '12', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('23', '17', '2017', '13', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('24', '18', '2017', '16', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('25', '19', '2017', '17', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('26', '20', '2017', '18', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('27', '21', '2017', '19', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('28', '22', '2017', '20', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('29', '23', '2017', '21', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('30', '24', '2017', '22', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('31', '25', '2017', '23', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('32', '26', '2017', '24', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('33', '27', '2017', '25', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('34', '28', '2017', '26', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('35', '5', '2016', '27', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('36', '6', '2016', '28', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('37', '18', '2016', '28', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('38', '19', '2016', '29', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('39', '20', '2016', '30', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('42', '21', '2016', '30', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('43', '22', '2016', '31', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('44', '23', '2016', '32', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('45', '24', '2016', '33', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('46', '25', '2016', '34', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('47', '26', '2016', '36', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('48', '27', '2016', '37', '', '', '', '', '', '', '', '', '', '', '');
-INSERT INTO `user_info` VALUES ('49', '28', '2016', '38', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('1', '1', '2018', '1', '预备党员', '119', '班长', '12', '65', '13', '90', '3', '10', '20', '20', '73');
+INSERT INTO `user_info` VALUES ('2', '1', '2017', '1', '群众', '112', '无', '11', '60', '0', '71', '10', '20', '20', '20', '');
+INSERT INTO `user_info` VALUES ('3', '2', '2018', '2', '共青团员', '119', '无', '12', '61', '0', '73', '8', '16', '20', '20', '');
+INSERT INTO `user_info` VALUES ('5', '2', '2017', '2', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('6', '3', '2018', '1', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('7', '4', '2018', '2', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('11', '5', '2018', '14', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('12', '6', '2018', '15', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('13', '7', '2018', '3', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('14', '8', '2018', '4', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('15', '9', '2018', '5', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('16', '10', '2018', '6', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('17', '11', '2018', '7', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('18', '12', '2018', '8', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('19', '13', '2018', '9', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('20', '14', '2018', '10', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('21', '15', '2018', '11', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('22', '16', '2018', '12', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('23', '17', '2018', '13', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('24', '18', '2018', '16', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('25', '19', '2018', '17', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('26', '20', '2018', '18', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('27', '21', '2018', '19', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('28', '22', '2018', '20', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('29', '23', '2018', '21', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('30', '24', '2018', '22', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('31', '25', '2018', '23', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('32', '26', '2018', '24', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('33', '27', '2018', '25', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('34', '28', '2018', '26', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('35', '5', '2017', '27', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('36', '6', '2017', '28', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('37', '18', '2017', '28', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('38', '19', '2017', '29', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('39', '20', '2017', '30', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('42', '21', '2017', '30', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('43', '22', '2017', '31', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('44', '23', '2017', '32', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('45', '24', '2017', '33', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('46', '25', '2017', '34', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('47', '26', '2017', '36', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('48', '27', '2017', '37', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('49', '28', '2017', '38', '', '', '', '', '', '', '', '', '', '', '', '');
+INSERT INTO `user_info` VALUES ('50', '29', '2018', '39', '', '', '', '', '', '', '', '', '', '', '', '');
