@@ -1,13 +1,13 @@
 package org.obsidian.ceimp.service.impl;
 
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.LogBean;
-import org.obsidian.ceimp.bean.ManagerLogBean;
-import org.obsidian.ceimp.bean.StatusBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.ManagerMapper;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.ManagerExample;
+import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
+import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ManagerMapper managerMapper;
+
+    @Autowired
+    private UserBasicService userBasicService;
 
     @Transactional
     @Override
@@ -85,5 +88,45 @@ public class ManagerServiceImpl implements ManagerService {
         ManagerExample example = new ManagerExample();
         example.or().andManagerIdEqualTo(manager.getManagerId());
         return managerMapper.updateByExampleSelective(manager,example);
+    }
+
+    @Transactional
+    @Override
+    public StatusBean resetPassword(UserAccountBean userAccountBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        UserBasic userBasic = new UserBasic();
+        userBasic.setAccount(userAccountBean.getAccount());
+        userBasic.setPassword(password);
+        return userBasicService.updateUserBasic(userBasic) == 0?new StatusBean("重置密码失败"):new StatusBean("重置密码成功");
+    }
+
+    @Transactional
+    @Override
+    public StatusBean changePassword(Long managerId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        Manager manager = this.get(managerId);
+        StatusBean statusBean = new StatusBean();
+        if(passwordBean.getPassword().length() >= 6){
+            if(passwordBean.getPassword().length() <= 16){
+                if(passwordBean.getPassword().equals(passwordBean.getConfirmPassword())){
+                    if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getPassword()))){
+                        manager.setPassword(passwordBean.getPassword());
+                        this.update(manager);
+                        statusBean.setStatus("修改成功");
+                    }
+                    else{
+                        statusBean.setStatus("新密码与原密码相同");
+                    }
+                }
+                else {
+                    statusBean.setStatus("两次密码输入不同");
+                }
+            }
+            else{
+                statusBean.setStatus("新密码不能大于16位");
+            }
+        }
+        else{
+            statusBean.setStatus("新密码不能小于6位");
+        }
+        return statusBean;
     }
 }

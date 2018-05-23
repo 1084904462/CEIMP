@@ -60,7 +60,7 @@ public class ManagerScholarshipController {
      * @return
      */
     @GetMapping("/{subName}")
-    public String showScholarship(@PathVariable("subName") String subName, HttpSession session, Model model){
+    public String pageScholarship(@PathVariable("subName") String subName, HttpSession session, Model model){
         logger.debug("subName:" + subName);
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         ShowScholarshipBean showScholarshipBean = scholarshipService.getShowScholarshipBean(subName,managerLogBean.getSchoolId());
@@ -156,6 +156,22 @@ public class ManagerScholarshipController {
         return "manager/writeOpinion";
     }
 
+    /**
+     * 根据grade返回对应年级的奖学金意见
+     * @param grade
+     * @param session
+     * @return
+     */
+    @GetMapping("/opinion/{grade}")
+    @ResponseBody
+    public String showScholarshipOpinionByGrade(@PathVariable("grade") String grade,HttpSession session){
+        logger.debug("grade:" + grade);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        ScholarshipOpinionBean scholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
+        return JSON.toJSONString(scholarshipOpinionBean);
+    }
+
 
     /**
      * 从session中获取managerId
@@ -166,13 +182,12 @@ public class ManagerScholarshipController {
      */
     @PostMapping("/opinion")
     @ResponseBody
-    public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean, @PathVariable("grade") String grade){
+    public String updateScholarshipOpinion(HttpSession session, @RequestBody ScholarshipOpinionBean scholarshipOpinionBean){
         logger.debug(scholarshipOpinionBean);
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         int yearScope = TimeUtil.getInstance().getThisYear();
-        opinionService.update(managerLogBean.getSchoolId(),grade,yearScope,scholarshipOpinionBean);
-        ScholarshipOpinionBean newScholarshipOpinionBean = opinionService.getBean(managerLogBean.getSchoolId(),grade,yearScope);
-        return JSON.toJSONString(newScholarshipOpinionBean);
+        int result = opinionService.update(managerLogBean.getSchoolId(),yearScope,scholarshipOpinionBean);
+        return JSON.toJSONString(result);
     }
 
 
@@ -186,26 +201,25 @@ public class ManagerScholarshipController {
      */
     @GetMapping("/opinion/ng")
     public String pageNgOpinion(HttpSession session,Model model){
-//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-//        int yearScope = TimeUtil.getInstance().getThisYear();
-//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-//        logger.debug(ngOpinionFormBeanList);
-//        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
+        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanList(managerLogBean.getSchoolId(),gradeList.get(0),yearScope);
+        model.addAttribute("gradeList",gradeList);
+        model.addAttribute("ngOpinionFormBeanList",ngOpinionFormBeanList);
         return "manager/writeNgOpinion";
     }
 
+    /**
+     * 通过ngOpinionUpdateBean里的opinion和userAccountList更新对应用户的国家助学金意见
+     * @param ngOpinionUpdateBean
+     * @return
+     */
     @PostMapping("/opinion/ng")
     @ResponseBody
-    public String updateNgOpinion(HttpSession session,@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
-//        logger.debug(ngOpinionUpdateBean);
-//        Long schoolId = ((ManagerLogBean)session.getAttribute("managerLogBean")).getSchoolId();
-//        String grade = ((ManagerLogBean)session.getAttribute("managerLogBean")).getGrade();
-//        int yearScope = TimeUtil.getInstance().getThisYear();
-//        int updateSum = ngService.updateNgOpinion(ngOpinionUpdateBean.getOpinion(),ngOpinionUpdateBean.getUserAccountList(),yearScope);
-//        logger.debug("updateSum:" + updateSum);
-//        List<NgOpinionFormBean> ngOpinionFormBeanList = opinionService.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
-//        logger.debug(ngOpinionFormBeanList);
-//        return JSON.toJSONString(ngOpinionFormBeanList);
-        return "";
+    public String updateNgOpinion(@RequestBody NgOpinionUpdateBean ngOpinionUpdateBean){
+        logger.debug(ngOpinionUpdateBean);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        return JSON.toJSONString(opinionService.updateNgOpinion(ngOpinionUpdateBean,yearScope));
     }
 }

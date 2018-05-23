@@ -6,6 +6,13 @@ package org.obsidian.ceimp.bean;
 public class StatusBean {
     private String status;
 
+    public StatusBean() {
+    }
+
+    public StatusBean(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "StatusBean{" +

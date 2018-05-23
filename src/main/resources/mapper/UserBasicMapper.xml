@@ -12,12 +12,12 @@
     <result column="entrance" jdbcType="VARCHAR" property="entrance" />
     <result column="identity" jdbcType="VARCHAR" property="identity" />
   </resultMap>
-  <select id="getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
+  <select id="searchUser" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
     from major,class_num,user_basic,user_info where major.major_id = class_num.major_id and
     major.school_id = #{schoolId} and class_num.class_num_id = user_info.class_num_id and
     user_info.year_scope = #{yearScope} and user_info.user_id = user_basic.user_id and
-    <foreach collection="searchKeyList" index="index" item="searchKey" open="(" separator="or" close=")">
+    <foreach collection="list" index="index" item="searchKey" open="(" separator="or" close=")">
       user_basic.account like #{searchKey} or user_basic.username like #{searchKey}
     </foreach>
   </select>

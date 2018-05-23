@@ -2,6 +2,7 @@ package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.NgOpinionFormBean;
+import org.obsidian.ceimp.bean.NgOpinionUpdateBean;
 import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.entity.OpinionExample;
@@ -9,13 +10,13 @@ import org.obsidian.ceimp.entity.OpinionExample;
 import java.util.List;
 
 public interface OpinionMapper {
-    List<NgOpinionFormBean> getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(@Param("schoolId")Long schoolId,
-                                                                           @Param("grade")String grade,
-                                                                           @Param("yearScope")Integer yearScope);
+    int updateNgOpinion(@Param("bean") NgOpinionUpdateBean bean,@Param("yearScope") Integer yearScope);
+
+    List<NgOpinionFormBean> getNgOpinionFormBeanList(@Param("schoolId")Long schoolId, @Param("grade")String grade, @Param("yearScope")Integer yearScope);
 
     Opinion get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
-    int update(@Param("managerId") Long managerId,@Param("grade")String grade, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
+    int update(@Param("managerId") Long managerId, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
 
     ScholarshipOpinionBean getBean(@Param("schoolId") Long managerId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
 

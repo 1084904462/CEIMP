@@ -2,6 +2,7 @@ package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.bean.ScholarshipFormBean;
+import org.obsidian.ceimp.bean.UserAccountBean;
 import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class AwardServiceImpl implements AwardService {
     @Override
     public int updateIsFilled(Long userId, Integer yearScope,String subName) {
         return awardMapper.updateIsFilled(userId,yearScope,subName);
+    }
+
+    @Transactional
+    @Override
+    public int cancelIsFilled(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
+        return awardMapper.cancelIsFilled(subName,userAccountBeanList,yearScope);
     }
 }

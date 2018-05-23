@@ -1,6 +1,7 @@
 package org.obsidian.ceimp.service.impl;
 
 import org.obsidian.ceimp.bean.NgOpinionFormBean;
+import org.obsidian.ceimp.bean.NgOpinionUpdateBean;
 import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.dao.OpinionMapper;
 import org.obsidian.ceimp.entity.Opinion;
@@ -28,8 +29,8 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Transactional
     @Override
-    public int update(Long schoolId,String grade, Integer yearScope, ScholarshipOpinionBean scholarshipOpinionBean) {
-        return opinionMapper.update(schoolId,grade,yearScope,scholarshipOpinionBean);
+    public int update(Long schoolId, Integer yearScope, ScholarshipOpinionBean scholarshipOpinionBean) {
+        return opinionMapper.update(schoolId,yearScope,scholarshipOpinionBean);
     }
 
     @Transactional
@@ -40,7 +41,13 @@ public class OpinionServiceImpl implements OpinionService {
 
     @Transactional
     @Override
-    public List<NgOpinionFormBean> getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(Long schoolId,String grade, Integer yearScope) {
-        return opinionMapper.getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope(schoolId,grade,yearScope);
+    public List<NgOpinionFormBean> getNgOpinionFormBeanList(Long schoolId,String grade, Integer yearScope) {
+        return opinionMapper.getNgOpinionFormBeanList(schoolId,grade,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public int updateNgOpinion(NgOpinionUpdateBean ngOpinionUpdateBean, Integer yearScope) {
+        return opinionMapper.updateNgOpinion(ngOpinionUpdateBean,yearScope);
     }
 }

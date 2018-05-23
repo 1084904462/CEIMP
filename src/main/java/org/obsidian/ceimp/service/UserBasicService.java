@@ -14,9 +14,9 @@ import java.util.List;
 public interface UserBasicService {
     StatusBean userLogin(HttpSession session, LogBean logBean) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 
-    List<UserSearchBean> getUserSearchBeanListBySearchKeyListAndSchoolIdAndYearScope(List<String> searchKeyList,Long schoolId,Integer yearScope);
-
     int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     UserBasic selectByAccount(String account);
+
+    List<UserSearchBean> searchUser(SearchBean searchBean,Long schoolId,Integer yearScope);
 }

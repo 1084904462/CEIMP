@@ -11,7 +11,13 @@
     <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
     <result column="tas_opinion" jdbcType="VARCHAR" property="tasOpinion" />
   </resultMap>
-  <select id="getNgOpinionFormBeanListBySchoolIdAndGradeAndYearScope" parameterType="map" resultType="org.obsidian.ceimp.bean.NgOpinionFormBean">
+  <update id="updateNgOpinion" parameterType="map">
+    update ng,user_basic set ng.opinion = #{bean.opinion} where ng.user_id = user_basic.user_id and user_basic.account in
+    <foreach collection="bean.userAccountList" index="index" item="account" open="(" separator="," close=")">
+      #{account}
+    </foreach>;
+  </update>
+  <select id="getNgOpinionFormBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.NgOpinionFormBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username,
     ng.opinion opinion from major,class_num,user_basic,user_info,ng where major.school_id = #{schoolId} and
     major.grade = #{grade} and major.major_id = class_num.major_id and class_num.class_num_id = user_info.class_num_id
@@ -29,10 +35,10 @@
     opinion.year_scope = #{yearScope} and user_basic.user_id = #{userId};
   </select>
   <update id="update" parameterType="map">
-    update opinion set opinion.nis_opinion = #{scholarshipOpinionBean.nisOpinion},
-    opinion.pgs_recommend = #{scholarshipOpinionBean.pgsRecommend},opinion.pgs_opinion = #{scholarshipOpinionBean.pgsOpinion},
-    opinion.ss_opinion = #{scholarshipOpinionBean.ssOpinion},opinion.tas_opinion = #{scholarshipOpinionBean.tasOpinion}
-    where opinion.school_id = #{schoolId} and opinion.grade = #{grade} and opinion.year_scope = #{yearScope};
+    update opinion set opinion.nis_opinion = #{bean.nisOpinion},
+    opinion.pgs_recommend = #{bean.pgsRecommend},opinion.pgs_opinion = #{bean.pgsOpinion},
+    opinion.ss_opinion = #{bean.ssOpinion},opinion.tas_opinion = #{bean.tasOpinion}
+    where opinion.school_id = #{schoolId} and opinion.grade = #{bean.grade} and opinion.year_scope = #{yearScope};
   </update>
   <select id="getBean" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipOpinionBean">
     select opinion.grade,opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,opinion.pgs_opinion pgsOpinion,
