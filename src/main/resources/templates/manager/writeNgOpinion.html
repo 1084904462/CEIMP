@@ -230,7 +230,7 @@
                                             <option value="同意一档" selected="selected">同意一档国家助学金</option>
                                             <option value="同意二档" >同意二档国家助学金</option>
                                 </select>
-                                <button type="button" class="btn btn-default btn-sm radius" id="batchChangeScholarshipButton">批量修改</button>
+                                <button type="button" class="btn btn-default btn-sm radius downloadScholarshipButton " id="batchChangeScholarshipButton">批量修改</button>
 
                             </span>
                         </div>
@@ -453,6 +453,10 @@
         $("#b3").attr("class","");
 
         $("#b1").attr("class","active");
+        $('#checkAll').attr('class','');
+        $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadOne");
+        $(".downloadScholarshipButton").off('click');
+        $('#checkAll').prop('checked',false);
 
 
 
@@ -467,8 +471,22 @@
             timeout: 600000,
 
             success: function (data) {
+                if ($('#dataTables-example').hasClass('dataTable')) {
+                    dttable = $('#dataTables-example').dataTable();
+                    dttable.fnClearTable(); //清空一下table
+                    dttable.fnDestroy(); //还原初始化了的datatable
+                    var oTable=$('#dataTables-example').DataTable({
+                        responsive: true,
+                        "order": [[ 1, "desc" ]],
+                        "columnDefs": [{ "targets": [0, 5], "orderable": false }]
+
+                    });
+                }
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
+                console.log("iterable:"+iterable);
+               /* let iterable = new Array(data.length);
+                $(".table tbody").html("");*/
 
                 var i=0;
 
@@ -518,9 +536,130 @@
                     i++;
 
 
-                    $(".table").append(tr);}
+                    oTable.row.add(tr);}
+
+                oTable.draw();
+                var allPages = oTable.cells( ).nodes( );
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+                $(".batchDownloadOne").click(function () {
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var ngOpinionUpdateBean=new Array();
+                    var opinion=$("#opinion16").find("option:selected").text();
+
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var userAccountList=[];
+
+                    for (let value of iterable) {
+
+                        console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        userAccountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+
+                        i++;
+                    }
+                    ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
+
+                    console.log(JSON.stringify(ngOpinionUpdateBean));
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json",
+                        url: "/manager/scholarship/opinion/ng",
+                        data: JSON.stringify(ngOpinionUpdateBean),
+                        dataType: 'json',
+                        cache: false,
+                        timeout: 600000,
+                        success: function (data) {
+                            console.log("SUCCESS : ", data);
+
+                            location.reload();
 
 
+
+
+                        },
+                        error: function (e) {
+
+
+
+                            alert("修改失败")
+
+
+                            console.log("Failed : ", e);
+
+                        }
+                    });
+
+
+
+
+
+
+
+
+                });
+
+
+                $('#checkAll').click(function () {
+                    if ($(this).hasClass('')) {
+                        $(allPages).find('input[name="subBox"]').prop('checked', false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="";
+
+
+                    } else {
+                        $(allPages).find('input[name="subBox"]').prop('checked', true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        $('#batchDownload').prop('disabled', "");
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="allChecked";
+
+                    }
+                });
+
+
+
+
+
+
+                var $subBox = $(allPages).find('input[name="subBox"]');
+                $subBox.click(function(){
+                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                        $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+                    else{
+                        $('#batchChangeScholarshipButton').prop('disabled', "");
+                    }
+                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                        $('#checkAll').prop("checked",true);
+                        $('#checkAll').prop("class","allChecked");
+
+
+
+                    }
+                    else{
+                        $('#checkAll').prop("checked",false);
+                        $('#checkAll').prop("class","");
+
+
+                    }
+
+                });
 
 
 
@@ -550,7 +689,10 @@
         $("#b3").attr("class","");
 
         $("#b2").attr("class","active");
-
+        $('#checkAll').attr('class','');
+        $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadTwo");
+        $(".downloadScholarshipButton").off('click');
+        $('#checkAll').prop('checked',false);
 
 
 
@@ -564,8 +706,22 @@
             timeout: 600000,
 
             success: function (data) {
+                if ($('#dataTables-example').hasClass('dataTable')) {
+                    dttable = $('#dataTables-example').dataTable();
+                    dttable.fnClearTable(); //清空一下table
+                    dttable.fnDestroy(); //还原初始化了的datatable
+                    var oTable=$('#dataTables-example').DataTable({
+                        responsive: true,
+                        "order": [[ 1, "desc" ]],
+                        "columnDefs": [{ "targets": [0, 5], "orderable": false }]
+
+                    });
+                }
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
+                console.log("iterable:"+iterable);
+                /* let iterable = new Array(data.length);
+                 $(".table tbody").html("");*/
 
                 var i=0;
 
@@ -615,9 +771,131 @@
                     i++;
 
 
-                    $(".table").append(tr);}
+                    oTable.row.add(tr);}
+
+                oTable.draw();
+                var allPages = oTable.cells( ).nodes( );
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+                $(".batchDownloadTwo").click(function () {
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var ngOpinionUpdateBean=new Array();
+                    var opinion=$("#opinion16").find("option:selected").text();
+
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var userAccountList=[];
+
+                    for (let value of iterable) {
+
+                        console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        userAccountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+
+                        i++;
+                    }
+                    ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
+
+                    console.log(JSON.stringify(ngOpinionUpdateBean));
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json",
+                        url: "/manager/scholarship/opinion/ng",
+                        data: JSON.stringify(ngOpinionUpdateBean),
+                        dataType: 'json',
+                        cache: false,
+                        timeout: 600000,
+                        success: function (data) {
+                            console.log("SUCCESS : ", data);
+
+                            location.reload();
 
 
+
+
+                        },
+                        error: function (e) {
+
+
+
+                            alert("修改失败")
+
+
+                            console.log("Failed : ", e);
+
+                        }
+                    });
+
+
+
+
+
+
+
+
+                });
+
+
+
+                $('#checkAll').click(function () {
+                    if ($(this).hasClass('')) {
+                        $(allPages).find('input[name="subBox"]').prop('checked', false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="";
+
+
+                    } else {
+                        $(allPages).find('input[name="subBox"]').prop('checked', true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        $('#batchDownload').prop('disabled', "");
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="allChecked";
+
+                    }
+                });
+
+
+
+
+
+
+                var $subBox = $(allPages).find('input[name="subBox"]');
+                $subBox.click(function(){
+                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                        $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+                    else{
+                        $('#batchChangeScholarshipButton').prop('disabled', "");
+                    }
+                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                        $('#checkAll').prop("checked",true);
+                        $('#checkAll').prop("class","allChecked");
+
+
+
+                    }
+                    else{
+                        $('#checkAll').prop("checked",false);
+                        $('#checkAll').prop("class","");
+
+
+                    }
+
+                });
 
 
 
@@ -645,7 +923,10 @@
         $("#b1").attr("class","");
         $("#b2").attr("class","");
         $("#b3").attr("class","active");
-
+        $('#checkAll').attr('class','');
+        $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton downloadScholarshipButtonThree");
+        $(".downloadScholarshipButton").off('click');
+        $('#checkAll').prop('checked',false);
 
 
 
@@ -659,8 +940,22 @@
             timeout: 600000,
 
             success: function (data) {
+                if ($('#dataTables-example').hasClass('dataTable')) {
+                    dttable = $('#dataTables-example').dataTable();
+                    dttable.fnClearTable(); //清空一下table
+                    dttable.fnDestroy(); //还原初始化了的datatable
+                    var oTable=$('#dataTables-example').DataTable({
+                        responsive: true,
+                        "order": [[ 1, "desc" ]],
+                        "columnDefs": [{ "targets": [0, 5], "orderable": false }]
+
+                    });
+                }
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
+                console.log("iterable:"+iterable);
+                /* let iterable = new Array(data.length);
+                 $(".table tbody").html("");*/
 
                 var i=0;
 
@@ -710,11 +1005,131 @@
                     i++;
 
 
-                    $(".table").append(tr);}
+                    oTable.row.add(tr);}
+
+                oTable.draw();
+                var allPages = oTable.cells( ).nodes( );
+                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+
+                if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                    $('#batchDownload').prop('disabled', "disabled");}
+                else{
+                    $('#batchDownload').prop('disabled', "");
+                }
+
+                $('#checkAll').click(function () {
+                    if ($(this).hasClass('')) {
+                        $(allPages).find('input[name="subBox"]').prop('checked', false);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="";
+
+
+                    } else {
+                        $(allPages).find('input[name="subBox"]').prop('checked', true);
+                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
+                        $('#batchDownload').prop('disabled', "");
+                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                            $('#batchDownload').prop('disabled', "disabled");}
+                        else{
+                            $('#batchDownload').prop('disabled', "");
+                        }
+                        $('#checkAll').className="allChecked";
+
+                    }
+                });
 
 
 
 
+
+
+                var $subBox = $(allPages).find('input[name="subBox"]');
+                $subBox.click(function(){
+                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
+                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
+                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
+                        $('#batchChangeScholarshipButton').prop('disabled', "disabled");}
+                    else{
+                        $('#batchChangeScholarshipButton').prop('disabled', "");
+                    }
+                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
+                        $('#checkAll').prop("checked",true);
+                        $('#checkAll').prop("class","allChecked");
+
+
+
+                    }
+                    else{
+                        $('#checkAll').prop("checked",false);
+                        $('#checkAll').prop("class","");
+
+
+                    }
+
+                });
+
+
+                $(".downloadScholarshipButtonThree").click(function () {
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var ngOpinionUpdateBean=new Array();
+                    var opinion=$("#opinion16").find("option:selected").text();
+
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var userAccountList=[];
+
+                    for (let value of iterable) {
+
+                        console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        userAccountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+
+                        i++;
+                    }
+                    ngOpinionUpdateBean={opinion:opinion,userAccountList:userAccountList};
+
+                    console.log(JSON.stringify(ngOpinionUpdateBean));
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json",
+                        url: "/manager/scholarship/opinion/ng",
+                        data: JSON.stringify(ngOpinionUpdateBean),
+                        dataType: 'json',
+                        cache: false,
+                        timeout: 600000,
+                        success: function (data) {
+                            console.log("SUCCESS : ", data);
+
+                            location.reload();
+
+
+
+
+                        },
+                        error: function (e) {
+
+
+
+                            alert("修改失败")
+
+
+                            console.log("Failed : ", e);
+
+                        }
+                    });
+
+
+
+
+
+
+
+
+                });
 
                 console.log("SUCCESS : ", data);
 
