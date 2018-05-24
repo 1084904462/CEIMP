@@ -165,9 +165,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" >2016</a></li>
-                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" >2015</a></li>
-                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" >2014</a></li>
+                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:text="${gradeList.get(0)}+级">2016</a></li>
+                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:text="${gradeList.get(1)}+级">2015</a></li>
+                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" th:text="${gradeList.get(2)}+级">2014</a></li>
                             </ul>
                         </div>
                         <!-- /.panel-heading -->
@@ -196,7 +196,6 @@
 
                                     <th>姓名</th>
                                     <th >国家助学金-院（系）意见</th>
-                                    <th>操作</th>
 
 
                                 </tr>
@@ -214,9 +213,7 @@
                                     <td th:text="${person.opinion}" >
                                     无
                                     </td>
-                                    <td style="text-align: center;">
-                                        <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton"  >下载</button>
-                                    </td>
+
 
 
 
@@ -315,6 +312,7 @@
 
 </script>
 <script th:inline="javascript">
+    var gradeList=[[${gradeList}]]
     $(document).ready(function() {
 
 
@@ -463,7 +461,7 @@
         $.ajax({
             type: "get",
             contentType: "application/json",
-            url: "/manager/scholarship/opinion/ng/"+showScholarshipBean.grade[0],//
+            url: "/manager/scholarship/opinion/ng/"+gradeList[0],//
             dataType: 'json',
             cache: false,
             timeout: 600000,
@@ -516,7 +514,7 @@
                     tr.append(td5);
                     tr.append(td6);
 
-                    tr.append(td7);
+
                     i++;
 
 
@@ -560,7 +558,7 @@
         $.ajax({
             type: "get",
             contentType: "application/json",
-            url: "/manager/scholarship/opinion/ng/"+showScholarshipBean.grade[1],//
+            url: "/manager/scholarship/opinion/ng/"+gradeList[1],//
             dataType: 'json',
             cache: false,
             timeout: 600000,
@@ -613,7 +611,7 @@
                     tr.append(td5);
                     tr.append(td6);
 
-                    tr.append(td7);
+
                     i++;
 
 
@@ -640,43 +638,32 @@
 
     }
     function fire_ajax_update3(event) {
-        var NgOpinionFormBeanList=[[${NgOpinionFormBeanList}]];
+        var showScholarshipBean=[[${showScholarshipBean}]];
         /*$("#b1").className="";
         $("#b2").className="active";*/
-        console.log(NgOpinionFormBeanList);
+        console.log("tab3");
         $("#b1").attr("class","");
         $("#b2").attr("class","");
         $("#b3").attr("class","active");
-        $("#batchDownload").prop("class","btn btn-default btn-sm radius  batchDownloadTwo");
-        $("#batchDownload").off('click');
-        console.log($('#checkAll'));
-        $('#checkAll').attr('class','');
+
+
+
+
 
         $.ajax({
             type: "get",
             contentType: "application/json",
-            url: "/manager/scholarship/opinion/ng/",//
+            url: "/manager/scholarship/opinion/ng/"+gradeList[2],//
             dataType: 'json',
             cache: false,
             timeout: 600000,
 
             success: function (data) {
-
-                if ($('#dataTables-example').hasClass('dataTable')) {
-                    dttable = $('#dataTables-example').dataTable();
-                    dttable.fnClearTable(); //清空一下table
-                    dttable.fnDestroy(); //还原初始化了的datatable
-                    var oTable=$('#dataTables-example').DataTable({
-                        responsive: true,
-                        "order": [[ 1, "desc" ]],
-                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
-                    });
-                }
-                $('#checkAll').prop('checked',false);
                 let iterable = new Array(data.length);
                 $(".table tbody").html("");
 
                 var i=0;
+
 
                 for (let value of iterable) {
                     var input=document.createElement("input");
@@ -684,9 +671,15 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
+
+
                     var button=document.createElement("button");
                     button.innerHTML = "下载";
                     button.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                    button.setAttribute("onclick","fire_ajax_download(event)");
+
+
+
 
 
 
@@ -713,161 +706,31 @@
                     tr.append(td5);
                     tr.append(td6);
 
-                    tr.append(td7);
+
                     i++;
 
-                    $(".table").append(tr);
 
-                    oTable.row.add(tr);}
-                oTable.draw();
-                var allPages = oTable.cells( ).nodes( );
-                $("#checkedNumber15").text(0);
-
-                if( $(allPages).find('input[name="subBox"]:checked').length==0){
-                    $('#batchDownload').prop('disabled', "disabled");}
-                else{
-                    $('#batchDownload').prop('disabled', "");
-                }
-
-                $('#checkAll').click(function () {
-                    if ($(this).hasClass('')) {
-                        $(allPages).find('input[name="subBox"]').prop('checked', false);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
-                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
-                            $('#batchDownload').prop('disabled', "disabled");}
-                        else{
-                            $('#batchDownload').prop('disabled', "");
-                        }
-                        $('#checkAll').className="";
-                    } else {
-                        $(allPages).find('input[name="subBox"]').prop('checked', true);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);
-                        $('#batchDownload').prop('disabled', "");
-                        if( $(allPages).find('input[name="subBox"]:checked').length==0){
-                            $('#batchDownload').prop('disabled', "disabled");}
-                        else{
-                            $('#batchDownload').prop('disabled', "");
-                        }
-                        $('#checkAll').className="allChecked";
-                    }
-                });
+                    $(".table").append(tr);}
 
 
-                var $subBox = $(allPages).find('input[name="subBox"]');
-                $subBox.click(function(){
-                    /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
-                    $("#checkedNumber15").text($(allPages).find('input[name="subBox"]:checked').length);
-                    if( $(allPages).find('input[name="subBox"]:checked').length==0){
-                        $('#batchDownload').prop('disabled', "disabled");}
-                    else{
-                        $('#batchDownload').prop('disabled', "");
-                    }
-                    if($(allPages).find('input[name="subBox"]:checked').length==$(allPages).find('input[name="subBox"]').length){
-                        $('#checkAll').prop("checked",true);
-                        $('#checkAll').prop("class","allChecked");
-                    }
-                    else{
-                        $('#checkAll').prop("checked",false);
-                        $('#checkAll').prop("class","");
-                    }
-                });
-                $(".batchDownloadTwo").click(function () {
-                    console.log("batchDownloadTwo be clicked");
-
-                    var checked=$(allPages).find('input[name="subBox"]:checked');
-                    var zipInfoBeanList=new Array();
-                    let iterable = new Array(checked.length);
-                    var i=0;
-                    var zipInfoBean;
-
-                    for (let value of iterable) {
-
-                        zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
-                        zipInfoBeanList.push(zipInfoBean);
-                        i++;
-                    }
-                    console.log("batchDownloadTwo:");
-                    console.log(zipInfoBeanList);
-
-                    var account1=[[${showScholarshipBean}]];
-                    var showScholarshipBean=[[${showScholarshipBean}]];
-
-                    var tempform = document.createElement("form");
-                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-                    tempform.method = "post";
-                    tempform.style.display="none"
-                    tempform.target="_blank";
-
-                    /* for (var x in ZipInfoBean) {
-                         var opt = document.createElement("input");
-                         opt.name = x;
-                         opt.value = ZipInfoBean[x];
-                         tempform.appendChild(opt);
-                     }
-         */
-                    var opt2=document.createElement("input");
-                    opt2.name="zipInfoBeanList";
-                    opt2.value=JSON.stringify(zipInfoBeanList);
-                    var opt = document.createElement("input");
-                    opt.type = "submit";
-                    tempform.appendChild(opt2);
-                    tempform.appendChild(opt);
-                    document.body.appendChild(tempform);
-                    tempform.submit();
-                    document.body.removeChild(tempform);
-                });
-                $('.downloadScholarshipButton').click(function (event) {
-                    var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
-
-                    var index=$($($($(event.target).parent())).parent()).prevAll().length;
-                    console.log("index:"+index);
-                    var scholarshipFormBean=scholarshipFormBeanList[index];
-                    var showScholarshipBean=[[${showScholarshipBean}]];
-
-                    var indexList=new Array();
 
 
-                    var ZipInfoBean=new Array();
 
-                    var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
-                    var username=$($($(event.target).parent()).parent()).children()[4].innerHTML;
-                    var scholarshipName=$($($(event.target).parent()).parent()).children()[5].innerHTML;
-
-                    ZipInfoBean={account:account,username:username,scholarshipName:scholarshipName};
-
-                    var ZipInfoBeanList=new Array();
-                    ZipInfoBeanList.push(ZipInfoBean);
-                    var tempform = document.createElement("form");
-                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-                    tempform.method = "post";
-                    tempform.style.display="none"
-                    tempform.target="_blank";
-
-                    /* for (var x in ZipInfoBean) {
-                         var opt = document.createElement("input");
-                         opt.name = x;
-                         opt.value = ZipInfoBean[x];
-                         tempform.appendChild(opt);
-                     }
-         */
-                    var opt2=document.createElement("input");
-                    opt2.name="zipInfoBeanList";
-                    opt2.value=JSON.stringify(ZipInfoBeanList);
-                    console.log(JSON.stringify(ZipInfoBeanList));
-                    var opt = document.createElement("input");
-                    opt.type = "submit";
-                    tempform.appendChild(opt2);
-                    tempform.appendChild(opt);
-                    document.body.appendChild(tempform);
-                    tempform.submit();
-                    document.body.removeChild(tempform);
-                });
                 console.log("SUCCESS : ", data);
+
+
+
             },
             error: function (e) {
+
+
+
+
                 console.log("Failed : ", e);
+
             }
         });
+
     }
 
 
