@@ -2,20 +2,21 @@ package org.obsidian.ceimp.controller.manager;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
-import org.obsidian.ceimp.bean.ManagerLogBean;
-import org.obsidian.ceimp.bean.PasswordBean;
-import org.obsidian.ceimp.bean.SearchBean;
-import org.obsidian.ceimp.bean.UserAccountBean;
+import org.obsidian.ceimp.bean.*;
+import org.obsidian.ceimp.entity.School;
 import org.obsidian.ceimp.service.ManagerService;
+import org.obsidian.ceimp.service.SchoolService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 
 /**
@@ -31,6 +32,9 @@ public class ManagerSettingController {
 
     @Autowired
     private ManagerService managerService;
+
+    @Autowired
+    private SchoolService schoolService;
 
     /**
      * 进入重置密码页面
@@ -89,13 +93,24 @@ public class ManagerSettingController {
     }
 
     /**
+     * 进入新增管理员页面
+     * @param model
+     * @return
+     */
+    @GetMapping("/insertManager")
+    public String pageInsertManager(Model model){
+        List<School> schoolList = schoolService.getAll();
+        model.addAttribute("schoolList",schoolList);
+        return "manager/insertManager";
+    }
+
+    /**
      * 新增管理员
      * @return
      */
     @PostMapping("/insertManager")
     @ResponseBody
-    public String insertManager(){
-
-        return JSON.toJSONString("");
+    public String insertManager(InsertManagerBean insertManagerBean){
+        return JSON.toJSONString(managerService.insert(insertManagerBean));
     }
 }
