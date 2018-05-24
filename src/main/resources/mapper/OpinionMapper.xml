@@ -3,7 +3,8 @@
 <mapper namespace="org.obsidian.ceimp.dao.OpinionMapper">
   <resultMap id="BaseResultMap" type="org.obsidian.ceimp.entity.Opinion">
     <id column="opinion_id" jdbcType="BIGINT" property="opinionId" />
-    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="school_id" jdbcType="BIGINT" property="schoolId" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
     <result column="nis_opinion" jdbcType="VARCHAR" property="nisOpinion" />
     <result column="pgs_recommend" jdbcType="VARCHAR" property="pgsRecommend" />
@@ -11,6 +12,10 @@
     <result column="ss_opinion" jdbcType="VARCHAR" property="ssOpinion" />
     <result column="tas_opinion" jdbcType="VARCHAR" property="tasOpinion" />
   </resultMap>
+  <select id="exist" parameterType="map" resultType="java.lang.Boolean">
+    select exists(select true from opinion where opinion.school_id = #{schoolId} and
+    opinion.year_scope = #{yearScope} and opinion.grade = #{grade}) exist;
+  </select>
   <update id="updateNgOpinion" parameterType="map">
     update ng,user_basic set ng.opinion = #{bean.opinion} where ng.user_id = user_basic.user_id and user_basic.account in
     <foreach collection="bean.userAccountList" index="index" item="account" open="(" separator="," close=")">
@@ -25,7 +30,7 @@
     ng.user_id = user_basic.user_id and ng.year_scope = #{yearScope}
   </select>
   <select id="get" parameterType="map" resultType="org.obsidian.ceimp.entity.Opinion">
-     select opinion.opinion_id opinionId,opinion.grade grade,opinion.school_id schoolId,
+    select opinion.opinion_id opinionId,opinion.grade grade,opinion.school_id schoolId,
     opinion.year_scope yearScope,opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,
     opinion.pgs_opinion pgsOpinion,opinion.ss_opinion ssOpinion,opinion.tas_opinion tasOpinion
     from opinion,major,class_num,user_basic,user_info
@@ -104,8 +109,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    opinion_id, manager_id, year_scope, nis_opinion, pgs_recommend, pgs_opinion, ss_opinion, 
-    tas_opinion
+    opinion_id, grade, school_id, year_scope, nis_opinion, pgs_recommend, pgs_opinion, 
+    ss_opinion, tas_opinion
   </sql>
   <select id="selectByExample" parameterType="org.obsidian.ceimp.entity.OpinionExample" resultMap="BaseResultMap">
     select
@@ -139,12 +144,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.obsidian.ceimp.entity.Opinion">
-    insert into opinion (opinion_id, manager_id, year_scope, 
-      nis_opinion, pgs_recommend, pgs_opinion, 
-      ss_opinion, tas_opinion)
-    values (#{opinionId,jdbcType=BIGINT}, #{managerId,jdbcType=BIGINT}, #{yearScope,jdbcType=INTEGER}, 
-      #{nisOpinion,jdbcType=VARCHAR}, #{pgsRecommend,jdbcType=VARCHAR}, #{pgsOpinion,jdbcType=VARCHAR}, 
-      #{ssOpinion,jdbcType=VARCHAR}, #{tasOpinion,jdbcType=VARCHAR})
+    insert into opinion (opinion_id, grade, school_id, 
+      year_scope, nis_opinion, pgs_recommend, 
+      pgs_opinion, ss_opinion, tas_opinion
+      )
+    values (#{opinionId,jdbcType=BIGINT}, #{grade,jdbcType=VARCHAR}, #{schoolId,jdbcType=BIGINT}, 
+      #{yearScope,jdbcType=INTEGER}, #{nisOpinion,jdbcType=VARCHAR}, #{pgsRecommend,jdbcType=VARCHAR}, 
+      #{pgsOpinion,jdbcType=VARCHAR}, #{ssOpinion,jdbcType=VARCHAR}, #{tasOpinion,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.obsidian.ceimp.entity.Opinion">
     insert into opinion
@@ -152,8 +159,11 @@
       <if test="opinionId != null">
         opinion_id,
       </if>
-      <if test="managerId != null">
-        manager_id,
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="schoolId != null">
+        school_id,
       </if>
       <if test="yearScope != null">
         year_scope,
@@ -178,8 +188,11 @@
       <if test="opinionId != null">
         #{opinionId,jdbcType=BIGINT},
       </if>
-      <if test="managerId != null">
-        #{managerId,jdbcType=BIGINT},
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=BIGINT},
       </if>
       <if test="yearScope != null">
         #{yearScope,jdbcType=INTEGER},
@@ -213,8 +226,11 @@
       <if test="record.opinionId != null">
         opinion_id = #{record.opinionId,jdbcType=BIGINT},
       </if>
-      <if test="record.managerId != null">
-        manager_id = #{record.managerId,jdbcType=BIGINT},
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolId != null">
+        school_id = #{record.schoolId,jdbcType=BIGINT},
       </if>
       <if test="record.yearScope != null">
         year_scope = #{record.yearScope,jdbcType=INTEGER},
@@ -242,7 +258,8 @@
   <update id="updateByExample" parameterType="map">
     update opinion
     set opinion_id = #{record.opinionId,jdbcType=BIGINT},
-      manager_id = #{record.managerId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      school_id = #{record.schoolId,jdbcType=BIGINT},
       year_scope = #{record.yearScope,jdbcType=INTEGER},
       nis_opinion = #{record.nisOpinion,jdbcType=VARCHAR},
       pgs_recommend = #{record.pgsRecommend,jdbcType=VARCHAR},
@@ -256,8 +273,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.obsidian.ceimp.entity.Opinion">
     update opinion
     <set>
-      <if test="managerId != null">
-        manager_id = #{managerId,jdbcType=BIGINT},
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        school_id = #{schoolId,jdbcType=BIGINT},
       </if>
       <if test="yearScope != null">
         year_scope = #{yearScope,jdbcType=INTEGER},
@@ -282,7 +302,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.obsidian.ceimp.entity.Opinion">
     update opinion
-    set manager_id = #{managerId,jdbcType=BIGINT},
+    set grade = #{grade,jdbcType=VARCHAR},
+      school_id = #{schoolId,jdbcType=BIGINT},
       year_scope = #{yearScope,jdbcType=INTEGER},
       nis_opinion = #{nisOpinion,jdbcType=VARCHAR},
       pgs_recommend = #{pgsRecommend,jdbcType=VARCHAR},

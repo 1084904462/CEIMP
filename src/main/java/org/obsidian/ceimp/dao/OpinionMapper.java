@@ -10,7 +10,7 @@ import org.obsidian.ceimp.entity.OpinionExample;
 import java.util.List;
 
 public interface OpinionMapper {
-    int updateNgOpinion(@Param("bean") NgOpinionUpdateBean bean,@Param("yearScope") Integer yearScope);
+    int updateNgOpinion(@Param("bean") NgOpinionUpdateBean bean, @Param("yearScope") Integer yearScope);
 
     List<NgOpinionFormBean> getNgOpinionFormBeanList(@Param("schoolId")Long schoolId, @Param("grade")String grade, @Param("yearScope")Integer yearScope);
 
@@ -19,6 +19,8 @@ public interface OpinionMapper {
     int update(@Param("schoolId") Long schoolId, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
 
     ScholarshipOpinionBean getBean(@Param("schoolId") Long managerId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
+
+    boolean exist(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope,@Param("grade")String grade);
 
     long countByExample(OpinionExample example);
 

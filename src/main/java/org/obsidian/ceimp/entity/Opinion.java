@@ -3,7 +3,9 @@ package org.obsidian.ceimp.entity;
 public class Opinion {
     private Long opinionId;
 
-    private Long managerId;
+    private String grade;
+
+    private Long schoolId;
 
     private Integer yearScope;
 
@@ -17,6 +19,21 @@ public class Opinion {
 
     private String tasOpinion;
 
+    @Override
+    public String toString() {
+        return "Opinion{" +
+                "opinionId=" + opinionId +
+                ", grade='" + grade + '\'' +
+                ", schoolId=" + schoolId +
+                ", yearScope=" + yearScope +
+                ", nisOpinion='" + nisOpinion + '\'' +
+                ", pgsRecommend='" + pgsRecommend + '\'' +
+                ", pgsOpinion='" + pgsOpinion + '\'' +
+                ", ssOpinion='" + ssOpinion + '\'' +
+                ", tasOpinion='" + tasOpinion + '\'' +
+                '}';
+    }
+
     public Long getOpinionId() {
         return opinionId;
     }
@@ -25,12 +42,20 @@ public class Opinion {
         this.opinionId = opinionId;
     }
 
-    public Long getManagerId() {
-        return managerId;
+    public String getGrade() {
+        return grade;
     }
 
-    public void setManagerId(Long managerId) {
-        this.managerId = managerId;
+    public void setGrade(String grade) {
+        this.grade = grade == null ? null : grade.trim();
+    }
+
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 
     public Integer getYearScope() {

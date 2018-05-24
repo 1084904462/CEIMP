@@ -6,6 +6,7 @@ import org.obsidian.ceimp.bean.ScholarshipOpinionBean;
 import org.obsidian.ceimp.dao.OpinionMapper;
 import org.obsidian.ceimp.entity.Opinion;
 import org.obsidian.ceimp.service.OpinionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,18 @@ public class OpinionServiceImpl implements OpinionService {
     @Transactional
     @Override
     public int update(Long schoolId, Integer yearScope, ScholarshipOpinionBean scholarshipOpinionBean) {
-        return opinionMapper.update(schoolId,yearScope,scholarshipOpinionBean);
+        int result = 0;
+        if(!opinionMapper.exist(schoolId,yearScope,scholarshipOpinionBean.getGrade())){
+            Opinion opinion = new Opinion();
+            BeanUtils.copyProperties(scholarshipOpinionBean,opinion);
+            opinion.setSchoolId(schoolId);
+            opinion.setYearScope(yearScope);
+            result = opinionMapper.insertSelective(opinion);
+        }
+        else{
+            result = opinionMapper.update(schoolId,yearScope,scholarshipOpinionBean);
+        }
+        return result;
     }
 
     @Transactional

@@ -15,7 +15,7 @@ public interface OpinionService {
 
     int update(Long schoolId,Integer yearScope,ScholarshipOpinionBean scholarshipOpinionBean);
 
-    Opinion get(Long userId,Integer yearScope);
+    Opinion get(Long userId, Integer yearScope);
 
     List<NgOpinionFormBean> getNgOpinionFormBeanList(Long schoolId,String grade,Integer yearScope);
 
