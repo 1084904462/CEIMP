@@ -1,9 +1,10 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.ManagerExample;
+
+import java.util.List;
 
 public interface ManagerMapper {
     long countByExample(ManagerExample example);

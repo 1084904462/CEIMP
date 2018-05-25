@@ -9,6 +9,7 @@ import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,6 +127,37 @@ public class ManagerServiceImpl implements ManagerService {
         }
         else{
             statusBean.setStatus("新密码不能小于6位");
+        }
+        return statusBean;
+    }
+
+    @Transactional
+    @Override
+    public StatusBean insert(InsertManagerBean insertManagerBean) {
+        StatusBean statusBean = new StatusBean();
+        if(this.get(insertManagerBean.getAccount()) == null){
+            if(insertManagerBean.getPassword().length() >= 6){
+                if(insertManagerBean.getPassword().length() <= 16){
+                    if(insertManagerBean.getPassword().equals(insertManagerBean.getConfirmPassword())){
+                        Manager manager = new Manager();
+                        BeanUtils.copyProperties(insertManagerBean,manager);
+                        managerMapper.insertSelective(manager);
+                        statusBean.setStatus("新增管理员成功");
+                    }
+                    else {
+                        statusBean.setStatus("两次密码输入不同");
+                    }
+                }
+                else{
+                    statusBean.setStatus("密码不能大于16位");
+                }
+            }
+            else{
+                statusBean.setStatus("密码不能小于6位");
+            }
+        }
+        else{
+            statusBean.setStatus("已存在该管理员");
         }
         return statusBean;
     }

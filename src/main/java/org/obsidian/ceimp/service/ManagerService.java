@@ -1,9 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.LogBean;
-import org.obsidian.ceimp.bean.PasswordBean;
-import org.obsidian.ceimp.bean.StatusBean;
-import org.obsidian.ceimp.bean.UserAccountBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.Manager;
 
 import javax.servlet.http.HttpSession;
@@ -26,4 +23,6 @@ public interface ManagerService {
     StatusBean resetPassword(UserAccountBean userAccountBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     StatusBean changePassword(Long managerId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    StatusBean insert(InsertManagerBean insertManagerBean);
 }
