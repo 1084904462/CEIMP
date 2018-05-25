@@ -134,8 +134,16 @@
                             </ul>
                         </li>
                         <li>
-                            <a onclick="loadPage('/manager/settings/resetPassword')" ><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
-                            
+                            <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw"></i>设置<span class="fa arrow"></span></a>
+
+                            <ul class="nav nav-second-level">
+                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
+                                </li>
+
+                            </ul>
+
                             <!-- /.nav-second-level -->
                         </li>
                        
