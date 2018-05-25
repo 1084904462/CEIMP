@@ -43,7 +43,29 @@
                 </button>
                 <div class="navbar-brand" >综合测评管理系统管理员端</div>
             </div>
+            <!-- /.navbar-header -->
 
+            <!--  <ul class="nav navbar-top-links navbar-right">
+
+
+
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                          <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
+                      </a>
+                      <ul class="dropdown-menu dropdown-user">
+
+                          <li><a href="javascript:void(0)"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                          </li>
+                      </ul>
+                      &lt;!&ndash; /.dropdown-user &ndash;&gt;
+                  </li>
+                  &lt;!&ndash; /.dropdown &ndash;&gt;
+              </ul>-->
 
 
 
@@ -81,6 +103,8 @@
                             <a onclick="loadPage('/manager/index')" id="test"><i class="fa fa-dashboard fa-fw"></i> 概览</a>
                         </li>
 
+
+
                         <li>
                             <a href="javascript:void(0)">
                                 <i class="fa fa-table fa-fw"></i>
@@ -111,7 +135,15 @@
                             </ul>
                         </li>
                         <li>
-                            <a onclick="loadPage('/manager/settings/resetPassword')" ><i class="fa fa-wrench fa-fw"></i> 重置学生密码</a>
+                            <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw"></i>设置<span class="fa arrow"></span></a>
+
+                            <ul class="nav nav-second-level">
+                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
+                                </li>
+
+                            </ul>
 
                             <!-- /.nav-second-level -->
                         </li>
