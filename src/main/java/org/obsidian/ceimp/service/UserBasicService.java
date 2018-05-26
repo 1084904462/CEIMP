@@ -12,6 +12,8 @@ import java.util.List;
  * Created by BillChen on 2017/11/13.
  */
 public interface UserBasicService {
+    int insert(List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
     StatusBean userLogin(HttpSession session, LogBean logBean) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 
     int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
@@ -19,4 +21,8 @@ public interface UserBasicService {
     UserBasic selectByAccount(String account);
 
     List<UserSearchBean> searchUser(SearchBean searchBean,Long schoolId,Integer yearScope);
+
+    List<InsertUserBasicBean> getInsertUserBasicBeanList();
+
+    int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList);
 }

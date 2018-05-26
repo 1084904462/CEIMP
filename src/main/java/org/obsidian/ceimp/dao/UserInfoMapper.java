@@ -2,6 +2,7 @@ package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.bean.BasicScholarshipBean;
+import org.obsidian.ceimp.bean.InsertUserInfoBean;
 import org.obsidian.ceimp.bean.UserInfoBean;
 import org.obsidian.ceimp.entity.UserInfo;
 import org.obsidian.ceimp.entity.UserInfoExample;
@@ -9,6 +10,10 @@ import org.obsidian.ceimp.entity.UserInfoExample;
 import java.util.List;
 
 public interface UserInfoMapper {
+    List<InsertUserInfoBean> getInsertUserInfoBeanList();
+
+    int insertUserInfoBean(List<InsertUserInfoBean> insertUserInfoBeanList);
+
     int update(@Param("userId")Long userId, @Param("yearScope")Integer yearScope,@Param("bean") BasicScholarshipBean bean);
 
     UserInfoBean getBean(@Param("userId")Long userId, @Param("yearScope")Integer yearScope);

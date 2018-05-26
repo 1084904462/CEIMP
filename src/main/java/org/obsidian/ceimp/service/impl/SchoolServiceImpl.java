@@ -29,4 +29,10 @@ public class SchoolServiceImpl implements SchoolService {
         }
         return list;
     }
+
+    @Transactional
+    @Override
+    public int insertSchoolList(List<String> schoolList) {
+        return schoolMapper.insertSchoolList(schoolList);
+    }
 }

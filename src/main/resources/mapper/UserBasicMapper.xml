@@ -12,6 +12,16 @@
     <result column="entrance" jdbcType="VARCHAR" property="entrance" />
     <result column="identity" jdbcType="VARCHAR" property="identity" />
   </resultMap>
+  <select id="getInsertUserBasicBeanList" resultType="org.obsidian.ceimp.bean.InsertUserBasicBean">
+    select user_basic.account account,user_basic.password password,user_basic.username username,
+    user_basic.sex sex,user_basic.entrance entrance from user_basic;
+  </select>
+  <insert id="insertUserBasicBeanList" parameterType="java.util.List">
+    insert into user_basic(account,password,username,sex,entrance) values
+    <foreach collection ="list" item="bean" index= "index" separator =",">
+      (#{bean.account},#{bean.password},#{bean.username},#{bean.sex},#{bean.entrance})
+    </foreach>;
+  </insert>
   <select id="searchUser" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
     from major,class_num,user_basic,user_info where major.major_id = class_num.major_id and

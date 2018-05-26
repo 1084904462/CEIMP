@@ -3,9 +3,10 @@ package org.obsidian.ceimp.service.impl;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.UserBasicMapper;
+import org.obsidian.ceimp.entity.School;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
-import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +31,86 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Autowired
     private UserBasicMapper userBasicMapper;
+
+    @Autowired
+    private SchoolService schoolService;
+
+    @Autowired
+    private MajorService majorService;
+
+    @Autowired
+    private ClassNumService classNumService;
+
+    @Autowired
+    private UserInfoService userInfoService;
+
+    @Transactional
+    @Override
+    public int insert(List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        int result = 0;
+        Set<String> schoolSet = new HashSet<>();
+        Set<InsertMajorBean> insertMajorBeanSet = new HashSet<>();
+        Set<InsertClassNumBean> insertClassNumBeanSet = new HashSet<>();
+        Set<InsertUserBasicBean> insertUserBasicBeanSet = new HashSet<>();
+        for(ExcelUserBean bean:excelUserBeanList){
+            schoolSet.add(bean.getSchoolName());
+            insertMajorBeanSet.add(new InsertMajorBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade()));
+            insertClassNumBeanSet.add(new InsertClassNumBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade(),bean.getClassNum()));
+            insertUserBasicBeanSet.add(new InsertUserBasicBean(bean.getAccount(),MD5Util.getInstance().EncoderByMd5("888666"),bean.getUsername(),bean.getSex(),bean.getEntrance()));
+
+        }
+        //插入数据库中不存在的学院
+        List<String> schoolList = new ArrayList<>(schoolSet);
+        List<School> schools = schoolService.getAll();
+        for(School school:schools){
+            if(schoolList.contains(school.getName())){
+                schoolList.remove(school.getName());
+            }
+        }
+        if(!schoolList.isEmpty()){
+            schoolService.insertSchoolList(schoolList);
+        }
+
+        //插入数据库中不存在的专业及年级
+        List<InsertMajorBean> insertMajorBeanList = new ArrayList<>(insertMajorBeanSet);
+        List<InsertMajorBean> insertMajorBeans = majorService.getInsertMajorBeanList();
+        for(InsertMajorBean bean:insertMajorBeans){
+            if(insertMajorBeanList.contains(bean)){
+                insertMajorBeanList.remove(bean);
+            }
+        }
+        if(!insertMajorBeanList.isEmpty()){
+            majorService.insertMajorList(insertMajorBeanList);
+        }
+
+        //插入数据库中不存在的班级号
+        List<InsertClassNumBean> insertClassNumBeanList = new ArrayList<>(insertClassNumBeanSet);
+        List<InsertClassNumBean> insertClassNumBeans = classNumService.getInsertClassNumBeanList();
+        for(InsertClassNumBean bean:insertClassNumBeans){
+            if(insertClassNumBeanList.contains(bean)){
+                insertClassNumBeanList.remove(bean);
+            }
+        }
+        if(!insertClassNumBeanList.isEmpty()){
+            classNumService.insertClassNumList(insertClassNumBeanList);
+        }
+
+        //插入数据库中不存在的用户基本信息
+        List<InsertUserBasicBean> insertUserBasicBeanList = new ArrayList<>(insertUserBasicBeanSet);
+        List<InsertUserBasicBean> insertUserBasicBeans = this.getInsertUserBasicBeanList();
+        for(InsertUserBasicBean bean:insertUserBasicBeans){
+            if(insertUserBasicBeanList.contains(bean)){
+                insertUserBasicBeanList.remove(bean);
+            }
+        }
+        if(!insertUserBasicBeanList.isEmpty()){
+            this.insertUserBasicBeanList(insertUserBasicBeanList);
+        }
+
+        //插入数据库中不存在的用户动态信息
+
+        return result;
+    }
 
     @Transactional
     @Override
@@ -90,5 +173,17 @@ public class UserBasicServiceImpl implements UserBasicService {
             searchKeyList.add("%" + matcher2.group() + "%");
         }
         return userBasicMapper.searchUser(searchKeyList,schoolId,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public List<InsertUserBasicBean> getInsertUserBasicBeanList() {
+        return userBasicMapper.getInsertUserBasicBeanList();
+    }
+
+    @Transactional
+    @Override
+    public int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList) {
+        return userBasicMapper.insertUserBasicBeanList(insertUserBasicBeanList);
     }
 }

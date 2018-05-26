@@ -1,11 +1,14 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.obsidian.ceimp.entity.School;
 import org.obsidian.ceimp.entity.SchoolExample;
 
+import java.util.List;
+
 public interface SchoolMapper {
+    int insertSchoolList(List<String> schoolList);
+
     long countByExample(SchoolExample example);
 
     int deleteByExample(SchoolExample example);

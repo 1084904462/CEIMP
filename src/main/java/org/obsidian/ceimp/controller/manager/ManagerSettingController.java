@@ -7,11 +7,13 @@ import org.obsidian.ceimp.entity.School;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.SchoolService;
 import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.util.ExcelUtil;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -112,5 +114,42 @@ public class ManagerSettingController {
     @ResponseBody
     public String insertManager(InsertManagerBean insertManagerBean){
         return JSON.toJSONString(managerService.insert(insertManagerBean));
+    }
+
+    /**
+     * 进入上传Excel页面
+     * @return
+     */
+    @GetMapping("/upload")
+    public String pageUpload(){
+        return "manager/upload";
+    }
+
+    /**
+     * 上传用户名单
+     * 有点复杂
+     * 检查是否有对应学院，没有->插入该学院，有->下一步
+     * 检查是否有对应专业与年级，没有->插入该专业与年级，有->下一步
+     * 检查是否有对应班级号，没有->插入该班级号，有->下一步
+     * 检查是否有对应用户，没有->插入该用户，有下一步
+     * 插入该用户当前综测的相关信息
+     * @return
+     */
+    @PostMapping("/upload/user")
+    @ResponseBody
+    public String uploadUser(@RequestParam("userExcel") MultipartFile file) throws Exception {
+        List<ExcelUserBean> list = ExcelUtil.getInstance().read(file);
+        return JSON.toJSONString(userBasicService.insert(list));
+    }
+
+    /**
+     * 上传奖学金名单
+     * @return
+     */
+    @PostMapping("/upload/scholarship")
+    @ResponseBody
+    public String uploadScholarship(){
+
+        return JSON.toJSONString("");
     }
 }

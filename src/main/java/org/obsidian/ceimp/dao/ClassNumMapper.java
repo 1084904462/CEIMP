@@ -1,11 +1,17 @@
 package org.obsidian.ceimp.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.obsidian.ceimp.bean.InsertClassNumBean;
 import org.obsidian.ceimp.entity.ClassNum;
 import org.obsidian.ceimp.entity.ClassNumExample;
 
+import java.util.List;
+
 public interface ClassNumMapper {
+    List<InsertClassNumBean> getInsertClassNumBeanList();
+
+    int insertClassNumList(List<InsertClassNumBean> insertClassNumBeanList);
+
     long countByExample(ClassNumExample example);
 
     int deleteByExample(ClassNumExample example);

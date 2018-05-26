@@ -19,6 +19,12 @@
     <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
     <result column="major_sum" jdbcType="VARCHAR" property="majorSum" />
   </resultMap>
+  <select id="getInsertUserInfoBeanList" resultType="org.obsidian.ceimp.bean.InsertUserInfoBean">
+
+  </select>
+  <insert id="insertUserInfoBean" parameterType="java.util.List">
+
+  </insert>
   <update id="update" parameterType="map">
     update user_info set political=#{bean.political},phone=#{bean.phone},job=#{bean.job},charact=#{bean.charact},
     study=#{bean.study},ability=#{bean.ability},total=#{bean.total},gp_rank=#{bean.gpRank},ce_rank=#{bean.ceRank},

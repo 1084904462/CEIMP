@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
+import org.obsidian.ceimp.bean.InsertMajorBean;
 import org.obsidian.ceimp.dao.MajorMapper;
 import org.obsidian.ceimp.service.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,17 @@ public class MajorServiceImpl implements MajorService {
     @Override
     public List<String> getLastThree(Long schoolId) {
         return majorMapper.getLastThree(schoolId);
+    }
+
+    @Transactional
+    @Override
+    public List<InsertMajorBean> getInsertMajorBeanList() {
+        return majorMapper.getInsertMajorBeanList();
+    }
+
+    @Transactional
+    @Override
+    public int insertMajorList(List<InsertMajorBean> insertMajorBeanList) {
+        return majorMapper.insertMajorList(insertMajorBeanList);
     }
 }

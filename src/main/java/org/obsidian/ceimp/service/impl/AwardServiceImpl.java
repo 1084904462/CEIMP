@@ -28,8 +28,8 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public List<ScholarshipFormBean> selectAllBySubNameAndYearScope(String subName, Integer yearScope,String grade) {
-        return awardMapper.selectAllBySubNameAndYearScope(subName,yearScope,grade);
+    public List<ScholarshipFormBean> getAll(String subName, Integer yearScope,String grade) {
+        return awardMapper.getAll(subName,yearScope,grade);
     }
 
     @Transactional

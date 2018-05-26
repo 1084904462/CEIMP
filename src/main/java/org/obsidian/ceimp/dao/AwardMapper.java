@@ -16,9 +16,9 @@ public interface AwardMapper {
 
     Boolean exist(@Param("userId")Long userId,@Param("subName") String subName,@Param("yearScope") Integer yearScope);
 
-    List<ScholarshipFormBean> selectAllBySubNameAndYearScope(@Param("subName") String subName,
-                                                             @Param("yearScope") Integer yearScope,
-                                                             @Param("grade") String grade);
+    List<ScholarshipFormBean> getAll(@Param("subName") String subName, @Param("yearScope") Integer yearScope, @Param("grade") String grade);
+
+    Award get(@Param("userId") Long userId,@Param("subName") String subName,@Param("yearScope")int yearScope);
 
     List<AwardBean> getList(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);
 
@@ -43,6 +43,4 @@ public interface AwardMapper {
     int updateByPrimaryKeySelective(Award record);
 
     int updateByPrimaryKey(Award record);
-
-    Award selectByUserIdAndSubNameAndYearScope(@Param("userId") Long userId,@Param("subName") String subName,@Param("yearScope")int yearScope);
 }
