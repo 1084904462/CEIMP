@@ -112,7 +112,7 @@ public class ManagerSettingController {
      */
     @PostMapping("/insertManager")
     @ResponseBody
-    public String insertManager(InsertManagerBean insertManagerBean){
+    public String insertManager(@RequestBody InsertManagerBean insertManagerBean){
         return JSON.toJSONString(managerService.insert(insertManagerBean));
     }
 
