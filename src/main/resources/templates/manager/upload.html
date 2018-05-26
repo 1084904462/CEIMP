@@ -167,23 +167,64 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">新增管理员
+                    <h1 class="page-header">上传文件
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
             <div class="row" style="width: 80%;margin-left: 3px;">
+                <form enctype="multipart/form-data" method="post"  action="/manager/settings/upload/user">
+                    1.上传用户名单
+                    <br/>
+                    <br/>
 
-                <form enctype="multipart/form-data" method="post" action="/manager/settings/upload/user">
-                    <input type="file" name="userExcel"/>
-                    <input type="submit" value="上传用户名单"/>
+                    <a href="javascript:;" style="
+                    padding: 4px 10px;
+                    height: 20px;
+                    line-height: 20px;
+                    position: relative;
+                    border: 1px solid #999;
+                    text-decoration: none;
+                    color: #666;
+                    ">选择文件
+                        <input style="
+                         position: absolute;
+                            overflow: hidden;
+                            right: 0;
+                            top: 0;
+                            opacity: 0;
+
+                        " type="file" multiple="multiple" name="userExcel"/>
+                    </a><br/>
+                        <input type="submit" class="btn btn-small btn-default" style="margin-top:15px;" value="上传用户名单"/>
                 </form>
                 <br/>
-                <form enctype="multipart/form-data" method="post" action="/manager/settings/upload/scholarship">
-                    <input type="file" name="scholarshipExcel"/>
-                    <input type="submit" value="上传奖学金名单"/>
+
+                <form enctype="multipart/form-data" method="post" style="margin-top:35px;"  action="/manager/settings/upload/user">
+                    2.上传奖学金名单  <br/>
+                    <br/>
+
+                    <a href="javascript:;" style="
+                    padding: 4px 10px;
+                    height: 20px;
+                    line-height: 20px;
+                    position: relative;
+                    border: 1px solid #999;
+                    text-decoration: none;
+                    color: #666;
+                    ">选择文件
+                        <input style="
+                         position: absolute;
+                            overflow: hidden;
+                            right: 0;
+                            top: 0;
+                            opacity: 0;
+                        " type="file" multiple="multiple" name="scholarshipExcel"/>
+                    </a><br/>
+                    <input type="submit" class="btn btn-default btn-small" style="margin-top:15px;" value="上传奖学金名单"/>
                 </form>
+
 
             </div>
 
@@ -203,67 +244,6 @@
 <script th:inline="javascript">
 
 
-    $("#submit").click(function () {
-        var schoolList=[[${schoolList}]]
-        var len=schoolList.length;
-        console.log(schoolList);
-        var insertManagerBean={}
-        insertManagerBean.account=$("#account").val();
-        insertManagerBean.password=$("#password").val();
-        insertManagerBean.confirmPassword=$("#confirmPassword").val();
-        if($("#managerType").val().trim()=="高级管理员"){
-            insertManagerBean.managerType=1;
 
-        }
-        else if($("#managerType").val().trim()=="子管理员"){
-            insertManagerBean.managerType=2;
-
-        }
-        console.log(insertManagerBean.managerType);
-
-        for(var value1 in schoolList){
-            if($("#schoolId").val().trim()==schoolList[value1].name){
-                insertManagerBean.schoolId=schoolList[value1].schoolId;
-            }
-        };
-
-        console.log(insertManagerBean.schoolId);
-
-        $.ajax({
-            type: "post",
-            contentType: "application/json",
-            url: "/manager/settings/insertManager",//
-            data: JSON.stringify(insertManagerBean),
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-                console.log("SUCCESS : ", data);
-                alert(data.status);
-
-                location.reload();
-
-
-
-
-                /* $("#deleteScholarship").data-dismiss="modal";*/
-                /*
-                                    $("#deleteScholarshipSuccess").style="display:block";
-                */
-
-
-            },
-            error: function (e) {
-
-
-
-                alert("删除失败")
-
-
-                console.log("Failed : ", e);
-
-            }
-        });
-    });
 </script>
 </html>
