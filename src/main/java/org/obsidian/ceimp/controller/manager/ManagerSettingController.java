@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.School;
+import org.obsidian.ceimp.service.AwardService;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.SchoolService;
 import org.obsidian.ceimp.service.UserBasicService;
@@ -37,6 +38,9 @@ public class ManagerSettingController {
 
     @Autowired
     private SchoolService schoolService;
+
+    @Autowired
+    private AwardService awardService;
 
     /**
      * 进入重置密码页面
@@ -138,7 +142,7 @@ public class ManagerSettingController {
     @PostMapping("/upload/user")
     @ResponseBody
     public String uploadUser(@RequestParam("userExcel") MultipartFile file) throws Exception {
-        List<ExcelUserBean> list = ExcelUtil.getInstance().read(file);
+        List<ExcelUserBean> list = ExcelUtil.getInstance().readUser(file);
         return JSON.toJSONString(userBasicService.insert(list));
     }
 
@@ -148,8 +152,8 @@ public class ManagerSettingController {
      */
     @PostMapping("/upload/scholarship")
     @ResponseBody
-    public String uploadScholarship(){
-
-        return JSON.toJSONString("");
+    public String uploadScholarship(@RequestParam("scholarshipExcel") MultipartFile file) throws Exception{
+        List<ExcelScholarshipBean> list = ExcelUtil.getInstance().readScholarship(file);
+        return JSON.toJSONString(awardService.insert(list));
     }
 }

@@ -19,12 +19,79 @@
     <result column="class_sum" jdbcType="VARCHAR" property="classSum" />
     <result column="major_sum" jdbcType="VARCHAR" property="majorSum" />
   </resultMap>
-  <select id="getInsertUserInfoBeanList" resultType="org.obsidian.ceimp.bean.InsertUserInfoBean">
-
+  <select id="getExcelUserBeanList" resultType="org.obsidian.ceimp.bean.ExcelUserBean">
+    select school.name schoolName,major.name majorName,major.grade grade,class_num.num classNum,
+    user_basic.account account,user_basic.username username,user_basic.sex sex,user_basic.entrance entrance,
+    user_info.charact charact,user_info.study study,user_info.ability ability,user_info.total total,
+    user_info.ce_rank ceRank,user_info.gp_rank gpRank,user_info.major_sum majorSum
+    from school,major,class_num,user_basic,user_info
+    where school.school_id = major.school_id and major.major_id = class_num.major_id and
+    class_num.class_num_id = user_info.class_num_id and user_info.user_id = user_basic.user_id
+    and user_info.year_scope = #{yearScope};
   </select>
-  <insert id="insertUserInfoBean" parameterType="java.util.List">
-
+  <insert id="insertExcelUserBeanList" parameterType="map">
+    insert into user_info(user_id,year_scope,class_num_id,charact,study,ability,total,gp_rank,ce_rank,major_sum)
+    <foreach collection ="list" item="bean" index= "index" separator ="union">
+      select user_basic.user_id user_id,#{yearScope} year_scope,class_num.class_num_id class_num_id,
+      #{bean.charact} charact,#{bean.study} study,#{bean.ability} ability,#{bean.total} total,#{bean.gpRank} gp_rank,
+      #{bean.ceRank} ce_rank,#{bean.majorSum} major_sum from school,major,class_num,user_basic
+      where school.name = #{bean.schoolName} and major.name = #{bean.majorName} and major.grade = #{bean.grade} and
+      school.school_id = major.school_id and major.major_id = class_num.major_id and
+      class_num.num = #{bean.classNum} and user_basic.account = #{bean.account}
+    </foreach>;
   </insert>
+  <update id="updateExcelUserBeanList" parameterType="map">
+    update user_info,user_basic set
+    user_info.charact = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.charact}
+    </foreach>
+    end,
+    user_info.study = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.study}
+    </foreach>
+    end,
+    user_info.ability = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.ability}
+    </foreach>
+    end,
+    user_info.total = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.total}
+    </foreach>
+    end,
+    user_info.gp_rank = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.gpRank}
+    </foreach>
+    end,
+    user_info.ce_rank = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.ceRank}
+    </foreach>
+    end,
+    user_info.major_sum = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then #{bean.majorSum}
+    </foreach>
+    end,
+    user_info.class_num_id = case user_basic.account
+    <foreach collection ="list" item="bean" index= "index" separator =" ">
+      when #{bean.account} then
+      (select class_num.class_num_id class_num_id
+      from school,major,class_num
+      where school.name = #{bean.schoolName} and school.school_id = major.school_id and
+      major.name = #{bean.majorName} and major.grade = #{bean.grade} and
+      major.major_id = class_num.major_id and class_num.num = #{bean.classNum})
+    </foreach>
+    end
+    where user_info.year_scope = #{yearScope} and user_basic.user_id = user_info.user_id and user_basic.account in
+    <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
+      #{bean.account}
+    </foreach>;
+  </update>
   <update id="update" parameterType="map">
     update user_info set political=#{bean.political},phone=#{bean.phone},job=#{bean.job},charact=#{bean.charact},
     study=#{bean.study},ability=#{bean.ability},total=#{bean.total},gp_rank=#{bean.gpRank},ce_rank=#{bean.ceRank},

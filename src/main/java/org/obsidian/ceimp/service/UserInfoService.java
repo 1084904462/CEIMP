@@ -1,6 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.InsertUserInfoBean;
+import org.obsidian.ceimp.bean.ExcelUserBean;
 
 import java.util.List;
 
@@ -8,7 +8,9 @@ import java.util.List;
  * Created by BillChen on 2018/5/25.
  */
 public interface UserInfoService {
-    List<InsertUserInfoBean> getInsertUserInfoBeanList();
+    List<ExcelUserBean> getExcelUserBeanList(Integer yearScope);
 
-    int insertUserInfoBean(List<InsertUserInfoBean> insertUserInfoBeanList);
+    int insertExcelUserBeanList(List<ExcelUserBean> insertExcelUserBeanList,Integer yearScope);
+
+    int updateExcelUserBeanList(List<ExcelUserBean> updateExcelUserBeanList,Integer yearScope);
 }

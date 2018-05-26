@@ -1,6 +1,6 @@
 package org.obsidian.ceimp.service.impl;
 
-import org.obsidian.ceimp.bean.InsertUserInfoBean;
+import org.obsidian.ceimp.bean.ExcelUserBean;
 import org.obsidian.ceimp.dao.UserInfoMapper;
 import org.obsidian.ceimp.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional
     @Override
-    public List<InsertUserInfoBean> getInsertUserInfoBeanList() {
-        return userInfoMapper.getInsertUserInfoBeanList();
+    public List<ExcelUserBean> getExcelUserBeanList(Integer yearScope) {
+        return userInfoMapper.getExcelUserBeanList(yearScope);
     }
 
     @Transactional
     @Override
-    public int insertUserInfoBean(List<InsertUserInfoBean> insertUserInfoBeanList) {
-        return userInfoMapper.insertUserInfoBean(insertUserInfoBeanList);
+    public int insertExcelUserBeanList(List<ExcelUserBean> insertExcelUserBeanList,Integer yearScope) {
+        return userInfoMapper.insertExcelUserBeanList(insertExcelUserBeanList,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public int updateExcelUserBeanList(List<ExcelUserBean> updateExcelUserBeanList,Integer yearScope) {
+        return userInfoMapper.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
     }
 }

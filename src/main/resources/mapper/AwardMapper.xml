@@ -8,6 +8,19 @@
     <result column="is_filled" jdbcType="INTEGER" property="isFilled" />
     <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
   </resultMap>
+  <insert id="insertExcelScholarshipBeanList" parameterType="map">
+    insert into award(user_id,scholarship_id,is_filled,year_scope)
+    <foreach collection ="list" item="bean" index= "index" separator ="union">
+      select user_basic.user_id,scholarship.scholarship_id scholarship_id,
+      0 is_filled,#{yearScope} year_scope from user_basic,scholarship
+      where user_basic.account = #{bean.account} and scholarship.name = #{bean.scholarship}
+    </foreach>;
+  </insert>
+  <select id="getExcelScholarshipBeanList" parameterType="java.lang.Integer" resultType="org.obsidian.ceimp.bean.ExcelScholarshipBean">
+    select user_basic.account account,scholarship.name scholarship from user_basic,award,scholarship
+    where user_basic.user_id = award.user_id and award.scholarship_id = scholarship.scholarship_id and
+    award.year_scope = #{yearScope};
+  </select>
   <update id="cancelIsFilled" parameterType="map">
     update user_basic,award,scholarship set award.is_filled = 0 where award.user_id = user_basic.user_id and
     award.year_scope = #{yearScope} and award.scholarship_id = scholarship.scholarship_id and

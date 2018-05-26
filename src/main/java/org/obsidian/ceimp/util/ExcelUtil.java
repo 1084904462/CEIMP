@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.obsidian.ceimp.bean.ExcelScholarshipBean;
 import org.obsidian.ceimp.bean.ExcelUserBean;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +29,7 @@ public class ExcelUtil {
         return instance;
     }
 
-    public List<ExcelUserBean> read(MultipartFile file) throws Exception {
+    public List<ExcelUserBean> readUser(MultipartFile file) throws Exception {
         List<ExcelUserBean> list = new ArrayList<>();
         XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
         XSSFSheet sheet = null;
@@ -44,6 +45,28 @@ public class ExcelUtil {
                         }
                     }
                     list.add(new ExcelUserBean(sb.toString().split(" ")));
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<ExcelScholarshipBean> readScholarship(MultipartFile file) throws Exception{
+        List<ExcelScholarshipBean> list = new ArrayList<>();
+        XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+        XSSFSheet sheet = null;
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {// 获取每个Sheet表
+            sheet = workbook.getSheetAt(i);
+            for (int j = 1; j < sheet.getLastRowNum() + 1; j++) {// getLastRowNum，获取最后一行的行标,j=1表示忽略第一行表头
+                XSSFRow row = sheet.getRow(j);
+                if (row != null) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int k = 0; k < row.getLastCellNum(); k++) {// getLastCellNum，是获取最后一个不为空的列是第几个
+                        if (row.getCell(k) != null) { // getCell 获取单元格数据
+                            sb.append(this.getXCellVal(row.getCell(k))).append(" ");
+                        }
+                    }
+                    list.add(new ExcelScholarshipBean(sb.toString().split(" ")));
                 }
             }
         }

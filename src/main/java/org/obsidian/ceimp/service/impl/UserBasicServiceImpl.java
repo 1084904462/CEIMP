@@ -8,6 +8,7 @@ import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
 import org.obsidian.ceimp.service.*;
 import org.obsidian.ceimp.util.MD5Util;
+import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +55,6 @@ public class UserBasicServiceImpl implements UserBasicService {
             insertMajorBeanSet.add(new InsertMajorBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade()));
             insertClassNumBeanSet.add(new InsertClassNumBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade(),bean.getClassNum()));
             insertUserBasicBeanSet.add(new InsertUserBasicBean(bean.getAccount(),MD5Util.getInstance().EncoderByMd5("888666"),bean.getUsername(),bean.getSex(),bean.getEntrance()));
-
         }
         //插入数据库中不存在的学院
         List<String> schoolList = new ArrayList<>(schoolSet);
@@ -108,7 +105,21 @@ public class UserBasicServiceImpl implements UserBasicService {
         }
 
         //插入数据库中不存在的用户动态信息
-
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Set<ExcelUserBean> excelUserBeanSet = new HashSet<>(userInfoService.getExcelUserBeanList(yearScope));
+        List<ExcelUserBean> updateExcelUserBeanList = new ArrayList<>();
+        for(ExcelUserBean bean:excelUserBeanList){
+            if(excelUserBeanSet.contains(bean)){
+                updateExcelUserBeanList.add(bean);
+            }
+        }
+        excelUserBeanList.removeAll(updateExcelUserBeanList);
+        if(!excelUserBeanList.isEmpty()){
+            userInfoService.insertExcelUserBeanList(excelUserBeanList,yearScope);
+        }
+        if(!updateExcelUserBeanList.isEmpty()){
+            userInfoService.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
+        }
         return result;
     }
 

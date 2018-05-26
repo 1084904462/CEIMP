@@ -42,6 +42,21 @@ public class ExcelUserBean {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ExcelUserBean that = (ExcelUserBean) o;
+
+        return account != null ? account.equals(that.account) : that.account == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return account != null ? account.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         return "ExcelUserBean{" +
                 "schoolName='" + schoolName + '\'' +
