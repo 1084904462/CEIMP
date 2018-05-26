@@ -148,6 +148,8 @@
                                 </li>
                                 <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
+                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">上传文件</span></a>
+                                </li>
 
                             </ul>
 
@@ -188,11 +190,24 @@
                     </div>
                     <div class="form-group">
                         <label    >管理员类型</label>
-                        <input type="text" class="form-control"  id="managerType"  placeholder="管理员类型"/>
+                        <select class="form-control"  id="managerType" placeholder="学校id">
+
+                            <option>
+                                高级管理员
+                            </option>
+                            <option>
+                                子管理员
+                            </option>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label    >学校id</label>
-                        <input type="text" class="form-control" id="schoolId"   placeholder="学校id"/>
+                        <label    >学院名称</label>
+                        <select class="form-control"  id="schoolId" placeholder="学校id">
+
+                        <option  th:each="school : ${schoolList}" >
+                            <div th:text="${school.name}"></div>
+                        </option>
+                        </select>
                     </div>
 
                     <button  class="btn btn-default" id="submit">提交</button>
@@ -213,14 +228,33 @@
 
 </script>
 <script th:inline="javascript">
+
+
     $("#submit").click(function () {
+        var schoolList=[[${schoolList}]]
+        var len=schoolList.length;
+        console.log(schoolList);
         var insertManagerBean={}
         insertManagerBean.account=$("#account").val();
         insertManagerBean.password=$("#password").val();
         insertManagerBean.confirmPassword=$("#confirmPassword").val();
-        insertManagerBean.managerType=$("#managerType").val();
-        insertManagerBean.schoolId=$("#schoolId").val();
-        console.log(insertManagerBean.account);
+        if($("#managerType").val().trim()=="高级管理员"){
+            insertManagerBean.managerType=1;
+
+        }
+        else if($("#managerType").val().trim()=="子管理员"){
+            insertManagerBean.managerType=2;
+
+        }
+        console.log(insertManagerBean.managerType);
+
+        for(var value1 in schoolList){
+            if($("#schoolId").val().trim()==schoolList[value1].name){
+                insertManagerBean.schoolId=schoolList[value1].schoolId;
+            }
+        };
+
+        console.log(insertManagerBean.schoolId);
 
         $.ajax({
             type: "post",
