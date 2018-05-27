@@ -24,5 +24,5 @@ public interface ManagerService {
 
     StatusBean changePassword(Long managerId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    StatusBean insert(InsertManagerBean insertManagerBean);
+    StatusBean insert(InsertManagerBean insertManagerBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }

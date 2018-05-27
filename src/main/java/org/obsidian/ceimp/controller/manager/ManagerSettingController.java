@@ -52,7 +52,8 @@ public class ManagerSettingController {
         ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
         List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
         int yearScope = TimeUtil.getInstance().getThisYear();
-        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),gradeList.get(0),yearScope);
+        String grade = gradeList.isEmpty()? "":gradeList.get(0);
+        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),grade,yearScope);
         model.addAttribute("gradeList",gradeList);
         model.addAttribute("userSearchBeanList",userSearchBeanList);
         return "manager/resetPassword";
@@ -115,7 +116,7 @@ public class ManagerSettingController {
      */
     @PostMapping("/insertManager")
     @ResponseBody
-    public String insertManager(@RequestBody InsertManagerBean insertManagerBean){
+    public String insertManager(@RequestBody InsertManagerBean insertManagerBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         return JSON.toJSONString(managerService.insert(insertManagerBean));
     }
 

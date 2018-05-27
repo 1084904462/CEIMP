@@ -134,7 +134,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Transactional
     @Override
-    public StatusBean insert(InsertManagerBean insertManagerBean) {
+    public StatusBean insert(InsertManagerBean insertManagerBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         StatusBean statusBean = new StatusBean();
         if(this.get(insertManagerBean.getAccount()) == null){
             if(insertManagerBean.getPassword().length() >= 6){
@@ -142,6 +142,7 @@ public class ManagerServiceImpl implements ManagerService {
                     if(insertManagerBean.getPassword().equals(insertManagerBean.getConfirmPassword())){
                         Manager manager = new Manager();
                         BeanUtils.copyProperties(insertManagerBean,manager);
+                        manager.setPassword(MD5Util.getInstance().EncoderByMd5(manager.getPassword()));
                         managerMapper.insertSelective(manager);
                         statusBean.setStatus("新增管理员成功");
                     }
