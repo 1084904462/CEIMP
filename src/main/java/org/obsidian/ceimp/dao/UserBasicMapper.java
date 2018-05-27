@@ -1,10 +1,7 @@
 package org.obsidian.ceimp.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.obsidian.ceimp.bean.BasicScholarshipBean;
-import org.obsidian.ceimp.bean.InsertUserBasicBean;
-import org.obsidian.ceimp.bean.UserBasicBean;
-import org.obsidian.ceimp.bean.UserSearchBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
 
@@ -15,11 +12,13 @@ public interface UserBasicMapper {
 
     int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList);
 
-    List<UserSearchBean> searchUser(@Param("list") List<String> list, @Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
-
     int update(@Param("userId")Long userId,@Param("bean") BasicScholarshipBean bean);
 
     UserBasicBean getBean(Long userId);
+
+    List<UserSearchBean> getUserSearchBeanList(@Param("schoolId")Long schoolId,@Param("grade")String grade,@Param("yearScope")Integer yearScope);
+
+    int resetPassword(@Param("bean")ResetPasswordBean bean,@Param("password")String password);
 
     long countByExample(UserBasicExample example);
 

@@ -4,14 +4,8 @@ import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.School;
-import org.obsidian.ceimp.service.AwardService;
-import org.obsidian.ceimp.service.ManagerService;
-import org.obsidian.ceimp.service.SchoolService;
-import org.obsidian.ceimp.service.UserBasicService;
-import org.obsidian.ceimp.util.DownloadUtil;
-import org.obsidian.ceimp.util.ExcelUtil;
-import org.obsidian.ceimp.util.TimeUtil;
-import org.obsidian.ceimp.util.UrlUtil;
+import org.obsidian.ceimp.service.*;
+import org.obsidian.ceimp.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -46,45 +40,46 @@ public class ManagerSettingController {
     @Autowired
     private AwardService awardService;
 
+    @Autowired
+    private MajorService majorService;
+
     /**
      * 进入重置密码页面
      * @return 重置密码页面
      */
     @GetMapping("/resetPassword")
-    public String pageResetPassword(){
+    public String pageResetPassword(HttpSession session, Model model){
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),gradeList.get(0),yearScope);
+        model.addAttribute("gradeList",gradeList);
+        model.addAttribute("userSearchBeanList",userSearchBeanList);
         return "manager/resetPassword";
+    }
+
+    @GetMapping("/resetPassword/{grade}")
+    @ResponseBody
+    public String showResetPasswordByGrade(@PathVariable("grade") String grade,HttpSession session){
+        logger.debug("grade:" + grade);
+        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        return JSON.toJSONString(userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),grade,yearScope));
     }
 
     /**
      * 管理员重置用户密码为888888
-     * @param userAccountBean
+     * @param resetPasswordBean
      * @return 重置密码成功
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/resetPassword")
     @ResponseBody
-    public String resetPassword(@RequestBody UserAccountBean userAccountBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.debug(userAccountBean);
-        String password = "888888";
-        return JSON.toJSONString(managerService.resetPassword(userAccountBean,password));
-    }
-
-    /**
-     * 默认只能搜索本学院用户
-     * 先去除searchKey中的空格及转义字符
-     * 再截取中文、数字，并在两头添加'%'
-     * @param searchBean
-     * @param session 从session中的managerLogBean获取schoolId
-     * @return
-     */
-    @PostMapping("/search")
-    @ResponseBody
-    public String searchUser(@RequestBody SearchBean searchBean,HttpSession session){
-        logger.debug("searchKey:" + searchBean.getSearchKey());
-        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        return JSON.toJSONString(userBasicService.searchUser(searchBean,managerLogBean.getSchoolId(),yearScope));
+    public String resetPassword(@RequestBody ResetPasswordBean resetPasswordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        logger.debug(resetPasswordBean);
+        String password = MD5Util.getInstance().EncoderByMd5("888888");
+        return JSON.toJSONString(managerService.resetPassword(resetPasswordBean,password));
     }
 
     /**

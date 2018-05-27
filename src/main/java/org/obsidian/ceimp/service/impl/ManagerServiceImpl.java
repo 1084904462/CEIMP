@@ -5,7 +5,6 @@ import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.ManagerMapper;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.ManagerExample;
-import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
@@ -93,11 +92,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Transactional
     @Override
-    public StatusBean resetPassword(UserAccountBean userAccountBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        UserBasic userBasic = new UserBasic();
-        userBasic.setAccount(userAccountBean.getAccount());
-        userBasic.setPassword(password);
-        return userBasicService.updateUserBasic(userBasic) == 0?new StatusBean("重置密码失败"):new StatusBean("重置密码成功");
+    public StatusBean resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userBasicService.resetPassword(resetPasswordBean,password) == 0?new StatusBean("重置密码失败"):new StatusBean("重置密码成功");
     }
 
     @Transactional

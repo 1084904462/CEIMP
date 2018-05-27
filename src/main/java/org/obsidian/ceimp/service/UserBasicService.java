@@ -16,13 +16,13 @@ public interface UserBasicService {
 
     StatusBean userLogin(HttpSession session, LogBean logBean) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 
-    int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    int resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     UserBasic selectByAccount(String account);
-
-    List<UserSearchBean> searchUser(SearchBean searchBean,Long schoolId,Integer yearScope);
 
     List<InsertUserBasicBean> getInsertUserBasicBeanList();
 
     int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList);
+
+    List<UserSearchBean> getUserSearchBeanList(Long schoolId,String grade,Integer yearScope);
 }

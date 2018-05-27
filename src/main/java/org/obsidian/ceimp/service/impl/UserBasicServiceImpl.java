@@ -16,9 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by BillChen on 2017/11/13.
@@ -54,7 +55,7 @@ public class UserBasicServiceImpl implements UserBasicService {
             schoolSet.add(bean.getSchoolName());
             insertMajorBeanSet.add(new InsertMajorBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade()));
             insertClassNumBeanSet.add(new InsertClassNumBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade(),bean.getClassNum()));
-            insertUserBasicBeanSet.add(new InsertUserBasicBean(bean.getAccount(),MD5Util.getInstance().EncoderByMd5("888666"),bean.getUsername(),bean.getSex(),bean.getEntrance()));
+            insertUserBasicBeanSet.add(new InsertUserBasicBean(bean.getAccount(),MD5Util.getInstance().EncoderByMd5("888888"),bean.getUsername(),bean.getSex(),bean.getEntrance()));
         }
         //插入数据库中不存在的学院
         List<String> schoolList = new ArrayList<>(schoolSet);
@@ -149,11 +150,8 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int updateUserBasic(UserBasic userBasic) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(userBasic.getPassword()));
-        UserBasicExample example = new UserBasicExample();
-        example.or().andAccountEqualTo(userBasic.getAccount());
-        return userBasicMapper.updateByExampleSelective(userBasic,example);
+    public int resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userBasicMapper.resetPassword(resetPasswordBean,password);
     }
 
     @Transactional
@@ -170,24 +168,6 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public List<UserSearchBean> searchUser(SearchBean searchBean, Long schoolId, Integer yearScope) {
-        String searchKey = searchBean.getSearchKey().replaceAll("\\s+", "");
-        List<String> searchKeyList = new ArrayList<>();
-        Pattern pattern1 = Pattern.compile("\\D+");
-        Matcher matcher1 = pattern1.matcher(searchKey);
-        while(matcher1.find()){
-            searchKeyList.add("%" + matcher1.group() + "%");
-        }
-        Pattern pattern2 = Pattern.compile("\\d+");
-        Matcher matcher2 = pattern2.matcher(searchKey);
-        while(matcher2.find()){
-            searchKeyList.add("%" + matcher2.group() + "%");
-        }
-        return userBasicMapper.searchUser(searchKeyList,schoolId,yearScope);
-    }
-
-    @Transactional
-    @Override
     public List<InsertUserBasicBean> getInsertUserBasicBeanList() {
         return userBasicMapper.getInsertUserBasicBeanList();
     }
@@ -196,5 +176,11 @@ public class UserBasicServiceImpl implements UserBasicService {
     @Override
     public int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList) {
         return userBasicMapper.insertUserBasicBeanList(insertUserBasicBeanList);
+    }
+
+    @Transactional
+    @Override
+    public List<UserSearchBean> getUserSearchBeanList(Long schoolId, String grade, Integer yearScope) {
+        return userBasicMapper.getUserSearchBeanList(schoolId,grade,yearScope);
     }
 }

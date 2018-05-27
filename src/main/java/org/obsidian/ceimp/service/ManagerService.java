@@ -20,7 +20,7 @@ public interface ManagerService {
 
     int update(Manager manager) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    StatusBean resetPassword(UserAccountBean userAccountBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    StatusBean resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     StatusBean changePassword(Long managerId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
