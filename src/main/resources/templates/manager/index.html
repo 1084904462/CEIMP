@@ -141,7 +141,7 @@
                                 </li>
                                 <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">上传文件</span></a>
+                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
 
                             </ul>
@@ -467,12 +467,12 @@
     </div><!-- /.modal -->
 </div>
 <!--修改密码model-->
-<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                <h4 class="modal-title" id="changePasswordModalLabel">修改密码</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -511,7 +511,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_reset(event)" data-dismiss="modal">确认修改</button>
+                <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_change_password(event)" data-dismiss="modal">确认修改</button>
             </div>
         </div>
     </div>
@@ -522,36 +522,20 @@
 
 <script>
 
-    function fire_ajax_reset(event) {
-
-          /*  if ($("#userID").val()=="") {
-                alert("请输入账号");
-
-            }*/
-            if ($("#password2").val()==$("#password3").val()) {
-                $.ajax({
-                    method:"post",
-                    url:"/manager/settings/changePassword",
-                    data:{
-                        "password":$("#password2").val(),
-                        "confirmPassword":$("#password3").val()
-                    },
-                    dataType: "json",
-                    success:function () {
-                        console.log("success");
-                        alert("修改成功");
-                        location.reload();
-                    },
-                    error:function (result) {
-                        console.log("fail");
-                    }
-                });
+    function fire_ajax_change_password(event) {
+        $.ajax({
+            method:"post",
+            url:"/manager/settings/changePassword",
+            data:{
+                "oldPassword":$("#password1").val(),
+                "newPassword":$("#password2").val(),
+                "confirmPassword":$("#password3").val()
+            },
+            dataType: "json",
+            success:function (result) {
+                alert(result.status);
             }
-            else{
-               alert("新密码不一样");
-            }
-
-
+        });
     }
 
 </script>

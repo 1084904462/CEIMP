@@ -8,15 +8,19 @@ import org.obsidian.ceimp.service.AwardService;
 import org.obsidian.ceimp.service.ManagerService;
 import org.obsidian.ceimp.service.SchoolService;
 import org.obsidian.ceimp.service.UserBasicService;
+import org.obsidian.ceimp.util.DownloadUtil;
 import org.obsidian.ceimp.util.ExcelUtil;
 import org.obsidian.ceimp.util.TimeUtil;
+import org.obsidian.ceimp.util.UrlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -155,5 +159,27 @@ public class ManagerSettingController {
     public String uploadScholarship(@RequestParam("scholarshipExcel") MultipartFile file) throws Exception{
         List<ExcelScholarshipBean> list = ExcelUtil.getInstance().readScholarship(file);
         return JSON.toJSONString(awardService.insert(list));
+    }
+
+    /**
+     * 下载用户名单示例
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/download/userExcel")
+    public ResponseEntity<byte[]> downloadUserExcel() throws IOException {
+        String inputUrl = UrlUtil.getInstance().getExcelInputUrl("用户");
+        return DownloadUtil.getInstance().download(inputUrl);
+    }
+
+    /**
+     * 下载奖学金名单示例
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/download/scholarshipExcel")
+    public ResponseEntity<byte[]> downloadScholarshipExcel() throws IOException {
+        String inputUrl = UrlUtil.getInstance().getExcelInputUrl("奖学金");
+        return DownloadUtil.getInstance().download(inputUrl);
     }
 }

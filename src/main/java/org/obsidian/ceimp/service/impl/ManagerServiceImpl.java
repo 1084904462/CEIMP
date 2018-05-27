@@ -105,28 +105,33 @@ public class ManagerServiceImpl implements ManagerService {
     public StatusBean changePassword(Long managerId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         Manager manager = this.get(managerId);
         StatusBean statusBean = new StatusBean();
-        if(passwordBean.getPassword().length() >= 6){
-            if(passwordBean.getPassword().length() <= 16){
-                if(passwordBean.getPassword().equals(passwordBean.getConfirmPassword())){
-                    if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getPassword()))){
-                        manager.setPassword(passwordBean.getPassword());
-                        this.update(manager);
-                        statusBean.setStatus("修改成功");
+        if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getOldPassword()))){
+            if(passwordBean.getNewPassword().length() >= 6){
+                if(passwordBean.getNewPassword().length() <= 16){
+                    if(passwordBean.getNewPassword().equals(passwordBean.getConfirmPassword())){
+                        if(!manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getNewPassword()))){
+                            manager.setPassword(passwordBean.getNewPassword());
+                            this.update(manager);
+                            statusBean.setStatus("修改成功");
+                        }
+                        else{
+                            statusBean.setStatus("新密码与原密码相同");
+                        }
                     }
-                    else{
-                        statusBean.setStatus("新密码与原密码相同");
+                    else {
+                        statusBean.setStatus("两次密码输入不同");
                     }
                 }
-                else {
-                    statusBean.setStatus("两次密码输入不同");
+                else{
+                    statusBean.setStatus("新密码不能大于16位");
                 }
             }
             else{
-                statusBean.setStatus("新密码不能大于16位");
+                statusBean.setStatus("新密码不能小于6位");
             }
         }
         else{
-            statusBean.setStatus("新密码不能小于6位");
+            statusBean.setStatus("原密码不一致");
         }
         return statusBean;
     }

@@ -35,7 +35,7 @@ public class ExcelUtil {
         XSSFSheet sheet = null;
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {// 获取每个Sheet表
             sheet = workbook.getSheetAt(i);
-            for (int j = 1; j < sheet.getLastRowNum() + 1; j++) {// getLastRowNum，获取最后一行的行标,j=1表示忽略第一行表头
+            for (int j = 1; j < sheet.getLastRowNum(); j++) {// getLastRowNum，获取最后一行的行标,j=1表示忽略第一行表头
                 XSSFRow row = sheet.getRow(j);
                 if (row != null) {
                     StringBuilder sb = new StringBuilder();
@@ -57,7 +57,7 @@ public class ExcelUtil {
         XSSFSheet sheet = null;
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {// 获取每个Sheet表
             sheet = workbook.getSheetAt(i);
-            for (int j = 1; j < sheet.getLastRowNum() + 1; j++) {// getLastRowNum，获取最后一行的行标,j=1表示忽略第一行表头
+            for (int j = 1; j < sheet.getLastRowNum(); j++) {// getLastRowNum，获取最后一行的行标,j=1表示忽略第一行表头
                 XSSFRow row = sheet.getRow(j);
                 if (row != null) {
                     StringBuilder sb = new StringBuilder();

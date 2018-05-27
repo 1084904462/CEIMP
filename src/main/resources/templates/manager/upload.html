@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>新增管理员</title>
+    <title>文件上传</title>
     <link th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
@@ -148,7 +148,7 @@
                                 </li>
                                 <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">上传文件</span></a>
+                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
 
                             </ul>
@@ -167,62 +167,40 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">上传文件
+                    <h1 class="page-header">名单管理
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
             <div class="row" style="width: 80%;margin-left: 3px;">
-                <form enctype="multipart/form-data" method="post"  action="/manager/settings/upload/user">
-                    1.上传用户名单
+                <p>1.用户名单</p>
+                <form action="/manager/settings/download/userExcel" method="post">
+                    <input type="submit" class="btn btn-default btn-small" value="下载用户名单示例"/>
+                </form>
+                <form id="userForm" enctype="multipart/form-data" method="post"  action="/manager/settings/upload/user">
                     <br/>
-                    <br/>
-
-                    <a href="javascript:;" style="
-                    padding: 4px 10px;
-                    height: 20px;
-                    line-height: 20px;
-                    position: relative;
-                    border: 1px solid #999;
-                    text-decoration: none;
-                    color: #666;
-                    ">选择文件
-                        <input style="
-                         position: absolute;
-                            overflow: hidden;
-                            right: 0;
-                            top: 0;
-                            opacity: 0;
-
-                        " type="file" multiple="multiple" name="userExcel"/>
-                    </a><br/>
-                        <input type="submit" class="btn btn-small btn-default" style="margin-top:15px;" value="上传用户名单"/>
+                    <a id="userChoose"  style="cursor:pointer;padding: 5px 10px;height: 40px;line-height: 20px;
+                    position: relative;border: 1px solid #999;text-decoration: none;color: #666;">选择文件</a>
+                    <div id="userFileName" style="padding: 3px 10px;line-height: 20px;display: inline-block;
+                    border: 1px solid #999;text-decoration: none;color: #666;width:300px;">当前未选择文件</div>
+                    <input type="file" style="display: none" name="userExcel"/><br/>
+                    <input id="userBtn" type="button" class="btn btn-small btn-default" style="margin-top:15px;" value="上传用户名单"/>
                 </form>
                 <br/>
 
-                <form enctype="multipart/form-data" method="post" style="margin-top:35px;"  action="/manager/settings/upload/user">
-                    2.上传奖学金名单  <br/>
+                <p>2.奖学金名单</p>
+                <form action="/manager/settings/download/scholarshipExcel" method="post">
+                    <input type="submit" class="btn btn-default btn-small" value="下载奖学金名单示例"/>
+                </form>
+                <form id="scholarshipForm" enctype="multipart/form-data" method="post" action="/manager/settings/upload/scholarship">
                     <br/>
-
-                    <a href="javascript:;" style="
-                    padding: 4px 10px;
-                    height: 20px;
-                    line-height: 20px;
-                    position: relative;
-                    border: 1px solid #999;
-                    text-decoration: none;
-                    color: #666;
-                    ">选择文件
-                        <input style="
-                         position: absolute;
-                            overflow: hidden;
-                            right: 0;
-                            top: 0;
-                            opacity: 0;
-                        " type="file" multiple="multiple" name="scholarshipExcel"/>
-                    </a><br/>
-                    <input type="submit" class="btn btn-default btn-small" style="margin-top:15px;" value="上传奖学金名单"/>
+                    <a id="scholarshipChoose"  style="cursor:pointer;padding: 5px 10px;height: 40px;line-height: 20px;
+                    position: relative;border: 1px solid #999;text-decoration: none;color: #666;">选择文件</a>
+                    <div id="scholarshipFileName" style="padding: 3px 10px;line-height: 20px;display: inline-block;
+                    border: 1px solid #999;text-decoration: none;color: #666;width:300px;">当前未选择文件</div>
+                    <input type="file" style="display: none" name="scholarshipExcel"/><br/>
+                    <input id="scholarshipBtn" type="button" class="btn btn-default btn-small" style="margin-top:15px;" value="上传奖学金名单"/>
                 </form>
 
 
@@ -232,18 +210,138 @@
         <!-- /#page-wrapper -->
 
 
+<!--修改密码model-->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="changePasswordModalLabel">修改密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <input type="text" class="form-control" name="account" id="userID" th:value="${session.managerLogBean.account}" autocomplete="off" disabled="disabled" />
 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    原密码
+                                </div>
+                                <input type="password" class="form-control" name="password" id="password1" placeholder="原密码" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    新密码
+                                </div>
+                                <input type="password" class="form-control" name="password" id="password2" placeholder="新密码" autocomplete="off" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    确认新密码
+                                </div>
+                                <input type="password" class="form-control" name="confirmPassword" id="password3" placeholder="确认新密码" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_change_password(event)" data-dismiss="modal">确认修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
     </div>
 </body>
 <script>
+    $("#userChoose").click(function(){
+        $("input[name='userExcel']").click();
+    });
+    $("input[name='userExcel']").change(function(){
+        var str=$(this).val();
+        if(str!==""){
+            var arr=str.split("\\");
+            var file_name=arr[arr.length-1];
+            $("#userFileName").text(file_name);
+        }
+    });
+    $("#userBtn").on('click', function () {
+        if($("#userFileName").text() === "当前未选择文件"){
+            alert("请选择文件");
+            return false;
+        }
+        var formData = new FormData($('#userForm')[0]);
+        $.ajax({
+            url: "/manager/settings/upload/user",
+            data: formData,
+            type: "post",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                alert("成功上传" + result + "条记录");
+            }
+        })
+    });
 
-</script>
-<script th:inline="javascript">
+
+    $("#scholarshipChoose").click(function(){
+        $("input[name='scholarshipExcel']").click();
+    });
+    $("input[name='scholarshipExcel']").change(function(){
+        var str=$(this).val();
+        if(str!==""){
+            var arr=str.split("\\");
+            var file_name=arr[arr.length-1];
+            $("#scholarshipFileName").text(file_name);
+        }
+    });
+    $("#scholarshipBtn").on('click', function () {
+        if($("#scholarshipFileName").text() === "当前未选择文件"){
+            alert("请选择文件");
+            return false;
+        }
+        var formData = new FormData($('#scholarshipForm')[0]);
+        $.ajax({
+            url: "/manager/settings/upload/scholarship",
+            data: formData,
+            type: "post",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                alert("成功上传" + result + "条记录");
+            }
+        })
+    });
 
 
-
+    function fire_ajax_change_password(event) {
+        $.ajax({
+            method:"post",
+            url:"/manager/settings/changePassword",
+            data:{
+                "oldPassword":$("#password1").val(),
+                "newPassword":$("#password2").val(),
+                "confirmPassword":$("#password3").val()
+            },
+            dataType: "json",
+            success:function (result) {
+                alert(result.status);
+            }
+        });
+    }
 </script>
 </html>

@@ -155,7 +155,7 @@
                                 </li>
                                 <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">上传文件</span></a>
+                                <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
 
                             </ul>
@@ -330,6 +330,56 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
+    </div>
+<!--修改密码model-->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="changePasswordModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <input type="text" class="form-control" name="account" id="userID" th:value="${session.managerLogBean.account}" autocomplete="off" disabled="disabled" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                原密码
+                            </div>
+                            <input type="password" class="form-control" name="password" id="password1" placeholder="原密码" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                新密码
+                            </div>
+                            <input type="password" class="form-control" name="password" id="password2" placeholder="新密码" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                确认新密码
+                            </div>
+                            <input type="password" class="form-control" name="confirmPassword" id="password3" placeholder="确认新密码" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_change_password(event)" data-dismiss="modal">确认修改</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script th:inline="javascript">
@@ -1294,6 +1344,22 @@
         tempform.submit();
         document.body.removeChild(tempform);
         console.log(tempform);
+    }
+
+    function fire_ajax_change_password(event) {
+        $.ajax({
+            method:"post",
+            url:"/manager/settings/changePassword",
+            data:{
+                "oldPassword":$("#password1").val(),
+                "newPassword":$("#password2").val(),
+                "confirmPassword":$("#password3").val()
+            },
+            dataType: "json",
+            success:function (result) {
+                alert(result.status);
+            }
+        });
     }
 </script>
 </html>

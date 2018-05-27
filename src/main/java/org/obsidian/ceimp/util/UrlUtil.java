@@ -22,6 +22,7 @@ public class UrlUtil {
     private static String DIVIDE = "/";
     private static String WORD_SUFFIX = ".docx";
     private static String ZIP_SUFFIX = ".zip";
+    private static String EXCEL_SUFFIX = ".xlsx";
 
     private static final UrlUtil instance = new UrlUtil();
 
@@ -57,12 +58,7 @@ public class UrlUtil {
         return ZIP_OUTPUT_URL + scholarshipName + ZIP_SUFFIX;
     }
 
-    public String getZipFileName(String scholarshipName){
-        return scholarshipName + ZIP_SUFFIX;
-    }
-
-    public String getWordFileName(ZipInfoBean zipInfoBean)
-    {
-        return zipInfoBean.getAccount() + zipInfoBean.getUsername() + zipInfoBean.getScholarshipName() + WORD_SUFFIX;
+    public String getExcelInputUrl(String fileName){
+        return MODEL_INPUT_URL + fileName + EXCEL_SUFFIX;
     }
 }
