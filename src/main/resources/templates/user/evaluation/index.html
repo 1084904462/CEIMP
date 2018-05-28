@@ -3,9 +3,10 @@
 <head>
 	<meta charset="UTF-8"/>
 	<title>首页</title>
-	<link rel='stylesheet prefetch' th:href='@{/static/css/bootstrap.min.css}'/>
+	<link rel="stylesheet prefetch" th:href="@{/static/css/bootstrap.min.css}"/>
 	<link rel='stylesheet' th:href='@{/static/css/user/scholarship/scholarship.css}'/>
 	<link rel="stylesheet" th:href='@{/static/css/user/evaluation/index.css}'/>
+	<link th:href="@{/static/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
   	<script th:src="@{/static/js/bootstrap.min.js}"></script>
 	<script th:src="@{/static/js/user/nav.js}"></script>
@@ -29,12 +30,12 @@
 			<li><a href="/scholarship/index">在线文档生成</a></li>
 		</ul>
 		<ul class="nav navbar-nav">
-			 <li class="navbar-text">
+			 <li class="navbar-text" style="margin-top: 0px;">
 			  <a href="javascript:;" th:text="${session.userLogBean.account}" class="dropdown">
 			    <span class="caret"></span>
 			   </a>
 			        <ul class="dropdown-menu1">
-				  		<li><a href="#">个人信息</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#changePassword">修改密码</a></li>
 						<li><a href="/userLogout">退出登录</a></li>
 					</ul>
 			 </li>
@@ -141,5 +142,76 @@
 
 
 </div>
+
+<!--修改密码model-->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="changePasswordModalLabel">修改密码</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-user"></i>
+						</div>
+						<input type="text" class="form-control" name="account" id="userID" th:value="${session.userLogBean.account}" autocomplete="off" disabled="disabled" style="height: 38px;width: 150%;"/>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							原密码
+						</div>
+						<input type="password" class="form-control" name="password" id="password1" placeholder="原密码" autocomplete="off" style="height: 38px;width: 150%;"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							新密码
+						</div>
+						<input type="password" class="form-control" name="password" id="password2" placeholder="新密码" autocomplete="off" style="height: 38px;width: 150%;"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							确认新密码
+						</div>
+						<input type="password" class="form-control" name="confirmPassword" id="password3" placeholder="确认新密码" autocomplete="off" style="height: 38px;width: 150%;"/>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="ok" onclick="fire_ajax_change_password(event)" data-dismiss="modal">确认修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
+<script>
+
+    function fire_ajax_change_password(event) {
+        $.ajax({
+            method:"post",
+            url:"/evaluation/changePassword",
+            data:{
+                "oldPassword":$("#password1").val(),
+                "newPassword":$("#password2").val(),
+                "confirmPassword":$("#password3").val()
+            },
+            dataType: "json",
+            success:function (result) {
+                alert(result.status);
+            }
+        });
+    }
+
+</script>
 </html>

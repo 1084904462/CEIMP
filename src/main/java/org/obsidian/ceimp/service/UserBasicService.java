@@ -25,4 +25,6 @@ public interface UserBasicService {
     int insertUserBasicBeanList(List<InsertUserBasicBean> insertUserBasicBeanList);
 
     List<UserSearchBean> getUserSearchBeanList(Long schoolId,String grade,Integer yearScope);
+
+    StatusBean changeUserPassword(Long userId,PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 }

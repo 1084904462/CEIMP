@@ -183,4 +183,42 @@ public class UserBasicServiceImpl implements UserBasicService {
     public List<UserSearchBean> getUserSearchBeanList(Long schoolId, String grade, Integer yearScope) {
         return userBasicMapper.getUserSearchBeanList(schoolId,grade,yearScope);
     }
+
+    @Transactional
+    @Override
+    public StatusBean changeUserPassword(Long userId, PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        UserBasic userBasic = userBasicMapper.selectByPrimaryKey(userId);
+        StatusBean statusBean = new StatusBean();
+        if(userBasic.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getOldPassword()))){
+            if(passwordBean.getNewPassword().length() >= 6){
+                if(passwordBean.getNewPassword().length() <= 16){
+                    if(passwordBean.getNewPassword().equals(passwordBean.getConfirmPassword())){
+                        if(!userBasic.getPassword().equals(MD5Util.getInstance().EncoderByMd5(passwordBean.getNewPassword()))){
+                            userBasic.setPassword(MD5Util.getInstance().EncoderByMd5(passwordBean.getNewPassword()));
+                            UserBasicExample example = new UserBasicExample();
+                            example.or().andUserIdEqualTo(userId);
+                            userBasicMapper.updateByExampleSelective(userBasic,example);
+                            statusBean.setStatus("修改成功");
+                        }
+                        else{
+                            statusBean.setStatus("新密码与原密码相同");
+                        }
+                    }
+                    else {
+                        statusBean.setStatus("两次密码输入不同");
+                    }
+                }
+                else{
+                    statusBean.setStatus("新密码不能大于16位");
+                }
+            }
+            else{
+                statusBean.setStatus("新密码不能小于6位");
+            }
+        }
+        else{
+            statusBean.setStatus("原密码不一致");
+        }
+        return statusBean;
+    }
 }
