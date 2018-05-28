@@ -116,10 +116,10 @@ public class UserBasicServiceImpl implements UserBasicService {
         }
         excelUserBeanList.removeAll(updateExcelUserBeanList);
         if(!excelUserBeanList.isEmpty()){
-            userInfoService.insertExcelUserBeanList(excelUserBeanList,yearScope);
+            result = userInfoService.insertExcelUserBeanList(excelUserBeanList,yearScope);
         }
         if(!updateExcelUserBeanList.isEmpty()){
-            userInfoService.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
+            result = userInfoService.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
         }
         return result;
     }

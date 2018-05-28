@@ -79,6 +79,46 @@ $(function () {
             $("#phone-message").html("请输入数字");
         }
     });
+    $("#classSum").keyup(function () {
+        $("#classSum").popover('hide');
+        var r=/^[0-9]*$/;
+        var number= $("#classSum").val();
+        var length=number.length;
+        if(r.test(number)){
+            if(length>3){
+                $("#classSum-message").html("长度超过三个");
+                $("#submit").attr("disabled",true);
+            }
+            else{
+                $("#classSum-message").html("");
+                $("#submit").attr("disabled",false);
+            }
+        }
+        else{
+            $("#classSum-message").html("请输入数字");
+            $("#submit").attr("disabled",true);
+        }
+    })
+    $("#passSum").keyup(function () {
+        $("#passSum").popover('hide');
+        var r=/^[0-9]*$/;
+        var number= $("#passSum").val();
+        var length=number.length;
+        if(r.test(number)){
+            if(length>3){
+                $("#passSum-message").html("长度超过三个");
+                $("#submit").attr("disabled",true);
+            }
+            else{
+                $("#passSum-message").html("");
+                $("#submit").attr("disabled",false);
+            }
+        }
+        else{
+            $("#passSum-message").html("请输入数字");
+            $("#submit").attr("disabled",true);
+        }
+    })
     $("#input-form").keyup(function(){
          $("#input-form").popover('hide');
          var length = 30;
@@ -97,10 +137,10 @@ $(function () {
 
     $("#home-address").keyup(function(){
           $("#home-address").popover('hide');
-         var length = 54;
+         var length = 14;
          var content_len = $("#home-address").val().length;
          var out_len=content_len-length;   
-         if(content_len >54){
+         if(content_len >length){
             $("#home-address-message").html('您已超出'+out_len+'字');
             $("#home-address-message").css({"color":"red"});
          }else{
@@ -170,7 +210,7 @@ $(function () {
         $("#submit").mouseover(function(){
           if(($("#input-form-message").html()!="" )||($("#home-address-message").html()!="" )||($("#phone-message").html()!="")||
             ($("#month-input-message").html()!="" )||($("#message2").html()!="" )||($("#email-message").html()!="" )
-            ||($("#family-number-message").html()!="" )||($("#identity-message").html()!="")){
+            ||($("#family-number-message").html()!="" )||($("#identity-message").html()!="")||($("#classSum-message").html()!="" )||($("#passSum-message").html()!="" )){
             $("#submit").attr("disabled",true);
          }
      });
@@ -194,6 +234,26 @@ $(function () {
                                 });
                                 $("#phone").popover('show');
                                 var position=$("#phone").offset().top-200;
+                                $("html,body").animate({
+                                    "scrollTop":position},"slow");
+                                return false;
+                            }
+                            if($("#classSum").val()==""){
+                                $("#classSum").popover({
+                                    content:"请输入必修课数",
+                                });
+                                $("#classSum").popover('show');
+                                var position=$("#classSum").offset().top-180;
+                                $("html,body").animate({
+                                    "scrollTop":position},"slow");
+                                return false;
+                            }
+                            if($("#passSum").val()==""){
+                                $("#passSum").popover({
+                                    content:"请输入通过必修课数",
+                                });
+                                $("#passSum").popover('show');
+                                var position=$("#passSum").offset().top-180;
                                 $("html,body").animate({
                                     "scrollTop":position},"slow");
                                 return false;

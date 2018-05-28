@@ -58,10 +58,10 @@ $(function () {
 
     $("#home-address").keyup(function(){
           $("#home-address").popover('hide');
-         var length = 54;
+         var length = 14;
          var content_len = $("#home-address").val().length;
          var out_len=content_len-length;   
-         if(content_len >54){
+         if(content_len >length){
             $("#home-address-message").html('您已超出'+out_len+'字');
             $("#home-address-message").css({"color":"red"});
          }else{

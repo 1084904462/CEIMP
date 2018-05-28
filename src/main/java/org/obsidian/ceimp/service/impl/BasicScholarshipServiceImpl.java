@@ -127,6 +127,8 @@ public class BasicScholarshipServiceImpl implements BasicScholarshipService {
             bean.setPolitical(postBean.getPolitical());
             bean.setPhone(postBean.getPhone());
             bean.setNation(postBean.getNation());
+            bean.setPassSum(postBean.getPassSum());
+            bean.setClassSum(postBean.getClassSum());
             bean.setDate1(postBean.getDate1());
             bean.setAward1(postBean.getAward1());
             bean.setUnit1(postBean.getUnit1());
@@ -156,6 +158,8 @@ public class BasicScholarshipServiceImpl implements BasicScholarshipService {
             bean.setPolitical(postBean.getPolitical());
             bean.setPhone(postBean.getPhone());
             bean.setNation(postBean.getNation());
+            bean.setPassSum(postBean.getPassSum());
+            bean.setClassSum(postBean.getClassSum());
             bean.setDate1(postBean.getDate1());
             bean.setAward1(postBean.getAward1());
             bean.setUnit1(postBean.getUnit1());

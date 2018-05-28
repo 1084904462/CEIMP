@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 /**
@@ -31,12 +32,12 @@ public class AwardServiceImpl implements AwardService {
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ExcelScholarshipBean> excelScholarshipBeans = this.getExcelScholarshipBeanList(yearScope);
         Set<ExcelScholarshipBean> excelScholarshipBeanSet = new HashSet<>(excelScholarshipBeans);
-        for(ExcelScholarshipBean bean:excelScholarshipBeanList){
-            if(excelScholarshipBeanSet.contains(bean)){
-                excelScholarshipBeanList.remove(bean);
+        ListIterator<ExcelScholarshipBean> iterator = excelScholarshipBeanList.listIterator();
+        while(iterator.hasNext()){
+            if(excelScholarshipBeanSet.contains(iterator.next())){
+                iterator.remove();
             }
         }
-        System.out.println(excelScholarshipBeanList);
         if(!excelScholarshipBeanList.isEmpty()){
             result = this.insertExcelScholarshipBeanList(excelScholarshipBeanList,yearScope);
         }

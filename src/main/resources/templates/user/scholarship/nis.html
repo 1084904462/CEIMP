@@ -148,15 +148,18 @@
 				<div class="form-group col-md-3">
 					<div class="input-group">
 						<div class="input-group-addon">必修课数</div>
-						<input type="text" class="form-control" disabled="disabled" style="width: 100px;" th:value="*{classSum}" name="classSum"/>
+						<input type="text" class="form-control"  style="width: 100px;" th:value="*{classSum}" name="classSum" id="classSum" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
 					</div>
+					<div class="length-message2" id="classSum-message"></div>
 				</div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 						<div class="input-group-addon">通过必修课数</div>
-						<input type="text" class="form-control" disabled="disabled" style="width: 100px;" th:value="*{passSum}" name="passSum"/>
+						<input type="text" class="form-control"  style="width: 100px;" th:value="*{passSum}" name="passSum" id="passSum" data-toggle="popover" data-content="" data-placement="bottom" data-html="true"/>
 					</div>
+					<div class="length-message2" id="passSum-message"></div>
 				</div>
+				<div class="row"></div>
 				<div class="form-group col-md-5">
 					<div class="input-group">
 						<div class="input-group-addon">政治面貌</div>

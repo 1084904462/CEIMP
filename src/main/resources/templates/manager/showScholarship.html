@@ -184,9 +184,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" th:if="${!showScholarshipBean.grade.isEmpty()}" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(0)}">2016</a></li>
-                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(1)}">2016</a></li>
-                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" th:text="${showScholarshipBean.grade.get(2)}">2016</a></li>
+                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:if="${showScholarshipBean.grade.size()} >0" th:text="${showScholarshipBean.grade.get(0)} + 级">2016</a></li>
+                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:if="${showScholarshipBean.grade.size()} >1" th:text="${showScholarshipBean.grade.get(1)} + 级">2016</a></li>
+                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" th:if="${showScholarshipBean.grade.size()} >2" th:text="${showScholarshipBean.grade.get(2)} + 级">2016</a></li>
                             </ul>
                         </div>
                         <!-- /.panel-heading -->

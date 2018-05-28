@@ -11,8 +11,10 @@ public class ExcelScholarshipBean {
     }
 
     public ExcelScholarshipBean(String[] strings){
-        this.account = strings[0];
-        this.scholarship = strings[1];
+        if(strings!= null && strings.length>0){
+            this.account = strings[0];
+            this.scholarship = strings[1];
+        }
     }
 
     @Override

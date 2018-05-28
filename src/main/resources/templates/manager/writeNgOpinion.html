@@ -177,9 +177,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" th:if="${!gradeList.isEmpty()}" style="padding: 0px;margin: 0px;">
                             <ul class="nav nav-tabs" >
-                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:text="${gradeList.get(0)}+级">2016</a></li>
-                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:text="${gradeList.get(1)}+级">2015</a></li>
-                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" th:text="${gradeList.get(2)}+级">2014</a></li>
+                                <li role="presentation" class="active" id="b1"  onclick="fire_ajax_update(event)"><a href="javascript:void(0)" th:if="${gradeList.size()} > 0" th:text="${gradeList.get(0)}+级">2016</a></li>
+                                <li role="presentation" id="b2" onclick="fire_ajax_update2(event)"><a href="javascript:void(0)" th:if="${gradeList.size()} > 1" th:text="${gradeList.get(1)}+级">2015</a></li>
+                                <li role="presentation" id="b3" onclick="fire_ajax_update3(event)"><a href="javascript:void(0)" th:if="${gradeList.size()} > 2" th:text="${gradeList.get(2)}+级">2014</a></li>
                             </ul>
                         </div>
                         <!-- /.panel-heading -->
