@@ -25,7 +25,7 @@ public class Test {
 
 
     @org.junit.Test
-    public void test() throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void test(){
 
     }
 }
