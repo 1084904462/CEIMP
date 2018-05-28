@@ -31,7 +31,7 @@
     user_basic.birth birth,user_basic.nation nation,user_basic.entrance entrance,
     user_basic.identity identity from user_basic where user_basic.user_id = #{userId}
   </select>
-  <select id="getUserSearchBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.SearchBean">
+  <select id="getUserSearchBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.UserSearchBean">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username
     from major,class_num,user_info,user_basic
     where major.major_id = class_num.major_id and user_info.user_id = user_basic.user_id and
