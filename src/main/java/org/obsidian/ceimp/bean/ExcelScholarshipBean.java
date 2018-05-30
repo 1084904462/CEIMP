@@ -10,6 +10,11 @@ public class ExcelScholarshipBean {
     public ExcelScholarshipBean() {
     }
 
+    public ExcelScholarshipBean(String account, String scholarship) {
+        this.account = account;
+        this.scholarship = scholarship;
+    }
+
     public ExcelScholarshipBean(String[] strings){
         if(strings!= null && strings.length>0){
             this.account = strings[0];

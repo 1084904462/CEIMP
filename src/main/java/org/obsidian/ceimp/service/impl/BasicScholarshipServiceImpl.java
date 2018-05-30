@@ -314,7 +314,7 @@ public class BasicScholarshipServiceImpl implements BasicScholarshipService {
         String wordOutputUrl = UrlUtil.getInstance().getWordOutputUrl(zipInfoBean);
         Map<String,String> textMap = TextMapUtil.getInstance().get(bean);
         WordUtil.getInstance().generateWord(modelInputUrl,wordOutputUrl,textMap);
-        return DownloadUtil.getInstance().download(wordOutputUrl);
+        return DownloadUtil.getInstance().downloadAndDelete(wordOutputUrl);
     }
 
     private BasicScholarshipBean getNgBean(Long userId,Integer yearScope){

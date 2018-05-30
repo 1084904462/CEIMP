@@ -36,6 +36,24 @@ public class DownloadUtil {
         headers.add("Content-Disposition", "attchement;filename=" + String.valueOf(URLEncoder.encode(file.getName(),"UTF-8")));
         HttpStatus statusCode = HttpStatus.OK;
         is.close();
+        return new ResponseEntity<byte[]>(body, headers, statusCode);
+    }
+
+    /**
+     * 下载文件后删除
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    public ResponseEntity<byte[]> downloadAndDelete(String url) throws IOException{
+        File file = new File(url);
+        InputStream is = new FileInputStream(file);
+        byte[] body = new byte[is.available()];
+        is.read(body);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attchement;filename=" + String.valueOf(URLEncoder.encode(file.getName(),"UTF-8")));
+        HttpStatus statusCode = HttpStatus.OK;
+        is.close();
         if(file.exists()){
             file.delete();
         }

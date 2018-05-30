@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by BillChen on 2017/11/14.
@@ -36,23 +33,31 @@ public class AwardServiceImpl implements AwardService {
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ExcelScholarshipBean> excelScholarshipBeans = this.getExcelScholarshipBeanList(yearScope);
         Set<ExcelScholarshipBean> excelScholarshipBeanSet = new HashSet<>(excelScholarshipBeans);
-        List<String> ssNameList = scholarshipService.getSsNameList();   //该list和set是为了防止用户上传多个校奖学金
-        Set<String> ssNameSet = new HashSet<>(ssNameList);
+        List<String> ssNameList = scholarshipService.getSsNameList();   //该list、set、map是为了防止
+        Set<String> ssNameSet = new HashSet<>(ssNameList);              //用户上传多个校奖学金
+        Map<String,String> ssNameMap = new HashMap<>();
         ListIterator<ExcelScholarshipBean> iterator = excelScholarshipBeanList.listIterator();
-        boolean hasSs = false;
         while(iterator.hasNext()){
             ExcelScholarshipBean bean = iterator.next();
             if(excelScholarshipBeanSet.contains(bean)){
+                if(null != ssNameMap.get(bean.getAccount())){
+                    ssNameMap.remove(bean.getAccount());
+                }
                 iterator.remove();
             }
             else{
-                if(ssNameSet.contains(bean.getScholarship()) && !hasSs){
-                    hasSs = true;
-                }
-                else if(ssNameSet.contains(bean.getScholarship()) && hasSs){
+                if(ssNameSet.contains(bean.getScholarship())){
+                    if(null == ssNameMap.get(bean.getAccount())){
+                        ssNameMap.put(bean.getAccount(),bean.getScholarship());
+                    }
                     iterator.remove();
                 }
             }
+        }
+        Iterator<Map.Entry<String, String>> iter = ssNameMap.entrySet().iterator();
+        while(iter.hasNext()){
+            Map.Entry<String,String> tmp = iter.next();
+            excelScholarshipBeanList.add(new ExcelScholarshipBean(tmp.getKey(),tmp.getValue()));
         }
         if(!excelScholarshipBeanList.isEmpty()){
             result = this.insertExcelScholarshipBeanList(excelScholarshipBeanList,yearScope);

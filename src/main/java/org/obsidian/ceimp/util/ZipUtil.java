@@ -23,7 +23,7 @@ public class ZipUtil {
     public ResponseEntity<byte[]> zip(List<String> modelNameList, List<Map<String,String>> textMapList, List<String> zipInputUrlList, String zipOutputUrl) throws IOException{
         WordUtil.getInstance().generateAllWord(modelNameList,zipInputUrlList,textMapList);
         this.zipAllWord(zipInputUrlList,zipOutputUrl);
-        return DownloadUtil.getInstance().download(zipOutputUrl);
+        return DownloadUtil.getInstance().downloadAndDelete(zipOutputUrl);
     }
 
     private void zipAllWord(List<String> zipInputUrlList,String zipOutputUrl) throws IOException{
