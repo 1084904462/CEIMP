@@ -7,7 +7,7 @@ import org.obsidian.ceimp.entity.SchoolExample;
 import java.util.List;
 
 public interface SchoolMapper {
-    int insertSchoolList(List<String> schoolList);
+    boolean exist(String name);
 
     long countByExample(SchoolExample example);
 

@@ -1,12 +1,11 @@
 package org.obsidian.ceimp.service.impl;
 
-import org.obsidian.ceimp.bean.AwardBean;
-import org.obsidian.ceimp.bean.ExcelScholarshipBean;
-import org.obsidian.ceimp.bean.ScholarshipFormBean;
-import org.obsidian.ceimp.bean.UserAccountBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.AwardMapper;
+import org.obsidian.ceimp.entity.Scholarship;
 import org.obsidian.ceimp.service.AwardService;
 import org.obsidian.ceimp.service.ScholarshipService;
+import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,55 +25,62 @@ public class AwardServiceImpl implements AwardService {
     @Autowired
     private ScholarshipService scholarshipService;
 
+    @Autowired
+    private UserBasicService userBasicService;
+
     @Transactional
     @Override
-    public int insert(List<ExcelScholarshipBean> excelScholarshipBeanList) {
-        int result = 0;
+    public StatusBean insert(Long schoolId,List<ExcelScholarshipBean> excelScholarshipBeanList) {
         int yearScope = TimeUtil.getInstance().getThisYear();
-        List<ExcelScholarshipBean> excelScholarshipBeans = this.getExcelScholarshipBeanList(yearScope);
-        Set<ExcelScholarshipBean> excelScholarshipBeanSet = new HashSet<>(excelScholarshipBeans);
-        List<String> ssNameList = scholarshipService.getSsNameList();   //该list、set、map是为了防止
-        Set<String> ssNameSet = new HashSet<>(ssNameList);              //用户上传多个校奖学金
-        Map<String,String> ssNameMap = new HashMap<>();
+        Set<String> accountSet = new HashSet<>(userBasicService.getAccountList(schoolId,yearScope));
+        for(ExcelScholarshipBean bean:excelScholarshipBeanList){
+            if(!accountSet.contains(bean.getAccount())){
+                return new StatusBean("上传名单中包含非本学院的学生");
+            }
+        }
+        int result = 0;
+        //添加奖学金缩写
+        List<Scholarship> scholarshipList = scholarshipService.getList();
+        for(ExcelScholarshipBean bean:excelScholarshipBeanList){
+            for(Scholarship scholarship:scholarshipList){
+                if(bean.getScholarship().equals(scholarship.getName())){
+                    bean.setSubName(scholarship.getSubName());
+                    break;
+                }
+            }
+        }
+        //用于只保存第一个校奖学金
+        Set<String> ssSet = new HashSet<>();
+        //除去数据库中用户已有的奖学金
+        Set<ExcelScholarshipBean> excelScholarshipBeanSet = new HashSet<>(awardMapper.getExcelScholarshipBeanList(yearScope));
         ListIterator<ExcelScholarshipBean> iterator = excelScholarshipBeanList.listIterator();
         while(iterator.hasNext()){
             ExcelScholarshipBean bean = iterator.next();
             if(excelScholarshipBeanSet.contains(bean)){
-                if(null != ssNameMap.get(bean.getAccount())){
-                    ssNameMap.remove(bean.getAccount());
+                if(bean.getSubName().equals("ss")){
+                    ssSet.add(bean.getAccount());
                 }
                 iterator.remove();
             }
-            else{
-                if(ssNameSet.contains(bean.getScholarship())){
-                    if(null == ssNameMap.get(bean.getAccount())){
-                        ssNameMap.put(bean.getAccount(),bean.getScholarship());
-                    }
+            else if(bean.getSubName().equals("ss")){
+                if(!ssSet.contains(bean.getAccount())){
+                    ssSet.add(bean.getAccount());
+                }
+                else{
                     iterator.remove();
                 }
             }
         }
-        Iterator<Map.Entry<String, String>> iter = ssNameMap.entrySet().iterator();
-        while(iter.hasNext()){
-            Map.Entry<String,String> tmp = iter.next();
-            excelScholarshipBeanList.add(new ExcelScholarshipBean(tmp.getKey(),tmp.getValue()));
-        }
         if(!excelScholarshipBeanList.isEmpty()){
             result = this.insertExcelScholarshipBeanList(excelScholarshipBeanList,yearScope);
         }
-        return result;
+        return result==0 ? new StatusBean("无记录更新"):new StatusBean("成功上传" + result + "条记录");
     }
 
     @Transactional
     @Override
     public int insertExcelScholarshipBeanList(List<ExcelScholarshipBean> excelScholarshipBeanList, Integer yearScope) {
         return awardMapper.insertExcelScholarshipBeanList(excelScholarshipBeanList,yearScope);
-    }
-
-    @Transactional
-    @Override
-    public List<ExcelScholarshipBean> getExcelScholarshipBeanList(Integer yearScope) {
-        return awardMapper.getExcelScholarshipBeanList(yearScope);
     }
 
     @Transactional

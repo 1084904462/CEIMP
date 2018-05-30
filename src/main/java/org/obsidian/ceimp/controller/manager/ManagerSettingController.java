@@ -99,12 +99,41 @@ public class ManagerSettingController {
     }
 
     /**
+     * 进入新增学院页面
+     * @return
+     */
+    @GetMapping("/insertSchool")
+    public String pageInsertSchool(HttpSession session){
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+        if(managerLogBean.getManagerType() != 1){
+            return "redirect:/manager/index";
+        }
+        return "manager/insertSchool";
+    }
+
+    /**
+     * 新增学院
+     * @param schoolName
+     * @return
+     */
+    @PostMapping("/insertSchool")
+    @ResponseBody
+    public String insertSchool(@RequestBody String schoolName){
+        return JSON.toJSONString(schoolService.insert(schoolName));
+    }
+
+
+    /**
      * 进入新增管理员页面
      * @param model
      * @return
      */
     @GetMapping("/insertManager")
-    public String pageInsertManager(Model model){
+    public String pageInsertManager(HttpSession session,Model model){
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
+        if(managerLogBean.getManagerType() != 1){
+            return "redirect:/manager/index";
+        }
         List<School> schoolList = schoolService.getAll();
         model.addAttribute("schoolList",schoolList);
         return "manager/insertManager";
@@ -141,9 +170,10 @@ public class ManagerSettingController {
      */
     @PostMapping("/upload/user")
     @ResponseBody
-    public String uploadUser(@RequestParam("userExcel") MultipartFile file) throws Exception {
+    public String uploadUser(HttpSession session,@RequestParam("userExcel") MultipartFile file) throws Exception {
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         List<ExcelUserBean> list = ExcelUtil.getInstance().readUser(file);
-        return JSON.toJSONString(userBasicService.insert(list));
+        return JSON.toJSONString(userBasicService.insert(managerLogBean.getSchoolId(),list));
     }
 
     /**
@@ -152,9 +182,10 @@ public class ManagerSettingController {
      */
     @PostMapping("/upload/scholarship")
     @ResponseBody
-    public String uploadScholarship(@RequestParam("scholarshipExcel") MultipartFile file) throws Exception{
+    public String uploadScholarship(HttpSession session,@RequestParam("scholarshipExcel") MultipartFile file) throws Exception{
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         List<ExcelScholarshipBean> list = ExcelUtil.getInstance().readScholarship(file);
-        return JSON.toJSONString(awardService.insert(list));
+        return JSON.toJSONString(awardService.insert(managerLogBean.getSchoolId(),list));
     }
 
     /**

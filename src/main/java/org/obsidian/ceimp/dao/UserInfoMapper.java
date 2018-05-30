@@ -10,11 +10,11 @@ import org.obsidian.ceimp.entity.UserInfoExample;
 import java.util.List;
 
 public interface UserInfoMapper {
-    List<ExcelUserBean> getExcelUserBeanList(Integer yearScope);
+    List<ExcelUserBean> getExcelUserBeanList(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
 
-    int insertExcelUserBeanList(@Param("list")List<ExcelUserBean> insertExcelUserBeanList,@Param("yearScope")Integer yearScope);
+    int insertExcelUserBeanList(@Param("schoolId")Long schoolId,@Param("list")List<ExcelUserBean> list,@Param("yearScope")Integer yearScope);
 
-    int updateExcelUserBeanList(@Param("list")List<ExcelUserBean> updateExcelUserBeanList,@Param("yearScope")Integer yearScope);
+    int updateExcelUserBeanList(@Param("schoolId")Long schoolId,@Param("list")List<ExcelUserBean> list,@Param("yearScope")Integer yearScope);
 
     int update(@Param("userId")Long userId, @Param("yearScope")Integer yearScope,@Param("bean") BasicScholarshipBean bean);
 

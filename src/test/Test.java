@@ -23,9 +23,14 @@ import java.util.List;
 public class Test {
 
 
+    @Autowired
+    private ClassNumService classNumService;
 
     @org.junit.Test
     public void test(){
-
+        List<InsertClassNumBean> list = new ArrayList<>();
+        list.add(new InsertClassNumBean(1L,"通信工程","2015","151"));
+        list.add(new InsertClassNumBean(1L,"物联网工程","2016","161"));
+        classNumService.insertClassNumList(list);
     }
 }

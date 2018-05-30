@@ -40,7 +40,7 @@ public class ManagerServiceImpl implements ManagerService {
         Manager manager = this.get(logBean.getAccount());
         if(manager != null){
             if(manager.getPassword().equals(MD5Util.getInstance().EncoderByMd5(logBean.getPassword()))) {
-                ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId());
+                ManagerLogBean managerLogBean = new ManagerLogBean(manager.getManagerId(),manager.getAccount(),manager.getSchoolId(),manager.getManagerType());
                 session.setAttribute("managerLogBean",managerLogBean);
                 session.setMaxInactiveInterval(30*86400);  //把session的时长设为30天
                 statusBean.setStatus("登录成功");

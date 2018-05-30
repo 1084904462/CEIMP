@@ -44,6 +44,16 @@
       #{account}
     </foreach>;
   </update>
+  <select id="getAccountList" parameterType="map" resultType="java.lang.String">
+    select user_basic.account account from user_basic,user_info,class_num,major
+    where user_basic.user_id = user_info.user_id and user_info.class_num_id = class_num.class_num_id and
+    class_num.major_id = major.major_id and user_info.year_scope = #{yearScope} and major.school_id = #{schoolId}
+  </select>
+  <select id="getAccountListReverse" parameterType="map" resultType="java.lang.String">
+    select user_basic.account account from user_basic,user_info,class_num,major
+    where user_basic.user_id = user_info.user_id and user_info.class_num_id = class_num.class_num_id and
+    class_num.major_id = major.major_id and user_info.year_scope = #{yearScope} and major.school_id != #{schoolId}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -20,19 +20,19 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Transactional
     @Override
-    public List<ExcelUserBean> getExcelUserBeanList(Integer yearScope) {
-        return userInfoMapper.getExcelUserBeanList(yearScope);
+    public List<ExcelUserBean> getExcelUserBeanList(Long schoolId,Integer yearScope) {
+        return userInfoMapper.getExcelUserBeanList(schoolId,yearScope);
     }
 
     @Transactional
     @Override
-    public int insertExcelUserBeanList(List<ExcelUserBean> insertExcelUserBeanList,Integer yearScope) {
-        return userInfoMapper.insertExcelUserBeanList(insertExcelUserBeanList,yearScope);
+    public int insertExcelUserBeanList(Long schoolId,List<ExcelUserBean> insertExcelUserBeanList,Integer yearScope) {
+        return userInfoMapper.insertExcelUserBeanList(schoolId,insertExcelUserBeanList,yearScope);
     }
 
     @Transactional
     @Override
-    public int updateExcelUserBeanList(List<ExcelUserBean> updateExcelUserBeanList,Integer yearScope) {
-        return userInfoMapper.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
+    public int updateExcelUserBeanList(Long schoolId,List<ExcelUserBean> updateExcelUserBeanList,Integer yearScope) {
+        return userInfoMapper.updateExcelUserBeanList(schoolId,updateExcelUserBeanList,yearScope);
     }
 }

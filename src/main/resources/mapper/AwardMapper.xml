@@ -17,7 +17,7 @@
     </foreach>;
   </insert>
   <select id="getExcelScholarshipBeanList" parameterType="java.lang.Integer" resultType="org.obsidian.ceimp.bean.ExcelScholarshipBean">
-    select user_basic.account account,scholarship.name scholarship from user_basic,award,scholarship
+    select user_basic.account account,scholarship.name scholarship,scholarship.sub_name subName from user_basic,award,scholarship
     where user_basic.user_id = award.user_id and award.scholarship_id = scholarship.scholarship_id and
     award.year_scope = #{yearScope};
   </select>

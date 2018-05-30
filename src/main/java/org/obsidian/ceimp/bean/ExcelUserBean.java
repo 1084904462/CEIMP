@@ -4,7 +4,6 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2018/5/25.
  */
 public class ExcelUserBean {
-    private String schoolName;
     private String majorName;
     private String grade;
     private String classNum;
@@ -24,21 +23,20 @@ public class ExcelUserBean {
     }
 
     public ExcelUserBean(String[] strings) {
-        this.schoolName = strings[0];
-        this.majorName = strings[1];
-        this.grade = strings[2];
-        this.classNum = strings[3];
-        this.account = strings[4];
-        this.username = strings[5];
-        this.sex = strings[6];
-        this.entrance = strings[7];
-        this.charact = strings[8];
-        this.study = strings[9];
-        this.ability = strings[10];
-        this.total = strings[11];
-        this.ceRank = strings[12];
-        this.gpRank = strings[13];
-        this.majorSum = strings[14];
+        this.majorName = strings[0];
+        this.grade = strings[1];
+        this.classNum = strings[2];
+        this.account = strings[3];
+        this.username = strings[4];
+        this.sex = strings[5];
+        this.entrance = strings[6];
+        this.charact = strings[7];
+        this.study = strings[8];
+        this.ability = strings[9];
+        this.total = strings[10];
+        this.ceRank = strings[11];
+        this.gpRank = strings[12];
+        this.majorSum = strings[13];
     }
 
     @Override
@@ -59,7 +57,6 @@ public class ExcelUserBean {
     @Override
     public String toString() {
         return "ExcelUserBean{" +
-                "schoolName='" + schoolName + '\'' +
                 ", majorName='" + majorName + '\'' +
                 ", grade='" + grade + '\'' +
                 ", classNum='" + classNum + '\'' +
@@ -75,14 +72,6 @@ public class ExcelUserBean {
                 ", gpRank='" + gpRank + '\'' +
                 ", majorSum='" + majorSum + '\'' +
                 '}';
-    }
-
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
     }
 
     public String getMajorName() {

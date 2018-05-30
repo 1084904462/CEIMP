@@ -20,6 +20,10 @@ public interface UserBasicMapper {
 
     int resetPassword(@Param("bean")ResetPasswordBean bean,@Param("password")String password);
 
+    List<String> getAccountList(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
+
+    List<String> getAccountListReverse(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
+
     long countByExample(UserBasicExample example);
 
     int deleteByExample(UserBasicExample example);

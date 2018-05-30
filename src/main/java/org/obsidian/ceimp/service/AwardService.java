@@ -1,9 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.AwardBean;
-import org.obsidian.ceimp.bean.ExcelScholarshipBean;
-import org.obsidian.ceimp.bean.ScholarshipFormBean;
-import org.obsidian.ceimp.bean.UserAccountBean;
+import org.obsidian.ceimp.bean.*;
 
 import java.util.List;
 
@@ -12,8 +9,6 @@ import java.util.List;
  */
 public interface AwardService {
     int insertExcelScholarshipBeanList(List<ExcelScholarshipBean> excelScholarshipBeanList,Integer yearScope);
-
-    List<ExcelScholarshipBean> getExcelScholarshipBeanList(Integer yearScope);
 
     List<AwardBean> getList(Long userId, Integer yearScope);
 
@@ -25,5 +20,5 @@ public interface AwardService {
 
     int cancelIsFilled(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 
-    int insert(List<ExcelScholarshipBean> excelScholarshipBeanList);
+    StatusBean insert(Long schoolId,List<ExcelScholarshipBean> excelScholarshipBeanList);
 }

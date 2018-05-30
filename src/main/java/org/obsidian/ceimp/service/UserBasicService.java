@@ -12,7 +12,7 @@ import java.util.List;
  * Created by BillChen on 2017/11/13.
  */
 public interface UserBasicService {
-    int insert(List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    StatusBean insert(Long schoolId,List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     StatusBean userLogin(HttpSession session, LogBean logBean) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 
@@ -27,4 +27,8 @@ public interface UserBasicService {
     List<UserSearchBean> getUserSearchBeanList(Long schoolId,String grade,Integer yearScope);
 
     StatusBean changeUserPassword(Long userId,PasswordBean passwordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+
+    List<String> getAccountList(Long schoolId,Integer yearScope);
+
+    List<String> getAccountListReverse(Long schoolId,Integer yearScope);
 }

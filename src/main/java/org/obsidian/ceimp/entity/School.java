@@ -5,6 +5,13 @@ public class School {
 
     private String name;
 
+    public School() {
+    }
+
+    public School(String name) {
+        this.name = name;
+    }
+
     public Long getSchoolId() {
         return schoolId;
     }

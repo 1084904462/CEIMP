@@ -58,36 +58,7 @@
             </div>
             <!-- /.navbar-header -->
 
-            <!--  <ul class="nav navbar-top-links navbar-right">
-
-
-
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-                          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                          <font style="margin-left: 15px;margin-right: 30px;">fzj2</font>
-                      </a>
-                      <ul class="dropdown-menu dropdown-user">
-
-                          <li><a href="javascript:void(0)"><i class="fa fa-gear fa-fw"></i> 修改密码</a>
-                          </li>
-                          <li class="divider"></li>
-                          <li><a th:href="@{/managerLogout}"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
-                          </li>
-                      </ul>
-                      &lt;!&ndash; /.dropdown-user &ndash;&gt;
-                  </li>
-                  &lt;!&ndash; /.dropdown &ndash;&gt;
-              </ul>-->
-
-
-
-
-
             <ul class="nav navbar-top-links navbar-right">
-
-
-
                 <li class="dropdown">
                     <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="javascript:void(0)">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -151,13 +122,14 @@
                             <a href="javascript:void(0)"><i class="fa fa-wrench fa-fw"></i>设置<span class="fa arrow"></span></a>
 
                             <ul class="nav nav-second-level">
-                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
+                                <li th:if="${session.managerLogBean.managerType} == 1" onclick="loadPage('/manager/settings/insertSchool')"><a><span class="text">新增学院</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
+                                <li th:if="${session.managerLogBean.managerType} == 1" onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
+                                </li>
+                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
                                 </li>
                                 <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
-
                             </ul>
 
                             <!-- /.nav-second-level -->

@@ -3,7 +3,6 @@ package org.obsidian.ceimp.service.impl;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.dao.UserBasicMapper;
-import org.obsidian.ceimp.entity.School;
 import org.obsidian.ceimp.entity.UserBasic;
 import org.obsidian.ceimp.entity.UserBasicExample;
 import org.obsidian.ceimp.service.*;
@@ -16,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by BillChen on 2017/11/13.
@@ -32,9 +28,6 @@ public class UserBasicServiceImpl implements UserBasicService {
     private UserBasicMapper userBasicMapper;
 
     @Autowired
-    private SchoolService schoolService;
-
-    @Autowired
     private MajorService majorService;
 
     @Autowired
@@ -45,30 +38,32 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int insert(List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public StatusBean insert(Long schoolId,List<ExcelUserBean> excelUserBeanList) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        Set<String> accountSet = new HashSet<>();
+        for(ExcelUserBean bean:excelUserBeanList){
+            if(accountSet.contains(bean.getAccount())){
+                return new StatusBean("上传名单中包含重复学生信息");
+            }
+            accountSet.add(bean.getAccount());
+        }
+        List<String> accountList = new ArrayList<>();
+        accountList.addAll(accountSet);
+        Set<String> accountSets = new HashSet<>(this.getAccountListReverse(schoolId,yearScope));
+        for(String account:accountList){
+            if(accountSets.contains(account)){
+                return new StatusBean("上传名单中包含非本学院的学生");
+            }
+        }
         int result = 0;
-        Set<String> schoolSet = new HashSet<>();
         Set<InsertMajorBean> insertMajorBeanSet = new HashSet<>();
         Set<InsertClassNumBean> insertClassNumBeanSet = new HashSet<>();
         Set<InsertUserBasicBean> insertUserBasicBeanSet = new HashSet<>();
         for(ExcelUserBean bean:excelUserBeanList){
-            schoolSet.add(bean.getSchoolName());
-            insertMajorBeanSet.add(new InsertMajorBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade()));
-            insertClassNumBeanSet.add(new InsertClassNumBean(bean.getSchoolName(),bean.getMajorName(),bean.getGrade(),bean.getClassNum()));
+            insertMajorBeanSet.add(new InsertMajorBean(schoolId,bean.getMajorName(),bean.getGrade()));
+            insertClassNumBeanSet.add(new InsertClassNumBean(schoolId,bean.getMajorName(),bean.getGrade(),bean.getClassNum()));
             insertUserBasicBeanSet.add(new InsertUserBasicBean(bean.getAccount(),MD5Util.getInstance().EncoderByMd5("888888"),bean.getUsername(),bean.getSex(),bean.getEntrance()));
         }
-        //插入数据库中不存在的学院
-        List<String> schoolList = new ArrayList<>(schoolSet);
-        List<School> schools = schoolService.getAll();
-        for(School school:schools){
-            if(schoolList.contains(school.getName())){
-                schoolList.remove(school.getName());
-            }
-        }
-        if(!schoolList.isEmpty()){
-            schoolService.insertSchoolList(schoolList);
-        }
-
         //插入数据库中不存在的专业及年级
         List<InsertMajorBean> insertMajorBeanList = new ArrayList<>(insertMajorBeanSet);
         List<InsertMajorBean> insertMajorBeans = majorService.getInsertMajorBeanList();
@@ -106,8 +101,7 @@ public class UserBasicServiceImpl implements UserBasicService {
         }
 
         //插入数据库中不存在的用户动态信息
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        Set<ExcelUserBean> excelUserBeanSet = new HashSet<>(userInfoService.getExcelUserBeanList(yearScope));
+        Set<ExcelUserBean> excelUserBeanSet = new HashSet<>(userInfoService.getExcelUserBeanList(schoolId,yearScope));
         List<ExcelUserBean> updateExcelUserBeanList = new ArrayList<>();
         for(ExcelUserBean bean:excelUserBeanList){
             if(excelUserBeanSet.contains(bean)){
@@ -116,12 +110,12 @@ public class UserBasicServiceImpl implements UserBasicService {
         }
         excelUserBeanList.removeAll(updateExcelUserBeanList);
         if(!excelUserBeanList.isEmpty()){
-            result = userInfoService.insertExcelUserBeanList(excelUserBeanList,yearScope);
+            result = userInfoService.insertExcelUserBeanList(schoolId,excelUserBeanList,yearScope);
         }
         if(!updateExcelUserBeanList.isEmpty()){
-            result = userInfoService.updateExcelUserBeanList(updateExcelUserBeanList,yearScope);
+            result = userInfoService.updateExcelUserBeanList(schoolId,updateExcelUserBeanList,yearScope);
         }
-        return result;
+        return result==0 ? new StatusBean("无记录更新"):new StatusBean("成功上传" + result + "条记录");
     }
 
     @Transactional
@@ -220,5 +214,17 @@ public class UserBasicServiceImpl implements UserBasicService {
             statusBean.setStatus("原密码不一致");
         }
         return statusBean;
+    }
+
+    @Transactional
+    @Override
+    public List<String> getAccountList(Long schoolId, Integer yearScope) {
+        return userBasicMapper.getAccountList(schoolId,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public List<String> getAccountListReverse(Long schoolId, Integer yearScope) {
+        return userBasicMapper.getAccountListReverse(schoolId,yearScope);
     }
 }

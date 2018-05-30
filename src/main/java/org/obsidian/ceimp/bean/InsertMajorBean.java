@@ -4,15 +4,15 @@ package org.obsidian.ceimp.bean;
  * Created by BillChen on 2018/5/25.
  */
 public class InsertMajorBean {
-    private String school;
+    private Long schoolId;
     private String major;
     private String grade;
 
     public InsertMajorBean() {
     }
 
-    public InsertMajorBean(String school,String major, String grade) {
-        this.school = school;
+    public InsertMajorBean(Long schoolId,String major, String grade) {
+        this.schoolId = schoolId;
         this.major = major;
         this.grade = grade;
     }
@@ -24,14 +24,14 @@ public class InsertMajorBean {
 
         InsertMajorBean that = (InsertMajorBean) o;
 
-        if (school != null ? !school.equals(that.school) : that.school != null) return false;
+        if (schoolId != null ? !schoolId.equals(that.schoolId) : that.schoolId != null) return false;
         if (major != null ? !major.equals(that.major) : that.major != null) return false;
         return grade != null ? grade.equals(that.grade) : that.grade == null;
     }
 
     @Override
     public int hashCode() {
-        int result = school != null ? school.hashCode() : 0;
+        int result = schoolId != null ? schoolId.hashCode() : 0;
         result = 31 * result + (major != null ? major.hashCode() : 0);
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         return result;
@@ -40,18 +40,18 @@ public class InsertMajorBean {
     @Override
     public String toString() {
         return "InsertMajorBean{" +
-                "school='" + school + '\'' +
+                "schoolId=" + schoolId +
                 ", major='" + major + '\'' +
                 ", grade='" + grade + '\'' +
                 '}';
     }
 
-    public String getSchool() {
-        return school;
+    public Long getSchoolId() {
+        return schoolId;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
     }
 
     public String getMajor() {

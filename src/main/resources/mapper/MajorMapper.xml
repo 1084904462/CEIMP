@@ -8,14 +8,13 @@
     <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
   <insert id="insertMajorList" parameterType="java.util.List">
-    insert into major(name,school_id,grade)
-    <foreach collection ="list" item="bean" index= "index" separator ="union">
-      select #{bean.major} name,school.school_id school_id,#{bean.grade} grade from school
-      where school.name = #{bean.school}
+    insert into major(name,school_id,grade) values
+    <foreach collection="list" index="index" item="bean" separator=",">
+      (#{bean.major},#{bean.schoolId},#{bean.grade})
     </foreach>;
   </insert>
   <select id="getInsertMajorBeanList" resultType="org.obsidian.ceimp.bean.InsertMajorBean">
-    select school.name school,major.name major,major.grade grade from school,major where school.school_id = major.school_id;
+    select major.school_id schoolId,major.name major,major.grade grade from major;
   </select>
   <select id="getAll" parameterType="java.lang.Long" resultType="java.lang.String">
     select DISTINCT grade from major where school_id = #{schoolId} order by grade desc

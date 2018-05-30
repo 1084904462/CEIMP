@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>文件上传</title>
+    <title>新增学院</title>
     <link th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/vendor/metisMenu/metisMenu.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/vendor/datatables-plugins/dataTables.bootstrap.css}" rel="stylesheet"/>
@@ -30,7 +30,6 @@
     <script th:src="@{/static/js/manager/resetPassword.js}"></script>
     <script th:src="@{/static/js/manager/index.js}"></script>
 
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>-->
 </head>
 <body>
 
@@ -49,8 +48,6 @@
                 </button>
                 <div class="navbar-brand" >综合测评管理系统管理员端</div>
             </div>
-            <!-- /.navbar-header -->
-
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" onmouseover="mouseOverShow()" onmouseout="mouseOutHidden()"  href="javascript:void(0)">
@@ -139,42 +136,19 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">名单管理
+                    <h1 class="page-header">新增学院
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
             <div class="row" style="width: 80%;margin-left: 3px;">
-                <p>1.用户名单</p>
-                <form action="/manager/settings/download/userExcel" method="post">
-                    <input type="submit" class="btn btn-default btn-small" value="下载用户名单示例"/>
-                </form>
-                <form id="userForm" enctype="multipart/form-data" method="post"  action="/manager/settings/upload/user">
-                    <br/>
-                    <a id="userChoose"  style="cursor:pointer;padding: 5px 10px;height: 40px;line-height: 20px;
-                    position: relative;border: 1px solid #999;text-decoration: none;color: #666;">选择文件</a>
-                    <div id="userFileName" style="padding: 3px 10px;line-height: 20px;display: inline-block;
-                    border: 1px solid #999;text-decoration: none;color: #666;width:300px;">当前未选择文件</div>
-                    <input type="file" style="display: none" name="userExcel"/><br/>
-                    <input id="userBtn" type="button" class="btn btn-small btn-default" style="margin-top:15px;" value="上传用户名单"/>
-                </form>
-                <br/>
 
-                <p>2.奖学金名单</p>
-                <form action="/manager/settings/download/scholarshipExcel" method="post">
-                    <input type="submit" class="btn btn-default btn-small" value="下载奖学金名单示例"/>
-                </form>
-                <form id="scholarshipForm" enctype="multipart/form-data" method="post" action="/manager/settings/upload/scholarship">
-                    <br/>
-                    <a id="scholarshipChoose"  style="cursor:pointer;padding: 5px 10px;height: 40px;line-height: 20px;
-                    position: relative;border: 1px solid #999;text-decoration: none;color: #666;">选择文件</a>
-                    <div id="scholarshipFileName" style="padding: 3px 10px;line-height: 20px;display: inline-block;
-                    border: 1px solid #999;text-decoration: none;color: #666;width:300px;">当前未选择文件</div>
-                    <input type="file" style="display: none" name="scholarshipExcel"/><br/>
-                    <input id="scholarshipBtn" type="button" class="btn btn-default btn-small" style="margin-top:15px;" value="上传奖学金名单"/>
-                </form>
-
+                    <div class="form-group">
+                        <label>学院名称</label>
+                        <input type="text" class="form-control"  id="schoolName" placeholder="学院名称"/>
+                    </div>
+                    <button  class="btn btn-default" id="submit">提交</button>
 
             </div>
 
@@ -182,8 +156,8 @@
         <!-- /#page-wrapper -->
 
 
-<!--修改密码model-->
-<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
+        <!--修改密码model-->
+        <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -238,69 +212,31 @@
     </div>
 </body>
 <script>
-    $("#userChoose").click(function(){
-        $("input[name='userExcel']").click();
-    });
-    $("input[name='userExcel']").change(function(){
-        var str=$(this).val();
-        if(str!==""){
-            var arr=str.split("\\");
-            var file_name=arr[arr.length-1];
-            $("#userFileName").text(file_name);
-        }
-    });
-    $("#userBtn").on('click', function () {
-        if($("#userFileName").text() === "当前未选择文件"){
-            alert("请选择文件");
-            return false;
-        }
-        var formData = new FormData($('#userForm')[0]);
+
+</script>
+<script th:inline="javascript">
+
+
+    $("#submit").click(function () {
         $.ajax({
-            url: "/manager/settings/upload/user",
-            data: formData,
             type: "post",
-            dataType: "json",
-            cache: false,//上传文件无需缓存
-            processData: false,//用于对data参数进行序列化处理 这里必须false
-            contentType: false, //必须
-            success: function (result) {
-                alert(result.status);
+            contentType: "application/json",
+            url: "/manager/settings/insertSchool",
+            data: $("#schoolName").val(),
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log("SUCCESS : ", data);
+                alert(data.status);
+            },
+            error: function (e) {
+                alert("新增学院失败")
+                console.log("Failed : ", e);
+
             }
-        })
+        });
     });
-
-
-    $("#scholarshipChoose").click(function(){
-        $("input[name='scholarshipExcel']").click();
-    });
-    $("input[name='scholarshipExcel']").change(function(){
-        var str=$(this).val();
-        if(str!==""){
-            var arr=str.split("\\");
-            var file_name=arr[arr.length-1];
-            $("#scholarshipFileName").text(file_name);
-        }
-    });
-    $("#scholarshipBtn").on('click', function () {
-        if($("#scholarshipFileName").text() === "当前未选择文件"){
-            alert("请选择文件");
-            return false;
-        }
-        var formData = new FormData($('#scholarshipForm')[0]);
-        $.ajax({
-            url: "/manager/settings/upload/scholarship",
-            data: formData,
-            type: "post",
-            dataType: "json",
-            cache: false,//上传文件无需缓存
-            processData: false,//用于对data参数进行序列化处理 这里必须false
-            contentType: false, //必须
-            success: function (result) {
-                alert(result.status);
-            }
-        })
-    });
-
 
     function fire_ajax_change_password(event) {
         $.ajax({

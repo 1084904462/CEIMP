@@ -7,15 +7,14 @@
     <result column="major_id" jdbcType="BIGINT" property="majorId" />
   </resultMap>
   <select id="getInsertClassNumBeanList" resultType="org.obsidian.ceimp.bean.InsertClassNumBean">
-    select school.name school,major.name major,major.grade grade,class_num.num classNum from school,major,class_num
-    where school.school_id = major.school_id and major.major_id = class_num.major_id;
+    select major.school_id schoolId,major.name major,major.grade grade,class_num.num classNum from major,class_num
+    where major.major_id = class_num.major_id;
   </select>
   <insert id="insertClassNumList" parameterType="java.util.List">
     insert into class_num(num,major_id)
     <foreach collection ="list" item="bean" index= "index" separator ="union">
-      select #{bean.classNum} num,major.major_id major_id from school,major
-      where school.name = #{bean.school} and school.school_id = major.school_id
-      and major.name = #{bean.major} and major.grade = #{bean.grade}
+      select #{bean.classNum} num,major.major_id major_id from major
+      where major.school_id = #{bean.schoolId} and major.name = #{bean.major} and major.grade = #{bean.grade}
     </foreach>;
   </insert>
   <sql id="Example_Where_Clause">

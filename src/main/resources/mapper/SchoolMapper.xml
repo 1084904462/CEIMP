@@ -5,12 +5,9 @@
     <id column="school_id" jdbcType="BIGINT" property="schoolId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
-  <insert id="insertSchoolList" parameterType="java.util.List">
-    insert into school (name) values
-    <foreach collection ="list" item="name" index= "index" separator =",">
-      (#{name})
-    </foreach>;
-  </insert>
+  <select id="exist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+    select exists(select school.name from school where school.name = #{name});
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

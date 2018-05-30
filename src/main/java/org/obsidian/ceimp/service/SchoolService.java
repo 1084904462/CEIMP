@@ -1,5 +1,6 @@
 package org.obsidian.ceimp.service;
 
+import org.obsidian.ceimp.bean.StatusBean;
 import org.obsidian.ceimp.entity.School;
 
 import java.util.List;
@@ -10,5 +11,7 @@ import java.util.List;
 public interface SchoolService {
     List<School> getAll();
 
-    int insertSchoolList(List<String> schoolList);
+    StatusBean insert(String name);
+
+    boolean exist(String name);
 }

@@ -6,13 +6,15 @@ package org.obsidian.ceimp.bean;
 public class ExcelScholarshipBean {
     private String account;
     private String scholarship;
+    private String subName;
 
     public ExcelScholarshipBean() {
     }
 
-    public ExcelScholarshipBean(String account, String scholarship) {
+    public ExcelScholarshipBean(String account, String scholarship,String subName) {
         this.account = account;
         this.scholarship = scholarship;
+        this.subName = subName;
     }
 
     public ExcelScholarshipBean(String[] strings){
@@ -27,16 +29,18 @@ public class ExcelScholarshipBean {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ExcelScholarshipBean that = (ExcelScholarshipBean) o;
+        ExcelScholarshipBean bean = (ExcelScholarshipBean) o;
 
-        if (account != null ? !account.equals(that.account) : that.account != null) return false;
-        return scholarship != null ? scholarship.equals(that.scholarship) : that.scholarship == null;
+        if (account != null ? !account.equals(bean.account) : bean.account != null) return false;
+        if (scholarship != null ? !scholarship.equals(bean.scholarship) : bean.scholarship != null) return false;
+        return subName != null ? subName.equals(bean.subName) : bean.subName == null;
     }
 
     @Override
     public int hashCode() {
         int result = account != null ? account.hashCode() : 0;
         result = 31 * result + (scholarship != null ? scholarship.hashCode() : 0);
+        result = 31 * result + (subName != null ? subName.hashCode() : 0);
         return result;
     }
 
@@ -45,6 +49,7 @@ public class ExcelScholarshipBean {
         return "ExcelScholarshipBean{" +
                 "account='" + account + '\'' +
                 ", scholarship='" + scholarship + '\'' +
+                ", subName='" + subName + '\'' +
                 '}';
     }
 
@@ -62,5 +67,13 @@ public class ExcelScholarshipBean {
 
     public void setScholarship(String scholarship) {
         this.scholarship = scholarship;
+    }
+
+    public String getSubName() {
+        return subName;
+    }
+
+    public void setSubName(String subName) {
+        this.subName = subName;
     }
 }

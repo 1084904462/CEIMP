@@ -110,7 +110,12 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Transactional
     @Override
-    public List<String> getSsNameList() {
-        return scholarshipMapper.getSsNameList();
+    public List<Scholarship> getList() {
+        ScholarshipExample example = new ScholarshipExample();
+        List<Scholarship> list = scholarshipMapper.selectByExample(example);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 }

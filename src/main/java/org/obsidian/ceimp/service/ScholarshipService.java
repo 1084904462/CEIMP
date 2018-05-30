@@ -4,6 +4,7 @@ import org.obsidian.ceimp.bean.ScholarshipFormBean;
 import org.obsidian.ceimp.bean.ShowScholarshipBean;
 import org.obsidian.ceimp.bean.UserAccountBean;
 import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.entity.Scholarship;
 
 import java.util.List;
 import java.util.Map;
@@ -24,5 +25,5 @@ public interface ScholarshipService {
 
     List<ScholarshipFormBean> getScholarshipFormBeanList(Long schoolId,String subName, Integer yearScope, String grade);
 
-    List<String> getSsNameList();
+    List<Scholarship> getList();
 }
