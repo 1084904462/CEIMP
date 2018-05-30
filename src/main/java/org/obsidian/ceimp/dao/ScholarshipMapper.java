@@ -10,6 +10,8 @@ import org.obsidian.ceimp.entity.ScholarshipExample;
 import java.util.List;
 
 public interface ScholarshipMapper {
+    List<String> getSsNameList();
+
     List<ResidentAndSituationBean> getBeanList(@Param("subName")String subName, @Param("list")List<ZipInfoBean> list, @Param("yearScope")Integer yearScope);
 
     int deleteAll(@Param("subName")String subName, @Param("list")List<UserAccountBean> list, @Param("yearScope")Integer yearScope);

@@ -17,7 +17,7 @@ public interface AwardService {
 
     List<AwardBean> getList(Long userId, Integer yearScope);
 
-    List<ScholarshipFormBean> getAll(String subName,Integer yearScope,String grade);
+    List<ScholarshipFormBean> getAll(Long schoolId,String subName,Integer yearScope,String grade);
 
     Boolean exist(Long userId,String subName,Integer yearScope);
 

@@ -91,6 +91,8 @@ public class ScholarshipServiceImpl implements ScholarshipService {
         return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope);
     }
 
+    @Transactional
+    @Override
     public ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId){
         ShowScholarshipBean showScholarshipBean = new ShowScholarshipBean();
         showScholarshipBean.setScholarshipName(this.getScholarshipName(subName));
@@ -100,8 +102,15 @@ public class ScholarshipServiceImpl implements ScholarshipService {
         return showScholarshipBean;
     }
 
-    public List<ScholarshipFormBean> getScholarshipFormBeanList(String subName, Integer yearScope, String grade){
-        return awardService.getAll(subName,yearScope,grade);
+    @Transactional
+    @Override
+    public List<ScholarshipFormBean> getScholarshipFormBeanList(Long schoolId,String subName, Integer yearScope, String grade) {
+        return awardService.getAll(schoolId, subName, yearScope, grade);
     }
 
+    @Transactional
+    @Override
+    public List<String> getSsNameList() {
+        return scholarshipMapper.getSsNameList();
+    }
 }

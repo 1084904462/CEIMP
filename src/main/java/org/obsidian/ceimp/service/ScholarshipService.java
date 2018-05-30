@@ -22,6 +22,7 @@ public interface ScholarshipService {
 
     ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId);
 
-    List<ScholarshipFormBean> getScholarshipFormBeanList(String subName, Integer yearScope, String grade);
+    List<ScholarshipFormBean> getScholarshipFormBeanList(Long schoolId,String subName, Integer yearScope, String grade);
 
+    List<String> getSsNameList();
 }

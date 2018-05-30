@@ -47,11 +47,11 @@
   <select id="getAll" parameterType="map" resultType="org.obsidian.ceimp.bean.ScholarshipFormBean" statementType="STATEMENT">
     select major.name major,class_num.num classNum,user_basic.account account,user_basic.username username,
     scholarship.name scholarshipName from award,major,class_num,user_basic,user_info,scholarship where
-    major.major_id = class_num.major_id and class_num.class_num_id = user_info.class_num_id and
-    user_info.year_scope = ${yearScope} and award.year_scope = user_info.year_scope and
-    user_info.user_id = user_basic.user_id and award.user_id = user_basic.user_id
-    and award.scholarship_id = scholarship.scholarship_id and scholarship.sub_name = "${subName}"
-    and major.grade = "${grade}" and user_basic.user_id in
+    major.school_id = ${schoolId} and major.major_id = class_num.major_id and
+    class_num.class_num_id = user_info.class_num_id and user_info.year_scope = ${yearScope} and
+    award.year_scope = user_info.year_scope and user_info.user_id = user_basic.user_id and
+    award.user_id = user_basic.user_id and award.scholarship_id = scholarship.scholarship_id and
+    scholarship.sub_name = "${subName}" and major.grade = "${grade}" and user_basic.user_id in
     (select ${subName}.user_id from ${subName} where year_scope = ${yearScope})
   </select>
   <select id="get" parameterType="map" resultMap="BaseResultMap">

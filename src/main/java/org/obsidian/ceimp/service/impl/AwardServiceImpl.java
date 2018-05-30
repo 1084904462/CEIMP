@@ -6,6 +6,7 @@ import org.obsidian.ceimp.bean.ScholarshipFormBean;
 import org.obsidian.ceimp.bean.UserAccountBean;
 import org.obsidian.ceimp.dao.AwardMapper;
 import org.obsidian.ceimp.service.AwardService;
+import org.obsidian.ceimp.service.ScholarshipService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,9 @@ public class AwardServiceImpl implements AwardService {
     @Autowired
     private AwardMapper awardMapper;
 
+    @Autowired
+    private ScholarshipService scholarshipService;
+
     @Transactional
     @Override
     public int insert(List<ExcelScholarshipBean> excelScholarshipBeanList) {
@@ -32,10 +36,22 @@ public class AwardServiceImpl implements AwardService {
         int yearScope = TimeUtil.getInstance().getThisYear();
         List<ExcelScholarshipBean> excelScholarshipBeans = this.getExcelScholarshipBeanList(yearScope);
         Set<ExcelScholarshipBean> excelScholarshipBeanSet = new HashSet<>(excelScholarshipBeans);
+        List<String> ssNameList = scholarshipService.getSsNameList();   //该list和set是为了防止用户上传多个校奖学金
+        Set<String> ssNameSet = new HashSet<>(ssNameList);
         ListIterator<ExcelScholarshipBean> iterator = excelScholarshipBeanList.listIterator();
+        boolean hasSs = false;
         while(iterator.hasNext()){
-            if(excelScholarshipBeanSet.contains(iterator.next())){
+            ExcelScholarshipBean bean = iterator.next();
+            if(excelScholarshipBeanSet.contains(bean)){
                 iterator.remove();
+            }
+            else{
+                if(ssNameSet.contains(bean.getScholarship()) && !hasSs){
+                    hasSs = true;
+                }
+                else if(ssNameSet.contains(bean.getScholarship()) && hasSs){
+                    iterator.remove();
+                }
             }
         }
         if(!excelScholarshipBeanList.isEmpty()){
@@ -64,8 +80,8 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
-    public List<ScholarshipFormBean> getAll(String subName, Integer yearScope,String grade) {
-        return awardMapper.getAll(subName,yearScope,grade);
+    public List<ScholarshipFormBean> getAll(Long schoolId,String subName, Integer yearScope,String grade) {
+        return awardMapper.getAll(schoolId,subName,yearScope,grade);
     }
 
     @Transactional

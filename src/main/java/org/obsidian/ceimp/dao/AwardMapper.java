@@ -21,7 +21,7 @@ public interface AwardMapper {
 
     Boolean exist(@Param("userId")Long userId,@Param("subName") String subName,@Param("yearScope") Integer yearScope);
 
-    List<ScholarshipFormBean> getAll(@Param("subName") String subName, @Param("yearScope") Integer yearScope, @Param("grade") String grade);
+    List<ScholarshipFormBean> getAll(@Param("schoolId")Long schoolId,@Param("subName") String subName, @Param("yearScope") Integer yearScope, @Param("grade") String grade);
 
     Award get(@Param("userId") Long userId,@Param("subName") String subName,@Param("yearScope")int yearScope);
 

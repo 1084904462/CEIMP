@@ -7,6 +7,9 @@
     <result column="model_name" jdbcType="VARCHAR" property="modelName" />
     <result column="sub_name" jdbcType="VARCHAR" property="subName" />
   </resultMap>
+  <select id="getSsNameList" resultType="java.lang.String">
+    select scholarship.name from scholarship where scholarship.sub_name = 'ss';
+  </select>
   <select id="getBeanList" parameterType="map" resultType="org.obsidian.ceimp.bean.ResidentAndSituationBean" statementType="STATEMENT">
     select ${subName}.resident resident,${subName}.situation situation from ${subName},user_basic where
     ${subName}.year_scope = ${yearScope} and ${subName}.user_id = user_basic.user_id and user_basic.account in

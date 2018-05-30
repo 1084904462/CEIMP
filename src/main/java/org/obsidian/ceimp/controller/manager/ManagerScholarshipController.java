@@ -67,7 +67,8 @@ public class ManagerScholarshipController {
         model.addAttribute("showScholarshipBean",showScholarshipBean);
         int yearScope = TimeUtil.getInstance().getThisYear();
         String grade = showScholarshipBean.getGrade().isEmpty()? "":showScholarshipBean.getGrade().get(0);
-        List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade);
+        List<ScholarshipFormBean> scholarshipFormBeanList = scholarshipService.getScholarshipFormBeanList(managerLogBean.getSchoolId(),subName,yearScope,grade);
+        System.out.println(scholarshipFormBeanList);
         model.addAttribute("scholarshipFormBeanList",scholarshipFormBeanList);
         return "manager/showScholarship";
     }
@@ -80,10 +81,11 @@ public class ManagerScholarshipController {
      */
     @GetMapping("/{subName}/{grade}")
     @ResponseBody
-    public String showScholarshipByGrade(@PathVariable("subName")String subName,@PathVariable("grade")String grade){
+    public String showScholarshipByGrade(HttpSession session,@PathVariable("subName")String subName,@PathVariable("grade")String grade){
+        ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         logger.debug("subName:" + subName + " grade:" + grade);
         int yearScope = TimeUtil.getInstance().getThisYear();
-        return JSON.toJSONString(scholarshipService.getScholarshipFormBeanList(subName,yearScope,grade));
+        return JSON.toJSONString(scholarshipService.getScholarshipFormBeanList(managerLogBean.getSchoolId(),subName,yearScope,grade));
     }
 
     /**
