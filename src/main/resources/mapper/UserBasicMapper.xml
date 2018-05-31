@@ -44,6 +44,12 @@
       #{account}
     </foreach>;
   </update>
+  <delete id="deleteUser" parameterType="java.util.List">
+    delete from user_basic where user_basic.account in
+    <foreach collection="bean.accountList" index="index" item="account" open="(" separator="," close=")">
+      #{account}
+    </foreach>;
+  </delete>
   <select id="getAccountList" parameterType="map" resultType="java.lang.String">
     select user_basic.account account from user_basic,user_info,class_num,major
     where user_basic.user_id = user_info.user_id and user_info.class_num_id = class_num.class_num_id and

@@ -116,9 +116,25 @@ public class ManagerScholarshipController {
         }
     }
 
+
+    /**
+     * 重置奖学金
+     * @param subName
+     * @param userAccountBeanList
+     * @return
+     */
+    @PostMapping("/reset/{subName}")
+    @ResponseBody
+    public String resetScholarship(@PathVariable("subName") String subName,@RequestBody List<UserAccountBean> userAccountBeanList){
+        logger.debug("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
+        int yearScope = TimeUtil.getInstance().getThisYear();
+        return JSON.toJSONString(scholarshipService.resetAll(subName,userAccountBeanList,yearScope));
+    }
+
     /**
      * 默认只能删除当前正在进行的综测所属的奖学金
      * 根据subName对应的数据库表ng、nis、pgs、ss、tas中删除userAccountBeanList中account对应的奖学金记录
+     * 删除award表中对应的记录
      * @param subName 奖学金名称缩写
      * @param userAccountBeanList 包含用户学号account
      * @return
@@ -128,7 +144,7 @@ public class ManagerScholarshipController {
     public String deleteScholarship(@PathVariable("subName") String subName,@RequestBody List<UserAccountBean> userAccountBeanList){
         logger.debug("subName:" + subName + " userAccountBeanList:" + userAccountBeanList);
         int yearScope = TimeUtil.getInstance().getThisYear();
-        return JSON.toJSONString(scholarshipService.deleteAll(subName,userAccountBeanList,yearScope)!=0?new StatusBean("删除成功"):new StatusBean("删除失败"));
+        return JSON.toJSONString(scholarshipService.deleteAll(subName,userAccountBeanList,yearScope));
     }
 
 

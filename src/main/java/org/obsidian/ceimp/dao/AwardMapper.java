@@ -23,6 +23,8 @@ public interface AwardMapper {
 
     List<ScholarshipFormBean> getAll(@Param("schoolId")Long schoolId,@Param("subName") String subName, @Param("yearScope") Integer yearScope, @Param("grade") String grade);
 
+    int deleteAll(@Param("subName")String subName,@Param("list")List<UserAccountBean> userAccountBeanList,@Param("yearScope")Integer yearScope);
+
     Award get(@Param("userId") Long userId,@Param("subName") String subName,@Param("yearScope")int yearScope);
 
     List<AwardBean> getList(@Param("userId") Long userId, @Param("yearScope") Integer yearScope);

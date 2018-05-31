@@ -21,4 +21,6 @@ public interface AwardService {
     int cancelIsFilled(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 
     StatusBean insert(Long schoolId,List<ExcelScholarshipBean> excelScholarshipBeanList);
+
+    int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 }

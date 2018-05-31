@@ -16,7 +16,7 @@ public interface UserBasicService {
 
     StatusBean userLogin(HttpSession session, LogBean logBean) throws NoSuchAlgorithmException, UnsupportedEncodingException;
 
-    int resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    int resetPassword(UserAccountListBean userAccountListBean, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     UserBasic selectByAccount(String account);
 
@@ -31,4 +31,6 @@ public interface UserBasicService {
     List<String> getAccountList(Long schoolId,Integer yearScope);
 
     List<String> getAccountListReverse(Long schoolId,Integer yearScope);
+
+    StatusBean deleteUser(UserAccountListBean userAccountListBean);
 }

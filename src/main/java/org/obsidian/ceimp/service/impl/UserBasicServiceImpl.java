@@ -144,8 +144,8 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        return userBasicMapper.resetPassword(resetPasswordBean,password);
+    public int resetPassword(UserAccountListBean userAccountListBean, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userBasicMapper.resetPassword(userAccountListBean,password);
     }
 
     @Transactional
@@ -226,5 +226,11 @@ public class UserBasicServiceImpl implements UserBasicService {
     @Override
     public List<String> getAccountListReverse(Long schoolId, Integer yearScope) {
         return userBasicMapper.getAccountListReverse(schoolId,yearScope);
+    }
+
+    @Transactional
+    @Override
+    public StatusBean deleteUser(UserAccountListBean userAccountListBean) {
+        return userBasicMapper.deleteUser(userAccountListBean)==0?new StatusBean("删除失败"):new StatusBean("删除成功");
     }
 }

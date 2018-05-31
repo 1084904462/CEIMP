@@ -86,9 +86,16 @@ public class ScholarshipServiceImpl implements ScholarshipService {
 
     @Transactional
     @Override
-    public int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
+    public StatusBean resetAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
         awardService.cancelIsFilled(subName,userAccountBeanList,yearScope);
-        return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope);
+        return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope)==0?new StatusBean("重置失败"):new StatusBean("重置成功");
+    }
+
+    @Transactional
+    @Override
+    public StatusBean deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope){
+        awardService.deleteAll(subName,userAccountBeanList,yearScope);
+        return scholarshipMapper.deleteAll(subName,userAccountBeanList,yearScope)==0?new StatusBean("删除失败"):new StatusBean("删除成功");
     }
 
     @Transactional

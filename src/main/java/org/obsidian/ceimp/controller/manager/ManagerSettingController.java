@@ -70,17 +70,27 @@ public class ManagerSettingController {
 
     /**
      * 管理员重置用户密码为888888
-     * @param resetPasswordBean
+     * @param userAccountListBean
      * @return 重置密码成功
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
      */
     @PostMapping("/resetPassword")
     @ResponseBody
-    public String resetPassword(@RequestBody ResetPasswordBean resetPasswordBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        logger.debug(resetPasswordBean);
+    public String resetPassword(@RequestBody UserAccountListBean userAccountListBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String password = MD5Util.getInstance().EncoderByMd5("888888");
-        return JSON.toJSONString(managerService.resetPassword(resetPasswordBean,password));
+        return JSON.toJSONString(managerService.resetPassword(userAccountListBean,password));
+    }
+
+    /**
+     * 删除用户
+     * @param userAccountListBean
+     * @return
+     */
+    @PostMapping("/deleteUser")
+    @ResponseBody
+    public String deleteUser(@RequestBody UserAccountListBean userAccountListBean){
+        return JSON.toJSONString(userBasicService.deleteUser(userAccountListBean));
     }
 
     /**
@@ -161,7 +171,6 @@ public class ManagerSettingController {
     /**
      * 上传用户名单
      * 有点复杂
-     * 检查是否有对应学院，没有->插入该学院，有->下一步
      * 检查是否有对应专业与年级，没有->插入该专业与年级，有->下一步
      * 检查是否有对应班级号，没有->插入该班级号，有->下一步
      * 检查是否有对应用户，没有->插入该用户，有下一步

@@ -9,6 +9,19 @@ public class ScholarshipFormBean {
     private String account;
     private String username;
     private String scholarshipName;
+    private Integer isFilled;
+
+    public ScholarshipFormBean() {
+    }
+
+    public ScholarshipFormBean(String major, String classNum, String account, String username, String scholarshipName, Integer isFilled) {
+        this.major = major;
+        this.classNum = classNum;
+        this.account = account;
+        this.username = username;
+        this.scholarshipName = scholarshipName;
+        this.isFilled = isFilled;
+    }
 
     @Override
     public String toString() {
@@ -18,6 +31,7 @@ public class ScholarshipFormBean {
                 ", account='" + account + '\'' +
                 ", username='" + username + '\'' +
                 ", scholarshipName='" + scholarshipName + '\'' +
+                ", isFilled=" + isFilled +
                 '}';
     }
 
@@ -59,5 +73,13 @@ public class ScholarshipFormBean {
 
     public void setScholarshipName(String scholarshipName) {
         this.scholarshipName = scholarshipName;
+    }
+
+    public Integer getIsFilled() {
+        return isFilled;
+    }
+
+    public void setIsFilled(Integer isFilled) {
+        this.isFilled = isFilled;
     }
 }

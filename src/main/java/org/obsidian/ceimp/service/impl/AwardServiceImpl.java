@@ -79,6 +79,12 @@ public class AwardServiceImpl implements AwardService {
 
     @Transactional
     @Override
+    public int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope) {
+        return awardMapper.deleteAll(subName,userAccountBeanList,yearScope);
+    }
+
+    @Transactional
+    @Override
     public int insertExcelScholarshipBeanList(List<ExcelScholarshipBean> excelScholarshipBeanList, Integer yearScope) {
         return awardMapper.insertExcelScholarshipBeanList(excelScholarshipBeanList,yearScope);
     }

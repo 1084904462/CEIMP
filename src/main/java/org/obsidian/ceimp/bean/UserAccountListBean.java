@@ -5,19 +5,19 @@ import java.util.List;
 /**
  * Created by BillChen on 2018/5/27.
  */
-public class ResetPasswordBean {
+public class UserAccountListBean {
     private List<String> accountList;
 
-    public ResetPasswordBean() {
+    public UserAccountListBean() {
     }
 
-    public ResetPasswordBean(List<String> accountList) {
+    public UserAccountListBean(List<String> accountList) {
         this.accountList = accountList;
     }
 
     @Override
     public String toString() {
-        return "ResetPasswordBean{" +
+        return "UserAccountListBean{" +
                 "accountList=" + accountList +
                 '}';
     }

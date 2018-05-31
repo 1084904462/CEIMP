@@ -92,8 +92,8 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Transactional
     @Override
-    public StatusBean resetPassword(ResetPasswordBean resetPasswordBean,String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        return userBasicService.resetPassword(resetPasswordBean,password) == 0?new StatusBean("重置密码失败"):new StatusBean("重置密码成功");
+    public StatusBean resetPassword(UserAccountListBean userAccountListBean, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userBasicService.resetPassword(userAccountListBean,password) == 0?new StatusBean("重置密码失败"):new StatusBean("重置密码成功");
     }
 
     @Transactional

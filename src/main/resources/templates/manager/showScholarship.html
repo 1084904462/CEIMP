@@ -174,20 +174,19 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" >
                                 <thead>
                                 <tr>
-                                    <th style="width: 9%"  class="checkbox-center" >
+                                    <th class="checkbox-center" >
 
                                         <input type="checkbox" id="checkAll" name="all" />
 
                                     </th>
-                                    <th style="width: 15%">专业
+                                    <th>专业</th>
+                                    <th>班级号</th>
+                                    <th>学号</th>
 
-                                    </th>
-                                    <th style="width: 15%">班级号</th>
-                                    <th style="width: 15%">学号</th>
-
-                                    <th style="width: 15%">姓名</th>
-                                    <th style="width: 15%">获奖名称</th>
-                                    <th class="setWidth" style="width: 16%">操作</th>
+                                    <th>姓名</th>
+                                    <th>获奖名称</th>
+                                    <th>是否填写</th>
+                                    <th class="setWidth">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody id="TBody">
@@ -201,11 +200,14 @@
                                     <td th:text="${person.account}" class="account"></td>
                                     <td th:text="${person.username}"></td>
                                     <td th:text="${person.scholarshipName}"></td>
+                                    <td th:if="${person.isFilled} == 0">未填写</td>
+                                    <td th:if="${person.isFilled} == 1">已填写</td>
 
 
 
                                     <td style="text-align: center;">
-                                        <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
+                                        <button th:if="${person.isFilled} == 1" type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
+                                        <button th:if="${person.isFilled} == 1" type="button">重置</button>
                                         <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;"  onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
                                     </td>
                                 </tr>

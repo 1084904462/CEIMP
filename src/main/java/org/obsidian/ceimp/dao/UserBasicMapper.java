@@ -18,7 +18,9 @@ public interface UserBasicMapper {
 
     List<UserSearchBean> getUserSearchBeanList(@Param("schoolId")Long schoolId,@Param("grade")String grade,@Param("yearScope")Integer yearScope);
 
-    int resetPassword(@Param("bean")ResetPasswordBean bean,@Param("password")String password);
+    int resetPassword(@Param("bean")UserAccountListBean bean, @Param("password")String password);
+
+    int deleteUser(UserAccountListBean bean);
 
     List<String> getAccountList(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope);
 

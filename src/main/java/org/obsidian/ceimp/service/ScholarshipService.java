@@ -1,9 +1,6 @@
 package org.obsidian.ceimp.service;
 
-import org.obsidian.ceimp.bean.ScholarshipFormBean;
-import org.obsidian.ceimp.bean.ShowScholarshipBean;
-import org.obsidian.ceimp.bean.UserAccountBean;
-import org.obsidian.ceimp.bean.ZipInfoBean;
+import org.obsidian.ceimp.bean.*;
 import org.obsidian.ceimp.entity.Scholarship;
 
 import java.util.List;
@@ -19,7 +16,9 @@ public interface ScholarshipService {
 
     String getScholarshipName(String subName);
 
-    int deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
+    StatusBean resetAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
+
+    StatusBean deleteAll(String subName, List<UserAccountBean> userAccountBeanList, Integer yearScope);
 
     ShowScholarshipBean getShowScholarshipBean(String subName, Long schoolId);
 
