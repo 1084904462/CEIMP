@@ -145,8 +145,9 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    
-                    <h1 id="header" ></h1>
+
+                    <h1 class="page-header">忘了字段名了，你填下
+                    </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -208,7 +209,7 @@
                                     <td style="text-align: center;">
                                         <button th:if="${person.isFilled} == 1" type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
                                         <button th:if="${person.isFilled} == 1" type="button">重置</button>
-                                        <button type="button" class="btn btn-danger2 btn-sm interval radius" style="margin-left: 30px;"  onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
+                                        <button type="button" class="btn btn-danger2 btn-sm interval radius"   onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
                                     </td>
                                 </tr>
 
@@ -364,7 +365,7 @@
         var oTable=$('#dataTables-example').DataTable({
             responsive: true,
             "order": [[ 1, "desc" ]],
-            "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+            "columnDefs": [{ "targets": [0, 6,7], "orderable": false }]
 
         });
         var allPages = oTable.cells( ).nodes( );
@@ -507,7 +508,7 @@
                     var oTable=$('#dataTables-example').DataTable({
                         responsive: true,
                         "order": [[ 1, "desc" ]],
-                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+                        "columnDefs": [{ "targets": [0, 6,7], "orderable": false }]
 
                     });
                 }
@@ -524,23 +525,19 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
                     var button=document.createElement("button");
                     button.innerHTML = "下载";
                     button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    button.setAttribute("onclick","fire_ajax_download(event)");
-
-
+                    /*
+                                        button.setAttribute("onclick","fire_ajax_download(event)");
+                    */
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
-                    button2.setAttribute("style","margin-left:30px;");
+                    button2.setAttribute("style","");
                     button2.setAttribute("onclick","fire_ajax_delete(event)");
                     button2.setAttribute("data-toggle","modal");
                     button2.setAttribute("data-target","#deleteScholarship");
-
-
 
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
@@ -550,8 +547,7 @@
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
                     var td7=document.createElement("td");
-
-
+                    var td8=document.createElement("td");
 
 
                     td1.append(input);
@@ -560,17 +556,33 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].scholarshipName);
-                    td7.append(button,button2);
+                    if(data[i].isFilled=="0"){
+                        td8.append("未填写");
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td8.append("已填写");
+                    }
+
+                    if(data[i].isFilled=="0"){
+                        td7.append(button2);
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td7.append(button);
+                    }
+
+
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
                     tr.append(td4);
                     tr.append(td5);
                     tr.append(td6);
+                    tr.append(td8);
 
                     tr.append(td7);
                     i++;
 
+                    $(".table").append(tr);
 
                     oTable.row.add(tr);}
                 oTable.draw();
@@ -755,7 +767,7 @@
                     var oTable=$('#dataTables-example').DataTable({
                         responsive: true,
                         "order": [[ 1, "desc" ]],
-                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+                        "columnDefs": [{ "targets": [0, 6,7], "orderable": false }]
                     });
                 }
                     $('#checkAll').prop('checked',false);
@@ -779,7 +791,7 @@
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
-                    button2.setAttribute("style","margin-left:30px;");
+                    button2.setAttribute("style","");
                     button2.setAttribute("onclick","fire_ajax_delete(event)");
                     button2.setAttribute("data-toggle","modal");
                     button2.setAttribute("data-target","#deleteScholarship");
@@ -792,6 +804,8 @@
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
                     var td7=document.createElement("td");
+                    var td8=document.createElement("td");
+
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -799,13 +813,28 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].scholarshipName);
-                    td7.append(button,button2);
+                    if(data[i].isFilled=="0"){
+                        td8.append("未填写");
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td8.append("已填写");
+                    }
+
+                    if(data[i].isFilled=="0"){
+                        td7.append(button2);
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td7.append(button);
+                    }
+
+
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
                     tr.append(td4);
                     tr.append(td5);
                     tr.append(td6);
+                    tr.append(td8);
 
                     tr.append(td7);
                     i++;
@@ -1002,7 +1031,7 @@
                     var oTable=$('#dataTables-example').DataTable({
                         responsive: true,
                         "order": [[ 1, "desc" ]],
-                        "columnDefs": [{ "targets": [0, 6], "orderable": false }]
+                        "columnDefs": [{ "targets": [0, 6,7], "orderable": false }]
                     });
                 }
                 $('#checkAll').prop('checked',false);
@@ -1026,7 +1055,7 @@
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
-                    button2.setAttribute("style","margin-left:30px;");
+                    button2.setAttribute("style","");
                     button2.setAttribute("onclick","fire_ajax_delete(event)");
                     button2.setAttribute("data-toggle","modal");
                     button2.setAttribute("data-target","#deleteScholarship");
@@ -1039,6 +1068,8 @@
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
                     var td7=document.createElement("td");
+                    var td8=document.createElement("td");
+
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -1046,13 +1077,28 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].scholarshipName);
-                    td7.append(button,button2);
+                    if(data[i].isFilled=="0"){
+                        td8.append("未填写");
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td8.append("已填写");
+                    }
+
+                    if(data[i].isFilled=="0"){
+                        td7.append(button2);
+                    }
+                    else if(data[i].isFilled=="0"){
+                        td7.append(button);
+                    }
+
+
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
                     tr.append(td4);
                     tr.append(td5);
                     tr.append(td6);
+                    tr.append(td8);
 
                     tr.append(td7);
                     i++;
@@ -1237,7 +1283,6 @@
 
 
         $("#deleteScholarshipButton").click(function(){
-            console.log("1");
             $.ajax({
                 type: "post",
                 contentType: "application/json",
