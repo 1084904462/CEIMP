@@ -46,7 +46,7 @@
   </update>
   <delete id="deleteUser" parameterType="java.util.List">
     delete from user_basic where user_basic.account in
-    <foreach collection="bean.accountList" index="index" item="account" open="(" separator="," close=")">
+    <foreach collection="accountList" index="index" item="account" open="(" separator="," close=")">
       #{account}
     </foreach>;
   </delete>
