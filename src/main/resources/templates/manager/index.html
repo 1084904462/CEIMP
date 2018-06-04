@@ -451,6 +451,8 @@
         $('#checkAll').attr('class','');
         $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadOne");
         $(".downloadScholarshipButton").off('click');
+        $("#deleteUserBatch").attr("class","btn btn-default btn-sm radius  batchDeleteOne");
+        $("#deleteUserBatch").off('click');
         $('#checkAll').prop('checked',false);
         $.ajax({
             type: "get",
@@ -593,6 +595,37 @@
                         $('#checkAll').className="allChecked";
                     }
                 });
+                $(".batchDeleteOne").click(function () {
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var ngOpinionUpdateBean=new Array();
+                    var opinion=$("#opinion16").find("option:selected").text();
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var accountList=[];
+                    for (let value of iterable) {
+                        console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        accountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        i++;
+                    }
+                    ngOpinionUpdateBean={accountList:accountList};
+                    console.log(JSON.stringify(ngOpinionUpdateBean));
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json",
+                        url: "/manager/settings/deleteUser/",
+                        data: JSON.stringify(ngOpinionUpdateBean),
+                        dataType: 'json',
+                        cache: false,
+                        timeout: 600000,
+                        success: function (data) {
+                            alert(data.status);
+                        },
+                        error: function (e) {
+                            alert("删除失败")
+                        }
+                    });
+                });
+
                 var $subBox = $(allPages).find('input[name="subBox"]');
                 $subBox.click(function(){
                     /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -632,6 +665,8 @@
         $('#checkAll').attr('class','');
         $(".downloadScholarshipButton").attr("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownloadTwo");
         $(".downloadScholarshipButton").off('click');
+        $("#deleteUserBatch").attr("class","btn btn-default btn-sm radius  batchDeleteTwo");
+        $("#deleteUserBatch").off('click');
         $('#checkAll').prop('checked',false);
         $.ajax({
             type: "get",
@@ -775,6 +810,37 @@
                         $('#checkAll').className="allChecked";
                     }
                 });
+                $(".batchDeleteTwo").click(function () {
+                    var checked=$(allPages).find('input[name="subBox"]:checked');
+                    var ngOpinionUpdateBean=new Array();
+                    var opinion=$("#opinion16").find("option:selected").text();
+                    let iterable = new Array(checked.length);
+                    var i=0;
+                    var accountList=[];
+                    for (let value of iterable) {
+                        console.log($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        accountList.push($($($(checked[i]).parent()).parent()).children()[3].innerHTML);
+                        i++;
+                    }
+                    ngOpinionUpdateBean={accountList:accountList};
+                    console.log(JSON.stringify(ngOpinionUpdateBean));
+                    $.ajax({
+                        type: "post",
+                        contentType: "application/json",
+                        url: "/manager/settings/deleteUser/",
+                        data: JSON.stringify(ngOpinionUpdateBean),
+                        dataType: 'json',
+                        cache: false,
+                        timeout: 600000,
+                        success: function (data) {
+                            alert(data.status);
+                        },
+                        error: function (e) {
+                            alert("删除失败")
+                        }
+                    });
+                });
+
                 var $subBox = $(allPages).find('input[name="subBox"]');
                 $subBox.click(function(){
                     /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/

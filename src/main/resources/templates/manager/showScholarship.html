@@ -427,9 +427,10 @@
             }
         });
 
-        $(".batchDownload").click(function () {
-            console.log("batchDownload be clicked");
-//            console.log(showScholarshipBean.yearScope);
+        $('.batchDownload').click(function () {
+            console.log("batchDownloadOne be clicked");
+
+            $(allPages).find('input[name="subBox"]').prop('checked', true);
             var checked=$(allPages).find('input[name="subBox"]:checked');
             var zipInfoBeanList=new Array();
             let iterable = new Array(checked.length);
@@ -437,40 +438,51 @@
             var zipInfoBean;
 
             for (let value of iterable) {
+                if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
+                    alert("选中了未填写");
+                    var flag=1;
+                }
 
                 zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
                 zipInfoBeanList.push(zipInfoBean);
                 i++;
             }
-            console.log("batchDownload:")
-            console.log(zipInfoBeanList);
+            if(flag!=1){
+                var account1=[[${showScholarshipBean}]];
+                var showScholarshipBean=[[${showScholarshipBean}]];
+                console.log("batchDownloadOne:");
 
-            var account1=[[${showScholarshipBean}]];
-            var showScholarshipBean=[[${showScholarshipBean}]];
+                console.log(zipInfoBeanList);
 
-            var tempform = document.createElement("form");
-            tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-            tempform.method = "post";
-            tempform.style.display="none"
-            tempform.target="_blank";
 
-            /* for (var x in ZipInfoBean) {
-                 var opt = document.createElement("input");
-                 opt.name = x;
-                 opt.value = ZipInfoBean[x];
-                 tempform.appendChild(opt);
-             }
- */
-            var opt2=document.createElement("input");
-            opt2.name="zipInfoBeanList";
-            opt2.value=JSON.stringify(zipInfoBeanList);
-            var opt = document.createElement("input");
-            opt.type = "submit";
-            tempform.appendChild(opt2);
-            tempform.appendChild(opt);
-            document.body.appendChild(tempform);
-            tempform.submit();
-            document.body.removeChild(tempform);
+
+                var tempform = document.createElement("form");
+                tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                tempform.method = "post";
+                tempform.style.display="none"
+                tempform.target="_blank";
+
+
+                /* for (var x in ZipInfoBean) {
+                     var opt = document.createElement("input");
+                     opt.name = x;
+                     opt.value = ZipInfoBean[x];
+                     tempform.appendChild(opt);
+                 }
+     */
+                var opt2=document.createElement("input");
+                opt2.name="zipInfoBeanList";
+                opt2.value=JSON.stringify(zipInfoBeanList);
+                var opt = document.createElement("input");
+                opt.type = "submit";
+                tempform.appendChild(opt2);
+                tempform.appendChild(opt);
+                document.body.appendChild(tempform);
+                tempform.submit();
+                document.body.removeChild(tempform);
+            }
+
+
         });
     });
 
@@ -646,44 +658,50 @@
                     var zipInfoBean;
 
                     for (let value of iterable) {
+                        if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
+                            alert("选中了未填写");
+                            var flag=1;
+                        }
 
                         zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
                         zipInfoBeanList.push(zipInfoBean);
                         i++;
                     }
+                    if(flag!=1){
+                        var account1=[[${showScholarshipBean}]];
+                        var showScholarshipBean=[[${showScholarshipBean}]];
+                        console.log("batchDownloadOne:");
 
-                    var account1=[[${showScholarshipBean}]];
-                    var showScholarshipBean=[[${showScholarshipBean}]];
-                    console.log("batchDownloadOne:");
-
-                    console.log(zipInfoBeanList);
-
-
-
-                    var tempform = document.createElement("form");
-                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-                    tempform.method = "post";
-                    tempform.style.display="none"
-                    tempform.target="_blank";
+                        console.log(zipInfoBeanList);
 
 
-                    /* for (var x in ZipInfoBean) {
-                         var opt = document.createElement("input");
-                         opt.name = x;
-                         opt.value = ZipInfoBean[x];
-                         tempform.appendChild(opt);
-                     }
-         */
-                    var opt2=document.createElement("input");
-                    opt2.name="zipInfoBeanList";
-                    opt2.value=JSON.stringify(zipInfoBeanList);
-                    var opt = document.createElement("input");
-                    opt.type = "submit";
-                    tempform.appendChild(opt2);
-                    tempform.appendChild(opt);
-                    document.body.appendChild(tempform);
-                    tempform.submit();
-                    document.body.removeChild(tempform);
+
+                        var tempform = document.createElement("form");
+                        tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                        tempform.method = "post";
+                        tempform.style.display="none"
+                        tempform.target="_blank";
+
+
+                        /* for (var x in ZipInfoBean) {
+                             var opt = document.createElement("input");
+                             opt.name = x;
+                             opt.value = ZipInfoBean[x];
+                             tempform.appendChild(opt);
+                         }
+             */
+                        var opt2=document.createElement("input");
+                        opt2.name="zipInfoBeanList";
+                        opt2.value=JSON.stringify(zipInfoBeanList);
+                        var opt = document.createElement("input");
+                        opt.type = "submit";
+                        tempform.appendChild(opt2);
+                        tempform.appendChild(opt);
+                        document.body.appendChild(tempform);
+                        tempform.submit();
+                        document.body.removeChild(tempform);
+                    }
+
 
                 });
 
@@ -931,9 +949,10 @@
                         $('#checkAll').prop("class","");
                     }
                 });
-                $(".batchDownloadTwo").click(function () {
-                    console.log("batchDownloadTwo be clicked");
+                $('.batchDownloadTwo').click(function () {
+                    console.log("batchDownloadOne be clicked");
 
+                    $(allPages).find('input[name="subBox"]').prop('checked', true);
                     var checked=$(allPages).find('input[name="subBox"]:checked');
                     var zipInfoBeanList=new Array();
                     let iterable = new Array(checked.length);
@@ -941,40 +960,51 @@
                     var zipInfoBean;
 
                     for (let value of iterable) {
+                        if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
+                            alert("选中了未填写");
+                            var flag=1;
+                        }
 
                         zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
                         zipInfoBeanList.push(zipInfoBean);
                         i++;
                     }
-                    console.log("batchDownloadTwo:");
-                    console.log(zipInfoBeanList);
+                    if(flag!=1){
+                        var account1=[[${showScholarshipBean}]];
+                        var showScholarshipBean=[[${showScholarshipBean}]];
+                        console.log("batchDownloadOne:");
 
-                    var account1=[[${showScholarshipBean}]];
-                    var showScholarshipBean=[[${showScholarshipBean}]];
+                        console.log(zipInfoBeanList);
 
-                    var tempform = document.createElement("form");
-                    tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
-                    tempform.method = "post";
-                    tempform.style.display="none"
-                    tempform.target="_blank";
 
-                    /* for (var x in ZipInfoBean) {
-                         var opt = document.createElement("input");
-                         opt.name = x;
-                         opt.value = ZipInfoBean[x];
-                         tempform.appendChild(opt);
-                     }
-         */
-                    var opt2=document.createElement("input");
-                    opt2.name="zipInfoBeanList";
-                    opt2.value=JSON.stringify(zipInfoBeanList);
-                    var opt = document.createElement("input");
-                    opt.type = "submit";
-                    tempform.appendChild(opt2);
-                    tempform.appendChild(opt);
-                    document.body.appendChild(tempform);
-                    tempform.submit();
-                    document.body.removeChild(tempform);
+
+                        var tempform = document.createElement("form");
+                        tempform.action = "/manager/scholarship/zip/"+showScholarshipBean.subName+"/"+showScholarshipBean.yearScope;
+                        tempform.method = "post";
+                        tempform.style.display="none"
+                        tempform.target="_blank";
+
+
+                        /* for (var x in ZipInfoBean) {
+                             var opt = document.createElement("input");
+                             opt.name = x;
+                             opt.value = ZipInfoBean[x];
+                             tempform.appendChild(opt);
+                         }
+             */
+                        var opt2=document.createElement("input");
+                        opt2.name="zipInfoBeanList";
+                        opt2.value=JSON.stringify(zipInfoBeanList);
+                        var opt = document.createElement("input");
+                        opt.type = "submit";
+                        tempform.appendChild(opt2);
+                        tempform.appendChild(opt);
+                        document.body.appendChild(tempform);
+                        tempform.submit();
+                        document.body.removeChild(tempform);
+                    }
+
+
                 });
                 $('.downloadScholarshipButton').click(function (event) {
                     var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
