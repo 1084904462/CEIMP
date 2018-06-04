@@ -202,13 +202,17 @@
                                     <td th:text="${person.username}" style="width: 13%;text-align: center;"></td>
                                     <td th:text="${person.scholarshipName}" style="width: 13%;text-align: center;"></td>
                                     <td th:if="${person.isFilled} == 0" style="width: 13%;text-align: center;">未填写</td>
-                                    <td th:if="${person.isFilled} == 1" style="width: 13%;text-align: center;">已填写</td>
+                                    <td th:if="${person.isFilled} == 1" style="width: 13%;text-align: center;">
+                                        <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
+
+                                    </td>
 
 
 
                                     <td style="width: 13%;text-align: center;"><!--style="text-align: center;"-->
-                                        <button th:if="${person.isFilled} == 1" type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
-                                        <button th:if="${person.isFilled} == 0" type="button" class="btn btn-danger2 btn-sm interval radius"   onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
+                                        <button  type="button" class="btn btn-danger2 btn-sm interval radius"   onclick="fire_ajax_delete(event)"  data-toggle="modal" data-target="#deleteScholarship">删除</button>
+                                        <button  type="button" class="btn btn-info btn-sm interval radius" style="margin-left: 13px;"   onclick="fire_ajax_reset(event)"  >重置</button>
+
                                     </td>
                                 </tr>
 
@@ -526,11 +530,11 @@
 
 
                     var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    /*
-                                        button.setAttribute("onclick","fire_ajax_download(event)");
-                    */
+                    button.innerHTML = "重置";
+                    button.className="btn btn-info btn-sm radius";
+                    button.setAttribute("onclick","fire_ajax_reset(event)");
+                    button.setAttribute("style","margin-left:13px;");
+
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
@@ -570,16 +574,18 @@
                     if(data[i].isFilled=="0"){
                         td8.append("未填写");
                     }
-                    else if(data[i].isFilled=="0"){
-                        td8.append("已填写");
+                    else if(data[i].isFilled=="1"){
+                        var button3=document.createElement("button");
+                        button3.innerHTML = "下载";
+                        button3.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                        button3.setAttribute("style","");
+                        button3.setAttribute("onclick","fire_ajax_download(event)");
+                        td8.append(button3);
                     }
 
-                    if(data[i].isFilled=="0"){
-                        td7.append(button2);
-                    }
-                    else if(data[i].isFilled=="0"){
-                        td7.append(button);
-                    }
+
+                        td7.append(button2,button);
+
 
 
                     tr.append(td1);
@@ -795,11 +801,11 @@
 
 
                     var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    /*
-                                        button.setAttribute("onclick","fire_ajax_download(event)");
-                    */
+                    button.innerHTML = "重置";
+                    button.className="btn btn-info btn-sm radius";
+                    button.setAttribute("onclick","fire_ajax_reset(event)");
+                    button.setAttribute("style","margin-left:13px;");
+
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
@@ -839,16 +845,18 @@
                     if(data[i].isFilled=="0"){
                         td8.append("未填写");
                     }
-                    else if(data[i].isFilled=="0"){
-                        td8.append("已填写");
+                    else if(data[i].isFilled=="1"){
+                        var button3=document.createElement("button");
+                        button3.innerHTML = "下载";
+                        button3.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                        button3.setAttribute("style","");
+                        button3.setAttribute("onclick","fire_ajax_download(event)");
+                        td8.append(button3);
                     }
 
-                    if(data[i].isFilled=="0"){
-                        td7.append(button2);
-                    }
-                    else if(data[i].isFilled=="0"){
-                        td7.append(button);
-                    }
+
+                    td7.append(button2,button);
+
 
 
                     tr.append(td1);
@@ -1071,11 +1079,11 @@
 
 
                     var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    /*
-                                        button.setAttribute("onclick","fire_ajax_download(event)");
-                    */
+                    button.innerHTML = "重置";
+                    button.className="btn btn-info btn-sm radius";
+                    button.setAttribute("onclick","fire_ajax_reset(event)");
+                    button.setAttribute("style","margin-left:13px;");
+
                     var button2=document.createElement("button");
                     button2.innerHTML = "删除";
                     button2.className="btn btn-danger2 btn-sm interval radius";
@@ -1115,16 +1123,18 @@
                     if(data[i].isFilled=="0"){
                         td8.append("未填写");
                     }
-                    else if(data[i].isFilled=="0"){
-                        td8.append("已填写");
+                    else if(data[i].isFilled=="1"){
+                        var button3=document.createElement("button");
+                        button3.innerHTML = "下载";
+                        button3.className="btn btn-info btn-sm radius downloadScholarshipButton";
+                        button3.setAttribute("style","");
+                        button3.setAttribute("onclick","fire_ajax_download(event)");
+                        td8.append(button3);
                     }
 
-                    if(data[i].isFilled=="0"){
-                        td7.append(button2);
-                    }
-                    else if(data[i].isFilled=="0"){
-                        td7.append(button);
-                    }
+
+                    td7.append(button2,button);
+
 
 
                     tr.append(td1);
@@ -1398,6 +1408,47 @@
         tempform.submit();
         document.body.removeChild(tempform);
         console.log(tempform);
+    }
+    function fire_ajax_reset(event) {
+
+        var account1=[[${showScholarshipBean}]];
+
+        var UserAccountBean=[[${scholarshipFormBeanList}]];
+
+        var UserAccountBeanList = new Array();
+
+
+
+        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+
+        var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+        UserAccountBeanList.push(account);
+
+
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "/manager/scholarship/reset/"+account1.subName,//
+                data: JSON.stringify(UserAccountBeanList),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    alert("重置成功")
+
+                    /*
+                                        location.reload();
+                    */
+
+                    console.log("SUCCESS : ", data);
+                    /* $("#deleteScholarship").data-dismiss="modal";*/
+                },
+                error: function (e) {
+                    alert("重置失败")
+                    console.log("Failed : ", e);
+                }
+            });
     }
 
     function fire_ajax_change_password(event) {
