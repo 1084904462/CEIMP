@@ -118,8 +118,6 @@
                                 </li>
                                 <li th:if="${session.managerLogBean.managerType} == 1" onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
-                                </li>
                                 <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
                             </ul>
@@ -490,18 +488,6 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
-                    var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    button.setAttribute("onclick","fire_ajax_download(event)");
-
-
-
-
-
-
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
                     var td2=document.createElement("td");
@@ -509,15 +495,13 @@
                     var td4=document.createElement("td");
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
-                    var td7=document.createElement("td");
 
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
                     td3.setAttribute("style","width: 13%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
                     td5.setAttribute("style","width: 13%;text-align: center;");
-                    td6.setAttribute("style","width: 13%;text-align: center;");
-                    td7.setAttribute("style","width: 26%;text-align: center;");
+                    td6.setAttribute("style","width: 26%;text-align: center;");
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -525,7 +509,6 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].opinion);
-                    td7.append(button);
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
@@ -733,18 +716,6 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
-                    var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    button.setAttribute("onclick","fire_ajax_download(event)");
-
-
-
-
-
-
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
                     var td2=document.createElement("td");
@@ -752,15 +723,13 @@
                     var td4=document.createElement("td");
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
-                    var td7=document.createElement("td");
 
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
                     td3.setAttribute("style","width: 13%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
                     td5.setAttribute("style","width: 13%;text-align: center;");
-                    td6.setAttribute("style","width: 13%;text-align: center;");
-                    td7.setAttribute("style","width: 26%;text-align: center;");
+                    td6.setAttribute("style","width: 26%;text-align: center;");
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -768,7 +737,6 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].opinion);
-                    td7.append(button);
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);
@@ -975,18 +943,6 @@
                     input.setAttribute("name","subBox");
                     input.setAttribute("style","margin-top:7px;");
 
-
-
-                    var button=document.createElement("button");
-                    button.innerHTML = "下载";
-                    button.className="btn btn-info btn-sm radius downloadScholarshipButton";
-                    button.setAttribute("onclick","fire_ajax_download(event)");
-
-
-
-
-
-
                     var tr=document.createElement("tr");
                     var td1=document.createElement("td");
                     var td2=document.createElement("td");
@@ -994,15 +950,13 @@
                     var td4=document.createElement("td");
                     var td5=document.createElement("td");
                     var td6=document.createElement("td");
-                    var td7=document.createElement("td");
 
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
                     td3.setAttribute("style","width: 13%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
                     td5.setAttribute("style","width: 13%;text-align: center;");
-                    td6.setAttribute("style","width: 13%;text-align: center;");
-                    td7.setAttribute("style","width: 26%;text-align: center;");
+                    td6.setAttribute("style","width: 26%;text-align: center;");
 
                     td1.append(input);
                     td2.append(data[i].major);
@@ -1010,7 +964,6 @@
                     td4.append(data[i].account);
                     td5.append(data[i].username);
                     td6.append(data[i].opinion);
-                    td7.append(button);
                     tr.append(td1);
                     tr.append(td2);
                     tr.append(td3);

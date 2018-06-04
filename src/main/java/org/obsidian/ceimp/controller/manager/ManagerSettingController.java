@@ -40,34 +40,6 @@ public class ManagerSettingController {
     @Autowired
     private AwardService awardService;
 
-    @Autowired
-    private MajorService majorService;
-
-    /**
-     * 进入重置密码页面
-     * @return 重置密码页面
-     */
-    @GetMapping("/resetPassword")
-    public String pageResetPassword(HttpSession session, Model model){
-        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
-        List<String> gradeList = majorService.getLastThree(managerLogBean.getSchoolId());
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        String grade = gradeList.isEmpty()? "":gradeList.get(0);
-        List<UserSearchBean> userSearchBeanList = userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),grade,yearScope);
-        model.addAttribute("gradeList",gradeList);
-        model.addAttribute("userSearchBeanList",userSearchBeanList);
-        return "manager/resetPassword";
-    }
-
-    @GetMapping("/resetPassword/{grade}")
-    @ResponseBody
-    public String showResetPasswordByGrade(@PathVariable("grade") String grade,HttpSession session){
-        logger.debug("grade:" + grade);
-        ManagerLogBean managerLogBean = (ManagerLogBean)session.getAttribute("managerLogBean");
-        int yearScope = TimeUtil.getInstance().getThisYear();
-        return JSON.toJSONString(userBasicService.getUserSearchBeanList(managerLogBean.getSchoolId(),grade,yearScope));
-    }
-
     /**
      * 管理员重置用户密码为888888
      * @param userAccountListBean
@@ -79,7 +51,8 @@ public class ManagerSettingController {
     @ResponseBody
     public String resetPassword(@RequestBody UserAccountListBean userAccountListBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         String password = MD5Util.getInstance().EncoderByMd5("888888");
-        return JSON.toJSONString(managerService.resetPassword(userAccountListBean,password));
+        StatusBean statusBean = userBasicService.resetPassword(userAccountListBean,password);
+        return JSON.toJSONString(statusBean);
     }
 
     /**

@@ -144,8 +144,8 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Transactional
     @Override
-    public int resetPassword(UserAccountListBean userAccountListBean, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        return userBasicMapper.resetPassword(userAccountListBean,password);
+    public StatusBean resetPassword(UserAccountListBean userAccountListBean, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        return userBasicMapper.resetPassword(userAccountListBean,password)==0?new StatusBean("重置失败"):new StatusBean("重置成功");
     }
 
     @Transactional

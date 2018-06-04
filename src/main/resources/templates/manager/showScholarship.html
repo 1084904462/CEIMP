@@ -126,8 +126,6 @@
                                 </li>
                                 <li th:if="${session.managerLogBean.managerType} == 1" onclick="loadPage('/manager/settings/insertManager')"><a><span class="text">新增管理员</span></a>
                                 </li>
-                                <li onclick="loadPage('/manager/settings/resetPassword')"><a ><span class="text ">重置学生密码</span></a>
-                                </li>
                                 <li onclick="loadPage('/manager/settings/upload')"><a><span class="text">名单管理</span></a>
                                 </li>
                             </ul>
@@ -146,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">忘了字段名了，你填下
+                    <h1 class="page-header" th:text="${showScholarshipBean.scholarshipName}">
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -181,12 +179,12 @@
 
                                     </th>
                                     <th style="width: 13%;text-align: center;">专业</th>
-                                    <th style="width: 13%;text-align: center;">班级号</th>
+                                    <th style="width: 10%;text-align: center;">班级号</th>
                                     <th style="width: 13%;text-align: center;">学号</th>
 
-                                    <th style="width: 13%;text-align: center;">姓名</th>
+                                    <th style="width: 10%;text-align: center;">姓名</th>
                                     <th style="width: 13%;text-align: center;">获奖名称</th>
-                                    <th style="width: 13%;text-align: center;">是否填写</th>
+                                    <th style="width: 10%;text-align: center;">状态</th>
                                     <th style="width: 13%;text-align: center;">操作</th>
                                 </tr>
                                 </thead>
@@ -197,12 +195,12 @@
                                         <input type="checkbox" id="blankCheckbox1" value="option1" name="subBox" aria-label="..." style="margin-top:7px;"/>
                                     </td >
                                     <td th:text="${person.major}" style="width: 13%;text-align: center;"></td>
-                                    <td th:text="${person.classNum}" style="width: 13%;text-align: center;"></td>
+                                    <td th:text="${person.classNum}" style="width: 10%;text-align: center;"></td>
                                     <td th:text="${person.account}" class="account" style="width: 13%;text-align: center;"></td>
-                                    <td th:text="${person.username}" style="width: 13%;text-align: center;"></td>
+                                    <td th:text="${person.username}" style="width: 10%;text-align: center;"></td>
                                     <td th:text="${person.scholarshipName}" style="width: 13%;text-align: center;"></td>
-                                    <td th:if="${person.isFilled} == 0" style="width: 13%;text-align: center;">未填写</td>
-                                    <td th:if="${person.isFilled} == 1" style="width: 13%;text-align: center;">
+                                    <td th:if="${person.isFilled} == 0" style="width: 10%;text-align: center;">未填写</td>
+                                    <td th:if="${person.isFilled} == 1" style="width: 10%;text-align: center;">
                                         <button type="button" class="btn btn-info btn-sm radius downloadScholarshipButton" onclick="fire_ajax_download(event)"  >下载</button>
 
                                     </td>
@@ -554,12 +552,12 @@
                     var td8=document.createElement("td");
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
-                    td3.setAttribute("style","width: 13%;text-align: center;");
+                    td3.setAttribute("style","width: 10%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
-                    td5.setAttribute("style","width: 13%;text-align: center;");
+                    td5.setAttribute("style","width: 10%;text-align: center;");
                     td6.setAttribute("style","width: 13%;text-align: center;");
                     td7.setAttribute("style","width: 13%;text-align: center;");
-                    td8.setAttribute("style","width: 13%;text-align: center;");
+                    td8.setAttribute("style","width: 10%;text-align: center;");
 
 
 
@@ -825,12 +823,12 @@
                     var td8=document.createElement("td");
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
-                    td3.setAttribute("style","width: 13%;text-align: center;");
+                    td3.setAttribute("style","width: 10%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
-                    td5.setAttribute("style","width: 13%;text-align: center;");
+                    td5.setAttribute("style","width: 10%;text-align: center;");
                     td6.setAttribute("style","width: 13%;text-align: center;");
                     td7.setAttribute("style","width: 13%;text-align: center;");
-                    td8.setAttribute("style","width: 13%;text-align: center;");
+                    td8.setAttribute("style","width: 10%;text-align: center;");
 
 
 
@@ -1103,12 +1101,12 @@
                     var td8=document.createElement("td");
                     td1.setAttribute("style","width: 6%;text-align: center;");
                     td2.setAttribute("style","width: 13%;text-align: center;");
-                    td3.setAttribute("style","width: 13%;text-align: center;");
+                    td3.setAttribute("style","width: 10%;text-align: center;");
                     td4.setAttribute("style","width: 13%;text-align: center;");
-                    td5.setAttribute("style","width: 13%;text-align: center;");
+                    td5.setAttribute("style","width: 15%;text-align: center;");
                     td6.setAttribute("style","width: 13%;text-align: center;");
                     td7.setAttribute("style","width: 13%;text-align: center;");
-                    td8.setAttribute("style","width: 13%;text-align: center;");
+                    td8.setAttribute("style","width: 10%;text-align: center;");
 
 
 
