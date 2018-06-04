@@ -1308,46 +1308,6 @@
         });
     }
 
-    function fire_ajax_delete(event) {
-
-        var account1=[[${showScholarshipBean}]];
-
-        var UserAccountBean=[[${scholarshipFormBeanList}]];
-
-        var UserAccountBeanList = new Array();
-
-
-
-        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
-
-        var index=$($($($(event.target).parent())).parent()).prevAll().length;
-
-        UserAccountBeanList.push(account);
-
-
-        $("#deleteScholarshipButton").click(function(){
-            $.ajax({
-                type: "post",
-                contentType: "application/json",
-                url: "/manager/scholarship/delete/"+account1.subName,//
-                data: JSON.stringify(UserAccountBeanList),
-                dataType: 'json',
-                cache: false,
-                timeout: 600000,
-                success: function (data) {
-                    location.reload();
-
-                    console.log("SUCCESS : ", data);
-                   /* $("#deleteScholarship").data-dismiss="modal";*/
-                   $("#deleteScholarshipSuccess").style="display:block";
-                },
-                error: function (e) {
-                    alert("删除失败")
-                    console.log("Failed : ", e);
-                }
-            });
-        });
-    }
     function fire_ajax_download(event) {
         var scholarshipFormBeanList=[[${scholarshipFormBeanList}]];
 
@@ -1448,6 +1408,49 @@
                 }
             });
     }
+    var UserAccountBeanList = new Array();
+
+    function fire_ajax_delete(event) {
+        UserAccountBeanList=[]
+
+        var UserAccountBean=[[${scholarshipFormBeanList}]];
+
+
+
+
+        var account=$($($(event.target).parent()).parent()).children()[3].innerHTML;
+
+        var index=$($($($(event.target).parent())).parent()).prevAll().length;
+
+        UserAccountBeanList.push(account);
+
+
+    }
+    $("#deleteScholarshipButton").click(function(){
+        var account1=[[${showScholarshipBean}]];
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json",
+            url: "/manager/scholarship/delete/"+account1.subName,//
+            data: JSON.stringify(UserAccountBeanList),
+            dataType: 'json',
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                location.reload();
+
+                console.log("SUCCESS : ", data);
+                /* $("#deleteScholarship").data-dismiss="modal";*/
+                $("#deleteScholarshipSuccess").style="display:block";
+            },
+            error: function (e) {
+                alert("删除失败")
+                console.log("Failed : ", e);
+            }
+        });
+    });
+
 
     function fire_ajax_change_password(event) {
         $.ajax({
