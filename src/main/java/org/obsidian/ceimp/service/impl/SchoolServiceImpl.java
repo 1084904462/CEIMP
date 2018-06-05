@@ -40,6 +40,9 @@ public class SchoolServiceImpl implements SchoolService {
     @Transactional
     @Override
     public StatusBean insert(String name) {
+        if("".equals(name) || name.length()<=0){
+            return new StatusBean("学院名称不能为空");
+        }
         if(this.exist(name)){
             return new StatusBean("已存在相同名称的学院");
         }

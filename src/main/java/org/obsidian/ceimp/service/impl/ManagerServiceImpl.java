@@ -6,7 +6,6 @@ import org.obsidian.ceimp.dao.ManagerMapper;
 import org.obsidian.ceimp.entity.Manager;
 import org.obsidian.ceimp.entity.ManagerExample;
 import org.obsidian.ceimp.service.ManagerService;
-import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.MD5Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private ManagerMapper managerMapper;
-
-    @Autowired
-    private UserBasicService userBasicService;
 
     @Transactional
     @Override
@@ -131,25 +127,30 @@ public class ManagerServiceImpl implements ManagerService {
     public StatusBean insert(InsertManagerBean insertManagerBean) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         StatusBean statusBean = new StatusBean();
         if(this.get(insertManagerBean.getAccount()) == null){
-            if(insertManagerBean.getPassword().length() >= 6){
-                if(insertManagerBean.getPassword().length() <= 16){
-                    if(insertManagerBean.getPassword().equals(insertManagerBean.getConfirmPassword())){
-                        Manager manager = new Manager();
-                        BeanUtils.copyProperties(insertManagerBean,manager);
-                        manager.setPassword(MD5Util.getInstance().EncoderByMd5(manager.getPassword()));
-                        managerMapper.insertSelective(manager);
-                        statusBean.setStatus("新增管理员成功");
+            if(!"".equals(insertManagerBean.getAccount()) && insertManagerBean.getAccount().length()>0){
+                if(insertManagerBean.getPassword().length() >= 6){
+                    if(insertManagerBean.getPassword().length() <= 16){
+                        if(insertManagerBean.getPassword().equals(insertManagerBean.getConfirmPassword())){
+                            Manager manager = new Manager();
+                            BeanUtils.copyProperties(insertManagerBean,manager);
+                            manager.setPassword(MD5Util.getInstance().EncoderByMd5(manager.getPassword()));
+                            managerMapper.insertSelective(manager);
+                            statusBean.setStatus("新增管理员成功");
+                        }
+                        else {
+                            statusBean.setStatus("两次密码输入不同");
+                        }
                     }
-                    else {
-                        statusBean.setStatus("两次密码输入不同");
+                    else{
+                        statusBean.setStatus("密码不能大于16位");
                     }
                 }
                 else{
-                    statusBean.setStatus("密码不能大于16位");
+                    statusBean.setStatus("密码不能小于6位");
                 }
             }
             else{
-                statusBean.setStatus("密码不能小于6位");
+                statusBean.setStatus("账号不能为空");
             }
         }
         else{
