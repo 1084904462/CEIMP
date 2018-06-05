@@ -361,7 +361,7 @@
 <script th:inline="javascript">
     $(document).ready(function() {
 
-        $("#batchDownload").prop("class","btn btn-default btn-sm radius downloadScholarshipButton batchDownload");
+        $("#batchDownload").attr("class","btn btn-default btn-sm radius batchDownload");
 
         var oTable=$('#dataTables-example').DataTable({
             responsive: true,
@@ -399,15 +399,7 @@
             $(this).toggleClass('allChecked');
         });
 
-        /*$("#checkAll2").click(function() {
-            if ($(this).hasClass('checked')) {
-                $('input[name="subBox"]').prop("checked",false);
-                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-            else {
-                $('input[name="subBox"]').prop("checked",true);
-                $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-            $(this).toggleClass('checked');
-        });*/
+
         var $subBox = $(allPages).find('input[name="subBox"]');
         $subBox.click(function(){
             /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -427,10 +419,10 @@
             }
         });
 
-        $('.batchDownload').click(function () {
-            console.log("batchDownloadOne be clicked");
+        $('#batchDownload').click(function () {
+            console.log("batchDownload be clicked");
 
-            $(allPages).find('input[name="subBox"]').prop('checked', true);
+
             var checked=$(allPages).find('input[name="subBox"]:checked');
             var zipInfoBeanList=new Array();
             let iterable = new Array(checked.length);
@@ -450,7 +442,7 @@
             if(flag!=1){
                 var account1=[[${showScholarshipBean}]];
                 var showScholarshipBean=[[${showScholarshipBean}]];
-                console.log("batchDownloadOne:");
+                console.log("batchDownload:");
 
                 console.log(zipInfoBeanList);
 
@@ -650,7 +642,7 @@
                 $('.batchDownloadOne').click(function () {
                     console.log("batchDownloadOne be clicked");
 
-                    $(allPages).find('input[name="subBox"]').prop('checked', true);
+
                     var checked=$(allPages).find('input[name="subBox"]:checked');
                     var zipInfoBeanList=new Array();
                     let iterable = new Array(checked.length);
@@ -709,15 +701,7 @@
 
 
 
-                /*$("#checkAll2").click(function() {
-                    if ($(this).hasClass('checked')) {
-                        $('input[name="subBox"]').prop("checked",false);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    else {
-                        $('input[name="subBox"]').prop("checked",true);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    $(this).toggleClass('checked');
-                });*/
+
                 var $subBox = $(allPages).find('input[name="subBox"]');
                 $subBox.click(function(){
                     /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -922,15 +906,7 @@
                     }
                 });
 
-                /*$("#checkAll2").click(function() {
-                    if ($(this).hasClass('checked')) {
-                        $('input[name="subBox"]').prop("checked",false);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    else {
-                        $('input[name="subBox"]').prop("checked",true);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    $(this).toggleClass('checked');
-                });*/
+
                 var $subBox = $(allPages).find('input[name="subBox"]');
                 $subBox.click(function(){
                     /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -950,9 +926,9 @@
                     }
                 });
                 $('.batchDownloadTwo').click(function () {
-                    console.log("batchDownloadOne be clicked");
+                    console.log("batchDownloadTwo be clicked");
 
-                    $(allPages).find('input[name="subBox"]').prop('checked', true);
+
                     var checked=$(allPages).find('input[name="subBox"]:checked');
                     var zipInfoBeanList=new Array();
                     let iterable = new Array(checked.length);
@@ -972,7 +948,6 @@
                     if(flag!=1){
                         var account1=[[${showScholarshipBean}]];
                         var showScholarshipBean=[[${showScholarshipBean}]];
-                        console.log("batchDownloadOne:");
 
                         console.log(zipInfoBeanList);
 
@@ -1068,7 +1043,7 @@
         $("#b2").attr("class","");
 
         $("#b3").attr("class","active");
-        $("#batchDownload").prop("class","btn btn-default btn-sm radius  batchDownloadTwo");
+        $("#batchDownload").prop("class","btn btn-default btn-sm radius  batchDownloadThree");
         $("#batchDownload").off('click');
         console.log($('#checkAll'));
         $('#checkAll').attr('class','');
@@ -1211,16 +1186,6 @@
                         $('#checkAll').className="allChecked";
                     }
                 });
-
-                /*$("#checkAll2").click(function() {
-                    if ($(this).hasClass('checked')) {
-                        $('input[name="subBox"]').prop("checked",false);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    else {
-                        $('input[name="subBox"]').prop("checked",true);
-                        $("#checkedNumber15").text( $(allPages).find('input[name="subBox"]:checked').length);}
-                    $(this).toggleClass('checked');
-                });*/
                 var $subBox = $(allPages).find('input[name="subBox"]');
                 $subBox.click(function(){
                     /!*  $("#checkAll2").prop("checked",$subBox.length == $("input[name='subBox']:checked").length ? true : false);*!/
@@ -1239,8 +1204,8 @@
                         $('#checkAll').prop("class","");
                     }
                 });
-                $(".batchDownloadTwo").click(function () {
-                    console.log("batchDownloadTwo be clicked");
+                $(".batchDownloadThree").click(function () {
+                    console.log("batchDownloadThree be clicked");
 
                     var checked=$(allPages).find('input[name="subBox"]:checked');
                     var zipInfoBeanList=new Array();
@@ -1254,7 +1219,7 @@
                         zipInfoBeanList.push(zipInfoBean);
                         i++;
                     }
-                    console.log("batchDownloadTwo:");
+                    console.log("batchDownloadThree:");
                     console.log(zipInfoBeanList);
 
                     var account1=[[${showScholarshipBean}]];
