@@ -428,7 +428,6 @@
 
             for (let value of iterable) {
                 if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
-                    alert("选中了未填写");
                     var flag=1;
                 }
 
@@ -469,6 +468,10 @@
                 document.body.appendChild(tempform);
                 tempform.submit();
                 document.body.removeChild(tempform);
+            }
+            if(flag==1){
+                alert("选中了未填写");
+
             }
 
 
@@ -648,13 +651,17 @@
 
                     for (let value of iterable) {
                         if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
-                            alert("选中了未填写");
+
                             var flag=1;
                         }
 
                         zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
                         zipInfoBeanList.push(zipInfoBean);
                         i++;
+                    }
+                    if(flag==1){
+                        alert("选中了未填写");
+
                     }
                     if(flag!=1){
                         var account1=[[${showScholarshipBean}]];
@@ -934,13 +941,17 @@
 
                     for (let value of iterable) {
                         if($($($(checked[i]).parent()).parent()).children()[6].innerHTML=="未填写"){
-                            alert("选中了未填写");
+
                             var flag=1;
                         }
 
                         zipInfoBean={account:$($($(checked[i]).parent()).parent()).children()[3].innerHTML,username:$($($(checked[i]).parent()).parent()).children()[4].innerHTML,scholarshipName:$($($(checked[i]).parent()).parent()).children()[5].innerHTML};
                         zipInfoBeanList.push(zipInfoBean);
                         i++;
+                    }
+                    if(flag==1){
+                        alert("选中了未填写");
+
                     }
                     if(flag!=1){
                         var account1=[[${showScholarshipBean}]];
