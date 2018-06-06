@@ -34,13 +34,12 @@
         nis.award1 award1,nis.unit1 unit1,nis.date2 date2,nis.award2 award2,nis.unit2 unit2,nis.date3 date3,
         nis.award3 award3,nis.unit3 unit3,nis.date4 date4,nis.award4 award4,nis.unit4 unit4,nis.resident resident,
         nis.income_source incomeSource,nis.month_income monthIncome,nis.family_sum familySum,nis.address address,
-        nis.postal_code postalCode,nis.situation situation,nis.apply_reason applyReason,opinion.nis_opinion opinion
-        from school,major,class_num,user_basic,user_info,nis,opinion
+        nis.postal_code postalCode,nis.situation situation,nis.apply_reason applyReason
+        from school,major,class_num,user_basic,user_info,nis
         where school.school_id = major.school_id and major.major_id = class_num.major_id and
         class_num.class_num_id = user_info.class_num_id and user_info.user_id = user_basic.user_id and
         user_info.year_scope = nis.year_scope and nis.user_id = user_basic.user_id and
-        opinion.school_id = school.school_id and opinion.grade = major.grade and
-        opinion.year_scope = nis.year_scope and nis.year_scope = #{yearScope} and user_basic.account in
+        nis.year_scope = #{yearScope} and user_basic.account in
         <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
             #{bean.account}
         </foreach>
@@ -54,13 +53,12 @@
         user_info.major_sum majorSum,user_info.pass_sum passSum,user_info.class_sum classSum,pgs.date1 date1,
         pgs.award1 award1,pgs.unit1 unit1,pgs.date2 date2,pgs.award2 award2,pgs.unit2 unit2,pgs.date3 date3,
         pgs.award3 award3,pgs.unit3 unit3,pgs.date4 date4,pgs.award4 award4,pgs.unit4 unit4,
-        pgs.apply_reason applyReason,opinion.pgs_recommend recommendReason,opinion.pgs_opinion opinion
-        from school,major,class_num,user_basic,user_info,pgs,opinion
+        pgs.apply_reason applyReason
+        from school,major,class_num,user_basic,user_info,pgs
         where school.school_id = major.school_id and major.major_id = class_num.major_id and
         class_num.class_num_id = user_info.class_num_id and user_info.user_id = user_basic.user_id and
         user_info.year_scope = pgs.year_scope and pgs.user_id = user_basic.user_id and
-        opinion.school_id = school.school_id and opinion.grade = major.grade and
-        opinion.year_scope = pgs.year_scope and pgs.year_scope = #{yearScope} and user_basic.account in
+        pgs.year_scope = #{yearScope} and user_basic.account in
         <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
             #{bean.account}
         </foreach>
@@ -71,15 +69,14 @@
         class_num.num classNum,user_basic.username username,user_basic.sex sex,user_basic.account account,
         user_basic.nation nation,user_info.political political,user_info.job job,user_info.charact charact,
         user_info.study study,user_info.ability ability,user_info.total total,user_info.ce_rank ceRank,
-        user_info.major_sum majorSum,scholarship.name rank,ss.apply_reason applyReanson,opinion.ss_opinion opinion
-        from school,major,class_num,user_basic,user_info,ss,scholarship,award,opinion
+        user_info.major_sum majorSum,scholarship.name rank,ss.apply_reason applyReanson
+        from school,major,class_num,user_basic,user_info,ss,scholarship,award
         where scholarship.sub_name = "ss" and scholarship.scholarship_id = award.scholarship_id and
         award.user_id = user_basic.user_id and award.year_scope = ss.year_scope and
         school.school_id = major.school_id and major.major_id = class_num.major_id and
         class_num.class_num_id = user_info.class_num_id and user_info.user_id = user_basic.user_id and
         user_info.year_scope = ss.year_scope and ss.user_id = user_basic.user_id and
-        opinion.school_id = school.school_id and opinion.grade = major.grade and
-        opinion.year_scope = ss.year_scope and ss.year_scope = #{yearScope} and user_basic.account in
+        ss.year_scope = #{yearScope} and user_basic.account in
         <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
             #{bean.account}
         </foreach>
@@ -90,13 +87,12 @@
         class_num.num classNum,user_basic.username username,user_basic.sex sex,user_basic.account account,
         user_basic.nation nation,user_info.political political,user_info.job job,user_info.charact charact,
         user_info.study study,user_info.ability ability,user_info.total total,user_info.ce_rank ceRank,
-        user_info.major_sum majorSum,tas.apply_reason applyReanson,opinion.tas_opinion opinion
-        from school,major,class_num,user_basic,user_info,tas,opinion
+        user_info.major_sum majorSum,tas.apply_reason applyReanson
+        from school,major,class_num,user_basic,user_info,tas
         where school.school_id = major.school_id and major.major_id = class_num.major_id and
         class_num.class_num_id = user_info.class_num_id and user_info.user_id = user_basic.user_id and
         user_info.year_scope = tas.year_scope and tas.user_id = user_basic.user_id and
-        opinion.school_id = school.school_id and opinion.grade = major.grade and
-        opinion.year_scope = tas.year_scope and tas.year_scope = #{yearScope} and user_basic.account in
+        tas.year_scope = #{yearScope} and user_basic.account in
         <foreach collection="list" index="index" item="bean" open="(" separator="," close=")">
             #{bean.account}
         </foreach>

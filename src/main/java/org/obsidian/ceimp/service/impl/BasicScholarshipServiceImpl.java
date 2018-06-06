@@ -197,17 +197,45 @@ public class BasicScholarshipServiceImpl implements BasicScholarshipService {
         if("ng".equals(subName)){
             beanList = basicScholarshipMapper.getNgBeanList(zipInfoBeanList,yearScope);
         }
-        else if("nis".equals(subName)){
-            beanList = basicScholarshipMapper.getNisBeanList(zipInfoBeanList,yearScope);
-        }
-        else if("pgs".equals(subName)){
-            beanList = basicScholarshipMapper.getPgsBeanList(zipInfoBeanList,yearScope);
-        }
-        else if("ss".equals(subName)){
-            beanList = basicScholarshipMapper.getSsBeanList(zipInfoBeanList,yearScope);
-        }
-        else if("tas".equals(subName)){
-            beanList = basicScholarshipMapper.getTasBeanList(zipInfoBeanList,yearScope);
+        else{
+            String account = "";
+            if(!zipInfoBeanList.isEmpty()){
+                account = zipInfoBeanList.get(0).getAccount();
+            }
+            Opinion opinion = opinionMapper.getOpinion(account,yearScope);
+            if("nis".equals(subName)){
+                beanList = basicScholarshipMapper.getNisBeanList(zipInfoBeanList,yearScope);
+                if(opinion != null){
+                    for(BasicScholarshipBean bean:beanList){
+                        bean.setOpinion(opinion.getNisOpinion());
+                    }
+                }
+            }
+            else if("pgs".equals(subName)){
+                beanList = basicScholarshipMapper.getPgsBeanList(zipInfoBeanList,yearScope);
+                if(opinion != null){
+                    for(BasicScholarshipBean bean:beanList){
+                        bean.setRecommendReason(opinion.getPgsRecommend());
+                        bean.setOpinion(opinion.getPgsOpinion());
+                    }
+                }
+            }
+            else if("ss".equals(subName)){
+                beanList = basicScholarshipMapper.getSsBeanList(zipInfoBeanList,yearScope);
+                if(opinion != null){
+                    for(BasicScholarshipBean bean:beanList){
+                        bean.setOpinion(opinion.getSsOpinion());
+                    }
+                }
+            }
+            else if("tas".equals(subName)){
+                beanList = basicScholarshipMapper.getTasBeanList(zipInfoBeanList,yearScope);
+                if(opinion != null){
+                    for(BasicScholarshipBean bean:beanList){
+                        bean.setOpinion(opinion.getTasOpinion());
+                    }
+                }
+            }
         }
         return beanList;
     }

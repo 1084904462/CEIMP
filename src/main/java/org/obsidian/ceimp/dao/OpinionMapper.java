@@ -16,9 +16,11 @@ public interface OpinionMapper {
 
     Opinion get(@Param("userId")Long userId,@Param("yearScope")Integer yearScope);
 
+    Opinion getOpinion(@Param("account")String account,@Param("yearScope")Integer yearScope);
+
     int update(@Param("schoolId") Long schoolId, @Param("yearScope") Integer yearScope,@Param("bean")ScholarshipOpinionBean bean);
 
-    ScholarshipOpinionBean getBean(@Param("schoolId") Long managerId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
+    ScholarshipOpinionBean getBean(@Param("schoolId") Long schoolId,@Param("grade")String grade,@Param("yearScope") Integer yearScope);
 
     boolean exist(@Param("schoolId")Long schoolId,@Param("yearScope")Integer yearScope,@Param("grade")String grade);
 

@@ -39,6 +39,16 @@
     major.school_id = opinion.school_id and opinion.grade = major.grade and
     opinion.year_scope = #{yearScope} and user_basic.user_id = #{userId};
   </select>
+  <select id="getOpinion" parameterType="map" resultType="org.obsidian.ceimp.entity.Opinion">
+    select opinion.opinion_id opinionId,opinion.grade grade,opinion.school_id schoolId,
+    opinion.year_scope yearScope,opinion.nis_opinion nisOpinion,opinion.pgs_recommend pgsRecommend,
+    opinion.pgs_opinion pgsOpinion,opinion.ss_opinion ssOpinion,opinion.tas_opinion tasOpinion
+    from opinion,major,class_num,user_basic,user_info
+    where user_basic.user_id = user_info.user_id and user_info.year_scope = opinion.year_scope and
+    user_info.class_num_id = class_num.class_num_id and class_num.major_id = major.major_id and
+    major.school_id = opinion.school_id and opinion.grade = major.grade and
+    opinion.year_scope = #{yearScope} and user_basic.account = #{account};
+  </select>
   <update id="update" parameterType="map">
     update opinion set opinion.nis_opinion = #{bean.nisOpinion},
     opinion.pgs_recommend = #{bean.pgsRecommend},opinion.pgs_opinion = #{bean.pgsOpinion},
