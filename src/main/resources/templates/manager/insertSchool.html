@@ -216,24 +216,30 @@
 
 
     $("#submit").click(function () {
-        $.ajax({
-            type: "post",
-            contentType: "application/json",
-            url: "/manager/settings/insertSchool",
-            data: $("#schoolName").val(),
-            dataType: 'json',
-            cache: false,
-            timeout: 600000,
-            success: function (data) {
-                console.log("SUCCESS : ", data);
-                alert(data.status);
-            },
-            error: function (e) {
-                alert("新增学院失败")
-                console.log("Failed : ", e);
+        if($("#schoolName").val()!=""){
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "/manager/settings/insertSchool",
+                data: $("#schoolName").val(),
+                dataType: 'json',
+                cache: false,
+                timeout: 600000,
+                success: function (data) {
+                    console.log("SUCCESS : ", data);
+                    alert(data.status);
+                },
+                error: function (e) {
+                    alert("新增学院失败")
+                    console.log("Failed : ", e);
 
-            }
-        });
+                }
+            });
+        }
+        else{
+            alert("值为空")
+        }
+
     });
 
     function fire_ajax_change_password(event) {
