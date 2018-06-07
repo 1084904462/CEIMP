@@ -51,7 +51,7 @@ public class LoginController {
     public String pageLogin(HttpSession session){
         UserLogBean userLogBean = (UserLogBean) session.getAttribute("userLogBean");
         if(userLogBean != null){
-            return "redirect:/evaluation/index";
+            return "redirect:/scholarship/index";
         }
         ManagerLogBean managerLogBean = (ManagerLogBean) session.getAttribute("managerLogBean");
         if(managerLogBean != null){

@@ -1,23 +1,25 @@
 package org.obsidian.ceimp.controller.user;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.obsidian.ceimp.bean.AwardBean;
 import org.obsidian.ceimp.bean.BasicScholarshipBean;
+import org.obsidian.ceimp.bean.PasswordBean;
 import org.obsidian.ceimp.bean.UserLogBean;
 import org.obsidian.ceimp.service.AwardService;
 import org.obsidian.ceimp.service.BasicScholarshipService;
+import org.obsidian.ceimp.service.UserBasicService;
 import org.obsidian.ceimp.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -27,6 +29,9 @@ import java.util.List;
 @RequestMapping("/scholarship")
 public class ScholarshipController {
     private Logger logger = Logger.getLogger(this.getClass());
+
+    @Autowired
+    private UserBasicService userBasicService;
 
     @Autowired
     private AwardService awardService;
@@ -57,6 +62,22 @@ public class ScholarshipController {
         List<AwardBean> awardBeanList = awardService.getList(userId,yearScope);
         model.addAttribute("awardBeanList",awardBeanList);
         return "user/scholarship/index";
+    }
+
+
+    /**
+     * 修改用户密码
+     * @param passwordBean
+     * @param session
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     */
+    @PostMapping("/changePassword")
+    @ResponseBody
+    public String changeUserPassword(PasswordBean passwordBean, HttpSession session) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        Long userId = ((UserLogBean) session.getAttribute("userLogBean")).getUserId();
+        return JSON.toJSONString(userBasicService.changeUserPassword(userId,passwordBean));
     }
 
 
